@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+"""Run one bounded smallest-first reconstruction pass; see tools/smallest_pass.py."""
+import pathlib
+import sys
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / 'tools'))
+from smallest_pass import main
+main()

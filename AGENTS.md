@@ -75,6 +75,26 @@ blocks those bodies. Read docs/baseline.md before reasoning about a mismatch.
 - Live binding metadata is now a hash, while immutable attempt.json keeps the full
   map. This does NOT narrow invalidation: changing any binding still retires proof.
 
+- The bounded smallest-first pass is documented in docs/smallest-pass.md and its
+  per-function index. A pass outcome is not a backend status: a reconstruction
+  blocker can still have an older compiling source. scripts/smallest-pass resumes
+  its frozen .work/smallest-pass checkpoint; it does not start a new campaign.
+  Its source/config guards and stable verification IDs must not be bypassed to
+  get past an uncertain result. The runner lock scopes this pass client, not every
+  possible editor or other verification client.
+- Imported sizes are enclosing spans, not guaranteed complete functions. Some tiny
+  entries contain only prologues; 00409970 spans 218,888 bytes and its detail exceeds
+  the transport budget. Do not trim bytes or repair Ghidra in place to fit a test.
+  A body ending in a call may instead be a legitimate noreturn wrapper: recover
+  that callee contract rather than automatically declaring its bounds corrupt.
+- Fresh proposals may use an opaque GXObject declaration for four-byte pointer-slot
+  accesses. That is not a recovered object layout. Missing member layouts,
+  conflicting declarations and unrecovered register inputs stay diagnostics;
+  syntax checks, higher positional scores and inherited type names are not proof.
+- scripts/report-smallest-pass checks every current exact artifact against an
+  independent raw-backed PE slice and the source/config hashes. Its public index
+  omits original byte windows; full private diagnostics remain under .work.
+
 The immutable backend currently runs from .work/backend/544312b (compact proof projections).
 The .work/backend-current symlink is what scripts/backend resolves. Rebuild its repo
 separately, test it, stage a new immutable copy and deliberately restart the user

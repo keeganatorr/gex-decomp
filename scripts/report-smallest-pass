@@ -1,0 +1,128 @@
+#!/usr/bin/env python3
+"""Validate the completed pass against current owner projections and pinned bytes.
+
+Does not submit any job, modify proof status or export game bytes. Committed index
+contains IDs/hashes, counts and blockers; detailed private evidence stays in .work.
+"""
+import fcntl
+import json
+import pathlib
+import struct
+import sys
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]/'tools'))
+import smallest_pass as p
+
+
+def image_bytes(image, address, length):
+    pe = struct.unpack_from('<I', image, 0x3c)[0]
+    if image[pe:pe+4] != b'PE\0\0':
+        raise RuntimeError('Not PE')
+    count, optional_size = struct.unpack_from('<H', image, pe+6)[0], struct.unpack_from('<H', image, pe+20)[0]
+    optional = pe+24
+    if struct.unpack_from('<H', image, optional)[0] != 0x10b:
+        raise RuntimeError('Not PE32')
+    base = struct.unpack_from('<I', image, optional+28)[0]
+    rva = address-base
+    for i in range(count):
+        sh = optional+optional_size+i*40
+        section_rva, size, offset = struct.unpack_from('<III', image, sh+12)
+        if section_rva <= rva and rva+length <= section_rva+size:
+            result = image[offset+rva-section_rva:offset+rva-section_rva+length]
+            if len(result) != length:
+                raise RuntimeError('Short pinned bytes')
+            return result
+    raise RuntimeError('Function outside raw-backed image')
+
+
+def main():
+    with (p.WORK/'runner.lock').open('w') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        manifest = p.load(p.WORK/'manifest.json')
+        summary = p.report(manifest)
+        if summary['completed'] != summary['total']:
+            raise RuntimeError('Pass is not complete')
+        config = p.load(p.ROOT/'project.json')
+        if p.digest((p.ROOT/'project.json').read_bytes()) != manifest['configHash']:
+            raise RuntimeError('Configuration drift')
+        image = (p.ROOT/'.work/original.exe').read_bytes()
+        expected = 'e1fd63ecb09fca29d63286e22447752dcb120d7e682f8759d1021776f7698b86'
+        installed = pathlib.Path('/home/keegan/.wine/drive_c/GOG Games/Gex/GEX.exe')
+        if p.digest(image) != expected or p.digest(installed.read_bytes()) != expected:
+            raise RuntimeError('Original target drift')
+        tc = config['toolchain']
+        for name, checksum in tc['componentHashes'].items():
+            if p.digest((pathlib.Path(tc['compiler']).parent/name).read_bytes()) != checksum:
+                raise RuntimeError('Compiler component drift: '+name)
+        rows = p.load(p.WORK/'report.json')['rows']
+        if [r['address'] for r in rows] != [r['address'] for r in manifest['rows']]:
+            raise RuntimeError('Pass omitted or reordered inventory entries')
+        for row in rows:
+            source = p.ROOT/'src/functions'/f'{row["address"]}.cpp'
+            current = p.digest(source.read_bytes()) if source.exists() else None
+            if current != row['installedHash'] or row.get('pendingCommand') or row.get('installPending'):
+                raise RuntimeError('Source drift or unfinished intent: '+row['address'])
+        old_exact = {r['address'] for r in manifest['inventory'] if r['status']=='ExactMatch'}
+        new_exact = {r['address'] for r in rows if r['outcome']=='exact'}
+        for address in old_exact:
+            source = p.ROOT/'src/functions'/f'{address}.cpp'
+            if p.digest(source.read_bytes()) != manifest['originalSources'][address]:
+                raise RuntimeError('Previously exact source changed: '+address)
+        rpc = p.Rpc()
+        try:
+            inventory = rpc.inventory()
+            exact = [r for r in inventory if r['status']=='ExactMatch']
+            if {r['address'] for r in exact} != old_exact | new_exact:
+                raise RuntimeError('Current exact inventory disagrees with pass')
+            if rpc.snapshot['progress']['tasksRunning'] or rpc.snapshot['progress']['tasksQueued']:
+                raise RuntimeError('Verification work is still active')
+            proofs = []
+            for row in exact:
+                detail = rpc.detail(row)
+                proof = detail['match']
+                source = p.ROOT/'src/functions'/f'{row["address"]}.cpp'
+                directory = p.ROOT/'.work/attempts'/proof['verificationId']
+                retained = p.load(directory/'attempt.json')['match']
+                a, b = (directory/'original.bin').read_bytes(), (directory/'resolved.bin').read_bytes()
+                source_hash = p.digest(source.read_bytes())
+                if not proof['verifiedExact'] or proof['sourceRevision'] != source_hash:
+                    raise RuntimeError('Non-current exact source: '+row['address'])
+                if a != b or a != image_bytes(image, int(row['address'],16), row['size']):
+                    raise RuntimeError('Byte proof disagrees with independently sliced pinned image')
+                if retained['symbolBindings'] != config['symbolBindings'] or retained['flags'] != tc['flags'] or retained['componentHashes'] != tc['componentHashes']:
+                    raise RuntimeError('Retained input proof differs from configuration')
+                if retained['objectHash'] != p.digest((directory/'target.obj').read_bytes()):
+                    raise RuntimeError('Retained object hash differs')
+                if p.digest((directory/'source.cpp').read_bytes()) != source_hash:
+                    raise RuntimeError('Retained source differs')
+                if retained['originalBytesHash'] != p.digest(a) or retained['resolvedBytesHash'] != p.digest(b):
+                    raise RuntimeError('Retained byte hashes differ')
+                proofs.append(dict(address=row['address'], size=row['size'], sourceHash=source_hash, attemptId=proof['verificationId']))
+            final_progress = rpc.snapshot['progress']
+            if final_progress['bytes']['exact'] != sum(r['size'] for r in exact):
+                raise RuntimeError('Progress/Atlas byte count disagreement')
+            p.save(p.WORK/'validated-proof-index.json', proofs)
+            p.save(p.WORK/'final-snapshot.json', rpc.snapshot)
+        finally:
+            rpc.close()
+        public_rows = []
+        for row in rows:
+            item = {k: row[k] for k in ('address','name','size','initialStatus','outcome','blocker')}
+            item['sourceHash'] = row['installedHash']
+            item['attempts'] = row['attempts']
+            for kind in ('previousComparison','currentComparison'):
+                if kind in row:
+                    item[kind] = {k:v for k,v in row[kind].items() if k not in ('originalWindow','candidateWindow')}
+            if row.get('preparationHistory'):
+                item['preparationRefinements'] = len(row['preparationHistory'])
+            public_rows.append(item)
+        index = dict(schemaVersion=1, scope='One conservative reconstruction pass; not completion of the game',
+            order='Initial enclosing-span size ascending, address as tie-breaker; unattempted declaration blockers could be reprepared',
+            initialProgress=manifest['initialProgress'], finalProgress=final_progress, summary=summary,
+            manifestHash=p.digest((p.WORK/'manifest.json').read_bytes()), configHash=manifest['configHash'],
+            originalBinaryHash=expected, sourceFiles=len(list((p.ROOT/'src/functions').glob('*.cpp'))), rows=public_rows)
+        p.save(p.ROOT/'docs/smallest-pass-index.json', index)
+        print(json.dumps(dict(summary=summary, finalProgress=final_progress, verifiedProofs=len(proofs), sourceFiles=index['sourceFiles']), indent=2))
+
+
+if __name__ == '__main__':
+    main()

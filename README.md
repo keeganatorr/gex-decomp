@@ -12,11 +12,13 @@ source reconstruction and verification baseline**, not yet a full rebuilt game.
   recovered structures). Ghidra reports 1,515 functions including 180 externals.
 - Recovered compiler runs: **Microsoft C/C++ 10.00.5270**, with the old project's
   `/O2 /G5 /Oy /GR-` flags. It is **not MSVC 2010**.
-- **354 C++ candidates match 13,544 original bytes**, including actual DIR32/REL32
-  destinations. No wildcard masking. The backup recovery added **344 exact**,
-  32 near and 440 compiling nonmatching candidates. See
-  [backup import results and provenance](docs/backup-import.md).
-  The earlier [ten-function batch](docs/ten-functions.md) remains documented.
+- **372 C++ candidates match 14,177 original bytes**, including actual DIR32/REL32
+  destinations. No wildcard masking. The [smallest-first pass](docs/smallest-pass.md)
+  assessed all 981 remaining entries, tried 82 new verification candidates and added
+  **18 exact / 633 bytes**; unresolved cases have individual diagnostics. This is
+  not completion of the game's decompilation. There are now 870 source files.
+  Earlier [backup recovery](docs/backup-import.md) and
+  [ten-function results](docs/ten-functions.md) remain documented.
 - A persistent backend serves real data to Nexus over a private named Unix socket.
 - Explicit verification requests are journalled, queued and processed one at a time.
   The backend launches no model calls or autonomous workers.

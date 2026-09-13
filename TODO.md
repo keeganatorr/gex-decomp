@@ -26,11 +26,21 @@
 - [x] Compact binding metadata for large imports without changing validity rules; full maps remain in immutable artifacts (pc-decomp 544312b)
 - [x] Test backup preservation, explicit declaration adaptation, uncertain-command recovery, idempotency and config-change retry (`tests/backup_tools.py`)
 
+## Done — operator-requested smallest-first pass
+- [x] Assess all 981 initially non-exact entries in imported size order; retain a complete per-function outcome index (`docs/smallest-pass.md`, `docs/smallest-pass-index.json`)
+- [x] Run 82 fresh candidate trials and 26 restoration verifications; add 18 exact / 633 bytes and retain 31 other proposed candidates
+- [x] Preserve all 354 previously exact sources; independently validate all 372 current proofs / 14,177 exact bytes against pinned PE bytes
+- [x] Add checkpointed pass/recovery/report tools and 13 synthetic safety tests (`scripts/smallest-pass`, `scripts/report-smallest-pass`, `tools/smallest_pass.py`, `tests/smallest_pass.py`)
+- [x] Record 858 pre-trial reconstruction blockers, 37 analysis/termination/transport blockers, seven compiler blockers and unchanged/unsuccessful proposals honestly; this completes the pass, not the game
+
 ## Operator UI
 - [ ] In Decomp select Data source = real, service = pc-decomp, project ID blank; inspect live Functions and Function Lab
 
 ## Next — manual source reconstruction, not an autonomous campaign
-- [ ] Prioritize the 32 imported NearMatch candidates; retain the 440 other compiling sources as unverified starting points
+- [ ] Refine the current 33 NearMatch candidates with instruction-aware comparisons; keep historical nonmatches and pass diagnostics as starting points
+- [ ] Recover compound layouts, callee prototypes and missing explicit bindings before another bulk proposal pass; conservative adaptation could not reconstruct 858 entries
+- [ ] Review 14 terminal/boundary cases and three possible noreturn-call endings; do not assume imported small spans describe complete functions
+- [ ] Add bounded function detail/artifact access: the 218,888-byte enclosing span at 00409970 exceeds the 900 KiB response budget
 - [ ] Review deferred backup types/conventions, embedded strings/data, compiler helpers and local COFF label/jump-table support without masking differences
 - [ ] Resolve byte-reader register-allocation differences at 00417f00 and 00417f40 without weakening ExactMatch
 - [ ] Add register-aware diagnostic diffs, per-used-binding proof dependencies and concise batch reports in pc-decomp/Nexus (feedback: docs/ten-functions.md)
