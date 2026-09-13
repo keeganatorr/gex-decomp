@@ -12,11 +12,13 @@ source reconstruction and verification baseline**, not yet a full rebuilt game.
   recovered structures). Ghidra reports 1,515 functions including 180 externals.
 - Recovered compiler runs: **Microsoft C/C++ 10.00.5270**, with the old project's
   `/O2 /G5 /Oy /GR-` flags. It is **not MSVC 2010**.
-- Two real C++ candidates independently match **17 original bytes**, including
-  the actual DIR32 and REL32 relocation destinations. No wildcard masking.
+- **10 real C++ candidates match 381 original bytes**, including the actual
+  DIR32/REL32 destinations. No wildcard masking. The latest ten-function batch
+  added eight exact functions and two nonmatching byte-reader candidates;
+  see [results and workflow feedback](docs/ten-functions.md).
 - A persistent backend serves real data to Nexus over a private named Unix socket.
 - Explicit verification requests are journalled, queued and processed one at a time.
-  No paid model calls or autonomous workers have been launched.
+  The backend launches no model calls or autonomous workers.
 
 ## Nexus
 
@@ -44,7 +46,7 @@ Nexus's own agents and actual session viewers remain the place for discussion.
 # Start the already-installed user service; waits for its actual identity handshake.
 systemctl --user start pc-decomp-gex.service
 
-# Verify the checked-in baseline through the real queue.
+# Verify the original two-function baseline through the real queue.
 ./scripts/build-baseline
 
 # One intentional verification operation; choose a stable ID for it.
@@ -62,8 +64,8 @@ unchanged successful baseline is queried rather than compiled repeatedly. If an
 operation failed for a transient reason, inspect its result before choosing a new
 explicit verification ID.
 
-Nexus build scripts are in `.nexus/`: **Build** validates these two translation
-units, **Run** starts the backend, **Build and run** starts it then verifies the
+Nexus build scripts are in `.nexus/`: **Build** validates the original two translation
+units (not every file in src/functions), **Run** starts the backend, **Build and run** starts it then verifies the
 baseline. They do **not** launch or relink GEX.exe.
 
 Exit codes: 0 = current exact source proof, 2 = no current exact proof, 1 = failure

@@ -20,8 +20,8 @@ The service runs as pc-decomp-gex.service, one worker, no autonomous campaign.
 
 Recovered CL 10.00.5270, VC4.0-era, with /O2 /G5 /Oy /GR- through a dedicated Wine
 prefix. Tool binaries and flags are fingerprinted in project.json. Original GEX
-linker version is 4.20. The old notes' 'MSVC 2010' label is wrong; two small exact
-matches do not prove the compiler/version/flags for the entire game.
+linker version is 4.20. The old notes' 'MSVC 2010' label is wrong; per-function
+exact matches do not prove the compiler/version/flags for the entire game.
 
 ## Ghidra warning
 
@@ -50,6 +50,19 @@ blocks those bodies. Read docs/baseline.md before reasoning about a mismatch.
 6. Commit the candidate and evidence notes. An exact match means current compiled
    function bytes including destinations matched, not proven source types or a
    reconstructed whole executable. Preserve near misses and failed attempts.
+
+## Reconstruction notes
+
+- Read docs/ten-functions.md for the first ten-function expansion and retained
+  attempt IDs. The two byte readers are Compiles, NOT ExactMatch; ECX/EDX differ.
+  Positional byte scores are not semantic scores. tests/byte_readers.py is a
+  host-only behavioural check and must never promote backend proof status.
+- Ghidra's EVENT_ExtractUShort pseudocode suggests a wider memory load than the
+  assembly actually performs. Read instruction access widths before copying types.
+- Adding symbol bindings currently retires all old proofs, even for unrelated
+  functions. Reverify affected current proofs; never restore status by hand.
+- scripts/build-baseline and the Nexus Build button still cover only the original
+  two functions. They are not an all-source verification gate.
 
 The immutable backend currently runs from .work/backend/13286c8 (Atlas feed added).
 The .work/backend-current symlink is what scripts/backend resolves. Rebuild its repo

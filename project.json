@@ -43,7 +43,18 @@
   },
   "symbolBindings": {
     "_gNumPlayerBubbles_004a2854": "004a2854",
-    "_VSIT_UnforceVoiceSituation_0041fbc0": "0041fbc0"
+    "_VSIT_UnforceVoiceSituation_0041fbc0": "0041fbc0",
+    "_gInputRecords_004a27dc": "004a27dc",
+    "_randomState_00463af0": "00463af0",
+    "_randomState_00463aec": "00463aec",
+    "_LST_Remove_0042cbf0": "0042cbf0",
+    "_objectLists_004a28a0": "004a28a0",
+    "_GEX_pGlob_004a2ad4": "004a2ad4",
+    "_debugLevel_00455c54": "00455c54",
+    "_stateNames_00457648": "00457648",
+    "_stateTraceFormat_0045aad8": "0045aad8",
+    "_TracePrintf_00405390": "00405390",
+    "_ResetPreviousPosition_004317b0": "004317b0"
   },
   "policy": {
     "autonomousAgents": false,

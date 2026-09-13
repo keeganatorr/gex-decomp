@@ -12,11 +12,19 @@
 - [x] Provide online verification/build scripts and retain immutable attempts
 - [x] Validate live protocol/schema, backend restart/reconnect and idempotent build queries
 
+## Done — ten-function reconstruction batch
+- [x] Reconstruct ten additional unpatched functions: eight ExactMatch / 364 new bytes, two Compiles (`src/functions/`, `docs/ten-functions.md`)
+- [x] Cover nontrivial pointer/list traversal, branches, random-state loops, tracing and recursion with resolved relocation proofs
+- [x] Retain all 21 attempts and reverify the original baseline after binding changes; project total 10 exact / 381 bytes
+- [x] Check byte readers on 65,536 exhaustive 16-bit and 11,048 directed/seeded 32-bit inputs (`tests/byte_readers.py`; host tests, not ExactMatch proof)
+
 ## Operator UI
 - [ ] In Decomp select Data source = real, service = pc-decomp, project ID blank; inspect live Functions and Function Lab
 
 ## Next — manual source reconstruction, not an autonomous campaign
-- [ ] Choose a nontrivial unpatched function and reconstruct self-contained C/C++ with justified bindings
+- [ ] Resolve byte-reader register-allocation differences at 00417f00 and 00417f40 without weakening ExactMatch
+- [ ] Add register-aware diagnostic diffs, per-used-binding proof dependencies and concise batch reports in pc-decomp/Nexus (feedback: docs/ten-functions.md)
+- [ ] Add an explicit all-source verification gate; build-baseline intentionally remains the original two-function smoke test
 - [ ] Verify calling conventions, signedness and struct layouts independently of byte equality
 - [ ] Approve a separate original-byte Ghidra analysis for WndProc, WinMain and GFX_OpenGraphics
 - [ ] Benchmark additional compiler/flag candidates on a representative corpus before claiming original toolchain identity

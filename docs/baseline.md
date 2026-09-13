@@ -1,5 +1,8 @@
 # Baseline evidence
 
+This records the initial two-function setup. For the subsequent ten-function
+reconstruction batch and current aggregate results, see [ten-functions.md](ten-functions.md).
+
 ## Identity and preserved analysis
 
 - Input: `/home/keegan/.wine/drive_c/GOG Games/Gex/GEX.exe`
