@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT=$(cd -- "$(dirname -- "$0")/.." && pwd)
+if [[ $# != 2 ]]; then
+    echo "Usage: $0 FUNCTION_ADDRESS_OR_ID STABLE_COMMAND_ID" >&2
+    echo "Reuse an ID to query its outcome, not to submit another attempt." >&2
+    exit 1
+fi
+exec "$ROOT/scripts/backend" request --socket "${PC_DECOMP_SOCKET:-/run/user/$(id -u)/pc-decomp/gex.sock}" --function "$1" --command-id "$2"

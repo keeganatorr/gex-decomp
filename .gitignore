@@ -1,0 +1,13 @@
+.work/
+imports/
+artifacts/
+*.exe
+*.EXE
+*.dll
+*.DLL
+*.obj
+*.o
+*.db*
+*.gzf
+*.gar
+__pycache__/

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT=$(cd -- "$(dirname -- "$0")/.." && pwd)
+STATUS=$("$ROOT/scripts/backend" status)
+EPOCH=$(printf '%s' "$STATUS" | python3 -c 'import json,sys; print(json.load(sys.stdin)["health"]["ghidra"]["analysisEpoch"])')
+for ADDRESS in 00420d30 00418e20; do
+    KEY=$(python3 - "$ROOT" "$ADDRESS" "$EPOCH" <<'PY'
+import hashlib,pathlib,sys
+root=pathlib.Path(sys.argv[1]);h=hashlib.sha256()
+for data in [(root/'src/functions'/f'{sys.argv[2]}.cpp').read_bytes(),(root/'project.json').read_bytes(),sys.argv[3].encode()]:
+ h.update(len(data).to_bytes(8,'little'));h.update(data)
+print('build-'+sys.argv[2]+'-'+h.hexdigest()[:24])
+PY
+)
+    "$ROOT/scripts/verify" "$ADDRESS" "$KEY"
+done

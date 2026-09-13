@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+"""Readiness probe, not a mutation retry. Safe before a command has been submitted."""
+import json,socket,sys,time
+path=sys.argv[1]
+deadline=time.monotonic()+15
+while time.monotonic()<deadline:
+    try:
+        with socket.socket(socket.AF_UNIX) as s:
+            s.settimeout(1);s.connect(path)
+            s.sendall(b'{"jsonrpc":"2.0","id":"ready","method":"nexus.hello","params":{"serviceId":"pc-decomp","protocolVersion":1}}\n')
+            with s.makefile('rb') as f:reply=json.loads(f.readline(65536))
+            assert reply['result']=={'serviceId':'pc-decomp','protocolVersion':1}
+            sys.exit(0)
+    except (OSError,ValueError,KeyError,AssertionError):time.sleep(.1)
+raise SystemExit('pc-decomp did not complete its identity handshake in 15 seconds')

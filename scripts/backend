@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT=$(cd -- "$(dirname -- "$0")/.." && pwd)
+APP=${PC_DECOMP_APP:-$ROOT/.work/backend-current/PcDecomp.dll}
+if [[ ! -f "$APP" ]]; then
+    echo "Backend not staged. Set PC_DECOMP_APP to the built PcDecomp.dll." >&2
+    exit 1
+fi
+exec dotnet "$APP" "$@" --project "$ROOT"

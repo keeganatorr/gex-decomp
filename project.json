@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "id": "gex-gog-e1fd63ec",
+  "name": "Gex / GOG matching decompilation",
+  "executable": "/home/keegan/.wine/drive_c/GOG Games/Gex/GEX.exe",
+  "sha256": "e1fd63ecb09fca29d63286e22447752dcb120d7e682f8759d1021776f7698b86",
+  "ghidra": {
+    "url": "http://127.0.0.1:8089/",
+    "program": "GEX.exe",
+    "domainPath": "/EditedGex",
+    "project": "Gex"
+  },
+  "toolchain": {
+    "id": "vc40-cl-10.00.5270",
+    "compiler": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/bin/cl.exe",
+    "wine": "/usr/bin/wine",
+    "winePrefix": "/home/keegan/.local/state/pc-decomp/wine-vc4",
+    "flags": [
+      "/O2",
+      "/G5",
+      "/Oy",
+      "/GR-"
+    ],
+    "componentHashes": {
+      "cl.exe": "f097e736bb04d38391c8b524945d58809ec4c42e97c056eca6f40bba2de910c3",
+      "c1.exe": "7a7c14aff9631b9460a5666a8c344a5a177fce125ba3c4e9c2a4d57c7f402bb2",
+      "c1xx.exe": "3376b1dfaff0bdb1018b13fbb22cf407858044f327d4bbc3e4d9335640aea7f0",
+      "c2.exe": "820ed4e4930db97bcba646afb88fdb7d1f329631ca8e5b84096c0d6daa82e9a9",
+      "mspdb40.dll": "7c99519244e1dfe9f8cbc0b54842a757c22121c4269572c7c744d8bd7da0d419",
+      "mspdb41.dll": "632b054fd3f19fe7b7f3f316927938b8eb4a43e3279d1440a83a8dfecd02652e",
+      "msvcrt40.dll": "4d76dd8771ef7e48bcb557b2f694d0b4870ff5608ea9081e22008620c2e96b01"
+    },
+    "targetSymbol": "_GEX_Target",
+    "provenVersion": "10.00.5270",
+    "originalCompilerProven": false,
+    "historicalEvidence": "pc-decomp-agent-csharp 49460b1 / CLAUDE.md and toolchain/bin/cl; historical MSVC 2010 label is incorrect",
+    "name": "Microsoft C/C++ 10.00.5270 / recovered Gex candidate",
+    "versionEvidence": {
+      "banner": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 10.00.5270 for 80x86",
+      "probe": "A C++ identity function compiled successfully under dedicated Wine prefix. Object is i386 COFF.",
+      "originalCompilerProven": false
+    }
+  },
+  "symbolBindings": {
+    "_gNumPlayerBubbles_004a2854": "004a2854",
+    "_VSIT_UnforceVoiceSituation_0041fbc0": "0041fbc0"
+  },
+  "policy": {
+    "autonomousAgents": false,
+    "compilerTimeoutSeconds": 45,
+    "maxVerificationBatch": 32,
+    "verificationParallelism": 1,
+    "ghidraWrites": false
+  },
+  "compilerHypothesis": "VC4.x; recovered CL 10.00.5270 candidate. Original compiler/flags not proven.",
+  "knowledge": [
+    {
+      "id": "compiler-history",
+      "name": "Historical compiler label corrected",
+      "status": "Candidate toolchain",
+      "category": "Compiler",
+      "data": {
+        "historicalLabel": "MSVC 2010",
+        "actualVersion": "10.00.5270 (VC4.0-era)",
+        "targetLinkerVersion": "4.20",
+        "flags": [
+          "/O2",
+          "/G5",
+          "/Oy",
+          "/GR-"
+        ],
+        "conclusion": "Recovered configuration, not its incorrect year. Individual exact matches do not identify the original compiler globally."
+      },
+      "confidence": null,
+      "origin": "pc-decomp-agent-csharp 49460b1 + local CL probe",
+      "provenance": {
+        "source": "pc-decomp-agent-csharp 49460b1 + local CL probe",
+        "synthetic": false
+      }
+    },
+    {
+      "id": "target-identity",
+      "name": "Pinned GOG executable",
+      "status": "Hash verified",
+      "category": "Binary",
+      "data": {
+        "sha256": "e1fd63ecb09fca29d63286e22447752dcb120d7e682f8759d1021776f7698b86",
+        "domainPath": "/EditedGex",
+        "warning": "Ghidra original import hash matches, but current .text contains patches. Each verification checks its complete body against pinned original bytes."
+      },
+      "confidence": null,
+      "origin": "SHA256 + Ghidra Program Information + memory comparison",
+      "provenance": {
+        "source": "SHA256 + Ghidra Program Information + memory comparison",
+        "synthetic": false
+      }
+    },
+    {
+      "id": "baseline-policy",
+      "name": "Deterministic baseline; no autonomous campaign",
+      "status": "Active",
+      "category": "Process",
+      "data": {
+        "autonomousAgents": false,
+        "compilerTimeoutSeconds": 45,
+        "maxVerificationBatch": 32,
+        "verificationParallelism": 1,
+        "ghidraWrites": false
+      },
+      "confidence": null,
+      "origin": "User-approved setup scope",
+      "provenance": {
+        "source": "User-approved setup scope",
+        "synthetic": false
+      }
+    }
+  ]
+}
