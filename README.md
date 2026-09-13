@@ -12,10 +12,11 @@ source reconstruction and verification baseline**, not yet a full rebuilt game.
   recovered structures). Ghidra reports 1,515 functions including 180 externals.
 - Recovered compiler runs: **Microsoft C/C++ 10.00.5270**, with the old project's
   `/O2 /G5 /Oy /GR-` flags. It is **not MSVC 2010**.
-- **10 real C++ candidates match 381 original bytes**, including the actual
-  DIR32/REL32 destinations. No wildcard masking. The latest ten-function batch
-  added eight exact functions and two nonmatching byte-reader candidates;
-  see [results and workflow feedback](docs/ten-functions.md).
+- **354 C++ candidates match 13,544 original bytes**, including actual DIR32/REL32
+  destinations. No wildcard masking. The backup recovery added **344 exact**,
+  32 near and 440 compiling nonmatching candidates. See
+  [backup import results and provenance](docs/backup-import.md).
+  The earlier [ten-function batch](docs/ten-functions.md) remains documented.
 - A persistent backend serves real data to Nexus over a private named Unix socket.
 - Explicit verification requests are journalled, queued and processed one at a time.
   The backend launches no model calls or autonomous workers.
@@ -95,7 +96,7 @@ service identity in Nexus's `extension-services.json`.
 | `.work/attempts/` | Immutable source/object/log/byte-comparison evidence |
 | `.work/requests/` | Online command checkpoints and receipts |
 | `imports/` | Timestamped Ghidra inventory snapshots — ignored |
-| `.work/backend/13286c8/` | Immutable tested backend release with compact Atlas feed |
+| `.work/backend/544312b/` | Immutable tested backend; Atlas and compact binding-proof projections |
 
 The backend's source is `/home/keegan/Repos/pc-decomp`. To import again, stop the
 service, run `./scripts/backend import`, then restart. Existing attempts survive;

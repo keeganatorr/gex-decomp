@@ -18,10 +18,20 @@
 - [x] Retain all 21 attempts and reverify the original baseline after binding changes; project total 10 exact / 381 bytes
 - [x] Check byte readers on 65,536 exhaustive 16-bit and 11,048 directed/seeded 32-bit inputs (`tests/byte_readers.py`; host tests, not ExactMatch proof)
 
+## Done — historical backup recovery
+- [x] Audit 2,461 main source files and 977 assembly/raw-byte mod wrappers without modifying the backup
+- [x] Compare 882 additional addresses; import 344 exact, 32 near and 440 compiling candidates with source/attempt provenance (`docs/backup-import.md`, `docs/backup-import-index.json`)
+- [x] Retain 1,005 attempt records and all failures; preserve the original 12 sources and their current proofs
+- [x] Add 13,163 exact bytes; project total 354 exact functions / 13,544 bytes; validate live Atlas and function details
+- [x] Compact binding metadata for large imports without changing validity rules; full maps remain in immutable artifacts (pc-decomp 544312b)
+- [x] Test backup preservation, explicit declaration adaptation, uncertain-command recovery, idempotency and config-change retry (`tests/backup_tools.py`)
+
 ## Operator UI
 - [ ] In Decomp select Data source = real, service = pc-decomp, project ID blank; inspect live Functions and Function Lab
 
 ## Next — manual source reconstruction, not an autonomous campaign
+- [ ] Prioritize the 32 imported NearMatch candidates; retain the 440 other compiling sources as unverified starting points
+- [ ] Review deferred backup types/conventions, embedded strings/data, compiler helpers and local COFF label/jump-table support without masking differences
 - [ ] Resolve byte-reader register-allocation differences at 00417f00 and 00417f40 without weakening ExactMatch
 - [ ] Add register-aware diagnostic diffs, per-used-binding proof dependencies and concise batch reports in pc-decomp/Nexus (feedback: docs/ten-functions.md)
 - [ ] Add an explicit all-source verification gate; build-baseline intentionally remains the original two-function smoke test

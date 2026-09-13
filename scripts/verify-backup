@@ -1,0 +1,120 @@
+#!/usr/bin/env python3
+"""Compare staged backup candidates via the durable owner; preserve best results.
+
+Run scan-backup first, review audit.json, merge bindings while the service is idle,
+and restart it. This runner never changes configuration or the backup. A private
+lock prevents duplicate runners. Stable IDs bind source/config/import epoch;
+uncertain outcomes stop immediately and must be queried before another mutation.
+"""
+import fcntl
+import hashlib
+import json
+import os
+import pathlib
+import re
+import subprocess
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+WORK = ROOT / '.work/backup-import'
+lock = (WORK / 'runner.lock').open('w')
+fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+status = json.loads(subprocess.check_output([ROOT/'scripts/backend', 'status'], text=True))
+config = (ROOT/'project.json').read_bytes()
+epoch = status['health']['ghidra']['analysisEpoch']
+audit_name = sys.argv[sys.argv.index('--audit')+1] if '--audit' in sys.argv else 'audit.json'
+only = sys.argv[sys.argv.index('--only')+1] if '--only' in sys.argv else None
+rows = json.loads((WORK/audit_name).read_text())
+config_hash = hashlib.sha256(config).hexdigest()
+state_path = WORK/'run.json'
+state = json.loads(state_path.read_text()) if state_path.exists() else {}
+
+def save():
+    temp = state_path.with_suffix('.tmp'); temp.write_text(json.dumps(state, indent=2)+'\n'); temp.replace(state_path)
+
+def install(address, data, record):
+    path = ROOT/'src/functions'/f'{address}.cpp'
+    if path.exists():
+        current = hashlib.sha256(path.read_bytes()).hexdigest()
+        if current != record.get('installedHash'):
+            raise RuntimeError(f'{address}: external source edit; refusing overwrite')
+    elif record.get('installedHash'):
+        raise RuntimeError(f'{address}: external source removal; refusing overwrite')
+    # Checkpoint intent before file mutation so interruption can be recognized.
+    record['nextHash'] = hashlib.sha256(data).hexdigest(); save()
+    temp = path.with_suffix('.import-tmp'); temp.write_bytes(data); temp.replace(path)
+    record['installedHash'] = record.pop('nextHash'); save()
+
+def verify(address, data, row, phase):
+    if (ROOT/'project.json').read_bytes() != config: raise RuntimeError('Configuration changed during batch')
+    h = hashlib.sha256(data + b'\0' + config + b'\0' + epoch.encode()).hexdigest()[:28]
+    command = f'backup-{address}-{h}-{phase}'
+    log = WORK/'responses'/f'{command}.txt'; log.parent.mkdir(exist_ok=True)
+    with log.open('w') as out:
+        result = subprocess.run([ROOT/'scripts/verify', address, command], stdout=out, stderr=subprocess.STDOUT)
+    if result.returncode not in (0,2):
+        raise RuntimeError(f'{address}: exit {result.returncode}; query {command}, see {log}; NO automatic new intent')
+    text = log.read_text(); reply = json.loads(text[text.index('\n{')+1:]); attempt = reply['task']['result']
+    return dict(variant=row['sha256'], candidate=row['candidate'], commandId=command, configHash=config_hash,
+                attempt=attempt['id'], sourceHash=attempt['sourceRevision'], score=attempt['bestScore'],
+                exact=attempt['match']['verifiedExact'], failure=attempt['failureReason'],
+                compiled=attempt['compileResult'] in ('ExactMatch','Compiled; bytes differ'))
+
+groups = {}
+for row in rows:
+    if row['reason']=='staged': groups.setdefault(row['address'], []).append(row)
+for index,(address,variants) in enumerate(sorted(groups.items()),1):
+    if (WORK/'pause').exists():
+        print('Paused between functions; safe to update configuration.',flush=True)
+        break
+    if only and address != only: continue
+    record = state.setdefault(address,dict(attempts=[],done=False))
+    if record['done'] and record.get('selected') and record.get('configHash') != config_hash:
+        selected=record['selected']; data=(ROOT/selected['candidate']).read_bytes()
+        path=ROOT/'src/functions'/f'{address}.cpp'
+        if hashlib.sha256(path.read_bytes()).hexdigest()!=record['installedHash']:
+            raise RuntimeError(f'{address}: external edit; refusing proof refresh')
+        row=next(r for r in variants if r['sha256']==selected['variant'])
+        fresh=verify(address,data,row,'selected');record['attempts'].append(fresh);record['selected']=fresh
+        record['configHash']=config_hash;save()
+    def already_compared(row):
+        # Configuration changes are new comparisons, not uncertain-command retries.
+        # A missing binding may now exist, or a previously wrong binding be fixed.
+        return any(a['variant']==row['sha256'] and a.get('configHash')==config_hash
+                   for a in record['attempts'])
+    remaining=any(not already_compared(r) for r in variants)
+    if record['done'] and ((record.get('selected') or {}).get('exact') or not remaining): continue
+    record['done']=False
+    path = ROOT/'src/functions'/f'{address}.cpp'
+    if record.get('nextHash') and path.exists() and hashlib.sha256(path.read_bytes()).hexdigest()==record['nextHash']:
+        record['installedHash']=record.pop('nextHash'); save()
+    for row in variants:
+        if any(a['exact'] and a.get('configHash')==config_hash for a in record['attempts']): break
+        if already_compared(row): continue
+        data = (ROOT/row['candidate']).read_bytes()
+        assert hashlib.sha256(data).hexdigest()==row['candidateHash']
+        install(address,data,record)
+        attempt = verify(address,data,row,'trial')
+        record['attempts'].append(attempt); save()
+        if attempt['exact']: break
+    usable = [a for a in record['attempts'] if a['compiled'] and a.get('configHash')==config_hash]
+    # Never retain a mismatching empty/constant placeholder as useful C++ recovery.
+    def useful(a):
+        text=(ROOT/a['candidate']).read_text()
+        tiny=re.search(r'GEX_Target\([^{}]*\)\s*\{\s*(?:return\s+(?:0|1)\s*;)?\s*\}',text)
+        return a['exact'] or not tiny
+    usable=[a for a in usable if useful(a)]
+    if usable:
+        best=max(usable,key=lambda a:(a['exact'],a['score']))
+        if record['installedHash'] != best['sourceHash']:
+            data=(ROOT/best['candidate']).read_bytes(); install(address,data,record)
+            row=next(r for r in variants if r['sha256']==best['variant'])
+            best=verify(address,data,row,'selected'); record['attempts'].append(best)
+        record['selected']=best
+    else:
+        assert hashlib.sha256(path.read_bytes()).hexdigest()==record['installedHash']
+        path.unlink();record.pop('installedHash',None);record['selected']=None
+    record['done']=True;record['configHash']=config_hash;save()
+    chosen=record['selected'];total=sum(r.get('done',False) for r in state.values())
+    exact=sum(bool((r.get('selected') or {}).get('exact')) for r in state.values())
+    print(f'{index}/{len(groups)} {address} '+('ExactMatch' if chosen and chosen['exact'] else f"Compiles {chosen['score']:.2f}%" if chosen else 'deferred')+f' | {total} processed, {exact} exact',flush=True)

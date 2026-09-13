@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+"""Produce a compact provenance index; raw backup exports/objects stay ignored.
+
+Only completed selections are reported. This does not set backend match status.
+Checks selected source hashes and original/resolved artifact equality independently
+before writing the report. Run after verify-backup finishes for final totals.
+"""
+import collections
+import hashlib
+import json
+import pathlib
+import subprocess
+
+ROOT=pathlib.Path(__file__).resolve().parents[1]
+WORK=ROOT/'.work/backup-import'
+audit=json.loads((WORK/'audit.json').read_text())
+state=json.loads((WORK/'run.json').read_text())
+by_variant={(r.get('address'),r['sha256']):r for r in audit}
+config=json.loads((ROOT/'project.json').read_text())
+rows=[]; failures=collections.Counter()
+expected={r['address'] for r in audit if r['reason']=='staged'}
+pending=sorted(a for a in expected if a not in state or not state[a]['done'])
+for address,record in sorted(state.items()):
+    if not record['done']:continue
+    for attempt in record['attempts']:
+        if attempt['failure']: failures[attempt['failure']]+=1
+    chosen=record.get('selected')
+    if not chosen:
+        rows.append(dict(address=address,result='Deferred',attempts=len(record['attempts'])))
+        continue
+    source=ROOT/'src/functions'/f'{address}.cpp'
+    assert hashlib.sha256(source.read_bytes()).hexdigest()==chosen['sourceHash'],address
+    legacy=by_variant[(address,chosen['variant'])]
+    attempt_dir=ROOT/'.work/attempts'/chosen['attempt']
+    proof=json.loads((attempt_dir/'attempt.json').read_text())
+    original=(attempt_dir/'original.bin').read_bytes();resolved=(attempt_dir/'resolved.bin').read_bytes()
+    assert (original==resolved)==chosen['exact'], address
+    assert proof['sourceRevision']==chosen['sourceHash']
+    assert proof['match']['symbolBindings']==config['symbolBindings'], 'Historical configuration is not current proof'
+    assert proof['match']['binaryHash']==config['sha256']
+    assert proof['match']['flags']==config['toolchain']['flags']
+    assert proof['match']['componentHashes']==config['toolchain']['componentHashes']
+    rows.append(dict(address=address,result='ExactMatch' if chosen['exact'] else 'NearMatch' if chosen['score']>=90 else 'Compiles',
+                     bytes=len(original),candidateBytes=len(resolved),score=chosen['score'],sourceHash=chosen['sourceHash'],
+                     backupPath=legacy['path'],backupHash=legacy['sha256'],attempt=chosen['attempt'],
+                     commandId=chosen['commandId'],attempts=len(record['attempts'])))
+status=json.loads(subprocess.check_output([ROOT/'scripts/backend','status'],text=True))
+counts=dict(collections.Counter(r['result'] for r in rows))
+report=dict(backup='/home/keegan/Repos/pc_decomp_backup',counts=counts,
+            selectedExactBytes=sum(r['bytes'] for r in rows if r['result']=='ExactMatch'),
+            exactBodiesAtMost8Bytes=sum(r['result']=='ExactMatch' and r['bytes']<=8 for r in rows),
+            auditReasons=dict(collections.Counter(r['reason'] for r in audit)),
+            pending=pending,attempts=sum(len(r['attempts']) for r in state.values()),
+            failures=dict(failures),projectProgress=status['progress'],functions=rows)
+(WORK/'report.json').write_text(json.dumps(report,indent=2)+'\n')
+(ROOT/'docs/backup-import-index.json').write_text(json.dumps(report,indent=2)+'\n')
+print(json.dumps({k:v for k,v in report.items() if k!='functions'},indent=2))

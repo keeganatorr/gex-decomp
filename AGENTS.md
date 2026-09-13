@@ -64,7 +64,18 @@ blocks those bodies. Read docs/baseline.md before reasoning about a mismatch.
 - scripts/build-baseline and the Nexus Build button still cover only the original
   two functions. They are not an all-source verification gate.
 
-The immutable backend currently runs from .work/backend/13286c8 (Atlas feed added).
+- Backup recovery is indexed in docs/backup-import-index.json and explained in
+  docs/backup-import.md. Sources retain their archive path/hash. Do not trust old
+  objdiff 100% reports: many mod wrappers literally emit original bytes. Compiles
+  and NearMatch sources are retained starting points, never proof of fidelity.
+- scan-backup stages files; verify-backup uses the existing durable queue and
+  refuses external source edits. Never rerun the scanner during a running import.
+  To pause, create .work/backup-import/pause and wait for the current function.
+  Delete that marker to resume. tests/backup_tools.py covers uncertainty recovery.
+- Live binding metadata is now a hash, while immutable attempt.json keeps the full
+  map. This does NOT narrow invalidation: changing any binding still retires proof.
+
+The immutable backend currently runs from .work/backend/544312b (compact proof projections).
 The .work/backend-current symlink is what scripts/backend resolves. Rebuild its repo
 separately, test it, stage a new immutable copy and deliberately restart the user
 service to deploy. Never overwrite an active DLL. Never restart Nexus to deploy it.
