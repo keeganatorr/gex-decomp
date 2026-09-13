@@ -24,6 +24,11 @@ In **Decomp**, select **Data source → real**, service identity `pc-decomp`.
 Leave project ID blank (service default), or enter `gex-gog-e1fd63ec`.
 It connects automatically; **Connect / reconnect** retries if needed.
 
+**Atlas now renders a native hierarchical treemap**: module/function byte areas,
+state colours, exact totals, hover details and click-to-Function-Lab. Wheel zooms,
+right-drag pans, and the module selector drills down. It retains the enclosing-span
+coverage warning rather than pretending those sizes are unique code coverage.
+
 Use Functions, Function Lab, Atlas, Queue, Types, Knowledge, Ghidra, Toolchains
 and History against the real backend. Empty campaigns/reviews/agents are honestly
 empty, not synthetic filler. The implemented bulk action is **Verification**;
@@ -88,7 +93,7 @@ service identity in Nexus's `extension-services.json`.
 | `.work/attempts/` | Immutable source/object/log/byte-comparison evidence |
 | `.work/requests/` | Online command checkpoints and receipts |
 | `imports/` | Timestamped Ghidra inventory snapshots — ignored |
-| `.work/backend/b048050/` | Immutable tested backend release |
+| `.work/backend/13286c8/` | Immutable tested backend release with compact Atlas feed |
 
 The backend's source is `/home/keegan/Repos/pc-decomp`. To import again, stop the
 service, run `./scripts/backend import`, then restart. Existing attempts survive;

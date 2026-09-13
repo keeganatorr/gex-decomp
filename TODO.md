@@ -8,6 +8,7 @@
 - [x] Identify five edited code bytes in three functions and block those matches
 - [x] Verify 00420d30 (7 bytes, DIR32) and 00418e20 (10 bytes, REL32) exactly
 - [x] Run the separate durable pc-decomp service and register its Nexus service identity
+- [x] Native Atlas treemap and compact live feed: 1,335 functions, 2 exact / 17 bytes retained after deployment; backend 13286c8, evidence .work/atlas-live-proof.json
 - [x] Provide online verification/build scripts and retain immutable attempts
 - [x] Validate live protocol/schema, backend restart/reconnect and idempotent build queries
 

@@ -51,6 +51,7 @@ blocks those bodies. Read docs/baseline.md before reasoning about a mismatch.
    function bytes including destinations matched, not proven source types or a
    reconstructed whole executable. Preserve near misses and failed attempts.
 
-The immutable backend currently runs from .work/backend/b048050. Rebuild its repo
+The immutable backend currently runs from .work/backend/13286c8 (Atlas feed added).
+The .work/backend-current symlink is what scripts/backend resolves. Rebuild its repo
 separately, test it, stage a new immutable copy and deliberately restart the user
 service to deploy. Never overwrite an active DLL. Never restart Nexus to deploy it.
