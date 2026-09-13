@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+"""Audit current exact proofs without compiling, changing statuses or touching Ghidra."""
+import json
+import pathlib
+import sys
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / 'tools'))
+import smallest_pass as p
+from proof_audit import image_bytes, resolve_object, check_contract
+
+
+def main():
+    config_bytes = (p.ROOT / 'project.json').read_bytes()
+    config = json.loads(config_bytes)
+    expected = 'e1fd63ecb09fca29d63286e22447752dcb120d7e682f8759d1021776f7698b86'
+    image = (p.ROOT / '.work/original.exe').read_bytes()
+    if config['sha256'] != expected or p.digest(image) != expected or p.digest(pathlib.Path(config['executable']).read_bytes()) != expected:
+        raise RuntimeError('Pinned/installed original differs')
+    tc = config['toolchain']
+    for name, checksum in tc['componentHashes'].items():
+        if p.digest((pathlib.Path(tc['compiler']).parent / name).read_bytes()) != checksum:
+            raise RuntimeError('Compiler component differs: ' + name)
+    rpc = p.Rpc()
+    try:
+        if rpc.snapshot['progress']['tasksRunning'] or rpc.snapshot['progress']['tasksQueued']:
+            raise RuntimeError('Wait for the verification queue to become idle')
+        inventory = rpc.inventory()
+        exact = [row for row in inventory if row['status'] == 'ExactMatch']
+        proofs = []
+        for row in exact:
+            address = row['address']
+            proof = rpc.detail(row)['match']
+            if not proof['verifiedExact']:
+                raise RuntimeError('Exact row lacks a current proof: ' + address)
+            directory = p.ROOT / '.work/attempts' / proof['verificationId']
+            retained = p.load(directory / 'attempt.json')['match']
+            source = p.ROOT / 'src/functions' / (address + '.cpp')
+            source_hash = p.digest(source.read_bytes())
+            if source_hash != proof['sourceRevision'] or p.digest((directory / 'source.cpp').read_bytes()) != source_hash:
+                raise RuntimeError('Current/retained source differs: ' + address)
+            for key in ('verifiedExact', 'verificationId', 'sourceRevision', 'binaryHash', 'compilerHash',
+                        'componentHashes', 'flags', 'targetSymbol', 'analysisEpoch', 'objectHash',
+                        'originalBytesHash', 'resolvedBytesHash', 'relocations'):
+                if retained[key] != proof[key]:
+                    raise RuntimeError('Live/immutable proof differs: ' + address + ' / ' + key)
+            check_contract(proof, config, address)
+            check_contract(retained, config, address)
+            if retained['symbolBindings'] != config['symbolBindings'] or retained['componentHashes'] != tc['componentHashes']:
+                raise RuntimeError('Retained bindings/compiler inputs differ: ' + address)
+            if retained['binaryHash'] != expected or retained['compilerHash'] != tc['componentHashes'][pathlib.Path(tc['compiler']).name]:
+                raise RuntimeError('Compiler/target hash differs: ' + address)
+            obj = (directory / 'target.obj').read_bytes()
+            original = (directory / 'original.bin').read_bytes()
+            resolved = (directory / 'resolved.bin').read_bytes()
+            regenerated, relocations = resolve_object(obj, retained['targetSymbol'], int(address, 16), config['symbolBindings'])
+            if not original == resolved == regenerated == image_bytes(image, int(address, 16), row['size']):
+                raise RuntimeError('Independent object relocation / original byte comparison failed: ' + address)
+            if relocations != retained['relocations']:
+                raise RuntimeError('Retained relocation evidence differs: ' + address)
+            for key, data in (('objectHash', obj), ('originalBytesHash', original), ('resolvedBytesHash', resolved)):
+                if p.digest(data) != retained[key]:
+                    raise RuntimeError('Artifact hash differs: ' + address + ' / ' + key)
+            proofs.append(dict(address=address, size=row['size'], sourceHash=source_hash,
+                               attemptId=proof['verificationId'], flags=proof['flags'],
+                               language=proof.get('language', 'cpp'), targetSymbol=proof['targetSymbol']))
+        if sum(row['size'] for row in proofs) != rpc.snapshot['progress']['bytes']['exact']:
+            raise RuntimeError('Atlas / proof byte totals differ')
+        # Do not describe a mixed snapshot if another editor/worker intervened.
+        if (p.ROOT / 'project.json').read_bytes() != config_bytes or rpc.inventory() != inventory:
+            raise RuntimeError('Configuration/inventory changed during audit')
+        for proof in proofs:
+            if p.digest((p.ROOT / 'src/functions' / (proof['address'] + '.cpp')).read_bytes()) != proof['sourceHash']:
+                raise RuntimeError('Source changed during audit')
+        report = dict(kind='Current proof audit; not whole-project completion',
+                      configHash=p.digest(config_bytes), progress=rpc.snapshot['progress'], proofs=proofs)
+        p.save(p.ROOT / '.work/current-proof-audit.json', report)
+        print(json.dumps(dict(verifiedProofs=len(proofs), progress=report['progress'], configHash=report['configHash']), indent=2))
+    finally:
+        rpc.close()
+
+
+if __name__ == '__main__':
+    main()

@@ -91,11 +91,25 @@ blocks those bodies. Read docs/baseline.md before reasoning about a mismatch.
   accesses. That is not a recovered object layout. Missing member layouts,
   conflicting declarations and unrecovered register inputs stay diagnostics;
   syntax checks, higher positional scores and inherited type names are not proof.
-- scripts/report-smallest-pass checks every current exact artifact against an
-  independent raw-backed PE slice and the source/config hashes. Its public index
-  omits original byte windows; full private diagnostics remain under .work.
+- scripts/report-smallest-pass validates its historical frozen checkpoint and now
+  intentionally refuses the changed configuration. scripts/audit-current is the
+  current-phase read-only auditor: it independently parses retained COFF, resolves
+  DIR32/REL32, slices the pinned PE and checks source/config/compiler identities.
+  Its report stays in .work; tests/proof_audit.py uses synthetic binaries.
+- Project schema 2 enables functionOverrides (flags, c/cpp language, targetSymbol).
+  Flags replace the whole global list. Source files keep the .cpp suffix even for
+  C; the trusted /Tc selector and proof language field are authoritative. Old
+  proofs without language mean C++. An unrelated override does not retire proof,
+  but a selected override change does; full binding-map invalidation is unchanged.
+  Old backends must reject schema 2 rather than silently ignore overrides.
+- docs/iterative-editedgex.md records the next nine matches and preserved failures.
+  SCRIPT_KillPlayer forwards a second argument hidden by the callee's decompiled
+  signature; inspect stack accesses, not only pseudocode. LST_InsertBefore models
+  the predecessor left in EAX without claiming its historical API return type.
+  SCRIPT_ShiftRight's unmasked expression is target-specific: C++ requires a count
+  below 32, while the verified x86 instruction masks CL for every byte value.
 
-The immutable backend currently runs from .work/backend/544312b (compact proof projections).
+The immutable backend currently runs from .work/backend/3545257 (scoped compiler contracts).
 The .work/backend-current symlink is what scripts/backend resolves. Rebuild its repo
 separately, test it, stage a new immutable copy and deliberately restart the user
 service to deploy. Never overwrite an active DLL. Never restart Nexus to deploy it.

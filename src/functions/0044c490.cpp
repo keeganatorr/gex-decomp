@@ -1,12 +1,6 @@
-typedef unsigned int undefined4;
-extern "C" {
-undefined4 __cdecl GEX_Target(int *param_1)
-
+// Advance the four-byte argument slot before loading its previous value.
+extern "C" unsigned int __cdecl GEX_Target(unsigned int **cursor)
 {
-  undefined4 *puVar1;
-  
-  puVar1 = (undefined4 *)*param_1;
-  *param_1 = (int)(puVar1 + 1);
-  return *puVar1;
-}
+    ++*cursor;
+    return (*cursor)[-1];
 }

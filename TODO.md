@@ -33,10 +33,18 @@
 - [x] Add checkpointed pass/recovery/report tools and 13 synthetic safety tests (`scripts/smallest-pass`, `scripts/report-smallest-pass`, `tools/smallest_pass.py`, `tests/smallest_pass.py`)
 - [x] Record 858 pre-trial reconstruction blockers, 37 analysis/termination/transport blockers, seven compiler blockers and unchanged/unsuccessful proposals honestly; this completes the pass, not the game
 
+## Done — first EditedGex iterative checkpoint
+- [x] Keep EditedGex read-only; add nine exact / 163 bytes from instruction-aware reconstruction, not a reset of the completed pass (`docs/iterative-editedgex.md`)
+- [x] Deploy scoped compiler contracts with C/C++ mode, allowlisted per-function flags and COFF symbols; preserve all 372 earlier exact sources/proofs (backend 3545257)
+- [x] Retain 31 attempts, including six restoration verifications; restore unsuccessful byte-reader, BSF and voice-state proposals
+- [x] Independently reconstruct all 381 exact COFF byte streams and relocation destinations against pinned PE bytes (`scripts/audit-current`, `tools/proof_audit.py`, six synthetic test groups)
+- [x] Record target-specific shift semantics, provisional list return type and hidden SCRIPT_KillPlayer stack argument; totals now 381 exact / 14,340 bytes, 874 sources
+
 ## Operator UI
 - [ ] In Decomp select Data source = real, service = pc-decomp, project ID blank; inspect live Functions and Function Lab
 
-## Next — manual source reconstruction, not an autonomous campaign
+## Next — iterative reconstruction, not an autonomous campaign
+- [ ] Continue toward exact matches for the remaining 954 functions, smallest first; preserve unresolved evidence rather than declaring the project complete
 - [ ] Refine the current 33 NearMatch candidates with instruction-aware comparisons; keep historical nonmatches and pass diagnostics as starting points
 - [ ] Recover compound layouts, callee prototypes and missing explicit bindings before another bulk proposal pass; conservative adaptation could not reconstruct 858 entries
 - [ ] Review 14 terminal/boundary cases and three possible noreturn-call endings; do not assume imported small spans describe complete functions
@@ -46,7 +54,7 @@
 - [ ] Add register-aware diagnostic diffs, per-used-binding proof dependencies and concise batch reports in pc-decomp/Nexus (feedback: docs/ten-functions.md)
 - [ ] Add an explicit all-source verification gate; build-baseline intentionally remains the original two-function smoke test
 - [ ] Verify calling conventions, signedness and struct layouts independently of byte equality
-- [ ] Approve a separate original-byte Ghidra analysis for WndProc, WinMain and GFX_OpenGraphics
+- [ ] Resolve the three edited bodies without changing the EditedGex reference; separate original-byte analysis remains unimplemented
 - [ ] Benchmark additional compiler/flag candidates on a representative corpus before claiming original toolchain identity
 - [ ] Add complete compiler-input/header dependency capture in pc-decomp before introducing shared headers
 - [ ] Import detailed existing type members/references and improve unique-byte coverage accounting

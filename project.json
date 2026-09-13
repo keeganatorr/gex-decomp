@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "gex-gog-e1fd63ec",
   "name": "Gex / GOG matching decompilation",
   "executable": "/home/keegan/.wine/drive_c/GOG Games/Gex/GEX.exe",
@@ -40,6 +40,18 @@
       "probe": "A C++ identity function compiled successfully under dedicated Wine prefix. Object is i386 COFF.",
       "originalCompilerProven": false
     }
+  },
+  "functionOverrides": {
+    "0042cbb0": {"language": "c", "flags": ["/O2", "/G3", "/Oy", "/GR-"]},
+    "0044c490": {
+      "flags": ["/O2", "/G3", "/Oy", "/GR-"],
+      "language": "cpp"
+    },
+    "0044c4c0": {
+      "flags": ["/O2", "/G3", "/Oy", "/GR-"],
+      "language": "c"
+    },
+    "0044c860": {"language": "c", "flags": ["/O2", "/G3", "/Oy", "/GR-"]}
   },
   "symbolBindings": {
     "_gNumPlayerBubbles_004a2854": "004a2854",

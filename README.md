@@ -12,13 +12,14 @@ source reconstruction and verification baseline**, not yet a full rebuilt game.
   recovered structures). Ghidra reports 1,515 functions including 180 externals.
 - Recovered compiler runs: **Microsoft C/C++ 10.00.5270**, with the old project's
   `/O2 /G5 /Oy /GR-` flags. It is **not MSVC 2010**.
-- **372 C++ candidates match 14,177 original bytes**, including actual DIR32/REL32
-  destinations. No wildcard masking. The [smallest-first pass](docs/smallest-pass.md)
-  assessed all 981 remaining entries, tried 82 new verification candidates and added
-  **18 exact / 633 bytes**; unresolved cases have individual diagnostics. This is
-  not completion of the game's decompilation. There are now 870 source files.
-  Earlier [backup recovery](docs/backup-import.md) and
-  [ten-function results](docs/ten-functions.md) remain documented.
+- **381 C/C++ candidates match 14,340 original bytes**, including actual DIR32/REL32
+  destinations. No wildcard masking. The latest
+  [EditedGex iterative checkpoint](docs/iterative-editedgex.md) adds **nine exact /
+  163 bytes**, with scoped compiler contracts and all 372 previous matches preserved.
+  **954 functions remain non-exact**; this is not completion of the game.
+  There are now 874 source files. The completed
+  [smallest-first pass](docs/smallest-pass.md), [backup recovery](docs/backup-import.md)
+  and [ten-function results](docs/ten-functions.md) remain documented.
 - A persistent backend serves real data to Nexus over a private named Unix socket.
 - Explicit verification requests are journalled, queued and processed one at a time.
   The backend launches no model calls or autonomous workers.
@@ -60,6 +61,9 @@ systemctl --user start pc-decomp-gex.service
 
 # Read current inventory / progress through the backend CLI.
 ./scripts/backend status
+
+# Read-only audit of every current exact artifact, including independent COFF relocation.
+./scripts/audit-current
 ```
 
 `build-baseline` keys operations by source, configuration and import epoch. An
@@ -98,7 +102,7 @@ service identity in Nexus's `extension-services.json`.
 | `.work/attempts/` | Immutable source/object/log/byte-comparison evidence |
 | `.work/requests/` | Online command checkpoints and receipts |
 | `imports/` | Timestamped Ghidra inventory snapshots — ignored |
-| `.work/backend/544312b/` | Immutable tested backend; Atlas and compact binding-proof projections |
+| `.work/backend/3545257/` | Immutable tested backend; scoped compiler contracts and compact proofs |
 
 The backend's source is `/home/keegan/Repos/pc-decomp`. To import again, stop the
 service, run `./scripts/backend import`, then restart. Existing attempts survive;
@@ -108,7 +112,10 @@ uncached detail offline, stop the service and use `./scripts/backend detail
 
 **Configuration changes require a service restart.** Source edits do not; they
 retire current proof automatically. Header dependency capture is not implemented,
-so candidate translation units must currently be self-contained.
+so candidate translation units must currently be self-contained. Project schema 2
+adds per-function `functionOverrides` for allowlisted flags, C/C++ language and COFF
+symbol. C sources retain the `.cpp` filename but compile with `/Tc`; effective
+contracts are recorded in proofs. See the [checkpoint](docs/iterative-editedgex.md).
 
 ## Preserve the existing Ghidra work
 
