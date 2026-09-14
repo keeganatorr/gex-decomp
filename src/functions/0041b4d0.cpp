@@ -1,12 +1,9 @@
-typedef unsigned int uint;
 extern "C" {
-void __cdecl GEX_Target(int param_1,int param_2)
-
+void __cdecl GEX_Target(int *object, int ignored)
 {
-  if (param_2 == 0) {
-    *(uint *)(param_1 + 0x78) = *(uint *)(param_1 + 0x78) & 0xffe00000;
-    *(uint *)(param_1 + 0x7c) = *(uint *)(param_1 + 0x7c) & 0xffe00000;
-  }
-  return;
+    if (ignored == 0) {
+        object[0x1e] &= 0xffe00000;
+        object[0x1f] &= 0xffe00000;
+    }
 }
 }

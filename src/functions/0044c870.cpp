@@ -1,18 +1,12 @@
-typedef unsigned int undefined4;
-extern "C" {
-undefined4 __cdecl GEX_Target(int *param_1)
-
+typedef unsigned int uint;
+uint __cdecl GEX_Target(uint *value)
 {
-  int iVar1;
-  
-  iVar1 = 0;
-  do {
-    if (*param_1 != 0) {
-      return 0;
+    int index = 0;
+    while (index < 3) {
+        if (*value != 0)
+            return 0;
+        value += 1;
+        index += 1;
     }
-    param_1 = param_1 + 1;
-    iVar1 = iVar1 + 1;
-  } while (iVar1 < 3);
-  return 1;
-}
+    return 1;
 }

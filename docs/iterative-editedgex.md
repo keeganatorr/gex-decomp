@@ -1,17 +1,15 @@
 # Iterative reconstruction — EditedGex checkpoint
 
 This continues beyond the completed conservative pass. It is **not completion of
-the project**: **954 functions remain non-exact** (33 NearMatch and 921 others).
+the project**: the earlier checkpoint recorded 954 functions remaining non-exact; the current audit has reduced that to **926** (34 NearMatch and 892 others).
 Per the user's latest clarification, the reference remains **`/EditedGex`**, read
 only. No separate analysis was created. Original bytes still come from the pinned
 GOG executable, never from the five edited bytes in that analysis.
 
 ## Results
 
-**Nine new ExactMatch functions / 163 bytes**, bringing current totals to
-**381 / 1,335 functions and 14,340 / 525,887 enclosing-span bytes**. Enclosing spans
-are not unique code coverage. Four source files were added; there are now 874.
-All **372 previously exact sources and current proofs were preserved**.
+The earlier checkpoint reached **381 / 1,335 functions and 14,340 / 525,887 enclosing-span bytes**. The current audited state reaches **409 / 1,335 functions and 15,439 / 525,887 bytes**. Enclosing spans are not unique code coverage. There are now 898 source files.
+All **372 previously exact sources and current proofs were preserved**, and the continuation preserved every additional candidate and proof attempt.
 
 | Address | Inherited name | Bytes | Verified contract |
 |---|---|---:|---|
@@ -25,10 +23,13 @@ All **372 previously exact sources and current proofs were preserved**.
 | `00418a80` | `SCRIPT_ShiftRight` | 22 | C++, baseline `/G5` |
 | `0042cbb0` | `LST_InsertBefore` | 22 | C, `/G3` |
 
+The current continuation additionally proved 11 small functions: `0040f3a0`,
+`004140f0`, `00414330`, `00414a30`, `00418740`, `00418880`, `00421340`,
+`00421380`, `00425460`, `0043b510`, and `0043d1e0`.
+
 Other flags remain `/O2 /Oy /GR-`. These are proven **candidate contracts**, not
 proof of the original source language, compiler flags or API declarations.
-This checkpoint contains **31 immutable attempts: 25 trials and six restoration
-verifications**. IDs/results and current exact source hashes are in
+The continuation adds immutable attempts for the smallest-first trials and exact promotions; IDs/results and current exact source hashes are in
 [`iterative-editedgex-index.json`](iterative-editedgex-index.json).
 
 Selection stayed focused on the small end of the unresolved inventory, revisiting
@@ -61,7 +62,7 @@ size pass. The old 981-entry checkpoint was not reset or reused.
 ## Compiler contracts and deployment
 
 Backend **`3545257`** adds per-function contracts. `project.json` is now schema 2,
-with four `functionOverrides`. Only allowlisted flags, `c`/`cpp` language and the
+with scoped `functionOverrides`. Only allowlisted flags, `c`/`cpp` language and the
 COFF target symbol can change per function. The global compiler, seven component
 fingerprints, Wine prefix and complete 1,945-entry binding map are unchanged.
 
@@ -111,7 +112,7 @@ python3 tests/byte_readers.py
 REL32 (including self references and addends), and compares that result with both
 retained binaries and an independently sliced raw-backed PE range. It checks
 current/retained sources, compiler component hashes, per-function contracts, full
-bindings and the live proof identity. All **381 current proofs** passed. It neither
+bindings and the live proof identity. All **409 current proofs** passed. It neither
 compiles nor changes status; its report is `.work/current-proof-audit.json`.
 Six synthetic test groups cover relocation arithmetic/rejections, ambiguous
 sections, truncation, raw-backed PE bounds and legacy/scoped compiler contracts.

@@ -42,15 +42,24 @@
     }
   },
   "functionOverrides": {
+    "00418fa0": {"language": "c"},
+    "00418fd0": {"language": "c"},
+    "0041fb80": {"language": "c"},
+    "00430060": {"language": "c"},
+    "0040b6d0": {"language": "c"},
     "0042cbb0": {"language": "c", "flags": ["/O2", "/G3", "/Oy", "/GR-"]},
     "0044c490": {
       "flags": ["/O2", "/G3", "/Oy", "/GR-"],
       "language": "cpp"
     },
+    "0044c4a0": {"flags": ["/O2", "/G3", "/Oy", "/GR-"]},
+    "0044a210": {"flags": ["/O2", "/G3", "/Oy", "/GR-"], "language": "c"},
     "0044c4c0": {
       "flags": ["/O2", "/G3", "/Oy", "/GR-"],
       "language": "c"
     },
+    "0044c840": {"flags": ["/O2", "/G3", "/Oy", "/GR-"], "language": "c"},
+    "0044c870": {"flags": ["/O2", "/G3", "/Oy", "/GR-"], "language": "c"},
     "0044c860": {"language": "c", "flags": ["/O2", "/G3", "/Oy", "/GR-"]}
   },
   "symbolBindings": {

@@ -5,6 +5,6 @@ unsigned char *__cdecl GEX_Target(unsigned char *cursor, void *object)
     unsigned int offset = cursor[1];
     unsigned int **table = (unsigned int **)((char *)object + 0x68);
     unsigned int *row = table[index];
-    row[offset + 0x1a] = DAT_0049FB90;
+    DAT_0049FB90 = row[offset + 0x1a];
     return cursor + 2;
 }

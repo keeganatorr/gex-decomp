@@ -1,11 +1,10 @@
-extern "C" {
-int __cdecl GEX_Target(short **param_1)
-
+typedef unsigned char byte;
+int __cdecl GEX_Target(byte **cursor)
 {
-  short sVar1;
-  
-  sVar1 = **param_1;
-  *param_1 = *param_1 + 1;
-  return (int)sVar1;
-}
+    byte *value = *cursor;
+    int high = value[1];
+    int low = value[0];
+    int result = (high << 8) | low;
+    *cursor = value + 2;
+    return (short)result;
 }

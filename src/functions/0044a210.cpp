@@ -1,8 +1,7 @@
 typedef unsigned int uint;
-extern "C" {
-uint __cdecl GEX_Target(double *param_1)
-
+uint __cdecl GEX_Target(double *value)
 {
-  return (uint)(0.0 <= *param_1);
-}
+    if (0.0 > *value)
+        return 0;
+    return 1;
 }

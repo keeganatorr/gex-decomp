@@ -25,7 +25,9 @@ def image_bytes(image, address, length):
     rva = address-base
     for i in range(count):
         sh = optional+optional_size+i*40
-        section_rva, size, offset = struct.unpack_from('<III', image, sh+12)
+        section_rva = struct.unpack_from('<I', image, sh+12)[0]
+        size = struct.unpack_from('<I', image, sh+16)[0]
+        offset = struct.unpack_from('<I', image, sh+20)[0]
         if section_rva <= rva and rva+length <= section_rva+size:
             result = image[offset+rva-section_rva:offset+rva-section_rva+length]
             if len(result) != length:

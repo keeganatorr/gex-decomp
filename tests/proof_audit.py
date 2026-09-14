@@ -63,7 +63,9 @@ class Tests(unittest.TestCase):
         data[0x80:0x84] = b'PE\0\0';struct.pack_into('<HH', data, 0x84, 0x14c, 1)
         struct.pack_into('<H', data, 0x94, 0xe0);struct.pack_into('<H', data, 0x98, 0x10b)
         struct.pack_into('<I', data, 0x98 + 28, 0x400000)
-        struct.pack_into('<III', data, 0x178 + 12, 0x1000, 16, 512)
+        struct.pack_into('<I', data, 0x178 + 12, 0x1000)
+        struct.pack_into('<I', data, 0x178 + 16, 16)
+        struct.pack_into('<I', data, 0x178 + 20, 512)
         data[512:] = bytes(range(16))
         self.assertEqual(image_bytes(data, 0x401004, 4), b'\x04\x05\x06\x07')
         for address, size in [(0x40100f, 2), (0x400fff, 1), (0x401000, 0)]:

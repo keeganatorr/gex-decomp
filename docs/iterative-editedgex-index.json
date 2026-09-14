@@ -46,6 +46,13 @@
   "configHash": "717891ff34f6f529ccac507674bd48fb46a15e036814b6516691cb7fbb980cc5",
   "previousExactSourcesPreserved": 372,
   "sourceFiles": 874,
+  "latestAudit": {
+    "functions": {"total": 1335, "exact": 409, "near": 34, "unmatched": 892},
+    "bytes": {"total": 525887, "exact": 15439, "near": 4004, "unmatched": 506444},
+    "sourceFiles": 898,
+    "configHash": "79f9fe97a5f552973dd9aac82c2427f60fbad015fc80cf03edcf97221e583ef7",
+    "proofAudit": "all 409 current proofs passed"
+  },
   "newExact": [
     {
       "address": "0044c490",

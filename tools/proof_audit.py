@@ -28,7 +28,9 @@ def image_bytes(image, address, size):
     rva = address - base
     for index in range(count):
         sh = optional + optional_size + index * 40
-        section_rva, raw_size, raw = unpack('<III', image, sh + 12)
+        section_rva, = unpack('<I', image, sh + 12)
+        raw_size, = unpack('<I', image, sh + 16)
+        raw, = unpack('<I', image, sh + 20)
         if section_rva <= rva and rva + size <= section_rva + raw_size:
             return span(image, raw + rva - section_rva, size)
     raise ValueError('Range is not completely raw-backed')

@@ -1,6 +1,13 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00423190_CollisionIntoJumpTailWhack.cpp
-// Historical source SHA256: 945019398f1989a56816ff854a41b51eaf9ba03ee17dde16e337bd5f12362853
+typedef unsigned int uint;
 extern "C" {
-extern "C" int __cdecl FUN_00425AF0(void**);
-extern "C" int __cdecl GEX_Target(void** p) { if (*(char*)0x00458e68 && !*(char*)0x00458e6a) return FUN_00425AF0(p); return 0; }
+extern unsigned char DAT_004A0295;
+extern unsigned char DAT_004A0293;
+extern void __cdecl FUN_00425AF0(void *);
+uint __cdecl GEX_Target(void *object)
+{
+    if (DAT_004A0295 == 0 || DAT_004A0293 != 0)
+        return 0;
+    FUN_00425AF0(object);
+    return 1;
+}
 }

@@ -1,11 +1,9 @@
-extern "C" { extern int DAT_0049fb90; }
-struct GXObject;
-typedef unsigned char byte;
 extern "C" {
-byte * __cdecl GEX_Target(byte *param_1,GXObject **param_2)
-
+extern int DAT_0049FB90;
+unsigned char *__cdecl GEX_Target(unsigned char *cursor, unsigned int **object)
 {
-  DAT_0049fb90 = (int)param_2[*param_1 + 0x1a] - (int)param_2[param_1[1] + 0x1a];
-  return param_1 + 2;
+    DAT_0049FB90 = (int)object[cursor[0] + 0x1a] -
+                   (int)object[cursor[1] + 0x1a];
+    return cursor + 2;
 }
 }
