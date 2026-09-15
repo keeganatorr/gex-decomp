@@ -1,5 +1,27 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
+  "libraryOwnership": {
+    "version": 1,
+    "archives": [
+      {
+        "id": "msvc-crt-10.00.5270-candidate",
+        "variant": "libc",
+        "path": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+        "sha256": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3"
+      },
+      {
+        "id": "msvc-crt-10.00.5270-candidate",
+        "variant": "libcmt",
+        "path": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+        "sha256": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907"
+      }
+    ],
+    "provenance": "Recovered c1032 candidate toolchain; does not prove original global compiler/version",
+    "fidReport": {
+      "path": "/home/keegan/Repos/gex-decomp/.work/fid/c1032-full-02/report.json",
+      "sha256": "2c5e9f309fe4c3e99e8b7518e447cd62f2d75cfdcda5d3fb1665075521fdc8b9"
+    }
+  },
   "id": "gex-gog-e1fd63ec",
   "name": "Gex / GOG matching decompilation",
   "executable": "/home/keegan/.wine/drive_c/GOG Games/Gex/GEX.exe",

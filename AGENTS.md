@@ -33,6 +33,26 @@ original across WndProc, WinMain and GFX_OpenGraphics. Do not repair, overwrite,
 reimport or rename that Ghidra analysis without explicit approval. The backend
 blocks those bodies. Read docs/baseline.md before reasoning about a mismatch.
 
+## Library ownership (schema 3)
+
+Before reconstructing, check backend `ownership` and `reconstructionEligible`.
+Confirmed CRT/library and pinned-PE import thunks stay visible but are excluded
+from proposals. Never infer ownership from the legacy Library status or a name.
+Unknown/candidate-library functions remain eligible. Ownership does not change
+source-match status or erase proofs. `docs/library-ownership.md` and its JSON
+report document 28 CRT functions + 3 import thunks, leaving 873 unfinished
+reconstruction targets; all 419 source proofs remain current. __fpmath is excluded
+by corroborated custom-toolchain FID, NOT an exact archive-byte claim.
+
+`library-scan`/`library-apply` run through scripts/backend under the owner lock;
+stop/drain the service first. No direct DB edits. Schema 3 pins the recovered
+c1032 archives and custom FID report so old backends cannot ignore exclusions.
+FID scratch tooling and provenance: `docs/crt-fid.md`. No Ghidra reference writes,
+assembly injection, fabricated bindings, relocation masking or bulk recompilation.
+The active immutable backend is `.work/backend/ownership-bounds-660e2ebf47835c31`;
+activation/rollback: `.work/ownership-activation-20260915-200641/activation.json`.
+Earlier deployment notes below are historical.
+
 ## Source loop
 
 1. Choose an unpatched function; inspect Ghidra via Nexus MCP with program=GEX.exe
@@ -61,8 +81,9 @@ blocks those bodies. Read docs/baseline.md before reasoning about a mismatch.
   host-only behavioural check and must never promote backend proof status.
 - Ghidra's EVENT_ExtractUShort pseudocode suggests a wider memory load than the
   assembly actually performs. Read instruction access widths before copying types.
-- Adding symbol bindings currently retires all old proofs, even for unrelated
-  functions. Reverify affected current proofs; never restore status by hand.
+- Proof currency uses the recorded per-used binding subset; unrelated binding
+  changes and ownership metadata do not retire source proofs. Old whole-map proofs
+  retain legacy semantics until metadata migration. Never restore status by hand.
 - Import bindings name IAT pointer storage, not the local jump thunk or code in
   a DLL. `docs/iat-binding-review.md` records three pinned-PE slot identities,
   SDK-corroborated stdcall import names and the activated 179-entry PE import map.
@@ -98,8 +119,9 @@ blocks those bodies. Read docs/baseline.md before reasoning about a mismatch.
   refuses external source edits. Never rerun the scanner during a running import.
   To pause, create .work/backup-import/pause and wait for the current function.
   Delete that marker to resume. tests/backup_tools.py covers uncertainty recovery.
-- Live binding metadata is now a hash, while immutable attempt.json keeps the full
-  map. This does NOT narrow invalidation: changing any binding still retires proof.
+- Live binding metadata uses a hash plus usedBindings; immutable attempt.json
+  retains its original evidence. Only changed used destinations retire migrated
+  proofs; exact history remains historical.
 
 - The bounded smallest-first pass is documented in docs/smallest-pass.md and its
   per-function index. A pass outcome is not a backend status: a reconstruction
@@ -130,7 +152,7 @@ blocks those bodies. Read docs/baseline.md before reasoning about a mismatch.
   Flags replace the whole global list. Source files keep the .cpp suffix even for
   C; the trusted /Tc selector and proof language field are authoritative. Old
   proofs without language mean C++. An unrelated override does not retire proof,
-  but a selected override change does; full binding-map invalidation is unchanged.
+  but a selected override change does; migrated proofs use per-used bindings.
   Old backends must reject schema 2 rather than silently ignore overrides.
 - docs/iterative-editedgex.md records the next nine matches and preserved failures.
   SCRIPT_KillPlayer forwards a second argument hidden by the callee's decompiled

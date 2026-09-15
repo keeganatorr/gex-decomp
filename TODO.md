@@ -83,6 +83,12 @@
 - [x] Run five explicit targets, one attempt each: 00423760 and 0044a210 exact (+46 bytes); 00445180 compiled mismatch, __fpmath missing instruction-generation evidence, 0044a9a2 timeout. 417 -> 419 exact; no bulk recompilation/audit (`docs/deepseek-five-functions.md`)
 - [x] Distinguish model `MissingEvidence` from provider/auth failures; retain configured tier escalation without falsely pausing on model prose. Supply configured compiler ID/version to future prompts; synthetic regressions pass, immutable backend deployed, no additional paid run
 
+## Done — evidence-backed library ownership
+- [x] Scan recovered c1032 libc/libcmt archives and generate an isolated custom-only FID corpus; retain hashes, member identities and ambiguity diagnostics (`docs/crt-fid.md`)
+- [x] Classify 19 exact-object CRT matches, 9 corroborated custom-FID CRT matches and 3 pinned-PE import thunks; __fpmath excluded without fabricating relocation bindings or injecting assembly (`docs/library-ownership.md`, `docs/library-ownership-report.json`)
+- [x] Preserve all 419 current/historical source proofs and all function records; reconstruction remaining 904 -> 873, with 69 candidate-library functions still eligible
+- [x] Enforce ownership in proposal eligibility, expose filters/evidence and separate progress counters in Nexus; backend/synthetic integration/FID tests and 5 extension CTest suites pass, immutable backend and rendered extension deployed
+
 ## Operator UI
 - [ ] In Decomp select Data source = real, service = pc-decomp, project ID blank; inspect live Functions and Function Lab
 

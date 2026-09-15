@@ -375,7 +375,7 @@ def capture(rpc):
         return load(manifest_path)
     config = (ROOT/'project.json').read_bytes()
     inventory = rpc.inventory()
-    rows = sorted((r for r in inventory if r['status'] != 'ExactMatch'), key=lambda r: (r['size'], r['address']))
+    rows = sorted((r for r in inventory if r['status'] != 'ExactMatch' and r.get('reconstructionEligible', True)), key=lambda r: (r['size'], r['address']))
     sources = {}
     for path in sorted((ROOT/'src/functions').glob('*.cpp')):
         data = path.read_bytes()
@@ -459,6 +459,10 @@ def verify(address, phase, manifest, state, state_path):
 
 
 def process(row, manifest, rpc):
+    # Ownership can change after a frozen pass manifest was captured. Never
+    # silently overwrite/restore source for a newly excluded dependency.
+    if rpc.detail(row).get('reconstructionEligible') is False:
+        raise RuntimeError('Confirmed library/import ownership; reconstruction excluded. Existing checkpoint retained.')
     address = row['address']
     state_path = WORK/'results'/f'{address}.json'
     if state_path.exists():
