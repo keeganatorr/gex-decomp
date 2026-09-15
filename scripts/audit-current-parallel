@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+"""Parallel read-only audit of current exact artifacts.
+
+The backend remains the sole owner of verification writes. This tool only reads
+immutable attempts/current sources and uses independent read-only RPC sessions.
+"""
+import argparse
+import concurrent.futures
+import hashlib
+import json
+import os
+import pathlib
+import sys
+import threading
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'tools'))
+import smallest_pass as p
+from proof_audit import image_bytes, resolve_object, check_contract
+
+EXPECTED = 'e1fd63ecb09fca29d63286e22447752dcb120d7e682f8759d1021776f7698b86'
+
+thread_state = threading.local()
+
+def detail(row):
+    for attempt in range(2):
+        rpc = getattr(thread_state, 'rpc', None)
+        try:
+            if rpc is None:
+                rpc = p.Rpc(); thread_state.rpc = rpc
+            return rpc.detail(row)['match']
+        except (ConnectionResetError, BrokenPipeError, TimeoutError, OSError):
+            try:
+                if rpc is not None: rpc.close()
+            finally:
+                thread_state.rpc = None
+            if attempt == 1: raise
+
+def audit_one(row, config, tc, image):
+    proof = detail(row)
+    address = row['address']
+    if not proof['verifiedExact']:
+        raise RuntimeError('Exact row lacks a current proof: ' + address)
+    directory = ROOT / '.work/attempts' / proof['verificationId']
+    retained = p.load(directory / 'attempt.json')['match']
+    source = ROOT / 'src/functions' / (address + '.cpp')
+    source_hash = p.digest(source.read_bytes())
+    if source_hash != proof['sourceRevision'] or p.digest((directory / 'source.cpp').read_bytes()) != source_hash:
+        raise RuntimeError('Current/retained source differs: ' + address)
+    for key in ('verifiedExact', 'verificationId', 'sourceRevision', 'binaryHash', 'compilerHash',
+                'componentHashes', 'flags', 'targetSymbol', 'analysisEpoch', 'objectHash',
+                'originalBytesHash', 'resolvedBytesHash', 'relocations'):
+        if retained[key] != proof[key]:
+            raise RuntimeError('Live/immutable proof differs: ' + address + ' / ' + key)
+    check_contract(proof, config, address)
+    check_contract(retained, config, address)
+    if retained['symbolBindings'] != config['symbolBindings'] or retained['componentHashes'] != tc['componentHashes']:
+        raise RuntimeError('Retained bindings/compiler inputs differ: ' + address)
+    if retained['binaryHash'] != EXPECTED or retained['compilerHash'] != tc['componentHashes'][pathlib.Path(tc['compiler']).name]:
+        raise RuntimeError('Compiler/target hash differs: ' + address)
+    obj = (directory / 'target.obj').read_bytes()
+    original = (directory / 'original.bin').read_bytes()
+    resolved = (directory / 'resolved.bin').read_bytes()
+    regenerated, relocations = resolve_object(obj, retained['targetSymbol'], int(address, 16), config['symbolBindings'])
+    if not original == resolved == regenerated == image_bytes(image, int(address, 16), row['size']):
+        raise RuntimeError('Independent object relocation / original byte comparison failed: ' + address)
+    if relocations != retained['relocations']:
+        raise RuntimeError('Retained relocation evidence differs: ' + address)
+    for key, data in (('objectHash', obj), ('originalBytesHash', original), ('resolvedBytesHash', resolved)):
+        if p.digest(data) != retained[key]:
+            raise RuntimeError('Artifact hash differs: ' + address + ' / ' + key)
+    return dict(address=address, size=row['size'], sourceHash=source_hash,
+                attemptId=proof['verificationId'], flags=proof['flags'],
+                language=proof.get('language', 'cpp'), targetSymbol=proof['targetSymbol'])
+
+def main():
+    ap = argparse.ArgumentParser(); ap.add_argument('--jobs', type=int, default=min(os.cpu_count() or 1, 16)); args = ap.parse_args()
+    if args.jobs < 1 or args.jobs > 256: raise SystemExit('--jobs must be 1..256')
+    config_bytes = (p.ROOT / 'project.json').read_bytes(); config = json.loads(config_bytes)
+    image = (p.ROOT / '.work/original.exe').read_bytes(); tc = config['toolchain']
+    if config['sha256'] != EXPECTED or p.digest(image) != EXPECTED or p.digest(pathlib.Path(config['executable']).read_bytes()) != EXPECTED:
+        raise RuntimeError('Pinned/installed original differs')
+    for name, checksum in tc['componentHashes'].items():
+        if p.digest((pathlib.Path(tc['compiler']).parent / name).read_bytes()) != checksum:
+            raise RuntimeError('Compiler component differs: ' + name)
+    coordinator = p.Rpc()
+    try:
+        if coordinator.snapshot['progress']['tasksRunning'] or coordinator.snapshot['progress']['tasksQueued']:
+            raise RuntimeError('Wait for the verification queue to become idle')
+        inventory = coordinator.inventory(); exact = [row for row in inventory if row['status'] == 'ExactMatch']
+        print(f'Auditing {len(exact)} proofs with {args.jobs} workers', flush=True)
+        with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
+            futures = [pool.submit(audit_one, row, config, tc, image) for row in exact]
+            proofs = [future.result() for future in futures]
+        if sum(row['size'] for row in proofs) != coordinator.snapshot['progress']['bytes']['exact']:
+            raise RuntimeError('Atlas / proof byte totals differ')
+        if (p.ROOT / 'project.json').read_bytes() != config_bytes or coordinator.inventory() != inventory:
+            raise RuntimeError('Configuration/inventory changed during audit')
+        for proof in proofs:
+            if p.digest((p.ROOT / 'src/functions' / (proof['address'] + '.cpp')).read_bytes()) != proof['sourceHash']:
+                raise RuntimeError('Source changed during audit: ' + proof['address'])
+        proofs.sort(key=lambda x: x['address'])
+        report = dict(kind='Parallel current proof audit; not whole-project completion', configHash=p.digest(config_bytes), progress=coordinator.snapshot['progress'], proofs=proofs, workers=args.jobs)
+        p.save(p.ROOT / '.work/current-proof-audit.json', report)
+        print(json.dumps(dict(verifiedProofs=len(proofs), progress=report['progress'], configHash=report['configHash'], workers=args.jobs), indent=2))
+    finally:
+        coordinator.close()
+
+if __name__ == '__main__': main()

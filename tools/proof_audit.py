@@ -48,6 +48,7 @@ def resolve_object(data, target_symbol, address, bindings):
         raise ValueError('Invalid COFF string table')
     strings = span(data, strings_at, strings_size)
     symbols = {}
+    symbol_names = set()
     index = 0
     while index < symbol_count:
         name_bytes, value, section, kind, storage, auxiliaries = unpack('<8sIhHBB', data, symbols_at + index * 18)
@@ -58,6 +59,9 @@ def resolve_object(data, target_symbol, address, bindings):
             name = strings[offset:].split(b'\0', 1)[0].decode('ascii')
         else:
             name = name_bytes.split(b'\0', 1)[0].decode('ascii')
+        if name in symbol_names:
+            raise ValueError('Duplicate COFF symbol name: ' + name)
+        symbol_names.add(name)
         symbols[index] = (name, value, section, kind, storage)
         index += 1 + auxiliaries
     if index != symbol_count:
@@ -65,8 +69,9 @@ def resolve_object(data, target_symbol, address, bindings):
     targets = [s for s in symbols.values() if s[0] == target_symbol]
     if len(targets) != 1:
         raise ValueError('Missing/ambiguous target symbol')
-    _, value, section, _, storage = targets[0]
-    if value or not 1 <= section <= count or storage != 2:
+    target_info = targets[0]
+    _, value, section, kind, storage = target_info
+    if value or not 1 <= section <= count or kind != 0x20 or storage != 2:
         raise ValueError('Target does not own its code section')
     if any(s[2] == section and s[3] == 0x20 and s[0] != target_symbol for s in symbols.values()):
         raise ValueError('Multiple functions in section')
@@ -90,10 +95,20 @@ def resolve_object(data, target_symbol, address, bindings):
             raise ValueError('Overlapping relocations')
         used |= locations
         name = symbols[symbol][0]
-        if name not in destinations or not 0 <= destinations[name] <= 0xffffffff:
+        if name in destinations:
+            destination = destinations[name]
+        else:
+            candidate = symbols[symbol]
+            if candidate[2] > 0 and candidate[2] == target_info[2]:
+                destination = address + candidate[1] - target_info[1]
+            elif candidate[2] == -1:
+                destination = candidate[1]
+            else:
+                raise ValueError('Unresolved relocation destination: ' + name)
+        if not 0 <= destination <= 0xffffffff:
             raise ValueError('Unresolved/out-of-range destination: ' + name)
         addend, = unpack('<I', code, offset)
-        value = destinations[name] + addend
+        value = destination + addend
         if kind == 20:
             value -= address + offset + 4
         struct.pack_into('<I', code, offset, value & 0xffffffff)

@@ -8,6 +8,23 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / 'tools'))
 from proof_audit import image_bytes, resolve_object, check_contract
 
 
+def local_coff():
+    code = b'\xa1' + struct.pack('<I', 4) + b'\xc3'
+    raw, relocs = 60, 60 + len(code)
+    symbols_at = relocs + 10
+    target = b'_GEX_Target@4'
+    local = b'$L1\0\0\0\0\0'
+    strings = bytearray(b'\0' * 4)
+    symbols = bytearray()
+    offset = len(strings); strings += target + b'\0'
+    symbols += struct.pack('<IIIhHBB', 0, offset, 0, 1, 0x20, 2, 0)
+    symbols += struct.pack('<8sIhHBB', local, 5, 1, 0, 3, 0)
+    struct.pack_into('<I', strings, 0, len(strings))
+    header = struct.pack('<HHIIIHH', 0x14c, 1, 0, symbols_at, 2, 0, 0)
+    section = struct.pack('<8sIIIIIIHHI', b'.text\0\0\0', 0, 0, len(code), raw, relocs, 0, 1, 0, 0x60000020)
+    return bytearray(header + section + code + struct.pack('<IIH', 1, 1, 6) + symbols + strings)
+
+
 def coff():
     code = b'\xa1' + struct.pack('<I', 4) + b'\xe8' + struct.pack('<I', 0) + b'\xc3'
     raw, relocs = 60, 60 + len(code)
@@ -29,6 +46,11 @@ class Tests(unittest.TestCase):
     def resolve(self, data=None, bindings=None):
         return resolve_object(coff() if data is None else data, '_GEX_Target@4', 0x401000,
                               {'_data': '00402000', '_callee': '00401100'} if bindings is None else bindings)
+
+    def test_section_local_label_does_not_need_project_binding(self):
+        code, relocations = resolve_object(local_coff(), '_GEX_Target@4', 0x401000, {})
+        self.assertEqual(struct.unpack_from('<I', code, 1)[0], 0x401009)
+        self.assertEqual(relocations, [{'Offset': 1, 'Type': 6, 'Symbol': '$L1'}])
 
     def test_dir32_rel32_addends_and_decorated_target(self):
         code, relocations = self.resolve()

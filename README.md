@@ -12,12 +12,13 @@ source reconstruction and verification baseline**, not yet a full rebuilt game.
   recovered structures). Ghidra reports 1,515 functions including 180 externals.
 - Recovered compiler runs: **Microsoft C/C++ 10.00.5270**, with the old project's
   `/O2 /G5 /Oy /GR-` flags. It is **not MSVC 2010**.
-- **381 C/C++ candidates match 14,340 original bytes**, including actual DIR32/REL32
+- **409 C/C++ candidates match 15,439 original bytes**, including actual DIR32/REL32
   destinations. No wildcard masking. The latest
-  [EditedGex iterative checkpoint](docs/iterative-editedgex.md) adds **nine exact /
-  163 bytes**, with scoped compiler contracts and all 372 previous matches preserved.
-  **954 functions remain non-exact**; this is not completion of the game.
-  There are now 874 source files. The completed
+  [EditedGex iterative checkpoint](docs/iterative-editedgex.md) and subsequent
+  bounded recovery work preserve these proofs under the activated 179-entry
+  pinned-PE import map; all 409 were reverified after activation. **926 functions
+  remain non-exact**; this is not completion of the game. There are now 898 source
+  files. The completed
   [smallest-first pass](docs/smallest-pass.md), [backup recovery](docs/backup-import.md)
   and [ten-function results](docs/ten-functions.md) remain documented.
 - A persistent backend serves real data to Nexus over a private named Unix socket.

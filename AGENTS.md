@@ -14,7 +14,9 @@ Ghidra exports or compiled artifacts may be committed or published.
 Nexus owns agents/sessions/MCP/UI. ../pc-decomp owns compiler jobs, SQLite and proof.
 Use scripts/backend (offline read/import/verify) or scripts/verify (online queue).
 Never manipulate decomp.db directly or claim a match by editing its status.
-The service runs as pc-decomp-gex.service, one worker, no autonomous campaign.
+The service runs as pc-decomp-gex.service with one verifier. Its optional bounded
+proposal loop uses Nexus-owned agents and requires explicit models, limits and
+Play. Activation alone never starts a campaign.
 
 ## Compiler
 
@@ -61,6 +63,30 @@ blocks those bodies. Read docs/baseline.md before reasoning about a mismatch.
   assembly actually performs. Read instruction access widths before copying types.
 - Adding symbol bindings currently retires all old proofs, even for unrelated
   functions. Reverify affected current proofs; never restore status by hand.
+- Import bindings name IAT pointer storage, not the local jump thunk or code in
+  a DLL. `docs/iat-binding-review.md` records three pinned-PE slot identities,
+  SDK-corroborated stdcall import names and the activated 179-entry PE import map.
+  DirectDraw cdecl candidate uses a different COFF name and is 25 bytes versus
+  the original 6 even after diagnostic relocation resolution: removing an
+  unresolved-symbol error is not evidence of a match. The corrected stdcall
+  revision (`.work/retained-candidate-fixes/00409876-stdcall-v1/`) still emits a
+  24-byte forwarding call under baseline CL flags, not the 6-byte jump; its
+  decorated target/import names are verified, but it is not a current proof.
+  An opaque-entry revision *does* emit the exact 6-byte jump under the unchanged
+  baseline (`docs/isolated-import-thunk-match.md`), verified twice in a separate
+  project and independently audited. It retains the canonical stdcall import
+  declaration but uses a C-style function-pointer cast for the private entry;
+  this is a compiler-specific byte-matching surrogate, not a portable type-safe
+  API wrapper. CL 10 rejects the analogous reinterpret_cast with C2152. Never
+  silently turn that machine-level proof into a source-level semantics claim.
+  The live binding map now includes the complete pinned-PE import map. All 409
+  prior proofs were reverified under its new binding hash; no proof was restored
+  manually. Former NearMatch entries remain unmatched until separately reviewed.
+- CoffCode resolves unique symbols in the target section relative to the target
+  entry point and COFF absolute symbols locally. Other-section symbols still
+  require explicit bindings, so object-local labels are not fabricated project
+  bindings. `tools/import_bindings.py` validates the pinned PE hash and SDK
+  import-library spelling, then emits a read-only provenance map.
 - scripts/build-baseline and the Nexus Build button still cover only the original
   two functions. They are not an all-source verification gate.
 
@@ -95,6 +121,10 @@ blocks those bodies. Read docs/baseline.md before reasoning about a mismatch.
   intentionally refuses the changed configuration. scripts/audit-current is the
   current-phase read-only auditor: it independently parses retained COFF, resolves
   DIR32/REL32, slices the pinned PE and checks source/config/compiler identities.
+  The 2026-09-14 smallest follow-up confirmed that the first three unattempted
+  non-thunk entries are only 11-byte NOP-terminated prefixes; preserve these
+  boundary diagnostics and do not trim or retry them until complete extents and
+  missing bindings are established (`docs/smallest-followup-trial.md`).
   Its report stays in .work; tests/proof_audit.py uses synthetic binaries.
 - Project schema 2 enables functionOverrides (flags, c/cpp language, targetSymbol).
   Flags replace the whole global list. Source files keep the .cpp suffix even for
@@ -109,7 +139,15 @@ blocks those bodies. Read docs/baseline.md before reasoning about a mismatch.
   SCRIPT_ShiftRight's unmasked expression is target-specific: C++ requires a count
   below 32, while the verified x86 instruction masks CL for every byte value.
 
-The immutable backend currently runs from .work/backend/3545257 (scoped compiler contracts).
-The .work/backend-current symlink is what scripts/backend resolves. Rebuild its repo
+The immutable backend currently runs from .work/backend/bindings-bba8b3e1a75c1d1f
+(scoped compiler contracts, bounded loop, pinned reasoning and pass ceiling, plus
+fail-closed local COFF resolution and the activated PE import map).
+Release and rollback record: .work/reasoning-trial-20260914-204750/activation.json. The Nexus work
+bridge is authorized; model order/limits and Play remain explicit user choices.
+The .work/backend-current symlink is what scripts/backend resolves. The Luna
+three-function trial is documented in docs/luna-three-trial.md: it ended at the
+one-pass ceiling with zero gains; `_flsall` lacked a binding, VSIT retained an
+18-byte NearMatch, and `__ismbblead` timed out with unknown usage. Do not repeat
+those model calls without new evidence or a changed scope. Rebuild its repo
 separately, test it, stage a new immutable copy and deliberately restart the user
 service to deploy. Never overwrite an active DLL. Never restart Nexus to deploy it.

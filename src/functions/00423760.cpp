@@ -1,13 +1,14 @@
 extern "C" {
-extern unsigned int DAT_004A2868;
-extern unsigned int DAT_004A2848;
-extern unsigned int DAT_004A2820;
-extern unsigned int DAT_004A286C;
-void __cdecl GEX_Target(void)
+extern unsigned int DAT_004a2868;
+extern unsigned int DAT_004a2848;
+extern unsigned int DAT_004a2820;
+extern unsigned int DAT_004a286c;
+
+void GEX_Target(void)
 {
-    DAT_004A2868 = 0;
-    DAT_004A2848 = 0;
-    DAT_004A2820 = 0;
-    DAT_004A286C = 0;
+    DAT_004a2868 = 0;
+    DAT_004a2848 = 0;
+    DAT_004a2820 = 0;
+    DAT_004a286c = 0;
 }
 }
