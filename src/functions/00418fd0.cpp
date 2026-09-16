@@ -1,10 +1,11 @@
 extern unsigned int DAT_0049FB90;
-unsigned char *__cdecl GEX_Target(unsigned char *cursor, void *object)
+
+unsigned char * __cdecl GEX_Target(unsigned char *param_1, unsigned int **param_2)
 {
-    unsigned int index = cursor[0];
-    unsigned int offset = cursor[1];
-    unsigned int **table = (unsigned int **)((char *)object + 0x68);
-    unsigned int *row = table[index];
-    row[offset + 0x1a] = DAT_0049FB90;
-    return cursor + 2;
+    unsigned int index = *param_1++;
+    unsigned int offset = *param_1++;
+
+    param_2[index + 0x1a][offset + 0x1a] = DAT_0049FB90;
+
+    return param_1;
 }

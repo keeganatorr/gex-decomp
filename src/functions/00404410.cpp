@@ -1,0 +1,1 @@
+extern "C" { extern unsigned DAT_004875A0,DAT_00451798; __declspec(dllimport) unsigned __stdcall PostMessageA(unsigned,unsigned,unsigned,unsigned);unsigned __cdecl GEX_Target(unsigned a,unsigned b) {DAT_00451798=1;return PostMessageA(DAT_004875A0,0x659u,a,b);} }

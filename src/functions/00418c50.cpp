@@ -1,0 +1,1 @@
+extern "C" { extern unsigned DAT_0049fb90; unsigned char * __cdecl GEX_Target(register unsigned char *script, register unsigned *object) { unsigned index=*script++; unsigned result=DAT_0049fb90;result+=object[26+index]; DAT_0049fb90=result;return script; } }

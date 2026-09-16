@@ -1,0 +1,1 @@
+extern "C" { extern unsigned DAT_0045904c;void __cdecl GEX_Target(unsigned *object) { unsigned count=--object[38];if((int)count<0) {count=DAT_0045904c;unsigned next=object[21]+1u;object[38]=count;object[21]=next;} } }

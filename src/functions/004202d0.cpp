@@ -1,0 +1,1 @@
+extern "C" { extern unsigned DAT_00463a40[24];extern void __cdecl FUN_004202b0(unsigned);void __cdecl GEX_Target(void) {register unsigned *p=DAT_00463a40;do{unsigned handle=*p;if(handle){FUN_004202b0(handle);*p=0;}p+=3;}while(p<DAT_00463a40+24);} }

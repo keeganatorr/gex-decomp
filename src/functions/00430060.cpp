@@ -2,9 +2,10 @@ typedef unsigned char byte;
 int __cdecl GEX_Target(byte **cursor)
 {
     byte *value = *cursor;
-    int high = value[1];
-    int low = value[0];
-    int result = (high << 8) | low;
+    short result = value[1];
+    short low = value[0];
+    result <<= 8;
+    result |= low;
     *cursor = value + 2;
-    return (short)result;
+    return result;
 }

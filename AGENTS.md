@@ -18,6 +18,56 @@ The service runs as pc-decomp-gex.service with one verifier. Its optional bounde
 proposal loop uses Nexus-owned agents and requires explicit models, limits and
 Play. Activation alone never starts a campaign.
 
+## Current batch reconstruction deployment
+
+Active backend `function-prompt-1965650bce139a03`, project schema **5**; extension
+`atlas-tint-2b923e55c8e5e9e8` tints whole cells grey→green. Service and CLI link use
+`/home/keegan/.local/state/pc-decomp/staged/function-prompt-1965650bce139a03/backend`.
+Function-sized prompts now contain code/target asm/compiler feedback and relevant
+bindings only, with cited (not dumped) evidence. Verifier still owns the full map
+and all proof/receipt checks. Retained-request audit: 74,457→3,771 characters,
+2,127→0 irrelevant bindings; no new model run. Receipt `.work/function-prompt-fix/`;
+see `../pc-decomp/docs/function-prompts.md`. The WebSocket error is not proven fixed.
+This backend fixes smallest-first batch ordering and schema >=3 ownership validity
+(31 excluded records restored; 847 unresolved eligible functions before this run).
+One explicitly approved run is `loop-2a359fd951223a7126881ceb`: first 100 eligible
+unresolved functions (8–61 bytes), Luna/max, one lane, 300s/request, 3600s total,
+200,000 reported tokens, bounded repair/revisit. Durable monitor, command receipts
+and eventual summary live in `.work/smallest-batch-bd58b165f8a55359/`. Never replay
+its Start or automatically resume/extend it. Consult live state/summary before
+claiming it is active or terminal. Outcome is terminal **LimitReached** after the
+first request failed with **WebSocket error** (~165s, unknown usage); no proposals,
+compiler jobs, source changes or new matches. All 445 proofs preserved. Worker
+and monitor exited. `docs/smallest-batch-luna.md` records the result and the separate
+65 KB full-binding-map prompt overhead. Do not retry/Resume without fresh approval.
+Recovered 453 partial current-source candidate comparisons from validated retained
+attempt history; `00427b80` now paints 96.58% green. All 445 exact proofs, source
+hashes and terminal campaign preserved. Receipt:
+`.work/atlas-recovery-02996291cf2ccbbb/activation.json`.
+`../pc-decomp/docs/batch-repair.md` explains pseudocode-first
+reconstruction, private hypotheses (never auto-shared), bounded evidence repair,
+deferred blockers and dependency revisits. Atlas uses current-basis matchPercent,
+not historical bestScore, for proportional green. All 445 proofs / 16,730 bytes
+and all source hashes survived activation. Receipt:
+`.work/batch-activation-f5934f4a1e98b791/activation.json`. No paid batch was started.
+Older release paths below are historical. Stop/drain with a schema-5-capable backend
+before rollback; never Resume batchRepair on an older binary.
+
+## Prior evidence workflow deployment
+
+`docs/evidence-workflow.md` records activated candidate `evidence-a901b74f868a6b12`.
+Project schema is now 4; compiler/bindings and all 445 exact proofs / 16,730 bytes
+were preserved. Service and `.work/backend-current` use the immutable backend at
+`/home/keegan/.local/state/pc-decomp/staged/evidence-a901b74f868a6b12/backend`.
+Earlier DLL paths below are historical. Nexus was restarted with the matching
+host/runtime, and the matching release extension was activated. Old campaign stays
+Stopped; a separately approved one-function Luna/max analysis smoke timed out at 120s,
+with no result/proposals and unknown usage. Its run is terminal LimitReached, no
+active jobs and no automatic retry. Expanded/live batch work requires new explicit
+scope/model/budget approval.
+Read-only collection for 00444590 succeeded; inferred layouts remain unreviewed,
+and non-file-backed data windows remain omissions. No Ghidra writes or proof changes.
+
 ## Compiler
 
 Recovered CL 10.00.5270, VC4.0-era, with /O2 /G5 /Oy /GR- through a dedicated Wine
@@ -49,9 +99,65 @@ stop/drain the service first. No direct DB edits. Schema 3 pins the recovered
 c1032 archives and custom FID report so old backends cannot ignore exclusions.
 FID scratch tooling and provenance: `docs/crt-fid.md`. No Ghidra reference writes,
 assembly injection, fabricated bindings, relocation masking or bulk recompilation.
-The active immutable backend is `.work/backend/ownership-bounds-660e2ebf47835c31`;
-activation/rollback: `.work/ownership-activation-20260915-200641/activation.json`.
+The active immutable backend is `.work/backend/parallel-738d0f450e51f142`;
+activation/rollback: `.work/decomp-loop-staging/c0311f3a351aa137/activation.json`.
+The prior ownership deployment remains retained for a deliberate stopped rollback.
 Earlier deployment notes below are historical.
+
+## Parallel proposal release (activated; trial stopped)
+
+`docs/parallel-loop.md` records activated release `c0311f3a351aa137` and trial
+`loop-0fbc8c03e1a344ff2a48fede`: up to ten lanes, serial compiler, 2 Luna → 2 Terra
+→ 2 Sol at max, 5,400 seconds / one pass, only the eight remaining original targets.
+The user relaunched Nexus; frozen host/runtime hashes and release activation were
+verified. All 421 exact / 15,798 bytes were preserved before the trial. Final:
+Stopped, 40 attempts, 2 exact / +56 bytes, zero active lanes. Read live
+`decomp.loop` before any control; never start overlapping work.
+Never start on activation alone, silently fall back, or replay an uncertain start.
+Before any rollback, Stop/drain and terminalize parallel runs with the NEW backend;
+an older backend cannot safely Resume a parallel policy. No bulk proof audit or
+recompilation is authorized by this deployment.
+
+## Latest exact checkpoint
+
+`docs/smallest-hundreds.md` records the latest user-authorized smallest-first
+batch: all **302** never-attempted eligible functions were covered—254 bounded
+searches and 48 fail-closed blockers. The serial pinned compiler performed 5,798
+probes; four exact results (`00449e10`, `004397c0`, `004187f0`, `0041fbd0`) were
+published through normal verification. Alongside the focused `_flsall`,
+`__ismbblead` and `assertfail` results, dependency work published
+`0040fce0 OBI_CheckRemoveObject` and `00419840 GOB_RemoveMapObject`; current state
+is **445 exact / 16,730 bytes**, 878 unmatched. No provider calls,
+executable/Ghidra/config changes or relaxed proofs. Service active, campaign
+Stopped, zero queued/running tasks. Do not interpret generic-family saturation as
+disproving skipped candidates. Evidence: `.work/smallest-hundreds/` and
+`.work/full-source-coverage/`.
+
+Previous checkpoint: `docs/full-game-source-coverage.md`, provisional artifacts for
+379 source-less functions and 437 exact / 16,342 bytes. Older totals below are
+historical. The live service still uses the immutable parallel release.
+
+## Bounded compiler-guided search
+
+`docs/compiler-guided-search.md` records the approved two-target, no-provider
+benchmark. `0040bc50` became exact on variant two; `0042dcf0` stayed unresolved
+(96 variants, five outputs). Published through the normal queue: **424 exact /
+15,882 bytes**, all previous 423 proof/source metadata records preserved without
+recompilation or byte-audit sweep. No flags, bindings, executable or Ghidra changes.
+`tools/source_variants.py` holds reviewed Gex-only families; host behavior tests
+are not byte proofs. Backend probes never publish and must end in fresh full
+verification. Optional dedicated-Wine cache cut measured compiler latency from
+~3.3 s to 45–47 ms, with identical outputs. Working offline CLI:
+`.work/backend/source-search-c4ed997dd21733a0/PcDecomp.dll`; live service/link stay
+on the parallel release. Not yet integrated into automatic campaigns/UI. Do not
+rerun the exact target or invent another budget; remaining mismatch needs a new
+hypothesis. Evidence and failed cache experiments: `.work/compiler-search-transition/`.
+`docs/search-hypotheses.md` records the follow-up on 20-byte `0044c690`: EAX/partial-
+register provenance, resolved (not placeholder) transfer diagnostics and optional
+family-local duplicate cutoffs. Return-preserving and qualified byte-read families
+still emit 21 bytes, not exact; total stays 424. Latest-feedback generation refuses
+an already explored hypothesis. Skipped candidates are uncompiled, never disproved.
+No compiler-language or flag switch is authorized by those completed experiments.
 
 ## Source loop
 

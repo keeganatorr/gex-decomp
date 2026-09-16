@@ -1,5 +1,62 @@
 # Gex decompilation
 
+## Done — smallest-first hundreds pass
+- [x] Cover all 302 never-attempted eligible functions in size order: 254 bounded searches and 48 fail-closed blockers (`docs/smallest-hundreds.md`)
+- [x] Run 5,798 serial pinned-compiler probes across 11 checkpointed batches; no providers, campaign work, executable/Ghidra/config changes or relaxed proof rules
+- [x] Publish four exact functions: `00449e10`, `004397c0`, `004187f0`, `0041fbd0`; with the focused tiny-wrapper gains, **443 exact / 16,580 bytes**
+- [x] Resolve the next dependency step: exact `0040fce0 OBI_CheckRemoveObject` and `00419840 GOB_RemoveMapObject`; **445 exact / 16,730 bytes**
+- [ ] Recover the 34-caller `00444590` sprite/draw-node/image contract, then revisit `0042d2c0` tile callbacks
+- [x] Restore active service; campaign Stopped; zero queued/running work; retain every batch artifact and blocker
+- [ ] Continue with new evidence-driven ABI/layout/CRT hypotheses; do not replay saturated generic families
+
+## In progress — full-game source coverage
+- [x] Freeze full-game baseline: 1,323 records, 436 exact / 16,279 bytes, 405 source-less records, 824 with caller/callee data
+- [x] Generate provisional artifacts for all 379 eligible source-less functions without modifying `src/functions`: 7 syntax-checkable, 328 declaration/layout blockers, 43 ABI/pseudocode blockers, 1 oversized analysis blocker
+- [x] Rank shared missing dependencies by unresolved caller count and resolve/publish `assertfail_00405350` (38 callers): **437 exact / 16,342 bytes** (`docs/full-game-source-coverage.md`)
+- [ ] Continue the focused dependency-cluster reverse: `OBI_CheckRemoveObject_0040fce0` reached 104/108 positions with a signed-branch mismatch; graphics/tile contracts remain next
+- [ ] Recover shared platform/graphics/tile declarations and opaque object field contracts in dependency clusters; do not fabricate layouts or install noncompiling pseudocode
+- [ ] Convert remaining provisional artifacts into reviewed compilable source, then selectively exact-verify justified candidates
+
+## Done — exhaustive eligible local pass
+- [x] Inventory all 858 reconstruction-eligible unresolved records; exclude 28 confirmed libraries and 3 import thunks, and retain 373 fail-closed analysis/declaration blockers
+- [x] Run 485 bounded local searches (24 candidates/60 seconds), 3,568 serial pinned-compiler probes and 482 finalist verifications across 20 checkpointed batches; no provider calls or campaign work
+- [x] Publish two exact results (`0044a0a0`, `0040f500`) through the normal durable queue: **+38 bytes → 436 exact / 16,279 bytes**; all 434 pre-pass proof metadata records preserved
+- [x] Verify pinned executable/configuration, source set, active service, stopped campaign and zero queued/running tasks (`docs/exhaustive-local-pass.md`)
+- [ ] New attempts for the remaining 887 unmatched records require genuinely new evidence; do not replay generic blocked/saturated families or fabricate bindings
+
+## Done — ten-target local parallel-preparation batch
+- [x] Prepare ten new targets concurrently; 240 variants / 25,728 host behavior checks, peak ten host-test compilers; no provider calls (`docs/local-ten-search.md`)
+- [x] Run one serial pinned compiler: 46 probes + 9 full finalist verifications, 15.524 s search wall time; eight first-candidate hits and VCRDoIt on candidate 14
+- [x] Publish nine exact sources through one durable normal queue command and nine fresh verifications: **+330 bytes → 434 exact / 16,241 bytes**; all 425 previous proof/source metadata records unchanged
+- [x] Retain tenth target `0041be80` as unresolved `_obs_0__gdat_points`, not a byte mismatch; no source/binding change, replacement target or budget extension; service active and campaign Stopped
+- [ ] Before any new `0041be80` attempt, review a pinned table-root/offset spelling; avoid spending another family on the identical unresolved-symbol error
+
+## Done — SCRIPT_SetCLIDCheckRoutine local reconstruction
+- [x] Reverse previously source-less `004188e0` (29 bytes): exact on the first candidate, 1.068 s including fresh full verification, unchanged compiler settings and no provider calls (`docs/set-clid-search.md`)
+- [x] Pass 12,288 host behavior checks; resolve the table through pinned evidence; publish via normal durable verification, total **425 exact / 15,911 bytes**
+
+## Parallel Luna → Terra → Sol (stopped)
+- [x] Implement/test 1–10 proposal lanes with serial compilation and independent 2/2/2 max escalation; fake-provider suite 42/42, backend synthetic integration, UI CTest 5/5 and two-window rendered reload tests
+- [x] Stage immutable release `c0311f3a351aa137` and one fixed approved trial command; preserve the stopped iterative run and 421 exact / 15,798 bytes (`docs/parallel-loop.md`)
+- [x] User relaunched Nexus; verified frozen host/runtime hashes and activated immutable backend + release extension, preserving 421 exact / 15,798 bytes
+- [x] Start approved 90-minute, one-pass trial `loop-0fbc8c03e1a344ff2a48fede` on the eight remaining original targets; eight distinct active lanes observed
+- [x] Final: Stopped, 40 attempts, 2 exact / +56 bytes (`DDRAW_Destroy`, `00439110`), total 423 / 15,854; no automatic Resume/repeat
+
+## Done — bounded compiler-guided search
+- [x] Review/test finite semantic families for the original `0042dcf0` and `0040bc50` targets; no extra proposal-provider calls or compiler/flag/binding changes
+- [x] Backend-owned finite CLI probes, duplicate-output grouping, instruction ranking and strict full finalist verification; no probe publication
+- [x] Measure cold/Wine-cache-identical outputs: compiler median ~3.3 s → 45–47 ms; warm exact search/full verification 1.18 s (`docs/compiler-guided-search.md`)
+- [x] Publish `0040bc50` through normal durable verification: +28 bytes; total **424 exact / 15,882 bytes**, all prior 423 proof/source metadata records preserved
+- [x] Retain unsuccessful `0042dcf0` outcome: 96 variants / 5 outputs, no source change; no replacement targets or new run
+- [ ] Decide a genuinely new hypothesis for the remaining compare/call mismatch before another bounded experiment; CLI prototype is not automatic campaign integration
+
+## Done — fresh small-function search test
+- [x] Test previously source-less/unattempted `0044c690` (20 bytes): 24 local variants / one distinct output, 2.536 s including full verification; no exact match or source publication (`docs/fresh-small-search.md`)
+- [x] All three relocations resolved; 18,432 host behavior checks passed; unchanged settings and 424 exact / 15,882 bytes retained, service restored
+- [x] User-requested search improvement: EAX/partial-register exit feedback, relocation-aware diagnostics, reviewed return/access hypotheses and empirical family saturation (`docs/search-hypotheses.md`)
+- [x] Follow-up used 9 probes + 2 full verifications in 2.598 s; preserved EAX but still 21 vs 20 bytes, no publication or new exact; repeated-hypothesis feedback now refuses a cosmetic retry
+- [ ] Review compiler-language/contract evidence before another experiment; no C/C++ or flag switch was performed
+
 ## Done — reproducible first baseline
 - [x] Preserve GOG executable and existing edited Ghidra project; pin original hash
 - [x] Update GhidraMCP for the installed Ghidra and reconnect after user save/restart

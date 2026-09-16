@@ -1,8 +1,4 @@
 extern "C" {
 extern int DAT_00456034;
-void __cdecl GEX_Target(int amount)
-{
-    if (DAT_00456034 != -1)
-        DAT_00456034 = (amount + DAT_00456034) & 0x7fffffff;
-}
+void __cdecl GEX_Target(register unsigned amount) { unsigned current=(unsigned)DAT_00456034; unsigned delta=(unsigned)amount; if (current != 0xffffffffu) { unsigned result=current + delta; DAT_00456034=result & 0x7fffffffu; } }
 }
