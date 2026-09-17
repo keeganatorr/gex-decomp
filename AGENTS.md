@@ -18,9 +18,36 @@ The service runs as pc-decomp-gex.service with one verifier. Its optional bounde
 proposal loop uses Nexus-owned agents and requires explicit models, limits and
 Play. Activation alone never starts a campaign.
 
-## Current batch reconstruction deployment
+## Current match-priority deployment (schema 6)
 
-Active backend `function-prompt-1965650bce139a03`, project schema **5**; extension
+Backend/UI `match-priority-32f300ed5eb81d03` activated; service and CLI link use
+`/home/keegan/.local/state/pc-decomp/staged/match-priority-32f300ed5eb81d03/backend`.
+Function selection and automatic dispatch now sort lowest current relocated
+byte-match percentage first (unknown/stale first), then shortest function, then
+address. The Functions sort menu also exposes `matchPercent` with the same length
+secondary key. Receipt `.work/match-priority-activation-32f300ed5eb81d03/activation.json`.
+No campaign was started/resumed; current campaign remains Stopped with zero work.
+
+## Previous same-session repair deployment (schema 6)
+
+Backend/UI `session-repair-e3b19e240e398dd4` activated; service and CLI link use
+`/home/keegan/.local/state/pc-decomp/staged/session-repair-e3b19e240e398dd4/backend`.
+Live Nexus host/runtime `stable-30eea9c66bb1` matches the frozen staged hashes.
+Only project schema changed (5→6); compiler, bindings and other config are unchanged.
+All 641 current exact proofs / 35,146 exact bytes, their histories and all source
+hashes were preserved. Receipt `.work/session-repair-activation-e3b19e240e398dd4/`;
+see `docs/session-repair.md` and `../pc-decomp/docs/session-repair.md`.
+No campaign was started/resumed: `loop-77482146e96fa7384514b060` remained Stopped,
+zero active/queued work. Recheck live state before any control. Same-session repair
+must be selected explicitly for a new run: one model, default 600-second shared
+function budget under the overall limit. Existing policies are not reinterpreted.
+Do not automatically start paid work or reset budgets. Stop/drain persistent runs
+with this compatible backend before any rollback; never restore an old DB over
+new durable commands. All deployment sections below are historical.
+
+## Prior batch reconstruction deployment (schema 5)
+
+Previous backend `function-prompt-1965650bce139a03`, project schema **5**; extension
 `atlas-tint-2b923e55c8e5e9e8` tints whole cells grey→green. Service and CLI link use
 `/home/keegan/.local/state/pc-decomp/staged/function-prompt-1965650bce139a03/backend`.
 Function-sized prompts now contain code/target asm/compiler feedback and relevant

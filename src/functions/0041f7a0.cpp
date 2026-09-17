@@ -1,49 +1,47 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041F7A0.cpp
-// Historical source SHA256: 94f9a7be1bf05f362358b33e5062047657d72a50aa4dc8451575f93f9e0cc6f1
+struct M1Tile {
+    int field0;
+    int field1;
+    int field2;
+};
+
+struct M1TileSet {
+    M1Tile* tiles;
+    int field1;
+    int field2;
+    int field3;
+    int field4;
+};
+
 extern "C" {
-extern "C" { extern int DAT_00463740; }
-extern "C" { extern int DAT_004A02F0; }
+extern M1TileSet* M1_TileSets_00463740[];
+extern M1Tile gTiles_004a02f0[];
+extern int M1_DidLastLoadSucceed_00463840;
 
-extern "C" void __cdecl GEX_Target()
+void GEX_Target(void)
 {
-    
-    
-    
-    
-    
-    int* const tileTable = (int*)0x004A02F0;
-    int* gTiles;
-    int* gTilesPTR;
-    int currentTile;
-
-    gTilesPTR = (int*)&DAT_00463740;
+    M1TileSet** gTilesPTR = M1_TileSets_00463740;
     do {
-        gTiles = (int*)*gTilesPTR;
-        if (gTiles != (int*)0x0) {
-            currentTile = gTiles[0];
+        M1TileSet* gTiles = *gTilesPTR;
+        if (gTiles != 0) {
+            int currentTile = (int)gTiles->tiles;
             while (currentTile != 0) {
-                currentTile = gTiles[4] + gTiles[3];
-                gTiles[3] = currentTile;
+                currentTile = gTiles->field4 + gTiles->field3;
+                gTiles->field3 = currentTile;
                 if (currentTile > 0x10000) {
-                    gTiles[3] = currentTile - 0x10000;
-                    currentTile = gTiles[2] + 1;
-                    gTiles[2] = currentTile;
-                    if (*(int*)(gTiles[0] + currentTile * 0xc) == 0) {
-                        gTiles[2] = 0;
+                    gTiles->field3 = currentTile - 0x10000;
+                    currentTile = gTiles->field2 + 1;
+                    gTiles->field2 = currentTile;
+                    if (gTiles->tiles[currentTile].field0 == 0) {
+                        gTiles->field2 = 0;
                     }
-                    currentTile = gTiles[1];
-                    {
-                        int* puVar2 = (int*)(gTiles[0] + gTiles[2] * 0xc);
-                        tileTable[currentTile * 3] = puVar2[0];
-                        tileTable[currentTile * 3 + 1] = puVar2[1];
-                        tileTable[currentTile * 3 + 2] = puVar2[2];
-                    }
+                    M1Tile* puVar2 = &gTiles->tiles[gTiles->field2];
+                    gTiles_004a02f0[gTiles->field1] = *puVar2;
                 }
-                gTiles = (int*)&gTiles[5];
-                currentTile = *gTiles;
+                currentTile = (int)gTiles[1].tiles;
+                gTiles = &gTiles[1];
             }
         }
-        gTilesPTR = gTilesPTR + 1;
-    } while ((int)gTilesPTR < (int)&DAT_00463740 + 0x100);
+        gTilesPTR++;
+    } while (gTilesPTR < (M1TileSet**)&M1_DidLastLoadSucceed_00463840);
 }
 }

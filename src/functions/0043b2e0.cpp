@@ -1,16 +1,14 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0043B2E0.cpp
-// Historical source SHA256: e537acbe251ddc6054c7546585beaca2c1b2e57d81eaa4ccf59e2044775449b6
 extern "C" {
-extern "C" { extern int DAT_004a2824; }
-extern "C" { extern int DAT_004a285c; }
-extern "C" { extern int DAT_004a2880; }
-extern "C" { extern int DAT_004a283c; }
-extern "C" { extern int DAT_004a2844; }
-extern "C" { extern int DAT_004a2834; }
-extern "C" { extern int DAT_00460008[]; }
-extern "C" { extern int DAT_0046000c[]; }
+extern int DAT_004a2824;
+extern int DAT_004a285c;
+extern int DAT_004a2880;
+extern int DAT_004a283c;
+extern int DAT_004a2844;
+extern int DAT_004a2834;
+extern int DAT_00460008[];
+extern int DAT_0046000c[];
 
-extern "C" void __cdecl GEX_Target(int param_1, int* param_2)
+void __cdecl GEX_Target(char* param_1, int* param_2)
 {
     int uVar1;
 

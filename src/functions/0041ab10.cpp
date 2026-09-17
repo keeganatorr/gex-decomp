@@ -1,13 +1,11 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041AB10.cpp
-// Historical source SHA256: 70a86f320da36a70a856d7ab5bb0d144a866ec222336c3d4cb7a82baba91d9f4
 extern "C" {
-extern "C" { extern int DAT_00459084; }
-extern "C" { extern int DAT_004A2A98; }
-extern "C" { extern int DAT_004A2710; }
-extern "C" void __cdecl FUN_00405350(int, int, int);
-extern "C" void __cdecl FUN_0041FA80(int);
+extern int DAT_00459084;
+extern int DAT_004A2A98;
+extern int DAT_004A2710;
+void __cdecl FUN_00405350(int, int, int);
+void __cdecl FUN_0041FA80(int);
 
-extern "C" void __cdecl GEX_Target(void** LevelRelated, int* param_2)
+void __cdecl GEX_Target(void** LevelRelated, int* param_2)
 {
     int CameraID;
     unsigned int flags_shifted;
@@ -28,19 +26,16 @@ extern "C" void __cdecl GEX_Target(void** LevelRelated, int* param_2)
     }
 
     {
-        unsigned int level_id = *(unsigned int*)&DAT_004A2A98;
-        unsigned char* door_base = (unsigned char*)&DAT_004A2710;
-        int ebx_val;
-        unsigned char current_val;
-        ebx_val = 0;
-        current_val = *(unsigned char*)(door_base + level_id);
-        if (ebx_val + (int)current_val != CameraID) {
-            *(unsigned char*)(door_base + level_id) = (unsigned char)CameraID;
-            LevelRelated[0x27] = (void*)0;
-            LevelRelated[0x28] = (void*)0;
-            ((unsigned char*)LevelRelated)[0x54] = 0;
+        unsigned char* door_ptr = (unsigned char*)((int)&DAT_004A2710 + DAT_004A2A98);
+        int current_val = 0;
+        current_val = *door_ptr;
+        if (current_val != CameraID) {
+            *door_ptr = (unsigned char)CameraID;
+            LevelRelated[0x27] = 0;
+            LevelRelated[0x28] = 0;
+            LevelRelated[0x15] = 0;
             LevelRelated[0x26] = (void*)1;
-            LevelRelated[0x14] = (void*)0;
+            LevelRelated[0x14] = 0;
             FUN_0041FA80(0x4a);
         }
     }

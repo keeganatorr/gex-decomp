@@ -1,6 +1,8 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0042df40_RemoveTile.cpp
-// Historical source SHA256: e7952c5d4392d7236a016bbf10c4744beaff4a8e18aab1565fe3d3707da1a148
-extern "C" {
-extern "C" { extern int DAT_00462e34; }
-extern "C" void __cdecl GEX_Target() { DAT_00462e34 = 0; }
+extern "C" int __cdecl FUN_00405390(const char* format, int arg1, int arg2);
+
+extern "C" int __cdecl GEX_Target(int param_1) {
+    FUN_00405390((const char*)0x45b068,
+                 *(int *)(param_1 + 0x184) / 2097152,
+                 *(int *)(param_1 + 0x188) / 2097152);
+    return 0;
 }

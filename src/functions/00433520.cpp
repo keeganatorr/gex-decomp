@@ -1,8 +1,6 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00433520.cpp
-// Historical source SHA256: 04d55f3f36bbf38682506f34e78365e5f71a16a4955969638b0e1dadb8b8310d
 extern "C" {
 extern "C" int __cdecl FUN_0041E9D0(void**, int);
-extern "C" void __cdecl FUN_00433370_Stub();
+extern "C" void __cdecl FUN_00433370_Stub(void**);
 extern "C" void __cdecl FUN_00419520(void**);
 
 extern "C" void __cdecl GEX_Target(void** param_1, int* param_2)
@@ -17,7 +15,7 @@ extern "C" void __cdecl GEX_Target(void** param_1, int* param_2)
             if (uVar2 != 5) {
                 if (uVar2 == 2 || uVar2 == 0) {
                     *(int*)((char*)param_1[0x5e] + 0xe0) |= 0x8000;
-                    FUN_00433370_Stub();
+                    FUN_00433370_Stub(param_1);
                 }
                 FUN_00419520(param_1);
             }

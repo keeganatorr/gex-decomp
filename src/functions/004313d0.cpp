@@ -1,5 +1,3 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004313D0.cpp
-// Historical source SHA256: d6506f94c2aa431b6a90aa3776808dbe5defcb3abc22e4b87ba8b8a5e54c1052
 extern "C" {
 extern "C" void __cdecl FUN_004335F0(void**, int);
 
@@ -21,7 +19,7 @@ extern "C" void __cdecl GEX_Target(void** param_1)
         pGVar1 = (int)param_1[3];
         pNVar2 = *(int*)(pGVar1 + 4);
         if (pNVar2 != 0 && (pNVar2 = *(int*)pNVar2, pNVar2 != 0)) {
-            PTR_0049fb98 = (void*)pNVar2;
+            PTR_0049fb98 = (void*)*(int*)(pNVar2 + 4);
             piVar5 = DAT_0049fba0;
             iVar4 = 8;
             do {
@@ -41,7 +39,7 @@ extern "C" void __cdecl GEX_Target(void** param_1)
     if (param_1[0x26] == (void*)0x80) {
         param_1[0x14] = (void*)0;
         param_1[0x15] = (void*)0x1;
-        param_1[0x38] = (void*)((unsigned int)param_1[0x38] | 0x10);
+        ((int*)param_1)[0x38] |= 0x10;
     }
 }
 }

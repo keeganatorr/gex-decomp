@@ -1,7 +1,7 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004451a0_GFXInit4.cpp
-// Historical source SHA256: b7d8e6521807e9da789d720f8e2a2e297cc487078619e20669be62048efc87cb
-extern "C" {
-extern "C" { extern int DAT_004a2f84; }
-extern "C" void __cdecl FUN_00406C30();
-extern "C" int __cdecl GEX_Target(int p) { DAT_004a2f84 = 0; *(int*)0x004a2f74 = -1; *(int*)0x004a2f7c = -1; *(int*)0x004a2f80 = -1; *(int*)0x004a2f70 = -1; FUN_00406C30(); return p; }
+extern "C" unsigned short __cdecl GEX_Target(unsigned int param_1, unsigned int param_2, unsigned int param_3, unsigned int param_4)
+{
+    unsigned short v = (((unsigned short)param_1 & 3) << 2) | ((unsigned short)param_2 & 3);
+    v = (v << 5) | ((unsigned short)(param_4 >> 4) & 0x10);
+    v = v | ((unsigned short)(param_3 >> 6) & 0xf);
+    return v;
 }

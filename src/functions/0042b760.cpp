@@ -1,28 +1,44 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0042B760.cpp
-// Historical source SHA256: b5d5472b97e5153552c5e8f2e953600496d5b76eb41a8176bf4318f162c258e4
 extern "C" {
-extern void* DAT_004A2AD4;
-extern "C" { extern int DAT_0045AED0; }
-extern "C" { extern int DAT_00463B44; }
-extern "C" void __cdecl FUN_00441150(void*);
+extern int DAT_004A2AD4;
+extern int DAT_0045AED0;
+extern int DAT_00463B44;
+extern void __cdecl FUN_00441150(void*);
 
-extern "C" void __cdecl GEX_Target(int param_1, int param_2)
+struct GXLocal {
+    int pad_a[3];
+    int f_00c;
+    int pad_b[16];
+    int f_050;
+    int f_054;
+    int pad_c[5];
+    int f_06c;
+    int pad_d[2];
+    int f_078;
+    int f_07c;
+    int pad_e[15];
+    int f_0bc;
+    int f_0c0;
+    int f_0c4;
+    int f_0c8;
+    int f_0cc;
+    int pad_f[77];
+};
+
+void __cdecl GEX_Target(int param_1, int param_2)
 {
-    char local_204[0x204];
-    int angle;
+    GXLocal local;
 
-    *(int*)(local_204 + 0x78) = param_1;
-    *(int*)(local_204 + 0x7c) = param_2;
-    *(int*)(local_204 + 0x54) = 0;
-    *(int*)(local_204 + 0x0c) = (int)DAT_004A2AD4;
-    *(int*)(local_204 + 0x6c) = 0;
-    *(int*)(local_204 + 0xc8) = DAT_0045AED0;
-    *(int*)(local_204 + 0xcc) = DAT_0045AED0;
-    *(int*)(local_204 + 0x50) = 0x1e;
-    *(int*)(local_204 + 0xbc) = 0;
-    *(int*)(local_204 + 0xc0) = 0;
-    angle = ((DAT_00463B44 * 0x57) & 0xff) << 0x10;
-    *(int*)(local_204 + 0xc8) = angle;
-    FUN_00441150((void*)local_204);
+    local.f_078 = param_1;
+    local.f_07c = param_2;
+    local.f_054 = 0;
+    local.f_00c = DAT_004A2AD4;
+    local.f_06c = 0;
+    local.f_0c8 = DAT_0045AED0;
+    local.f_0cc = DAT_0045AED0;
+    local.f_050 = 0x1e;
+    local.f_0c4 = ((DAT_00463B44 * 0x57) << 0x10) & 0xff0000;
+    local.f_0bc = 0;
+    local.f_0c0 = 0;
+    FUN_00441150(&local);
 }
 }

@@ -15,9 +15,7 @@ extern "C" int __cdecl GEX_Target()
 {
     if (DAT_004A2A10 == 0 && DAT_00463A2C != 0) {
         if (DAT_00463A30 == 0) {
-            
-            DAT_00463A2C = 0;
-            return 1;
+            return 0;
         }
         if (DAT_00455C54 > 2) {
             FUN_00405390(DAT_0045A198, DAT_00463A34);

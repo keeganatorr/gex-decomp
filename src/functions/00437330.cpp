@@ -1,15 +1,14 @@
 // Adapted from pc_decomp_backup/src/functions/FUN_00437330.cpp
-// Historical source SHA256: 35c6f9cdfe1475407e200b4549729f42bbf862f4e8b7eb46c023968f0aab56bb
 extern "C" {
-extern "C" { extern int DAT_004642D0; }
-extern "C" { extern int DAT_004642D4; }
+extern int DAT_004642D0;
+extern int DAT_004642D4;
 extern void* DAT_004A27FC;
-extern "C" { extern int DAT_004A2AC8; }
-extern "C" void __cdecl FUN_0041E7C0(void**);
-extern "C" void __cdecl FUN_0041FA80(int);
-extern "C" void __cdecl FUN_00437310(void**);
+extern int DAT_004A2AC8;
+extern void __cdecl FUN_0041E7C0(void**);
+extern void __cdecl FUN_0041FA80(int);
+extern void __cdecl FUN_00437310(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+void __cdecl GEX_Target(void** param_1)
 {
     if (param_1[0x59] != (void*)0x0) {
         GEX_Target((void**)param_1[0x59]);
@@ -23,7 +22,7 @@ extern "C" void __cdecl GEX_Target(void** param_1)
                 DAT_004642D0 = 0;
             }
             DAT_004642D0 = DAT_004642D0 + 1;
-            if (DAT_004642D0 > 2) {
+            if (DAT_004642D0 >= 3) {
                 FUN_0041FA80(0x15);
             }
         }

@@ -7,6 +7,7 @@ void __cdecl GEX_Target(int *object)
     object[0x15] = 0;
     object[0x26] = 0;
     object[0x20] = 0;
+    object[0x1c] = 0x1d;
     object[0x14] = 0x2c;
     object[0x22] = 0;
     FUN_00427980(object);
