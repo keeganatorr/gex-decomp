@@ -1,8 +1,13 @@
-// Assembly reads two bytes; Ghidra's uint** pseudocode obscures that access width.
-extern "C" unsigned long __cdecl GEX_Target(unsigned char** cursor)
+struct GEX_UShortBytes
 {
-    unsigned char* p = *cursor;
-    unsigned long value = p[0] | ((unsigned long)p[1] << 8);
-    *cursor = p + 2;
+    unsigned char low;
+    unsigned char high;
+};
+
+extern "C" unsigned long __cdecl GEX_Target(GEX_UShortBytes **cursor)
+{
+    GEX_UShortBytes *p = *cursor;
+    unsigned long value = ((unsigned long)p->high << 8) | p->low;
+    *cursor = (GEX_UShortBytes *)((unsigned char *)p + 2);
     return value;
 }
