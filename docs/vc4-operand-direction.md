@@ -197,3 +197,45 @@ the register-rename class and `00419520`'s position-dependent compare encoding:
 the pinned `vc40-cl-10.00.5270` makes code-generation choices the original
 compiler did not, and `project.json` already records
 `"originalCompilerProven": false`.
+
+## The compiler-identity hypothesis, tested and largely closed
+
+Three classes of near miss looked like they might be explained by the pinned
+compiler not being the one that built Gex (`project.json` records
+`"originalCompilerProven": false`). That was tested directly.
+
+**No sibling build exists on this machine.** The only two 32-bit MSVC code
+generators present are:
+
+| path | banner |
+|---|---|
+| `base/mvdm/tools/c1032/bin` | `Version 10.00.5270 for 80x86` (pinned) |
+| `base/mvdm/tools/c932/bin` | `Version 9.00 for 80x86` |
+
+Everything else found by name is a driver `cl.exe` with no `c1`/`c2` beside it,
+or a modern MSVC 14.x toolchain. Compiler binaries were deliberately not
+downloaded from the internet.
+
+**MSVC 9.00 makes the identical choices.** Compiled against the same candidate
+sources with the same flags, 9.00 reproduces the pinned compiler's output
+exactly for two of the blocked classes:
+
+| function | class | 10.00.5270 | 9.00 |
+|---|---|---|---|
+| `00412750` | constant selection | 4 off `[21..24]` | **4 off `[21..24]`** |
+| `00429190` | compare encoding | 2 off `[56,57]` | **2 off `[56,57]`** |
+
+Two compiler generations apart, byte-identical decisions.
+
+**No allowlisted flag set changes it either.** All 84 combinations of
+`/O1 /O2 /Ox /Og+/Oi /Ot /Os` x `/G3 /G4 /G5 /G6` x `/Oy /Oy- /(none)` were
+compiled against `00412750`. None is exact, and the immediate at offsets 21-24
+survives every combination that otherwise matches. The pinned
+`/O2 /G5 /Oy /GR-` is also the best of the 84 -- every alternative is worse or
+equal, which is independent confirmation that the contract is well chosen.
+
+So these classes are not explained by version or flags within what is available
+here. A 10.00.6038 (4.1) or 10.20 (4.2) build remains untested and is the only
+remaining form of this hypothesis; the probe harness takes a compiler path as an
+argument, so testing one is a single command if a build is ever obtained
+legitimately.
