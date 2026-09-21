@@ -169,3 +169,31 @@ This does **not** generalise. `00417f40` has three locals and all six
 declaration orders produce identical output; only the assignment order moves it,
 and none of the twelve combinations is exact. Treat local declaration order as a
 knob to try, not a rule.
+
+## Constant selection is also outside source control
+
+`00412750 InitPlayerSideUTurn` and its siblings `00411d70` and `00411b90` are
+four bytes off in a single immediate. The original masks `0x80000000`; every
+candidate emits `0x8fffffff`:
+
+```
+original : 81 e7 00 00 00 80    andl $0x80000000, %edi
+candidate: 81 e7 ff ff ff 8f    andl $0x8fffffff, %edi
+```
+
+The two are equivalent in context — the result is immediately `shr edi, 0x1c`,
+which discards bits 30..28, so both masks leave bit 31 in bit 3. The source was
+never wrong.
+
+Eight source forms were tried: a separate local for the masked value, a `U`
+suffix, full parenthesisation, splitting into two statements, reversing the `|`
+operands, a volatile local, and `((x >> 0x1f) << 3)` — a structurally different
+expression computing the same value. **All eight produced byte-identical output
+with `0x8fffffff`.** The compiler normalises them to one internal form and picks
+its own constant encoding, so no source form reaches the original's choice.
+
+This is the third independent line of evidence for the same conclusion, after
+the register-rename class and `00419520`'s position-dependent compare encoding:
+the pinned `vc40-cl-10.00.5270` makes code-generation choices the original
+compiler did not, and `project.json` already records
+`"originalCompilerProven": false`.
