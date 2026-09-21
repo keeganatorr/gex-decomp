@@ -1,13 +1,9 @@
-struct GEX_UShortBytes
+extern "C" unsigned long __cdecl GEX_Target(unsigned char **cursor)
 {
-    unsigned char low;
-    unsigned char high;
-};
-
-extern "C" unsigned long __cdecl GEX_Target(GEX_UShortBytes **cursor)
-{
-    GEX_UShortBytes *p = *cursor;
-    unsigned long value = ((unsigned long)p->high << 8) | p->low;
-    *cursor = (GEX_UShortBytes *)((unsigned char *)p + 2);
-    return value;
+    unsigned char **slot = cursor;
+    unsigned char *p = *slot;
+    unsigned long hi = p[1];
+    unsigned long lo = p[0];
+    *slot = p + 2;
+    return (hi << 8) | lo;
 }
