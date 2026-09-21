@@ -145,3 +145,27 @@ compares uniformly would explain every one of these at once.
 The expression swap being inert here is also the first direct test of the
 canonicalisation claim rather than an inference from it: swapping operands on
 all three functions changed nothing.
+
+## Local declaration order is a second, independent lever
+
+`004308d0 ob229Draw` was one of the "register rename" near misses: four bytes
+off, two field loads landing in exchanged registers and the matching stores
+likewise. Extern declaration order does nothing for it. What works is the order
+of the **local variable declarations**, and it is independent of the order of
+the statements that assign them:
+
+| local decls | load order | store order | result |
+|---|---|---|---|
+| `ypos, xpos` | ypos first | xpos first | 4 off (baseline) |
+| `xpos, ypos` | ypos first | xpos first | stores fixed, loads worse |
+| `ypos, xpos` | xpos first | xpos first | loads fixed, stores still off |
+| **`xpos, ypos`** | **xpos first** | **xpos first** | **exact** |
+
+Separating declarations from assignments is what makes this searchable: while
+the locals are declared with initialisers the two orders are the same edit, and
+neither alone reaches the target.
+
+This does **not** generalise. `00417f40` has three locals and all six
+declaration orders produce identical output; only the assignment order moves it,
+and none of the twelve combinations is exact. Treat local declaration order as a
+knob to try, not a rule.
