@@ -108,3 +108,40 @@ Two things this rules out, both measured:
 Practical rule: when a candidate is byte-perfect except for one ModRM byte in a
 `3b` compare, permute the order of the `extern` declarations before touching the
 expression. The expression is usually already correct.
+
+## Where the declaration lever stops working
+
+Three functions resisted it entirely: `0042e8b0`, `0043a7c0` and `00419520`.
+Each is one ModRM byte from exact (`00419520` is four copies of the same byte),
+each compare is followed by `je`/`jne` so the operands are commutative, and each
+was searched exhaustively:
+
+| function | search | result |
+|---|---|---|
+| `0042e8b0` | all 24 declaration orders x volatile (96), expression swap | no exact |
+| `0043a7c0` | all 24 orders x volatile (120), expression swap | no exact |
+| `00419520` | 4000 of ~5040 order x volatile variants, casts removed, expression swap | no exact |
+
+`00419520` shows why. Its original contains **six identical `3b c6` compares**.
+The candidate reproduces the first two exactly and gets the last four wrong,
+even after every comparison is written in the identical uncast pointer form:
+
+```
+  43 matches   3b c6   cmpl %esi, %eax
+  58 matches   3b c6   cmpl %esi, %eax
+  73 MISMATCH  3b c6   cmpl %esi, %eax     (and 88, 103, 118)
+```
+
+So the encoding this compiler chooses depends on the comparison's **position in
+the statement sequence**, not on how that comparison is written. No per-site
+source form can make all six agree, and no declaration order reaches it either.
+
+This is the same wall as the register-rename class in `0042de50` and `00417f40`:
+a whole-function code-generation decision that the source cannot address. Note
+`project.json` records `"originalCompilerProven": false` — the pinned
+`vc40-cl-10.00.5270` is a recovered candidate. A build that emitted all six
+compares uniformly would explain every one of these at once.
+
+The expression swap being inert here is also the first direct test of the
+canonicalisation claim rather than an inference from it: swapping operands on
+all three functions changed nothing.
