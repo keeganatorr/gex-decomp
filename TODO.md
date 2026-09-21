@@ -100,6 +100,7 @@
 ## Done — bounded loop activation
 - [x] Activate immutable backend `loop-cc6be762d054e328`, compatible Nexus host/runtime and native loop controls; authorize the bridge without starting a campaign (`.work/decomp-loop-activation-20260914-200335/activation.json`)
 - [x] Independently re-audit all 409 current exact proofs / 15,439 bytes after deployment; preserve source, pinned executable and EditedGex
+- [x] Document the authoritative iterative repair contract: durable candidates, exact-proof publication, structured diagnostics/investigation routing, and container-owned proposal sessions (`docs/parallel-loop.md`)
 
 ## Done — approved reasoning-pinned trial
 - [x] Implement/test and immutably stage reasoning support and a single-pass ceiling (`.work/decomp-loop-staging/a69d4faec306ceb1/manifest.json`); 38/38 Nexus harness tests, backend synthetic integration, extension CTest/rendered persistence pass; all 409 proofs preserved

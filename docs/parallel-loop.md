@@ -1,5 +1,16 @@
 # Parallel Luna → Terra → Sol trial — stopped, two exact gains
 
+## Current iterative repair contract
+
+The authoritative backend now runs each function through `LOAD → ANALYZE →
+PROPOSE → COMPILE → VERIFY → DIAGNOSE → SAVE → ANALYZE`. Working and best
+candidates are durable artifacts; publication remains gated by exact verifier
+proof. Structured diagnostics distinguish compiler rejection, byte/extent
+mismatch, missing bindings, compiler-contract drift, and provider failure.
+Evidence-based stagnation routes to bounded internal investigation work instead
+of blind retries. These investigation conversations are container-owned and are
+excluded from global session browsing and cloud synchronization.
+
 ## Approved policy
 
 The user approved implementation/testing followed by one paid trial:
