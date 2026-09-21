@@ -1,17 +1,14 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00401ED0.cpp
-// Historical source SHA256: 5f5b5269c24cbd59bfd3c3d553f04815211ba84d43809d482067b98a0010a7cf
 extern "C" {
-extern "C" { extern int DAT_0049A030; }
-extern "C" void __cdecl GEX_Target(int, int);
-
-extern "C" void __cdecl GEX_Target(int volume, int applyNow)
+void __cdecl SND_PlayPreviewSound_00401d00(int, int);
+extern int DAT_0048a030;
+void __cdecl GEX_Target(int param_1, int param_2)
 {
-    if (volume == 0) return;
-    int newVol = (volume * 4 - 500) * 4;
-    if (newVol == DAT_0049A030) return;
-    DAT_0049A030 = newVol;
-    if (applyNow != 0) {
-        GEX_Target(0x158, newVol);
-    }
+    if (param_1 != 0) {
+        int newVol = (param_1 * 5 - 500) * 5;
+        if (newVol != DAT_0048a030) {
+            DAT_0048a030 = newVol;
+            if (param_2 != 0) { SND_PlayPreviewSound_00401d00(0x158, newVol); return; }
+        }
+    } else { DAT_0048a030 = -10000; }
 }
 }

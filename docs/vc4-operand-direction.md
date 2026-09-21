@@ -76,3 +76,35 @@ target's shape byte-for-byte while its relocations pointed at the opposite
 symbols, making it the existing 66.7% family. Always resolve relocations against
 the pinned bindings and compare resolved bytes. Offline probes are diagnosis
 only — the strict relocation/byte verifier remains the sole source of a proof.
+
+## Declaration order also decides register-to-register CMP encoding
+
+`0041fba0` showed declaration order selecting which *memory* operand is loaded.
+The SetVolume cluster shows the same lever deciding the ModRM encoding of a
+**register-to-register** compare, where no memory operand is involved at all.
+
+All three functions share the shape `mov edx,[global]; lea ecx,[eax+eax*4]; cmp`:
+
+| function | original | candidate produced | declarations |
+|---|---|---|---|
+| `00401e20` | `3b ca` `cmp ecx,edx` | `3b d1` | global, then function |
+| `00401ed0` | `3b ca` `cmp ecx,edx` | `3b d1` | global, then function |
+| `00401e70` | `3b d1` `cmp edx,ecx` | `3b ca` | function, then global |
+
+Moving the callee's declaration ahead of the global flips the encoding, and the
+flip runs in *both* directions — `00401e20`/`00401ed0` needed the function first,
+`00401e70` needed the global first. All three verify exact with no other change.
+
+Two things this rules out, both measured:
+
+- **Swapping the comparison's operands does nothing.** `00401e20` writes
+  `DAT_0049FB20 != newVol` and `00401ed0` writes `newVol != DAT_0048a030` —
+  opposite source order, identical wrong output. VC canonicalises `==`/`!=` on a
+  register pair, so reordering the expression is not a lever. Neither is
+  restructuring into a `&&` comma expression, nor an intervening global store.
+- The same canonicalisation is why an operand swap failed on `0041f8c0`, whose
+  remaining single byte is also a reg-to-reg ModRM.
+
+Practical rule: when a candidate is byte-perfect except for one ModRM byte in a
+`3b` compare, permute the order of the `extern` declarations before touching the
+expression. The expression is usually already correct.
