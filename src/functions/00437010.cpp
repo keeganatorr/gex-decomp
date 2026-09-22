@@ -3,7 +3,6 @@ typedef unsigned int Word;
 extern "C" {
 extern Word DAT_0045c988;
 extern unsigned char DAT_004642e4;
-extern Word obs_0__gdat_drawFunc;
 void __cdecl RezInit_00436cf0(Word *);
 void __cdecl FUN_0042e850(Word *);
 void __cdecl FUN_00436cb0_Graphics_unk(Word *);
@@ -11,8 +10,8 @@ void __cdecl GOB_Remove_00419a80(Word *);
 
 void __cdecl GEX_Target(Word *object)
 {
-    Word *parent = (Word *)object[0x57];
     Word originalX, originalY;
+    Word *parent = (Word *)object[0x57];
     Word savedX, savedY, savedC8, savedCC;
 
     RezInit_00436cf0(object);
@@ -27,7 +26,7 @@ void __cdecl GEX_Target(Word *object)
             parent = (Word *)parent[0x57];
         }
         object[0x1e] = parent[0x1e] + originalX + dx;
-        object[0x1f] = parent[0x1f] + dy + originalY;
+        object[0x1f] = (Word)((int)(parent[0x1f] + dy) + (int)originalY);
     }
 
     Word frame = object[0x2e];
@@ -53,7 +52,7 @@ void __cdecl GEX_Target(Word *object)
         object[0x2e] = 0;
         object[0x2f] = 0;
         object[0x30] = 0;
-        object[0x18] = (&obs_0__gdat_drawFunc)[object[2] * 6];
+        object[0x18] = (&DAT_0045c988 + 46)[object[2] * 6];
         if ((object[0x38] & 0x10) == 0)
             GOB_Remove_00419a80(object);
     }

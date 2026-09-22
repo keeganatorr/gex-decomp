@@ -7,7 +7,7 @@ void __cdecl FUN_00436cb0_Graphics_unk(int *);
 extern int FUN_0045C960[];
 extern int DAT_0045c988;
 extern unsigned char DAT_004642e4;
-extern DrawProc obs_0__gdat_drawFunc[];
+extern DrawProc obs[];
 }
 
 extern "C" void __cdecl GEX_Target(int *obj)
@@ -53,7 +53,7 @@ extern "C" void __cdecl GEX_Target(int *obj)
         }
         ++obj[0x2e];
     } else {
-        DrawProc draw = obs_0__gdat_drawFunc[obj[2] * 6];
+        DrawProc draw = obs[obj[2] * 6];
         obj[0x2f] = 0;
         obj[0x30] = 0;
         obj[0x18] = (int)draw;

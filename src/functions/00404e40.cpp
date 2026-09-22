@@ -1,5 +1,4 @@
 extern "C" {
-extern char STRING_Buffer_00488010[];
 extern char *STRING_CurrentBufferPtr_00487fd8;
 extern int STRING_BufferSizeRemaining_00487fdc;
 extern char *STRING_Up_Down_00487ff0;
@@ -18,14 +17,13 @@ extern char *STRING_PRESSTAILWHIPTOTURNONATV_00487ff4;
 extern char *STRING_CHOOSEREMOTEANDPRESSJUMP_0048a020;
 extern char *STRING_TOENTERALEVEL_0048a028;
 extern char *DAT_0048a024_PressAnyKeyToContinue;
-extern char *AreYouSureYouWantToExitGEX_;
 extern char *STRING_SUREYOUWANTTOENDTHECURRENTGAME_00487fe8;
 char *__cdecl STRING_Load_00404e00(int);
 }
 
 extern "C" void __cdecl GEX_Target(void)
 {
-    STRING_CurrentBufferPtr_00487fd8 = STRING_Buffer_00488010;
+    STRING_CurrentBufferPtr_00487fd8 = (char *)&STRING_DEMO_00488008 + 8;
     STRING_BufferSizeRemaining_00487fdc = 0x2000;
     STRING_Up_Down_00487ff0 = STRING_Load_00404e00(20);
     STRING_Enter_Password_00488000 = STRING_Load_00404e00(21);
@@ -43,6 +41,6 @@ extern "C" void __cdecl GEX_Target(void)
     STRING_CHOOSEREMOTEANDPRESSJUMP_0048a020 = STRING_Load_00404e00(33);
     STRING_TOENTERALEVEL_0048a028 = STRING_Load_00404e00(34);
     DAT_0048a024_PressAnyKeyToContinue = STRING_Load_00404e00(35);
-    AreYouSureYouWantToExitGEX_ = STRING_Load_00404e00(41);
+    *(&STRING_Enter_0048a010 + 1) = STRING_Load_00404e00(41);
     STRING_SUREYOUWANTTOENDTHECURRENTGAME_00487fe8 = STRING_Load_00404e00(42);
 }

@@ -25,6 +25,7 @@ extern "C" {
     extern int DAT_00487768_ScreenWidth;
 
     void FUN_004013E0(int mode);
+    void* __cdecl memset(void* destination, int value, unsigned int count);
 
     __declspec(dllimport) void __stdcall AdjustWindowRect(tagRECT* lpRect, unsigned long dwStyle, int bMenu);
     __declspec(dllimport) int __stdcall GetSystemMetrics(int nIndex);
@@ -34,8 +35,10 @@ extern "C" {
     void GEX_Target(int width, int height)
     {
         tagRECT rect;
+        void* handle;
         int cx;
         int cy;
+        int metric;
 
         if (DAT_0045103C != 0) {
             FUN_004013E0(0);
@@ -50,7 +53,8 @@ extern "C" {
         cx = rect.right - rect.left;
         cy = rect.bottom - rect.top;
 
-        tagWINDOWPLACEMENT wp = { 0 };
+        tagWINDOWPLACEMENT wp;
+        memset(&wp, 0, sizeof(wp));
 
         wp.length = 0x2c;
         GetWindowPlacement(DAT_004875A0, &wp);
@@ -58,11 +62,18 @@ extern "C" {
         wp.rcNormalPosition.left = (GetSystemMetrics(0) - cx) / 2;
         wp.rcNormalPosition.left = ((wp.rcNormalPosition.left + 2) & 0xfffffffc) - DAT_00487768_ScreenWidth;
 
-        wp.rcNormalPosition.right = cx + wp.rcNormalPosition.left;
-        wp.rcNormalPosition.top = (GetSystemMetrics(1) - cy) / 2;
-        wp.rcNormalPosition.bottom = cy + wp.rcNormalPosition.top;
-        wp.showCmd = 1;
+        metric = GetSystemMetrics(1);
+        metric = (metric - cy) / 2;
+        cx += wp.rcNormalPosition.left;
+        cy += metric;
 
-        SetWindowPlacement(DAT_004875A0, &wp);
+        SetWindowPlacement(
+            (handle = *(void* volatile*)&DAT_004875A0,
+             wp.rcNormalPosition.top = metric,
+             wp.rcNormalPosition.right = cx,
+             wp.showCmd = 1,
+             wp.rcNormalPosition.bottom = cy,
+             handle),
+            &wp);
     }
 }

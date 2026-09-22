@@ -16,27 +16,29 @@ extern const char s_ERROR__invalid_cache_slot_number_004600f4[];
 void __cdecl assertfail_00405350(const char *, ...);
 void __cdecl IMG_Unpack_0043e730(void *, const void *, int);
 void __cdecl FUN_0043e800_ProcessTileData(CacheSlot *, void *, void *, unsigned int);
-void __cdecl __debugbreak(void);
+void * __cdecl _alloca(unsigned int);
 }
 
 extern "C" CacheSlot *__cdecl GEX_Target(unsigned char *image)
 {
-    unsigned char *data = image + 20;
-    unsigned char *processed;
+    unsigned char * volatile data;
+    unsigned char * volatile processed;
+    unsigned char *initialData;
     CacheSlot *slot;
     unsigned int format;
     short index;
+    int empty;
 
-    if (*(unsigned short *)data == 0) {
+    _alloca(0);
+    initialData = image + 20;
+    empty = (*(unsigned short *)initialData == 0);
+    data = initialData;
+    if (empty)
         assertfail_00405350(s_ERROR__empty_image__x_0046011c, image);
-        __debugbreak();
-    }
 
     index = *(short *)(image + 18);
-    if (index < -1 || index >= 660) {
+    if (index < -1 || index >= 660)
         assertfail_00405350(s_ERROR__invalid_cache_slot_number_004600f4, (int)index);
-        __debugbreak();
-    }
 
     index = *(short *)(image + 18);
     if (index >= 0) {
@@ -48,6 +50,7 @@ extern "C" CacheSlot *__cdecl GEX_Target(unsigned char *image)
         if (image[16] & 4) {
             unsigned char alignedHeight = (unsigned char)((data[2] + 7) & 248);
             int size;
+            unsigned char *next;
             unsigned char *unpacked;
 
             switch (format) {
@@ -62,15 +65,17 @@ extern "C" CacheSlot *__cdecl GEX_Target(unsigned char *image)
                 break;
             }
 
-            PTR_004a2ae4 += size;
-            if (DAT_004a2adc_Tiles2 < PTR_004a2ae4) {
+            next = PTR_004a2ae4 + size;
+            if (DAT_004a2adc_Tiles2 < next) {
                 PTR_004a2ae4 = DAT_004a2ae0_TilesBack1 + size;
                 unpacked = DAT_004a2ae0_TilesBack1;
             } else {
-                unpacked = PTR_004a2ae4 - size;
+                PTR_004a2ae4 = next;
+                unpacked = next - size;
             }
-            IMG_Unpack_0043e730(unpacked, data + 16, size);
-            processed = unpacked - 36;
+            processed = unpacked;
+            IMG_Unpack_0043e730(processed, data + 16, size);
+            processed = processed - 36;
         } else {
             processed = image;
         }
