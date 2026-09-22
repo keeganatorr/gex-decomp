@@ -4,7 +4,7 @@
 - [x] One approved 50-function / ten-lane astra-high pass, terminal LimitReached in 24m 50s: +38 proofs / +9,634 bytes → **740 exact / 61,108 bytes**; all 702 baseline proof/source identities preserved (`docs/astra-loop-audit.md`)
 - [x] Audit every emitted diagnostic class: 27 misleading labels; five reported compile rejections were four transport/session errors and one malformed Investigation reply, with no compilation
 - [x] Backend fixes and synthetic regressions on a branch: provenance-first diagnostics, decoded byte fields, transport pause/no-retry, publication-final diagnostics, investigation routing and operator-approved closest-first new campaigns
-- [ ] Activate an immutable tested backend only with the campaign/verifier drained; no new paid run without explicit approval
+- [x] Activate immutable `astra-loop-d286452-cec8d7ff8e72` after operator request: service/launch/CLI paths agree, bridge reconnected, all 740 proof identities and 1,088 source hashes preserved; campaign still terminal, no model work (`docs/astra-loop-activation.md`)
 - [ ] Obtain host/provider loss provenance plus independently evidenced symbols for 0045b0b0 / 00431820; do not fabricate bindings or retry exhausted codegen hypotheses
 
 ## Done — smallest-first hundreds pass

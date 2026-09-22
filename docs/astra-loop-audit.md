@@ -172,7 +172,8 @@ publication conflict, schema validation, closest-first dispatch and investigatio
 routing. Test outputs and raw audit are local in `.work/astra-loop-audit/` and
 `/tmp/astra-{build,test,integration}.log`.
 
-Fixes are committed on a backend branch, **not activated in the running service**.
-Deploy an immutable backend including `Iced.dll` only with work drained. Native UI
-and Nexus host/runtime need no changes for these backend fixes. Deployment does
-not authorise another paid campaign.
+Fixes were committed on a backend branch, then **activated after the operator's
+separate “Apply fixes” request** as immutable `astra-loop-d286452-cec8d7ff8e72`,
+including `Iced.dll`. All 740 proof identities and 1,088 source hashes survived;
+no model work started. See [activation and rollback](astra-loop-activation.md).
+Native UI and Nexus host/runtime needed no changes.

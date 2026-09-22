@@ -16,9 +16,12 @@ Ghidra exports or compiled artifacts may be committed or published.
 pass after 24m 50s. **740 exact / 61,108 bytes**, +38 / +9,634; all 702 baseline
 proof/source identities preserved. Reported $61.247258 / 13,890,903 tokens is
 provider metadata with unknownUsage=true, not a subscription bill. No second run
-is authorised. Diagnostic/closest-first scheduling fixes are tested on a backend
-branch, not activated. Historical deployment sections below are not current proof
-counts; always query the socket before controls. The source checkpoint is 360ea3b.
+is authorised. Diagnostic/closest-first fixes (d286452) are now activated as
+immutable `astra-loop-d286452-cec8d7ff8e72`; systemd service, Nexus service launch
+and `.work/backend-current` all point there. All 740 proof identities and 1,088
+source hashes survived activation. See `docs/astra-loop-activation.md` for receipt
+and rollback. Historical deployment sections below are not current proof counts;
+always query the socket before controls. The source checkpoint is 360ea3b.
 
 ## Authority
 
