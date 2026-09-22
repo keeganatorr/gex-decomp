@@ -1,0 +1,3747 @@
+{
+  "runId": "loop-934da8537fb606c616423ead",
+  "status": "LimitReached",
+  "baselineExactPreserved": 702,
+  "baselineBytesPreserved": 51474,
+  "currentExact": 740,
+  "currentExactBytes": 61108,
+  "proofsGained": 38,
+  "bytesGained": 9634,
+  "attempts": 184,
+  "elapsedMs": 1489563,
+  "tokens": 13890903,
+  "reportedCost": 61.24725800000003,
+  "unknownUsage": true,
+  "diagnostics": {
+    "VERIFY_BYTE_MISMATCH": 123,
+    "COMPILE_REJECTED": 5,
+    "VERIFY_REGISTER_ALLOCATION": 13,
+    "EXACT_MATCH": 38,
+    "VERIFY_UNRESOLVED_IMPORT": 2,
+    "MISSING_EVIDENCE": 2,
+    "VERIFY_OPERAND_ORDER": 1
+  },
+  "outcomes": {
+    "Compiled; bytes differ": 128,
+    "Failed": 5,
+    "ExactPublished": 38,
+    "Failed/blocked": 2,
+    "Investigated": 9,
+    "MissingEvidence": 2
+  },
+  "configSha256": "4389620d960f7109d780df51ba4c7c5f781c1e8c3decf137f9d0e41f57fefd89",
+  "proofs": [
+    {
+      "address": "00414bb0",
+      "name": "PlayerDuckSpin_00414bb0",
+      "size": 217,
+      "attemptId": "attempt-c6fb32670c4d4b34b723e2429a46c8cc",
+      "sourceRevision": "b1f13788214285dc3b425322765c341c9111e45d069b42e390d2d648833ef8dd"
+    },
+    {
+      "address": "00431e00",
+      "name": "ob93DoIt_00431e00",
+      "size": 394,
+      "attemptId": "attempt-d65d7bbe451545dbb1eefcbaf3abb4a4",
+      "sourceRevision": "f83cc50c4e0b93a5a217dff5dc4939753ede3ee8bc32c3db5220d6303fa1aa5e"
+    },
+    {
+      "address": "00413c80",
+      "name": "InitPlayerTailBounce_00413c80",
+      "size": 212,
+      "attemptId": "attempt-265eb15c23b64767a6edf96dfd3fd70f",
+      "sourceRevision": "53a5ff98cfc8d944863ecb67eb27770a3de6452d3a5faa1187593050875587c7"
+    },
+    {
+      "address": "0043cd00",
+      "name": "ob1DoIt_0043cd00",
+      "size": 210,
+      "attemptId": "attempt-2111ed53c6bf491f88f82c0fc1967652",
+      "sourceRevision": "bd044acc62bfc51c46f1ef3732fc76cead0c58492655d7f7b1c356d2532ef89b"
+    },
+    {
+      "address": "0043db70",
+      "name": "CEL_DrawCels_0043db70",
+      "size": 256,
+      "attemptId": "attempt-c5f59f787cf446deabb1ad4c823b1a3e",
+      "sourceRevision": "f3dc828d9a01f123c1e98f0bafd84004c0cd41f0fc78b43a7a66a406feecf3ba"
+    },
+    {
+      "address": "0043f490",
+      "name": "GFX_Fade_0043f490",
+      "size": 239,
+      "attemptId": "attempt-967001003d1f4e0ea111ad1516cc778f",
+      "sourceRevision": "db7ba9b8749876893679f01f08b842234c51b05c9f03cf190a5c8ac5fc979580"
+    },
+    {
+      "address": "00414600",
+      "name": "PlayerLookup_00414600",
+      "size": 206,
+      "attemptId": "attempt-221e2d084c7d433b87e724e8ef712355",
+      "sourceRevision": "2bcf440afc9e7037c7df150596354a905808b56cebd33f75fec19dc2a01dcad7"
+    },
+    {
+      "address": "0041b500",
+      "name": "ob284DoIt_0041b500",
+      "size": 241,
+      "attemptId": "attempt-03fa41f5f00c4a2299eefbf02c32048e",
+      "sourceRevision": "a8db49a8e8a8ca5ed590001650bf2f3d33e96a85c051149842f7e835a0039578"
+    },
+    {
+      "address": "00413d60",
+      "name": "PlayerBounceFall_00413d60",
+      "size": 251,
+      "attemptId": "attempt-d4214078941642b99584f15fcb6506f4",
+      "sourceRevision": "93f5311e48bcf1076deb8c85a6078fc8fa06fe9739f86e78a188e32f5804bd63"
+    },
+    {
+      "address": "00427c00",
+      "name": "PlayerSwallow_00427c00",
+      "size": 220,
+      "attemptId": "attempt-8fc5495977e74459a57fd1010f668686",
+      "sourceRevision": "f3750f88cf65bbcbab3927aa4bb8784385f3621ccb7602690ef5be0a5e61c72f"
+    },
+    {
+      "address": "00412de0",
+      "name": "PlayerFaceUnspin_00412de0",
+      "size": 250,
+      "attemptId": "attempt-db3528eab65f446c9658c70225178709",
+      "sourceRevision": "092cbab2dc40e139ae599330cd38485ec42d971788da03e60898a7591d19852b"
+    },
+    {
+      "address": "00425c10",
+      "name": "InitPlayerStopFall_00425c10",
+      "size": 212,
+      "attemptId": "attempt-fda6eb23906e495fac44cbd1b0daa772",
+      "sourceRevision": "e01119e38e95bd68d7f43d894105c347bc3da9a4f5b48c0112239a5fa99b91ae"
+    },
+    {
+      "address": "0040cf60",
+      "name": "ob256Init_0040cf60",
+      "size": 230,
+      "attemptId": "attempt-07753dfb369d4271b9482cb277be229c",
+      "sourceRevision": "6eaa4bb5185e86f75713a35a07e4300404cc969bfb36ad4a656799d12dea8771"
+    },
+    {
+      "address": "004244e0",
+      "name": "FUN_004244e0_left_right_move_xpos",
+      "size": 202,
+      "attemptId": "attempt-195be1aeb0d24abcb00f42432351c4f2",
+      "sourceRevision": "4334db7e4c769b1df07c825ded96e09157d1c0115e40528acb36ca8a4bb7bdfa"
+    },
+    {
+      "address": "00412f40",
+      "name": "PlayerSideTongueLash90_00412f40",
+      "size": 260,
+      "attemptId": "attempt-16173985e5144689990c13c417646c8b",
+      "sourceRevision": "a133487e19c3e6bb53e99323121c900df121b2dbddaffad3a163337383b23f21"
+    },
+    {
+      "address": "0043ce90",
+      "name": "ob89DoIt_0043ce90",
+      "size": 275,
+      "attemptId": "attempt-1493aa7c65874e0eacbd2ce588d8fe30",
+      "sourceRevision": "033510688720356a228d07d7e97fc195f3aee39d748fc0092a95329bd67c0018"
+    },
+    {
+      "address": "0043d230",
+      "name": "ob120DoIt_0043d230",
+      "size": 229,
+      "attemptId": "attempt-59e4d5905e4d4c468191f934cc482317",
+      "sourceRevision": "58681f5747129d30936357318144c12a6193162ad3edd30d08f87f92de03035c"
+    },
+    {
+      "address": "00412880",
+      "name": "PlayerSideTongueLash_00412880",
+      "size": 223,
+      "attemptId": "attempt-557b25d6be50415db7e979686e791bfd",
+      "sourceRevision": "a65cbc74ba0cb550b844e671db5b2bf3771d06356029b99ade36e92e6a57af97"
+    },
+    {
+      "address": "00413f10",
+      "name": "PlayerBounceRise_00413f10",
+      "size": 277,
+      "attemptId": "attempt-c760b29fe5c84889926a58cdcd5715d5",
+      "sourceRevision": "c42703309f356192c45a8aa64f8d7478f018e37ebeb89f805fc312bd91bd10c2"
+    },
+    {
+      "address": "00434570",
+      "name": "PlatformDoIt_00434570",
+      "size": 248,
+      "attemptId": "attempt-896e481015284406889edf1a489f1c93",
+      "sourceRevision": "84a6d2e6a947d9a8558ab562e93c8a95f77fd0862f79b289abbc400599533202"
+    },
+    {
+      "address": "0043d050",
+      "name": "ob90DoIt_0043d050",
+      "size": 267,
+      "attemptId": "attempt-5499ec445d734e4996958d85a86ea106",
+      "sourceRevision": "7e14b4a3fd70fe1539d2468443e6c582d722d82a2279ef9764f910036053d901"
+    },
+    {
+      "address": "0042cc90",
+      "name": "TILES_CheckHorizForcedScroll_0042cc90",
+      "size": 253,
+      "attemptId": "attempt-e04762bbac3049ab8fffb3bcff5469dc",
+      "sourceRevision": "fc8e59e49697db0796ae4a9ac44687af4b716ff3b6799fb58d71de97ccc4df61"
+    },
+    {
+      "address": "00432680",
+      "name": "ob94DoIt_00432680",
+      "size": 347,
+      "attemptId": "attempt-c3d43323e5304f8fb239b72c90ce45af",
+      "sourceRevision": "364f079d145228a1669b075b731652fe68b82e4b6bcf57bc2d9fca5f8af3b209"
+    },
+    {
+      "address": "004322b0",
+      "name": "FUN_004322b0",
+      "size": 224,
+      "attemptId": "attempt-f3c3f70420224ff2b370c715767be45f",
+      "sourceRevision": "ae05db4d297d46f191cfcc2478fa83df03cdeb711936e78e82a9273967b9bfb8"
+    },
+    {
+      "address": "004144e0",
+      "name": "InitPlayerFaceCrawlToAir_004144e0",
+      "size": 283,
+      "attemptId": "attempt-dcd52c41cd2f489eb60c44307c578e1a",
+      "sourceRevision": "5f45710bf3d8124c270f0a7957b28ef3ca103d847982681584ce4ad78cab17e8"
+    },
+    {
+      "address": "004275e0",
+      "name": "PlayerTailSlash_004275e0",
+      "size": 247,
+      "attemptId": "attempt-f0ac4253ff0e4f77920f8d7cb7580fe9",
+      "sourceRevision": "632be26d4edd04925af978439565f1bb515bfd96078e2f09dd98c89a0d976427"
+    },
+    {
+      "address": "0042d7c0",
+      "name": "FUN_0042d7c0_ObjCallUnk",
+      "size": 331,
+      "attemptId": "attempt-7f9c42d554dd432d9b7a69a429e13368",
+      "sourceRevision": "f3a7f63c24d3e94c91d784ce1a22d9da8a9ebf190b068a65c60095c944c147cf"
+    },
+    {
+      "address": "00414a80",
+      "name": "PlayerDuckSwallow_00414a80",
+      "size": 219,
+      "attemptId": "attempt-0827271834874f939f3262b588bef805",
+      "sourceRevision": "4287e2341358bb747fe705c9edf597589c7f4f352f706c58c230639c9aab0af3"
+    },
+    {
+      "address": "00425da0",
+      "name": "InitPlayerStopFalling_00425da0",
+      "size": 212,
+      "attemptId": "attempt-e8c028a9f09e44c9b16cbad3e2cbb6b4",
+      "sourceRevision": "62057c4882715fa04e538330b0133948fbf7ca45bec873fddd36368329f42ea4"
+    },
+    {
+      "address": "004333c0",
+      "name": "ob369DoIt_004333c0",
+      "size": 247,
+      "attemptId": "attempt-37f2886ab6a343018e651f951030a8ec",
+      "sourceRevision": "fb7387d92a871a59f40851c0fad3a9ff232c85f7e4f65fd6a871745c652d6fcc"
+    },
+    {
+      "address": "00435ba0",
+      "name": "CollectibleDoIt_00435ba0",
+      "size": 272,
+      "attemptId": "attempt-40cf1a0dbf814793b734b64f5e197b2a",
+      "sourceRevision": "fd0bef4be8cfb35f4fc9cd5091761e3577ab9d7bee5f9febb8657946487735ec"
+    },
+    {
+      "address": "0042e2b0",
+      "name": "ob92Draw_0042e2b0",
+      "size": 451,
+      "attemptId": "attempt-11494a5e537142c3992593e7dcfcc6e2",
+      "sourceRevision": "70213895f2cd14a97a6ddaee697a462e85ec819088afd6493393a6809a8d9ea7"
+    },
+    {
+      "address": "0043a910",
+      "name": "ob371DoIt_0043a910",
+      "size": 289,
+      "attemptId": "attempt-042efad7662640689a3dca1ba85e5dcf",
+      "sourceRevision": "7c02d9cac9b71a08fa26caff210dae57df526f5ba6e6aa24c5b9c4c1a6c57ccc"
+    },
+    {
+      "address": "00413ac0",
+      "name": "PlayerFaceTongueLash_00413ac0",
+      "size": 220,
+      "attemptId": "attempt-2bd1cbdefdac4c0e924ddffe3c4cb088",
+      "sourceRevision": "85b777d5cd7d82ed109811abd1ae6c055f7f9e23c5e0299e8cb4a396279dcb3f"
+    },
+    {
+      "address": "004373c0",
+      "name": "FUN_004373c0_KFInner",
+      "size": 209,
+      "attemptId": "attempt-276d66d5068e4d6396f141c853b13a13",
+      "sourceRevision": "f8b8e8895e4bba6df1b7b3c31660d314120e4232507eede3dadae4a6ef48bcd0"
+    },
+    {
+      "address": "00414e80",
+      "name": "PlayerDuckUnspin_00414e80",
+      "size": 218,
+      "attemptId": "attempt-c82729bdff014b608d446d413133cf55",
+      "sourceRevision": "787171ef41e37479202cdefc748b193d82ea69cee114cf936c8ab09661737f85"
+    },
+    {
+      "address": "0041a160",
+      "name": "GOB_LandedOnContoursWithOffset_0041a160",
+      "size": 226,
+      "attemptId": "attempt-dcae6e37a2bf4d92a600f76d125baf08",
+      "sourceRevision": "5a8adbddf6a0760ed054e9ff545c8b0f651449a6a9d9ea9798aafd7466ba81bf"
+    },
+    {
+      "address": "0043d3e0",
+      "name": "ob121DoIt_0043d3e0",
+      "size": 267,
+      "attemptId": "attempt-bbed356dc5964cdb8824843c0fa176e4",
+      "sourceRevision": "6eead1163e1c0835e8fef079c6f0f82b91b107dcd67d41a53fe480eb19d03e69"
+    }
+  ],
+  "unresolved": [
+    {
+      "address": "00412630",
+      "name": "PlayerSideUTurn_00412630",
+      "status": "Stubbed",
+      "lastJobId": "work-99ea9c42970e495883d6a3ae49c14988",
+      "lastStatus": "Compiled; bytes differ",
+      "reason": "",
+      "lastAttemptId": "attempt-8f620d67c479479ba7f31acad05eea44",
+      "jobs": 8
+    },
+    {
+      "address": "004263b0",
+      "name": "InitPlayerRunStopFall_004263b0",
+      "status": "Stubbed",
+      "lastJobId": "work-7bc2dc2fefda4af0a2bf612f34220db9",
+      "lastStatus": "Compiled; bytes differ",
+      "reason": "",
+      "lastAttemptId": "attempt-01fffcc125db45e9a53a442cf889ea2d",
+      "jobs": 9
+    },
+    {
+      "address": "00423800",
+      "name": "FUN_00423800_pStateUnk",
+      "status": "Stubbed",
+      "lastJobId": "work-9bcd6e6cb245413ea4ef6c760d83f77a",
+      "lastStatus": "Compiled; bytes differ",
+      "reason": "",
+      "lastAttemptId": "attempt-3b1a40bd25234993ab6cc0dbc589eb73",
+      "jobs": 9
+    },
+    {
+      "address": "00431830",
+      "name": "FUN_00431830",
+      "status": "Stubbed",
+      "lastJobId": "work-ed5a95a58429460a99d8645f0f42eef7",
+      "lastStatus": "MissingEvidence",
+      "reason": "Model reports missing evidence: Need a permitted symbol binding or authoritative inventory symbol for callback address 00431820, pushed at 004318a6. The last compilation failed relocation resolution for _LAB_00431820; no new binding or byte-comparison evidence was supplied after investigation.",
+      "lastAttemptId": "",
+      "jobs": 3
+    },
+    {
+      "address": "004195d0",
+      "name": "GOB_AddObject_004195d0",
+      "status": "Stubbed",
+      "lastJobId": "work-c51fe10694864c4d8ce4e15b375a4961",
+      "lastStatus": "Compiled; bytes differ",
+      "reason": "",
+      "lastAttemptId": "attempt-cacf0fb49dba4377ad0aff613e11f1de",
+      "jobs": 9
+    },
+    {
+      "address": "00433ec0",
+      "name": "FUN_00433ec0",
+      "status": "Stubbed",
+      "lastJobId": "work-aedd9838b7fb4daea9887af20e1e448a",
+      "lastStatus": "Compiled; bytes differ",
+      "reason": "",
+      "lastAttemptId": "attempt-e5068607eb1e48b8b59d2d327d528a2a",
+      "jobs": 8
+    },
+    {
+      "address": "00411a90",
+      "name": "PlayerSideInside45Trans_00411a90",
+      "status": "Stubbed",
+      "lastJobId": "work-210d972b9c0e41f49ec2d5a8d83078f6",
+      "lastStatus": "Failed",
+      "reason": "WebSocket error",
+      "lastAttemptId": "",
+      "jobs": 8
+    },
+    {
+      "address": "004120c0",
+      "name": "FUN_004120c0_SideInside90Trans",
+      "status": "Stubbed",
+      "lastJobId": "work-8e92584838764212a95d03dff67e7280",
+      "lastStatus": "Compiled; bytes differ",
+      "reason": "",
+      "lastAttemptId": "attempt-63477c762fa54174a42a99653bd8462b",
+      "jobs": 9
+    },
+    {
+      "address": "00434080",
+      "name": "KFBossDraw_00434080",
+      "status": "Stubbed",
+      "lastJobId": "work-8f624fc5e765498f8af566173bbd33b5",
+      "lastStatus": "Compiled; bytes differ",
+      "reason": "",
+      "lastAttemptId": "attempt-b968695dccfe486c9cdb8e4d082ccde9",
+      "jobs": 9
+    },
+    {
+      "address": "0040ea90",
+      "name": "PasswordKeyHintsDraw_0040ea90",
+      "status": "Stubbed",
+      "lastJobId": "work-a7954dafb81547fab7a27955d5c9d1de",
+      "lastStatus": "Compiled; bytes differ",
+      "reason": "",
+      "lastAttemptId": "attempt-f1f603799cbd4fc4a5c17175c0bd08fa",
+      "jobs": 9
+    },
+    {
+      "address": "00431470",
+      "name": "ob234DoIt_00431470",
+      "status": "Stubbed",
+      "lastJobId": "work-49c7ad240939477d9f944fcb4c8adac0",
+      "lastStatus": "MissingEvidence",
+      "reason": "Model reports missing evidence: Need an authorized binding for _DAT_0045b0b0 at 0045b0b0, or its permitted inventory name. The last compilation failed relocation verification for this table; no new binding or byte-comparison evidence was supplied after investigation.",
+      "lastAttemptId": "",
+      "jobs": 3
+    },
+    {
+      "address": "00419870",
+      "name": "GOB_AddMapObject_00419870",
+      "status": "Stubbed",
+      "lastJobId": "work-47ad009496d945299c947b866f0096c2",
+      "lastStatus": "Failed",
+      "reason": "Persistent session lost; manual Resume required, never replay a turn",
+      "lastAttemptId": "",
+      "jobs": 9
+    }
+  ],
+  "duplicateOutputs": [
+    {
+      "functionId": "fn-f3c41bee8cf80b29f5af25cc",
+      "resolvedBytesHash": "7880e94f9b4d11086cd9577a6f61689d6a8d670c163347d28f53cc0ed9c819eb",
+      "attempts": [
+        {
+          "jobId": "work-05027e3863cc48afb1c79ce94152ecd3",
+          "attemptId": "attempt-451ee8abd7634744957e339c938d4f47",
+          "objectHash": "7127f7bf90fbe066db0eccb5c317ab732b0d19870302af8a9cb19612c17e1da9",
+          "sourceRevision": "f217986858ccc861dee302e2a3e36976a7ac6f23ad7784c5323874370354a294"
+        },
+        {
+          "jobId": "work-99ea9c42970e495883d6a3ae49c14988",
+          "attemptId": "attempt-8f620d67c479479ba7f31acad05eea44",
+          "objectHash": "6c51c34c5019dac48edd9cd366141327b7d628d5bf742d0342b4f3e5e0097675",
+          "sourceRevision": "a005451e5d7f89f553064549c9a20fc448efe04a29d14354ad926926c41279af"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "resolvedBytesHash": "6bbbb805df8155251f39ebd42f4b558ed6dfa380c5c7d8179ece9836483ddab3",
+      "attempts": [
+        {
+          "jobId": "work-05820165a4cb413c85ba36c35e510426",
+          "attemptId": "attempt-775b5376df0349609de95717e468f78c",
+          "objectHash": "82cfc0dcb3bc9bfab519c6607e18c80f352765a518979946b0ef7dbccf013fbd",
+          "sourceRevision": "446f32e0eaa0f0e013cffca1a8560d3d32c4a3fa214220001f28dd630b956fd9"
+        },
+        {
+          "jobId": "work-b7fc363abfe149d691194565a726a9d4",
+          "attemptId": "attempt-1131b9ca980e467ebb01da5e56dfd405",
+          "objectHash": "66992cb23e81df380c3b3f1ee15fc2ed55f040b71413dc5599862ef9457f9ef1",
+          "sourceRevision": "d6a57fcaa3bf34ee239620ce875c64fe345cd39d88b02e3e2825c2f14ebd7bb9"
+        },
+        {
+          "jobId": "work-ef0a7992da1748eb85dc4d1ea27a1612",
+          "attemptId": "attempt-41839371bcf94646bba230a82e7604e5",
+          "objectHash": "5a68e81088011178f558add8035a9ed84a5e8793f9713b9faada516ab8310c07",
+          "sourceRevision": "a293cae4be92a86609b10f79d15dd338e161dae5e908340d8314555e26ae3538"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-dbfedd255a5211867f26dd2e",
+      "resolvedBytesHash": "20ad4c850326257d120a086b08ef015ce795803d689ab6c2eaa2e3ceb6106dd3",
+      "attempts": [
+        {
+          "jobId": "work-09286cb072e4433a96e026dce2908baa",
+          "attemptId": "attempt-fbc63e3e60654f57a785cceaa26c7ed5",
+          "objectHash": "3270b65f1d313140060333906a1a58bc12e856c75b6c7f69ae7f5480f8713600",
+          "sourceRevision": "15336413a1e0389f2fd878db70299d5da7f6ec05ea9956a570604286412f1469"
+        },
+        {
+          "jobId": "work-28c481653ab7488aa5c404a1d887114f",
+          "attemptId": "attempt-5ba7a62140114387a7a4e55239ceb281",
+          "objectHash": "0dba11cd1457b682195dbc4cb5f1709d03263ea06117310b2537c170b9851eec",
+          "sourceRevision": "75b29da2b00127379a553ae38160da5037b57ff83ed976f64e6fb2bfff3aee82"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-8f35c7538e5ca76bb1021f1b",
+      "resolvedBytesHash": "94ca576262b57b27dc29806d51d2a8a4ef242d75730f14bd3e4067f5b690618c",
+      "attempts": [
+        {
+          "jobId": "work-0c42425ae6e34c00af5f305acf89cc77",
+          "attemptId": "attempt-a89280423ca24b1aafe2e6e60d5c316a",
+          "objectHash": "0aaeef84449b51988953940c34eb520857851605246f594dfe72ba599c3769e7",
+          "sourceRevision": "10276689c32bb668737d217c895965ecae289ca13ab545b3e8c3b508a7e95b58"
+        },
+        {
+          "jobId": "work-58228eaa29a046c1a09cd7f9ba61226c",
+          "attemptId": "attempt-36b9964c94bb43df84044d2aca377ddc",
+          "objectHash": "40e6bdf3034cdf021d3897be71c1cc66dfa6896e68393014f4cd120a45fd02de",
+          "sourceRevision": "ac12ea66fcf272b6eaa31cc3323730aabb0f4cd8ed03ee25796ce888f45ebf3b"
+        },
+        {
+          "jobId": "work-9bcd6e6cb245413ea4ef6c760d83f77a",
+          "attemptId": "attempt-3b1a40bd25234993ab6cc0dbc589eb73",
+          "objectHash": "8b81ce2a963af9720bccc75356db54f3d8e31dfcca6de02334a85e72811108c4",
+          "sourceRevision": "ad3ce5f36ecba7385cd05103c8742f5c506f175f823f2f8b23bdaf28e0725b7e"
+        },
+        {
+          "jobId": "work-a9806a8b04e14a6cb595acfb16573926",
+          "attemptId": "attempt-1f43796735394dca99b0e01f5a8bb133",
+          "objectHash": "1437c12fb21b5b8094860aff609f06913bd64b07b07d67df895e1c6a565335ba",
+          "sourceRevision": "b7c3b9563906f1a88ffc80aeab1a8b2657a9bda01cba02545b6378f34f1e7074"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-dbfedd255a5211867f26dd2e",
+      "resolvedBytesHash": "7ecd4968dab2cb3518793904aca2e5f81765154512ad268533c401c610063314",
+      "attempts": [
+        {
+          "jobId": "work-0cbf4e373deb42a98b8f0e3b5fa8883f",
+          "attemptId": "attempt-ed2be5f5a6a74388ad4a3d8122ba7180",
+          "objectHash": "a39762ab277feeed64793a22bd45174c008368815d4f840279448d60472bce9f",
+          "sourceRevision": "f2e17777ff0d4130e851b172709707f0652f26142034f9364e265eae8373cce6"
+        },
+        {
+          "jobId": "work-6dbbe3d76c8a482685c25051ca8abd9d",
+          "attemptId": "attempt-40f2e2d06bb444438382954481ceab66",
+          "objectHash": "ce57811c1118e90785ff666fa067aea010b020ca3531f8cc5bd43a7568d8f5e5",
+          "sourceRevision": "e9971682c71365c1f6ec639f032ef3488b9045dd5a455c744f32afb8cbfd4b96"
+        },
+        {
+          "jobId": "work-aedd9838b7fb4daea9887af20e1e448a",
+          "attemptId": "attempt-e5068607eb1e48b8b59d2d327d528a2a",
+          "objectHash": "f597adfecc68110116e3e9c5094c195f6d2e6af6334143be289a07b1b66c3387",
+          "sourceRevision": "e578b471bdb4983ec2dc5b29abefa8e7a38b401d45c0fa51a6444a8636582e1d"
+        },
+        {
+          "jobId": "work-ffd90ecf508a40a4b96783590cbf12f3",
+          "attemptId": "attempt-53c9d6fdded24b559a03470c90e1ce36",
+          "objectHash": "b30a12cf1326823eeed0d3519bafb8cf2d4aa249836517babf3d108943d9f681",
+          "sourceRevision": "876280a67c0ba9921b43269b93814c53248237c2377fe839073169347e03617b"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-28b8faa1237746076286f5af",
+      "resolvedBytesHash": "120c352c46ff90e5ec814382f15dbdd2299d5558afe769fe7fc1cf75bbe27c05",
+      "attempts": [
+        {
+          "jobId": "work-12929acd2fa84e7baae546c24dc38c3e",
+          "attemptId": "attempt-93431659b61b4717b2b77fd7bf14beb7",
+          "objectHash": "26169b84bc7080c8767d51f7cde7dcace81467b501b336afb0959678a683cae1",
+          "sourceRevision": "6377066c5baba6ceb27e505386c01f03a0a544350a53963e007153683199deea"
+        },
+        {
+          "jobId": "work-4df9e65eaeeb4d559e322c31b6038fab",
+          "attemptId": "attempt-821a52c9d7a44c63949cb8b7ba1e994c",
+          "objectHash": "88f579acfd3f86c8b0fb619adfceca6214cec97ed13e76341eb23410287655e5",
+          "sourceRevision": "b41f05b99db8ab03e5ed802a489f13c2facf46fd06f6a918ae66503167fcb1be"
+        },
+        {
+          "jobId": "work-66853b74cb5e477dae4c8f411a5b88a5",
+          "attemptId": "attempt-3b6003a9ed0546c09e07e3182c58b5a7",
+          "objectHash": "7c0e4db32b1b5eb1e24665650575df567bd2efecd32c88d3c4ed463b2108cb33",
+          "sourceRevision": "800491bc3e757107aabd8b58a429b717bee5df716924c0affdf33e40bec35d75"
+        },
+        {
+          "jobId": "work-740e2fc3e590412cb28789c8e149cfdb",
+          "attemptId": "attempt-1dc8a090b85c4650ac368b938d3ea15a",
+          "objectHash": "71c0708594bf9029b716cdd4a8a4f7f111f6202339d857eeda350463a25502ad",
+          "sourceRevision": "8680b6af12ff40d2d83978d5cd4237e781d8be1c17e7cb85be123e70fa1ed3e5"
+        },
+        {
+          "jobId": "work-ccf738b1e1234081a029dcdacb85ddb6",
+          "attemptId": "attempt-7f7f459502cd47b3badf7ad11486b2c0",
+          "objectHash": "b17713761a848cad47786e9ffd1a092372ce4b803632fc002ab9cd2a5176893a",
+          "sourceRevision": "2eed734de5cbdec39ea392fddec10774406d4223c01dc7df8eda3875b93ca7a1"
+        },
+        {
+          "jobId": "work-e905e85d64ab4eb694fb9e136629b6f9",
+          "attemptId": "attempt-b8fa8c055f4b425c8dce32849c151719",
+          "objectHash": "3c01b94bd19668d1ae8a20a53152a427fc3459ff23caac6a7070c58febe0f7bf",
+          "sourceRevision": "28a92abef910a07c42be81475175d7fdfce1b1f36131eb7a85633450d40f6728"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-313a3bab28a2faca273e7844",
+      "resolvedBytesHash": "ef8afb5b5d121a7556c631134de7a9aca4c90f1e7fad2a8c40c787de24ad03e6",
+      "attempts": [
+        {
+          "jobId": "work-13f81dde131643d48a07147339458bf2",
+          "attemptId": "attempt-de3a9aad92c44d3eb0cfde783bf995d2",
+          "objectHash": "4e0150cc7046c14b279bbbb032deeba3a6e63ec01c579c2a6d5d437aedf23c99",
+          "sourceRevision": "ed53240a727a9ea75fc05c1b64d461afe1251f78c1181c0f23ce3dbf0fd6dce7"
+        },
+        {
+          "jobId": "work-a69a4a40a3804aacb4d7ddc9c9ef69e2",
+          "attemptId": "attempt-df26ca4735aa4e7186a45c485d198a85",
+          "objectHash": "1e509d9704469683d10c0695d5c5cc0fd5e8e6a925136299c416d9879baed0bd",
+          "sourceRevision": "5d3d669e6abdae5dbebe4b777fe46c4af8a19a73bd3bcf152625f490fc51f6b3"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-17ef010cf68ac0b9f19821db",
+      "resolvedBytesHash": "b025f8ed373f534f3111430a2dad50162b198cf11f8d88ed1d7ca45ddb49b293",
+      "attempts": [
+        {
+          "jobId": "work-1486c2db76c84f5eb8797d68acaa8089",
+          "attemptId": "attempt-0d943d591ef8455ab46412d500a79156",
+          "objectHash": "379e3a44e91525e86e2b30129b76e0ff58a4dd8710c1523bfbf2a07f5b3e1cd1",
+          "sourceRevision": "0e79cacdb30b637c746609d8df4637ed71bf34c82e286b007b61ba38b90bbab8"
+        },
+        {
+          "jobId": "work-f527bf2515974064bd05b6270be7651a",
+          "attemptId": "attempt-15cd0b84e4874ea6be41e32247bd12e3",
+          "objectHash": "d778b08f98eaea63410a77dad5e36f4d6c7e420e1f5dd637d791e65184595b72",
+          "sourceRevision": "fca0e78d7d599918cc8b74a1b436d1ca52e5ec3ce12bc15c43fef4ce3f30d068"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "resolvedBytesHash": "36f370ee23c0ec45d9a4e103888fc1cfc2b50fe53848dd2484beaf0e9c470006",
+      "attempts": [
+        {
+          "jobId": "work-3277d0890fe840cd872d876a1ff013f6",
+          "attemptId": "attempt-3d000460ae7c4f1aa3daaf1a6cb6bc07",
+          "objectHash": "2d68312b774d3c96e2326cf19f715b116ec17e2662c8fdc48bb965891e3b4035",
+          "sourceRevision": "bf017cfa20542f0464246cdc46429c130e7b1440c84d914d44143d489c80ac12"
+        },
+        {
+          "jobId": "work-43ccd67edb7c4cb4a6537e0f7016116e",
+          "attemptId": "attempt-c995b42887e14691b18d7e0201de0557",
+          "objectHash": "10bb74af1af02955fa53bb0143dce9552fd444b2f75ad14471a218acbe541e58",
+          "sourceRevision": "e92d1000167961838aa3edeb54e880b298e1786403cf57460123a17fd1f7d1e6"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-a576eea1ed39e31f6fdf126b",
+      "resolvedBytesHash": "747c70f68f79d721b00ea13c10c228974f40285a4903e06ad9aa9b2ca671fc1a",
+      "attempts": [
+        {
+          "jobId": "work-38870af16b644c229f38c0d762aaaa13",
+          "attemptId": "attempt-312767445b3840e98aac3645ed14f766",
+          "objectHash": "81894b9ff3054fb7e598673fab4ef6c1e24d3b7d2cb2b0ee67e36cbea1117d4c",
+          "sourceRevision": "c3852f116d26191f07e47861711b6a0744182bb60c5ad320618572743b2f5d31"
+        },
+        {
+          "jobId": "work-749b5e58265c41d1a1d9b288302d2b83",
+          "attemptId": "attempt-fcede3ccf1c748019f815e4e62565dd8",
+          "objectHash": "b3ef4d9763e10e8bdb9021f16af175ee7e3c14b968671395a5180b6645048571",
+          "sourceRevision": "b2770544188085309d1b5acea1951d45d44f84c5826654b6f14d4833e65ec8dd"
+        },
+        {
+          "jobId": "work-bc8d0237448f4f72b415875aba33c34d",
+          "attemptId": "attempt-3b169100a7294f7ab80d2b33fe2fb1f9",
+          "objectHash": "d3d2377fdf08389617fe0ec53bd76f07b67c21fd1076e6ff532dff00b67c3d02",
+          "sourceRevision": "781b14e0d8afefa5b685ac2fa9fe3a1ab1e7975d226f74868297a5b1d5f16e87"
+        },
+        {
+          "jobId": "work-c51fe10694864c4d8ce4e15b375a4961",
+          "attemptId": "attempt-cacf0fb49dba4377ad0aff613e11f1de",
+          "objectHash": "75b0670cf425799f573d978ce89e770cf336a7a90941ebe238f63102ffc8e372",
+          "sourceRevision": "d89f120fd82be2de2e19518a586b359831a077a45c9a21f66f76d0d1b2e90c6f"
+        },
+        {
+          "jobId": "work-cc6fda6a76a041e2a9eb57e33f268316",
+          "attemptId": "attempt-2b5ab43104af4c58a56539eb9f658412",
+          "objectHash": "e1b2e6e863f68cae34a3793e072012c527bd04b352ff4d1d78c5260b8fa79e9a",
+          "sourceRevision": "f57c63d3cf91c3f5310d37440cebbe4b180641a82adc8fabc6f1fada2dc06dae"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-e73f98e80bf86087c47c2313",
+      "resolvedBytesHash": "7c45a3b572e1788f0c04beb8e1dcdd65fda345069fbc8f2da28c68f0bb2398b4",
+      "attempts": [
+        {
+          "jobId": "work-427c446a22154a4b953e8aba6347136b",
+          "attemptId": "attempt-11920a9c829f4f27943515ba19e18fa5",
+          "objectHash": "b1f3cf4659ba9027be41bd278556c8e26719d899263a77111ba5cae6b20ae011",
+          "sourceRevision": "d3c9ccd31cb194c9a466d66b9eb2dfc2f3ceb15f8c669bd3551dbfaf13aed9b7"
+        },
+        {
+          "jobId": "work-6a6ecff964354fa49a24ca9fce0be3ab",
+          "attemptId": "attempt-fff0bb6e6ab74ee3b168e53da0f7d9d4",
+          "objectHash": "105dc902d5f89769bfdb004cca9147d62f250fe7169ded1d3867c4bb240629f5",
+          "sourceRevision": "c1ac429e369da2a4e355edf3958ecfa35f87beac8036dacf8920b89c940eeabe"
+        },
+        {
+          "jobId": "work-7703d9bbb97c46f88491412db31676f6",
+          "attemptId": "attempt-eb760588deca4754ad5b5c8665d7bc4b",
+          "objectHash": "f98a4945e25c90c1c459638349f2dbd1818a59ac82c38e7cb59fc00567f37cb0",
+          "sourceRevision": "7351598bdc6f3f6225502a62bc91b87a476b390e34d27774f84325f63f724aa9"
+        },
+        {
+          "jobId": "work-a65975be9195404abbc32afde428cdf3",
+          "attemptId": "attempt-382507a389e248a78bf70835da920a07",
+          "objectHash": "77efcd44282a88b349374e88729cbd9211e5185fa77e9cabb276eed75230a3cb",
+          "sourceRevision": "a2f9497b7488db3318f8ee9ca6e1c0cbfa5950e7e5c33fcc7f7eaeaa927e0d08"
+        },
+        {
+          "jobId": "work-bc716d9eeba741b99950f09eb7d9504c",
+          "attemptId": "attempt-7e40dc0e1ce04c4a939cfbd6600efcde",
+          "objectHash": "61988b9727e634bc6109c33b69ea226ef6df9e70086a714bc983925ddd9c594d",
+          "sourceRevision": "d0f6aff7cbffb7113a98ac8cbf09256486ac76872fb9d829b8d799021820558b"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-fbfa292ffcc8256316710d6b",
+      "resolvedBytesHash": "f24a34acf84b0612d184859c63b96224a49575320ee73402d3e7a896d86a19f9",
+      "attempts": [
+        {
+          "jobId": "work-43a0d47018684808ab6cac423bd41dd8",
+          "attemptId": "attempt-c1dd87e85c1d43a69df95ad39bb9e01c",
+          "objectHash": "e2ce64a9ec6452dbef404e2d39be9ad15dfcf218a50b620ae54c7431d76ab095",
+          "sourceRevision": "b06094bb7b667b3b7961e779600f44b560940febc98d484495055d237cdc0efe"
+        },
+        {
+          "jobId": "work-ac0a503606da418ba33a7dcb8b472eb9",
+          "attemptId": "attempt-e7976df3f1364d148022c37c74924eff",
+          "objectHash": "cee7846e216579b16c0befb2c68bb85e672420a555bdca1b20981b6a2af743a8",
+          "sourceRevision": "1c4871df658446d075d92dd41cef8e4c3b6df265f89efc10d8c1fa47bf9ccafd"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-f3c41bee8cf80b29f5af25cc",
+      "resolvedBytesHash": "e18c0d78faaab24d3143d0416cf7984af66cce9c39204bb28b0cd1ab050d7155",
+      "attempts": [
+        {
+          "jobId": "work-4691dcc2c63f4b22ba1c0fe8819ce67c",
+          "attemptId": "attempt-30e72120c22a4d7b858c2eae8b8517c8",
+          "objectHash": "3437845fb57017d68274ba33be466fb446277c4098810a375adefd30e33005cb",
+          "sourceRevision": "7d3fb72bb3c9fe68fa419ad12bf05ec0e09f9a94cc916fe22c10e4e029498b16"
+        },
+        {
+          "jobId": "work-89078807b6da466da058f72c2cd69cc8",
+          "attemptId": "attempt-33345e783c1e427cb35afdd2f4af125f",
+          "objectHash": "6d040924ddd24011a2da86e7b20dadef30bb30fc9ca615292ed4a21901d27813",
+          "sourceRevision": "57620986e499c4ae4cf7b32a4a514b39c9b179b14bec03f6df6a713b11967c30"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-8f35c7538e5ca76bb1021f1b",
+      "resolvedBytesHash": "1fbdf28b854430750be920a7f8afe60ceb1b3eca423cf1534782f2292bb534ad",
+      "attempts": [
+        {
+          "jobId": "work-5a12d3fbf88b44fbbe7d2751beaa8994",
+          "attemptId": "attempt-8705415f02ed4c53bbdc7b52e49c7e3d",
+          "objectHash": "126f446dc16d99a8c16ce5b99379cebf318064f5b9c7278ed9d4f46b1be02f93",
+          "sourceRevision": "5085b37aa68b86eb921f4e84a7f383221d58c939b50addf88d3e4affb0a0d7d6"
+        },
+        {
+          "jobId": "work-63cf08136b0b47dca345297fdef36358",
+          "attemptId": "attempt-c9ea4ef603dc4346b2afba3013e427f2",
+          "objectHash": "5f9f9a2d45de91cefa5f4eb4123602ae14c4b31c2fbcfa076552714e49e4e3e6",
+          "sourceRevision": "91da330c5a6730df462a962ffa97257a0444efebe7aa11f31229247e75a0e1c5"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-38883b7e76390b67690e9b58",
+      "resolvedBytesHash": "049efc2a872690f78d038440084f991e83e397f7ff22792065feef76979c3dbf",
+      "attempts": [
+        {
+          "jobId": "work-5aa1523122ec4906ab7348e6ae034bc0",
+          "attemptId": "attempt-2acbdb710bc0481b8aef682916be9979",
+          "objectHash": "d8423414512f1e63a37ab16106276e3b0042d8db518464f9f42a3a2e086d2ea0",
+          "sourceRevision": "ebba207cc3508fa5a1608052d1ad3b30cf17bfe297df4c07d4dc414fccd70c38"
+        },
+        {
+          "jobId": "work-7964f2c1227c421c85d615a8ef592d89",
+          "attemptId": "attempt-45a91617b30b463ea0dbd61cc3d5c3d4",
+          "objectHash": "6c4348b2ee502388bf09ebd30c26d74044084dfeb510f0901db9e7eabc53bfe1",
+          "sourceRevision": "8e287ddaa179c915fd05d63fad2eb5fc324c6709b514b625371f432dd448a9c3"
+        },
+        {
+          "jobId": "work-8ef5aebf21904ee8a1a90c8172d997e9",
+          "attemptId": "attempt-cf03c045564c44889e7589d00f77fb32",
+          "objectHash": "ecba990c08dd8eb92f1ce0f5b941a586480cd6a2a854e7ff0282e9a80d7baa2b",
+          "sourceRevision": "08806e2948737c8303750cf83adcfe50bcf9be21a48bc01ec0680378314859c0"
+        },
+        {
+          "jobId": "work-a02797855a724b8190a9f8052656af70",
+          "attemptId": "attempt-a7bd3c54f2114a6ba5b627d392035c41",
+          "objectHash": "1e824255695cddd9c047765722b02d4ea65f0e58a9c66e85de0f69530ff3d0c4",
+          "sourceRevision": "39ef5676d4760f09573970c0cdc9b0506a4d36478ba742e710c18d59e35ad080"
+        },
+        {
+          "jobId": "work-a0dc22dfac804132a10e68a890d93e4e",
+          "attemptId": "attempt-a60bb0e8b5554bca92e6fa40c4273983",
+          "objectHash": "23168f9343bf744b946083b5f71028e61a1563fd2348cda973e9177a77ad2c8b",
+          "sourceRevision": "b6a3ac53e90e4872f0643ca937bb868a72731ef713af821df34df45dbf175fd8"
+        },
+        {
+          "jobId": "work-a7954dafb81547fab7a27955d5c9d1de",
+          "attemptId": "attempt-f1f603799cbd4fc4a5c17175c0bd08fa",
+          "objectHash": "5d0b4bb2a1ee522fd7b239b000df80395b466af92b83840e84d3c521256f410e",
+          "sourceRevision": "8a8b02bd2e2eabfdfd6281582b3f123e0b404736b00e7dbc76f224d5717d96ab"
+        },
+        {
+          "jobId": "work-cc6923313cc54d8492382ee85a2b8e88",
+          "attemptId": "attempt-21a078590cc642ca87757e0a34b58186",
+          "objectHash": "54587d050826cebfcfadd86db2e57035926b9a41c0c57ef33a0cafc60e2bd17f",
+          "sourceRevision": "fecafb18fe5b774994fff81d475450ab72244b1d34559c5d145fa4b7989afd16"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-bad1ea86b7ee0097ca00b380",
+      "resolvedBytesHash": "19b93811e59cd5ee7a4722c788e88ffc0461c3d6fdf8a2dfaeed49e5d001feb5",
+      "attempts": [
+        {
+          "jobId": "work-6233a7965d814d70840971cb3af20477",
+          "attemptId": "attempt-6c000f2571734fd8bef140283c8cf3d6",
+          "objectHash": "1c6800aa78b7a0771a1cc3d9cbb5b04430b29fe6d513faefaaa6a19e5119304f",
+          "sourceRevision": "7d789203893ed0db311eb2b634b5bd57606f8d86251e31f7469b08ff76266963"
+        },
+        {
+          "jobId": "work-9837372d293a472a85661e2c36e3366b",
+          "attemptId": "attempt-b965d985525e46fdbc23b845f51c0404",
+          "objectHash": "a264a9af82a9b9ba082f7160f4734fbba1c72bd2fd59764ed88a3fb1aea5de61",
+          "sourceRevision": "5e5e7f06026a90b73e92783121b2139f6e4636f04e7642842404942200ea0676"
+        },
+        {
+          "jobId": "work-c924ea97f0164cbe9409130c3a198c66",
+          "attemptId": "attempt-18ed8b63bf314cba98e09e0150e4ab32",
+          "objectHash": "34f967771f2054f4f9060cc852050dbe1f66c161a19ada737f97ae8759d2faf0",
+          "sourceRevision": "1aa32d52a2f70e5e74668b10605f942ce7238818a626f7fa38a5e0a0328329ce"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-82dc0244488180ccea9817b4",
+      "resolvedBytesHash": "f2c6e0857bfb0a170355948a522d867dd93bc869ffa4543b2f24e36e9148a895",
+      "attempts": [
+        {
+          "jobId": "work-6e13c663efea4ae19e560f3b82a52f61",
+          "attemptId": "attempt-da218905c5984169b716acb84d701f02",
+          "objectHash": "646025fd7acc0602df576d768e802f960e0a059f23664500240193b1ed8d0162",
+          "sourceRevision": "8dc74eded45f1920a346683dbacb2800699502331e9c18184c85ee58051103b2"
+        },
+        {
+          "jobId": "work-bc9fe0c5d80a439d9be421874222366c",
+          "attemptId": "attempt-432f1f9f3a88473393a2c350b996c6b5",
+          "objectHash": "351843c5caeec6cc7e0a1614779fc10f7443e7e96cbecee15ae6c242d37bddab",
+          "sourceRevision": "f5e94e2d4fc32cc733db6e3cd55a543320314a0b6ebeb469b4b38553f71f8252"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-5272f98789cc8e33c1bf9520",
+      "resolvedBytesHash": "f2e12658a9c596214ff26f9b95321f6d8960a3bc4320a629bf1f1baa0a1e7b67",
+      "attempts": [
+        {
+          "jobId": "work-6f47431846b1471aadefb92755a34552",
+          "attemptId": "attempt-7db7c0c93fd641a881ac57f5bbb62ee8",
+          "objectHash": "1e54e6b7865061e54e00eeb0dae5962753feeb7724f69c06a6cf34ce5141a43c",
+          "sourceRevision": "501142a3ffae0ceee2238fddd5f5d3cb1b07e315d19f8b32127c83d3ddb677c7"
+        },
+        {
+          "jobId": "work-c063108338b44f35a34f26a737c2c325",
+          "attemptId": "attempt-ea764100fddb480e87487c3311c4ff1f",
+          "objectHash": "ddecd720badbebf67b47485ee60b2489b9d053b2b33745bd52537bcf63efae44",
+          "sourceRevision": "c033ada0d1625665f64efe17efc3871d4d85c1d8e0d8fac91fc9ecedbb10b00c"
+        },
+        {
+          "jobId": "work-ec88edc0bc1049cba52cd4ebe2e5c6d5",
+          "attemptId": "attempt-9de3896ae26e4cb4928fde35c53b9ba5",
+          "objectHash": "82bdb6b439f51eecfd63cb68b265fedb4d3daf901e458ea43841a6820777110d",
+          "sourceRevision": "ec3638e4a026e2968827422345985810266f4798e2457eeea9caf12b26594f44"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-82dc0244488180ccea9817b4",
+      "resolvedBytesHash": "228caa7f8eb0b924f4942e7a427be1f1119446f6e05048abc77e9cd70cfa2827",
+      "attempts": [
+        {
+          "jobId": "work-72fc60dd300f4f1a843be88addef767a",
+          "attemptId": "attempt-7ba96d1004284f22872aca6af9936bb7",
+          "objectHash": "f0db782187cbf5b426fd5206e6036844475022d07184f5a40ca90bb0a26466cb",
+          "sourceRevision": "6c1dac840910f3339e24f9c56546ac5f39079177ae49db806378ad9cb5936b67"
+        },
+        {
+          "jobId": "work-8d26dde8ea144fa8b970405e8448f082",
+          "attemptId": "attempt-4ad108215f8f4216a039a3576f25a0f6",
+          "objectHash": "1e1cfc215e65a3c6f3adbe5f6b50815b27538c7f7425b0551bef411b2e693614",
+          "sourceRevision": "3ffb229031193f1be0c910c22f6fb7cf4d319ba7b58dc23369be7fa6774577b3"
+        },
+        {
+          "jobId": "work-df7306e9c7a740e388c37f92a5445b71",
+          "attemptId": "attempt-e81aa4c5c41948a190c9591fee1bab38",
+          "objectHash": "f83ae83d7f33d3f0814d1086e06ab875d23113f87f8f8102c70f27f11ad0cfed",
+          "sourceRevision": "17456cbdb0e9f9228df20e2339f6aa9f74ff0d8a29f2b56bdae49a3b6b10d25e"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-28b8faa1237746076286f5af",
+      "resolvedBytesHash": "53b13aec7c1fb86d4c36dcdac898daa463c59f38bdb66a0f9d9baa9b2c1f9f50",
+      "attempts": [
+        {
+          "jobId": "work-7bc2dc2fefda4af0a2bf612f34220db9",
+          "attemptId": "attempt-01fffcc125db45e9a53a442cf889ea2d",
+          "objectHash": "cbd9b9f524df9522f0c2e2a3e8c6a492cb83b210d4811c752937b60d3ca610cb",
+          "sourceRevision": "b27d1412442f1958beae6e153c656502cdbe58198c2b0cf99054f84676920381"
+        },
+        {
+          "jobId": "work-9400397d45a5402aa32a0fb610a6668a",
+          "attemptId": "attempt-31e9539f73f8450fbb779d5105214b2b",
+          "objectHash": "cd56016f3fc89f56b1652047eeff25196634eef8ff0c545746590d0aaee94620",
+          "sourceRevision": "ab552331acf03a182dc0637346cf70d316072c4cfccd88736c4815b7bc945347"
+        }
+      ]
+    },
+    {
+      "functionId": "fn-16c7c669f0bcc5cfe05ad5fe",
+      "resolvedBytesHash": "c7ad2ad581cc2eeff1b7249559d7c56959ca154e29049e6ce661a8a0a5d36a9d",
+      "attempts": [
+        {
+          "jobId": "work-a83f7df0b09940e58c86ee80b27d5fe8",
+          "attemptId": "attempt-b6021cb233374f4fb64c7627e6651d4d",
+          "objectHash": "6983ba0b5ea82672125d606feda7577e8d8ee8410ceb9b04b2b6f801e5c25c8a",
+          "sourceRevision": "56d2a2b95700c0eea2c789b376a259df19f3bceb5642203dde115dc9ff93df04"
+        },
+        {
+          "jobId": "work-e7fa54ab8bb4480db232a9fc2f4587f2",
+          "attemptId": "attempt-016fbac96ba345eba8cf9234d81f26ec",
+          "objectHash": "2b823c5dc2c82af93a4f2bcd58172aeaa05fcf6311a0ab16b2572afefc20f543",
+          "sourceRevision": "bc0ee42c33e4db2bf083e57b2ca322dcad347ee7b091a5fcc5f596829d18bfa0"
+        }
+      ]
+    }
+  ],
+  "scope": [
+    {
+      "id": "fn-b66f67c637561239a9afe70c",
+      "name": "InitPlayerTailBounce_00413c80",
+      "address": {
+        "spaceId": "ram",
+        "display": "00413c80",
+        "sortKey": "00413c80",
+        "canonical": "00413c80"
+      },
+      "size": 212,
+      "matchPercent": 99.52830188679245,
+      "matchAttemptId": "attempt-5da0f16941e04fcb9803f04ef5f40e58"
+    },
+    {
+      "id": "fn-2fd83d0f3f782212d9d10d1c",
+      "name": "PlayerSwallow_00427c00",
+      "address": {
+        "spaceId": "ram",
+        "display": "00427c00",
+        "sortKey": "00427c00",
+        "canonical": "00427c00"
+      },
+      "size": 220,
+      "matchPercent": 99.0909090909091,
+      "matchAttemptId": "attempt-586efdd40a094f6a9eb7e9c9fa64a500"
+    },
+    {
+      "id": "fn-311bcd886d303c9a3571183d",
+      "name": "InitPlayerStopFall_00425c10",
+      "address": {
+        "spaceId": "ram",
+        "display": "00425c10",
+        "sortKey": "00425c10",
+        "canonical": "00425c10"
+      },
+      "size": 212,
+      "matchPercent": 97.64150943396227,
+      "matchAttemptId": "attempt-e4651a3fb32642fba739afb560b2f0e5"
+    },
+    {
+      "id": "fn-abadd7d1ab84ec44f2b85739",
+      "name": "InitPlayerStopFalling_00425da0",
+      "address": {
+        "spaceId": "ram",
+        "display": "00425da0",
+        "sortKey": "00425da0",
+        "canonical": "00425da0"
+      },
+      "size": 212,
+      "matchPercent": 97.64150943396227,
+      "matchAttemptId": "attempt-7e80ee1dd3084a13bcdff42890077670"
+    },
+    {
+      "id": "fn-fbfa292ffcc8256316710d6b",
+      "name": "ob284DoIt_0041b500",
+      "address": {
+        "spaceId": "ram",
+        "display": "0041b500",
+        "sortKey": "0041b500",
+        "canonical": "0041b500"
+      },
+      "size": 241,
+      "matchPercent": 95.4356846473029,
+      "matchAttemptId": "attempt-50d7a64f97714923a5c6b71e420c1534"
+    },
+    {
+      "id": "fn-29e6b320d3a5c726e1376507",
+      "name": "PlayerBounceRise_00413f10",
+      "address": {
+        "spaceId": "ram",
+        "display": "00413f10",
+        "sortKey": "00413f10",
+        "canonical": "00413f10"
+      },
+      "size": 277,
+      "matchPercent": 90.25270758122744,
+      "matchAttemptId": "attempt-d0382b6d95fa4a3088dacc6768d6da2d"
+    },
+    {
+      "id": "fn-73515ba63f84b082e9a2cdda",
+      "name": "ob256Init_0040cf60",
+      "address": {
+        "spaceId": "ram",
+        "display": "0040cf60",
+        "sortKey": "0040cf60",
+        "canonical": "0040cf60"
+      },
+      "size": 230,
+      "matchPercent": 88.36206896551724,
+      "matchAttemptId": "attempt-5f20e340a32441a0a579cb64a14351c5"
+    },
+    {
+      "id": "fn-8fa6d61595a9a43725c2da2d",
+      "name": "PlayerBounceFall_00413d60",
+      "address": {
+        "spaceId": "ram",
+        "display": "00413d60",
+        "sortKey": "00413d60",
+        "canonical": "00413d60"
+      },
+      "size": 251,
+      "matchPercent": 87.64940239043824,
+      "matchAttemptId": "attempt-52c75b842fd54a49946c6629e1f8f7c4"
+    },
+    {
+      "id": "fn-f3c41bee8cf80b29f5af25cc",
+      "name": "PlayerSideUTurn_00412630",
+      "address": {
+        "spaceId": "ram",
+        "display": "00412630",
+        "sortKey": "00412630",
+        "canonical": "00412630"
+      },
+      "size": 275,
+      "matchPercent": 86.18181818181819,
+      "matchAttemptId": "attempt-13ba36d10f1641d1a2efd50756d79f32"
+    },
+    {
+      "id": "fn-5272f98789cc8e33c1bf9520",
+      "name": "GFX_Fade_0043f490",
+      "address": {
+        "spaceId": "ram",
+        "display": "0043f490",
+        "sortKey": "0043f490",
+        "canonical": "0043f490"
+      },
+      "size": 239,
+      "matchPercent": 84.10041841004184,
+      "matchAttemptId": "attempt-1ec6421b919245b48657e04b343d516d"
+    },
+    {
+      "id": "fn-3e98d95a66f3d9d4b420536d",
+      "name": "PlayerLookup_00414600",
+      "address": {
+        "spaceId": "ram",
+        "display": "00414600",
+        "sortKey": "00414600",
+        "canonical": "00414600"
+      },
+      "size": 206,
+      "matchPercent": 83.98058252427184,
+      "matchAttemptId": "attempt-e3d06852f68e4e8f83705a6fdccfd63e"
+    },
+    {
+      "id": "fn-b6cab551749311a62ff31e5a",
+      "name": "PlayerDuckSwallow_00414a80",
+      "address": {
+        "spaceId": "ram",
+        "display": "00414a80",
+        "sortKey": "00414a80",
+        "canonical": "00414a80"
+      },
+      "size": 219,
+      "matchPercent": 79.90867579908675,
+      "matchAttemptId": "attempt-cf44406b05ee4b949e24214706b42650"
+    },
+    {
+      "id": "fn-28b8faa1237746076286f5af",
+      "name": "InitPlayerRunStopFall_004263b0",
+      "address": {
+        "spaceId": "ram",
+        "display": "004263b0",
+        "sortKey": "004263b0",
+        "canonical": "004263b0"
+      },
+      "size": 228,
+      "matchPercent": 78.94736842105263,
+      "matchAttemptId": "attempt-8fa5e04a4631406fa2c7cef2bde072e8"
+    },
+    {
+      "id": "fn-8f35c7538e5ca76bb1021f1b",
+      "name": "FUN_00423800_pStateUnk",
+      "address": {
+        "spaceId": "ram",
+        "display": "00423800",
+        "sortKey": "00423800",
+        "canonical": "00423800"
+      },
+      "size": 264,
+      "matchPercent": 71.69811320754717,
+      "matchAttemptId": "attempt-a3eea2c97b254ebabb1527212917bf85"
+    },
+    {
+      "id": "fn-bddda3b12bc86c0cf795c40b",
+      "name": "ob92Draw_0042e2b0",
+      "address": {
+        "spaceId": "ram",
+        "display": "0042e2b0",
+        "sortKey": "0042e2b0",
+        "canonical": "0042e2b0"
+      },
+      "size": 451,
+      "matchPercent": 69.24778761061947,
+      "matchAttemptId": "attempt-7613eccbb5124e3d9a88e8dbaba73f88"
+    },
+    {
+      "id": "fn-9fdb8b7574b04be4a570a0da",
+      "name": "PlayerDuckUnspin_00414e80",
+      "address": {
+        "spaceId": "ram",
+        "display": "00414e80",
+        "sortKey": "00414e80",
+        "canonical": "00414e80"
+      },
+      "size": 218,
+      "matchPercent": 67.43119266055047,
+      "matchAttemptId": "attempt-b798184966b0476d876004ba3f0a3784"
+    },
+    {
+      "id": "fn-e73f98e80bf86087c47c2313",
+      "name": "FUN_004373c0_KFInner",
+      "address": {
+        "spaceId": "ram",
+        "display": "004373c0",
+        "sortKey": "004373c0",
+        "canonical": "004373c0"
+      },
+      "size": 209,
+      "matchPercent": 66.98564593301435,
+      "matchAttemptId": "attempt-110b7b31f23f4a75a0f0a24991e89206"
+    },
+    {
+      "id": "fn-a7cf5d39265679dd7357e5de",
+      "name": "ob369DoIt_004333c0",
+      "address": {
+        "spaceId": "ram",
+        "display": "004333c0",
+        "sortKey": "004333c0",
+        "canonical": "004333c0"
+      },
+      "size": 247,
+      "matchPercent": 64.37246963562752,
+      "matchAttemptId": "attempt-9fa1c17af6944554ab33b9312a8bd35c"
+    },
+    {
+      "id": "fn-05eddb2168387b41eaba565b",
+      "name": "PlayerDuckSpin_00414bb0",
+      "address": {
+        "spaceId": "ram",
+        "display": "00414bb0",
+        "sortKey": "00414bb0",
+        "canonical": "00414bb0"
+      },
+      "size": 217,
+      "matchPercent": 61.81818181818181,
+      "matchAttemptId": "attempt-4c4ccf50c7b7446390232a010cac75bf"
+    },
+    {
+      "id": "fn-ef0338338707d9325ddf9e71",
+      "name": "FUN_00431830",
+      "address": {
+        "spaceId": "ram",
+        "display": "00431830",
+        "sortKey": "00431830",
+        "canonical": "00431830"
+      },
+      "size": 201,
+      "matchPercent": 60.69651741293532,
+      "matchAttemptId": "attempt-400ff186ae564997be2018d0e5f2268c"
+    },
+    {
+      "id": "fn-a2a04243c830cf15695b5b49",
+      "name": "PlayerSideTongueLash_00412880",
+      "address": {
+        "spaceId": "ram",
+        "display": "00412880",
+        "sortKey": "00412880",
+        "canonical": "00412880"
+      },
+      "size": 223,
+      "matchPercent": 58.744394618834086,
+      "matchAttemptId": "attempt-e1ce301766574d52937841e999ddb72d"
+    },
+    {
+      "id": "fn-a576eea1ed39e31f6fdf126b",
+      "name": "GOB_AddObject_004195d0",
+      "address": {
+        "spaceId": "ram",
+        "display": "004195d0",
+        "sortKey": "004195d0",
+        "canonical": "004195d0"
+      },
+      "size": 257,
+      "matchPercent": 57.587548638132304,
+      "matchAttemptId": "attempt-a7812deecfe449cb9627125659a10d97"
+    },
+    {
+      "id": "fn-1f6ed3f9ea1ab18ee58a438a",
+      "name": "PlayerFaceUnspin_00412de0",
+      "address": {
+        "spaceId": "ram",
+        "display": "00412de0",
+        "sortKey": "00412de0",
+        "canonical": "00412de0"
+      },
+      "size": 250,
+      "matchPercent": 56.00000000000001,
+      "matchAttemptId": "attempt-0e05b19df4cf40318f685bc286540efa"
+    },
+    {
+      "id": "fn-bad1ea86b7ee0097ca00b380",
+      "name": "CEL_DrawCels_0043db70",
+      "address": {
+        "spaceId": "ram",
+        "display": "0043db70",
+        "sortKey": "0043db70",
+        "canonical": "0043db70"
+      },
+      "size": 256,
+      "matchPercent": 54.65116279069767,
+      "matchAttemptId": "attempt-6cf8d0d4eb874e218e7490edbf073af6"
+    },
+    {
+      "id": "fn-dbfedd255a5211867f26dd2e",
+      "name": "FUN_00433ec0",
+      "address": {
+        "spaceId": "ram",
+        "display": "00433ec0",
+        "sortKey": "00433ec0",
+        "canonical": "00433ec0"
+      },
+      "size": 437,
+      "matchPercent": 50.44642857142857,
+      "matchAttemptId": "attempt-bc9dafa768d14ae59684a972f7b4c0b7"
+    },
+    {
+      "id": "fn-461481097dc63a6f44e40c84",
+      "name": "PlayerFaceTongueLash_00413ac0",
+      "address": {
+        "spaceId": "ram",
+        "display": "00413ac0",
+        "sortKey": "00413ac0",
+        "canonical": "00413ac0"
+      },
+      "size": 220,
+      "matchPercent": 48,
+      "matchAttemptId": "attempt-996b270b40e44d76854bb2de929aec28"
+    },
+    {
+      "id": "fn-16c7c669f0bcc5cfe05ad5fe",
+      "name": "PlayerSideInside45Trans_00411a90",
+      "address": {
+        "spaceId": "ram",
+        "display": "00411a90",
+        "sortKey": "00411a90",
+        "canonical": "00411a90"
+      },
+      "size": 255,
+      "matchPercent": 47.84313725490196,
+      "matchAttemptId": "attempt-0a5405621a75469690f2087703961489"
+    },
+    {
+      "id": "fn-17ef010cf68ac0b9f19821db",
+      "name": "ob1DoIt_0043cd00",
+      "address": {
+        "spaceId": "ram",
+        "display": "0043cd00",
+        "sortKey": "0043cd00",
+        "canonical": "0043cd00"
+      },
+      "size": 210,
+      "matchPercent": 46.44549763033175,
+      "matchAttemptId": "attempt-bf483ca80fbf4460853235848e4257fe"
+    },
+    {
+      "id": "fn-465df26c4e1f66cd4e1e384d",
+      "name": "PlayerTailSlash_004275e0",
+      "address": {
+        "spaceId": "ram",
+        "display": "004275e0",
+        "sortKey": "004275e0",
+        "canonical": "004275e0"
+      },
+      "size": 247,
+      "matchPercent": 45.74898785425101,
+      "matchAttemptId": "attempt-3d52e0e41f534c0ab4b53d481ecc3ba9"
+    },
+    {
+      "id": "fn-1d6133f709e3e470e3fac580",
+      "name": "CollectibleDoIt_00435ba0",
+      "address": {
+        "spaceId": "ram",
+        "display": "00435ba0",
+        "sortKey": "00435ba0",
+        "canonical": "00435ba0"
+      },
+      "size": 272,
+      "matchPercent": 43.01470588235294,
+      "matchAttemptId": "attempt-dd35c04f861548fa8b0860ae7e523123"
+    },
+    {
+      "id": "fn-d9a7fd6c70e1228f29bc6ff3",
+      "name": "FUN_004244e0_left_right_move_xpos",
+      "address": {
+        "spaceId": "ram",
+        "display": "004244e0",
+        "sortKey": "004244e0",
+        "canonical": "004244e0"
+      },
+      "size": 202,
+      "matchPercent": 40.0990099009901,
+      "matchAttemptId": "attempt-a6c23d20c08043edb5420142fac9b50a"
+    },
+    {
+      "id": "fn-2e57f0af4e2f80e36f3a277e",
+      "name": "GOB_LandedOnContoursWithOffset_0041a160",
+      "address": {
+        "spaceId": "ram",
+        "display": "0041a160",
+        "sortKey": "0041a160",
+        "canonical": "0041a160"
+      },
+      "size": 226,
+      "matchPercent": 39.224137931034484,
+      "matchAttemptId": "attempt-f18f5ab12ba7422582c0865b2dd95f40"
+    },
+    {
+      "id": "fn-4eb26d252c54ed99b474cba9",
+      "name": "FUN_0042d7c0_ObjCallUnk",
+      "address": {
+        "spaceId": "ram",
+        "display": "0042d7c0",
+        "sortKey": "0042d7c0",
+        "canonical": "0042d7c0"
+      },
+      "size": 331,
+      "matchPercent": 38.972809667673715,
+      "matchAttemptId": "attempt-c5af0d60e4c44ada9f1537addac3d76b"
+    },
+    {
+      "id": "fn-e3674552040d052e6e15af64",
+      "name": "PlatformDoIt_00434570",
+      "address": {
+        "spaceId": "ram",
+        "display": "00434570",
+        "sortKey": "00434570",
+        "canonical": "00434570"
+      },
+      "size": 248,
+      "matchPercent": 38.95582329317269,
+      "matchAttemptId": "attempt-9e12ef0c3cb747bdb2dcee0dc24b34f9"
+    },
+    {
+      "id": "fn-8743b3025893dd64492c54fd",
+      "name": "ob120DoIt_0043d230",
+      "address": {
+        "spaceId": "ram",
+        "display": "0043d230",
+        "sortKey": "0043d230",
+        "canonical": "0043d230"
+      },
+      "size": 229,
+      "matchPercent": 37.916666666666664,
+      "matchAttemptId": "attempt-eb80adf2e81a4b45afb086442ad1faec"
+    },
+    {
+      "id": "fn-c469fb91703b029c72588a37",
+      "name": "PlayerSideTongueLash90_00412f40",
+      "address": {
+        "spaceId": "ram",
+        "display": "00412f40",
+        "sortKey": "00412f40",
+        "canonical": "00412f40"
+      },
+      "size": 260,
+      "matchPercent": 36.92307692307692,
+      "matchAttemptId": "attempt-671d3e9bb40a45daa7ecb3cf882bdc21"
+    },
+    {
+      "id": "fn-f89709b05d2d20dfd070ee9f",
+      "name": "InitPlayerFaceCrawlToAir_004144e0",
+      "address": {
+        "spaceId": "ram",
+        "display": "004144e0",
+        "sortKey": "004144e0",
+        "canonical": "004144e0"
+      },
+      "size": 283,
+      "matchPercent": 35.91549295774648,
+      "matchAttemptId": "attempt-c623d222b12e472880f85045934dd678"
+    },
+    {
+      "id": "fn-a7e5a17060724a3329b81d25",
+      "name": "FUN_004322b0",
+      "address": {
+        "spaceId": "ram",
+        "display": "004322b0",
+        "sortKey": "004322b0",
+        "canonical": "004322b0"
+      },
+      "size": 224,
+      "matchPercent": 34.82142857142857,
+      "matchAttemptId": "attempt-5fa7d03bbb244041ad1da5f779f66e3c"
+    },
+    {
+      "id": "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "name": "FUN_004120c0_SideInside90Trans",
+      "address": {
+        "spaceId": "ram",
+        "display": "004120c0",
+        "sortKey": "004120c0",
+        "canonical": "004120c0"
+      },
+      "size": 231,
+      "matchPercent": 34.59915611814346,
+      "matchAttemptId": "attempt-62d304dd88504a59847849b659e35104"
+    },
+    {
+      "id": "fn-fe8fe552a35d5661681342c0",
+      "name": "ob89DoIt_0043ce90",
+      "address": {
+        "spaceId": "ram",
+        "display": "0043ce90",
+        "sortKey": "0043ce90",
+        "canonical": "0043ce90"
+      },
+      "size": 275,
+      "matchPercent": 33.214285714285715,
+      "matchAttemptId": "attempt-bf6aeda5d6034ee1bab5ccaaa8876455"
+    },
+    {
+      "id": "fn-82dc0244488180ccea9817b4",
+      "name": "KFBossDraw_00434080",
+      "address": {
+        "spaceId": "ram",
+        "display": "00434080",
+        "sortKey": "00434080",
+        "canonical": "00434080"
+      },
+      "size": 264,
+      "matchPercent": 32.196969696969695,
+      "matchAttemptId": "attempt-21ec75a1812446b8a2ff87da9ae32043"
+    },
+    {
+      "id": "fn-9df0687757affb644702200b",
+      "name": "ob94DoIt_00432680",
+      "address": {
+        "spaceId": "ram",
+        "display": "00432680",
+        "sortKey": "00432680",
+        "canonical": "00432680"
+      },
+      "size": 347,
+      "matchPercent": 31.805157593123205,
+      "matchAttemptId": "attempt-73aced2862ed4e35b725ab8993641fc2"
+    },
+    {
+      "id": "fn-38883b7e76390b67690e9b58",
+      "name": "PasswordKeyHintsDraw_0040ea90",
+      "address": {
+        "spaceId": "ram",
+        "display": "0040ea90",
+        "sortKey": "0040ea90",
+        "canonical": "0040ea90"
+      },
+      "size": 211,
+      "matchPercent": 31.27962085308057,
+      "matchAttemptId": "attempt-ff27d22403a040f0b66532a500050a67"
+    },
+    {
+      "id": "fn-51dc661f220e17ed41e4a2e2",
+      "name": "ob90DoIt_0043d050",
+      "address": {
+        "spaceId": "ram",
+        "display": "0043d050",
+        "sortKey": "0043d050",
+        "canonical": "0043d050"
+      },
+      "size": 267,
+      "matchPercent": 31.135531135531135,
+      "matchAttemptId": "attempt-43e5ce9c734b4f8b933f9bfdd5e2a07c"
+    },
+    {
+      "id": "fn-9632c7a205ce5e6d01b662b2",
+      "name": "ob121DoIt_0043d3e0",
+      "address": {
+        "spaceId": "ram",
+        "display": "0043d3e0",
+        "sortKey": "0043d3e0",
+        "canonical": "0043d3e0"
+      },
+      "size": 267,
+      "matchPercent": 31.135531135531135,
+      "matchAttemptId": "attempt-8e08f3a344a84de38e8fefdbc911fd58"
+    },
+    {
+      "id": "fn-c7a99e44358c6150e28e7e8d",
+      "name": "ob371DoIt_0043a910",
+      "address": {
+        "spaceId": "ram",
+        "display": "0043a910",
+        "sortKey": "0043a910",
+        "canonical": "0043a910"
+      },
+      "size": 289,
+      "matchPercent": 30.44982698961938,
+      "matchAttemptId": "attempt-6e0d56c2a51f4de5a31dfaaec73fc856"
+    },
+    {
+      "id": "fn-a5a74c2760350434eb359777",
+      "name": "ob93DoIt_00431e00",
+      "address": {
+        "spaceId": "ram",
+        "display": "00431e00",
+        "sortKey": "00431e00",
+        "canonical": "00431e00"
+      },
+      "size": 394,
+      "matchPercent": 28.46534653465347,
+      "matchAttemptId": "attempt-0d8dfb6b30b8421eace700c5a449f6bd"
+    },
+    {
+      "id": "fn-c10525a4542caa835ea7f90b",
+      "name": "ob234DoIt_00431470",
+      "address": {
+        "spaceId": "ram",
+        "display": "00431470",
+        "sortKey": "00431470",
+        "canonical": "00431470"
+      },
+      "size": 449,
+      "matchPercent": 27.39420935412027,
+      "matchAttemptId": "attempt-657afd431f2943948d2e6fb5d8698d94"
+    },
+    {
+      "id": "fn-313a3bab28a2faca273e7844",
+      "name": "GOB_AddMapObject_00419870",
+      "address": {
+        "spaceId": "ram",
+        "display": "00419870",
+        "sortKey": "00419870",
+        "canonical": "00419870"
+      },
+      "size": 522,
+      "matchPercent": 25.954198473282442,
+      "matchAttemptId": "attempt-99e57ce922804935b6947bacaeaa432c"
+    },
+    {
+      "id": "fn-004525c422a970925c956f3a",
+      "name": "TILES_CheckHorizForcedScroll_0042cc90",
+      "address": {
+        "spaceId": "ram",
+        "display": "0042cc90",
+        "sortKey": "0042cc90",
+        "canonical": "0042cc90"
+      },
+      "size": 253,
+      "matchPercent": 24.90272373540856,
+      "matchAttemptId": "attempt-e1296200b78341aa8e23a1b61d32f521"
+    }
+  ],
+  "policy": {
+    "models": [
+      {
+        "provider": "openai-codex",
+        "id": "gpt-6-astra",
+        "thinkingLevel": "high",
+        "attempts": 8,
+        "timeoutSeconds": 600
+      }
+    ],
+    "functionIds": [
+      "fn-b66f67c637561239a9afe70c",
+      "fn-2fd83d0f3f782212d9d10d1c",
+      "fn-311bcd886d303c9a3571183d",
+      "fn-abadd7d1ab84ec44f2b85739",
+      "fn-fbfa292ffcc8256316710d6b",
+      "fn-29e6b320d3a5c726e1376507",
+      "fn-73515ba63f84b082e9a2cdda",
+      "fn-8fa6d61595a9a43725c2da2d",
+      "fn-f3c41bee8cf80b29f5af25cc",
+      "fn-5272f98789cc8e33c1bf9520",
+      "fn-3e98d95a66f3d9d4b420536d",
+      "fn-b6cab551749311a62ff31e5a",
+      "fn-28b8faa1237746076286f5af",
+      "fn-8f35c7538e5ca76bb1021f1b",
+      "fn-bddda3b12bc86c0cf795c40b",
+      "fn-9fdb8b7574b04be4a570a0da",
+      "fn-e73f98e80bf86087c47c2313",
+      "fn-a7cf5d39265679dd7357e5de",
+      "fn-05eddb2168387b41eaba565b",
+      "fn-ef0338338707d9325ddf9e71",
+      "fn-a2a04243c830cf15695b5b49",
+      "fn-a576eea1ed39e31f6fdf126b",
+      "fn-1f6ed3f9ea1ab18ee58a438a",
+      "fn-bad1ea86b7ee0097ca00b380",
+      "fn-dbfedd255a5211867f26dd2e",
+      "fn-461481097dc63a6f44e40c84",
+      "fn-16c7c669f0bcc5cfe05ad5fe",
+      "fn-17ef010cf68ac0b9f19821db",
+      "fn-465df26c4e1f66cd4e1e384d",
+      "fn-1d6133f709e3e470e3fac580",
+      "fn-d9a7fd6c70e1228f29bc6ff3",
+      "fn-2e57f0af4e2f80e36f3a277e",
+      "fn-4eb26d252c54ed99b474cba9",
+      "fn-e3674552040d052e6e15af64",
+      "fn-8743b3025893dd64492c54fd",
+      "fn-c469fb91703b029c72588a37",
+      "fn-f89709b05d2d20dfd070ee9f",
+      "fn-a7e5a17060724a3329b81d25",
+      "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "fn-fe8fe552a35d5661681342c0",
+      "fn-82dc0244488180ccea9817b4",
+      "fn-9df0687757affb644702200b",
+      "fn-38883b7e76390b67690e9b58",
+      "fn-51dc661f220e17ed41e4a2e2",
+      "fn-9632c7a205ce5e6d01b662b2",
+      "fn-c7a99e44358c6150e28e7e8d",
+      "fn-a5a74c2760350434eb359777",
+      "fn-c10525a4542caa835ea7f90b",
+      "fn-313a3bab28a2faca273e7844",
+      "fn-004525c422a970925c956f3a"
+    ],
+    "parallelism": 10,
+    "maxSeconds": 3600,
+    "maxTokens": 0,
+    "maxPasses": 1,
+    "evidenceWorkflow": true,
+    "batchRepair": true,
+    "maxFunctionIterations": 8,
+    "stagnationIterations": 2,
+    "persistWorkingCandidate": true,
+    "continueWhileImproving": true
+  },
+  "diagnosticAudit": [
+    {
+      "jobId": "work-05027e3863cc48afb1c79ce94152ecd3",
+      "functionId": "fn-f3c41bee8cf80b29f5af25cc",
+      "name": "PlayerSideUTurn_00412630",
+      "attemptId": "attempt-451ee8abd7634744957e339c938d4f47",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-05820165a4cb413c85ba36c35e510426",
+      "functionId": "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "name": "FUN_004120c0_SideInside90Trans",
+      "attemptId": "attempt-775b5376df0349609de95717e468f78c",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-090685415aaa400db4ecea46fc86ded0",
+      "functionId": "fn-8743b3025893dd64492c54fd",
+      "name": "ob120DoIt_0043d230",
+      "attemptId": "attempt-4de5d48b86a54e57bf54724db2b83915",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-09286cb072e4433a96e026dce2908baa",
+      "functionId": "fn-dbfedd255a5211867f26dd2e",
+      "name": "FUN_00433ec0",
+      "attemptId": "attempt-fbc63e3e60654f57a785cceaa26c7ed5",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-0bc2ccdf891e4b8f85133709ef036a4d",
+      "functionId": "fn-313a3bab28a2faca273e7844",
+      "name": "GOB_AddMapObject_00419870",
+      "attemptId": "",
+      "status": "Failed",
+      "oldCode": "COMPILE_REJECTED",
+      "newCode": "PROVIDER_UNAVAILABLE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-0c42425ae6e34c00af5f305acf89cc77",
+      "functionId": "fn-8f35c7538e5ca76bb1021f1b",
+      "name": "FUN_00423800_pStateUnk",
+      "attemptId": "attempt-a89280423ca24b1aafe2e6e60d5c316a",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {
+        "modrm": 1,
+        "opcode": 1
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-0cbf4e373deb42a98b8f0e3b5fa8883f",
+      "functionId": "fn-dbfedd255a5211867f26dd2e",
+      "name": "FUN_00433ec0",
+      "attemptId": "attempt-ed2be5f5a6a74388ad4a3d8122ba7180",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-10537136f62040fd80afba3412f35c02",
+      "functionId": "fn-73515ba63f84b082e9a2cdda",
+      "name": "ob256Init_0040cf60",
+      "attemptId": "attempt-968a9453bbd94b5f945f1ee6493210f8",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-11cd9905e9ce4e93b97e620710c605e9",
+      "functionId": "fn-05eddb2168387b41eaba565b",
+      "name": "PlayerDuckSpin_00414bb0",
+      "attemptId": "attempt-c6fb32670c4d4b34b723e2429a46c8cc",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-12929acd2fa84e7baae546c24dc38c3e",
+      "functionId": "fn-28b8faa1237746076286f5af",
+      "name": "InitPlayerRunStopFall_004263b0",
+      "attemptId": "attempt-93431659b61b4717b2b77fd7bf14beb7",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-13f81dde131643d48a07147339458bf2",
+      "functionId": "fn-313a3bab28a2faca273e7844",
+      "name": "GOB_AddMapObject_00419870",
+      "attemptId": "attempt-de3a9aad92c44d3eb0cfde783bf995d2",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-1486c2db76c84f5eb8797d68acaa8089",
+      "functionId": "fn-17ef010cf68ac0b9f19821db",
+      "name": "ob1DoIt_0043cd00",
+      "attemptId": "attempt-0d943d591ef8455ab46412d500a79156",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-16ce388701494a96bbcc4392a30c326c",
+      "functionId": "fn-ef0338338707d9325ddf9e71",
+      "name": "FUN_00431830",
+      "attemptId": "attempt-1296b5efa26e486896243e1f323b13d8",
+      "status": "Failed/blocked",
+      "oldCode": "VERIFY_UNRESOLVED_IMPORT",
+      "newCode": "VERIFY_UNRESOLVED_IMPORT",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-1708dbe165524073b75aaec337cd1b5f",
+      "functionId": "fn-fe8fe552a35d5661681342c0",
+      "name": "ob89DoIt_0043ce90",
+      "attemptId": "attempt-425d0b64c4de4cb3bb7224dda43e4b1c",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-183021a19ac943e988e5210dfcfa535e",
+      "functionId": "fn-313a3bab28a2faca273e7844",
+      "name": "GOB_AddMapObject_00419870",
+      "attemptId": "",
+      "status": "Failed",
+      "oldCode": "COMPILE_REJECTED",
+      "newCode": "PROVIDER_UNAVAILABLE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-186cac5ae6d74596a33fd5845a2e6a41",
+      "functionId": "fn-9632c7a205ce5e6d01b662b2",
+      "name": "ob121DoIt_0043d3e0",
+      "attemptId": "attempt-761346f762654d3f910f0f038e6b48b2",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-19bc629984d2403ba92a4b7d22ed8b0c",
+      "functionId": "fn-313a3bab28a2faca273e7844",
+      "name": "GOB_AddMapObject_00419870",
+      "attemptId": "",
+      "status": "Investigated",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "INVESTIGATION_COMPLETE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-1e84ae087cb148bc930318bc85911328",
+      "functionId": "fn-82dc0244488180ccea9817b4",
+      "name": "KFBossDraw_00434080",
+      "attemptId": "",
+      "status": "Failed",
+      "oldCode": "COMPILE_REJECTED",
+      "newCode": "MODEL_FORMAT_INVALID",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-1ee19b6e4f1649e296ba88eeedcdbd24",
+      "functionId": "fn-c10525a4542caa835ea7f90b",
+      "name": "ob234DoIt_00431470",
+      "attemptId": "",
+      "status": "Investigated",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "INVESTIGATION_COMPLETE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-210d972b9c0e41f49ec2d5a8d83078f6",
+      "functionId": "fn-16c7c669f0bcc5cfe05ad5fe",
+      "name": "PlayerSideInside45Trans_00411a90",
+      "attemptId": "",
+      "status": "Failed",
+      "oldCode": "COMPILE_REJECTED",
+      "newCode": "PROVIDER_UNAVAILABLE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-211854f6fcbd4924992c0db7aed80f5c",
+      "functionId": "fn-a5a74c2760350434eb359777",
+      "name": "ob93DoIt_00431e00",
+      "attemptId": "attempt-d65d7bbe451545dbb1eefcbaf3abb4a4",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-2159fbfcbdf1454fb80ddddb5af18d4c",
+      "functionId": "fn-9632c7a205ce5e6d01b662b2",
+      "name": "ob121DoIt_0043d3e0",
+      "attemptId": "attempt-42f2ba59d7e84cea89e1e26953333021",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-2234dfa9007f48cbb40cae1ea159e5d3",
+      "functionId": "fn-b66f67c637561239a9afe70c",
+      "name": "InitPlayerTailBounce_00413c80",
+      "attemptId": "attempt-265eb15c23b64767a6edf96dfd3fd70f",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-2275df0cdba14b2cbb95e1316a6fce44",
+      "functionId": "fn-17ef010cf68ac0b9f19821db",
+      "name": "ob1DoIt_0043cd00",
+      "attemptId": "attempt-2111ed53c6bf491f88f82c0fc1967652",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-277bfab90e4a49eaa5eb943838ce321b",
+      "functionId": "fn-9df0687757affb644702200b",
+      "name": "ob94DoIt_00432680",
+      "attemptId": "attempt-7deb0af6d6be4c469e3094716f2838c5",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-28c481653ab7488aa5c404a1d887114f",
+      "functionId": "fn-dbfedd255a5211867f26dd2e",
+      "name": "FUN_00433ec0",
+      "attemptId": "attempt-5ba7a62140114387a7a4e55239ceb281",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-2a414f629040402c848eddee205f4c36",
+      "functionId": "fn-ef0338338707d9325ddf9e71",
+      "name": "FUN_00431830",
+      "attemptId": "",
+      "status": "Investigated",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "INVESTIGATION_COMPLETE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-2acac9d7c22146e58fcae28d0dba7856",
+      "functionId": "fn-2e57f0af4e2f80e36f3a277e",
+      "name": "GOB_LandedOnContoursWithOffset_0041a160",
+      "attemptId": "attempt-519920185d184796b7fc5880d1384227",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-2dd65654b22a45c3a0893f3e9c18bbef",
+      "functionId": "fn-f3c41bee8cf80b29f5af25cc",
+      "name": "PlayerSideUTurn_00412630",
+      "attemptId": "attempt-4dd5abd6ebb94689a03baddb35423ce8",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-305cfe726c44440daaecee44dc308b0c",
+      "functionId": "fn-313a3bab28a2faca273e7844",
+      "name": "GOB_AddMapObject_00419870",
+      "attemptId": "attempt-90bd231ecf3f48138fac914737631a3a",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-3277d0890fe840cd872d876a1ff013f6",
+      "functionId": "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "name": "FUN_004120c0_SideInside90Trans",
+      "attemptId": "attempt-3d000460ae7c4f1aa3daaf1a6cb6bc07",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-335c7198e94f4c128ca1ffc0f2987328",
+      "functionId": "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "name": "FUN_004120c0_SideInside90Trans",
+      "attemptId": "",
+      "status": "Investigated",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "INVESTIGATION_COMPLETE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-33d4a1caf39a41598f52a85db0ad882b",
+      "functionId": "fn-16c7c669f0bcc5cfe05ad5fe",
+      "name": "PlayerSideInside45Trans_00411a90",
+      "attemptId": "attempt-f4e24266cdc046089caf977f750d6612",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-38870af16b644c229f38c0d762aaaa13",
+      "functionId": "fn-a576eea1ed39e31f6fdf126b",
+      "name": "GOB_AddObject_004195d0",
+      "attemptId": "attempt-312767445b3840e98aac3645ed14f766",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-38d4a6049b7c490393de8b5e412a0772",
+      "functionId": "fn-bad1ea86b7ee0097ca00b380",
+      "name": "CEL_DrawCels_0043db70",
+      "attemptId": "attempt-c5f59f787cf446deabb1ad4c823b1a3e",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-427c446a22154a4b953e8aba6347136b",
+      "functionId": "fn-e73f98e80bf86087c47c2313",
+      "name": "FUN_004373c0_KFInner",
+      "attemptId": "attempt-11920a9c829f4f27943515ba19e18fa5",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-43a0d47018684808ab6cac423bd41dd8",
+      "functionId": "fn-fbfa292ffcc8256316710d6b",
+      "name": "ob284DoIt_0041b500",
+      "attemptId": "attempt-c1dd87e85c1d43a69df95ad39bb9e01c",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-43ccd67edb7c4cb4a6537e0f7016116e",
+      "functionId": "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "name": "FUN_004120c0_SideInside90Trans",
+      "attemptId": "attempt-c995b42887e14691b18d7e0201de0557",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-44cbf0c792264e528b75f96c319fe3d1",
+      "functionId": "fn-fe8fe552a35d5661681342c0",
+      "name": "ob89DoIt_0043ce90",
+      "attemptId": "attempt-7ece301bcd1641829d30543b284c750b",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-4691dcc2c63f4b22ba1c0fe8819ce67c",
+      "functionId": "fn-f3c41bee8cf80b29f5af25cc",
+      "name": "PlayerSideUTurn_00412630",
+      "attemptId": "attempt-30e72120c22a4d7b858c2eae8b8517c8",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-47ad009496d945299c947b866f0096c2",
+      "functionId": "fn-313a3bab28a2faca273e7844",
+      "name": "GOB_AddMapObject_00419870",
+      "attemptId": "",
+      "status": "Failed",
+      "oldCode": "COMPILE_REJECTED",
+      "newCode": "PROVIDER_UNAVAILABLE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-4889d9ec01a44ad4af02e42a37b850da",
+      "functionId": "fn-5272f98789cc8e33c1bf9520",
+      "name": "GFX_Fade_0043f490",
+      "attemptId": "attempt-967001003d1f4e0ea111ad1516cc778f",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-48ddc9c7052642999646b286d823509e",
+      "functionId": "fn-3e98d95a66f3d9d4b420536d",
+      "name": "PlayerLookup_00414600",
+      "attemptId": "attempt-221e2d084c7d433b87e724e8ef712355",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-49c7ad240939477d9f944fcb4c8adac0",
+      "functionId": "fn-c10525a4542caa835ea7f90b",
+      "name": "ob234DoIt_00431470",
+      "attemptId": "",
+      "status": "MissingEvidence",
+      "oldCode": "MISSING_EVIDENCE",
+      "newCode": "MISSING_EVIDENCE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-49db285e7af447e2ae410fdcedb549e6",
+      "functionId": "fn-2e57f0af4e2f80e36f3a277e",
+      "name": "GOB_LandedOnContoursWithOffset_0041a160",
+      "attemptId": "attempt-45a7e6aafb9146f3ac826c5e4e36881b",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-4df9e65eaeeb4d559e322c31b6038fab",
+      "functionId": "fn-28b8faa1237746076286f5af",
+      "name": "InitPlayerRunStopFall_004263b0",
+      "attemptId": "attempt-821a52c9d7a44c63949cb8b7ba1e994c",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-4fb987e61c854ceba812cd84643ed72f",
+      "functionId": "fn-fbfa292ffcc8256316710d6b",
+      "name": "ob284DoIt_0041b500",
+      "attemptId": "attempt-03fa41f5f00c4a2299eefbf02c32048e",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-51ec323ec4e74cd8b06d9df3de784891",
+      "functionId": "fn-82dc0244488180ccea9817b4",
+      "name": "KFBossDraw_00434080",
+      "attemptId": "attempt-b2a9bd68573c485e87fde98fae858fd9",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-51edb5efbfe74b4e823696ede33a85b1",
+      "functionId": "fn-a5a74c2760350434eb359777",
+      "name": "ob93DoIt_00431e00",
+      "attemptId": "attempt-a557007c9e8549b39c6273caf26c0f79",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-525beb02dd2f43358b5358bdb5690742",
+      "functionId": "fn-8fa6d61595a9a43725c2da2d",
+      "name": "PlayerBounceFall_00413d60",
+      "attemptId": "attempt-d4214078941642b99584f15fcb6506f4",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-528e1243e696430cbd71435a293e8b4f",
+      "functionId": "fn-e73f98e80bf86087c47c2313",
+      "name": "FUN_004373c0_KFInner",
+      "attemptId": "attempt-6c50f1fdce4c4f849a05dcc6cdfd2c95",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-543c9e10cd48414d9f22c6c929aae04e",
+      "functionId": "fn-2fd83d0f3f782212d9d10d1c",
+      "name": "PlayerSwallow_00427c00",
+      "attemptId": "attempt-8fc5495977e74459a57fd1010f668686",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-5440348ed2564ae08c03eb7f8f46cb16",
+      "functionId": "fn-28b8faa1237746076286f5af",
+      "name": "InitPlayerRunStopFall_004263b0",
+      "attemptId": "",
+      "status": "Investigated",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "INVESTIGATION_COMPLETE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-5621e08286e140febf04bed7b904d40b",
+      "functionId": "fn-4eb26d252c54ed99b474cba9",
+      "name": "FUN_0042d7c0_ObjCallUnk",
+      "attemptId": "attempt-42539a4582334d9ea9fc6549bfe53fa4",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_OPERAND_ORDER",
+      "newCode": "VERIFY_OPERAND_ORDER",
+      "byteRoles": {
+        "modrm": 1
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-5705df1f62c9470882422f58c0bda2d8",
+      "functionId": "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "name": "FUN_004120c0_SideInside90Trans",
+      "attemptId": "attempt-c98029dfcd19457888e1cac770a2c104",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_IMMEDIATE",
+      "byteRoles": {
+        "immediate": 4
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-58228eaa29a046c1a09cd7f9ba61226c",
+      "functionId": "fn-8f35c7538e5ca76bb1021f1b",
+      "name": "FUN_00423800_pStateUnk",
+      "attemptId": "attempt-36b9964c94bb43df84044d2aca377ddc",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {
+        "modrm": 1,
+        "opcode": 1
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-5a12d3fbf88b44fbbe7d2751beaa8994",
+      "functionId": "fn-8f35c7538e5ca76bb1021f1b",
+      "name": "FUN_00423800_pStateUnk",
+      "attemptId": "attempt-8705415f02ed4c53bbdc7b52e49c7e3d",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-5aa1523122ec4906ab7348e6ae034bc0",
+      "functionId": "fn-38883b7e76390b67690e9b58",
+      "name": "PasswordKeyHintsDraw_0040ea90",
+      "attemptId": "attempt-2acbdb710bc0481b8aef682916be9979",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-5aecaa516f5a4a13adbb8ae8ec6c56ab",
+      "functionId": "fn-e3674552040d052e6e15af64",
+      "name": "PlatformDoIt_00434570",
+      "attemptId": "attempt-554f6d472de143baa9989e4537c480de",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-5cbde6623a274a13abee8903828af486",
+      "functionId": "fn-16c7c669f0bcc5cfe05ad5fe",
+      "name": "PlayerSideInside45Trans_00411a90",
+      "attemptId": "attempt-de943233a63d42f48693d9de0df82744",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-5f8bd7c9cb2e4d5aac98681e452d2590",
+      "functionId": "fn-17ef010cf68ac0b9f19821db",
+      "name": "ob1DoIt_0043cd00",
+      "attemptId": "attempt-ab51bce3e3c846b3b3f2906ee176bf3d",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-5fa4f49cdd1b4ca399fe634abe883c48",
+      "functionId": "fn-1f6ed3f9ea1ab18ee58a438a",
+      "name": "PlayerFaceUnspin_00412de0",
+      "attemptId": "attempt-db3528eab65f446c9658c70225178709",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-6233a7965d814d70840971cb3af20477",
+      "functionId": "fn-bad1ea86b7ee0097ca00b380",
+      "name": "CEL_DrawCels_0043db70",
+      "attemptId": "attempt-6c000f2571734fd8bef140283c8cf3d6",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-627d7951536946eba2a066345d06a909",
+      "functionId": "fn-38883b7e76390b67690e9b58",
+      "name": "PasswordKeyHintsDraw_0040ea90",
+      "attemptId": "",
+      "status": "Investigated",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "INVESTIGATION_COMPLETE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-6296d653592745bc8c2b74833185e69b",
+      "functionId": "fn-311bcd886d303c9a3571183d",
+      "name": "InitPlayerStopFall_00425c10",
+      "attemptId": "attempt-fda6eb23906e495fac44cbd1b0daa772",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-63a47fb73fd44ea8926bcad320f78a6f",
+      "functionId": "fn-73515ba63f84b082e9a2cdda",
+      "name": "ob256Init_0040cf60",
+      "attemptId": "attempt-07753dfb369d4271b9482cb277be229c",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-63cf08136b0b47dca345297fdef36358",
+      "functionId": "fn-8f35c7538e5ca76bb1021f1b",
+      "name": "FUN_00423800_pStateUnk",
+      "attemptId": "attempt-c9ea4ef603dc4346b2afba3013e427f2",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-63cf9f54caa842ba99c0d1cf7652828b",
+      "functionId": "fn-1d6133f709e3e470e3fac580",
+      "name": "CollectibleDoIt_00435ba0",
+      "attemptId": "attempt-60878bfcbaf94559b2fdbe98aaba14ad",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-63ed94f8f64942ffa9ef1cfe0cb75f62",
+      "functionId": "fn-461481097dc63a6f44e40c84",
+      "name": "PlayerFaceTongueLash_00413ac0",
+      "attemptId": "attempt-1635f2b2acec428a9422435d05b78c8c",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-66853b74cb5e477dae4c8f411a5b88a5",
+      "functionId": "fn-28b8faa1237746076286f5af",
+      "name": "InitPlayerRunStopFall_004263b0",
+      "attemptId": "attempt-3b6003a9ed0546c09e07e3182c58b5a7",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-6a6ecff964354fa49a24ca9fce0be3ab",
+      "functionId": "fn-e73f98e80bf86087c47c2313",
+      "name": "FUN_004373c0_KFInner",
+      "attemptId": "attempt-fff0bb6e6ab74ee3b168e53da0f7d9d4",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-6dbbe3d76c8a482685c25051ca8abd9d",
+      "functionId": "fn-dbfedd255a5211867f26dd2e",
+      "name": "FUN_00433ec0",
+      "attemptId": "attempt-40f2e2d06bb444438382954481ceab66",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-6e13c663efea4ae19e560f3b82a52f61",
+      "functionId": "fn-82dc0244488180ccea9817b4",
+      "name": "KFBossDraw_00434080",
+      "attemptId": "attempt-da218905c5984169b716acb84d701f02",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {
+        "immediate": 4,
+        "modrm": 19,
+        "displacement": 7,
+        "opcode": 3
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-6f47431846b1471aadefb92755a34552",
+      "functionId": "fn-5272f98789cc8e33c1bf9520",
+      "name": "GFX_Fade_0043f490",
+      "attemptId": "attempt-7db7c0c93fd641a881ac57f5bbb62ee8",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-7071781e7e464ce6957a9a27f8102e6a",
+      "functionId": "fn-004525c422a970925c956f3a",
+      "name": "TILES_CheckHorizForcedScroll_0042cc90",
+      "attemptId": "attempt-30fbeb5e85b7459a9188e47f53376fff",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-72fc60dd300f4f1a843be88addef767a",
+      "functionId": "fn-82dc0244488180ccea9817b4",
+      "name": "KFBossDraw_00434080",
+      "attemptId": "attempt-7ba96d1004284f22872aca6af9936bb7",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {
+        "immediate": 4,
+        "modrm": 21,
+        "displacement": 7,
+        "opcode": 3
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-738049b1cc6841b9ad174437dd7f00e8",
+      "functionId": "fn-51dc661f220e17ed41e4a2e2",
+      "name": "ob90DoIt_0043d050",
+      "attemptId": "attempt-c1ab77a3347743b69ff2d4b8ec120f55",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-740e2fc3e590412cb28789c8e149cfdb",
+      "functionId": "fn-28b8faa1237746076286f5af",
+      "name": "InitPlayerRunStopFall_004263b0",
+      "attemptId": "attempt-1dc8a090b85c4650ac368b938d3ea15a",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-749b5e58265c41d1a1d9b288302d2b83",
+      "functionId": "fn-a576eea1ed39e31f6fdf126b",
+      "name": "GOB_AddObject_004195d0",
+      "attemptId": "attempt-fcede3ccf1c748019f815e4e62565dd8",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-75392477ce074ff08501eb7feb6421c5",
+      "functionId": "fn-d9a7fd6c70e1228f29bc6ff3",
+      "name": "FUN_004244e0_left_right_move_xpos",
+      "attemptId": "attempt-195be1aeb0d24abcb00f42432351c4f2",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-76bcf4c1f97248d4bfc0808358a0d8ea",
+      "functionId": "fn-313a3bab28a2faca273e7844",
+      "name": "GOB_AddMapObject_00419870",
+      "attemptId": "attempt-13a21aec62b1436a96aec5edf6ffe70d",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-7703d9bbb97c46f88491412db31676f6",
+      "functionId": "fn-e73f98e80bf86087c47c2313",
+      "name": "FUN_004373c0_KFInner",
+      "attemptId": "attempt-eb760588deca4754ad5b5c8665d7bc4b",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-771119b5eee94e488f17d1043bdcf969",
+      "functionId": "fn-a576eea1ed39e31f6fdf126b",
+      "name": "GOB_AddObject_004195d0",
+      "attemptId": "attempt-f2e0cbee98524c648e466800ea92e873",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-775693114a004690b8766b2f403be3ba",
+      "functionId": "fn-e73f98e80bf86087c47c2313",
+      "name": "FUN_004373c0_KFInner",
+      "attemptId": "attempt-b172319fe6874124838d41f921d0a3ce",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-77e9774260b44b13961513f598ca59a0",
+      "functionId": "fn-1d6133f709e3e470e3fac580",
+      "name": "CollectibleDoIt_00435ba0",
+      "attemptId": "attempt-ded589adf32147abbeb4640d78948c91",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-7964f2c1227c421c85d615a8ef592d89",
+      "functionId": "fn-38883b7e76390b67690e9b58",
+      "name": "PasswordKeyHintsDraw_0040ea90",
+      "attemptId": "attempt-45a91617b30b463ea0dbd61cc3d5c3d4",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-79b4b80435e0499491f89acac0372c0c",
+      "functionId": "fn-a7cf5d39265679dd7357e5de",
+      "name": "ob369DoIt_004333c0",
+      "attemptId": "attempt-df6c7a1f38124bc88c7bfb0dc07cceb4",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-7bc2dc2fefda4af0a2bf612f34220db9",
+      "functionId": "fn-28b8faa1237746076286f5af",
+      "name": "InitPlayerRunStopFall_004263b0",
+      "attemptId": "attempt-01fffcc125db45e9a53a442cf889ea2d",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-7e7918b8bf5d4d859e1172cac8e0cc58",
+      "functionId": "fn-c469fb91703b029c72588a37",
+      "name": "PlayerSideTongueLash90_00412f40",
+      "attemptId": "attempt-16173985e5144689990c13c417646c8b",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-8429e743a4874693b2a49bd63e4b25b3",
+      "functionId": "fn-38883b7e76390b67690e9b58",
+      "name": "PasswordKeyHintsDraw_0040ea90",
+      "attemptId": "attempt-c1e72e8339d0499e8f74781e7e0f5a6d",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-875e3713323d44a38f8769df0053d0f0",
+      "functionId": "fn-dbfedd255a5211867f26dd2e",
+      "name": "FUN_00433ec0",
+      "attemptId": "attempt-ecf230875c5b40539184056ee963f589",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-8868ee11b53543e4a6f66eed165c2072",
+      "functionId": "fn-a576eea1ed39e31f6fdf126b",
+      "name": "GOB_AddObject_004195d0",
+      "attemptId": "attempt-520f5aa2b66c4e46b3550327bbdf468c",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-88e7e163a779400cbcec412ce257584a",
+      "functionId": "fn-d9a7fd6c70e1228f29bc6ff3",
+      "name": "FUN_004244e0_left_right_move_xpos",
+      "attemptId": "attempt-53fa216abc20498d90a22d1e973576a7",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-89078807b6da466da058f72c2cd69cc8",
+      "functionId": "fn-f3c41bee8cf80b29f5af25cc",
+      "name": "PlayerSideUTurn_00412630",
+      "attemptId": "attempt-33345e783c1e427cb35afdd2f4af125f",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-8a56735234984d8da591705816163cf6",
+      "functionId": "fn-fe8fe552a35d5661681342c0",
+      "name": "ob89DoIt_0043ce90",
+      "attemptId": "attempt-1493aa7c65874e0eacbd2ce588d8fe30",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-8d26dde8ea144fa8b970405e8448f082",
+      "functionId": "fn-82dc0244488180ccea9817b4",
+      "name": "KFBossDraw_00434080",
+      "attemptId": "attempt-4ad108215f8f4216a039a3576f25a0f6",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {
+        "immediate": 4,
+        "modrm": 21,
+        "displacement": 7,
+        "opcode": 3
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-8e92584838764212a95d03dff67e7280",
+      "functionId": "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "name": "FUN_004120c0_SideInside90Trans",
+      "attemptId": "attempt-63477c762fa54174a42a99653bd8462b",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-8ef5aebf21904ee8a1a90c8172d997e9",
+      "functionId": "fn-38883b7e76390b67690e9b58",
+      "name": "PasswordKeyHintsDraw_0040ea90",
+      "attemptId": "attempt-cf03c045564c44889e7589d00f77fb32",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-8f624fc5e765498f8af566173bbd33b5",
+      "functionId": "fn-82dc0244488180ccea9817b4",
+      "name": "KFBossDraw_00434080",
+      "attemptId": "attempt-b968695dccfe486c9cdb8e4d082ccde9",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-8fbef33ce2264102806c4d046dc2e2a7",
+      "functionId": "fn-8743b3025893dd64492c54fd",
+      "name": "ob120DoIt_0043d230",
+      "attemptId": "attempt-59e4d5905e4d4c468191f934cc482317",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-8ffb88cf2f9a48dba8c9d602c2a4a9ab",
+      "functionId": "fn-a2a04243c830cf15695b5b49",
+      "name": "PlayerSideTongueLash_00412880",
+      "attemptId": "attempt-557b25d6be50415db7e979686e791bfd",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-9400397d45a5402aa32a0fb610a6668a",
+      "functionId": "fn-28b8faa1237746076286f5af",
+      "name": "InitPlayerRunStopFall_004263b0",
+      "attemptId": "attempt-31e9539f73f8450fbb779d5105214b2b",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-94577433feee40b38058dad9593a6bf5",
+      "functionId": "fn-29e6b320d3a5c726e1376507",
+      "name": "PlayerBounceRise_00413f10",
+      "attemptId": "attempt-c760b29fe5c84889926a58cdcd5715d5",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-94e0a5e6caac427590719654142301f3",
+      "functionId": "fn-e3674552040d052e6e15af64",
+      "name": "PlatformDoIt_00434570",
+      "attemptId": "attempt-896e481015284406889edf1a489f1c93",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-97a192c855944e4092614c28d20ae8a0",
+      "functionId": "fn-313a3bab28a2faca273e7844",
+      "name": "GOB_AddMapObject_00419870",
+      "attemptId": "attempt-aa9b4bc1cd7e44d4823e9955eff48a9a",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-9837372d293a472a85661e2c36e3366b",
+      "functionId": "fn-bad1ea86b7ee0097ca00b380",
+      "name": "CEL_DrawCels_0043db70",
+      "attemptId": "attempt-b965d985525e46fdbc23b845f51c0404",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-985c8a3af9404b56b2195ff8a3cf63f5",
+      "functionId": "fn-51dc661f220e17ed41e4a2e2",
+      "name": "ob90DoIt_0043d050",
+      "attemptId": "attempt-5499ec445d734e4996958d85a86ea106",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-99ea9c42970e495883d6a3ae49c14988",
+      "functionId": "fn-f3c41bee8cf80b29f5af25cc",
+      "name": "PlayerSideUTurn_00412630",
+      "attemptId": "attempt-8f620d67c479479ba7f31acad05eea44",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-9bcd6e6cb245413ea4ef6c760d83f77a",
+      "functionId": "fn-8f35c7538e5ca76bb1021f1b",
+      "name": "FUN_00423800_pStateUnk",
+      "attemptId": "attempt-3b1a40bd25234993ab6cc0dbc589eb73",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {
+        "modrm": 1,
+        "opcode": 1
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-a0026a5e150643158a408a21fde96ca5",
+      "functionId": "fn-004525c422a970925c956f3a",
+      "name": "TILES_CheckHorizForcedScroll_0042cc90",
+      "attemptId": "attempt-e04762bbac3049ab8fffb3bcff5469dc",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-a02797855a724b8190a9f8052656af70",
+      "functionId": "fn-38883b7e76390b67690e9b58",
+      "name": "PasswordKeyHintsDraw_0040ea90",
+      "attemptId": "attempt-a7bd3c54f2114a6ba5b627d392035c41",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-a03277db10554bd7a9d37eafcc8184cc",
+      "functionId": "fn-51dc661f220e17ed41e4a2e2",
+      "name": "ob90DoIt_0043d050",
+      "attemptId": "attempt-9956cc2404a94ee89f3b1d659b11fd90",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-a0dc22dfac804132a10e68a890d93e4e",
+      "functionId": "fn-38883b7e76390b67690e9b58",
+      "name": "PasswordKeyHintsDraw_0040ea90",
+      "attemptId": "attempt-a60bb0e8b5554bca92e6fa40c4273983",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-a0e08167611f4c579e82d734334145f1",
+      "functionId": "fn-dbfedd255a5211867f26dd2e",
+      "name": "FUN_00433ec0",
+      "attemptId": "attempt-106793fe15dc43958e82df391ca2d699",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-a2a991f3d2bb4c74b8570d8b8e844f62",
+      "functionId": "fn-9df0687757affb644702200b",
+      "name": "ob94DoIt_00432680",
+      "attemptId": "attempt-c3d43323e5304f8fb239b72c90ce45af",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-a31d26799bbc452b8c6504251754d681",
+      "functionId": "fn-16c7c669f0bcc5cfe05ad5fe",
+      "name": "PlayerSideInside45Trans_00411a90",
+      "attemptId": "attempt-d1888e341c4541dfa9c1a6bdc7925e1b",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-a40c7ea99e5f4363b13971d020cfd5a5",
+      "functionId": "fn-a576eea1ed39e31f6fdf126b",
+      "name": "GOB_AddObject_004195d0",
+      "attemptId": "",
+      "status": "Investigated",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "INVESTIGATION_COMPLETE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-a5ad213fd14b4627a6979c565c138da6",
+      "functionId": "fn-a7e5a17060724a3329b81d25",
+      "name": "FUN_004322b0",
+      "attemptId": "attempt-f3c3f70420224ff2b370c715767be45f",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-a65975be9195404abbc32afde428cdf3",
+      "functionId": "fn-e73f98e80bf86087c47c2313",
+      "name": "FUN_004373c0_KFInner",
+      "attemptId": "attempt-382507a389e248a78bf70835da920a07",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-a69a4a40a3804aacb4d7ddc9c9ef69e2",
+      "functionId": "fn-313a3bab28a2faca273e7844",
+      "name": "GOB_AddMapObject_00419870",
+      "attemptId": "attempt-df26ca4735aa4e7186a45c485d198a85",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-a76d0ac6fccd436bac1003133abc8efa",
+      "functionId": "fn-8f35c7538e5ca76bb1021f1b",
+      "name": "FUN_00423800_pStateUnk",
+      "attemptId": "attempt-57e00ddfab8f455394204b011e8cb121",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-a7954dafb81547fab7a27955d5c9d1de",
+      "functionId": "fn-38883b7e76390b67690e9b58",
+      "name": "PasswordKeyHintsDraw_0040ea90",
+      "attemptId": "attempt-f1f603799cbd4fc4a5c17175c0bd08fa",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-a79ad7f2df5c4ce7996d2fb4f3d954f7",
+      "functionId": "fn-f89709b05d2d20dfd070ee9f",
+      "name": "InitPlayerFaceCrawlToAir_004144e0",
+      "attemptId": "attempt-dcd52c41cd2f489eb60c44307c578e1a",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-a83f7df0b09940e58c86ee80b27d5fe8",
+      "functionId": "fn-16c7c669f0bcc5cfe05ad5fe",
+      "name": "PlayerSideInside45Trans_00411a90",
+      "attemptId": "attempt-b6021cb233374f4fb64c7627e6651d4d",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-a9806a8b04e14a6cb595acfb16573926",
+      "functionId": "fn-8f35c7538e5ca76bb1021f1b",
+      "name": "FUN_00423800_pStateUnk",
+      "attemptId": "attempt-1f43796735394dca99b0e01f5a8bb133",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {
+        "modrm": 1,
+        "opcode": 1
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-aa482aef2a69424ebbba9eed6c41508f",
+      "functionId": "fn-f3c41bee8cf80b29f5af25cc",
+      "name": "PlayerSideUTurn_00412630",
+      "attemptId": "attempt-0418d8fcc5054824a62a2809d0e7f478",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-ac0a503606da418ba33a7dcb8b472eb9",
+      "functionId": "fn-fbfa292ffcc8256316710d6b",
+      "name": "ob284DoIt_0041b500",
+      "attemptId": "attempt-e7976df3f1364d148022c37c74924eff",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-acc2cb02c0a742c6bc869b17b72e33af",
+      "functionId": "fn-465df26c4e1f66cd4e1e384d",
+      "name": "PlayerTailSlash_004275e0",
+      "attemptId": "attempt-f0ac4253ff0e4f77920f8d7cb7580fe9",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-aedd9838b7fb4daea9887af20e1e448a",
+      "functionId": "fn-dbfedd255a5211867f26dd2e",
+      "name": "FUN_00433ec0",
+      "attemptId": "attempt-e5068607eb1e48b8b59d2d327d528a2a",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-afc7de574bc54e8aa434f0dd321f5b8e",
+      "functionId": "fn-8743b3025893dd64492c54fd",
+      "name": "ob120DoIt_0043d230",
+      "attemptId": "attempt-4e15e95a855f43cfbfa5bfbb762cb84f",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-b0263796de56479bbf75c893eb823928",
+      "functionId": "fn-4eb26d252c54ed99b474cba9",
+      "name": "FUN_0042d7c0_ObjCallUnk",
+      "attemptId": "attempt-7f9c42d554dd432d9b7a69a429e13368",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-b19314726f294ac395ed0baee88e17af",
+      "functionId": "fn-b6cab551749311a62ff31e5a",
+      "name": "PlayerDuckSwallow_00414a80",
+      "attemptId": "attempt-0827271834874f939f3262b588bef805",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-b26c8872b02349a9803334cbbbcd39c8",
+      "functionId": "fn-a576eea1ed39e31f6fdf126b",
+      "name": "GOB_AddObject_004195d0",
+      "attemptId": "attempt-683b0d53139a4884ae71d8fa19270d80",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-b7dd757930814119ad76d48d73926938",
+      "functionId": "fn-e73f98e80bf86087c47c2313",
+      "name": "FUN_004373c0_KFInner",
+      "attemptId": "",
+      "status": "Investigated",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "INVESTIGATION_COMPLETE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-b7fc363abfe149d691194565a726a9d4",
+      "functionId": "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "name": "FUN_004120c0_SideInside90Trans",
+      "attemptId": "attempt-1131b9ca980e467ebb01da5e56dfd405",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-b8dda193540844569f9b2c98b4c18aad",
+      "functionId": "fn-abadd7d1ab84ec44f2b85739",
+      "name": "InitPlayerStopFalling_00425da0",
+      "attemptId": "attempt-e8c028a9f09e44c9b16cbad3e2cbb6b4",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-bc716d9eeba741b99950f09eb7d9504c",
+      "functionId": "fn-e73f98e80bf86087c47c2313",
+      "name": "FUN_004373c0_KFInner",
+      "attemptId": "attempt-7e40dc0e1ce04c4a939cfbd6600efcde",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-bc7ebea12a214d4796e8b2884355b57b",
+      "functionId": "fn-16c7c669f0bcc5cfe05ad5fe",
+      "name": "PlayerSideInside45Trans_00411a90",
+      "attemptId": "attempt-422523f2557b4e8cb9efc67478a68d64",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_IMMEDIATE",
+      "byteRoles": {
+        "immediate": 4
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-bc8d0237448f4f72b415875aba33c34d",
+      "functionId": "fn-a576eea1ed39e31f6fdf126b",
+      "name": "GOB_AddObject_004195d0",
+      "attemptId": "attempt-3b169100a7294f7ab80d2b33fe2fb1f9",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-bc9fe0c5d80a439d9be421874222366c",
+      "functionId": "fn-82dc0244488180ccea9817b4",
+      "name": "KFBossDraw_00434080",
+      "attemptId": "attempt-432f1f9f3a88473393a2c350b996c6b5",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {
+        "immediate": 4,
+        "modrm": 19,
+        "displacement": 7,
+        "opcode": 3
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-be03a7dbde084147971f7aa47b528392",
+      "functionId": "fn-e3674552040d052e6e15af64",
+      "name": "PlatformDoIt_00434570",
+      "attemptId": "attempt-52d90378b9f145f880045b760256f598",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-bf7baa65d89240ed87690598b3529446",
+      "functionId": "fn-51dc661f220e17ed41e4a2e2",
+      "name": "ob90DoIt_0043d050",
+      "attemptId": "attempt-a972fe8e6d07451082bde67328fb1be1",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-bff02bdd31c241a882d2da23cbd4b324",
+      "functionId": "fn-a7cf5d39265679dd7357e5de",
+      "name": "ob369DoIt_004333c0",
+      "attemptId": "attempt-37f2886ab6a343018e651f951030a8ec",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-c063108338b44f35a34f26a737c2c325",
+      "functionId": "fn-5272f98789cc8e33c1bf9520",
+      "name": "GFX_Fade_0043f490",
+      "attemptId": "attempt-ea764100fddb480e87487c3311c4ff1f",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-c0c4b22f0b254805b44af65b5d612d30",
+      "functionId": "fn-16c7c669f0bcc5cfe05ad5fe",
+      "name": "PlayerSideInside45Trans_00411a90",
+      "attemptId": "attempt-871a466bf53749e5a33d00adfcd53c55",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-c2362db5ee394877afda12a8cecb69ef",
+      "functionId": "fn-73515ba63f84b082e9a2cdda",
+      "name": "ob256Init_0040cf60",
+      "attemptId": "attempt-f85f0e45c9984cf2ba47bb62952ae531",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_DISPLACEMENT",
+      "byteRoles": {
+        "displacement": 6
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-c51fe10694864c4d8ce4e15b375a4961",
+      "functionId": "fn-a576eea1ed39e31f6fdf126b",
+      "name": "GOB_AddObject_004195d0",
+      "attemptId": "attempt-cacf0fb49dba4377ad0aff613e11f1de",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-c6f9e4b3fa9a49eea92202ffbc7d0a87",
+      "functionId": "fn-1d6133f709e3e470e3fac580",
+      "name": "CollectibleDoIt_00435ba0",
+      "attemptId": "attempt-40cf1a0dbf814793b734b64f5e197b2a",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-c82fd936b4b5401cb2cdeabc6c26e3f1",
+      "functionId": "fn-a7e5a17060724a3329b81d25",
+      "name": "FUN_004322b0",
+      "attemptId": "attempt-0250487a441147908b224952753bdd43",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {
+        "modrm": 16
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-c8a63106c1634ba3a4382a63de537dad",
+      "functionId": "fn-bddda3b12bc86c0cf795c40b",
+      "name": "ob92Draw_0042e2b0",
+      "attemptId": "attempt-11494a5e537142c3992593e7dcfcc6e2",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-c924ea97f0164cbe9409130c3a198c66",
+      "functionId": "fn-bad1ea86b7ee0097ca00b380",
+      "name": "CEL_DrawCels_0043db70",
+      "attemptId": "attempt-18ed8b63bf314cba98e09e0150e4ab32",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-cb9094a1ef764eb6a32ff1b357a81dc4",
+      "functionId": "fn-f3c41bee8cf80b29f5af25cc",
+      "name": "PlayerSideUTurn_00412630",
+      "attemptId": "attempt-e6879f6d565747a6b2fb1de9762f1fd3",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-cb9d15801dec421baccb5875cb5d03cc",
+      "functionId": "fn-a7cf5d39265679dd7357e5de",
+      "name": "ob369DoIt_004333c0",
+      "attemptId": "attempt-a4fd10d2d16c4d898f6085cec1109531",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-cbbb8c627fc24162b78be8d21d111497",
+      "functionId": "fn-8f35c7538e5ca76bb1021f1b",
+      "name": "FUN_00423800_pStateUnk",
+      "attemptId": "",
+      "status": "Investigated",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "INVESTIGATION_COMPLETE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-cc4e8226a18e482fa9123b627ebb8a2f",
+      "functionId": "fn-8f35c7538e5ca76bb1021f1b",
+      "name": "FUN_00423800_pStateUnk",
+      "attemptId": "attempt-1f9c3445450b4ca3be156c58e4baea41",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-cc6923313cc54d8492382ee85a2b8e88",
+      "functionId": "fn-38883b7e76390b67690e9b58",
+      "name": "PasswordKeyHintsDraw_0040ea90",
+      "attemptId": "attempt-21a078590cc642ca87757e0a34b58186",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-cc6fda6a76a041e2a9eb57e33f268316",
+      "functionId": "fn-a576eea1ed39e31f6fdf126b",
+      "name": "GOB_AddObject_004195d0",
+      "attemptId": "attempt-2b5ab43104af4c58a56539eb9f658412",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-ccf738b1e1234081a029dcdacb85ddb6",
+      "functionId": "fn-28b8faa1237746076286f5af",
+      "name": "InitPlayerRunStopFall_004263b0",
+      "attemptId": "attempt-7f7f459502cd47b3badf7ad11486b2c0",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-d45751a3ee4949dcb5ec63f25d8aa764",
+      "functionId": "fn-4eb26d252c54ed99b474cba9",
+      "name": "FUN_0042d7c0_ObjCallUnk",
+      "attemptId": "attempt-f2dc65e656cb4622beab2700a7bf8d16",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-d5f71337d9954345b67351fb9b07ec10",
+      "functionId": "fn-c10525a4542caa835ea7f90b",
+      "name": "ob234DoIt_00431470",
+      "attemptId": "attempt-7b3730fdfbf1416d94f5977abac27325",
+      "status": "Failed/blocked",
+      "oldCode": "VERIFY_UNRESOLVED_IMPORT",
+      "newCode": "VERIFY_UNRESOLVED_IMPORT",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-dbc0f3e6a6774432bdc1a953458a71ec",
+      "functionId": "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "name": "FUN_004120c0_SideInside90Trans",
+      "attemptId": "attempt-96837289e6ab4758babae4e12531d707",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-dde846aab01944debe549dccf12aef20",
+      "functionId": "fn-5272f98789cc8e33c1bf9520",
+      "name": "GFX_Fade_0043f490",
+      "attemptId": "attempt-d25acb3efdd74dcfadc7bbba09252ea6",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-df7306e9c7a740e388c37f92a5445b71",
+      "functionId": "fn-82dc0244488180ccea9817b4",
+      "name": "KFBossDraw_00434080",
+      "attemptId": "attempt-e81aa4c5c41948a190c9591fee1bab38",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {
+        "immediate": 4,
+        "modrm": 21,
+        "displacement": 7,
+        "opcode": 3
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-dfe6c9c770094dd5ba55ae59ea2b8337",
+      "functionId": "fn-82dc0244488180ccea9817b4",
+      "name": "KFBossDraw_00434080",
+      "attemptId": "attempt-f4322ccf83e24a37931fde060d2f4dd6",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_REGISTER_ALLOCATION",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {
+        "immediate": 12,
+        "modrm": 21,
+        "displacement": 7,
+        "opcode": 4
+      },
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-e005c690796d4cb3952d3c4449b3a5a3",
+      "functionId": "fn-004525c422a970925c956f3a",
+      "name": "TILES_CheckHorizForcedScroll_0042cc90",
+      "attemptId": "attempt-76138a9011fa47d6a71a1e54d45311b2",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-e2271e3f027f408e8d877aa33149cbe6",
+      "functionId": "fn-c7a99e44358c6150e28e7e8d",
+      "name": "ob371DoIt_0043a910",
+      "attemptId": "attempt-042efad7662640689a3dca1ba85e5dcf",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-e68ee4a131884bf3ba8c8de9f2b9ba0c",
+      "functionId": "fn-461481097dc63a6f44e40c84",
+      "name": "PlayerFaceTongueLash_00413ac0",
+      "attemptId": "attempt-2bd1cbdefdac4c0e924ddffe3c4cb088",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-e74fa04999d44db5b6018fd8503e8e0d",
+      "functionId": "fn-bddda3b12bc86c0cf795c40b",
+      "name": "ob92Draw_0042e2b0",
+      "attemptId": "attempt-55c61e3e8b3642169527b655d5e8ba9d",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-e7fa54ab8bb4480db232a9fc2f4587f2",
+      "functionId": "fn-16c7c669f0bcc5cfe05ad5fe",
+      "name": "PlayerSideInside45Trans_00411a90",
+      "attemptId": "attempt-016fbac96ba345eba8cf9234d81f26ec",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-e905e85d64ab4eb694fb9e136629b6f9",
+      "functionId": "fn-28b8faa1237746076286f5af",
+      "name": "InitPlayerRunStopFall_004263b0",
+      "attemptId": "attempt-b8fa8c055f4b425c8dce32849c151719",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-ec88edc0bc1049cba52cd4ebe2e5c6d5",
+      "functionId": "fn-5272f98789cc8e33c1bf9520",
+      "name": "GFX_Fade_0043f490",
+      "attemptId": "attempt-9de3896ae26e4cb4928fde35c53b9ba5",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-ed5a95a58429460a99d8645f0f42eef7",
+      "functionId": "fn-ef0338338707d9325ddf9e71",
+      "name": "FUN_00431830",
+      "attemptId": "",
+      "status": "MissingEvidence",
+      "oldCode": "MISSING_EVIDENCE",
+      "newCode": "MISSING_EVIDENCE",
+      "byteRoles": null,
+      "instructionAligned": null
+    },
+    {
+      "jobId": "work-ef0a7992da1748eb85dc4d1ea27a1612",
+      "functionId": "fn-2bcb5d4f244e7f5cdf9c28d2",
+      "name": "FUN_004120c0_SideInside90Trans",
+      "attemptId": "attempt-41839371bcf94646bba230a82e7604e5",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-f0adab80fb8d466fa5ffebf89e622f9a",
+      "functionId": "fn-c7a99e44358c6150e28e7e8d",
+      "name": "ob371DoIt_0043a910",
+      "attemptId": "attempt-1c2b480281db4f4190e5deadea78867c",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-f0fe0bae5c74422f928f0633ea1a8b65",
+      "functionId": "fn-9632c7a205ce5e6d01b662b2",
+      "name": "ob121DoIt_0043d3e0",
+      "attemptId": "attempt-29ad925dfb6b4b84a0136379fe4bf062",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-f211743714014d30b42722e4ac1a0307",
+      "functionId": "fn-f3c41bee8cf80b29f5af25cc",
+      "name": "PlayerSideUTurn_00412630",
+      "attemptId": "attempt-0c7618d87b9c4c6cb68785b2cdaaa796",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-f2379a4ddb1c4a80a37b1f6f95bb3f6d",
+      "functionId": "fn-e73f98e80bf86087c47c2313",
+      "name": "FUN_004373c0_KFInner",
+      "attemptId": "attempt-276d66d5068e4d6396f141c853b13a13",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-f2f64542955b4cdb8291d8c629e71363",
+      "functionId": "fn-05eddb2168387b41eaba565b",
+      "name": "PlayerDuckSpin_00414bb0",
+      "attemptId": "attempt-0aa46030082c425eab62ea726ef6d849",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-f527bf2515974064bd05b6270be7651a",
+      "functionId": "fn-17ef010cf68ac0b9f19821db",
+      "name": "ob1DoIt_0043cd00",
+      "attemptId": "attempt-15cd0b84e4874ea6be41e32247bd12e3",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-f80af3903a5e4a5cb80314c9bfd9fb69",
+      "functionId": "fn-9fdb8b7574b04be4a570a0da",
+      "name": "PlayerDuckUnspin_00414e80",
+      "attemptId": "attempt-c82729bdff014b608d446d413133cf55",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-f8fdd3e225134385aafe8fcbb97082eb",
+      "functionId": "fn-2e57f0af4e2f80e36f3a277e",
+      "name": "GOB_LandedOnContoursWithOffset_0041a160",
+      "attemptId": "attempt-dcae6e37a2bf4d92a600f76d125baf08",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-fe1fa146c87e41fabd98574ce05814a6",
+      "functionId": "fn-9632c7a205ce5e6d01b662b2",
+      "name": "ob121DoIt_0043d3e0",
+      "attemptId": "attempt-bbed356dc5964cdb8824843c0fa176e4",
+      "status": "ExactPublished",
+      "oldCode": "EXACT_MATCH",
+      "newCode": "EXACT_MATCH",
+      "byteRoles": {},
+      "instructionAligned": true
+    },
+    {
+      "jobId": "work-ffb7147714b043eeb3f635ff3f2fe2d5",
+      "functionId": "fn-17ef010cf68ac0b9f19821db",
+      "name": "ob1DoIt_0043cd00",
+      "attemptId": "attempt-ad8e23b4b6be4f62b524e6210b10dbdc",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    },
+    {
+      "jobId": "work-ffd90ecf508a40a4b96783590cbf12f3",
+      "functionId": "fn-dbfedd255a5211867f26dd2e",
+      "name": "FUN_00433ec0",
+      "attemptId": "attempt-53c9d6fdded24b559a03470c90e1ce36",
+      "status": "Compiled; bytes differ",
+      "oldCode": "VERIFY_BYTE_MISMATCH",
+      "newCode": "VERIFY_BYTE_MISMATCH",
+      "byteRoles": {},
+      "instructionAligned": false
+    }
+  ],
+  "diagnosticAuditNote": "Advisory offline replay only; immutable attempts/proofs not rewritten. Legacy invalid Investigation reply mapped to its new typed FormatInvalid outcome.",
+  "usageKnownJobs": 176,
+  "usageUnknownJobs": 8
+}

@@ -1,5 +1,12 @@
 # Gex decompilation
 
+## Done — bounded astra loop audit
+- [x] One approved 50-function / ten-lane astra-high pass, terminal LimitReached in 24m 50s: +38 proofs / +9,634 bytes → **740 exact / 61,108 bytes**; all 702 baseline proof/source identities preserved (`docs/astra-loop-audit.md`)
+- [x] Audit every emitted diagnostic class: 27 misleading labels; five reported compile rejections were four transport/session errors and one malformed Investigation reply, with no compilation
+- [x] Backend fixes and synthetic regressions on a branch: provenance-first diagnostics, decoded byte fields, transport pause/no-retry, publication-final diagnostics, investigation routing and operator-approved closest-first new campaigns
+- [ ] Activate an immutable tested backend only with the campaign/verifier drained; no new paid run without explicit approval
+- [ ] Obtain host/provider loss provenance plus independently evidenced symbols for 0045b0b0 / 00431820; do not fabricate bindings or retry exhausted codegen hypotheses
+
 ## Done — smallest-first hundreds pass
 - [x] Cover all 302 never-attempted eligible functions in size order: 254 bounded searches and 48 fail-closed blockers (`docs/smallest-hundreds.md`)
 - [x] Run 5,798 serial pinned-compiler probes across 11 checkpointed batches; no providers, campaign work, executable/Ghidra/config changes or relaxed proof rules

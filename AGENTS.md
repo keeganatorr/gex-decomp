@@ -9,6 +9,17 @@ Source EXE: /home/keegan/.wine/drive_c/GOG Games/Gex/GEX.exe.
 The backend owns a read-only pinned copy under .work/. No binaries, database,
 Ghidra exports or compiled artifacts may be committed or published.
 
+## Latest bounded campaign / loop audit
+
+`docs/astra-loop-audit.md` records `loop-934da8537fb606c616423ead`, one authorised
+50-function astra/high campaign with 10 lanes, terminal LimitReached at its first
+pass after 24m 50s. **740 exact / 61,108 bytes**, +38 / +9,634; all 702 baseline
+proof/source identities preserved. Reported $61.247258 / 13,890,903 tokens is
+provider metadata with unknownUsage=true, not a subscription bill. No second run
+is authorised. Diagnostic/closest-first scheduling fixes are tested on a backend
+branch, not activated. Historical deployment sections below are not current proof
+counts; always query the socket before controls. The source checkpoint is 360ea3b.
+
 ## Authority
 
 Nexus owns agents/sessions/MCP/UI. ../pc-decomp owns compiler jobs, SQLite and proof.
