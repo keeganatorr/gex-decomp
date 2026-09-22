@@ -1,33 +1,54 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004263B0.cpp
-// Historical source SHA256: 53c350e51231b6758aa436cabf5fdd9479ef5945193077acb7304491c5c92a4d
+struct Player {
+    unsigned char unknown00[0x50];
+    volatile int field50;
+    int field54;
+    unsigned char unknown58[0x14];
+    unsigned int flags;
+    volatile int state;
+    int unknown74;
+    int x;
+    int y;
+    int velocityX;
+    int velocityY;
+    int velocityZ;
+    volatile int field8c;
+    unsigned char unknown90[8];
+    int field98;
+    unsigned char unknown9c[0x28];
+    int fieldc4;
+};
 extern "C" {
-extern "C" void __cdecl FUN_00420BC0(void**);
-extern "C" void __cdecl FUN_00423C80(void**);
-extern "C" int __cdecl FUN_00421560_DrawCharacter(int, void**);
-extern "C" void __cdecl FUN_0042E480(int, int, unsigned int, int, unsigned int);
-extern "C" void __cdecl FUN_00426330(void**);
-extern "C" { extern int FUN_004A2990; }
-extern "C" { extern int DAT_004a27f8; }
-extern "C" { extern unsigned char DAT_004a0280; }
-extern "C" { extern unsigned char DAT_004a0282; }
-
-extern "C" void __cdecl GEX_Target(void** param1) {
-    FUN_00420BC0(param1);
-    param1[0x1c] = (void*)0x55;
-    param1[0x14] = (void*)0x28;
-    param1[0x23] = (void*)0;
-    param1[0x15] = (void*)5;
-    param1[0x21] = (void*)0x90000;
-    param1[0x26] = (void*)3;
-    FUN_00423C80(param1);
-    if (DAT_004a0280 == 0 && DAT_004a0282 == 0) {
-        param1[0x20] = (void*)0;
-        param1[0x22] = (void*)0;
-    }
-    DAT_004a27f8 = 1;
-    FUN_00421560_DrawCharacter(FUN_004A2990, param1);
-    FUN_0042E480((int)((char*)param1[0x1e] + 0x500), (int)param1[0x1f], (unsigned int)param1[0x1b] & 0x80000000, (int)param1[0x31], (unsigned int)param1[0x1b] & 0xf);
-    FUN_0042E480((int)((char*)param1[0x1e] - 0x500), (int)param1[0x1f], (unsigned int)param1[0x1b] & 0x80000000, (int)param1[0x31], (unsigned int)param1[0x1b] & 0xf);
-    FUN_00426330(param1);
+void __cdecl FUN_00420BC0(Player*);
+void __cdecl FUN_00423C80(Player*);
+int __cdecl FUN_00421560_DrawCharacter(int, Player*);
+void __cdecl FUN_0042E480(int, int, unsigned int, int, unsigned int);
+void __cdecl FUN_00426330(Player*);
+extern int FUN_004A2990;
+extern int DAT_004a27f8;
+extern unsigned char DAT_004a0280;
+extern unsigned char DAT_004A0281;
 }
+
+static inline void InitializeFall(Player* p) {
+    p->state = 0x2c;
+    p->field50 = 0x28;
+    p->field8c = 0;
+    p->field54 = 5;
+    p->velocityY = 0x90000;
+    p->field98 = 3;
+    FUN_00423C80(p);
+    if (DAT_004a0280 == 0 && DAT_004A0281 == 0) {
+        p->velocityX = 0;
+        p->velocityZ = 0;
+    }
+}
+
+extern "C" void __cdecl GEX_Target(Player* p) {
+    FUN_00420BC0(p);
+    InitializeFall(p);
+    DAT_004a27f8 = 1;
+    FUN_00421560_DrawCharacter(FUN_004A2990, p);
+    FUN_0042E480(p->x + 0xa0000, p->y, p->flags & 0x80000000, p->fieldc4, p->flags & 0xf);
+    FUN_0042E480(p->x - 0xa0000, p->y, p->flags & 0x80000000, p->fieldc4, p->flags & 0xf);
+    FUN_00426330(p);
 }

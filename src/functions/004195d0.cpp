@@ -1,40 +1,40 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004195D0.cpp
-// Historical source SHA256: 924d0a70b02259b4a41b8f62adcd64a7db8032ed9d874cf1ba0968be874cdc22
 extern "C" {
-extern "C" void** __cdecl FUN_0042CC20(void**);
-extern "C" void __cdecl FUN_0042CC00(void**, void**);
-extern "C" void __cdecl FUN_0041E7E0(void**, int*, int*, int*);
-extern "C" void __cdecl FUN_0040F2E0(void**, int);
-extern "C" int __cdecl FUN_0041E190(void**, void*);
-extern "C" { extern int DAT_004A27B0; }
-extern "C" { extern int DAT_0045CA4C; }
-extern "C" { extern int DAT_004A28A0; }
-extern "C" { extern int DAT_004A27A4; }
-extern "C" void** __cdecl GEX_Target(int gObType, int xpos, int ypos, int gOb) {
+void** __cdecl FUN_0042CC20(void**);
+void __cdecl FUN_0042CC00(void**, void**);
+void __cdecl FUN_0041E7E0(void**, int*, int*, int*);
+void __cdecl FUN_0040F2E0(void**, int);
+int __cdecl FUN_0041E190(void**, void*);
+void* __cdecl memset(void*, int, unsigned int);
+extern int DAT_004A27B0;
+extern unsigned int obs_0045ca38[][6];
+extern int DAT_004A28A0;
+extern int DAT_004A27A4;
+
+void** __cdecl GEX_Target(int gObType, long xpos, long ypos, int gOb) {
     void** GexObject = FUN_0042CC20((void**)&DAT_004A27B0);
     if (GexObject != 0) {
-        unsigned int uVar2 = (*(unsigned int*)((int)&DAT_0045CA4C + gObType * 0x18) & 0xf) + 1;
-        void** ppGVar3 = GexObject;
-        for (int i = 0x81; i != 0; i--) *ppGVar3++ = 0;
-        FUN_0042CC00((void**)((int)&DAT_004A28A0 + uVar2 * 12), GexObject);
+        unsigned int* data = obs_0045ca38[gObType];
+        unsigned int uVar2 = (data[5] & 0xf) + 1;
+        memset(GexObject, 0, 0x204);
+        FUN_0042CC00((void**)((char*)&DAT_004A28A0 + uVar2 * 12), GexObject);
         GexObject[3] = (void*)gOb;
-        GexObject[0x1e] = (void*)xpos;
-        GexObject[0x1f] = (void*)ypos;
-        GexObject[0x35] = (void*)xpos;
-        GexObject[0x36] = (void*)ypos;
+        ((long*)GexObject)[0x1e] = xpos;
+        ((long*)GexObject)[0x1f] = ypos;
+        ((long*)GexObject)[0x35] = xpos;
+        ((long*)GexObject)[0x36] = ypos;
         GexObject[0x37] = (void*)0x7fffffff;
-        GexObject[0x1b] = (void*)((*(unsigned int*)((int)&DAT_0045CA4C + gObType * 0x18) & 0xfffffff0) | uVar2);
+        GexObject[0x1b] = (void*)((data[5] & 0xfffffff0) | uVar2);
         GexObject[2] = (void*)gObType;
         GexObject[0x32] = (void*)0x10000;
         GexObject[0x33] = (void*)0x10000;
         GexObject[0x34] = (void*)0xc00000;
-        GexObject[0x16] = (void*)*(int*)((int)&DAT_0045CA4C - 0x14 + gObType * 24);
-        GexObject[0x19] = (void*)*(int*)((int)&DAT_0045CA4C - 0x10 + gObType * 24);
-        GexObject[0x17] = (void*)*(int*)((int)&DAT_0045CA4C - 0xc + gObType * 24);
-        GexObject[0x18] = (void*)*(int*)((int)&DAT_0045CA4C - 8 + gObType * 24);
+        GexObject[0x16] = (void*)data[0];
+        GexObject[0x19] = (void*)data[3];
+        GexObject[0x17] = (void*)data[1];
+        GexObject[0x18] = (void*)data[2];
         FUN_0041E7E0(GexObject,
-            (int*)((*(unsigned int*)((int)&DAT_0045CA4C + gObType * 0x18) & 0xf0) >> 4),
-            (int*)((*(unsigned int*)((int)&DAT_0045CA4C + gObType * 0x18) & 0xf00) >> 8),
+            (int*)((data[5] & 0xf0) >> 4),
+            (int*)((data[5] & 0xf00) >> 8),
             (int*)&FUN_0041E190);
         FUN_0040F2E0(GexObject, 0);
         DAT_004A27A4++;

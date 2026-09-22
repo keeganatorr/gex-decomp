@@ -1,40 +1,45 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004244E0.cpp
-// Historical source SHA256: 8165408ecf0bd16ff810be143dabdeb1ce19aa724a6890380b9fbe464dbfee02
-extern "C" {
-extern "C" { extern unsigned char DAT_004A0280; }
-extern "C" { extern unsigned char DAT_004A0288; }
-extern "C" { extern int DAT_004A23C8; }
+extern "C" unsigned char DAT_004A0280;
+extern "C" unsigned char DAT_004A0281;
+extern "C" int DAT_004A23C8;
 
-extern "C" void __cdecl GEX_Target(void** param_1, int param_2)
+struct MoveState {
+    unsigned char unknown_00[0x6c];
+    unsigned int flags;
+    unsigned char unknown_70[0x10];
+    int velocity;
+    unsigned char unknown_84[4];
+    int acceleration;
+};
+
+extern "C" void __cdecl GEX_Target(MoveState* p, int amount)
 {
     if (DAT_004A0280 != 0) {
-        if (0 < (int)param_1[0x20] && DAT_004A23C8 == 0) {
-            param_1[0x20] = (void*)0;
-            param_1[0x22] = (void*)0;
+        if (p->velocity > 0 && DAT_004A23C8 == 0) {
+            p->velocity = 0;
+            p->acceleration = 0;
             return;
         }
-        param_1[0x22] = (void*)(-param_2);
-        param_1[0x1b] = (void*)((int)param_1[0x1b] & 0x7fffffff);
+        p->acceleration = -amount;
+        p->flags &= 0x7fffffff;
         return;
     }
-    if (DAT_004A0288 != 0) {
-        if ((int)param_1[0x20] < 0 && DAT_004A23C8 == 0) {
-            param_1[0x20] = (void*)0;
-            param_1[0x22] = (void*)0;
+    if (DAT_004A0281 != 0) {
+        if (p->velocity < 0 && DAT_004A23C8 == 0) {
+            p->velocity = 0;
+            p->acceleration = 0;
             return;
         }
-        param_1[0x22] = (void*)param_2;
-        param_1[0x1b] = (void*)((int)param_1[0x1b] | 0x80000000);
+        p->acceleration = amount;
+        p->flags |= 0x80000000;
         return;
     }
-    if (0x10000 < (int)param_1[0x20]) {
-        param_1[0x22] = (void*)0xffffc000;
+    if (p->velocity > 0x10000) {
+        p->acceleration = -0x4000;
         return;
     }
-    if ((int)param_1[0x20] < -0x10000) {
-        param_1[0x22] = (void*)0x4000;
+    if (p->velocity < -0x10000) {
+        p->acceleration = 0x4000;
         return;
     }
-    param_1[0x22] = (void*)0;
-}
+    p->acceleration = 0;
 }

@@ -1,24 +1,19 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00433EC0.cpp
-// Historical source SHA256: 06c8524b6f36f093e317c9940e38f3dc38604bb3822678b53d065abc8f630a19
 extern "C" {
 extern int DAT_0045b5ec;
 extern int DAT_0045b5e8;
 extern int FUN_00464210;
-extern int FUN_00464214[];
-extern int FUN_004A2AD4;
+extern unsigned int FUN_00464214[];
+void __cdecl FUN_00441150(int *);
 
-extern "C" void __cdecl FUN_00441150(int *);
-
-extern "C" void __cdecl GEX_Target(int *param_1)
+void __cdecl GEX_Target(int *param_1)
 {
-    int iVar4;
+    int saved_30, saved_1e, saved_1f, saved_2f;
+    unsigned short local_array[31];
+    int index;
     unsigned int uVar3;
-    int saved_1e, saved_1f;
-    int saved_30, saved_2f;
-    unsigned short local_array[32];
-    int i;
+    unsigned int *dest;
+    int count;
 
-    
     local_array[0] = 0x801f;
     local_array[1] = 0x801d;
     local_array[2] = 0x801b;
@@ -49,38 +44,35 @@ extern "C" void __cdecl GEX_Target(int *param_1)
     local_array[27] = 0x8019;
     local_array[28] = 0x801b;
     local_array[29] = 0x801d;
-    local_array[30] = 0x801f;
-    local_array[31] = 0xffff;
+    local_array[30] = 0xffff;
 
     saved_1e = param_1[0x1e];
     saved_30 = param_1[0x30];
-    saved_2f = param_1[0x2f];
     saved_1f = param_1[0x1f];
-
+    saved_2f = param_1[0x2f];
     FUN_00441150(param_1);
 
-    uVar3 = *(unsigned int *)&local_array[DAT_0045b5ec] & 0xffff;
+    index = *(volatile int *)&DAT_0045b5ec;
+    uVar3 = local_array[index];
     if (uVar3 == 0xffff) {
         DAT_0045b5ec = 0;
         uVar3 = 0x801f;
     }
-
     FUN_00464210 = 0xffffff00;
-    for (i = 0; i < 16; i++) {
-        FUN_00464214[i] = uVar3 | (uVar3 << 16);
+    uVar3 |= uVar3 << 16;
+    dest = FUN_00464214;
+    for (count = 16; count != 0; --count) {
+        *dest++ = uVar3;
     }
-    *(unsigned short *)&FUN_00464214[0] = 0;
-
-    param_1[0x30] = (int)&FUN_00464214[0];
+    *(unsigned short *)FUN_00464214 = 0;
+    param_1[0x30] = (int)FUN_00464214;
     DAT_0045b5e8 = DAT_0045b5e8 - 1;
-    if (DAT_0045b5e8 < 1) {
+    if (DAT_0045b5e8 <= 0) {
         DAT_0045b5e8 = 3;
         DAT_0045b5ec = DAT_0045b5ec + 1;
     }
-
     param_1[0x2f] = 0x1f801f80;
     FUN_00441150(param_1);
-
     param_1[0x1e] = saved_1e;
     param_1[0x1f] = saved_1f;
     param_1[0x30] = saved_30;
