@@ -1,47 +1,52 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004097F0.cpp
-// Historical source SHA256: 23abcf4fd9f2488930f708701b289dd19658c60a0a386b580fbb710c8d5367f8
-extern "C" {
-extern "C" { extern unsigned char DAT_00455B38; }
-extern char* DAT_00455B40[];
-extern "C" { extern char DAT_0047EF30; }
-extern "C" { extern char DAT_0047EF6E; }
-extern "C" { extern char DAT_0047EF6F; }
-extern "C" int __cdecl FUN_00449AE0(int);
+extern "C" unsigned char DAT_00455B38;
+extern "C" char* DAT_00455B40[];
+extern "C" char DAT_0047EF30;
+extern "C" unsigned char DAT_0047EF6E;
+extern "C" unsigned char DAT_0047EF6F;
+extern "C" int __cdecl _tolower(int);
 
 extern "C" void __cdecl GEX_Target(char param_1)
 {
-    char* pcVar4;
-    char* pcVar6;
-    char* pcVar1;
+    char *pcVar1;
+    unsigned char uVar2;
+    unsigned char *puVar3;
+    char *pcVar4;
+    unsigned char *puVar5;
+    char *pcVar6;
     int iVar7;
-    unsigned int cheatIdx;
+    unsigned int cheatStringToTest;
 
+    puVar5 = &DAT_0047EF6F;
+    puVar3 = &DAT_0047EF6E;
     iVar7 = 0x3f;
     do {
-        *(&DAT_0047EF6F - (0x3f - iVar7)) = *(&DAT_0047EF6E - (0x3f - iVar7));
+        uVar2 = *puVar3;
+        puVar3 = puVar3 - 1;
+        *puVar5 = uVar2;
+        puVar5 = puVar5 - 1;
         iVar7 = iVar7 - 1;
     } while (iVar7 != 0);
-    iVar7 = FUN_00449AE0((int)param_1);
-    cheatIdx = 0;
+    iVar7 = _tolower((int)param_1);
+    cheatStringToTest = 0;
     DAT_00455B38 = 0xb;
     DAT_0047EF30 = (char)iVar7;
     do {
         pcVar4 = &DAT_0047EF30;
-        pcVar6 = DAT_00455B40[cheatIdx];
+        pcVar6 = DAT_00455B40[cheatStringToTest];
         if (*pcVar6 == '\0') {
-            DAT_00455B38 = (unsigned char)cheatIdx;
+            DAT_00455B38 = (unsigned char)cheatStringToTest;
         } else {
             do {
-                if (*pcVar6 != *pcVar4) break;
+                uVar2 = *(volatile unsigned char *)pcVar4;
+                if (uVar2 != (unsigned char)*pcVar6) break;
+                pcVar1 = pcVar6 + 1;
                 pcVar6 = pcVar6 + 1;
                 pcVar4 = pcVar4 + 1;
-            } while (*pcVar6 != '\0');
+            } while (*pcVar1 != '\0');
             if (*pcVar6 == '\0') {
-                DAT_00455B38 = (unsigned char)cheatIdx;
+                DAT_00455B38 = (unsigned char)cheatStringToTest;
             }
         }
-        cheatIdx = cheatIdx + 1;
-        if (cheatIdx > 10) return;
-    } while (1);
-}
+        cheatStringToTest = cheatStringToTest + 1;
+    } while (cheatStringToTest < 11);
 }

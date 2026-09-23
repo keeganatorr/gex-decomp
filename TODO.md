@@ -1,5 +1,12 @@
 # Gex decompilation
 
+## Done — GPT-6 Luna/max ten-function batch
+- [x] Refresh the real Pi model catalog; run one approved ten-function / ten-lane / eight-iteration batch, bounded to one pass and 30 minutes; drained Blocked after 17m 41s (`docs/luna6-ten-functions.md`)
+- [x] Publish four exact functions (`00433900`, `004212d0`, `004097f0`, `00430ea0`), +545 bytes → **752 exact / 63,353 bytes**; independently check new retained artifacts against pinned PE and preserve all 748 baseline proof/source identities
+- [x] Retain 71 model replies (64 compiler attempts, seven investigations), failed hypothesis families and two genuine compiler errors; no provider fallback, compiler/config/Ghidra edits or automatic budget renewal
+- [ ] Carry reviewed negative AH-load/scheduling evidence across related functions; require a new hypothesis rather than repeating byte-identical output families
+- [ ] Investigate terminal non-exact candidate projection: six deferred rows became Stubbed/null current match while historical best evidence survived; any restoration must use normal verification, never database status edits
+
 ## Done — bounded astra loop audit
 - [x] One approved 50-function / ten-lane astra-high pass, terminal LimitReached in 24m 50s: +38 proofs / +9,634 bytes → **740 exact / 61,108 bytes**; all 702 baseline proof/source identities preserved (`docs/astra-loop-audit.md`)
 - [x] Audit every emitted diagnostic class: 27 misleading labels; five reported compile rejections were four transport/session errors and one malformed Investigation reply, with no compilation

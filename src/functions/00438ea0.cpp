@@ -1,10 +1,8 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00438EA0.cpp
-// Historical source SHA256: 8c1767692984e9fe24aafbf27111855082a1fa3b3be9c12d786781ea306a7117
 extern "C" {
-extern "C" { extern int DAT_00455c54; }
-extern "C" void __cdecl FUN_00405390(const char*, ...);
+extern int DAT_00455c54;
+extern void __cdecl FUN_00405390(const char*, ...);
 
-extern "C" int __cdecl GEX_Target(void* param_1)
+int __cdecl GEX_Target(int param_1)
 {
     if ((*(unsigned char*)((char*)param_1 + 0xe1) & 0x10) != 0) {
         if (DAT_00455c54 > 1) {

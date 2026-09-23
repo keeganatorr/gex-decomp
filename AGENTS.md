@@ -11,6 +11,20 @@ Ghidra exports or compiled artifacts may be committed or published.
 
 ## Latest bounded campaign / loop audit
 
+Latest run: `docs/luna6-ten-functions.md`, `loop-f2cf827017ec5bb6a8f10f57`:
+GPT-6 Luna/max, ten closest eligible functions, eight reconstruction iterations
+plus investigation, ten lanes, one pass/30-minute ceiling. Finished **Blocked /
+drained** after 17m 41s, **4 exact / +545 bytes → 752 exact / 63,353 bytes**.
+All 748 pre-run proof/source identities preserved; zero active/queued work, no
+automatic Resume or renewal. Catalog refreshed with `pi update --models`; do not
+substitute GPT-5.6 or invent an alias. Retained local audit:
+`.work/luna6-ten-20260923/`. Successful declaration-order and typed-pointer repairs
+are compiler-specific, not recovered historical types. AH-load variants and
+`00431900` scheduling rewrites saturated identical resolved outputs: read the
+failure ledger before another run. Six deferred rows ended `Stubbed`/null current
+match; their historical best scores are NOT current proof. The Astra audit below
+is an earlier checkpoint, not the current count.
+
 `docs/astra-loop-audit.md` records `loop-934da8537fb606c616423ead`, one authorised
 50-function astra/high campaign with 10 lanes, terminal LimitReached at its first
 pass after 24m 50s. **740 exact / 61,108 bytes**, +38 / +9,634; all 702 baseline
