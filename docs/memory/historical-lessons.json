@@ -1,0 +1,102 @@
+{
+  "format": "pc-decomp-historical-lessons-v1",
+  "toolchainId": "vc40-cl-10.00.5270",
+  "source": {
+    "path": "docs/iterative-editedgex.md",
+    "blob": "ac4e18bf218dec3a4c974f90c755a650ce451afc",
+    "note": "Historical reported cases from the EditedGex iterative checkpoint. Importing them does not re-verify anything: each lesson stays historical-documented, and cited functions are linked only to what their retained artifacts establish today."
+  },
+  "lessons": [
+    {
+      "key": "gex-zero-fill-memset",
+      "title": "Small zero fill of consecutive words matched an inlined memset",
+      "summary": "The three-word mantissa clear matched a compiler-inlined memset(..., 0, 12). Three independent stores, a chained assignment and an explicit zero return did not match.",
+      "trigger": ["pattern:zero-fill", "mem:write:dword"],
+      "action": "Try memset(pointer, 0, exact byte count) over the stored range instead of separate stores or chained assignments.",
+      "expectedEffect": "xor of one register followed by consecutive dword stores through one base register, as in the target.",
+      "limits": "Byte count must equal the stored range. The observed function compiled as C with a /G3 per-function contract.",
+      "verification": "Strict relocated byte comparison of the whole function.",
+      "caveats": [
+        "No larger object or array semantics are claimed from the stored byte range.",
+        "Exact bytes do not establish that the original source used memset."
+      ],
+      "functions": ["0044c860"]
+    },
+    {
+      "key": "gex-rep-stos-memset",
+      "title": "rep stos over a fixed word count matched memset",
+      "summary": "The start-door routine matched memset over exactly 36 words, emitted as xor eax + mov ecx, 36 + rep stosd.",
+      "trigger": ["pattern:rep-stos"],
+      "action": "Try memset over the exact byte count (word count x 4) of the destination.",
+      "expectedEffect": "xor eax; mov edi, destination; mov ecx, count; rep stosd.",
+      "limits": "Observed under the baseline C++ contract. The count and destination come from the pinned bytes, not from a recovered declaration.",
+      "verification": "Strict relocated byte comparison of the whole function.",
+      "caveats": [
+        "No object layout is inferred for the destination.",
+        "Target-specific code generation; not a portability claim."
+      ],
+      "functions": ["0041a610"]
+    },
+    {
+      "key": "gex-wrapper-hidden-stack-argument",
+      "title": "A forwarding wrapper passed a stack argument its reference callee signature hides",
+      "summary": "SCRIPT_KillPlayer loads and forwards the SECOND stack argument, then returns the first. EditedGex's callee signature hides the unused argument, so copying its one-argument wrapper pseudocode was insufficient.",
+      "trigger": ["pattern:wrapper", "stackarg:8"],
+      "action": "Read which stack slot is loaded before the call and declare the callee with the forwarded parameter the bytes show, rather than the reference signature.",
+      "expectedEffect": "mov eax, [esp+8]; push eax; call; mov eax, [esp+8]; add esp, 4; ret.",
+      "limits": "Stack displacements shift after each push; compare the loaded slot, not the literal offset.",
+      "verification": "Strict relocated byte comparison, including the call relocation.",
+      "caveats": [
+        "The forwarded argument is an observation from the bytes, not a recovered API declaration.",
+        "Ghidra/EditedGex signatures are reference material."
+      ],
+      "functions": ["00419040"]
+    },
+    {
+      "key": "gex-arg-reader-g3-contract",
+      "title": "Pre-incremented argument readers matched under /G3, not /G5",
+      "summary": "The argument readers need a pre-incremented four-byte slot followed by a load from the previous slot. /G5 inserted an extra NOP in _get_int_arg; /G3 reproduced the original bytes. The short reader returns AX rather than a value assembled from the undefined upper half of EAX.",
+      "trigger": ["mem:rmw:dword", "stackarg:4", "pattern:leaf"],
+      "flags": ["/O2", "/G3", "/Oy", "/GR-"],
+      "action": "Increment the slot pointer first and read the previous slot; if bytes differ only by scheduling padding, a per-function /G3 contract is a candidate experiment that needs explicit approval.",
+      "expectedEffect": "No NOP between the increment and the previous-slot load.",
+      "limits": "Scoped contract observation for these readers. A flag override is a per-function compiler-contract change and is never applied automatically.",
+      "verification": "Strict relocated byte comparison under the approved per-function contract.",
+      "caveats": [
+        "Not permission to change global flags.",
+        "Exact bytes under /G3 do not prove the original compiler flags."
+      ],
+      "functions": ["0044c490", "0044c4c0"]
+    },
+    {
+      "key": "gex-opaque-pointer-forwarding",
+      "title": "Forwarding-only callbacks matched with opaque pointer parameters",
+      "summary": "The collision callbacks simply forward two pointers to a callee. An opaque pointer was sufficient; inventing an object layout for these wrappers added no evidence.",
+      "trigger": ["pattern:wrapper", "stackargs:2"],
+      "action": "Declare the forwarded parameters as opaque pointers (void *) and pass them through unchanged.",
+      "expectedEffect": "Two stack loads, two pushes, one call, caller cleanup of 8 bytes.",
+      "limits": "Only for code that forwards without dereferencing.",
+      "verification": "Strict relocated byte comparison, including the call relocation.",
+      "caveats": [
+        "No GXObject or other object layout was inferred or proven."
+      ],
+      "functions": ["0043abc0", "0043b900"]
+    },
+    {
+      "key": "gex-register-allocation-variant-families",
+      "title": "Language, flag and reference-parameter variants did not remove a register-allocation mismatch",
+      "summary": "For the byte-assembly readers, C mode, /G3 and C++ reference-parameter variants did not remove the ECX/EDX allocation mismatch. For 0041fba0, C and /G3 variants did not improve the comparison at that checkpoint.",
+      "polarity": "negative",
+      "trigger": ["shape:register-rename"],
+      "action": "Do not retry these variant families without a new hypothesis or a changed compiler/binding basis; look for a structural source difference instead.",
+      "expectedEffect": "Identical resolved output when only these variants change.",
+      "limits": "Scoped to these functions under the contracts recorded at the time. Not a claim that these variants never work elsewhere.",
+      "verification": "Compare resolved output identities across candidates under the same basis.",
+      "caveats": [
+        "0041fba0 was later proved exact by a different change; the negative result concerns only the variants listed.",
+        "A changed basis (compiler, binding or target) makes a retest new information."
+      ],
+      "functions": ["00417f00", "00417f40", "0041fba0"]
+    }
+  ]
+}

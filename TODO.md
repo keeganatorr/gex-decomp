@@ -1,5 +1,10 @@
 # Gex decompilation
 
+## Project memory (pc-decomp schema 7) — prepared, not activated
+- [x] Curated historical lesson manifest with caveats and cited functions (`docs/memory/historical-lessons.json`, `docs/memory/README.md`)
+- [x] Read-only bootstrap dry run on a snapshot copy: 752 proofs reconciled, 115 saturated families, 6 lessons, idempotent, no compile; live project untouched
+- [ ] Operator activation: schema-7 backend + restarted Nexus host, then explicit `schemaVersion: 7` here and `memory.bootstrap`; any new single-model campaign needs fresh scope/budget approval
+
 ## Done — GPT-6 Luna/max ten-function batch
 - [x] Refresh the real Pi model catalog; run one approved ten-function / ten-lane / eight-iteration batch, bounded to one pass and 30 minutes; drained Blocked after 17m 41s (`docs/luna6-ten-functions.md`)
 - [x] Publish four exact functions (`00433900`, `004212d0`, `004097f0`, `00430ea0`), +545 bytes → **752 exact / 63,353 bytes**; independently check new retained artifacts against pinned PE and preserve all 748 baseline proof/source identities
