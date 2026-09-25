@@ -1,37 +1,42 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041A680.cpp
-// Historical source SHA256: d1f0a8ae162ea0d52d78ef2db958f84ae8def64fd95f31e9a88081a2c6ca3a20
 extern "C" {
-extern "C" { extern unsigned int DAT_004A2660[]; }
-extern "C" { extern unsigned int DAT_004A2678; }
+extern unsigned int DAT_004A2660[];
+extern unsigned int DAT_004A2678;
 
-extern "C" unsigned int __cdecl GEX_Target()
+unsigned int __cdecl GEX_Target(void)
 {
-    int index = 0;
-    unsigned int* ptr = DAT_004A2660;
+    unsigned int uVar1;
+    unsigned int uVar2;
+    int iVar3;
+    unsigned int *puVar4;
 
+    iVar3 = 0;
+    puVar4 = DAT_004A2660;
     while (1) {
-        unsigned int val = *ptr;
-        unsigned int low_byte = val & 0xff;
-        if (low_byte != 4 && low_byte != 3) {
-            DAT_004A2660[index] = 4;
-            return val;
-        }
-        ptr = ptr + 1;
-        index = index + 1;
-        if (ptr >= &DAT_004A2678) {
-            index = 0;
-            ptr = DAT_004A2660;
+        uVar1 = *puVar4;
+        uVar2 = uVar1 & 0xff;
+        if (uVar2 != 4 && uVar2 != 3)
+            break;
+        puVar4 = puVar4 + 1;
+        iVar3 = iVar3 + 1;
+        if (puVar4 >= &DAT_004A2678) {
+            int j;
+            unsigned int *q;
+
+            j = 0;
+            q = DAT_004A2660;
             do {
-                val = *ptr;
-                if ((unsigned char)val == 3) {
-                    DAT_004A2660[index] = 4;
-                    return val;
+                uVar1 = *q;
+                if ((unsigned char)uVar1 == 3) {
+                    DAT_004A2660[j] = 4;
+                    return uVar1;
                 }
-                ptr = ptr + 1;
-                index = index + 1;
-            } while (ptr < &DAT_004A2678);
+                q = q + 1;
+                j = j + 1;
+            } while (q < &DAT_004A2678);
             return 4;
         }
     }
+    DAT_004A2660[iVar3] = 4;
+    return uVar1;
 }
 }

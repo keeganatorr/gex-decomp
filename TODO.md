@@ -1,5 +1,11 @@
 # Gex decompilation
 
+## Done — twenty closest functions, DeepSeek V4.1 Flash/max (Stopped)
+- [x] One approved 30-minute run, ten lanes, 600 s turns: 51 jobs, no exact gain, 752 exact / 63,353 bytes preserved, no working-source regression (`docs/deepseek-twenty-current.md`)
+- [x] Fix the lease mismatch: a reply the host did not keep now starts a fresh conversation instead of pausing the campaign; no per-reply limit under a function budget; `fullFunctionTime`; Ghidra outages pause instead of blocking; cut-off replies diagnosed (`../pc-decomp/docs/function-time.md`)
+- [x] Activated `function-time-b3b4984fd40aa68a` while idle (752 exact / 63,353 bytes preserved; DB backup and prior launch config in `.work/function-time-activation-20260925/`); `extension-services.json` launch and `.work/backend-current` now name it
+- [ ] Next run: set a per-function time budget with full function time and size `maxSeconds` for every function (Start refuses a run that cannot give each function its whole budget); DeepSeek's 131,072 output-token cap remains the model's own limit at max reasoning
+
 ## Project memory (pc-decomp schema 7) — prepared, not activated
 - [x] Curated historical lesson manifest with caveats and cited functions (`docs/memory/historical-lessons.json`, `docs/memory/README.md`)
 - [x] Read-only bootstrap dry run on a snapshot copy: 752 proofs reconciled, 115 saturated families, 6 lessons, idempotent, no compile; live project untouched

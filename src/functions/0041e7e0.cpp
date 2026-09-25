@@ -1,5 +1,3 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041E7E0.cpp
-// Historical source SHA256: a2648115d7ccdea37c85583d2991126f29f92b5b08463a0ec3e8d7ed26d32a41
 extern "C" {
 extern "C" { extern int DAT_004595E8; }
 extern "C" { extern int DAT_00459604; }
@@ -30,7 +28,8 @@ extern "C" void __cdecl GEX_Target(void** objectType, int* func1, int* func2, in
         objectType[0x5a] = (void*)func1;
         objectType[0x5b] = (void*)func3;
         objectType[0x60] = CollisionObjects;
-        objectType[0x1b] = (void*)(((unsigned int)objectType[0x1b] & 0xfffff0ff) | ((int)func2 << 8));
+        unsigned int mask = (unsigned int)objectType[0x1b] & 0xfffff0ff;
+        objectType[0x1b] = (void*)(mask | ((unsigned int)((int)func2 << 8)));
         FUN_0042CC00((void**)&DAT_00463680, (void**)CollisionObjects);
     }
 }

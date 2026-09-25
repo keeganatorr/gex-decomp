@@ -16,7 +16,7 @@ extern "C" void __cdecl GEX_Target(void** param_1)
     FUN_00420BC0(param_1);
     param_1[0x1c] = (void*)0x47;
     param_1[0x14] = (void*)0x4e;
-    uVar2 = ((unsigned int)param_1[0x1b] & 0x80000000) >> 0x1c | (int)param_1[0x31] >> 0x15;
+    uVar2 = ((((unsigned int)param_1[0x1b]) >> 0x1c) & 8) | ((int)param_1[0x31] >> 0x15);
     param_1[0x26] = (void*)0;
     param_1[0x27] = (void*)0;
     param_1[0x15] = (void*)0;

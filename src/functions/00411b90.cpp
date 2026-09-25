@@ -7,11 +7,6 @@ extern int DAT_0045814C;
 extern void __cdecl FUN_00420BC0(void**);
 extern void __cdecl FUN_00411A90(void**);
 
-struct GXFlags {
-    unsigned int pad : 31;
-    unsigned int bit31 : 1;
-};
-
 void __cdecl GEX_Target(void** param_1)
 {
     unsigned int uVar1;
@@ -21,7 +16,7 @@ void __cdecl GEX_Target(void** param_1)
     FUN_00420BC0(param_1);
     param_1[0x1c] = (void*)0x3e;
     param_1[0x14] = (void*)0x4f;
-    uVar1 = (((GXFlags*)((char*)param_1 + 0x6c))->bit31 << 3) | ((int)param_1[0x31] >> 0x15);
+    uVar1 = (((unsigned int)param_1[0x1b] >> 0x1c) & 8) | ((int)param_1[0x31] >> 0x15);
     param_1[0x26] = 0;
     param_1[0x15] = 0;
     pGVar2 = (unsigned int)param_1[0x1e];

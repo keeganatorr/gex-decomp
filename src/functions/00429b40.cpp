@@ -1,6 +1,31 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00429B40.cpp
-// Historical source SHA256: 4b4042e795b7d419bf262be13b5d4bc7753925573647407e82bc06d7a9bf177c
 extern "C" {
-extern "C" { extern void** FUN_00458508; }
-extern "C" void** __cdecl GEX_Target(int lev) { void** p = FUN_00458508; while (p) { if ((int)p[0x2] == 0x54 && (int)p[0x2b] == lev) return p; p = (void**)p[0x56]; } return 0; }
+
+struct GXObject {
+    GXObject *nd_next;
+    GXObject *nd_prev;
+    int gob_type;
+    char pad[0x9c - 0xc];
+    int gob_work1;
+};
+
+extern GXObject *ListType_ARRAY_004a28a0[];
+extern GXObject *DAT_004a2918_LevelObjectsListEnd;
+
+GXObject * __cdecl GEX_Target(int SelectedTV)
+{
+    GXObject *gOb_CurrentObject;
+    GXObject ***gOb_List;
+    gOb_List = (GXObject ***)&ListType_ARRAY_004a28a0;
+    do {
+        gOb_CurrentObject = (GXObject *)*gOb_List;
+        while (gOb_CurrentObject->nd_next) {
+            if (gOb_CurrentObject->gob_type == 0xdc && gOb_CurrentObject->gob_work1 == SelectedTV)
+                return gOb_CurrentObject;
+            gOb_CurrentObject = gOb_CurrentObject->nd_next;
+        }
+        gOb_List = gOb_List + 3;
+    } while ((GXObject **)gOb_List < &DAT_004a2918_LevelObjectsListEnd);
+    return 0;
+}
+
 }
