@@ -1,34 +1,34 @@
-typedef unsigned int uint;
-typedef unsigned int undefined4;
 extern "C" {
-undefined4 __cdecl GEX_Target(int param_1,int param_2,int param_3,int param_4)
+int __cdecl abs(int);
 
+int __cdecl GEX_Target(int param_1, int param_2, int param_3, int param_4)
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  
-  uVar4 = param_3 - param_1;
-  uVar3 = param_4 - param_2;
-  iVar1 = (uVar4 ^ (int)uVar4 >> 0x1f) - ((int)uVar4 >> 0x1f);
-  iVar2 = (uVar3 ^ (int)uVar3 >> 0x1f) - ((int)uVar3 >> 0x1f);
-  uVar4 = (uint)(0 < (int)uVar4);
-  if (0 < (int)uVar3) {
-    uVar4 = uVar4 | 2;
-  }
-  if (iVar2 < iVar1) {
-    uVar3 = uVar4 | 4;
-    if (iVar2 < iVar1 >> 1) {
-      return *(undefined4 *)((uVar4 | 0xc) * 4 + 0x45ab68);
+    int dx;
+    unsigned int flags = 0;
+    int dy;
+    int adx, ady;
+
+    dx = param_3 - param_1;
+    dy = param_4 - param_2;
+    adx = abs(dx);
+    ady = abs(dy);
+
+    if (dx > 0)
+        flags = 1;
+    if (dy > 0)
+        flags |= 2;
+
+    if (adx > ady) {
+        flags |= 4;
+        if ((adx >> 1) > ady) {
+            flags |= 8;
+            return ((int *)0x45ab68)[flags];
+        }
+    } else {
+        if ((ady >> 1) > adx)
+            flags |= 8;
     }
-  }
-  else {
-    uVar3 = uVar4;
-    if (iVar1 < iVar2 >> 1) {
-      uVar3 = uVar4 | 8;
-    }
-  }
-  return *(undefined4 *)(uVar3 * 4 + 0x45ab68);
+
+    return ((int *)0x45ab68)[flags];
 }
 }

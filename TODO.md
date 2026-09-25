@@ -5,6 +5,20 @@
 - [x] Read-only bootstrap dry run on a snapshot copy: 752 proofs reconciled, 115 saturated families, 6 lessons, idempotent, no compile; live project untouched
 - [ ] Operator activation: schema-7 backend + restarted Nexus host, then explicit `schemaVersion: 7` here and `memory.bootstrap`; any new single-model campaign needs fresh scope/budget approval
 
+## Done — ten live-current source-present Luna/max targets (Stopped)
+- [x] One approved GPT-6 Luna/max campaign: six lanes, at most eight iterations/function, 180 s/turn, one pass, original 30-minute wall deadline; Stopped after one safety Pause/one manual Resume and a second persistent-session loss (`docs/luna6-ten-current.md`)
+- [x] Protect the pre-loop best retained candidate's actual source, not just scores gained during a run; test legacy regression and current-basis different-source restoration, activate immutable repaired backend; preserve all **752 exact / 63,353 bytes** proofs
+- [x] Audit 24 jobs (12 byte mismatches, six MissingEvidence, one investigation, five transport/lease failures), zero exact gains; one of ten targets was not reached; Stop without automatic replay or renewal
+- [ ] Diagnose recurring persistent-session loss/expired leases and compiler deadline failures before authorizing another paid campaign; do not misclassify transport problems as source defects
+- [ ] Review retained-candidate match projections for source-less `0043a7c0` and post-missing-evidence null scores; never silently call a historical candidate current working source
+- [ ] Obtain fresh scope/budget approval for any further model work; fix `scripts/audit-current` pinned-symbol-index resolution if an independent whole-proof COFF audit is needed
+
+## Done — six-function Luna/max follow-up (Stopped)
+- [x] One approved six-target follow-up, 4 iterations/function, 6 lanes, 180 s/turn, 20 min overall; safety Pause and one manual Resume, then operator Stop after 16 jobs/357 s with no new exact proofs (`docs/luna6-six-followup.md`)
+- [x] Preserve 752 exact / 63,353 bytes and all existing proof/source identities; stage tested best-working-source backend without starting another campaign
+- [ ] Obtain new scope/budget approval before any further model requests; the stopped campaign cannot be resumed or auto-renewed
+- [ ] Repair independent `scripts/audit-current` relocation resolution for pinned symbol index `_PTR_ARRAY_00457c48` before calling it a full COFF proof regeneration
+
 ## Done — GPT-6 Luna/max ten-function batch
 - [x] Refresh the real Pi model catalog; run one approved ten-function / ten-lane / eight-iteration batch, bounded to one pass and 30 minutes; drained Blocked after 17m 41s (`docs/luna6-ten-functions.md`)
 - [x] Publish four exact functions (`00433900`, `004212d0`, `004097f0`, `00430ea0`), +545 bytes → **752 exact / 63,353 bytes**; independently check new retained artifacts against pinned PE and preserve all 748 baseline proof/source identities

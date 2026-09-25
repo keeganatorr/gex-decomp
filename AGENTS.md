@@ -11,7 +11,37 @@ Ghidra exports or compiled artifacts may be committed or published.
 
 ## Latest bounded campaign / loop audit
 
-Latest run: `docs/luna6-ten-functions.md`, `loop-f2cf827017ec5bb6a8f10f57`:
+Latest run: `docs/luna6-ten-current.md`, `loop-f0e3a9aab41bc12ca468d408`:
+ten highest **live-current, source-present** eligible targets, GPT-6 Luna/max,
+six lanes, eight iterations/function, 180 s/turn, one original 30-minute wall
+cap. **Stopped** after 24 jobs, no exact gains: **752 exact / 63,353 bytes**.
+One safety Pause/one manually authorized Resume after repairing pre-loop
+retained-candidate source selection, then a persistent-session loss and no
+further Resume; a wall guard stopped it before deadline. The repaired backend
+`source-baseline-1f599aca2c3698b2` validates retained source/object/original/
+resolved artifacts and current compiler/binding basis before materializing a
+best candidate as working source. Raw SQLite `matchPercent` was stale: select
+from the live service projection. `0043a7c0` had a high retained-candidate
+score but no source file and was explicitly skipped. The tenth selected function
+`0042a5d0` received zero turns. No new campaign is authorized; the 752 old
+proofs and all unscoped source hashes survived the read-only audit. See the doc
+for transport/lease failures and receipts.
+
+Previous six-target run: `docs/luna6-six-followup.md`, `loop-cd88ad6a12dd209debb32805`:
+Luna/max on only the six unresolved targets. Paused on persistent-session loss,
+manually resumed once within the approved limits, then **Stopped** after the
+operator noticed lower-scoring working sources were replacing best candidates:
+16 jobs, 357 s, no exact gain, **752 exact / 63,353 bytes**. No automatic restart.
+The tested immutable backend `best-source-89d55c5fc2200272` is now serving;
+it restores a *verified* retained best source before a future authorized dispatch
+and will not pretend a historical score is a live proof. The current Gex source
+files still reflect the Stopped run; deployment alone did not restore them.
+Gex's `scripts/audit-current` currently fails on pinned-index symbol
+`_PTR_ARRAY_00457c48`; the read-only follow-up baseline checks retained proof
+and artifact hashes against the pinned PE, not independent COFF regeneration.
+Another campaign requires fresh explicit scope/budget approval.
+
+Previous ten-function run: `docs/luna6-ten-functions.md`, `loop-f2cf827017ec5bb6a8f10f57`:
 GPT-6 Luna/max, ten closest eligible functions, eight reconstruction iterations
 plus investigation, ten lanes, one pass/30-minute ceiling. Finished **Blocked /
 drained** after 17m 41s, **4 exact / +545 bytes → 752 exact / 63,353 bytes**.
