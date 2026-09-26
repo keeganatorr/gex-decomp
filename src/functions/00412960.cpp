@@ -1,36 +1,58 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00412960.cpp
-// Historical source SHA256: 89651ab742b95b139395ff5f3b0b9022420d8133da2e3de4d40d5470a06d6ba7
+typedef struct GXObject {
+    unsigned char _pad0[0x50];
+    int gob_currentFrameGroup;  /* 0x50 */
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad58[0x6c - 0x58];
+    unsigned int gob_flags;     /* 0x6c */
+    int gob_state;              /* 0x70 */
+    unsigned char _pad74[0x98 - 0x74];
+    int gob_work0;              /* 0x98 */
+    unsigned char _pad9c[0xa0 - 0x9c];
+    int gob_work2;              /* 0xa0 */
+    unsigned char _pada4[0xc4 - 0xa4];
+    int gob_angle;              /* 0xc4 */
+} GXObject;
+typedef struct BUTTON_RECORD {
+    unsigned char buttonLeft, buttonRight, buttonUp, buttonDown;
+    unsigned char buttonA, buttonB, buttonC, buttonX, buttonL, buttonR, buttonStart;
+    unsigned char unkB[4];
+} BUTTON_RECORD;
+typedef struct GXInputRecord {
+    BUTTON_RECORD gxir_padButtons;        /* 0x0 */
+    BUTTON_RECORD gxir_padJustOnButtons;  /* 0xf */
+    unsigned char _pad1e[2];
+    unsigned int gxir_dValue;             /* 0x20 */
+} GXInputRecord;
 extern "C" {
-extern "C" { extern int DAT_004A02A0; }
-extern "C" { extern int DAT_00458758; }
-extern "C" void __cdecl FUN_00420BC0(void**);
-extern "C" void __cdecl FUN_00413050(void**);
-extern "C" void __cdecl FUN_00412880(void**);
-
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern GXInputRecord gInputControllers_004a0280[];
+extern unsigned int DAT_00458758[];
+void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
+void __cdecl InitPlayerSideTongueLash90_00413050(GXObject *gex);
+void __cdecl PlayerSideTongueLash_00412880(GXObject *gex);
+void __cdecl GEX_Target(GXObject *gex)
 {
-    unsigned int uVar1;
-    int iVar2;
-    unsigned int uVar3;
-
-    iVar2 = DAT_004A02A0;
-    uVar1 = *(unsigned int*)((int)&DAT_00458758 + ((((unsigned int)param_1[0x1b] & 0x80000000) >> 0x1c) << 2 | (unsigned int)((unsigned int)param_1[0x31] & 0xffe7ffff) >> 0x13));
-    FUN_00420BC0(param_1);
-    if (iVar2 != 0) {
-        uVar3 = 0;
-        if (iVar2 != 0) {
-            uVar3 = ((iVar2 + 3) & 7) + 1;
-        }
-        if (((uVar1 == uVar3) || ((uVar1 & 7) + 1 == uVar3)) || (((uVar1 - 2) & 7) + 1 == uVar3)) {
-            FUN_00413050(param_1);
+    unsigned int pad;
+    unsigned int dir;
+    unsigned int next;
+    unsigned int prev;
+    pad = gInputControllers_004a0280[0].gxir_dValue;
+    dir = DAT_00458758[(gex->gob_flags & 0x80000000 ? 8 : 0) | gex->gob_angle >> 21];
+    GOB_ResetState_00420bc0(gex);
+    if (pad) {
+        next = (dir & 7) + 1;
+        prev = (dir - 2 & 7) + 1;
+        if (pad)
+            pad = (pad + 3 & 7) + 1;
+        if (dir == pad || next == pad || prev == pad) {
+            InitPlayerSideTongueLash90_00413050(gex);
             return;
         }
     }
-    param_1[0x15] = (void*)0x0;
-    param_1[0x26] = (void*)0x0;
-    param_1[0x1c] = (void*)0x3a;
-    param_1[0x14] = (void*)0x4a;
-    param_1[0x28] = (void*)0x0;
-    FUN_00412880(param_1);
+    gex->gob_currentFrameIndex = 0;
+    gex->gob_work0 = 0;
+    gex->gob_state = 0x3a;
+    gex->gob_currentFrameGroup = 0x4a;
+    gex->gob_work2 = 0;
+    PlayerSideTongueLash_00412880(gex);
 }
 }

@@ -149,6 +149,25 @@
         "/Oy",
         "/GR-"
       ]
+    },
+    "004050e0": {
+      "targetSymbol": "_GEX_Target@4"
+    },
+    "004053a0": {
+      "language": "c"
+    },
+    "00434080": {
+      "language": "c"
+    },
+    "00404ab0": {
+      "targetSymbol": "_GEX_Target@20",
+      "language": "c"
+    },
+    "00444410": {
+      "language": "c"
+    },
+    "00430990": {
+      "language": "c"
     }
   },
   "symbolBindings": {
@@ -2278,7 +2297,17 @@
     "__imp__wvsprintfA@12": "004a5644",
     "_DAT_00487768_ScreenWidth": "00487768",
     "_gSFXTable_0049fb54": "0049fb54",
-    "_FUN_0040FE80": "0040fe80"
+    "_FUN_0040FE80": "0040fe80",
+    "_DAT_0045ffe8": "0045ffe8",
+    "_DAT_00458c88": "00458c88",
+    "_LAB_00431820": "00431820",
+    "_DAT_0045acc0": "0045acc0",
+    "_DAT_004a2b20": "004a2b20",
+    "_READ_REQUEST_2_ARRAY_00462740": "00462740",
+    "_DAT_0045b0b0": "0045b0b0",
+    "_DAT_0045aa10": "0045aa10",
+    "_DAT_0045a890": "0045a890",
+    "_DAT_0045a950": "0045a950"
   },
   "policy": {
     "autonomousAgents": false,

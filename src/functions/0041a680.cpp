@@ -1,42 +1,33 @@
 extern "C" {
-extern unsigned int DAT_004A2660[];
-extern unsigned int DAT_004A2678;
-
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern unsigned int gCollectibles_004a2660[6];
 unsigned int __cdecl GEX_Target(void)
 {
-    unsigned int uVar1;
-    unsigned int uVar2;
-    int iVar3;
-    unsigned int *puVar4;
-
-    iVar3 = 0;
-    puVar4 = DAT_004A2660;
-    while (1) {
-        uVar1 = *puVar4;
-        uVar2 = uVar1 & 0xff;
-        if (uVar2 != 4 && uVar2 != 3)
-            break;
-        puVar4 = puVar4 + 1;
-        iVar3 = iVar3 + 1;
-        if (puVar4 >= &DAT_004A2678) {
-            int j;
-            unsigned int *q;
-
-            j = 0;
-            q = DAT_004A2660;
-            do {
-                uVar1 = *q;
-                if ((unsigned char)uVar1 == 3) {
-                    DAT_004A2660[j] = 4;
-                    return uVar1;
-                }
-                q = q + 1;
-                j = j + 1;
-            } while (q < &DAT_004A2678);
-            return 4;
+    int i;
+    unsigned int v;
+    for (i = 0; i < 6; i++) {
+        v = gCollectibles_004a2660[i];
+        if ((v & 0xff) != 4 && (v & 0xff) != 3) {
+            gCollectibles_004a2660[i] = 4;
+            return v;
         }
     }
-    DAT_004A2660[iVar3] = 4;
-    return uVar1;
+    for (i = 0; i < 6; i++) {
+        v = gCollectibles_004a2660[i];
+        if ((unsigned char)v == 3) {
+            gCollectibles_004a2660[i] = 4;
+            return v;
+        }
+    }
+    return 4;
 }
 }

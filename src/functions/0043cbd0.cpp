@@ -1,30 +1,47 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0043CBD0.cpp
-// Historical source SHA256: b693ca873344c756cd7d12bbdc39cdfe5e52fe73f6918b8b9f4cbbd3ef03c685
+// Field names from Ghidra's GXObject/GXHitArea layouts (evidence, not proof).
+typedef struct GXHitArea { int gxha_left; int gxha_top; int gxha_right; int gxha_bottom; } GXHitArea;
+typedef struct GXObject {
+    unsigned char _pad0[0x54];
+    int gob_currentFrameIndex;         /* 0x54 */
+    unsigned char _pad58[0x14];
+    unsigned int gob_flags;            /* 0x6c */
+    unsigned char _pad70[0x2c];
+    int gob_work1;                     /* 0x9c */
+    unsigned char _padA0[0x18];
+    int gob_flashTime;                 /* 0xb8 */
+    unsigned char _padBC[0xb4];
+    GXHitArea *gob_phaClid;            /* 0x170 */
+    GXHitArea *gob_phaClidWith;        /* 0x174 */
+    struct GXObject *gob_pgobClidWith; /* 0x178 */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_00417B70();
-extern "C" void __cdecl FUN_0041A340(void*, int);
-extern "C" { extern int DAT_004a023c; }
-extern "C" { extern void* FUN_00464E14; }
-extern "C" void __cdecl GEX_Target(void** param1, int* param2) {
-    if (*param2 == 0) return;
-    if ((int)param1[0x2e] > 0) return;
-    if ((int)param1[0x27] < 0x11) return;
-    if ((int)param1[0x27] > 0x6f) return;
-    unsigned short uVar3 = (unsigned short)((int*)param1[0x5c])[1];
-    unsigned short uVar2 = (unsigned short)((int*)param1[0x5d])[1];
-    unsigned int uVar1 = ((unsigned int)param1[0x5e] >> 8) & 0xf;
-    if (uVar1 == 2) {
-        if (DAT_004a023c == 0) {
-            if (uVar2 == uVar3 || uVar3 == 1) { FUN_00417B70(); return; }
-            goto check;
-        }
-        goto check2;
-    } else {
-check:
-        if (DAT_004a023c != 0) goto check2;
+extern int DAT_004a023c_PowerUp_Invincibility;
+extern void *PTR_00464e14;
+void __cdecl PlayerDamage_00417b70(GXObject *gob);
+void __cdecl SND_PlaySound_0041a340(void *sound, int id);
+void __cdecl GEX_Target(GXObject *gob, int *event)
+{
+    unsigned int mine;
+    unsigned int theirs;
+    unsigned int kind;
+    if (!*event)
+        return;
+    if (gob->gob_flashTime > 0)
+        return;
+    if (gob->gob_work1 <= 0x10 || gob->gob_work1 >= 0x70)
+        return;
+    mine = gob->gob_phaClid->gxha_left & 0xffff;
+    theirs = gob->gob_phaClidWith->gxha_left & 0xffff;
+    kind = (gob->gob_pgobClidWith->gob_flags & 0xf00) >> 8;
+    if (kind == 2 && !DAT_004a023c_PowerUp_Invincibility && (theirs == mine || mine == 1)) {
+        PlayerDamage_00417b70(gob);
+        return;
     }
-    if (uVar3 != 2 && uVar2 != 1) return;
-check2:
-    if (uVar2 != 3) { FUN_0041A340(FUN_00464E14, 0x115); param1[0x15] = 0; }
+    if ((DAT_004a023c_PowerUp_Invincibility && kind == 2) || mine == 2 || theirs == 1) {
+        if (theirs != 3) {
+            SND_PlaySound_0041a340(PTR_00464e14, 0x115);
+            gob->gob_currentFrameIndex = 0;
+        }
+    }
 }
 }

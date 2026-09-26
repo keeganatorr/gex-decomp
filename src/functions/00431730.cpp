@@ -1,24 +1,52 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00431730.cpp
-// Historical source SHA256: feb0ce26cad3bff8a5237d234d6ca6e668c34b2ee17e8cc97355959fbf7e5cae
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern "C" int decl_pad_0;
+extern "C" int decl_pad_1;
+extern "C" int decl_pad_2;
+extern "C" int decl_pad_3;
+extern "C" int decl_pad_4;
+extern "C" int decl_pad_5;
+extern "C" int decl_pad_6;
+extern "C" int decl_pad_7;
+extern "C" int decl_pad_8;
+extern "C" int decl_pad_9;
+extern "C" int decl_pad_10;
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x78];
+    int gob_xpos;                 /* 0x78 */
+    int gob_ypos;                 /* 0x7c */
+    unsigned char _pad80[0xdc];
+    struct GXObject *gob_parent;  /* 0x15c */
+    unsigned char _pad160[0x98];
+    int gob_last_x;               /* 0x1f8 */
+    int gob_last_y;               /* 0x1fc */
+} GXObject;
 extern "C" {
-extern "C" int __cdecl GEX_Target(void** param_1)
+void __cdecl GEX_Target(GXObject *gob)
 {
-    int iVar3 = 0;
-    void* pGVar2 = param_1[0x57];
-    if (pGVar2 != 0) {
-        int iVar4 = 0;
-        void* pGVar1 = *(void**)((int)pGVar2 + 0x15c);
-        while (pGVar1 != 0) {
-            iVar3 = iVar3 + *(int*)((int)pGVar2 + 0x78);
-            iVar4 = iVar4 + *(int*)((int)pGVar2 + 0x7c);
-            pGVar2 = *(void**)((int)pGVar2 + 0x15c);
-            pGVar1 = *(void**)((int)pGVar2 + 0x15c);
+    GXObject *parent;
+    int dx;
+    int dy;
+    int x;
+    int y;
+    dx = 0;
+    parent = gob->gob_parent;
+    if (parent) {
+        dy = 0;
+        x = gob->gob_xpos;
+        y = gob->gob_ypos;
+        while (parent->gob_parent) {
+            dx += parent->gob_xpos;
+            dy += parent->gob_ypos;
+            parent = parent->gob_parent;
         }
-        param_1[0x1e] = (void*)((int)param_1[0x1e] + iVar3 + *(int*)((int)pGVar2 + 0x78) - 0x1c);
-        param_1[0x7e] = param_1[0x1e];
-        param_1[0x1f] = (void*)((int)param_1[0x1f] + iVar4 + *(int*)((int)pGVar2 + 0x7c) - 0x1c);
-        param_1[0x7f] = param_1[0x1f];
+        gob->gob_xpos = x + parent->gob_xpos + dx;
+        gob->gob_last_x = gob->gob_xpos;
+        gob->gob_ypos = y + parent->gob_ypos + dy;
+        gob->gob_last_y = gob->gob_ypos;
     }
-    return 0;
 }
 }

@@ -1,32 +1,43 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041D010.cpp
-// Historical source SHA256: 796729bb21cc477f1bc6302192c6281ea066dc7e002fb4661803b79a12260a7a
+// Field names from Ghidra's GXObject/GXHitArea layouts (evidence, not proof).
+typedef struct GXHitArea { int gxha_left; int gxha_top; int gxha_right; int gxha_bottom; } GXHitArea;
+typedef struct GXObject {
+    unsigned char _pad0[0x6c];
+    unsigned int gob_flags;  /* 0x6c */
+    unsigned char _pad70[8];
+    int gob_xpos;            /* 0x78 */
+    int gob_ypos;            /* 0x7c */
+    unsigned char _pad80[0x48];
+    int gob_xScale;          /* 0xc8 */
+    int gob_yScale;          /* 0xcc */
+} GXObject;
+typedef struct AnglePoint { int x; int y; } AnglePoint;
+typedef struct AnglePoints { int unk0; AnglePoint points[4]; } AnglePoints;
 extern "C" {
-extern "C" void __cdecl FUN_0041CC70(int*, int, int, int, int, unsigned int, int, int);
-extern "C" void __cdecl GEX_Target(int param1, int* param2, int param3, int param4, unsigned int param5, int param6) {
-    int iVar1;
-    if ((*(unsigned int*)(param1 + 0x6c) & 0x80000000) == 0) {
-        *(int*)(param6 + 4) = param2[0];
-        *(int*)(param6 + 0xc) = param2[2];
-        *(int*)(param6 + 0x14) = param2[2];
-        iVar1 = param2[0];
+void __cdecl CLD_ApplyAngleToPoints_0041cc70(AnglePoints *points, int x, int y, int a, int b, unsigned int angle, int xScale, int yScale);
+void __cdecl GEX_Target(GXObject *gob, GXHitArea *area, int a, int b, unsigned int angle, AnglePoints *points)
+{
+    if (gob->gob_flags & 0x80000000) {
+        points->points[0].x = -area->gxha_right;
+        points->points[1].x = -area->gxha_left;
+        points->points[2].x = -area->gxha_left;
+        points->points[3].x = -area->gxha_right;
     } else {
-        *(int*)(param6 + 4) = -param2[2];
-        *(int*)(param6 + 0xc) = -param2[0];
-        *(int*)(param6 + 0x14) = -param2[0];
-        iVar1 = -param2[2];
+        points->points[0].x = area->gxha_left;
+        points->points[1].x = area->gxha_right;
+        points->points[2].x = area->gxha_right;
+        points->points[3].x = area->gxha_left;
     }
-    *(int*)(param6 + 0x1c) = iVar1;
-    if ((*(unsigned int*)(param1 + 0x6c) & 0x40000000) == 0) {
-        *(int*)(param6 + 8) = param2[1];
-        *(int*)(param6 + 0x10) = param2[1];
-        *(int*)(param6 + 0x18) = param2[3];
-        *(int*)(param6 + 0x20) = param2[3];
+    if (gob->gob_flags & 0x40000000) {
+        points->points[0].y = -area->gxha_bottom;
+        points->points[1].y = -area->gxha_bottom;
+        points->points[2].y = -area->gxha_top;
+        points->points[3].y = -area->gxha_top;
     } else {
-        *(int*)(param6 + 8) = -param2[3];
-        *(int*)(param6 + 0x10) = -param2[3];
-        *(int*)(param6 + 0x18) = -param2[1];
-        *(int*)(param6 + 0x20) = -param2[1];
+        points->points[0].y = area->gxha_top;
+        points->points[1].y = area->gxha_top;
+        points->points[2].y = area->gxha_bottom;
+        points->points[3].y = area->gxha_bottom;
     }
-    FUN_0041CC70((int*)param6, *(int*)(param1 + 0x78), *(int*)(param1 + 0x7c), param3, param4, param5, *(int*)(param1 + 200), *(int*)(param1 + 0xcc));
+    CLD_ApplyAngleToPoints_0041cc70(points, gob->gob_xpos, gob->gob_ypos, a, b, angle, gob->gob_xScale, gob->gob_yScale);
 }
 }

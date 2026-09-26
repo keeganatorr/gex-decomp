@@ -1,16 +1,31 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00423D80.cpp
-// Historical source SHA256: dc3604be12821179da62ecae49678b048edac6086d1a758b07826774771d0db5
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x78];
+    int gob_xpos;  /* 0x78 */
+    int gob_ypos;  /* 0x7c */
+} GXObject;
 extern "C" {
-extern "C" int __cdecl FUN_0040F1D0(void*, void**);
-extern "C" int __cdecl GEX_Target(void* p1, void** p2, int p3, int p4)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int __cdecl GetGlueDist_0040f1d0(void *, GXObject *);
+int __cdecl GEX_Target(void *level, GXObject *gob, int x, int y)
 {
-    void* ox = p2[0x1e];
-    void* oy = p2[0x1f];
-    p2[0x1e] = (void*)p3;
-    p2[0x1f] = (void*)p4;
-    int result = FUN_0040F1D0(p1, p2);
-    p2[0x1e] = ox;
-    p2[0x1f] = oy;
+    int result;
+    int xpos = gob->gob_xpos;
+    int ypos = gob->gob_ypos;
+    gob->gob_xpos = x;
+    gob->gob_ypos = y;
+    result = GetGlueDist_0040f1d0(level, gob);
+    gob->gob_xpos = xpos;
+    gob->gob_ypos = ypos;
     return result;
 }
 }

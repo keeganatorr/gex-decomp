@@ -1,34 +1,27 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0043EC20.cpp
-// Historical source SHA256: 7cda0b5239b110765b6f4333ccb19ef1cda637ffa2c6ded3cee574ce3878cc76
+typedef struct CachePos { short x; short y; } CachePos;
+typedef struct DrawCache { CachePos pos; short width; short height; } DrawCache;
 extern "C" {
-struct DrawCache { short f0,f2,f4,f6; };
-extern "C" void __cdecl FUN_0043EB50(void*, int);
-extern "C" { extern unsigned int DAT_00460040; }
-extern unsigned short DAT_00460042;
-extern unsigned short DAT_004600C8;
-extern "C" void __cdecl GEX_Target(DrawCache* tile) {
-    unsigned short sVar1, uVar2;
-    if ((DAT_00460042 < 0x101) &&
-        (0x100 < (int)tile->f6 + (int)DAT_00460042)) {
-        DAT_00460040 = (0x100 << 16) | (DAT_00460040 & 0xffff);
+extern CachePos DAT_00460040_MAIN_GAME_WIDTH;
+extern short DAT_004600c8_DrawCacheCount;
+void __cdecl FUN_0043eb50_LoadTilePoss(DrawCache *cache, int initialise);
+void __cdecl GEX_Target(DrawCache *tile)
+{
+    if (DAT_00460040_MAIN_GAME_WIDTH.y <= 0x100 && tile->height + DAT_00460040_MAIN_GAME_WIDTH.y > 0x100)
+        DAT_00460040_MAIN_GAME_WIDTH.y = 0x100;
+    if (tile->height + DAT_00460040_MAIN_GAME_WIDTH.y > 0x1e0) {
+        DAT_00460040_MAIN_GAME_WIDTH.x += DAT_004600c8_DrawCacheCount;
+        DAT_00460040_MAIN_GAME_WIDTH.y = 0;
+        DAT_004600c8_DrawCacheCount = 0;
     }
-    if (0x1e0 < (int)tile->f6 + (int)DAT_00460042) {
-        unsigned int combined = (unsigned short)DAT_00460040 + DAT_004600C8;
-        DAT_00460040 = combined;
-        DAT_004600C8 = 0;
+    if (((tile->width + DAT_00460040_MAIN_GAME_WIDTH.x - 1) & ~0x3f) > DAT_00460040_MAIN_GAME_WIDTH.x) {
+        DAT_00460040_MAIN_GAME_WIDTH.x = (DAT_00460040_MAIN_GAME_WIDTH.x + tile->width - 1) & ~0x3f;
+        DAT_00460040_MAIN_GAME_WIDTH.y = 0;
+        DAT_004600c8_DrawCacheCount = 0;
     }
-    if ((int)(short)DAT_00460040 <
-        (int)(((int)tile->f4 + (int)(short)DAT_00460040 - 1U) & 0xffffffc0)) {
-        DAT_00460040 = ((unsigned short)DAT_00460040 + tile->f4 - 1) & 0xffc0;
-        DAT_004600C8 = 0;
-    }
-    if (DAT_004600C8 < tile->f4)
-        DAT_004600C8 = tile->f4;
-    sVar1 = tile->f6;
-    uVar2 = DAT_00460042;
-    tile->f0 = (short)DAT_00460040;
-    tile->f2 = uVar2;
-    DAT_00460042 = DAT_00460042 + sVar1;
-    FUN_0043EB50(tile, 0);
+    if (tile->width > DAT_004600c8_DrawCacheCount)
+        DAT_004600c8_DrawCacheCount = tile->width;
+    tile->pos = DAT_00460040_MAIN_GAME_WIDTH;
+    DAT_00460040_MAIN_GAME_WIDTH.y += tile->height;
+    FUN_0043eb50_LoadTilePoss(tile, 0);
 }
 }

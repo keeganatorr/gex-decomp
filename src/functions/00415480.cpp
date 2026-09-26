@@ -1,55 +1,70 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00415480.cpp
-// Historical source SHA256: 2e74341aad49caee6880bbdf955dcb751cc03990a566dd8d97beeb082c2838c9
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x50];
+    int gob_currentFrameGroup;  /* 0x50 */
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad58[0x18];
+    int gob_state;              /* 0x70 */
+    unsigned char _pad74[0x24];
+    int gob_work0;              /* 0x98 */
+    int gob_work1;              /* 0x9c */
+    unsigned char _padA0[8];
+    int gob_work4;              /* 0xa8 */
+    int gob_work5;              /* 0xac */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_00420BC0(void*);
-extern "C" { extern int FUN_00456AE0; }
-extern "C" { extern int CAMERA_XPos_004a2a38; }
-extern "C" { extern int CAMERA_YPos_004a2a1c; }
-extern "C" { extern int DAT_004A280C; }
-extern "C" { extern int DAT_004A2810; }
-extern "C" { extern int DAT_004A0260; }
-extern "C" { extern int DAT_00455BFC; }
-extern "C" { extern int DAT_00455C00; }
-extern "C" { extern int DAT_00455BF4; }
-extern "C" { extern int DAT_00455BE4; }
-extern "C" { extern int DAT_00455BF8; }
-extern "C" { extern int DAT_00455BF0; }
-extern "C" { extern int DAT_004A2948; }
-extern "C" void __cdecl FUN_0041A250(void*, int, int);
-extern "C" void __cdecl FUN_004153E0(void*);
-extern "C" void __cdecl FUN_0043F490(int, int, int, int, int, int, int);
-extern "C" void __cdecl FUN_004155C0(void*);
-extern "C" void __cdecl FUN_00405390(const char*);
-extern "C" { extern const char DAT_00458C04[]; }
-
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern int gStartDoorType_00456ae0;
+extern int DAT_004a0260;
+extern int DAT_00455bfc;
+extern int DAT_00455c00;
+extern int DAT_00455be4;
+extern int DAT_00455BF4;
+extern int DAT_00455BF8;
+extern int DAT_00455BF0;
+extern int DAT_004a2948;
+extern int DAT_004a280c_xPos;
+extern int DAT_004a2810_yPos;
+extern int CAMERA_XPos_004a2a38;
+extern int CAMERA_YPos_004a2a1c;
+extern char s_Bad_Start_Door_Type_ld_00458c04[];
+void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
+void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
+void __cdecl SND_PlayObSound_0041a250(GXObject *gob, int id, int volume, int pan);
+void __cdecl FUN_004153e0_Falling_unk(GXObject *gex);
+void __cdecl GFX_Fade_0043f490(int steps, int r0, int r1, int g0, int g1, int b0, int b1);
+void __cdecl InitPlayerStartFromCamera_004155c0(GXObject *gex);
+void __cdecl GEX_Target(GXObject *gex)
 {
-    FUN_00420BC0(param_1);
-    if (FUN_00456AE0 == 0) {
-        DAT_004A0260 = 0;
-        *(int*)((char*)param_1 + 0x70) = 1;
-        *(int*)((char*)param_1 + 0x54) = 0;
-        *(int*)((char*)param_1 + 0x9c) = 0;
-        *(int*)((char*)param_1 + 0x50) = 0x30;
-        *(int*)((char*)param_1 + 0x98) = 0xd;
-        DAT_00455BFC = 0;
-        DAT_00455C00 = 0;
-        *(int*)((char*)param_1 + 0xa8) = 0;
-        *(int*)((char*)param_1 + 0xac) = DAT_00455C00 / -13;
-        DAT_00455BF4 = DAT_004A280C - CAMERA_XPos_004a2a38;
-        DAT_00455BE4 = 1;
-        DAT_00455BF8 = DAT_004A2810 - CAMERA_YPos_004a2a1c;
+    GOB_ResetState_00420bc0(gex);
+    switch (gStartDoorType_00456ae0) {
+    case 0:
+        DAT_004a0260 = 0;
+        gex->gob_state = 1;
+        gex->gob_currentFrameIndex = 0;
+        gex->gob_work1 = 0;
+        gex->gob_currentFrameGroup = 0x30;
+        gex->gob_work0 = 0xd;
+        DAT_00455bfc = 0;
+        DAT_00455c00 = 0;
+        gex->gob_work4 = 0;
+        gex->gob_work5 = DAT_00455c00 / -13;
+        DAT_00455be4 = 1;
+        DAT_00455BF4 = DAT_004a280c_xPos - CAMERA_XPos_004a2a38;
+        DAT_00455BF8 = DAT_004a2810_yPos - CAMERA_YPos_004a2a1c;
         DAT_00455BF0 = 0;
-        DAT_004A2948 = 1;
-        FUN_0041A250(param_1, 0x89, 0x80);
-        FUN_004153E0(param_1);
-        FUN_0043F490(7, 0, 0xff, 0, 0xff, 0, 0xff);
-    } else if (FUN_00456AE0 == 1) {
-        DAT_004A0260 = 0;
-        FUN_004155C0(param_1);
-    } else {
-        FUN_00405390(DAT_00458C04);
+        DAT_004a2948 = 1;
+        SND_PlayObSound_0041a250(gex, 0x89, 0x80, 0x60);
+        FUN_004153e0_Falling_unk(gex);
+        GFX_Fade_0043f490(7, 0, 0xff, 0, 0xff, 0, 0xff);
+        break;
+    case 1:
+        DAT_004a0260 = 0;
+        InitPlayerStartFromCamera_004155c0(gex);
+        break;
+    default:
+        TracePrintf_Debug_00405390(s_Bad_Start_Door_Type_ld_00458c04, gStartDoorType_00456ae0);
+        break;
     }
-    FUN_00456AE0 = -1;
+    gStartDoorType_00456ae0 = -1;
 }
 }

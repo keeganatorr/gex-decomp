@@ -1,32 +1,31 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00419410.cpp
-// Historical source SHA256: 9ad6a16a7d30a249d5881b32a558e624b858907b70b92eb8d672ba01a45ec770
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x78];
+    int gob_xpos;  /* 0x78 */
+    int gob_ypos;  /* 0x7c */
+} GXObject;
 extern "C" {
-extern "C" { extern int DAT_0049FB90; }
-extern void* DAT_004A2990;
-
-extern "C" unsigned int __cdecl FUN_00417F00(unsigned char**);
-extern "C" int __cdecl FUN_00419FE0(void*, int, unsigned int);
-extern "C" int __cdecl FUN_0040F100(int, unsigned int, unsigned int);
-
-extern "C" unsigned char* __cdecl GEX_Target(unsigned char* param_1, void** param_2)
+extern void *M1_CurrentLevel_004a2990;
+extern int SCRIPT_WorkRegister_0049fb90;
+unsigned int __cdecl SCRIPT_GetUInt_00417f00(unsigned char **script);
+unsigned short *__cdecl GOB_GetBlockAddress_00419fe0(void *level, int x, int y);
+unsigned int __cdecl M1_GetContourDataFromID_0040f100(void *level, unsigned int id, unsigned int position);
+unsigned char *__cdecl GEX_Target(unsigned char *script, GXObject *gob)
 {
-    unsigned int uVar2;
-    unsigned int uVar3;
-    int iVar4;
-
-    uVar2 = FUN_00417F00(&param_1);
-    uVar3 = FUN_00417F00(&param_1);
-    iVar4 = FUN_00419FE0(DAT_004A2990, (int)param_2[0x1e] + (int)(uVar2 * 0x80), (unsigned int)((int)param_2[0x1f] + (int)(uVar3 * 0x80)));
-    if ((*(unsigned short*)(iVar4 + 2) & 0xfff) == 0) {
-        DAT_0049FB90 = 0;
-        return param_1;
-    }
-    iVar4 = FUN_0040F100((int)DAT_004A2990, (unsigned int)*(unsigned short*)(iVar4 + 2), (unsigned int)((int)param_2[0x1e] + (int)(uVar2 * 0x80)) & 0x1fffff);
-    if (iVar4 == 0) {
-        DAT_0049FB90 = 0;
-        return param_1;
-    }
-    DAT_0049FB90 = 1;
-    return param_1;
+    int dx;
+    int dy;
+    unsigned int id;
+    dx = SCRIPT_GetUInt_00417f00(&script);
+    dx <<= 16;
+    dy = SCRIPT_GetUInt_00417f00(&script) << 16;
+    id = GOB_GetBlockAddress_00419fe0(M1_CurrentLevel_004a2990, gob->gob_xpos + dx, gob->gob_ypos + dy)[1];
+    if (id & 0xfff) {
+        if (!M1_GetContourDataFromID_0040f100(M1_CurrentLevel_004a2990, id, (gob->gob_xpos + dx) & 0x1fffff))
+            SCRIPT_WorkRegister_0049fb90 = 0;
+        else
+            SCRIPT_WorkRegister_0049fb90 = 1;
+    } else
+        SCRIPT_WorkRegister_0049fb90 = 0;
+    return script;
 }
 }

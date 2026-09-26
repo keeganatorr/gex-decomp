@@ -1,3 +1,8 @@
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern "C" int decl_pad_0;
 extern "C" int __cdecl FUN_0040F030(void*, unsigned int, unsigned int);
 
 static inline int AbsI(int x)
@@ -15,23 +20,15 @@ extern "C" unsigned int __cdecl GEX_Target(void* param_1, unsigned int* param_2)
     iVar2 = FUN_0040F030(param_1, param_2[0x1e], (unsigned int)((int)param_2[0x1f] - 0x200000));
     uVar3 = iVar2 - 0x200000;
 
-    {
-        int abs1 = AbsI(uVar1);
-        int abs3 = AbsI(uVar3);
-        if (abs1 > abs3) {
-            uVar1 = uVar3;
-        }
+    if (AbsI(uVar3) < AbsI(uVar1)) {
+        uVar1 = uVar3;
     }
 
     iVar2 = FUN_0040F030(param_1, param_2[0x1e], (unsigned int)((int)param_2[0x1f] + 0x200000));
     uVar3 = iVar2 + 0x200000;
 
-    {
-        int abs1 = AbsI(uVar1);
-        int abs3 = AbsI(uVar3);
-        if (abs1 <= abs3) {
-            uVar3 = uVar1;
-        }
+    if (AbsI(uVar3) >= AbsI(uVar1)) {
+        uVar3 = uVar1;
     }
 
     return (unsigned int)uVar3;

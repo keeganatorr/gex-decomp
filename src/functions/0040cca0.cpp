@@ -1,31 +1,30 @@
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0xa8];
+    int gob_work4;  /* 0xa8 */
+    unsigned char _pad1[0x4];
+    int gob_work6;  /* 0xb0 */
+} GXObject;
+typedef struct Slot { int a, b, c, d; } Slot;
 extern "C" {
-extern int DAT_00456168;
-}
-
-struct GXObject;
-
-extern "C" void __cdecl GEX_Target(GXObject **param_1)
+extern Slot DAT_00456168[];
+void __cdecl GEX_Target(GXObject *gob)
 {
-    GXObject *pGVar1;
-    GXObject *pGVar2;
-
-    pGVar1 = param_1[0x2c];
-    pGVar2 = param_1[0x2a];
-    if (pGVar2 == (GXObject *)0x10) {
-        param_1[0x2c] = (GXObject *)0x1;
-    } else if (pGVar2 == (GXObject *)0xe) {
-        param_1[0x2c] = (GXObject *)0x2;
-    } else if (pGVar2 == (GXObject *)0xc) {
-        param_1[0x2c] = (GXObject *)0x3;
-    } else if (pGVar2 == (GXObject *)0x70) {
-        param_1[0x2c] = (GXObject *)0x4;
-    } else {
-        param_1[0x2c] = (GXObject *)0x5;
-        if (pGVar2 != (GXObject *)0x12) {
-            param_1[0x2c] = (GXObject *)0x0;
-        }
+    int old = gob->gob_work6;
+    if (gob->gob_work4 == 0x10)
+        gob->gob_work6 = 1;
+    else if (gob->gob_work4 == 0xe)
+        gob->gob_work6 = 2;
+    else if (gob->gob_work4 == 0xc)
+        gob->gob_work6 = 3;
+    else if (gob->gob_work4 == 0x70)
+        gob->gob_work6 = 4;
+    else {
+        gob->gob_work6 = 5;
+        if (gob->gob_work4 != 0x12)
+            gob->gob_work6 = 0;
     }
-    if (pGVar1 != param_1[0x2c]) {
-        *(int *)((int)&DAT_00456168 + (int)param_1[0x2c] * 0x10) = 0;
-    }
+    if (old != gob->gob_work6)
+        DAT_00456168[gob->gob_work6].a = 0;
+}
 }

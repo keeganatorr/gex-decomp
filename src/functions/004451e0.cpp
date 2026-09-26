@@ -1,32 +1,16 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004451E0.cpp
-// Historical source SHA256: 33d41afe6c36ea21d707066c50ae3f9ccfd77ce18e8039e82b6afdb22123d30d
+typedef struct Rect16 { short x, y, w, h; } Rect16;
 extern "C" {
-extern "C" { extern short* FUN_004A33AC; }
-
-extern "C" int __cdecl GEX_Target(void* drawCache, short* fileMemoryPointer)
+extern unsigned short *gPaletteDataPtr_004a33ac;
+int __cdecl GEX_Target(Rect16 *rect, unsigned short *data)
 {
-    short* pd = (short*)drawCache;
-    int eax = pd[0];
-    int esi = pd[1] << 10;
-    int ecx = pd[2];
-    esi += eax;
-    eax = (int)FUN_004A33AC;
-    int ebx = pd[3];
-    short* pixels = (short*)((char*)eax + esi * 2);
-    int strideBytes = (0x400 - ecx) * (int)sizeof(short);
-    
-    if (ebx != 0) {
-        do {
-            ecx = pd[2];
-            if (ecx != 0) {
-                do {
-                    *pixels++ = *fileMemoryPointer++;
-                    ecx--;
-                } while (ecx != 0);
-            }
-            pixels = (short*)((char*)pixels + strideBytes);
-            ebx--;
-        } while (ebx != 0);
+    unsigned short *dest = gPaletteDataPtr_004a33ac + (rect->y << 10) + rect->x;
+    unsigned short *src = data;
+    int skip = 0x400 - rect->w;
+    int rows, n;
+    for (rows = rect->h; rows; rows--) {
+        for (n = rect->w; n; n--)
+            *dest++ = *src++;
+        dest += skip;
     }
     return 1;
 }

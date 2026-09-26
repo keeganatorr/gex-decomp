@@ -1,80 +1,80 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00437170.cpp
-// Historical source SHA256: e78ba134d5ce005ba757be90c04715204f93caca8e16151e9150ff047f93b401
+typedef unsigned int Word;
+
 extern "C" {
-extern int FUN_0045C960[];
-extern int DAT_0045c988[];
-extern int DAT_004642e4;
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern Word DAT_0045c988;
+extern unsigned char DAT_004642e4;
+void __cdecl RezInit_00436cf0(Word *);
+void __cdecl FUN_0042e850(Word *);
+void __cdecl FUN_00436cb0_Graphics_unk(Word *);
+void __cdecl RezOutDraw2_00437010(Word *);
 
-extern "C" void __cdecl FUN_00436CF0();
-extern "C" void __cdecl FUN_0042e850(void **param_1);
-extern "C" void __cdecl FUN_00436cb0_Graphics_unk(void **param_1);
-extern "C" void __cdecl FUN_00437010(void **param_1);
-
-extern "C" void __cdecl GEX_Target(void **param_1)
+void __cdecl GEX_Target(Word *object)
 {
-    int pGVar4;
-    int iVar2;
-    int iVar3;
-    int pGVar5;
-    int local_14;
-    int pGVar1;
-    void *local_10;
-    void *local_c;
-    void *local_8;
-    void *local_4;
+    Word originalX, originalY;
+    Word *parent = (Word *)object[0x57];
+    Word savedX, savedY, savedC8, savedCC;
+    Word frame;
+    Word image;
 
-    pGVar4 = (int)param_1[0x57];
-    FUN_00436CF0();
-    iVar3 = 0;
-    if (pGVar4 != 0) {
-        iVar2 = 0;
-        pGVar5 = (int)param_1[0x1e];
-        local_14 = (int)param_1[0x1f];
-        pGVar1 = *(int *)(pGVar4 + 4);
-        while (pGVar1 != 0) {
-            iVar3 = iVar3 + *(int *)(pGVar4 + 8);
-            iVar2 = iVar2 + *(int *)(pGVar4 + 12);
-            pGVar4 = *(int *)(pGVar4 + 4);
-            pGVar1 = *(int *)(pGVar4 + 4);
+    RezInit_00436cf0(object);
+    Word dx = 0;
+    if (parent != 0) {
+        Word dy = 0;
+        originalX = object[0x1e];
+        originalY = object[0x1f];
+        while (parent[0x57] != 0) {
+            dx += parent[0x1e];
+            dy += parent[0x1f];
+            parent = (Word *)parent[0x57];
         }
-        param_1[0x1e] = (void *)(pGVar5 + *(int *)(pGVar4 + 8) + iVar3 - 0x1c);
-        param_1[0x1f] = (void *)(local_14 + *(int *)(pGVar4 + 12) + iVar2 - 0x1c);
+        object[0x1e] = parent[0x1e] + originalX + dx;
+        object[0x1f] = parent[0x1f] + originalY + dy;
     }
-    pGVar1 = FUN_0045C960[(int)param_1[0x2e]];
-    if (pGVar1 == 0) {
-        param_1[0x2e] = (void *)0x0;
-        param_1[0x18] = (void *)FUN_00437010;
-        if (pGVar4 != 0) {
-            param_1[0x1e] = (void *)pGVar5;
-            param_1[0x1f] = (void *)local_14;
+
+    image = (&DAT_0045c988 - 10)[object[0x2e]];
+    if (image) {
+        if (object[0x38] & 0x40) {
+            savedX = object[0x1e];
+            savedY = object[0x1f];
+            savedC8 = object[0x32];
+            savedCC = object[0x33];
+            FUN_0042e850(object);
         }
-        FUN_00437010(param_1);
+        frame = object[0x2e];
+        object[0x2f] = *(&DAT_0045c988 - frame);
+        object[0x2e] = frame + 1;
+        object[0x30] = 0;
+        FUN_00436cb0_Graphics_unk(object);
+        object[0x2f] = image;
+        object[0x30] = (Word)&DAT_004642e4;
+        FUN_00436cb0_Graphics_unk(object);
+        if (object[0x38] & 0x40) {
+            object[0x1e] = savedX;
+            object[0x1f] = savedY;
+            object[0x32] = savedC8;
+            object[0x33] = savedCC;
+        }
+    } else {
+        object[0x2e] = 0;
+        object[0x18] = (Word)RezOutDraw2_00437010;
+        if (parent != 0) {
+            object[0x1e] = originalX;
+            object[0x1f] = originalY;
+        }
+        RezOutDraw2_00437010(object);
     }
-    else {
-        if (((unsigned int)param_1[0x38] & 0x40) != 0) {
-            local_10 = param_1[0x1e];
-            local_c = param_1[0x1f];
-            local_8 = param_1[0x32];
-            local_4 = param_1[0x33];
-            FUN_0042e850(param_1);
-        }
-        param_1[0x2f] = (void *)DAT_0045c988[(int)param_1[0x2e] * -1];
-        param_1[0x2e] = (void *)((int)param_1[0x2e] + 1);
-        param_1[0x30] = (void *)0x0;
-        FUN_00436cb0_Graphics_unk(param_1);
-        param_1[0x2f] = (void *)pGVar1;
-        param_1[0x30] = (void *)&DAT_004642e4;
-        FUN_00436cb0_Graphics_unk(param_1);
-        if (((unsigned int)param_1[0x38] & 0x40) != 0) {
-            param_1[0x1e] = local_10;
-            param_1[0x1f] = local_c;
-            param_1[0x32] = local_8;
-            param_1[0x33] = local_4;
-        }
-    }
-    if (pGVar4 != 0) {
-        param_1[0x1e] = (void *)pGVar5;
-        param_1[0x1f] = (void *)local_14;
+
+    if (parent != 0) {
+        object[0x1e] = originalX;
+        object[0x1f] = originalY;
     }
 }
 }

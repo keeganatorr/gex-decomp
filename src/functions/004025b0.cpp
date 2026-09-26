@@ -1,69 +1,63 @@
-typedef unsigned long DWORD;
-typedef long HRESULT;
-typedef void (__stdcall *DSMethod)(void);
-struct SoundBuffer { DSMethod *lpVtbl; };
-typedef HRESULT (__stdcall *LockMethod)(SoundBuffer *, DWORD, DWORD, void **, DWORD *, void **, DWORD *, DWORD);
-typedef HRESULT (__stdcall *UnlockMethod)(SoundBuffer *, void *, DWORD, void *, DWORD);
-
+typedef struct IDirectSoundBuffer IDirectSoundBuffer;
+typedef struct IDirectSoundBufferVtbl {
+    void *QueryInterface, *AddRef, *Release, *GetCaps, *GetCurrentPosition, *GetFormat, *GetVolume, *GetPan,
+        *GetFrequency, *GetStatus, *Initialize;
+    long (__stdcall *Lock)(IDirectSoundBuffer *self, unsigned long offset, unsigned long bytes,
+        void **ptr1, unsigned long *bytes1, void **ptr2, unsigned long *bytes2, unsigned long flags);
+    void *Play, *SetCurrentPosition, *SetFormat, *SetVolume, *SetPan, *SetFrequency, *Stop;
+    long (__stdcall *Unlock)(IDirectSoundBuffer *self, void *ptr1, unsigned long bytes1, void *ptr2, unsigned long bytes2);
+    long (__stdcall *Restore)(IDirectSoundBuffer *self);
+} IDirectSoundBufferVtbl;
+struct IDirectSoundBuffer { IDirectSoundBufferVtbl *lpVtbl; };
 extern "C" {
-extern SoundBuffer *gMusicDirectSoundBuffer_0048a040;
-extern DWORD DAT_0049a05c;
-extern DWORD DAT_0049a060;
+void *__cdecl memset(void *dst, int value, unsigned int count);
+__declspec(dllimport) void __stdcall OutputDebugStringA(const char *text);
+extern IDirectSoundBuffer *gMusicDirectSoundBuffer_0048a040;
+extern unsigned int DAT_0049a05c;
+void *__cdecl memcpy(void *dst, const void *src, unsigned int count);
+extern unsigned int DAT_0049a060;
 extern unsigned char lpBuffer_0048a050[];
-extern const char s_DS_lock_failed_00451668[];
-__declspec(dllimport) void __stdcall OutputDebugStringA(const char *);
-void * __cdecl memcpy(void *, const void *, unsigned int);
-void * __cdecl memset(void *, int, unsigned int);
-}
-
-extern "C" void __cdecl GEX_Target(int which)
+extern char s_DS_lock_failed_00451668[];
+void __cdecl GEX_Target(int half)
 {
-    void *region1;
-    DWORD bytes2;
-    void *region2;
-    DWORD bytes1;
-    HRESULT result;
-
-    if (which) {
-        result = ((LockMethod)gMusicDirectSoundBuffer_0048a040->lpVtbl[11])
-            (gMusicDirectSoundBuffer_0048a040, 0x2b11UL, 0x2b11UL,
-             &region1, &bytes1, &region2, &bytes2, 0);
-    } else {
-        result = ((LockMethod)gMusicDirectSoundBuffer_0048a040->lpVtbl[11])
-            (gMusicDirectSoundBuffer_0048a040, 0, 0x2b11UL,
-             &region1, &bytes1, &region2, &bytes2, 0);
-    }
-
+    void *ptr1;
+    unsigned long bytes2;
+    void *ptr2;
+    unsigned long bytes1;
+    unsigned char *dest;
+    unsigned char *source;
+    long result;
+    unsigned int chunk;
+    unsigned int left;
+    if (half)
+        result = gMusicDirectSoundBuffer_0048a040->lpVtbl->Lock(gMusicDirectSoundBuffer_0048a040, 0x2b11, 0x2b11,
+            &ptr1, &bytes1, &ptr2, &bytes2, 0);
+    else
+        result = gMusicDirectSoundBuffer_0048a040->lpVtbl->Lock(gMusicDirectSoundBuffer_0048a040, 0, 0x2b11,
+            &ptr1, &bytes1, &ptr2, &bytes2, 0);
     if (result == 0) {
-        unsigned char *destination;
-        DWORD count;
-        DWORD remaining;
-        destination = (unsigned char *)region1;
-        remaining = 0x2b11UL;
+        dest = (unsigned char *)ptr1;
+        left = 0x2b11;
         do {
-            count = remaining;
-            DWORD available = DAT_0049a05c;
-            if (available != 0) {
-                const unsigned char *source = lpBuffer_0048a050 + DAT_0049a060;
-                count = available < remaining ? available : remaining;
-                if (DAT_0049a060 + count >= 0x10000UL) {
-                    count = 0x10000UL - DAT_0049a060;
+            chunk = left;
+            if (DAT_0049a05c) {
+                source = lpBuffer_0048a050 + DAT_0049a060;
+                if (left > DAT_0049a05c)
+                    chunk = DAT_0049a05c;
+                if (DAT_0049a060 + chunk >= 0x10000) {
+                    chunk = 0x10000 - DAT_0049a060;
                     DAT_0049a060 = 0;
-                } else {
-                    DAT_0049a060 += count;
-                }
-                DAT_0049a05c -= count;
-                memcpy(destination, source, count);
-            } else {
-                memset(destination, 0x80, count);
-            }
-            destination += count;
-            remaining -= count;
-        } while (remaining != 0);
-
-        ((UnlockMethod)gMusicDirectSoundBuffer_0048a040->lpVtbl[19])
-            (gMusicDirectSoundBuffer_0048a040, region1, bytes1, region2, bytes2);
-    } else {
+                } else
+                    DAT_0049a060 += chunk;
+                DAT_0049a05c -= chunk;
+                memcpy(dest, source, chunk);
+            } else
+                memset(dest, 0x80, left);
+            dest += chunk;
+            left -= chunk;
+        } while (left);
+        gMusicDirectSoundBuffer_0048a040->lpVtbl->Unlock(gMusicDirectSoundBuffer_0048a040, ptr1, bytes1, ptr2, bytes2);
+    } else
         OutputDebugStringA(s_DS_lock_failed_00451668);
-    }
+}
 }

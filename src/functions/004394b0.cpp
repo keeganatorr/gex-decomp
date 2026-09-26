@@ -1,31 +1,50 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004394B0.cpp
-// Historical source SHA256: e8af8e2c9470acc393295756bf1b225db3e5a09d4df812447766742773d0544c
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef int (__cdecl *GobFunc)(struct GXObject *gob);
+typedef struct GXObject {
+    unsigned char _pad0[0xc];
+    void *gob_objectLoadData;   /* 0xc */
+    unsigned char _pad10[0x40];
+    int gob_currentFrameGroup;  /* 0x50 */
+    unsigned char _pad54[8];
+    GobFunc gob_doitFunc;       /* 0x5c */
+    unsigned char _pad60[0x18];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    int gob_xVel;               /* 0x80 */
+    unsigned char _pad84[8];
+    int gob_yVel;               /* 0x8c */
+} GXObject;
 extern "C" {
-extern "C" int __cdecl FUN_00428C80(int);
-extern "C" void** __cdecl FUN_004195D0(int, int, int, int);
-extern "C" void __cdecl FUN_00419BE0(void**, void**);
-extern "C" void __cdecl FUN_00439460_HuntDiveInner();
-extern "C" void __cdecl GEX_Target(void** param1) {
-    int iVar1 = FUN_00428C80(2);
-    if (iVar1 == 0) { iVar1 = FUN_00428C80(8); iVar1 *= -0x10000; }
-    else { iVar1 = FUN_00428C80(8); iVar1 <<= 0x10; }
-    int iVar2 = FUN_00428C80(2);
-    if (iVar2 == 0) { iVar2 = FUN_00428C80(8); iVar2 *= -0x10000; }
-    else { iVar2 = FUN_00428C80(8); iVar2 <<= 0x10; }
-    void** ppGVar3 = FUN_004195D0(0x13b, (int)param1[0x1e] + iVar2 + -0x1c, (int)param1[0x1f] + iVar1 + -0x1c, (int)param1[3]);
-    if (ppGVar3 != 0) {
-        ppGVar3[0x17] = (void*)FUN_00439460_HuntDiveInner;
-        iVar1 = FUN_00428C80(2);
-        void* pGVar4;
-        if (iVar1 == 0) { iVar1 = FUN_00428C80(0x50000); pGVar4 = (void*)-iVar1; }
-        else { pGVar4 = (void*)FUN_00428C80(0x50000); }
-        ppGVar3[0x20] = pGVar4;
-        iVar1 = FUN_00428C80(2);
-        if (iVar1 == 0) { iVar1 = FUN_00428C80(0x50000); pGVar4 = (void*)-iVar1; }
-        else { pGVar4 = (void*)FUN_00428C80(0x50000); }
-        ppGVar3[0x23] = pGVar4;
-        ppGVar3[0x14] = (void*)3;
-        FUN_00419BE0(ppGVar3, param1);
+int __cdecl UTL_ReallyRandom_00428c80(int range);
+GXObject *__cdecl GOB_AddObject_004195d0(int type, int x, int y, void *loadData);
+int __cdecl FUN_00439460_HuntDiveInner(GXObject *gob);
+void __cdecl GOB_PutObjectInfrontOfObject_00419be0(GXObject *gob, GXObject *other);
+void __cdecl GEX_Target(GXObject *gob)
+{
+    int dx;
+    int dy;
+    GXObject *drop;
+    if (UTL_ReallyRandom_00428c80(2))
+        dy = UTL_ReallyRandom_00428c80(8) << 16;
+    else
+        dy = -(UTL_ReallyRandom_00428c80(8) << 16);
+    if (UTL_ReallyRandom_00428c80(2))
+        dx = UTL_ReallyRandom_00428c80(8) << 16;
+    else
+        dx = -(UTL_ReallyRandom_00428c80(8) << 16);
+    drop = GOB_AddObject_004195d0(0x13b, gob->gob_xpos + dx, gob->gob_ypos + dy, gob->gob_objectLoadData);
+    if (drop) {
+        drop->gob_doitFunc = FUN_00439460_HuntDiveInner;
+        if (UTL_ReallyRandom_00428c80(2))
+            drop->gob_xVel = UTL_ReallyRandom_00428c80(0x50000);
+        else
+            drop->gob_xVel = -UTL_ReallyRandom_00428c80(0x50000);
+        if (UTL_ReallyRandom_00428c80(2))
+            drop->gob_yVel = UTL_ReallyRandom_00428c80(0x50000);
+        else
+            drop->gob_yVel = -UTL_ReallyRandom_00428c80(0x50000);
+        drop->gob_currentFrameGroup = 3;
+        GOB_PutObjectInfrontOfObject_00419be0(drop, gob);
     }
 }
 }

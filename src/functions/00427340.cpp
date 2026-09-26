@@ -1,21 +1,27 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00427340.cpp
-// Historical source SHA256: bbffdc7085826483ec8673fbd0edc0f2b977c414270555a257f88616354ffb8e
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x50];
+    int gob_currentFrameGroup;  /* 0x50 */
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad1[0x14];
+    unsigned int gob_flags;     /* 0x6c */
+    int gob_state;              /* 0x70 */
+    unsigned char _pad2[0x14];
+    int gob_xAccl;              /* 0x88 */
+    unsigned char _pad3[0xc];
+    int gob_work0;              /* 0x98 */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_00420BC0(void**);
-extern "C" void __cdecl FUN_004271F0(void**);
-
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern void __cdecl GOB_ResetState_00420bc0(GXObject *);
+extern void __cdecl PlayerRunTurn_004271f0(GXObject *);
+void __cdecl GEX_Target(GXObject *gob)
 {
-    int iVar1;
-
-    FUN_00420BC0(param_1);
-    param_1[0x15] = (void*)0;
-    param_1[0x26] = (void*)0;
-    param_1[0x1c] = (void*)0x7;  
-    param_1[0x14] = (void*)0x3e;
-
-    iVar1 = ((int)param_1[0x1b] >> 31) & 1;
-    param_1[0x22] = (void*)(0x28000 - iVar1 * 0x50000);
-    FUN_004271F0(param_1);
+    GOB_ResetState_00420bc0(gob);
+    gob->gob_currentFrameIndex = 0;
+    gob->gob_work0 = 0;
+    gob->gob_state = 7;
+    gob->gob_currentFrameGroup = 0x3e;
+    gob->gob_xAccl = (gob->gob_flags & 0x80000000) ? -0x28000 : 0x28000;
+    PlayerRunTurn_004271f0(gob);
 }
 }

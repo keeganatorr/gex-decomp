@@ -1,33 +1,29 @@
-typedef unsigned char byte;
-typedef unsigned int uint;
-
-extern "C" int TracePrintf_Debug_00405390(const char *format, ...);
-
-extern "C" void __cdecl _GEX_Target(int *gamePasswordList, int value, uint value2, int numBits)
+extern "C" {
+extern char s_Put_value_d_d_d_2x_addr_0045ac88[];
+extern char s_Error_numbits_d_too_small_for_v_0045ac5c[];
+extern char s_stream_value_now_2x_0045ac44[];
+void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
+void __cdecl GEX_Target(unsigned char *stream, int value, int bitpos, int numbits)
 {
-    int iVar1;
-    int iVar2;
-    int iVar3;
-    byte *streamValueAddress;
-
-    streamValueAddress = (byte *)((int)gamePasswordList + ((int)(value2 + ((int)value2 >> 0x1f & 7U)) >> 3));
-    TracePrintf_Debug_00405390("Put value %d %d %d %2x (addr = %x)\n", value, value2, numBits, (uint)*streamValueAddress, streamValueAddress);
-    if (1 << (byte)numBits <= value) {
-        TracePrintf_Debug_00405390("Error: numbits %d too small for value %d\n", numBits, value);
+    unsigned char *p;
+    int count;
+    int shift;
+    p = stream + bitpos / 8;
+    TracePrintf_Debug_00405390(s_Put_value_d_d_d_2x_addr_0045ac88, value, bitpos, numbits, *p, p);
+    if ((1 << numbits) <= value)
+        TracePrintf_Debug_00405390(s_Error_numbits_d_too_small_for_v_0045ac5c, numbits, value);
+    while (numbits) {
+        count = 8 - (bitpos & 7);
+        shift = count - numbits;
+        if (shift < 0)
+            shift = 0;
+        else
+            count = numbits;
+        bitpos += count;
+        numbits -= count;
+        *p++ |= (unsigned char)((unsigned char)((1 << count) - 1) & (unsigned char)value) << shift;
+        value >>= count;
     }
-    for (; numBits != 0; numBits = numBits - iVar2) {
-        iVar1 = 8 - (value2 & 7);
-        iVar3 = iVar1 - numBits;
-        iVar2 = numBits;
-        if (iVar3 < 0) {
-            iVar3 = 0;
-            iVar2 = iVar1;
-        }
-        value2 = value2 + iVar2;
-        *streamValueAddress = (byte)(*streamValueAddress |
-            (byte)((((1 << (byte)iVar2) - 1) & (byte)value) << (byte)iVar3));
-        value = value >> (byte)iVar2;
-        streamValueAddress = streamValueAddress + 1;
-    }
-    TracePrintf_Debug_00405390("stream value now = %2x\n", (uint)streamValueAddress[-1]);
+    TracePrintf_Debug_00405390(s_stream_value_now_2x_0045ac44, p[-1]);
+}
 }

@@ -1,25 +1,30 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0040A8C0.cpp
-// Historical source SHA256: 57d833382c41024d43a5ae700adcc12f86ec06b6da9aea4ece3adffc82baea94
+typedef struct LevelInfo {
+    unsigned char unk0;
+    unsigned char unk1;
+    unsigned char fileIndex;   /* 0x2 */
+    unsigned char extraIndex;  /* 0x3 */
+    int unk4;
+} LevelInfo;
 extern "C" {
-extern "C" { extern int DAT_004a2a28_FileLoaded2; }
-extern "C" { extern int DAT_004a298c_FileLoaded; }
-extern "C" { extern int FUN_004A2964; }
-extern "C" { extern void* PTR_gIDLDirectory_00455998; }
-extern "C" { extern void* FUN_00455B7C; }
-extern "C" { extern void* FUN_00455B78; }
-extern "C" int __cdecl FUN_00409350(void*, void*, int);
-
-extern "C" void __cdecl GEX_Target()
+extern int DAT_004a2a28_FileLoaded2;
+extern void *PTR_gIDLDirectory_00455998;
+extern int level_004a2964;
+extern LevelInfo DAT_004577B0[];
+extern int DAT_004a298c_FileLoaded;
+extern char *gLevelDir_00455b7c;
+extern char *gIDLDir_00455b78;
+int __cdecl CDIO_OpenDirectory_00409350(void *idl, char *name, int index);
+void __cdecl GEX_Target(void)
 {
-    if (DAT_004a2a28_FileLoaded2 == 0) {
-        int idx = ((unsigned char*)0x004577b2)[FUN_004A2964 * 8];
-        FUN_00409350(PTR_gIDLDirectory_00455998, FUN_00455B7C, idx);
+    int index;
+    if (!DAT_004a2a28_FileLoaded2) {
+        CDIO_OpenDirectory_00409350(PTR_gIDLDirectory_00455998, gLevelDir_00455b7c, DAT_004577B0[level_004a2964].fileIndex);
         DAT_004a2a28_FileLoaded2 = 1;
     }
-    if (DAT_004a298c_FileLoaded == 0) {
-        int idx2 = ((unsigned char*)0x004577b3)[FUN_004A2964 * 8];
-        if (idx2 != 0) {
-            FUN_00409350(PTR_gIDLDirectory_00455998, FUN_00455B78, idx2);
+    if (!DAT_004a298c_FileLoaded) {
+        index = DAT_004577B0[level_004a2964].extraIndex;
+        if (index) {
+            CDIO_OpenDirectory_00409350(PTR_gIDLDirectory_00455998, gIDLDir_00455b78, index);
             DAT_004a298c_FileLoaded = 1;
         }
     }

@@ -1,65 +1,42 @@
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x98];
+    int gob_work0;   /* 0x98: parallax index */
+    int gob_work1;   /* 0x9c: display priority */
+    void *gob_work2; /* 0xa0: loaded parallax */
+    void *gob_work3; /* 0xa4: its file */
+} GXObject;
+typedef struct ParaInfo { void *file; void *para; int index; } ParaInfo;
 extern "C" {
-
-struct GXObject;
-typedef struct GXObject GXObject;
-
-typedef struct {
-    unsigned int f0;
-    GXObject *para;
-    GXObject *index;
-} ParaInfo;
-
 extern ParaInfo ParaInfo_fake_ARRAY_00463a40[8];
-extern int gLevelSelectSelectedIndex_00463aa0;
-extern const char s_ERROR__To_many_parallaxs_in_one_l_0045a1ac[];
-
-void GOB_SetObjectDisplayPriority_00419b80(GXObject **obj, unsigned int pri);
-GXObject *PAR_LoadParallaxs_00420210(GXObject *idx, GXObject **out);
-void assertfail_00405350(const char *msg);
-
-void _GEX_Target(GXObject **param_1, int param_2);
-
-}
-
-void _GEX_Target(GXObject **param_1, int param_2)
+extern char s_ERROR_To_many_parallaxs_in_one_l_0045a1ac[];
+void __cdecl GOB_SetObjectDisplayPriority_00419b80(GXObject *gob, unsigned int priority);
+void __cdecl assertfail_00405350(const char *format, ...);
+void *__cdecl PAR_LoadParallaxs_00420210(int index, void **file);
+void __cdecl GEX_Target(GXObject *gob, int loaded)
 {
-    GXObject *pGVar1;
-    ParaInfo *piVar2;
-    int iVar3;
-    int iStack_4;
-
-    if (param_2 != 0)
-        return;
-
-    GOB_SetObjectDisplayPriority_00419b80(param_1, (unsigned int)param_1[0x27]);
-
-    iVar3 = 0;
-    piVar2 = ParaInfo_fake_ARRAY_00463a40;
-    do {
-        if (piVar2->f0 == 0) {
-        lab_set_index:
-            iStack_4 = iVar3;
-        } else {
-            if (piVar2->index == param_1[0x26]) {
-                param_1[0x28] = piVar2->para;
+    int i;
+    int freeSlot;
+    if (!loaded) {
+        GOB_SetObjectDisplayPriority_00419b80(gob, gob->gob_work1);
+        for (i = 0; i < 8; i++) {
+            if (ParaInfo_fake_ARRAY_00463a40[i].file && ParaInfo_fake_ARRAY_00463a40[i].index == gob->gob_work0) {
+                gob->gob_work2 = ParaInfo_fake_ARRAY_00463a40[i].para;
                 break;
             }
-            if (piVar2->f0 == 0)
-                goto lab_set_index;
+            if (!ParaInfo_fake_ARRAY_00463a40[i].file)
+                freeSlot = i;
         }
-        piVar2 = piVar2 + 1;
-        iVar3 = iVar3 + 1;
-    } while (piVar2 < &ParaInfo_fake_ARRAY_00463a40[8]);
-
-    if (7 < iVar3) {
-        if (7 < iStack_4) {
-            assertfail_00405350(s_ERROR__To_many_parallaxs_in_one_l_0045a1ac);
-            return;
+        if (i >= 8) {
+            if (freeSlot >= 8) {
+                assertfail_00405350(s_ERROR_To_many_parallaxs_in_one_l_0045a1ac);
+                return;
+            }
+            gob->gob_work2 = PAR_LoadParallaxs_00420210(gob->gob_work0, &gob->gob_work3);
+            ParaInfo_fake_ARRAY_00463a40[freeSlot].file = gob->gob_work3;
+            ParaInfo_fake_ARRAY_00463a40[freeSlot].para = gob->gob_work2;
+            ParaInfo_fake_ARRAY_00463a40[freeSlot].index = gob->gob_work0;
         }
-        pGVar1 = PAR_LoadParallaxs_00420210(param_1[0x26], &param_1[0x29]);
-        param_1[0x28] = pGVar1;
-        ParaInfo_fake_ARRAY_00463a40[iStack_4].f0 = (unsigned int)param_1[0x29];
-        ParaInfo_fake_ARRAY_00463a40[iStack_4].para = param_1[0x28];
-        ParaInfo_fake_ARRAY_00463a40[iStack_4].index = param_1[0x26];
     }
+}
 }

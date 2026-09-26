@@ -1,60 +1,94 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041E5C0.cpp
-// Historical source SHA256: cd0763049599b0971ae52475a00e86e0eb06310cbd61dfbc38b144bced074351
+typedef struct GXObject {
+    unsigned char _pad0[8];
+    int gob_type;               /* 0x08 */
+    unsigned char _padc[0x6c - 0xc];
+    unsigned int gob_flags;     /* 0x6c */
+} GXObject;
+typedef struct CLDNode CLDNode;
+struct CLDNode {
+    CLDNode *next;
+    CLDNode *prev;
+    GXObject *obj;
+};
+typedef struct CLDList {
+    CLDNode *head;
+    CLDNode *tail;
+    CLDNode *tailPred;
+} CLDList;
 extern "C" {
-extern "C" void __cdecl FUN_0041E700(void);
-extern "C" void __cdecl FUN_0041E710(void);
-extern "C" void __cdecl FUN_0041E720(int, int**);
-extern "C" void __cdecl FUN_0042CBF0(int*);
-extern "C" void __cdecl FUN_0042CC00(int*, int*);
-extern "C" int* __cdecl FUN_0042CC20(int*);
-extern "C" void __cdecl FUN_00405350(const char*, ...);
-
-extern "C" void __cdecl GEX_Target(void)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+extern int decl_pad_9;
+extern int decl_pad_10;
+extern CLDList gCollisionObjects_00463680;
+extern CLDList CollideObject_00463698[12];
+extern CLDList gFreeCollisionObjects_00463728;
+extern int gNumCollideObjects_004a23c0;
+extern int DAT_00463734;
+extern int DAT_0046368c;
+extern int DAT_00463690;
+extern int DAT_00463738;
+extern char s_Error_Object_on_MOVE_list_00459598[];
+extern char s_Error_Object_Typ_00459528[];
+extern char s_Error_Processing_collisions_00459568[];
+void __cdecl CLD_ResetCollides_0041e700(void);
+void __cdecl CLD_CallAllCollisions_0041e710(void);
+void __cdecl CLD_CollideWithRest_0041e720(int type, CLDNode *node);
+CLDNode *__cdecl LST_RemTail_0042cc20(CLDList *list);
+void __cdecl LST_Remove_0042cbf0(CLDNode *node);
+void __cdecl LST_AddTail_0042cc00(CLDList *list, CLDNode *node);
+void __cdecl assertfail_00405350(const char *format, ...);
+void __cdecl GEX_Target(void)
 {
-    FUN_0041E700();
-    *(int*)0x00463734 = 0;
-    *(int*)0x0046368C = 0;
-    *(int*)0x00463690 = 0;
-    *(int*)0x00463738 = 0;
-
-    int* node;
-    while ((node = FUN_0042CC20((int*)0x00463680)) != 0) {
-        int object = node[2];
-        if (object == 0) {
-            FUN_0042CBF0(node);
-            FUN_0042CC00((int*)0x00463728, node);
-            --*(int*)0x004A23C0;
+    CLDNode *node;
+    CLDNode *next;
+    int i;
+    CLDNode *cur;
+    CLD_ResetCollides_0041e700();
+    DAT_00463734 = 0;
+    DAT_0046368c = 0;
+    DAT_00463690 = 0;
+    DAT_00463738 = 0;
+    while ((node = LST_RemTail_0042cc20(&gCollisionObjects_00463680)) != 0) {
+        if (!node->obj) {
+            LST_Remove_0042cbf0(node);
+            LST_AddTail_0042cc00(&gFreeCollisionObjects_00463728, node);
+            gNumCollideObjects_004a23c0--;
         } else {
-            if ((*(unsigned int*)(object + 0x6C) & 0x100000) != 0)
-                FUN_00405350((const char*)0x00459598, *(int*)(object + 8));
-            unsigned int list = (*(unsigned int*)(object + 0x6C) & 0xF00) >> 8;
-            FUN_0042CC00((int*)(0x00463698 + list * 12), node);
+            if (node->obj->gob_flags & 0x100000)
+                assertfail_00405350(s_Error_Object_on_MOVE_list_00459598, node->obj->gob_type);
+            LST_AddTail_0042cc00(&CollideObject_00463698[(node->obj->gob_flags & 0xf00) >> 8], node);
         }
     }
-
-    for (int list = 0, listHead = 0x00463698;
-         listHead <= 0x0046371C;
-         ++list, listHead += 12) {
-        node = *(int**)listHead;
-        while (*node != 0) {
-            int* next = (int*)node[0];
-            int object = node[2];
-            if (object == 0) {
-                FUN_0042CBF0(node);
-                FUN_0042CC00((int*)0x00463728, node);
-                --*(int*)0x004A23C0;
+    for (i = 0; i <= 11; i++) {
+        cur = CollideObject_00463698[i].head;
+        while (cur->next) {
+            next = cur->next;
+            if (!cur->obj) {
+                LST_Remove_0042cbf0(cur);
+                LST_AddTail_0042cc00(&gFreeCollisionObjects_00463728, cur);
+                gNumCollideObjects_004a23c0--;
             } else {
-                if ((*(unsigned int*)(object + 0x6C) & 0x100000) != 0)
-                    FUN_00405350((const char*)0x00459528, *(int*)(object + 8));
-                FUN_0041E720(list, (int**)node);
+                if (cur->obj->gob_flags & 0x100000)
+                    assertfail_00405350(s_Error_Object_Typ_00459528, cur->obj->gob_type);
+                CLD_CollideWithRest_0041e720(i, cur);
             }
-            node = next;
+            cur = next;
         }
-        int freeList = *(int*)0x00463730;
-        if (freeList != 0 && *(int*)freeList == (int)node) {
-            FUN_00405350((const char*)0x00459568, list);
-        }
+        if (gFreeCollisionObjects_00463728.tailPred->next == cur)
+            assertfail_00405350(s_Error_Processing_collisions_00459568, i);
     }
-    FUN_0041E710();
+    CLD_CallAllCollisions_0041e710();
 }
 }

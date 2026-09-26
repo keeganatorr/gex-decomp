@@ -1,29 +1,23 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00429B80.cpp
-// Historical source SHA256: fa4926cdde4f6e0671f32228fa1c61b88655914adbac0ea3b323d7684d87746b
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    struct GXObject *gob_next;  /* 0x00 gob_node.next */
+    struct GXObject *gob_prev;  /* 0x04 */
+    int gob_type;               /* 0x08 */
+    unsigned char _pad0[0x90];
+    int gob_work1;              /* 0x9c */
+} GXObject;
+typedef struct ObjectList { GXObject *head; int a; int b; } ObjectList;
 extern "C" {
-extern "C" { extern int DAT_004A2964; }
-extern "C" void __cdecl FUN_004339C0(void**);
-
-extern "C" int __cdecl GEX_Target(void** p)
+extern int level_004a2964;
+extern ObjectList ListType_ARRAY_004a28a0[10];
+GXObject * __cdecl GEX_Target(void)
 {
-    int* base = (int*)0x004A28A0;
-    
-    while ((int)base < 0x004A2918) {
-        int* node = (int*)*base;
-        if (node != 0 && *node != 0) {
-            while (node != 0) {
-                if (node[2] == 0xdc) {
-                    int val = node[0x27];
-                    if (val == DAT_004A2964 || (val >= 0x31 && val <= 0x36)) {
-                        FUN_004339C0(p);
-                        return 1;
-                    }
-                }
-                node = (int*)*node;
-            }
-        }
-        base += 3;
-    }
+    ObjectList *list;
+    GXObject *gob;
+    for (list = ListType_ARRAY_004a28a0; list < &ListType_ARRAY_004a28a0[10]; list++)
+        for (gob = list->head; gob->gob_next; gob = gob->gob_next)
+            if (gob->gob_type == 0xdc && gob->gob_work1 != level_004a2964 && gob->gob_work1 >= 0x31 && gob->gob_work1 <= 0x36)
+                return gob;
     return 0;
 }
 }

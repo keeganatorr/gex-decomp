@@ -1,102 +1,128 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00435760.cpp
-// Historical source SHA256: a49318eb4ca8b9f3814469b8de901098107777efd27aeb51386fb9dd9bed0239
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct Flags2 {
+    unsigned int low:8;
+    unsigned int hit:1;       /* bit 8 */
+    unsigned int wasHit:1;    /* bit 9 */
+    unsigned int high:22;
+} Flags2;
+typedef struct GXObject {
+    unsigned char _pad0[0xc];
+    void *gob_objectLoadData;   /* 0x0c */
+    unsigned char _pad10[0x50 - 0x10];
+    int gob_currentFrameGroup;  /* 0x50 */
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad58[0x14];
+    unsigned int gob_flags;     /* 0x6c */
+    int gob_state;              /* 0x70 */
+    unsigned char _pad74[4];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    unsigned char _pad80[0x8c - 0x80];
+    int gob_yVel;               /* 0x8c */
+    unsigned char _pad90[0x98 - 0x90];
+    int gob_work0;              /* 0x98 */
+    int gob_work1;              /* 0x9c */
+    int gob_work2;              /* 0xa0 */
+    unsigned char _padA4[0xac - 0xa4];
+    int gob_work5;              /* 0xac */
+    int gob_work6;              /* 0xb0 */
+    unsigned int gob_work7;     /* 0xb4 */
+    unsigned char _padB8[0xd4 - 0xb8];
+    int gob_xold;               /* 0xd4 */
+    int gob_yold;               /* 0xd8 */
+    int gob_oldContourDist;     /* 0xdc */
+    Flags2 gob_flags2;          /* 0xe0 */
+    int gob_leftEdge;           /* 0xe4 */
+    int gob_rightEdge;          /* 0xe8 */
+    int gob_topEdge;            /* 0xec */
+    int gob_bottomEdge;         /* 0xf0 */
+    int gob_oldGroup;           /* 0xf4 */
+    int gob_oldIndex;           /* 0xf8 */
+    unsigned int gob_oldFlags;  /* 0xfc */
+    unsigned char _pad100[0x10];
+    struct GXObject *gob_platform;  /* 0x110 */
+    int gob_platHitType;        /* 0x114 */
+} GXObject;
 extern "C" {
+extern void *GEX_pGlob_004a2ad4;
+extern void *M1_CurrentLevel_004a2990;
 extern int CAMERA_XPos_004a2a38;
 extern int CAMERA_YPos_004a2a1c;
-extern int FUN_004A2AD4;
 extern int DAT_0045b7cc;
 extern int DAT_0045b7d0;
-extern int DAT_0045b7d8_framecount_;
+extern int DAT_0045b7d8_framecount_[];
 extern int DAT_0045b7b0;
 extern int DAT_0045b7b8;
 extern int DAT_0045b798;
 extern int DAT_0045b7a0;
 extern int DAT_0045b7a4;
-extern int FUN_004A2990;
-
-extern "C" int __cdecl FUN_0040FCE0(int *);
-extern "C" void __cdecl FUN_00420770_Movement_unk(int *, int);
-extern "C" void __cdecl FUN_0040F260(int *);
-extern "C" void __cdecl FUN_0040F2A0(int *);
-extern "C" int __cdecl FUN_0041A0A0(int *, int);
-extern "C" void __cdecl FUN_0041A160(int *, int *);
-extern "C" void __cdecl FUN_00419A80(int *);
-
-extern "C" void __cdecl GEX_Target(int *param_1)
+int __cdecl OBI_CheckRemoveObject_0040fce0(GXObject *gob);
+void __cdecl FUN_00420770_Movement_unk(GXObject *gob, int type);
+void __cdecl GOB_PhysicsStepX_0040f260(GXObject *gob);
+void __cdecl GOB_PhysicsStepY_0040f2a0(GXObject *gob);
+int __cdecl GOB_LandedOnContours_0041a0a0(GXObject *gob, int offset);
+void __cdecl GOB_LandedOnContoursWithOffset_0041a160(void *level, GXObject *gob);
+void __cdecl GOB_Remove_00419a80(GXObject *gob);
+void __cdecl GEX_Target(GXObject *gob)
 {
-    int pGVar1;
-    int iVar2;
-
-    param_1[0x35] = param_1[0x1e];
-    param_1[0x36] = param_1[0x1f];
-    param_1[0x3f] = param_1[0x1b];
-    param_1[0x3d] = param_1[0x14];
-    param_1[0x3e] = param_1[0x15];
-    param_1[0x39] = 0;
-    pGVar1 = param_1[0x38];
-    param_1[0x3a] = 0;
-    param_1[0x3b] = 0;
-    param_1[0x3c] = 0;
-    pGVar1 = (pGVar1 * 2 ^ (unsigned int)pGVar1) & 0x200 ^ (unsigned int)pGVar1;
-    param_1[0x38] = pGVar1;
-    param_1[0x38] = (unsigned int)pGVar1 & 0xfffffeff;
-    iVar2 = FUN_0040FCE0(param_1);
-    if (iVar2 != 0) goto FUN_0043594F;
-    if (param_1[0x1c] == 0) {
-        if (DAT_0045b7cc != 0) {
-            param_1[0x1c] = 1;
-            iVar2 = *(int *)((int)&DAT_0045b7d8_framecount_ + param_1[0x26] * 4);
-            param_1[0x15] = 0;
-            param_1[0x27] = 0;
-            param_1[0x14] = iVar2 + 0xb;
-            return;
-        }
-        if (DAT_0045b7d0 != 0) {
-            param_1[0x1e] = param_1[0x2b] + CAMERA_XPos_004a2a38;
-            param_1[0x1f] = param_1[0x2c] + CAMERA_YPos_004a2a1c;
-        }
-        FUN_00420770_Movement_unk(param_1, 0x45);
-        param_1[3] = FUN_004A2AD4;
-        pGVar1 = param_1[0x27] + DAT_0045b7b0;
-        param_1[0x27] = pGVar1;
-        if (0x10000 < pGVar1) {
-            param_1[0x27] = pGVar1 - 0x80;
-            param_1[0x28] = param_1[0x28] + 1;
-        }
-        if (((unsigned int)param_1[0x2d] & 2) != 0) {
-            FUN_0040F260(param_1);
-            FUN_0040F2A0(param_1);
-            iVar2 = FUN_0041A0A0(param_1, DAT_0045b798);
-            if (iVar2 != 0) {
-                pGVar1 = DAT_0045b7a0 - param_1[0x23];
-                if (DAT_0045b7a4 <= DAT_0045b7a0 - param_1[0x23]) {
-                    pGVar1 = DAT_0045b7a4;
-                }
-                param_1[0x23] = pGVar1;
-                FUN_0041A160((int *)FUN_004A2990, param_1);
-                param_1[0x1f] = param_1[0x1f] - DAT_0045b798;
+    int v;
+    gob->gob_xold = gob->gob_xpos;
+    gob->gob_yold = gob->gob_ypos;
+    gob->gob_oldFlags = gob->gob_flags;
+    gob->gob_oldGroup = gob->gob_currentFrameGroup;
+    gob->gob_oldIndex = gob->gob_currentFrameIndex;
+    gob->gob_leftEdge = 0;
+    gob->gob_rightEdge = 0;
+    gob->gob_topEdge = 0;
+    gob->gob_bottomEdge = 0;
+    gob->gob_flags2.wasHit = gob->gob_flags2.hit;
+    gob->gob_flags2.hit = 0;
+    if (!OBI_CheckRemoveObject_0040fce0(gob)) {
+        switch (gob->gob_state) {
+        case 0:
+            if (DAT_0045b7cc) {
+                gob->gob_state = 1;
+                gob->gob_currentFrameGroup = DAT_0045b7d8_framecount_[gob->gob_work0] + 0xb;
+                gob->gob_currentFrameIndex = 0;
+                gob->gob_work1 = 0;
+                return;
             }
+            if (DAT_0045b7d0) {
+                gob->gob_xpos = gob->gob_work5 + CAMERA_XPos_004a2a38;
+                gob->gob_ypos = gob->gob_work6 + CAMERA_YPos_004a2a1c;
+            }
+            FUN_00420770_Movement_unk(gob, 0x45);
+            gob->gob_objectLoadData = GEX_pGlob_004a2ad4;
+            if ((gob->gob_work1 += DAT_0045b7b0) > 0x10000) {
+                gob->gob_work1 -= 0x10000;
+                gob->gob_work2++;
+            }
+            if (gob->gob_work7 & 2) {
+                GOB_PhysicsStepX_0040f260(gob);
+                GOB_PhysicsStepY_0040f2a0(gob);
+                if (GOB_LandedOnContours_0041a0a0(gob, DAT_0045b798)) {
+                    v = DAT_0045b7a0 - gob->gob_yVel;
+                    gob->gob_yVel = v < DAT_0045b7a4 ? v : DAT_0045b7a4;
+                    GOB_LandedOnContoursWithOffset_0041a160(M1_CurrentLevel_004a2990, gob);
+                    gob->gob_ypos -= DAT_0045b798;
+                }
+            }
+            gob->gob_currentFrameGroup = 0;
+            gob->gob_currentFrameIndex = gob->gob_work0;
+            break;
+        case 1:
+            if ((gob->gob_work1 += DAT_0045b7b8) > 0x10000) {
+                gob->gob_work1 -= 0x10000;
+                if (gob->gob_currentFrameIndex == 4)
+                    GOB_Remove_00419a80(gob);
+                else
+                    gob->gob_currentFrameIndex++;
+            }
+            break;
         }
-        param_1[0x14] = 0;
-        pGVar1 = param_1[0x26];
     }
-    else {
-        if (param_1[0x1c] != 1) goto FUN_0043594F;
-        pGVar1 = param_1[0x27] + DAT_0045b7b8;
-        param_1[0x27] = pGVar1;
-        if (pGVar1 < 0x10001) goto FUN_0043594F;
-        param_1[0x27] = pGVar1 - 0x80;
-        if (param_1[0x15] == 4) {
-            FUN_00419A80(param_1);
-            goto FUN_0043594F;
-        }
-        pGVar1 = param_1[0x15] + 1;
-    }
-    param_1[0x15] = pGVar1;
-FUN_0043594F:
-    if (param_1[0x45] == -1) {
-        param_1[0x44] = 0;
-    }
-    param_1[0x45] = -1;
+    if (gob->gob_platHitType == -1)
+        gob->gob_platform = 0;
+    gob->gob_platHitType = -1;
 }
 }

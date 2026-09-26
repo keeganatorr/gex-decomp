@@ -18,7 +18,7 @@ void __cdecl GEX_Target(int *objectType, int *param_2)
 {
     int *loaded_gOb;
     unsigned int uVar6;
-    register unsigned int priority;
+    unsigned int priority;
     int pGVar2;
     int pGVar5;
     int *puVar4;
@@ -40,8 +40,8 @@ void __cdecl GEX_Target(int *objectType, int *param_2)
         FUN_0042CC00(&FUN_004A28A0 + priority * 3, (int)loaded_gOb);
         pGVar2 = objectType[1] & 0x3fff;
         loaded_gOb[2] = pGVar2;
-        uVar6 = objectType[2] & 0xffff;
         obs_entry = &FUN_0045CA38 + pGVar2 * 6;
+        uVar6 = objectType[2] & 0xffff;
         if (uVar6 != 0) {
             loaded_gOb[3] = *(int *)(FUN_004A2934 + uVar6 * 8 - 8);
         }

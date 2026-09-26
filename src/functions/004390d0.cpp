@@ -1,18 +1,20 @@
+// Field names from Ghidra's GXObject layout (evidence, not proof). Only the
+// members this function touches are declared; the rest is padding.
+typedef struct GXObject {
+    unsigned char _pad0[0x8c];
+    int gob_yVel;     /* 0x8c */
+    int gob_maxyVel;  /* 0x90 */
+    int gob_yAccl;    /* 0x94 */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_00438470_MoveGuillotine(void*, int);
-
-extern "C" void __cdecl GEX_Target(int* p)
+extern void __cdecl FUN_00438470_MoveGuillotine(GXObject *, int);
+void __cdecl GEX_Target(GXObject *gob)
 {
-    int a = p[0x25];
-    int b = p[0x23];
-    int sum = b + a;
-    int bound = p[0x24];
-    p[0x23] = sum;
-    if (sum > bound) {
-        p[0x23] = bound;
-    } else if (sum < -bound) {
-        p[0x23] = -bound;
-    }
-    FUN_00438470_MoveGuillotine(p, p[0x23]);
+    gob->gob_yVel += gob->gob_yAccl;
+    if (gob->gob_yVel > gob->gob_maxyVel)
+        gob->gob_yVel = gob->gob_maxyVel;
+    else if (gob->gob_yVel < -gob->gob_maxyVel)
+        gob->gob_yVel = -gob->gob_maxyVel;
+    FUN_00438470_MoveGuillotine(gob, gob->gob_yVel);
 }
 }

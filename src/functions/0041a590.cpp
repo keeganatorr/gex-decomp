@@ -1,21 +1,44 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041A590.cpp
-// Historical source SHA256: a3e9ccc68c0c4c42d44c3beee017523f96e79dd28e4e461b1e5d14c02d7ab80e
 extern "C" {
-extern "C" { extern unsigned char BYTE_ARRAY_004a25d0[]; }
-extern "C" { extern unsigned char BYTE_ARRAY_004a2540[]; }
-extern "C" { extern int FUN_004A2660[]; }
-
-extern "C" int __cdecl GEX_Target(unsigned int RemoteLevelID)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+extern int decl_pad_9;
+extern int decl_pad_10;
+extern int decl_pad_11;
+extern int decl_pad_12;
+extern int decl_pad_13;
+extern int decl_pad_14;
+extern int decl_pad_15;
+extern int decl_pad_16;
+extern unsigned char BYTE_ARRAY_004a25d0[];
+extern unsigned char BYTE_ARRAY_004a2540[];
+extern unsigned int gCollectibles_004a2660[6];
+int __cdecl GEX_Target(unsigned int RemoteLevelID)
 {
-    if (BYTE_ARRAY_004a25d0[RemoteLevelID] != 0 || (BYTE_ARRAY_004a2540[RemoteLevelID] & 1) != 0) {
-        return 1;
-    }
-    for (int* p = FUN_004A2660; p <= &FUN_004A2660[0x17 / 4]; p++) {
-        unsigned int v = *p & 0xff;
-        if ((v == 0 || v == 1 || v == 2) && ((*p & 0xffff00) >> 8) == RemoteLevelID) {
+    int status;
+    int i;
+    unsigned int kind;
+    if (BYTE_ARRAY_004a25d0[RemoteLevelID] || (BYTE_ARRAY_004a2540[RemoteLevelID] & 1))
+        status = 1;
+    else
+        status = 0;
+    if (status)
+        return status;
+    for (i = 0; i < 6; i++) {
+        kind = gCollectibles_004a2660[i] & 0xff;
+        if ((kind == 0 || kind == 1 || kind == 2) && ((gCollectibles_004a2660[i] & 0xffff00) >> 8) == RemoteLevelID)
             return 2;
-        }
     }
-    return 0;
+    return status;
 }
 }

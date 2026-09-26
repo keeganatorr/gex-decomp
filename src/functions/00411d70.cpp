@@ -13,7 +13,7 @@ void __cdecl GEX_Target(int* param_1)
     int pGVar1;
     int pGVar2;
 
-    uVar3 = ((unsigned int)param_1[0x1b] & 0x80000000) >> 0x1c
+    uVar3 = (((unsigned int)param_1[0x1b] & 0x80000000) ? 8 : 0)
           | (int)param_1[0x31] >> 0x15;
     FUN_00420BC0(param_1);
     param_1[0x26] = 0;

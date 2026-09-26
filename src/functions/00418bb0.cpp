@@ -1,10 +1,16 @@
-typedef unsigned char byte;
+// Script field block of a GXObject (0x68 in Ghidra is gob_points; scripts index words from there).
+typedef struct GXObject {
+    unsigned char _pad0[0x68];
+    int gob_fields[61];                 /* 0x68 */
+} GXObject;
 extern "C" {
-extern void *DAT_0049FB94;
-byte *__cdecl GEX_Target(byte *cursor, void **object)
+extern int DAT_0049fb94;
+unsigned char * __cdecl GEX_Target(unsigned char *script, GXObject *gob)
 {
-    byte *value = cursor;
-    object[*value + 0x1a] = DAT_0049FB94;
-    return value + 1;
+    int *fields;
+    int field = *script++;
+    fields = gob->gob_fields;
+    fields[field] = DAT_0049fb94;
+    return script;
 }
 }

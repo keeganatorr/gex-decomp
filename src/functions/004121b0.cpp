@@ -1,45 +1,40 @@
+typedef struct CLDEdges {
+    int points[6];
+    int left;
+    int right;
+    int top;
+    int bottom;
+} CLDEdges;
+typedef struct GXObject {
+    unsigned char _pad0[0x6c];
+    unsigned int gob_flags;     /* 0x6c */
+    unsigned char _pad70[0x78 - 0x70];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    unsigned char _pad80[0xc4 - 0x80];
+    int gob_angle;              /* 0xc4 */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_00420BC0(void**);
-extern "C" int __cdecl FUN_0041CB80(void**, int*);
-extern "C" void __cdecl FUN_00411ff0(void**, int, int);
-extern void** FUN_004A2864;
-
-extern "C" void __cdecl GEX_Target(void** param1, int param2, int param3)
+extern GXObject *gPlayerPlatform_004a2864;
+void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
+int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *gob, CLDEdges *edges);
+void __cdecl FUN_00411ff0_SideInside90Trans(GXObject *gex, int x, int y);
+void __cdecl GEX_Target(GXObject *gex, int x, int y)
 {
-    struct {
-        int pad[6];
-        int local_10;
-        int local_c;
-        int local_8;
-        int local_4;
-    } L;
-
-    char* p = (char*)param1;
-
-    FUN_00420BC0(param1);
-    if (FUN_004A2864 != 0)
-    {
-        int iVar1 = FUN_0041CB80(FUN_004A2864, L.pad);
-        if (iVar1 != 0)
-        {
-            unsigned u = *(unsigned*)(p + 0x6c);
-            int v = *(int*)(p + 0xc4);
-            unsigned ang = ((u & 0x80000000u) >> 28) | (unsigned)(v >> 21);
-
-            if (param2 != 0)
-            {
-                void* pGVar2;
-                if (ang != 0xe)
-                    pGVar2 = (void*)(L.local_10 - 0x180000);
-                else
-                    pGVar2 = (void*)(L.local_c + 0x180000);
-                *(void**)(p + 0x78) = pGVar2;
-            }
-            if (param3 != 0)
-                *(void**)(p + 0x7c) = (void*)(L.local_4 + 0x180000);
-
-            FUN_00411ff0(param1, (param2 == 0) ? 0 : 2, (param3 == 0) ? 0 : 2);
+    CLDEdges edges;
+    int dir;
+    GOB_ResetState_00420bc0(gex);
+    if (gPlayerPlatform_004a2864 && CLD_ComputeAngleEdges_0041cb80(gPlayerPlatform_004a2864, &edges)) {
+        dir = (gex->gob_flags & 0x80000000 ? 8 : 0) | gex->gob_angle >> 21;
+        if (x) {
+            if (dir != 0xe)
+                gex->gob_xpos = edges.left - 0x180000;
+            else
+                gex->gob_xpos = edges.right + 0x180000;
         }
+        if (y)
+            gex->gob_ypos = edges.bottom + 0x180000;
+        FUN_00411ff0_SideInside90Trans(gex, x ? 2 : 0, y ? 2 : 0);
     }
 }
 }

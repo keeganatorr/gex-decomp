@@ -1,0 +1,140 @@
+{
+ "format": "pc-decomp-historical-lessons-v1",
+ "toolchainId": "vc40-cl-10.00.5270",
+ "source": {
+  "path": "docs/knowledge/recipes.json",
+  "note": "Restates the executable knowledge-base recipes (docs/knowledge/) for schema-7 project memory. tests/knowledge_checks.py re-verifies each recipe's checks with the pinned compiler; importing this manifest re-verifies nothing and cited functions are linked only to what their retained proof artifacts establish."
+ },
+ "lessons": [
+  {
+   "key": "gex-symbol-numbering-padding",
+   "title": "Operand order, register choice and schedule follow declaration context, not the body",
+   "summary": "When the candidate already has the target's instructions but a compare's operands are mirrored (cmp ecx,eax vs cmp eax,ecx with the opposite jcc), SIB base/index are swapped, a scratch register differs, or one independent instruction moved, CL 10.00 is choosing by internal symbol numbering. Semantic rewrites of the body (a==b vs b==a, locals, register, early return, types) do not move it; 96 such variants failed on one function.",
+   "trigger": [
+    "shape:operand-order",
+    "op:cmp"
+   ],
+   "action": "Keep the body byte-for-byte. Add unused data declarations such as `extern int decl_pad_0; extern int decl_pad_1;` (1 to 16 of them; 10 and 14 were needed) before or between the existing top-level declarations, or reorder the existing declarations, and change only that between turns. Label them as compiler-state padding in a comment.",
+   "expectedEffect": "The mirrored compare, swapped SIB operands or moved instruction flips to the target's form with every other byte unchanged.",
+   "limits": "Only helps once the body compiles to the target's instruction multiset. Names and data types of the padding do not matter; function prototypes count differently from data declarations.",
+   "verification": "Strict relocated byte comparison of the whole function through the durable queue.",
+   "caveats": [
+    "Padding reproduces compiler state; it is not recovered source.",
+    "Exact bytes do not establish the original declarations or their order."
+   ],
+   "functions": [
+    "00419520",
+    "00423800",
+    "00429190",
+    "0042e8b0",
+    "00437010",
+    "00439090",
+    "0040f1d0",
+    "004018b0",
+    "0041e7e0",
+    "004195d0",
+    "004404b0",
+    "00429b40",
+    "00433590"
+   ]
+  },
+  {
+   "key": "gex-symbol-numbering-register-choice",
+   "title": "A different scratch register with identical instructions is the same symbol-numbering effect",
+   "summary": "Candidates that differ only by register renaming or instruction order, with the same length, were fixed by unused declarations or declaration reordering rather than by body edits.",
+   "trigger": [
+    "shape:register-rename"
+   ],
+   "action": "Keep the body. Try unused `extern int decl_pad_N;` declarations (1 to 8) at the top, then between existing declarations, then reorder existing declarations.",
+   "expectedEffect": "Register assignment and schedule change as a whole; one variant reproduces the target.",
+   "limits": "Semantic differences must be fixed first.",
+   "verification": "Strict relocated byte comparison of the whole function through the durable queue.",
+   "caveats": [
+    "Not every register difference is reachable this way; about one in seven near misses were fixed."
+   ],
+   "functions": [
+    "00437010",
+    "004196e0"
+   ]
+  },
+  {
+   "key": "gex-declaration-order",
+   "title": "Declaring a callee before a global fixed a compare that 96 body variants could not",
+   "summary": "0042dcf0 compared its argument with a global. With the global declared before the callee's prototype the compiler loaded the global first; declaring the callee first reproduced the target exactly. In 004237c0 four globals summed in a loop loaded in the exact reverse of their declaration order; source term order was canonicalised.",
+   "trigger": [
+    "shape:operand-order"
+   ],
+   "action": "Permute the order of the existing extern declarations (single moves first) before touching the function body.",
+   "expectedEffect": "Load and compare operand order match the target.",
+   "limits": "Effect is not predictable from source order; search it.",
+   "verification": "Strict relocated byte comparison of the whole function through the durable queue.",
+   "caveats": [
+    "Declaration order is compiler state, not recovered header content."
+   ],
+   "functions": [
+    "0042dcf0",
+    "0043b9e0",
+    "004196e0",
+    "004237c0"
+   ]
+  },
+  {
+   "key": "gex-natural-field-access",
+   "title": "Re-read object fields through the pointer instead of caching Ghidra-style locals",
+   "summary": "A velocity clamp written as Ghidra pseudocode with every field cached in a local mirrored one compare. Written as gob->yVel += gob->yAccl; if (gob->yVel > gob->maxyVel) gob->yVel = gob->maxyVel; else if (gob->yVel < -gob->maxyVel) gob->yVel = -gob->maxyVel; it matched exactly. Ghidra's GXObject layout names these members; Ghidra's GXObject** parameter type is an analysis error. The same natural rewrite fixed 004213f0, whose Ghidra goto-shaped control flow had inverted one conditional jump.",
+   "trigger": [
+    "mem:rmw"
+   ],
+   "action": "Declare a local struct with the members the function touches (padding elsewhere) and write the updates as compound assignments and re-reads through the object pointer.",
+   "expectedEffect": "Load/compare order follows the natural expression trees of the original.",
+   "limits": "Member names and types come from Ghidra and are evidence, not proof.",
+   "verification": "Strict relocated byte comparison of the whole function through the durable queue.",
+   "caveats": [
+    "Exact bytes do not establish member types."
+   ],
+   "functions": [
+    "004390d0",
+    "004213f0"
+   ]
+  },
+  {
+   "key": "gex-narrow-mask-shift-limit",
+   "title": "and reg,0x80000000 before shr is not reproducible with CL 10.00 /O2",
+   "summary": "The target keeps the narrow mask; CL 10.00 widens it to 0x8fffffff over bits the following shift discards. Every tried form fails: (x>>31)<<3, (x&0x80000000)>>28, division, split statements, unsigned bitfields, /O1 /Ox /G3 /G4 /Op. 31 unmatched functions contain the idiom and no exact function does.",
+   "trigger": [
+    "shape:immediate",
+    "op:and"
+   ],
+   "polarity": "negative",
+   "action": "Do not spend turns on this mask once the rest matches. Report the remaining difference as a toolchain limit.",
+   "expectedEffect": "No change is expected under this toolchain.",
+   "limits": "Likely needs the original compiler (VC++ 4.2, CL 10.20); the executable was linked by linker 4.20 on 1996-09-12.",
+   "verification": "Negative search with the pinned compiler; zero proofs in the family.",
+   "caveats": [
+    "Not proof that no source form exists."
+   ],
+   "functions": [
+    "00412750",
+    "00411ff0"
+   ]
+  },
+  {
+   "key": "gex-stack-frame-aggregate",
+   "title": "A different stack frame size means a local aggregate of the wrong size",
+   "summary": "When sub esp,N and every [esp+k] displacement differ but instructions match, Ghidra has usually split one out-parameter buffer into an array plus stray locals that the source never writes. Sizing one buffer from the frame and the lea passed to the callee fixed 00421820 exactly.",
+   "trigger": [
+    "shape:displacement"
+   ],
+   "action": "Replace the split locals with one buffer of the frame's size and read the fields as its elements.",
+   "expectedEffect": "Frame size and all esp displacements match.",
+   "limits": "Only when the instruction sequence already matches.",
+   "verification": "Strict relocated byte comparison of the whole function through the durable queue.",
+   "caveats": [
+    "Buffer element types are not proved by exact bytes."
+   ],
+   "functions": [
+    "00421820"
+   ]
+  }
+ ]
+}

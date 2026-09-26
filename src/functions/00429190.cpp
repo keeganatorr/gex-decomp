@@ -1,4 +1,14 @@
 extern "C" {
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern "C" int decl_pad_0;
+extern "C" int decl_pad_1;
+extern "C" int decl_pad_2;
+extern "C" int decl_pad_3;
+extern "C" int decl_pad_4;
+extern "C" int decl_pad_5;
 int __cdecl abs(int);
 
 int __cdecl GEX_Target(int param_1, int param_2, int param_3, int param_4)
@@ -18,7 +28,7 @@ int __cdecl GEX_Target(int param_1, int param_2, int param_3, int param_4)
     if (dy > 0)
         flags |= 2;
 
-    if (adx > ady) {
+    if (ady < adx) {
         flags |= 4;
         if ((adx >> 1) > ady) {
             flags |= 8;

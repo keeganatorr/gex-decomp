@@ -1,5 +1,16 @@
 # Gex decompilation
 
+## Done — hand decompilation and executable knowledge base (Claude, 2026-09-25/26)
+- [x] Twenty-one functions exact by hand through the durable queue: **773 exact / 66,802 bytes** (+21 / +3,449), no config/binding/Ghidra edits (`docs/claude-hand-decomp.md`)
+- [x] Fast scratch loop: `tools/probe.py` (compile + relocated diff, ~0.1 s warm), `tools/perturb.py` (declaration orders + padding + front end), `tools/ghidra_struct.py`, `tools/idiom_scan.py`
+- [x] Executable knowledge base `docs/knowledge/` with `recipes.json` checks re-run by `tests/knowledge_checks.py`; schema-7 manifest `docs/memory/knowledge-lessons.json`
+- [ ] Deploy pc-decomp `loop-perturbation-v1` (immutable stage + restart), then opt in with `policy.perturbationSearch` in project.json; campaigns still need their own approval
+- [ ] Point the Claude desktop Ghidra MCP at the shared bridge (`~/src/ghidra-mcp`, port 8089); its config still runs the old bridge against dead port 8080
+- [ ] Obtain VC++ 4.2 (CL 10.20) and pin it as a second, per-function toolchain; retry the `narrow-mask-shift` family (31 functions) and the unreached register/schedule near misses under it
+- [ ] Put Ghidra struct layouts (members touched by the function) into loop prompts; natural field access fixed three stuck functions on the first compile
+- [ ] `0042de50`: the retained 93.9% best passes its arguments swapped; the correct body scores 81.8%. Needs a semantic check before best-score preservation, and a register lever not yet found
+- [ ] CRT family (78 unmatched, 19.7 KB) — deprioritised by the operator. CRT source compiles exact as C `/O2 /G3` for 16 of 19 tried; drafts and the bindings they need are in `.work/claude-hand-decomp-20260925/crt-leads/`
+
 ## Done — twenty closest functions, DeepSeek V4.1 Flash/max (Stopped)
 - [x] One approved 30-minute run, ten lanes, 600 s turns: 51 jobs, no exact gain, 752 exact / 63,353 bytes preserved, no working-source regression (`docs/deepseek-twenty-current.md`)
 - [x] Fix the lease mismatch: a reply the host did not keep now starts a fresh conversation instead of pausing the campaign; no per-reply limit under a function budget; `fullFunctionTime`; Ghidra outages pause instead of blocking; cut-off replies diagnosed (`../pc-decomp/docs/function-time.md`)

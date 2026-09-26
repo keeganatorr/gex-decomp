@@ -1,63 +1,82 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0040E570.cpp
-// Historical source SHA256: 293b8340d97947385d459a4f5e85f6bd97e793a158cc579a93bbece0fe90b75f
+typedef struct PalData { unsigned char _pad0[0xc]; unsigned short *colors; } PalData;
+typedef struct FrameImage { unsigned char _pad0[0x18]; PalData **pal; } FrameImage;
+typedef struct FrameGroup { FrameImage *image; } FrameGroup;
+typedef struct LoadData { FrameGroup **groups; } LoadData;
+typedef struct GXObject {
+    unsigned char _pad0[0xc];
+    LoadData *gob_objectLoadData;    /* 0x0c */
+    unsigned char _pad10[0x50 - 0x10];
+    int gob_currentFrameGroup;       /* 0x50 */
+    int gob_currentFrameIndex;       /* 0x54 */
+    unsigned char _pad58[0x78 - 0x58];
+    int gob_x;                       /* 0x78 */
+    int gob_y;                       /* 0x7c */
+    unsigned char _pad80[0x98 - 0x80];
+    int gob_state;                   /* 0x98 */
+    int gob_phase;                   /* 0x9c */
+    unsigned char _pada0[0xa4 - 0xa0];
+    int gob_yOffset;                 /* 0xa4 */
+    unsigned char _pada8[0xc0 - 0xa8];
+    unsigned short *gob_palette;     /* 0xc0 */
+    unsigned char _padc4[0x118 - 0xc4];
+    int gob_palHeader;               /* 0x118 */
+    unsigned short gob_pal[16];      /* 0x11c */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_00444590(int*);
-extern "C" { extern int FUN_004A2964; }
-
-extern "C" void __cdecl GEX_Target(int* object)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int level_004a2964;
+void __cdecl GOB_DisplayObject_00444590(GXObject *gob);
+void __cdecl GEX_Target(GXObject *gob)
 {
-    short* destination = (short*)((char*)object + 0x11E);
-    int sourceTable = object[3];
-    if (sourceTable == 0) return;
-    sourceTable = *(int*)sourceTable;
-    if (sourceTable == 0) return;
-    sourceTable = *(int*)(sourceTable + object[0x14] * 4);
-    if (sourceTable == 0) return;
-    sourceTable = *(int*)sourceTable;
-    if (sourceTable == 0) return;
-    sourceTable = *(int*)(sourceTable + 0x18);
-    if (sourceTable == 0) return;
-    sourceTable = *(int*)sourceTable;
-    if (sourceTable == 0) return;
-    short* source = *(short**)(sourceTable + 0x0C);
-    if (source == 0) return;
-
-    object[0x46] = 0xFFFFFF00;
-    *(short*)((char*)object + 0x11C) = *source;
-
-    if (object[0x26] == 0) {
-        for (int column = 0; column < 2; ++column) {
-            short last = destination[10];
-            destination[10] = destination[8];
-            destination[8] = destination[6];
-            destination[6] = destination[4];
-            destination[4] = destination[2];
-            destination[2] = destination[0];
-            destination[0] = last;
-            ++destination;
-        }
+    unsigned short *src;
+    unsigned short *dst;
+    unsigned short *palette;
+    unsigned short *pal;
+    unsigned short t;
+    int i;
+    int y;
+    int frame;
+    src = gob->gob_objectLoadData->groups[gob->gob_currentFrameGroup]->image->pal[0]->colors;
+    pal = gob->gob_pal;
+    ((int *)pal)[-1] = 0xffffff00;
+    *pal = *src++;
+    dst = pal + 1;
+    if (gob->gob_state) {
+        gob->gob_state = 0;
+        for (i = 15; i; i--)
+            *dst++ = *src++;
     } else {
-        object[0x26] = 0;
-        for (int index = 0; index < 0x0F; ++index)
-            *destination++ = *++source;
+        for (i = 2; i; i--) {
+            t = dst[10];
+            dst[10] = dst[8];
+            dst[8] = dst[6];
+            dst[6] = dst[4];
+            dst[4] = dst[2];
+            dst[2] = dst[0];
+            dst[0] = t;
+            dst++;
+        }
     }
-
-    int savedImage = object[0x30];
-    int savedY = object[0x1F];
-    int savedFlags = object[0x15];
-    object[0x30] = (int)((char*)object + 0x11C);
-    object[0x1F] = savedY - object[0x27] - 0x80000;
-    if (FUN_004A2964 == 0x86)
-        object[0x1F] = savedY - object[0x27] - 0x180000;
-    object[0x15] = 0;
-    object[0x1E] = 0x9F0000;
-    FUN_00444590(object);
-    object[0x1F] = savedY;
-    object[0x15] = savedFlags;
-    object[0x30] = savedImage;
-
-    if (object[0x29] != 0)
-        object[0x1F] = savedY + object[0x29];
-    object[0x27] = (object[0x27] + 0x70000) & 0x3F0000;
+    palette = gob->gob_palette;
+    y = gob->gob_y;
+    gob->gob_palette = pal;
+    frame = gob->gob_currentFrameIndex;
+    gob->gob_y = y - gob->gob_phase - 0x80000;
+    if (level_004a2964 == 0x86)
+        gob->gob_y -= 0x100000;
+    gob->gob_currentFrameIndex = 0;
+    gob->gob_x = 0x9f0000;
+    GOB_DisplayObject_00444590(gob);
+    gob->gob_y = y;
+    gob->gob_currentFrameIndex = frame;
+    gob->gob_palette = palette;
+    if (gob->gob_yOffset)
+        gob->gob_y = gob->gob_yOffset + y;
+    gob->gob_phase += 0x70000;
+    gob->gob_phase &= 0x3f0000;
 }
 }

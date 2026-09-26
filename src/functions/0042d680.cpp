@@ -1,15 +1,21 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0042D680.cpp
-// Historical source SHA256: fd5b0febd5bccdd5dd0a82d0383f7a1f72e45a7963e931c564982e515650b6c8
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x7c];
+    int gob_ypos;          /* 0x7c */
+    unsigned char _pad1[0x6c];
+    int gob_topEdge;       /* 0xec */
+    int gob_bottomEdge;    /* 0xf0 */
+    unsigned char _pad2[0x94];
+    int gob_checkYpos;     /* 0x188 */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_0042cc70_Object_unk(int, void**);
-
-extern "C" int __cdecl GEX_Target(void** param_1)
+extern void __cdecl FUN_0042cc70_Object_unk(int, GXObject *);
+int __cdecl GEX_Target(GXObject *gob)
 {
-    param_1[0x3c] = (void*)(((unsigned int)param_1[0x62] & 0xffe00000) + 0x200000);
-    param_1[0x1f] = (void*)((int)param_1[0x1f] + (0x200000 - ((unsigned int)param_1[0x62] & 0x1fffff)));
-    if (param_1[0x3b] != 0) {
-        FUN_0042cc70_Object_unk(0, param_1);
-    }
+    gob->gob_ypos += 0x200000 - (gob->gob_checkYpos & 0x1fffff);
+    gob->gob_bottomEdge = (gob->gob_checkYpos & 0xffe00000) + 0x200000;
+    if (gob->gob_topEdge)
+        FUN_0042cc70_Object_unk(0, gob);
     return 1;
 }
 }

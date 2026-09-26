@@ -1,28 +1,35 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00431640.cpp
-// Historical source SHA256: 0db5293eb521d6f268d82a326dcf0df028bea7d7c497eae5dac6f8d92dd59003
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x6c];
+    unsigned int gob_flags;              /* 0x6c */
+    unsigned char _pad1[0x28];
+    int gob_work0;                       /* 0x98 */
+    unsigned char _pad2[0x4];
+    int gob_work2;                       /* 0xa0 */
+    unsigned char _pad3[0xd0];
+    unsigned int *gob_phaClidWith;       /* 0x174 */
+    struct GXObject *gob_pgobClidWith;   /* 0x178 */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_0042f5f0(void**, int);
-extern "C" void __cdecl FUN_00437310(void**);
-
-extern "C" { extern int DAT_0045b130; }
-
-extern "C" void __cdecl GEX_Target(void** param_1, int* param_2)
+extern int DAT_0045b130;
+extern void __cdecl FUN_0042f5f0(GXObject *, int);
+extern void __cdecl RezOutObject_00437310(GXObject *);
+void __cdecl GEX_Target(GXObject *gob, int *hit)
 {
-    int iVar1;
-
-    if (*param_2 != 0 &&
-        param_1[0x26] == (void*)0x80 &&
-        ((*(unsigned char*)((int)param_1[0x5e] + 5) & 0xf) == 2) &&
-        ((unsigned int)(*(int**)param_1[0x5d])[0] & 0xffff) == 1 &&
-        (int)param_1[0x28] < 0) {
+    int i;
+    unsigned int kind, collision;
+    if (*hit && gob->gob_work0 == 0x80) {
+        kind = *gob->gob_phaClidWith & 0xffff;
+        collision = (gob->gob_pgobClidWith->gob_flags >> 8) & 0xf;
+        if (collision == 2 && kind == 1 && gob->gob_work0 == 0x80 && gob->gob_work2 < 0) {
         DAT_0045b130 = 1;
-        iVar1 = 0x14;
+        i = 20;
         do {
-            FUN_0042f5f0(param_1, 0);
-            iVar1 = iVar1 - 1;
-        } while (iVar1 != 0);
-        FUN_00437310(param_1);
-        param_1[0x28] = (void*)0x14;
+            FUN_0042f5f0(gob, 0);
+        } while (--i);
+        RezOutObject_00437310(gob);
+        gob->gob_work2 = 20;
+        }
     }
 }
 }

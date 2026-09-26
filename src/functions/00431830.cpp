@@ -1,4 +1,19 @@
 extern "C" {
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+extern int decl_pad_9;
+extern int decl_pad_10;
 int __cdecl FUN_0040F170(int, unsigned int, unsigned int);
 void __cdecl FUN_0042CEC0(int, void**, void (__cdecl *)(void), int);
 void __cdecl LAB_00431820(void);

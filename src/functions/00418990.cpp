@@ -1,9 +1,19 @@
+// Script field block of a GXObject (0x68 in Ghidra is gob_points; scripts index words from there).
+typedef struct GXObject {
+    unsigned char _pad0[0x68];
+    int gob_fields[61];                 /* 0x68 */
+    struct GXObject *gob_parent;        /* 0x15c */
+} GXObject;
 extern "C" {
-extern int DAT_0049FB90;
-unsigned char *__cdecl GEX_Target(unsigned char *cursor, unsigned int **object)
+extern int SCRIPT_WorkRegister_0049fb90;
+extern GXObject *DAT_0049fb94;
+unsigned char * __cdecl GEX_Target(unsigned char *script, GXObject *gob)
 {
-    DAT_0049FB90 = (int)object[cursor[0] + 0x1a] -
-                   (int)object[cursor[1] + 0x1a];
-    return cursor + 2;
+    int *fields;
+    int a = *script++;
+    int b = *script++;
+    fields = gob->gob_fields;
+    SCRIPT_WorkRegister_0049fb90 = fields[a] - fields[b];
+    return script;
 }
 }

@@ -4,6 +4,12 @@ extern "C" { extern int DAT_00459604; }
 extern "C" { extern void* DAT_00463680; }
 extern "C" { extern void* DAT_00463728; }
 extern "C" { extern int DAT_004A23C0; }
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern "C" int decl_pad_0;
+extern "C" int decl_pad_1;
 extern "C" void __cdecl FUN_00405350(int, int);
 extern "C" void __cdecl FUN_00405390(int);
 extern "C" void* __cdecl FUN_0042CC20(void**);

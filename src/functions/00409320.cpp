@@ -1,18 +1,15 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00409320.cpp
-// Historical source SHA256: 2e14167be65e60d6368b86080208c15f12f21d849e12b91b33ebd8570532ded1
+typedef struct Directory { int count; void *entries; void *file; } Directory;
 extern "C" {
-extern "C" void __cdecl FUN_00409200(void*);
-extern "C" void __cdecl FUN_00409740(void*);
-
-extern "C" void __cdecl GEX_Target(void* param_1)
+void * __cdecl memset(void *, int, unsigned int);
+extern void __cdecl CDIO_FileClose_00409200(void *);
+extern void __cdecl FreeMemory_00409740(void *);
+int __cdecl GEX_Target(Directory *dir)
 {
-    int* ip = (int*)param_1;
-    if ((void*)ip[2] > (void*)2) {
-        FUN_00409200((void*)ip[2]);
-        FUN_00409740(*(void**)(ip + 1));
+    if (dir->file > (void *)2) {
+        CDIO_FileClose_00409200(dir->file);
+        FreeMemory_00409740(dir->entries);
     }
-    ip[0] = 0;
-    ip[1] = 0;
-    ip[2] = 0;
+    memset(dir, 0, sizeof(Directory));
+    return 0;
 }
 }

@@ -1,28 +1,45 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0042E040.cpp
-// Historical source SHA256: 2c3ff27a953e67437c2c70bc4a0879e6c960187d003caa8a76e458ba198770a2
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x78];
+    int gob_xpos;       /* 0x78 */
+    unsigned char _pad7c[4];
+    int gob_xVel;       /* 0x80 */
+    unsigned char _pad84[0x8];
+    int gob_yVel;       /* 0x8c */
+    unsigned char _pad90[0x14];
+    int gob_work3;      /* 0xa4 */
+    unsigned char _padA8[0xe0];
+    int gob_checkYpos;  /* 0x188 */
+} GXObject;
+typedef struct JumpStep { int xVel; int yVel; int velocity; } JumpStep;
 extern "C" {
-extern "C" void __cdecl FUN_0041b700_ObjCallUnkInner(void*);
-extern "C" void** __cdecl FUN_004195D0(int, int, int, int);
-extern "C" int __cdecl FUN_0042da40_ObjCallUnk(void**);
-extern void** FUN_004A27FC;
-extern void** DAT_004a23d8;
-extern "C" { extern int DAT_004a23c8; }
-extern "C" { extern int DAT_004a2890_velocity_unk; }
-extern int DAT_0045b008;
-extern "C" int __cdecl GEX_Target(void** gOb) {
-    if (gOb == FUN_004A27FC) {
-        if (DAT_004a23d8 != 0) FUN_0041b700_ObjCallUnkInner(DAT_004a23d8);
-        void** pp = FUN_004195D0(0x11c,(int)gOb[0x1e],(int)gOb[0x62],0);
-        if (pp != 0) { DAT_004a23d8 = pp; pp[0x29] = (void*)2; }
-        FUN_0042da40_ObjCallUnk(gOb);
-        gOb[0x20] = (void*)*(int*)((int)&DAT_0045b008 + DAT_004a23c8 * 0xc);
-        gOb[0x23] = (void*)*(int*)((int)&DAT_0045b008 + 4 + DAT_004a23c8 * 0xc);
-        DAT_004a2890_velocity_unk = -*(int*)((int)&DAT_0045b008 + 8 + DAT_004a23c8 * 0xc);
-        int i = DAT_004a23c8 + 1;
-        if (i == 4) i = DAT_004a23c8;
-        DAT_004a23c8 = i;
+extern GXObject *DAT_004a23d8;
+extern GXObject *gPlayerObject_004a27fc;
+extern int DAT_004a23c8;
+extern int DAT_004a2890_velocity_unk;
+extern JumpStep DAT_0045b008[];
+void __cdecl FUN_0041b700_ObjCallUnkInner(GXObject *gob);
+GXObject *__cdecl GOB_AddObject_004195d0(int type, int x, int y, int flags);
+int __cdecl FUN_0042da40_ObjCallUnk(GXObject *gob, int arg);
+int __cdecl GEX_Target(GXObject *gob, int arg)
+{
+    GXObject *spawned;
+    if (gob == gPlayerObject_004a27fc) {
+        if (DAT_004a23d8)
+            FUN_0041b700_ObjCallUnkInner(DAT_004a23d8);
+        spawned = GOB_AddObject_004195d0(0x11c, gob->gob_xpos, gob->gob_checkYpos, 0);
+        if (spawned) {
+            DAT_004a23d8 = spawned;
+            spawned->gob_work3 = 2;
+        }
+        FUN_0042da40_ObjCallUnk(gob, arg);
+        gob->gob_xVel = DAT_0045b008[DAT_004a23c8].xVel;
+        gob->gob_yVel = DAT_0045b008[DAT_004a23c8].yVel;
+        DAT_004a2890_velocity_unk = -DAT_0045b008[DAT_004a23c8++].velocity;
+        if (DAT_004a23c8 == 4)
+            DAT_004a23c8--;
         return 0;
     }
-    return FUN_0042da40_ObjCallUnk(gOb);
+    return FUN_0042da40_ObjCallUnk(gob, arg);
 }
 }

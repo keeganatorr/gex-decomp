@@ -1,85 +1,76 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00440E70.cpp
-// Historical source SHA256: 7ef3be530953953badf123f5793930f465e1c1369e93d059348d9c9f9d820933
+typedef struct TilePos { short x; short y; } TilePos;
+typedef struct DrawCache { TilePos pos; int data; } DrawCache;
+typedef struct ImageCacheEntry { int id; TilePos pos; } ImageCacheEntry;
 extern "C" {
-extern int FUN_0046BD00;
-extern int *FUN_00460F6C;
-extern int FUN_004A2924;
-extern int FUN_0046BCF8;
-
-extern "C" void *__cdecl FUN_0040B390(int, unsigned int);
-extern "C" void __cdecl FUN_00405390(char *, ...);
-extern "C" void __cdecl FUN_0043ec20_TileLoadinPoss(void *);
-extern "C" void __cdecl FUN_004451e0_LEV_SetUpDrawCacheWithFileData(void *, short *);
-extern "C" void __cdecl FUN_0040B860(void *);
-
-extern "C" void __cdecl GEX_Target(void *gexTileStruct, unsigned int param_2)
+extern ImageCacheEntry FUN_0046BD00[];
+extern ImageCacheEntry *gObjectTextureMap_00460f6c;
+extern int nblocksFree_004a2924;
+extern int UINT_0046bcf8;
+extern char s_Loaded_Object_Texture_data_0046100c[];
+extern char s_Transferring_object_cell_00460fe0[];
+extern char s_w_h_00460fcc[];
+extern char s_All_texture_data_transferred_00460f9c[];
+extern char s_After_GOB_LoadTextures_00460f70[];
+void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
+int **__cdecl LINK_RESOLVE_0040b390(void *base, unsigned int offset);
+void __cdecl FUN_0043ec20_TileLoadinPoss(DrawCache *cache);
+void __cdecl FUN_004451e0_LEV_SetUpDrawCacheWithFileData(DrawCache *cache, short *data);
+void __cdecl BLOC_FreeBlocks_0040b860(void *base);
+void __cdecl GEX_Target(void *base, unsigned int offset)
 {
-    int emptyLists = 0;
-    int objectCellsCount = 0;
-    FUN_00405390((char *)0x0046100c);
-
-    unsigned int *lists = (unsigned int *)FUN_0040B390((int)gexTileStruct, param_2);
-    unsigned int *listSlot = lists;
+    int ***table;
+    int ***p;
+    int **tl;
+    int **q;
+    int *img;
+    int nulls;
+    int loaded;
+    ImageCacheEntry *cache;
+    DrawCache dc;
+    nulls = 0;
+    loaded = 0;
+    TracePrintf_Debug_00405390(s_Loaded_Object_Texture_data_0046100c);
+    table = (int ***)LINK_RESOLVE_0040b390(base, offset);
+    p = table;
     do {
-        if (*listSlot == 0) {
-            ++emptyLists;
-        } else {
-            unsigned int *entries = (unsigned int *)FUN_0040B390(
-                (int)gexTileStruct, *listSlot);
-            *listSlot = (unsigned int)entries;
-            while (*entries != 0) {
-                unsigned short *cell = (unsigned short *)FUN_0040B390(
-                    (int)gexTileStruct, *entries);
-                *entries = (unsigned int)cell;
-                if (*cell != 0) ++objectCellsCount;
-                ++entries;
+        if (*p) {
+            tl = *p = LINK_RESOLVE_0040b390(base, (unsigned int)*p);
+            for (; *tl; tl++) {
+                *tl = (int *)LINK_RESOLVE_0040b390(base, (unsigned int)*tl);
+                if (*(short *)*tl)
+                    loaded++;
             }
-        }
-        ++listSlot;
-    } while (emptyLists < 2);
-
-    unsigned char *cache = (unsigned char *)&FUN_0046BD00;
-    FUN_00460F6C = (int *)&FUN_0046BD00;
-    emptyLists = 0;
+        } else
+            nulls++;
+        p++;
+    } while (nulls < 2);
+    cache = FUN_0046BD00;
+    gObjectTextureMap_00460f6c = cache;
+    p = table;
+    nulls = 0;
     do {
-        unsigned int *entries = (unsigned int *)*lists;
-        if (entries == 0) {
-            ++emptyLists;
-        } else {
-            unsigned short *cell = (unsigned short *)*entries;
-            while (cell != 0) {
-                ++entries;
-                unsigned char *nextCache = cache;
-                if (*cell != 0) {
-                    struct DrawCache {
-                        short x, y, width, height;
-                    } drawCache;
-                    drawCache.x = 0;
-                    drawCache.y = 0;
-                    drawCache.width = cell[0];
-                    drawCache.height = cell[1];
-                    FUN_0043ec20_TileLoadinPoss(&drawCache);
-                    nextCache = cache + 8;
-                    FUN_00405390((char *)0x00460fe0, cell,
-                                 (int)(cache - (unsigned char *)FUN_00460F6C) >> 3,
-                                 (int)drawCache.x, (int)drawCache.y);
-                    FUN_00405390((char *)0x00460fcc,
-                                 (unsigned int)cell[0], (unsigned int)cell[1]);
-                    FUN_004451e0_LEV_SetUpDrawCacheWithFileData(
-                        &drawCache, (short *)(cell + 2));
-                    *(short *)(cache + 4) = drawCache.x;
-                    *(short *)(cache + 6) = drawCache.y;
+        q = *p;
+        if (!q)
+            nulls++;
+        else {
+            while ((img = *q++) != 0) {
+                if (*(short *)img) {
+                    dc.data = *img;
+                    FUN_0043ec20_TileLoadinPoss(&dc);
+                    TracePrintf_Debug_00405390(s_Transferring_object_cell_00460fe0, img, cache - gObjectTextureMap_00460f6c, dc.pos.x, dc.pos.y);
+                    img++;
+                    TracePrintf_Debug_00405390(s_w_h_00460fcc, ((unsigned short *)img)[-2], ((unsigned short *)img)[-1]);
+                    cache++;
+                    FUN_004451e0_LEV_SetUpDrawCacheWithFileData(&dc, (short *)img);
+                    cache[-1].pos = dc.pos;
                 }
-                cache = nextCache;
-                cell = (unsigned short *)*entries;
             }
         }
-        ++lists;
-    } while (emptyLists < 2);
-
-    FUN_00405390((char *)0x00460f9c, objectCellsCount);
-    FUN_0040B860(gexTileStruct);
-    FUN_00405390((char *)0x00460f70, FUN_004A2924);
-    FUN_0046BCF8 = 0;
+        p++;
+    } while (nulls < 2);
+    TracePrintf_Debug_00405390(s_All_texture_data_transferred_00460f9c, loaded);
+    BLOC_FreeBlocks_0040b860(base);
+    TracePrintf_Debug_00405390(s_After_GOB_LoadTextures_00460f70, nblocksFree_004a2924);
+    UINT_0046bcf8 = 0;
 }
 }

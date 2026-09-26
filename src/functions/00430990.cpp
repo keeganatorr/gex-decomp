@@ -1,58 +1,72 @@
-typedef unsigned int uint;
-typedef unsigned int undefined4;
-// Adapted from pc_decomp_backup/src/functions/FUN_00430990.cpp
-// Historical source SHA256: 34c21ca59feb6b967aa4689655e27f84eb0657170f8052db10e0c13c2298579e
-extern "C" {
-extern "C" undefined4 __cdecl
-GEX_Target(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,int param_7,
-            int param_8,int param_9)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+extern int decl_pad_9;
+extern int decl_pad_10;
+extern int decl_pad_11;
+extern int decl_pad_12;
+extern int decl_pad_13;
+extern int decl_pad_14;
+extern int decl_pad_15;
+extern int decl_pad_16;
+extern int decl_pad_17;
+extern int decl_pad_18;
+extern int decl_pad_19;
+extern int decl_pad_20;
+extern int decl_pad_21;
+extern int decl_pad_22;
+extern int decl_pad_23;
+typedef struct GXObject {
+    unsigned char _pad0[0x78];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+} GXObject;
 
+int __cdecl GEX_Target(GXObject *gob, int top, int bottom, int left, int right, int x0, int y0, int x1, int y1)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
-  uint uVar10;
-  
-  uVar5 = param_8 - param_6;
-  uVar10 = param_9 - param_7;
-  iVar7 = param_2 + *(int *)(param_1 + 0x7c);
-  iVar8 = param_3 + *(int *)(param_1 + 0x7c);
-  iVar6 = param_4 + *(int *)(param_1 + 0x78);
-  iVar9 = param_5 + *(int *)(param_1 + 0x78);
-  if (((((param_6 < iVar6) && (param_8 < iVar6)) || ((iVar9 < param_6 && (iVar9 < param_8)))) ||
-      ((param_7 < iVar7 && (param_9 < iVar7)))) || ((iVar8 < param_7 && (iVar8 < param_9)))) {
+    int dx;
+    int dy;
+    int xa;
+    int xb;
+    int ya;
+    int yb;
+    dx = x1 - x0;
+    dy = y1 - y0;
+    top += gob->gob_ypos;
+    bottom += gob->gob_ypos;
+    left += gob->gob_xpos;
+    right += gob->gob_xpos;
+    if (x0 < left && x1 < left || x0 > right && x1 > right || y0 < top && y1 < top || y0 > bottom && y1 > bottom)
+        return 0;
+    if (dy & 0xffff0000) {
+        xa = (top - y0 >> 8) * (dx >> 8) / (dy >> 16);
+        xb = (bottom - y0 >> 8) * (dx >> 8) / (dy >> 16);
+    } else {
+        xa = (top - y0 >> 8) * (dx >> 8);
+        xb = (bottom - y0 >> 8) * (dx >> 8);
+    }
+    if (dx & 0xffff0000) {
+        ya = (left - x0 >> 8) * (dy >> 8) / (dx >> 16);
+        yb = (right - x0 >> 8) * (dy >> 8) / (dx >> 16);
+    } else {
+        ya = (left - x0 >> 8) * (dy >> 8);
+        yb = (right - x0 >> 8) * (dy >> 8);
+    }
+    xa += x0;
+    xb += x0;
+    ya += y0;
+    yb += y0;
+    if (xa >= left && xa < right || xb >= left && xb < right || ya >= top && ya < bottom || yb >= top && yb < bottom)
+        return 1;
     return 0;
-  }
-  iVar2 = (int)uVar5 >> 8;
-  if ((uVar10 & 0xffff0000) == 0) {
-    iVar1 = (iVar7 - param_7 >> 8) * iVar2;
-    iVar2 = (iVar8 - param_7 >> 8) * iVar2;
-  }
-  else {
-    iVar1 = ((iVar7 - param_7 >> 8) * iVar2) / ((int)uVar10 >> 0x10);
-    iVar2 = ((iVar8 - param_7 >> 8) * iVar2) / ((int)uVar10 >> 0x10);
-  }
-  iVar4 = (int)uVar10 >> 8;
-  if ((uVar5 & 0xffff0000) == 0) {
-    iVar3 = (iVar6 - param_6 >> 8) * iVar4;
-    iVar4 = (iVar9 - param_6 >> 8) * iVar4;
-  }
-  else {
-    iVar3 = ((iVar6 - param_6 >> 8) * iVar4) / ((int)uVar5 >> 0x10);
-    iVar4 = ((iVar9 - param_6 >> 8) * iVar4) / ((int)uVar5 >> 0x10);
-  }
-  if ((((iVar1 + param_6 < iVar6) || (iVar9 <= iVar1 + param_6)) &&
-      ((iVar2 + param_6 < iVar6 || (iVar9 <= iVar2 + param_6)))) &&
-     (((iVar3 + param_7 < iVar7 || (iVar8 <= iVar3 + param_7)) &&
-      ((iVar4 + param_7 < iVar7 || (iVar8 <= iVar4 + param_7)))))) {
-    return 0;
-  }
-  return 1;
-}
 }

@@ -1,26 +1,29 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00430D70.cpp
-// Historical source SHA256: d0e3a32445c37be0c10a306655c49aa8e21d42d2c47d6797c56f579d0a476950
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x78];
+    int gob_xpos;     /* 0x78 */
+    int gob_ypos;     /* 0x7c */
+    unsigned char _pad1[0x48];
+    int gob_xScale;   /* 0xc8 */
+    int gob_yScale;   /* 0xcc */
+    unsigned char _pad2[0x10];
+    int gob_flags2;   /* 0xe0 */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_0042e850(void**);
-extern "C" void __cdecl FUN_00441150(void*);
-
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern void __cdecl FUN_0042e850(GXObject *);
+extern void __cdecl GOB_DisplayObjectScaleAndRotate_00441150(GXObject *);
+void __cdecl GEX_Target(GXObject *gob)
 {
-    void* pGVar1;
-    void* pGVar2;
-    void* pGVar3;
-    void* pGVar4;
-
-    pGVar1 = param_1[0x1f];
-    pGVar2 = param_1[0x1e];
-    pGVar3 = param_1[0x32];
-    pGVar4 = param_1[0x33];
-    param_1[0x38] = (void*)((unsigned int)param_1[0x38] | 0x40);
-    FUN_0042e850(param_1);
-    FUN_00441150((void*)param_1);
-    param_1[0x1e] = pGVar2;
-    param_1[0x1f] = pGVar1;
-    param_1[0x32] = pGVar3;
-    param_1[0x33] = pGVar4;
+    int xpos = gob->gob_xpos;
+    int ypos = gob->gob_ypos;
+    int xScale = gob->gob_xScale;
+    int yScale = gob->gob_yScale;
+    gob->gob_flags2 |= 0x40;
+    FUN_0042e850(gob);
+    GOB_DisplayObjectScaleAndRotate_00441150(gob);
+    gob->gob_xpos = xpos;
+    gob->gob_ypos = ypos;
+    gob->gob_xScale = xScale;
+    gob->gob_yScale = yScale;
 }
 }

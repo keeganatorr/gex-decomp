@@ -1,39 +1,60 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0042DBD0.cpp
-// Historical source SHA256: 7b6bc74d33136262bb831f0fbbebcb1c208c65d7cf24fb5d7e3018dfb2de4d8a
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x7c];
+    int gob_ypos;         /* 0x7c */
+    unsigned char _pad80[0x6c];
+    int gob_topEdge;      /* 0xec */
+    int gob_bottomEdge;   /* 0xf0 */
+    unsigned char _padF4[0x90];
+    int gob_checkXpos;    /* 0x184 */
+    int gob_checkYpos;    /* 0x188 */
+} GXObject;
+typedef struct TileAttribute { unsigned int flags; int unk[7]; } TileAttribute;
 extern "C" {
-extern "C" { extern unsigned int FUN_0045B9A0[]; }
-extern "C" void __cdecl FUN_0042cc70(int, int*);
-extern "C" int __cdecl FUN_0042d680(int*);
-
-extern "C" int __cdecl GEX_Target(int* param_1, int param_2)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern TileAttribute DAT_0045B9A0[];
+void __cdecl FUN_0042cc70_Object_unk(int reason, GXObject *object);
+int __cdecl FUN_0042d680_ObjCallUnk(GXObject *gob, unsigned short *block);
+int __cdecl GEX_Target(GXObject *gob, unsigned short *block)
 {
-    unsigned int uVar6 = (unsigned int)param_1[0x61] & 0x1fffff;
-    unsigned int uVar5 = (unsigned int)param_1[0x62] & 0x1fffff;
-    unsigned int uVar2 = FUN_0045B9A0[(*(unsigned short*)(param_2 + 6)) * 8] & 0xf000000;
-
-    if (uVar2 < 0x2000001) {
-        if (uVar2 == 0x2000000) {
-            int iVar4 = 0x1f0000 - uVar6;
-            if ((int)uVar5 <= iVar4) {
-                param_1[0x1f] = param_1[0x1f] + (iVar4 - uVar5);
-                param_1[0x3c] = (int)(((unsigned int)param_1[0x62] & 0xffe00000) + iVar4);
-                if (param_1[0x3b] != 0) {
-                    FUN_0042cc70(0, param_1);
-                }
-                return 1;
-            }
-        } else if (uVar2 == 0x1000000 && uVar5 <= uVar6) {
-            param_1[0x1f] = param_1[0x1f] + (uVar6 - uVar5);
-            param_1[0x3c] = (int)(((unsigned int)param_1[0x62] & 0xffe00000) + uVar6);
-            if (param_1[0x3b] != 0) {
-                FUN_0042cc70(0, param_1);
-            }
+    int xoffset;
+    int ypos;
+    int yoffset;
+    int limit;
+    xoffset = gob->gob_checkXpos & 0x1fffff;
+    ypos = gob->gob_checkYpos;
+    yoffset = ypos & 0x1fffff;
+    switch (DAT_0045B9A0[block[3]].flags & 0xf000000) {
+    case 0x1000000:
+        if (yoffset <= xoffset) {
+            gob->gob_ypos += xoffset - yoffset;
+            gob->gob_bottomEdge = (ypos & 0xffe00000) + xoffset;
+            if (gob->gob_topEdge)
+                FUN_0042cc70_Object_unk(0, gob);
             return 1;
         }
-        return 0;
+        break;
+    case 0x2000000:
+        limit = 0x1f0000 - xoffset;
+        if (yoffset <= limit) {
+            gob->gob_ypos += limit - yoffset;
+            gob->gob_bottomEdge = (ypos & 0xffe00000) + limit;
+            if (gob->gob_topEdge)
+                FUN_0042cc70_Object_unk(0, gob);
+            return 1;
+        }
+        break;
+    case 0x4000000:
+        return FUN_0042d680_ObjCallUnk(gob, block);
+    case 0x8000000:
+        return FUN_0042d680_ObjCallUnk(gob, block);
     }
-    if (uVar2 == 0x4000000) return FUN_0042d680(param_1);
-    if (uVar2 == 0x8000000) return FUN_0042d680(param_1);
     return 0;
 }
 }

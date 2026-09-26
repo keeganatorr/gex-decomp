@@ -1,33 +1,67 @@
+// Field names from Ghidra's GXObject/GXInputRecord layouts (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x50];
+    int gob_currentFrameGroup;      /* 0x50 */
+    int gob_currentFrameIndex;      /* 0x54 */
+    unsigned char _pad58[0x18];
+    int gob_state;                  /* 0x70 */
+    unsigned char _pad74[4];
+    int gob_xpos;                   /* 0x78 */
+    int gob_ypos;                   /* 0x7c */
+    int gob_xVel;                   /* 0x80 */
+    int gob_maxxVel;                /* 0x84 */
+    int gob_xAccl;                  /* 0x88 */
+    int gob_yVel;                   /* 0x8c */
+    int gob_maxyVel;                /* 0x90 */
+    int gob_yAccl;                  /* 0x94 */
+    int gob_work0;                  /* 0x98 */
+    int gob_work1;                  /* 0x9c */
+    int gob_work2;                  /* 0xa0 */
+    int gob_work3;                  /* 0xa4 */
+    unsigned char _padA8[0x2c];
+    int gob_xold;                   /* 0xd4 */
+    unsigned char _padD8[0x38];
+    struct GXObject *gob_platform;  /* 0x110 */
+} GXObject;
+typedef struct BUTTON_RECORD {
+    unsigned char buttonLeft, buttonRight, buttonUp, buttonDown;
+    unsigned char buttonA, buttonB, buttonC, buttonX, buttonL, buttonR, buttonStart;
+    unsigned char unkB[4];
+} BUTTON_RECORD;
+typedef struct GXInputRecord {
+    BUTTON_RECORD gxir_padButtons;
+    BUTTON_RECORD gxir_padJustOnButtons;
+    unsigned char _pad1e[2];
+    int gxir_dValue;
+} GXInputRecord;
 extern "C" {
-void GOB_ResetState_00420bc0(void**);
-void PlayerRunJump_00425f40(void**);
 extern int DAT_0045a6d4;
-extern unsigned int DAT_004a0214_HighJump;
-extern unsigned char DAT_004A0294;
-}
-
-extern "C" void __cdecl GEX_Target(int* param_1)
+extern int DAT_004a0214_HighJump;
+extern GXInputRecord gInputControllers_004a0280[];
+void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
+void __cdecl PlayerRunJump_00425f40(GXObject *gex);
+void __cdecl GEX_Target(GXObject *gex)
 {
-    GOB_ResetState_00420bc0((void**)param_1);
-    param_1[0x1c] = 0xe;
-    param_1[0x14] = 0x28;
-    param_1[0x15] = 2;
-    param_1[0x21] = DAT_0045a6d4;
-    param_1[0x26] = (DAT_004a0214_HighJump == 0) ? 7 : 10;
-    unsigned int highJump = DAT_004a0214_HighJump;
-    param_1[0x25] = 0x14000;
-    param_1[0x29] = 2;
-    param_1[0x24] = 0xe0000;
-    int currentX = ((highJump == 0) ? 0x18000 : 0) - 0xe0000;
-    param_1[0x23] = currentX;
-    param_1[0x27] = currentX;
-
-    int* gOb_local = (int*)param_1[0x44];
-    if (gOb_local != 0) {
-        int diff = gOb_local[0x1e] - gOb_local[0x35];
-        param_1[0x44] = 0;
-        param_1[0x20] = param_1[0x20] + diff;
+    GXObject *platform;
+    int highJump;
+    GOB_ResetState_00420bc0(gex);
+    gex->gob_state = 0xe;
+    gex->gob_currentFrameGroup = 0x28;
+    gex->gob_currentFrameIndex = 2;
+    gex->gob_maxxVel = DAT_0045a6d4;
+    gex->gob_work0 = DAT_004a0214_HighJump ? 10 : 7;
+    highJump = DAT_004a0214_HighJump;
+    gex->gob_yAccl = 0x14000;
+    gex->gob_maxyVel = 0xe0000;
+    gex->gob_yVel = highJump ? -0xe0000 : -0xc8000;
+    gex->gob_work3 = 2;
+    gex->gob_work1 = gex->gob_yVel;
+    platform = gex->gob_platform;
+    if (platform) {
+        gex->gob_xVel += platform->gob_xpos - platform->gob_xold;
+        gex->gob_platform = 0;
     }
-    DAT_004A0294 = 0;
-    PlayerRunJump_00425f40((void**)param_1);
+    gInputControllers_004a0280[0].gxir_padJustOnButtons.buttonB = 0;
+    PlayerRunJump_00425f40(gex);
+}
 }

@@ -1,68 +1,59 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0043F580.cpp
-// Historical source SHA256: f7e32275fc38ba18e89c502ca594ecd8e30f3ae91265a19752be5d3691e82eba
+typedef struct Prim Prim;
+struct Prim {
+    Prim *tag;
+    unsigned char r, g, b, code;
+};
 extern "C" {
-extern unsigned char DAT_004a2afa_InitUnk6;
-extern unsigned char DAT_004a2af9_InitUnk5;
 extern unsigned char DAT_004a2af8_InitUnk4;
-extern int DAT_00460038_GraphicsDataPointer;
+extern unsigned char DAT_004a2af9_InitUnk5;
+extern unsigned char DAT_004a2afa_InitUnk6;
+extern Prim *DAT_00460038_GraphicsDataPointer;
 extern int DAT_004a2b00;
-
-extern "C" void __cdecl FUN_00405390(char *);
-extern "C" void __cdecl FUN_00445140_InnerGraphics(int);
-extern "C" void __cdecl FUN_0043f310_InitializeGraphicsVariables();
-extern "C" void __cdecl FUN_0043f2d0_CheckF3ForUnpauseGameDrawWindow(int);
-
-extern "C" void __cdecl GEX_Target()
+extern char s_PAL_WaitForFade_00460df4[];
+void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
+void __cdecl FUN_00445140_InnerGraphics(Prim *list);
+void __cdecl FUN_0043f310_InitializeGraphicsVariables(void);
+void __cdecl FUN_0043f2d0_CheckF3ForUnpauseGameDrawWindow(int flag);
+void __cdecl GEX_Target(void)
 {
-    unsigned int uVar1;
-    int pGVar2;
-    unsigned char bVar3;
-    unsigned char local_3;
-    unsigned char local_2;
-    unsigned char local_1;
-
-    local_3 = DAT_004a2afa_InitUnk6;
-    local_2 = DAT_004a2af9_InitUnk5;
-    local_1 = DAT_004a2af8_InitUnk4;
-    FUN_00405390((char *)0x00460df4);
-    if (DAT_00460038_GraphicsDataPointer != 0) {
-        while (DAT_004a2b00 != 0) {
-            pGVar2 = DAT_00460038_GraphicsDataPointer;
-            uVar1 = *(unsigned int *)pGVar2;
-            while ((uVar1 & 0xffffff) != 0xffffff) {
-                pGVar2 = *(int *)pGVar2;
-                if ((*(unsigned char *)(pGVar2 + 7) != 0) && (*(unsigned char *)(pGVar2 + 7) != 0xe1)) {
-                    bVar3 = DAT_004a2afa_InitUnk6;
-                    if (local_3 != *(unsigned char *)(pGVar2 + 4)) {
-                        bVar3 = (unsigned char)(((unsigned int)DAT_004a2afa_InitUnk6 * (unsigned int)*(unsigned char *)(pGVar2 + 4)) / (unsigned int)local_3);
-                    }
-                    *(unsigned char *)(pGVar2 + 4) = bVar3;
-                    bVar3 = DAT_004a2af9_InitUnk5;
-                    if (local_2 != *(unsigned char *)(pGVar2 + 5)) {
-                        bVar3 = (unsigned char)(((unsigned int)DAT_004a2af9_InitUnk5 * (unsigned int)*(unsigned char *)(pGVar2 + 5)) / (unsigned int)local_2);
-                    }
-                    *(unsigned char *)(pGVar2 + 5) = bVar3;
-                    bVar3 = DAT_004a2af8_InitUnk4;
-                    if (local_1 != *(unsigned char *)(pGVar2 + 6)) {
-                        bVar3 = (unsigned char)(((unsigned int)DAT_004a2af8_InitUnk4 * (unsigned int)*(unsigned char *)(pGVar2 + 6)) / (unsigned int)local_1);
-                    }
-                    *(unsigned char *)(pGVar2 + 6) = bVar3;
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
+    Prim *p;
+    r = DAT_004a2afa_InitUnk6;
+    g = DAT_004a2af9_InitUnk5;
+    b = DAT_004a2af8_InitUnk4;
+    TracePrintf_Debug_00405390(s_PAL_WaitForFade_00460df4);
+    if (DAT_00460038_GraphicsDataPointer) {
+        while (DAT_004a2b00) {
+            p = DAT_00460038_GraphicsDataPointer;
+            while (((unsigned int)p->tag & 0xffffff) != 0xffffff) {
+                p = p->tag;
+                if (p->code && p->code != 0xe1) {
+                    if (r == p->r)
+                        p->r = DAT_004a2afa_InitUnk6;
+                    else
+                        p->r = DAT_004a2afa_InitUnk6 * p->r / r;
+                    if (g == p->g)
+                        p->g = DAT_004a2af9_InitUnk5;
+                    else
+                        p->g = DAT_004a2af9_InitUnk5 * p->g / g;
+                    if (b == p->b)
+                        p->b = DAT_004a2af8_InitUnk4;
+                    else
+                        p->b = DAT_004a2af8_InitUnk4 * p->b / b;
                 }
-                uVar1 = *(unsigned int *)pGVar2;
             }
             FUN_00445140_InnerGraphics(DAT_00460038_GraphicsDataPointer);
-            local_3 = DAT_004a2afa_InitUnk6;
-            local_2 = DAT_004a2af9_InitUnk5;
-            local_1 = DAT_004a2af8_InitUnk4;
-            if (DAT_004a2afa_InitUnk6 == 0) {
-                local_3 = 1;
-            }
-            if (DAT_004a2af9_InitUnk5 == 0) {
-                local_2 = 1;
-            }
-            if (DAT_004a2af8_InitUnk4 == 0) {
-                local_1 = 1;
-            }
+            r = DAT_004a2afa_InitUnk6;
+            g = DAT_004a2af9_InitUnk5;
+            b = DAT_004a2af8_InitUnk4;
+            if (!DAT_004a2afa_InitUnk6)
+                r = 1;
+            if (!DAT_004a2af9_InitUnk5)
+                g = 1;
+            if (!DAT_004a2af8_InitUnk4)
+                b = 1;
             FUN_0043f310_InitializeGraphicsVariables();
             FUN_0043f2d0_CheckF3ForUnpauseGameDrawWindow(1);
         }

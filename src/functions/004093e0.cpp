@@ -1,18 +1,17 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004093E0.cpp
-// Historical source SHA256: c6002967900327471b767ef267bd013907afa89c2020b7c76e4dc0952b9baaac
+typedef struct FileEntry { int a, b, c, d; } FileEntry;
+typedef struct FileTables { int count; FileEntry *entries; void *file; } FileTables;
 extern "C" {
-extern "C" { extern int DAT_004626E4; }
-extern "C" void __cdecl FUN_00409250(void*, void*, int);
-extern "C" void* __cdecl FUN_004096C0(int);
-
-extern "C" int __cdecl GEX_Target(void* levelFileHandle)
+extern int DAT_004626e4_FileSize;
+extern void __cdecl CDIO_FileRead_00409250(void *, void *, int);
+extern void * __cdecl MEM_AllocMem_004096c0(int);
+int __cdecl GEX_Target(FileTables *tables)
 {
-    FUN_00409250(*(void**)((char*)levelFileHandle + 8), &DAT_004626E4, 4);
-    int bytesToRead = (DAT_004626E4 + 1) * 0x10;
-    *(int*)((char*)levelFileHandle + 0) = DAT_004626E4;
-    void* buf = FUN_004096C0(bytesToRead);
-    *(void**)((char*)levelFileHandle + 4) = buf;
-    FUN_00409250(*(void**)((char*)levelFileHandle + 8), buf, bytesToRead);
+    int size;
+    CDIO_FileRead_00409250(tables->file, &DAT_004626e4_FileSize, 4);
+    size = (DAT_004626e4_FileSize + 1) * sizeof(FileEntry);
+    tables->count = DAT_004626e4_FileSize;
+    tables->entries = (FileEntry *)MEM_AllocMem_004096c0(size);
+    CDIO_FileRead_00409250(tables->file, tables->entries, size);
     return 1;
 }
 }

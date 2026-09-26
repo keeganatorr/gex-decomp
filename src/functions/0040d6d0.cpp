@@ -1,18 +1,37 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0040D6D0.cpp
-// Historical source SHA256: f0a31df2055376d9b24cc4a8173e12bdae743c5f713c6315c1a3061d5d845338
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct LoadData { int a, b, count8, countc; int *state; } LoadData;
+typedef struct GroupEntry { LoadData *data; int b; } GroupEntry;
+typedef struct GXObject {
+    unsigned char _pad0[0xc];
+    LoadData *gob_objectLoadData;   /* 0x0c */
+    unsigned char _pad1[0x74];
+    LoadData *gob_maxxVel;          /* 0x84 */
+    unsigned char _pad2[0x30];
+    unsigned int gob_flashTime;     /* 0xb8 */
+} GXObject;
 extern "C" {
-extern "C" { extern int FUN_004A2934; }
-extern "C" void __cdecl GEX_Target(int param_1)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern GroupEntry *FirstObjectGroup_004a2934;
+void __cdecl GEX_Target(GXObject *gob)
 {
-    int iVar1 = *(int*)(param_1 + 0xc);
-    int bVar2 = 0;
-    if (iVar1 != 0 && *(int*)(iVar1 + 8) != 0 && *(int*)(iVar1 + 0xc) > 0 && **(int**)(iVar1 + 0x10) == 1) bVar2 = 1;
-    if (*(unsigned int*)(param_1 + 0xb8) == 0 || !bVar2) {
-        *(int*)(param_1 + 0xb8) = iVar1;
-    } else {
-        *(int*)(param_1 + 0x84) = iVar1;
-        *(int*)(param_1 + 0xb8) = *(int*)(FUN_004A2934 - 8 + (*(unsigned int*)(param_1 + 0xb8) & 0xffff) * 8);
-    }
-    *(int*)(param_1 + 0xc) = *(int*)(param_1 + 0xb8);
+    int ok = 0;
+    LoadData *data = gob->gob_objectLoadData;
+    if (data && data->count8 && data->countc > 0 && *data->state == 1)
+        ok = 1;
+    if (gob->gob_flashTime && ok) {
+        gob->gob_maxxVel = data;
+        gob->gob_flashTime = (unsigned int)FirstObjectGroup_004a2934[(gob->gob_flashTime & 0xffff) - 1].data;
+    } else
+        gob->gob_flashTime = (unsigned int)data;
+    gob->gob_objectLoadData = (LoadData *)gob->gob_flashTime;
 }
 }

@@ -1,61 +1,69 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0040DDA0.cpp
-// Historical source SHA256: 41914b3fc7547f1a0934a2c7e9be2e590887c617b707e10c6a58b6fc2cda42ae
+typedef struct GXObject {
+    unsigned char _pad0[0x78];
+    int gob_xPos;               /* 0x78 */
+    int gob_yPos;               /* 0x7c */
+    unsigned char _pad80[0x98 - 0x80];
+    int gob_work0;              /* 0x98 */
+    char *gob_name;             /* 0x9c */
+    int gob_up;                 /* 0xa0 */
+    int gob_down;               /* 0xa4 */
+    unsigned char _pada8[0xb0 - 0xa8];
+    int gob_workB0;             /* 0xb0 */
+    int gob_workB4;             /* 0xb4 */
+} GXObject;
 extern "C" {
-extern "C" { extern int FUN_004A2A7C; }
-extern "C" { extern int DAT_00462c84; }
-extern "C" { extern int DAT_0045acc4_ProcessedTitleScreenCheat; }
-extern "C" { extern int DAT_00456334; }
-extern "C" { extern int DAT_0045633c; }
-extern "C" { extern char* FUN_004A0200; }
-extern "C" { extern int DAT_004a0204; }
-extern "C" { extern int DAT_004a0208; }
-extern "C" { extern void* FUN_004A2AC8; }
-extern "C" { extern int DAT_00462c78; }
-extern "C" { extern void* FUN_00487FE0; }
-extern "C" { extern void* FUN_00487FD0; }
-extern "C" { extern void* FUN_00487FEC; }
-extern "C" void __cdecl FUN_00417EE0();
-extern "C" void __cdecl FUN_0041F8C0(int);
-extern "C" void __cdecl FUN_0040b950_VoiceInner();
-extern "C" void** __cdecl FUN_0040C110(int, int);
-
-extern "C" void __cdecl GEX_Target(void** gexPlayerStruct) {
-    void** start;
-    void** password;
-    void** exit;
-
-    FUN_004A2A7C = 1;
+extern int M1_IsInMap_004a2a7c;
+extern int DAT_00462c84;
+extern int DAT_0045acc4_ProcessedTitleScreenCheat;
+extern char DAT_00456334;
+extern char DAT_0045633c;
+extern char gPasswordEnter_004a0200[];
+extern int gTimer_004a2ac8;
+extern int DAT_00462c78;
+extern char *STRING_START_00487fe0;
+extern char *STRING_PASSWORD_00487fd0;
+extern char *STRING_EXIT_00487fec;
+void *__cdecl memset(void *, int, unsigned int);
+void __cdecl InitPlayer_00417ee0(void);
+void __cdecl VSIT_PlayVoiceSituation_0041f8c0(int situation);
+void __cdecl FUN_0040b950_VoiceInner(void);
+GXObject *__cdecl GOB_FindWithWork0_0040c110(int type, int work0);
+void __cdecl GEX_Target(GXObject *gex)
+{
+    GXObject *start;
+    GXObject *password;
+    GXObject *exit;
+    M1_IsInMap_004a2a7c = 1;
     DAT_00462c84 = 0;
     DAT_0045acc4_ProcessedTitleScreenCheat = 0;
     DAT_00456334 = 0;
     DAT_0045633c = 0;
-    FUN_004A0200 = (char*)0x41414141;
-    DAT_004a0204 = 0x41414141;
-    DAT_004a0208 = 0;
-    FUN_00417EE0();
-    gexPlayerStruct[0x1e] = (void*)0xfff60000;
-    gexPlayerStruct[0x1f] = (void*)0x1e00000;
-    gexPlayerStruct[0x2d] = FUN_004A2AC8;
+    memset(gPasswordEnter_004a0200, 'A', 8);
+    gPasswordEnter_004a0200[8] = 0;
+    InitPlayer_00417ee0();
+    gex->gob_xPos = 0xfff60000;
+    gex->gob_yPos = 0x1e00000;
+    gex->gob_workB4 = gTimer_004a2ac8;
     DAT_00462c78 = 0xa0000;
-    gexPlayerStruct[0x2c] = (void*)0x0;
-    FUN_0041F8C0(1);
+    gex->gob_workB0 = 0;
+    VSIT_PlayVoiceSituation_0041f8c0(1);
     FUN_0040b950_VoiceInner();
-    start = FUN_0040C110(0x7b, 1);
-    start[0x2d] = (void*)((unsigned int)start[0x2d] | 1);
-    start[0x27] = FUN_00487FE0;
-    password = FUN_0040C110(0x7b, 2);
-    password[0x2d] = (void*)((unsigned int)password[0x2d] | 1);
-    password[0x27] = FUN_00487FD0;
-    exit = FUN_0040C110(0x7b, 3);
-    exit[0x2d] = (void*)((unsigned int)exit[0x2d] | 1);
-    exit[0x27] = FUN_00487FEC;
-    password[0x26] = (void*)0x3;
-    exit[0x26] = (void*)0x2;
-    start[0x28] = (void*)0x2;
-    start[0x29] = (void*)0x3;
-    password[0x28] = (void*)0x1;
-    password[0x29] = (void*)0x2;
-    exit[0x28] = (void*)0x3;
-    exit[0x29] = (void*)0x1;
+    start = GOB_FindWithWork0_0040c110(0x7b, 1);
+    start->gob_workB4 |= 1;
+    start->gob_name = STRING_START_00487fe0;
+    password = GOB_FindWithWork0_0040c110(0x7b, 2);
+    password->gob_workB4 |= 1;
+    password->gob_name = STRING_PASSWORD_00487fd0;
+    exit = GOB_FindWithWork0_0040c110(0x7b, 3);
+    exit->gob_workB4 |= 1;
+    exit->gob_name = STRING_EXIT_00487fec;
+    password->gob_work0 = 3;
+    exit->gob_work0 = 2;
+    start->gob_up = 2;
+    start->gob_down = 3;
+    password->gob_up = 1;
+    password->gob_down = 2;
+    exit->gob_up = 3;
+    exit->gob_down = 1;
 }
 }

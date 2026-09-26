@@ -1,76 +1,101 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00415170.cpp
-// Historical source SHA256: 7ee44b7f04874656523989fb4f93688a0e223aec243d9211c8391a70df19ef9f
+typedef struct LevelEntry {
+    unsigned short info;
+    unsigned char rest[6];
+} LevelEntry;
+typedef struct GXObject {
+    unsigned char _pad0[0x54];
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad58[0x98 - 0x58];
+    int gob_work0;              /* 0x98 */
+    int gob_work1;              /* 0x9c */
+    int gob_work2;              /* 0xa0 */
+    int gob_work3;              /* 0xa4 */
+    int gob_work4;              /* 0xa8 */
+    int gob_work5;              /* 0xac */
+    unsigned char _padb0[0xc8 - 0xb0];
+    int gob_xScale;             /* 0xc8 */
+    int gob_yScale;             /* 0xcc */
+} GXObject;
 extern "C" {
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+extern int decl_pad_9;
+extern int decl_pad_10;
+extern int decl_pad_11;
+extern int decl_pad_12;
+extern int decl_pad_13;
+extern int decl_pad_14;
+extern int decl_pad_15;
+extern int decl_pad_16;
+extern int decl_pad_17;
+extern int decl_pad_18;
 extern int DAT_00458898[];
+extern unsigned char DAT_004588d0[];
+extern LevelEntry DAT_004577B0[];
+extern unsigned int gCollectibles_004a2660[6];
+extern unsigned char gRemotesGained_004a2420[];
+extern unsigned char BYTE_ARRAY_004a2540[];
+extern int DAT_00456ae8;
+extern int LEVELID_00456ad8;
+extern int level_004a2964;
+extern int gGameState_00455c3c;
+extern int M1_IsInMap_004a2a7c;
 extern int DAT_00455be8;
 extern int DAT_00455bec;
 extern int DAT_00455bfc;
 extern int DAT_00455c00;
-extern int DAT_00456ae8;
-extern int FUN_00455C3C;
-extern unsigned int FUN_004A2660[];
-extern int DAT_004a2678;
-extern int FUN_004A2420[];
-extern int FUN_004A2964;
-extern int DAT_004588d0[];
-extern unsigned char BYTE_ARRAY_004a2540[];
-extern unsigned short FUN_004577B0[];
-extern int FUN_00456AD8;
-extern int FUN_004A2A7C;
-
-extern "C" void __cdecl GEX_Target(void **param_1)
+void __cdecl GEX_Target(GXObject *gob)
 {
-    int pGVar1;
-    int iVar2;
-    unsigned int *puVar4;
-
-    pGVar1 = (int)param_1[0x28];
-    iVar2 = *(int *)(pGVar1 + 0x2a * 4) + 0x1d;
-    param_1[0x28] = (void *)iVar2;
-    if (0xffff < iVar2) {
-        param_1[0x28] = (void *)(*(int *)(pGVar1 + (-0x56) * 4) + 0x1d);
-        param_1[0x15] = (void *)((int)param_1[0x15] + 1);
+    unsigned int *p;
+    int kind;
+    int image;
+    gob->gob_work2 += 0x5556;
+    if (gob->gob_work2 >= 0x10000) {
+        gob->gob_work2 -= 0x10000;
+        gob->gob_currentFrameIndex++;
     }
-    iVar2 = DAT_00458898[(int)param_1[0x26]];
-    if (iVar2 != 0) {
-        param_1[0x32] = (void *)((int)param_1[0x32] + -2);
-        param_1[0x33] = (void *)((int)param_1[0x33] + -2);
-        param_1[0x26] = (void *)((int)param_1[0x26] + 1);
-        DAT_00455be8 = iVar2;
-        DAT_00455bec = iVar2;
-        DAT_00455bfc = (int)param_1[0x2a] + DAT_00455bfc + -0x1c;
-        DAT_00455c00 = (int)param_1[0x2b] + DAT_00455c00 + -0x1c;
-        return;
-    }
-    if (DAT_00456ae8 == 4) {
-        FUN_00455C3C = 5;
-        puVar4 = &FUN_004A2660[0];
-        do {
-            if ((*puVar4 & 0xff) < 3) {
-                FUN_004A2420[FUN_004A2964] =
-                    FUN_004A2420[FUN_004A2964] | (DAT_004588d0[*puVar4 & 0xff]);
+    image = DAT_00458898[gob->gob_work0];
+    if (!image) {
+        if (DAT_00456ae8 == 4) {
+            gGameState_00455c3c = 5;
+            for (p = gCollectibles_004a2660; p < &gCollectibles_004a2660[6]; p++) {
+                kind = *p & 0xff;
+                if (kind >= 0 && kind <= 2)
+                    gRemotesGained_004a2420[level_004a2964] |= DAT_004588d0[kind];
             }
-            puVar4 = puVar4 + 1;
-        } while (puVar4 < &FUN_004A2660[6]);
-        if (FUN_004A2420[FUN_004A2964] >> 4 ==
-            (FUN_004A2420[FUN_004A2964] & 0xf)) {
-            BYTE_ARRAY_004a2540[FUN_004A2964] = BYTE_ARRAY_004a2540[FUN_004A2964] | 2;
+            if (gRemotesGained_004a2420[level_004a2964] >> 4 == (gRemotesGained_004a2420[level_004a2964] & 0xf))
+                BYTE_ARRAY_004a2540[level_004a2964] |= 2;
+        } else if (DAT_004577B0[LEVELID_00456ad8].info & 0x80)
+            gGameState_00455c3c = 2;
+        else {
+            if (LEVELID_00456ad8 == 47 || LEVELID_00456ad8 == 61)
+                LEVELID_00456ad8 = level_004a2964;
+            gGameState_00455c3c = 3;
         }
+        if (level_004a2964 != LEVELID_00456ad8) {
+            level_004a2964 = LEVELID_00456ad8;
+            M1_IsInMap_004a2a7c = 1;
+        } else
+            M1_IsInMap_004a2a7c = 3;
+    } else {
+        gob->gob_xScale -= 0x400;
+        gob->gob_yScale -= 0x400;
+        gob->gob_work0++;
+        DAT_00455be8 = image;
+        DAT_00455bec = image;
+        DAT_00455bfc += gob->gob_work4;
+        DAT_00455c00 += gob->gob_work5;
     }
-    else if ((FUN_004577B0[FUN_00456AD8 * 8] & 0x80) == 0) {
-        if ((FUN_00456AD8 == 47) || (FUN_00456AD8 == 61)) {
-            FUN_00456AD8 = FUN_004A2964;
-        }
-        FUN_00455C3C = 3;
-    }
-    else {
-        FUN_00455C3C = 2;
-    }
-    if (FUN_004A2964 == FUN_00456AD8) {
-        FUN_004A2A7C = 3;
-        return;
-    }
-    FUN_004A2964 = FUN_00456AD8;
-    FUN_004A2A7C = 1;
 }
 }

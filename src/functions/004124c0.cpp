@@ -1,37 +1,57 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004124C0.cpp
-// Historical source SHA256: 1618dd7761bdbc6622d0524ba6b0bdd97ed74e6d2636ef2b3e57adcfb73a0e10
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x54];
+    int gob_currentFrameIndex;      /* 0x54 */
+    unsigned char _pad58[0x14];
+    unsigned int gob_flags;         /* 0x6c */
+    unsigned char _pad70[8];
+    int gob_xpos;                   /* 0x78 */
+    int gob_ypos;                   /* 0x7c */
+    unsigned char _pad80[0x18];
+    int gob_work0;                  /* 0x98 */
+    unsigned char _pad9c[0x50];
+    int gob_topEdge;                /* 0xec */
+    unsigned char _padF0[0x20];
+    struct GXObject *gob_platform;  /* 0x110 */
+    int gob_platHitType;            /* 0x114 */
+} GXObject;
+typedef struct AngleEdge { int unk[10]; } AngleEdge;
+typedef struct GexTileStruct GexTileStruct;
 extern "C" {
-extern "C" int __cdecl FUN_00421f20_pStateUnk_Side(void**);
-extern "C" void __cdecl FUN_00411230(void**, void***, void***, void***);
-extern "C" int __cdecl FUN_00421560_DrawCharacter(int, void**);
-extern "C" void __cdecl FUN_00424090(void**);
-extern "C" { extern int FUN_004A2990; }
-extern "C" { extern void** FUN_004A2864; }
-
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern int DAT_004586a8[];
+extern int DAT_004586c0[];
+extern GXObject *gPlayerPlatform_004a2864;
+extern GexTileStruct *M1_CurrentLevel_004a2990;
+int __cdecl FUN_00421f20_pStateUnk_Side(GXObject *gex);
+int __cdecl FUN_00411230(GXObject *platform, AngleEdge *edge, int *left, int *right);
+int __cdecl FUN_00421560_DrawCharacter(GexTileStruct *level, GXObject *gex);
+void __cdecl InitPlayerStand_00424090(GXObject *gex);
+void __cdecl GEX_Target(GXObject *gex)
 {
-    int result = FUN_00421f20_pStateUnk_Side(param_1);
-    if (result != 0) {
-        int* p26 = (int*)&param_1[0x26];
-        (*p26)++;
-        if (*p26 > 1) {
-            int* p15 = (int*)&param_1[0x15];
-            (*p15)++;
-            param_1[0x26] = 0;
-            int offset = *((int*)0x004586a8 + *p15);
-            if (((unsigned int)param_1[0x1b] & 0x80000000) == 0) offset = -offset;
-            param_1[0x1e] = (void*)((int)param_1[0x1e] + offset - 0x1c);
-            param_1[0x1f] = (void*)((int)param_1[0x1f] + *((int*)0x004586c0 + *p15) - 0x1c);
-            if (*p15 > 3) {
-                if (FUN_004A2864 != 0) {
-                    param_1[0x45] = 0;
-                    param_1[0x3b] = (void*)1;
-                    param_1[0x44] = (void*)FUN_004A2864;
-                    FUN_004A2864 = 0;
-                }
-                FUN_00421560_DrawCharacter(FUN_004A2990, param_1);
-                FUN_00424090(param_1);
+    int left;
+    int right;
+    AngleEdge edge;
+    int frame;
+    GXObject *platform;
+    if (FUN_00421f20_pStateUnk_Side(gex) && ++gex->gob_work0 >= 2) {
+        frame = ++gex->gob_currentFrameIndex;
+        gex->gob_work0 = 0;
+        if (gex->gob_flags & 0x80000000)
+            gex->gob_xpos += DAT_004586a8[frame];
+        else
+            gex->gob_xpos -= DAT_004586a8[frame];
+        gex->gob_ypos += DAT_004586c0[frame];
+        if (frame > 3) {
+            if (gPlayerPlatform_004a2864) {
+                FUN_00411230(gPlayerPlatform_004a2864, &edge, &left, &right);
+                platform = gPlayerPlatform_004a2864;
+                gex->gob_platHitType = 0;
+                gex->gob_topEdge = 1;
+                gex->gob_platform = platform;
+                gPlayerPlatform_004a2864 = 0;
             }
+            FUN_00421560_DrawCharacter(M1_CurrentLevel_004a2990, gex);
+            InitPlayerStand_00424090(gex);
         }
     }
 }

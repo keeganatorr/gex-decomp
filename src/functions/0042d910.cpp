@@ -1,47 +1,50 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0042D910.cpp
-// Historical source SHA256: b71e238985398955237b8cb774e5074b5eead12947984d51b6700eab9a6196e0
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x78];
+    int gob_xpos;         /* 0x78 */
+    unsigned char _pad7c[0x68];
+    int gob_leftEdge;     /* 0xe4 */
+    int gob_rightEdge;    /* 0xe8 */
+    unsigned char _padEC[0x98];
+    int gob_checkXpos;    /* 0x184 */
+    int gob_checkYpos;    /* 0x188 */
+} GXObject;
 extern "C" {
-extern "C" { extern void** FUN_004A27FC; }
-extern "C" { extern int FUN_004A2990; }
-extern "C" { extern int DAT_004a01e0; }
-extern "C" { extern int DAT_004a01e8; }
-extern "C" unsigned int __cdecl FUN_0042d5c0_JumpingAboveScreen(void**, int);
-extern "C" int __cdecl FUN_0040F100(int, unsigned int, unsigned int);
-extern "C" void __cdecl FUN_0042cc70_Object_unk(int, void**);
-
-extern "C" unsigned int __cdecl GEX_Target(void** gOb, int param_2) {
-    unsigned int uVar1;
-    int iVar2;
-    unsigned int uVar3;
-
-    if (gOb != FUN_004A27FC) {
-        uVar1 = FUN_0042d5c0_JumpingAboveScreen(gOb, param_2);
-        return uVar1;
-    }
-    uVar3 = (unsigned int)gOb[0x61] & 0x1fffff;
-    if ((*(unsigned short*)(param_2 + 2) & 0xfff) == 0) {
-        DAT_004a01e0 = DAT_004a01e0 + 1;
-        if ((int)DAT_004a01e8 < 0) {
-            DAT_004a01e8 = (unsigned int)gOb[0x62] & 0xffe00000;
-        }
-        gOb[0x1e] = (void*)((int)gOb[0x1e] - (int)uVar3);
-        gOb[0x39] = (void*)((unsigned int)gOb[0x61] & 0xffe00000);
-        if (gOb[0x3a] != (void*)0x0) {
-            FUN_0042cc70_Object_unk(0, gOb);
-        }
+extern void *M1_CurrentLevel_004a2990;
+extern int DAT_004a01e0;
+extern int DAT_004a01e8;
+int __cdecl FUN_0042d5c0_JumpingAboveScreen(GXObject *gob, unsigned short *block);
+int __cdecl M1_GetContourDataFromID_0040f100(void *level, unsigned int id, unsigned int position);
+extern GXObject *gPlayerObject_004a27fc;
+void __cdecl FUN_0042cc70_Object_unk(int reason, GXObject *object);
+int __cdecl GEX_Target(GXObject *gob, unsigned short *block)
+{
+    unsigned int id;
+    int offset;
+    int height;
+    if (gob != gPlayerObject_004a27fc)
+        return FUN_0042d5c0_JumpingAboveScreen(gob, block);
+    id = block[1];
+    offset = gob->gob_checkXpos & 0x1fffff;
+    if (!(id & 0xfff)) {
+        DAT_004a01e0++;
+        if (DAT_004a01e8 < 0)
+            DAT_004a01e8 = gob->gob_checkYpos & 0xffe00000;
+        gob->gob_xpos -= offset;
+        gob->gob_leftEdge = gob->gob_checkXpos & 0xffe00000;
+        if (gob->gob_rightEdge)
+            FUN_0042cc70_Object_unk(0, gob);
         return 1;
     }
-    iVar2 = FUN_0040F100((int)FUN_004A2990, (unsigned int)*(unsigned short*)(param_2 + 2), uVar3);
-    if (iVar2 != 0 && iVar2 + -0x10000 <= (int)((unsigned int)gOb[0x62] & 0x1fffff)) {
-        DAT_004a01e0 = DAT_004a01e0 + 1;
-        if ((int)DAT_004a01e8 < 0) {
-            DAT_004a01e8 = (((unsigned int)gOb[0x62] & 0xffe00000) + iVar2) - 0x10000;
-        }
-        gOb[0x1e] = (void*)((int)gOb[0x1e] - (int)uVar3);
-        gOb[0x39] = (void*)((unsigned int)gOb[0x61] & 0xffe00000);
-        if (gOb[0x3a] != (void*)0x0) {
-            FUN_0042cc70_Object_unk(0, gOb);
-        }
+    height = M1_GetContourDataFromID_0040f100(M1_CurrentLevel_004a2990, id, offset);
+    if (height && (gob->gob_checkYpos & 0x1fffff) >= height - 0x10000) {
+        DAT_004a01e0++;
+        if (DAT_004a01e8 < 0)
+            DAT_004a01e8 = (gob->gob_checkYpos & 0xffe00000) + height - 0x10000;
+        gob->gob_xpos -= offset;
+        gob->gob_leftEdge = gob->gob_checkXpos & 0xffe00000;
+        if (gob->gob_rightEdge)
+            FUN_0042cc70_Object_unk(0, gob);
         return 1;
     }
     return 0;

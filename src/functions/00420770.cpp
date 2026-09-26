@@ -1,21 +1,25 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00420770.cpp
-// Historical source SHA256: db4dfb95dc9059a3f1b1ffb7e9a6ff8d1eb6493566df8461c014dd6063ceae8d
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x6c];
+    unsigned int gob_flags;  /* 0x6c */
+    unsigned char _pad70[8];
+    int gob_xpos;            /* 0x78 */
+    int gob_ypos;            /* 0x7c */
+} GXObject;
 extern "C" {
-extern "C" { extern void** FUN_004A27FC; }
-extern "C" void __cdecl FUN_0041FA80(int);
-
-extern "C" void __cdecl GEX_Target(void** param_1, int param_2)
+extern GXObject *gPlayerObject_004a27fc;
+int __cdecl VFX_Play_0041fa80(int voice);
+void __cdecl GEX_Target(GXObject *gob, int voice)
 {
-    unsigned int uVar1;
-
-    if (FUN_004A27FC != 0) {
-        uVar1 = (int)param_1[0x1e] - (int)((void**)FUN_004A27FC)[0x1e];
-        if (((int)((uVar1 ^ (int)uVar1 >> 31) - ((int)uVar1 >> 31)) < 0x3c0000) &&
-            -0x280000 < (int)param_1[0x1f] - (int)((void**)FUN_004A27FC)[0x1f] &&
-            (int)param_1[0x1f] - (int)((void**)FUN_004A27FC)[0x1f] < 0x280000) {
-            if (((int)uVar1 > 0 && ((unsigned int)param_1[0x1b] & 0x80000000) == 0) ||
-                ((int)uVar1 < 0 && ((unsigned int)param_1[0x1b] & 0x80000000) != 0)) {
-                FUN_0041FA80(param_2);
+    int dx;
+    int dy;
+    if (gPlayerObject_004a27fc) {
+        dx = gob->gob_xpos - gPlayerObject_004a27fc->gob_xpos;
+        if ((dx < 0 ? -dx : dx) < 0x3c0000) {
+            dy = gob->gob_ypos - gPlayerObject_004a27fc->gob_ypos;
+            if (dy > -0x280000 && dy < 0x280000) {
+                if ((dx > 0 && !(gob->gob_flags & 0x80000000)) || (dx < 0 && (gob->gob_flags & 0x80000000)))
+                    VFX_Play_0041fa80(voice);
             }
         }
     }

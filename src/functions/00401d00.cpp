@@ -1,58 +1,47 @@
-struct IDirectSoundBuffer {
-    virtual long __stdcall QueryInterface(void* riid, void** ppvObj) = 0;
-    virtual unsigned long __stdcall AddRef() = 0;
-    virtual unsigned long __stdcall Release() = 0;
-    virtual long __stdcall GetCaps(void* lpDSBufferDesc) = 0;
-    virtual long __stdcall GetCurrentPosition(unsigned long* lpdwPlayCursor, unsigned long* lpdwWriteCursor) = 0;
-    virtual long __stdcall GetFormat(void* lpwfxFormat, unsigned long dwSizeAllocated, unsigned long* lpdwSizeWritten) = 0;
-    virtual long __stdcall GetVolume(long* lplVolume) = 0;
-    virtual long __stdcall GetPan(long* lplPan) = 0;
-    virtual long __stdcall GetFrequency(unsigned long* lpdwFrequency) = 0;
-    virtual long __stdcall GetStatus(unsigned long* lpdwStatus) = 0;
-    virtual long __stdcall Initialize(void* lpDirectSound, const void* lpcDSBufferDesc) = 0;
-    virtual long __stdcall Lock(unsigned long dwOffset, unsigned long dwBytes, void** ppvAudioPtr1, unsigned long* pdwAudioBytes1, void** ppvAudioPtr2, unsigned long* pdwAudioBytes2, unsigned long dwFlags) = 0;
-    virtual long __stdcall Play(unsigned long dwReserved1, unsigned long dwPriority, unsigned long dwFlags) = 0;
-    virtual long __stdcall SetCurrentPosition(unsigned long dwNewPosition) = 0;
-    virtual long __stdcall SetFormat(const void* lpcfxFormat) = 0;
-    virtual long __stdcall SetVolume(long lVolume) = 0;
-};
-
+typedef struct IDirectSound IDirectSound;
+typedef struct IDirectSoundBuffer IDirectSoundBuffer;
+typedef struct IDirectSoundBufferVtbl {
+    void *QueryInterface, *AddRef;
+    unsigned long (__stdcall *Release)(IDirectSoundBuffer *self);
+    void *GetCaps, *GetCurrentPosition, *GetFormat, *GetVolume, *GetPan, *GetFrequency;
+    long (__stdcall *GetStatus)(IDirectSoundBuffer *self, unsigned long *status);
+    void *Initialize, *Lock;
+    long (__stdcall *Play)(IDirectSoundBuffer *self, unsigned long reserved, unsigned long priority, unsigned long flags);
+    void *SetCurrentPosition, *SetFormat;
+    long (__stdcall *SetVolume)(IDirectSoundBuffer *self, long volume);
+} IDirectSoundBufferVtbl;
+struct IDirectSoundBuffer { IDirectSoundBufferVtbl *lpVtbl; };
 extern "C" {
-
-extern void* gDirectSound_0049a070;
-extern IDirectSoundBuffer* gPreviewSoundBuffer_0049fb28;
+extern IDirectSound *gDirectSound_0049a070;
+extern IDirectSoundBuffer *gPreviewSoundBuffer_0049fb28;
 extern int DAT_0049a06c;
-extern int gSndSizes_00451048[];
-extern void* gSNDPointerArray_0049f6b0[];
-
-int SND_CreateDirectSoundBuffer_00401720(void* ds, void** ppBuffer, int size, int flags);
-int SND_FillDirectSoundBuffer_004017d0(void* buffer, int offset, void* data, int size);
-
-void _GEX_Target(int param_1, int param_2)
+extern unsigned long gSndSizes_00451048[];
+extern unsigned char *gSNDPointerArray_0049f6b0[];
+int __cdecl SND_CreateDirectSoundBuffer_00401720(IDirectSound *sound, IDirectSoundBuffer **buffer, unsigned long bytes, unsigned long rate);
+int __cdecl SND_FillDirectSoundBuffer_004017d0(IDirectSoundBuffer *buffer, unsigned long offset, unsigned char *data, unsigned long bytes);
+void __cdecl GEX_Target(int sound, long volume)
 {
-    int iVar2 = param_1 - 0x40;
-    if (gDirectSound_0049a070 == 0) {
+    unsigned long status;
+    int index;
+    index = sound - 0x40;
+    if (!gDirectSound_0049a070)
         return;
-    }
-    if (gPreviewSoundBuffer_0049fb28 != 0) {
-        if (DAT_0049a06c == iVar2) {
-            unsigned long local_4;
-            gPreviewSoundBuffer_0049fb28->GetStatus(&local_4);
-            if ((local_4 & 1) != 0) {
-                gPreviewSoundBuffer_0049fb28->SetVolume(param_2);
+    if (gPreviewSoundBuffer_0049fb28) {
+        if (index == DAT_0049a06c) {
+            gPreviewSoundBuffer_0049fb28->lpVtbl->GetStatus(gPreviewSoundBuffer_0049fb28, &status);
+            if (status & 1) {
+                gPreviewSoundBuffer_0049fb28->lpVtbl->SetVolume(gPreviewSoundBuffer_0049fb28, volume);
                 return;
             }
         }
-        gPreviewSoundBuffer_0049fb28->Release();
+        gPreviewSoundBuffer_0049fb28->lpVtbl->Release(gPreviewSoundBuffer_0049fb28);
         gPreviewSoundBuffer_0049fb28 = 0;
     }
-    DAT_0049a06c = iVar2;
-    if (SND_CreateDirectSoundBuffer_00401720(gDirectSound_0049a070, (void**)&gPreviewSoundBuffer_0049fb28, gSndSizes_00451048[iVar2], 0x2b11) != 0) {
-        if (SND_FillDirectSoundBuffer_004017d0(gPreviewSoundBuffer_0049fb28, 0, gSNDPointerArray_0049f6b0[iVar2], gSndSizes_00451048[iVar2]) != 0) {
-            gPreviewSoundBuffer_0049fb28->SetVolume(param_2);
-            gPreviewSoundBuffer_0049fb28->Play(0, 0, 0);
-        }
+    DAT_0049a06c = index;
+    if (SND_CreateDirectSoundBuffer_00401720(gDirectSound_0049a070, &gPreviewSoundBuffer_0049fb28, gSndSizes_00451048[index], 0x2b11)
+        && SND_FillDirectSoundBuffer_004017d0(gPreviewSoundBuffer_0049fb28, 0, gSNDPointerArray_0049f6b0[index], gSndSizes_00451048[index])) {
+        gPreviewSoundBuffer_0049fb28->lpVtbl->SetVolume(gPreviewSoundBuffer_0049fb28, volume);
+        gPreviewSoundBuffer_0049fb28->lpVtbl->Play(gPreviewSoundBuffer_0049fb28, 0, 0, 0);
     }
 }
-
 }

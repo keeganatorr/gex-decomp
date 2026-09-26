@@ -1,46 +1,55 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0042F720.cpp
-// Historical source SHA256: 55486fda188fab8398e88fa7787b9ff44843c396cf0cb9fef84e80b6bc68fdfd
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXAniScript { unsigned char *as_script; int as_data[7]; } GXAniScript;
+typedef int (__cdecl *GobFunc)(struct GXObject *gob);
+typedef struct GXObject {
+    unsigned char _pad0[0xc];
+    void *gob_objectLoadData;   /* 0xc */
+    GXAniScript gob_scripts[2]; /* 0x10 */
+    int gob_currentFrameGroup;  /* 0x50 */
+    int gob_currentFrameIndex;  /* 0x54 */
+    GobFunc gob_initFunc;       /* 0x58 */
+    GobFunc gob_doitFunc;       /* 0x5c */
+    unsigned char _pad60[0xc];
+    unsigned int gob_flags;     /* 0x6c */
+    unsigned char _pad70[0x8];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    unsigned char _pad80[0x28];
+    int gob_work4;              /* 0xa8 */
+    unsigned char _padAC[0x24];
+    int gob_removeDist;         /* 0xd0 */
+    unsigned char _padD4[0xc];
+    unsigned int gob_flags2;    /* 0xe0 */
+} GXObject;
 extern "C" {
-extern "C" { extern void* PTR_00463D7C; }
-extern "C" { extern unsigned char DAT_0049FB98; }
-extern "C" { extern int DAT_0049FCC0[8]; }
-extern "C" { extern int DAT_0049FCE0[8]; }
-extern "C" int __cdecl FUN_00419C00(void*, int, int, int*, int*);
-extern "C" void* __cdecl FUN_004195D0(int, int, int, int);
-extern "C" void __cdecl FUN_0042F6E0(void);
-
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern GXAniScript DAT_0049fcc0;
+extern GXAniScript DAT_0049fce0;
+extern GXObject *PTR_00463d7c;
+extern unsigned char *PTR_0049fb98;
+int __cdecl GOB_GetHotSpot_00419c00(GXObject *gob, int group, int index, int *x, int *y);
+GXObject *__cdecl GOB_AddObject_004195d0(int type, int x, int y, void *loadData);
+int __cdecl FUN_0042f6e0(GXObject *gob);
+void __cdecl GEX_Target(GXObject *gob)
 {
-    int xPos;
-    int yPos;
-    int iVar1;
-    void* ppGVar2;
-    int* puVar3;
-    int* ppGVar4;
-    int j;
-
-    iVar1 = FUN_00419C00(param_1, 0, 0, &xPos, &yPos);
-    if (iVar1 != 0) {
-        xPos = *(int*)((char*)param_1 + 0x78) + xPos - 0x1c;
-        yPos = *(int*)((char*)param_1 + 0x7c) + yPos - 0x1c;
-        ppGVar2 = FUN_004195D0(0xe5, xPos, yPos, *(int*)((char*)param_1 + 0xc));
-        if (ppGVar2 != 0) {
-            PTR_00463D7C = ppGVar2;
-            *(int*)((char*)ppGVar2 + 0x50) = 0xe;
-            *(int*)((char*)ppGVar2 + 0x54) = 0;
-            *(int*)((char*)ppGVar2 + 0x5c) = (int)FUN_0042F6E0;
-            if (DAT_0049FB98 == 6) {
-                puVar3 = DAT_0049FCC0;
-            } else {
-                puVar3 = DAT_0049FCE0;
-            }
-            ppGVar4 = (int*)((char*)ppGVar2 + 0x10);
-            for (j = 0; j < 8; j++) {
-                ppGVar4[j] = puVar3[j];
-            }
-            *(int*)((char*)ppGVar2 + 0x6c) = *(int*)((char*)param_1 + 0x6c);
-            *(int*)((char*)ppGVar2 + 0xd0) = 0x30000000;
-            *(int*)((char*)ppGVar2 + 0xe0) |= 0x40;
+    int x;
+    int y;
+    GXObject *spawned;
+    if (GOB_GetHotSpot_00419c00(gob, 0, 0, &x, &y)) {
+        x += gob->gob_xpos;
+        y += gob->gob_ypos;
+        spawned = GOB_AddObject_004195d0(0xe5, x, y, gob->gob_objectLoadData);
+        if (spawned) {
+            PTR_00463d7c = spawned;
+            spawned->gob_currentFrameGroup = 0xe;
+            spawned->gob_currentFrameIndex = 0;
+            spawned->gob_doitFunc = FUN_0042f6e0;
+            if (*PTR_0049fb98 == 6)
+                spawned->gob_scripts[0] = DAT_0049fcc0;
+            else
+                spawned->gob_scripts[0] = DAT_0049fce0;
+            spawned->gob_flags = gob->gob_flags;
+            spawned->gob_removeDist = 0x30000000;
+            spawned->gob_flags2 |= 0x40;
         }
     }
 }

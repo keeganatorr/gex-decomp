@@ -1,0 +1,856 @@
+{
+ "format": "gex-knowledge-recipes-v1",
+ "toolchainId": "vc40-cl-10.00.5270",
+ "note": "Every recipe carries executable checks. tests/knowledge_checks.py compiles each with the pinned compiler through tools/probe.py: 'exact' checks must match the pinned original bytes and 'differs' checks must not. A recipe whose checks fail is stale; fix or retire it, never loosen the check. Exact bytes do not prove source types or the original author's code.",
+ "statuses": {
+  "verifier-proved": "The lever produced current exact proofs through scripts/verify.",
+  "probe-observed": "Reproducible with tools/probe.py but not yet behind a published proof.",
+  "toolchain-limited": "A family with zero exact proofs and a reviewed negative search under this toolchain.",
+  "hypothesis": "Plausible, untested."
+ },
+ "recipes": [
+  {
+   "id": "symbol-numbering-padding",
+   "title": "Operand order, register choice and schedule follow internal symbol numbering",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/symbol-numbering.md",
+   "triggers": [
+    "shape:operand-order",
+    "shape:register-rename",
+    "shape:general",
+    "op:cmp"
+   ],
+   "symptom": "Candidate has the target's instructions but `cmp ecx, eax` vs `cmp eax, ecx` (with the mirrored jcc), SIB base/index swapped, a different register, or one independent instruction moved.",
+   "action": "Leave the body alone. Run tools/perturb.py ADDRESS SOURCE --moves: it first tries every order of up to five top-level declarations (else single moves and swaps), then inserts 1-16 unused `extern int decl_pad_N;` data declarations at each declaration slot. Publish the first exact variant with scripts/verify.",
+   "evidence": [
+    "00419520",
+    "00423800",
+    "00429190",
+    "0042e8b0",
+    "00437010",
+    "00439090",
+    "0040f1d0",
+    "004018b0",
+    "0041e7e0",
+    "004195d0",
+    "004404b0",
+    "00429b40",
+    "00433590"
+   ],
+   "checks": [
+    {
+     "address": "0042dcf0",
+     "expect": "differs",
+     "why": "global declared before the callee: cmp operands in the wrong order",
+     "source": "extern \"C\" void *DAT_004A27FC;\nextern \"C\" void __cdecl FUN_0042CC70(int, void *);\nextern \"C\" int __cdecl GEX_Target(void *o) { if (o == DAT_004A27FC) FUN_0042CC70(0, o); return 0; }\n"
+    },
+    {
+     "address": "0042dcf0",
+     "expect": "differs",
+     "why": "one unused declaration first is not enough",
+     "source": "extern \"C\" int decl_pad_0;\nextern \"C\" void *DAT_004A27FC;\nextern \"C\" void __cdecl FUN_0042CC70(int, void *);\nextern \"C\" int __cdecl GEX_Target(void *o) { if (o == DAT_004A27FC) FUN_0042CC70(0, o); return 0; }\n"
+    },
+    {
+     "address": "0042dcf0",
+     "expect": "exact",
+     "why": "two unused declarations first flip the compare; names and data types do not matter",
+     "source": "extern \"C\" int decl_pad_0;\nextern \"C\" char *a_much_longer_unused_name;\nextern \"C\" void *DAT_004A27FC;\nextern \"C\" void __cdecl FUN_0042CC70(int, void *);\nextern \"C\" int __cdecl GEX_Target(void *o) { if (o == DAT_004A27FC) FUN_0042CC70(0, o); return 0; }\n"
+    },
+    {
+     "address": "00419520",
+     "expect": "exact",
+     "file": "src/functions/00419520.cpp"
+    },
+    {
+     "address": "00437010",
+     "expect": "exact",
+     "file": "src/functions/00437010.cpp",
+     "why": "a pure instruction-schedule difference fixed by padding alone"
+    }
+   ],
+   "caveats": [
+    "Padding is compiler-state reproduction, not recovered source; keep the comment block the tool writes.",
+    "Function prototypes perturb numbering differently from data declarations; use data declarations.",
+    "Rename-only changes of any identifier do nothing.",
+    "Counts above eight matter: 00429b40 needed 10 and 00433590 needed 14."
+   ]
+  },
+  {
+   "id": "symbol-numbering-declaration-order",
+   "title": "Reordering existing declarations is the same lever without padding; a commutative sum follows declaration order",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/symbol-numbering.md",
+   "triggers": [
+    "shape:operand-order",
+    "op:cmp"
+   ],
+   "symptom": "As symbol-numbering-padding.",
+   "action": "tools/perturb.py --moves tries every single move and swap of the top-level declarations. Prefer this when it works: the source stays free of padding.",
+   "evidence": [
+    "0042dcf0",
+    "0043b9e0",
+    "004196e0",
+    "004237c0"
+   ],
+   "checks": [
+    {
+     "address": "0042dcf0",
+     "expect": "exact",
+     "why": "callee declared before the global",
+     "source": "extern \"C\" void __cdecl FUN_0042CC70(int, void *);\nextern \"C\" void *DAT_004A27FC;\nextern \"C\" int __cdecl GEX_Target(void *o) { if (o == DAT_004A27FC) FUN_0042CC70(0, o); return 0; }\n"
+    },
+    {
+     "address": "0043b9e0",
+     "expect": "exact",
+     "file": "src/functions/0043b9e0.cpp"
+    },
+    {
+     "address": "004237c0",
+     "expect": "exact",
+     "file": "src/functions/004237c0.cpp",
+     "why": "four globals summed in a loop load in the reverse of their declaration order"
+    }
+   ],
+   "caveats": [
+    "96 semantic C++ variants of 0042dcf0 (docs/compiler-guided-search.md) never moved this; the decisive change was outside the function body.",
+    "Source term order in a + b + c + d is canonicalised; only the declaration order moved it (004237c0 needed the exact reverse, one of 24 orders)."
+   ]
+  },
+  {
+   "id": "front-end-language-switch",
+   "title": "/Tc (C) and /Tp (C++) number symbols differently",
+   "status": "probe-observed",
+   "doc": "docs/knowledge/symbol-numbering.md",
+   "triggers": [
+    "shape:operand-order"
+   ],
+   "symptom": "As symbol-numbering-padding, when padding and moves under the contract language fail.",
+   "action": "tools/perturb.py --languages cpp,c. A C result needs functionOverrides[address].language = \"c\" in project.json, which is a configuration change (service restart). Prefer a C++ perturbation when one exists: 004195d0 and 004404b0 matched both ways.",
+   "evidence": [
+    "004195d0",
+    "004404b0"
+   ],
+   "checks": [
+    {
+     "address": "0042dcf0",
+     "expect": "exact",
+     "lang": "c",
+     "why": "the C++-failing declaration order matches under /Tc",
+     "source": "extern void *DAT_004A27FC;\nextern void __cdecl FUN_0042CC70(int, void *);\nint __cdecl GEX_Target(void *o) { if (o == DAT_004A27FC) FUN_0042CC70(0, o); return 0; }\n"
+    }
+   ],
+   "caveats": [
+    "441 of 452 comparable exact C++ proofs also match under a mechanical C conversion; the language is another perturbation, not evidence the game was C++ or C."
+   ]
+  },
+  {
+   "id": "natural-field-access",
+   "title": "Write fields the way the programmer did, through the pointer, with real member names",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/natural-field-access.md",
+   "triggers": [
+    "mem:rmw",
+    "shape:operand-order"
+   ],
+   "symptom": "Ghidra-shaped source (`int a = p[0x25]; int b = p[0x23]; ... p[0x23] = sum`) compiles to the right instructions with compares or loads in another order. Also: Ghidra's goto form of nested if/else produces an inverted conditional jump plus an extra jmp.",
+   "action": "Get the layout with tools/ghidra_struct.py GXObject --only <offsets>, then write `gob->gob_yVel += gob->gob_yAccl; if (gob->gob_yVel > gob->gob_maxyVel) ...` re-reading fields instead of caching them in locals.",
+   "evidence": [
+    "004390d0",
+    "004213f0",
+    "00431900"
+   ],
+   "checks": [
+    {
+     "address": "004390d0",
+     "expect": "exact",
+     "file": "src/functions/004390d0.cpp"
+    },
+    {
+     "address": "004213f0",
+     "expect": "exact",
+     "file": "src/functions/004213f0.cpp",
+     "why": "Ghidra's goto-shaped clamp inverted one branch; the natural if/else-if with re-read fields matched first try"
+    },
+    {
+     "address": "00431900",
+     "expect": "exact",
+     "file": "src/functions/00431900.cpp",
+     "why": "the retained candidate used a volatile read to force a load order; plain field access matched first try"
+    }
+   ],
+   "caveats": [
+    "Ghidra types GXObject parameters as GXObject**; that is an analysis error, not a clue."
+   ]
+  },
+  {
+   "id": "stack-frame-aggregate",
+   "title": "A different `sub esp, N` means a local aggregate of the wrong size, not a scheduling issue",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/natural-field-access.md",
+   "triggers": [
+    "shape:displacement"
+   ],
+   "symptom": "Frame size and every [esp+k] displacement differ while the instructions match. Ghidra split one out-parameter buffer into `local_28[6]`, `local_10`, `local_c` (the last two never written in source), so the compiler lays out a smaller frame.",
+   "action": "Size the buffer from `sub esp, N` and the lea passed to the callee, then read fields as elements of that one buffer (00421820: int edges[10], reading edges[6] and edges[7]).",
+   "evidence": [
+    "00421820"
+   ],
+   "checks": [
+    {
+     "address": "00421820",
+     "expect": "exact",
+     "file": "src/functions/00421820.cpp"
+    }
+   ],
+   "caveats": [
+    "Reading a Ghidra-named local that the source never assigns is undefined behaviour and a sign of this split."
+   ]
+  },
+  {
+   "id": "narrow-mask-shift",
+   "title": "`and r, 0x80000000` + `shr r, 0x1c` is a ternary `flags & 0x80000000 ? 8 : 0`",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "shape:immediate",
+    "op:and"
+   ],
+   "symptom": "Target keeps the narrow mask `and edi, 0x80000000` before `shr edi, 0x1c` (bit 31 to bit 3); a shift or divide in the candidate compiles to `and edi, 0x8fffffff` instead. `and r, 0x80000000; shr r, 0x1f` is the same idiom with 1/0.",
+   "action": "Write the flip bit as a ternary: `(flags & 0x80000000 ? 8 : 0) | angle >> 21` (the direction index of the InitPlayerSide* family). CL 10.00 lowers a select between a power of two and 0 to mask+shift and keeps the narrow mask. For the 1/0 form write `(flags & 0x80000000) != 0`. tools/idiom_scan.py still lists candidates; they are source shapes, not a toolchain limit.",
+   "evidence": [
+    "004125b0",
+    "00411d70",
+    "00412750",
+    "00411b90",
+    "00411ff0",
+    "00414130",
+    "00421f20",
+    "004121b0",
+    "004218a0",
+    "00414290",
+    "00412960",
+    "00411160",
+    "00413170",
+    "004123c0",
+    "00412290",
+    "00411a90",
+    "00411c60",
+    "004120c0",
+    "00412630",
+    "004206d0"
+   ],
+   "checks": [
+    {
+     "address": "004125b0",
+     "expect": "exact",
+     "file": "docs/knowledge/examples/004125b0-narrow-mask-ternary-exact.cpp"
+    },
+    {
+     "address": "004125b0",
+     "expect": "differs",
+     "file": "docs/knowledge/examples/004125b0-narrow-mask-ternary-differs.cpp",
+     "why": "(flags & 0x80000000) >> 28 widens the mask to 0x8fffffff"
+    }
+   ],
+   "caveats": [
+    "Every shift, divide and bitfield spelling widens (>> 28) or drops (>> 31) the mask; only the ternary (or != 0) keeps it. Found 2026-09-26 from 004207e0, whose `(x & 0x80000000) != 0` already compiled to and/shr 0x1f."
+   ]
+  },
+  {
+   "id": "noreturn-tail",
+   "title": "Bodies that end in call _exit: two different problems",
+   "status": "toolchain-limited",
+   "doc": "docs/knowledge/toolchain-limits.md",
+   "triggers": [
+    "op:call"
+   ],
+   "symptom": "Recorded extent ends in `call _exit`. For 00436c90 the original continues `add esp, 4; ret` right after: Ghidra assumed _exit is noreturn and cut the extent, so the verifier refuses a body that is actually complete (an extent bug, and a candidate compiles to exactly those bytes). For 004064d0 and 00449bd0 the original really has no epilogue, which CL 10.00 cannot produce.",
+   "action": "00436c90: needs an extent repair in the backend (extend a call-terminated extent through the following epilogue when no function starts inside). The other two: skip.",
+   "evidence": [
+    "00436c90",
+    "004064d0",
+    "00449bd0"
+   ],
+   "checks": [
+    {
+     "address": "00436c90",
+     "expect": "differs",
+     "source": "extern \"C\" void __cdecl assertfail_00405350(const char *, ...);\nextern \"C\" void __cdecl _exit(int);\nextern \"C\" char s_SCRIPT_ERROR___s_0045b98c[];\nextern \"C\" void __cdecl GEX_Target(char *name) { assertfail_00405350(s_SCRIPT_ERROR___s_0045b98c, name); _exit(-1); }\n"
+    }
+   ],
+   "caveats": [
+    "00402ec0 (MUS_SetMusicPlaying) also calls _exit mid-function and continues normally, so the original compiler did not treat _exit as noreturn everywhere."
+   ]
+  },
+  {
+   "id": "score-rewards-wrong-semantics",
+   "title": "A higher positional score can come from wrong semantics",
+   "status": "probe-observed",
+   "doc": "docs/knowledge/README.md",
+   "triggers": [
+    "shape:register-rename"
+   ],
+   "symptom": "0042de50's retained best (93.9%) passes its two parameters to both callees swapped; that happens to reproduce the target's esi/edi assignment. The semantically correct source scores 81.8% and no perturbation found tried so far flips its registers.",
+   "action": "Before perturbing or keeping a best candidate, check argument order against the target's push sequence. Never keep a higher-scoring source that computes something else.",
+   "evidence": [
+    "0042de50"
+   ],
+   "checks": [
+    {
+     "address": "0042de50",
+     "expect": "differs",
+     "why": "correct argument order, registers still swapped",
+     "source": "extern \"C\" {\nextern void __cdecl FUN_0042DE30(void *, void *);\nextern void __cdecl FUN_0042d4e0_Object_unk(void *, void *);\nvoid __cdecl GEX_Target(void *first, void *second)\n{\n    FUN_0042DE30(first, second);\n    FUN_0042d4e0_Object_unk(first, second);\n}\n}\n"
+    }
+   ],
+   "caveats": [
+    "The loop's monotonic best-score preservation will keep the wrong source; this needs a semantic check the backend does not have."
+   ]
+  },
+  {
+   "id": "switch-table-extent",
+   "title": "Switches: the jump table follows the code; the verifier now compares it",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/codegen-notes.md",
+   "triggers": [
+    "op:jmp"
+   ],
+   "symptom": "Candidate is longer than the recorded extent by the table size; before loop-trailing-data every such function plateaued near 93%.",
+   "action": "Write a normal switch. pc-decomp (switch-tables backend) widens the comparison to referenced trailing data when no other function starts inside it; tools/probe.py does the same.",
+   "evidence": [
+    "0040b0a0",
+    "0042ca40",
+    "0043a240",
+    "00420fa0",
+    "0041b3e0",
+    "0042c0a0",
+    "0041beb0",
+    "00409f00",
+    "0041a920"
+   ],
+   "checks": [
+    {
+     "address": "00409f00",
+     "expect": "exact",
+     "file": "src/functions/00409f00.cpp",
+     "why": "31 table bytes past the extent"
+    }
+   ],
+   "caveats": [
+    "Seven of these sources were already byte-exact; only the extent rule had hidden it."
+   ]
+  },
+  {
+   "id": "volatile-thread-flags",
+   "title": "Flags polled across threads were volatile",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/codegen-notes.md",
+   "triggers": [
+    "op:push"
+   ],
+   "symptom": "Target keeps constant 0 in a callee-saved register (`xor edi, edi` ... `push edi` for Sleep(0)) and reloads a flag every iteration; candidate pushes an immediate.",
+   "action": "Declare the polled globals `volatile` (tools/perturb.py --volatile tries every subset).",
+   "evidence": [
+    "0040b2d0",
+    "0040ab00",
+    "0040b320",
+    "00402e30"
+   ],
+   "checks": [
+    {
+     "address": "0040b320",
+     "expect": "exact",
+     "file": "src/functions/0040b320.cpp"
+    }
+   ],
+   "caveats": [
+    "Only the flags the loop polls: 0040b320 needed exactly gFreezeGame and M1_004a2a84."
+   ]
+  },
+  {
+   "id": "statement-and-declaration-order",
+   "title": "Independent statement order and local declaration-list order move scheduling and registers",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/codegen-notes.md",
+   "triggers": [
+    "shape:general",
+    "shape:register-rename"
+   ],
+   "symptom": "Same instructions, one store or call placed differently, or two locals' registers swapped.",
+   "action": "Permute adjacent statements (including calls) and the names in `int a, b;` lists. Exact bytes prove the reordering equivalent, so no independence analysis is needed.",
+   "evidence": [
+    "0043b210",
+    "00435a10",
+    "00430d70",
+    "00430de0",
+    "0040ba50",
+    "00423a00"
+   ],
+   "checks": [
+    {
+     "address": "00423a00",
+     "expect": "exact",
+     "file": "src/functions/00423a00.cpp",
+     "why": "`int count, i;` rather than `int i, count;`"
+    }
+   ],
+   "caveats": [
+    "Stack slot assignment for aggregates did not follow declaration order (004044b0)."
+   ]
+  },
+  {
+   "id": "mask-test-not-shift",
+   "title": "`(x & 0x80000000) != 0` keeps `and; shr 31`",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/codegen-notes.md",
+   "triggers": [
+    "op:and"
+   ],
+   "symptom": "Target `and eax, 0x80000000; shr eax, 0x1f`; `x >> 31` drops the mask.",
+   "action": "Write the test form `(x & 0x80000000) != 0`.",
+   "evidence": [
+    "004207e0"
+   ],
+   "checks": [
+    {
+     "address": "004207e0",
+     "expect": "exact",
+     "file": "src/functions/004207e0.cpp"
+    }
+   ],
+   "caveats": [
+    "The narrow-mask-shift family is solved by the ternary form (see that recipe)."
+   ]
+  },
+  {
+   "id": "inline-int3",
+   "title": "`int 3` after OutputDebugString needs inline assembly (refused by policy)",
+   "status": "toolchain-limited",
+   "doc": "docs/knowledge/codegen-notes.md",
+   "triggers": [
+    "op:int3"
+   ],
+   "symptom": "Function has an ebp frame and an `int3` after an error message (CDIO_FileClose, FreeMemory).",
+   "action": "Skip: sources may not contain inline assembly and VC4 has no __debugbreak.",
+   "evidence": [
+    "00409200",
+    "00409740"
+   ],
+   "checks": [
+    {
+     "address": "00409200",
+     "expect": "differs",
+     "source": "extern \"C\" {\n__declspec(dllimport) void __stdcall OutputDebugStringA(const char *);\nvoid __cdecl GEX_Target(void *h) { OutputDebugStringA(\"x\"); }\n}\n"
+    }
+   ],
+   "caveats": []
+  },
+  {
+   "id": "abs-branch-vs-ternary",
+   "title": "Absolute value shape follows the source form",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:neg",
+    "op:cdq",
+    "shape:general"
+   ],
+   "symptom": "Target has `mov eax, x; jns; mov eax, x; neg eax` where the candidate has `cdq; xor; sub` (or the reverse).",
+   "action": "`if (x < 0) d = -x; else d = x;` gives the branch; `x < 0 ? -x : x` gives cdq/xor/sub.",
+   "evidence": [
+    "0042c1a0"
+   ],
+   "checks": [
+    {
+     "address": "0042c1a0",
+     "expect": "exact",
+     "why": "if/else abs gives mov/jns/mov/neg",
+     "file": "docs/knowledge/examples/0042c1a0-abs-branch-vs-ternary-exact.cpp"
+    },
+    {
+     "address": "0042c1a0",
+     "expect": "differs",
+     "why": "ternary abs gives cdq/xor/sub",
+     "file": "docs/knowledge/examples/0042c1a0-abs-branch-vs-ternary-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "com-c-style-vtable",
+   "title": "DirectX COM calls are C style",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:call-indirect",
+    "shape:general"
+   ],
+   "symptom": "`call dword ptr [eax + N]` on a DirectX object with the `this` push scheduled differently.",
+   "action": "Declare a C vtable struct and call `obj->lpVtbl->Method(obj, ...)`, not a C++ virtual interface.",
+   "evidence": [
+    "00401720",
+    "00402940",
+    "004026d0"
+   ],
+   "checks": [
+    {
+     "address": "00401720",
+     "expect": "exact",
+     "why": "obj->lpVtbl->Method(obj, ...)",
+     "file": "docs/knowledge/examples/00401720-com-c-style-vtable-exact.cpp"
+    },
+    {
+     "address": "00401720",
+     "expect": "differs",
+     "why": "C++ virtual __stdcall interface schedules the this-push differently",
+     "file": "docs/knowledge/examples/00401720-com-c-style-vtable-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "if-else-source-order",
+   "title": "Blocks are laid out in source order",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "shape:general",
+    "op:jcc"
+   ],
+   "symptom": "The target keeps an error path (or one branch) at the end of the function, the candidate inline.",
+   "action": "Make the out-of-line body the `else` branch: `if (ok) { ... } else error();`.",
+   "evidence": [
+    "004026d0",
+    "004249e0"
+   ],
+   "checks": [
+    {
+     "address": "004026d0",
+     "expect": "exact",
+     "why": "if (ok) {...} else error(): error path at the end",
+     "file": "docs/knowledge/examples/004026d0-if-else-source-order-exact.cpp"
+    },
+    {
+     "address": "004026d0",
+     "expect": "differs",
+     "why": "early-return error path is laid out inline",
+     "file": "docs/knowledge/examples/004026d0-if-else-source-order-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "common-tail-after-if-else",
+   "title": "Common code after an if/else is tail-duplicated",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "shape:general"
+   ],
+   "symptom": "One store appears in both branches with an immediate while neighbouring stores in the branch reuse a register.",
+   "action": "Move that statement after the if/else.",
+   "evidence": [
+    "00429940"
+   ],
+   "checks": [
+    {
+     "address": "00429940",
+     "expect": "exact",
+     "why": "shared store after the if/else, duplicated by the compiler with an immediate",
+     "file": "docs/knowledge/examples/00429940-common-tail-after-if-else-exact.cpp"
+    },
+    {
+     "address": "00429940",
+     "expect": "differs",
+     "why": "the store written in both branches reuses a register",
+     "file": "docs/knowledge/examples/00429940-common-tail-after-if-else-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "explicit-empty-case-labels",
+   "title": "Explicit empty case labels keep the jump table bound",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:jmp-table"
+   ],
+   "symptom": "Only the jump-table bound (`cmp eax, N`) differs.",
+   "action": "List every empty case up to the target bound with `break;`; a single empty case is dropped.",
+   "evidence": [
+    "00435ab0"
+   ],
+   "checks": [
+    {
+     "address": "00435ab0",
+     "expect": "exact",
+     "why": "all empty cases listed keep the 10-entry jump table",
+     "file": "docs/knowledge/examples/00435ab0-explicit-empty-case-labels-exact.cpp"
+    },
+    {
+     "address": "00435ab0",
+     "expect": "differs",
+     "why": "a lone empty case 10 is dropped and the table shrinks",
+     "file": "docs/knowledge/examples/00435ab0-explicit-empty-case-labels-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "duplicate-case-bodies",
+   "title": "Duplicate case bodies merge into the later block",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:jmp-table"
+   ],
+   "symptom": "Two table slots share one block that sits after higher cases.",
+   "action": "Write the two cases with separate identical bodies instead of stacked labels.",
+   "evidence": [
+    "0040c940"
+   ],
+   "checks": [
+    {
+     "address": "0040c940",
+     "expect": "exact",
+     "why": "separate identical bodies merge into the later block",
+     "file": "docs/knowledge/examples/0040c940-duplicate-case-bodies-exact.cpp"
+    },
+    {
+     "address": "0040c940",
+     "expect": "differs",
+     "why": "'case 0xc: case 0x70:' places the block at 0xc's position",
+     "file": "docs/knowledge/examples/0040c940-duplicate-case-bodies-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "separate-struct-copies",
+   "title": "Per-branch struct copies are cross-jumped",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:rep-movsd"
+   ],
+   "symptom": "Each branch loads a source address into esi and jumps to one `rep movsd`.",
+   "action": "Write one struct assignment per branch rather than selecting a pointer and copying once.",
+   "evidence": [
+    "0042f860",
+    "0042f720"
+   ],
+   "checks": [
+    {
+     "address": "0042f860",
+     "expect": "exact",
+     "why": "one struct assignment per branch; the rep movsd tail is cross-jumped",
+     "file": "docs/knowledge/examples/0042f860-separate-struct-copies-exact.cpp"
+    },
+    {
+     "address": "0042f860",
+     "expect": "differs",
+     "why": "pointer chosen by if/else then one copy becomes a speculative assignment",
+     "file": "docs/knowledge/examples/0042f860-separate-struct-copies-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "loop-trip-count",
+   "title": "Down-counted loops come from stepped for loops",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:shr",
+    "shape:general"
+   ],
+   "symptom": "A trip count like `(n + 7) >> 3` feeds a `dec; jne` loop.",
+   "action": "`for (n = 0; n < bits; n += 8)`; the compiler computes the trip count.",
+   "evidence": [
+    "00429850"
+   ],
+   "checks": [
+    {
+     "address": "00429850",
+     "expect": "exact",
+     "why": "for (n = 0; n < bits; n += 8) with an int key",
+     "file": "docs/knowledge/examples/00429850-loop-trip-count-exact.cpp"
+    },
+    {
+     "address": "00429850",
+     "expect": "differs",
+     "why": "unsigned char key keeps byte arithmetic",
+     "file": "docs/knowledge/examples/00429850-loop-trip-count-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "script-post-increment",
+   "title": "Script readers use post-increment",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:inc"
+   ],
+   "symptom": "`inc esi` twice before reading `[esi-2]` and `[esi-1]`.",
+   "action": "`a = *p++; b = *p++;` instead of indexed reads and one `p += 2`.",
+   "evidence": [
+    "00418180",
+    "00419140"
+   ],
+   "checks": [
+    {
+     "address": "00418180",
+     "expect": "exact",
+     "why": "*script++ twice: inc esi; inc esi; [esi-2], [esi-1]",
+     "file": "docs/knowledge/examples/00418180-script-post-increment-exact.cpp"
+    },
+    {
+     "address": "00418180",
+     "expect": "differs",
+     "why": "script[0], script[1]; script += 2",
+     "file": "docs/knowledge/examples/00418180-script-post-increment-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "store-through-global-pointer",
+   "title": "Writes through a just-stored global pointer",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "shape:general"
+   ],
+   "symptom": "Absolute `and [X], m` right after `ptr = &X`, and an unrelated char global reloaded afterwards.",
+   "action": "Write through the pointer (`*ptr &= m`), not to X directly.",
+   "evidence": [
+    "0043daf0"
+   ],
+   "checks": [
+    {
+     "address": "0043daf0",
+     "expect": "exact",
+     "why": "write through the just-stored global pointer: absolute and + reload of the char global",
+     "file": "docs/knowledge/examples/0043daf0-store-through-global-pointer-exact.cpp"
+    },
+    {
+     "address": "0043daf0",
+     "expect": "differs",
+     "why": "writing the target directly lets the compiler keep the char in a register",
+     "file": "docs/knowledge/examples/0043daf0-store-through-global-pointer-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "ghidra-field-pointer-local",
+   "title": "Ghidra's &obj->field locals are compiler CSE",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "shape:general",
+    "op:lea"
+   ],
+   "symptom": "A `lea reg, [obj + off]` reused for a field, with the candidate's schedule slightly off.",
+   "action": "Access `obj->field` directly; drop Ghidra's pointer local.",
+   "evidence": [
+    "004094f0"
+   ],
+   "checks": [
+    {
+     "address": "004094f0",
+     "expect": "exact",
+     "why": "plain file->offset; the lea is the compiler CSE",
+     "file": "docs/knowledge/examples/004094f0-ghidra-field-pointer-local-exact.cpp"
+    },
+    {
+     "address": "004094f0",
+     "expect": "differs",
+     "why": "Ghidra's int *p = &file->offset local changes the schedule",
+     "file": "docs/knowledge/examples/004094f0-ghidra-field-pointer-local-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "join-point-return",
+   "title": "Error paths join one return",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:mov",
+    "shape:general"
+   ],
+   "symptom": "Error paths return `mov eax, esi` although the variable is known to be 0.",
+   "action": "Jump (goto or fall-through) to one `return var;`; separate returns fold to `xor eax, eax`.",
+   "evidence": [
+    "0041a500"
+   ],
+   "checks": [
+    {
+     "address": "0041a500",
+     "expect": "exact",
+     "why": "error paths jump to the common return: mov eax, esi is kept",
+     "file": "docs/knowledge/examples/0041a500-join-point-return-exact.cpp"
+    },
+    {
+     "address": "0041a500",
+     "expect": "differs",
+     "why": "return frame; in each error path constant-folds to xor eax, eax",
+     "file": "docs/knowledge/examples/0041a500-join-point-return-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "ternary-mov-zero",
+   "title": "mov reg, 0 marks a ternary",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:mov"
+   ],
+   "symptom": "`mov reg, 0` (not `xor`) set before a test and conditional overwrite.",
+   "action": "Write `v = cond ? a : 0;`.",
+   "evidence": [
+    "00411230"
+   ],
+   "checks": [
+    {
+     "address": "00411230",
+     "expect": "exact",
+     "why": "x ? a : 0 gives mov reg, 0 before the test",
+     "file": "docs/knowledge/examples/00411230-ternary-mov-zero-exact.cpp"
+    },
+    {
+     "address": "00411230",
+     "expect": "differs",
+     "why": "if-assign gives xor and a register compare",
+     "file": "docs/knowledge/examples/00411230-ternary-mov-zero-differs.cpp"
+    }
+   ]
+  },
+  {
+   "id": "memset-register-zero-fill",
+   "title": "Small memset zero fills use a zero register",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:xor",
+    "shape:general"
+   ],
+   "symptom": "`xor reg, reg` then several register stores into one struct.",
+   "action": "`memset(p, 0, sizeof *p)` (intrinsic under /O2; never with a pragma).",
+   "evidence": [
+    "00409350",
+    "00409430",
+    "00401340"
+   ],
+   "checks": [
+    {
+     "address": "00409350",
+     "expect": "exact",
+     "why": "memset of a small struct: xor reg then register stores",
+     "file": "docs/knowledge/examples/00409350-memset-register-zero-fill-exact.cpp"
+    },
+    {
+     "address": "00409350",
+     "expect": "differs",
+     "why": "field-by-field zeroing stores immediates",
+     "file": "docs/knowledge/examples/00409350-memset-register-zero-fill-differs.cpp"
+    }
+   ]
+  }
+ ]
+}

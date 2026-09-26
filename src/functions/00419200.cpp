@@ -1,82 +1,97 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00419200.cpp
-// Historical source SHA256: de4a79eb3407795b499d6cd628dbf3c2ab8c81931a1cd9f623bdd5c9f53c76c6
+typedef struct GXObject GXObject;
+struct GXObject {
+    unsigned char _pad0[0x50];
+    int gob_currentFrameGroup;  /* 0x50 */
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad58[0x78 - 0x58];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    unsigned char _pad80[0x15c - 0x80];
+    GXObject *gob_parent;       /* 0x15c */
+};
 extern "C" {
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+extern int decl_pad_9;
+extern int decl_pad_10;
+extern int decl_pad_11;
+extern int decl_pad_12;
+extern int decl_pad_13;
+extern int decl_pad_14;
+extern int decl_pad_15;
+extern int decl_pad_16;
+extern int decl_pad_17;
 extern int CAMERA_XPos_004a2a38;
 extern int CAMERA_YPos_004a2a1c;
-
-extern "C" unsigned int __cdecl FUN_00417F00(unsigned char **);
-extern "C" int __cdecl FUN_00419C00(int *, int, int, int *, int *);
-extern "C" void __cdecl FUN_00443AE0(int *, int, int, int, int, int, int, int, int, int);
-
-extern "C" unsigned char *__cdecl GEX_Target(unsigned char *param_1, int *param_2)
+unsigned int __cdecl SCRIPT_GetUInt_00417f00(unsigned char **script);
+int __cdecl GOB_GetHotSpot_00419c00(GXObject *gob, int index, int flag, int *x, int *y);
+void __cdecl GOB_DisplayCelToQuad_00443ae0(GXObject *gob, int cel, int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3);
+unsigned char *__cdecl GEX_Target(unsigned char *script, GXObject *gob)
 {
-    unsigned int local_48, local_44, uVar4, uVar5;
-    int local_50, local_4c;
-    int saved_14, saved_15;
-    int local_40, local_3c;
-    int local_38, local_34;
-    int local_20[4];
-    int local_30[4];
-    int local_10[4];
-    int ebp;
-    int i, iVar6;
-    int *ppGVar3;
-    int pGVar2;
-    int *puVar1;
-    int *puVar7;
-    int pGVar8;
-    unsigned char *p;
-
-    ppGVar3 = param_2;
-    saved_14 = param_2[0x14];
-    saved_15 = param_2[0x15];
-    local_40 = (int)*param_1;
-    local_3c = (int)param_1[1];
-    p = param_1 + 2;
-
-    local_48 = FUN_00417F00(&p);
-    local_44 = FUN_00417F00(&p);
-    uVar4 = FUN_00417F00(&p);
-    uVar5 = FUN_00417F00(&p);
-
-    local_10[0] = (int)p[0];
-    local_10[1] = (int)p[1];
-    local_10[2] = (int)p[2];
-    local_10[3] = (int)p[3];
-    p = p + 5;
-
-    ebp = 0;
-    do {
-        iVar6 = FUN_00419C00(ppGVar3, *(int *)((int)local_10 + ebp), 0, &local_50, &local_4c);
-        if (iVar6 != 0) {
-            pGVar2 = ppGVar3[0x57];
-            puVar1 = (int *)((int)local_20 + ebp);
-            if (pGVar2 == 0) {
-                pGVar8 = ppGVar3[0x1f];
-                *puVar1 = (int)ppGVar3[0x1e] + local_50;
+    int hx;
+    int hy;
+    int minX;
+    int minY;
+    int maxX;
+    int maxY;
+    int group;
+    int frame;
+    int savedGroup;
+    int savedFrame;
+    int ys[4];
+    int xs[4];
+    int hot[4];
+    int i;
+    savedGroup = gob->gob_currentFrameGroup;
+    savedFrame = gob->gob_currentFrameIndex;
+    group = *script++;
+    frame = *script++;
+    minX = SCRIPT_GetUInt_00417f00(&script);
+    minY = SCRIPT_GetUInt_00417f00(&script);
+    maxX = SCRIPT_GetUInt_00417f00(&script);
+    maxY = SCRIPT_GetUInt_00417f00(&script);
+    hot[0] = *script++;
+    hot[1] = *script++;
+    hot[2] = *script++;
+    hot[3] = *script++;
+    script++;
+    for (i = 0; i < 4; i++) {
+        if (GOB_GetHotSpot_00419c00(gob, hot[i], 0, &hx, &hy)) {
+            if (gob->gob_parent) {
+                xs[i] = gob->gob_parent->gob_xpos + hx;
+                ys[i] = gob->gob_parent->gob_ypos + hy;
             } else {
-                pGVar8 = *(int *)(pGVar2 + 0x7c);     
-                *puVar1 = *(int *)(pGVar2 + 0x78) + local_50;  
+                xs[i] = gob->gob_xpos + hx;
+                ys[i] = gob->gob_ypos + hy;
             }
-            puVar7 = (int *)((int)local_30 + ebp);
-            *puVar7 = pGVar8 + local_4c;
-
-            if (*puVar1 < (int)local_48) *puVar1 = local_48;
-            if ((int)uVar4 < *puVar1) *puVar1 = uVar4;
-            if (*puVar7 < (int)local_44) *puVar7 = local_44;
-            if ((int)uVar5 < *puVar7) *puVar7 = uVar5;
-
-            *puVar1 = *puVar1 - CAMERA_XPos_004a2a38;
-            *puVar7 = *puVar7 - CAMERA_YPos_004a2a1c;
+            if (xs[i] < minX)
+                xs[i] = minX;
+            if (xs[i] > maxX)
+                xs[i] = maxX;
+            if (ys[i] < minY)
+                ys[i] = minY;
+            if (ys[i] > maxY)
+                ys[i] = maxY;
+            xs[i] -= CAMERA_XPos_004a2a38;
+            ys[i] -= CAMERA_YPos_004a2a1c;
         }
-        ebp = ebp + 4;
-    } while (ebp < 0x10);
-
-    ppGVar3[0x14] = local_40;
-    ppGVar3[0x15] = local_3c;
-    FUN_00443AE0(ppGVar3, 0, local_20[0], local_30[0], local_20[1], local_30[1], local_20[2], local_30[2], local_20[3], local_30[3]);
-    ppGVar3[0x14] = saved_14;
-    ppGVar3[0x15] = saved_15;
-    return p;
+    }
+    gob->gob_currentFrameGroup = group;
+    gob->gob_currentFrameIndex = frame;
+    GOB_DisplayCelToQuad_00443ae0(gob, 0, xs[0], ys[0], xs[1], ys[1], xs[2], ys[2], xs[3], ys[3]);
+    gob->gob_currentFrameGroup = savedGroup;
+    gob->gob_currentFrameIndex = savedFrame;
+    return script;
 }
 }

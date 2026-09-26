@@ -1,28 +1,22 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041FA80.cpp
-// Historical source SHA256: fbee59f18dc3dbc376b7c2ff01c516f5305197345a75923488c22ce7c57635c2
 extern "C" {
-extern "C" unsigned int __cdecl FUN_0041FB50();
-extern "C" void __cdecl FUN_00401AD0(unsigned int);
-extern "C" void __cdecl FUN_0041F8B0(int);
-
-extern "C" { extern int DAT_004A02D0[2]; }
-extern "C" { extern int DAT_004638B8; }
-extern "C" { extern int DAT_004638BC; }
-extern "C" { extern int DAT_004639D8; }
-
-extern "C" unsigned int __cdecl GEX_Target(int param_1)
+extern int UINT_ARRAY_004a02d0[2];
+int __cdecl VFX_VoiceFinished_0041fb50(void);
+void __cdecl VFX_QueueToLoad_00401ad0(int slot);
+void __cdecl FUN_0041f8b0_Stub(int voice);
+extern int DAT_004638b8_VoiceInner6;
+extern int DAT_004638bc_VoiceInnerCounter;
+extern int gIsVFXPlaying_004639d8;
+int __cdecl GEX_Target(int voice)
 {
-    unsigned int uVar1;
-
-    uVar1 = FUN_0041FB50();
-    if (uVar1 != 0 && (DAT_004A02D0[0] == param_1 || DAT_004A02D0[1] == param_1)) {
-        uVar1 = (unsigned int)(DAT_004A02D0[1] == param_1);
-        FUN_00401AD0(uVar1);
-        DAT_004A02D0[uVar1] = 0;
-        DAT_004638B8 = uVar1;
-        DAT_004638BC = 0;
-        DAT_004639D8 = 0x5a;
-        FUN_0041F8B0(param_1);
+    int slot;
+    if (VFX_VoiceFinished_0041fb50() && (UINT_ARRAY_004a02d0[0] == voice || UINT_ARRAY_004a02d0[1] == voice)) {
+        slot = UINT_ARRAY_004a02d0[1] == voice;
+        VFX_QueueToLoad_00401ad0(slot);
+        UINT_ARRAY_004a02d0[slot] = 0;
+        DAT_004638b8_VoiceInner6 = slot;
+        gIsVFXPlaying_004639d8 = 0x5a;
+        DAT_004638bc_VoiceInnerCounter = 0;
+        FUN_0041f8b0_Stub(voice);
         return 1;
     }
     return 0;

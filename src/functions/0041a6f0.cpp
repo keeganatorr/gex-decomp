@@ -1,74 +1,65 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041A6F0.cpp
-// Historical source SHA256: c6f83a8e89e2d01c9379dea7975d7374f4f139d4225f022822d4355cd788faa8
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x50];
+    int gob_currentFrameGroup;  /* 0x50 */
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad58[0x20];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    unsigned char _pad80[0x18];
+    int gob_work0;              /* 0x98 */
+    int gob_work1;              /* 0x9c */
+    int gob_work2;              /* 0xa0 */
+    unsigned char _padA4[0x10];
+    int gob_work7;              /* 0xb4: door id */
+} GXObject;
+typedef struct GexTileStruct GexTileStruct;
 extern "C" {
-extern "C" { extern int DAT_00456ADC; }
-extern "C" { extern int DAT_0046359C; }
-extern "C" { extern int DAT_004A27D4; }
-extern "C" { extern int DAT_004A280C; }
-extern "C" { extern int DAT_004A2810; }
-extern "C" { extern int DAT_004A282C; }
-extern "C" { extern int DAT_004A2830; }
-extern "C" { extern int DAT_004A2990; }
-extern "C" { extern int DAT_004A2A40; }
-extern "C" { extern int DAT_004A2A98; }
-extern "C" { extern int DAT_00456AE0; }
-extern "C" { extern unsigned char DAT_004A2710[]; }
-
-extern "C" int __cdecl FUN_0040F1D0(int, void**);
-extern "C" void __cdecl FUN_00419840(void**);
-extern "C" void __cdecl FUN_0041F8C0(unsigned int);
-
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern int gIsAddingObjectIntros_004a27d4;
+extern int gStartDoorID_00456adc;
+extern int DAT_0046359c;
+extern int DAT_004a280c_xPos;
+extern int DAT_004a2810_yPos;
+extern int DAT_004a282c_startxPos;
+extern int DAT_004a2830_startypos;
+extern int gStartDoorType_00456ae0;
+extern GexTileStruct *M1_CurrentLevel_004a2990;
+extern int LEVELID_004a2a98;
+extern unsigned char gStartDoorIDs_004a2710[];
+extern int DAT_004a2a40_LoadObjects;
+int __cdecl GetGlueDist_0040f1d0(GexTileStruct *level, GXObject *gob);
+void __cdecl GOB_RemoveMapObject_00419840(GXObject *gob);
+void __cdecl VSIT_PlayVoiceSituation_0041f8c0(int situation);
+void __cdecl GEX_Target(GXObject *gob)
 {
-    if (DAT_004A27D4 != 0)
-    {
-        DAT_0046359C = 0;
-        if ((int)param_1[0x2d] == DAT_00456ADC)
-        {
-            DAT_004A280C = (int)param_1[0x1e];
-            DAT_004A2810 = (int)param_1[0x1f];
-            DAT_004A282C = (int)param_1[0x1e];
-            param_1[0x1f] = (void*)((int)param_1[0x1f] + 0x200000);
-            DAT_00456AE0 = 1;
-            DAT_004A2830 = (int)param_1[0x1f];
-
-            {
-                int glue_result = FUN_0040F1D0(DAT_004A2990, param_1);
-                int orig_glue = glue_result;
-                int abs_glue = glue_result < 0 ? -glue_result : glue_result;
-                if (abs_glue < 0x5A0000)
-                {
-                    DAT_004A2830 += orig_glue;
-                }
-            }
+    int dist;
+    if (gIsAddingObjectIntros_004a27d4) {
+        DAT_0046359c = 0;
+        if (gob->gob_work7 == gStartDoorID_00456adc) {
+            DAT_004a280c_xPos = gob->gob_xpos;
+            DAT_004a2810_yPos = gob->gob_ypos;
+            gob->gob_ypos += 0x200000;
+            DAT_004a282c_startxPos = gob->gob_xpos;
+            DAT_004a2830_startypos = gob->gob_ypos;
+            gStartDoorType_00456ae0 = 1;
+            dist = GetGlueDist_0040f1d0(M1_CurrentLevel_004a2990, gob);
+            if ((dist < 0 ? -dist : dist) < 0x5a0000)
+                DAT_004a2830_startypos += dist;
         }
-        FUN_00419840(param_1);
-        return;
-    }
-
-    {
-        int level_id = DAT_004A2A98;
-        unsigned char door_byte = DAT_004A2710[level_id];
-        if ((int)door_byte == (int)param_1[0x2d])
-        {
-            int zero_check = 0;
-            if ((int)DAT_004A282C >= zero_check && DAT_00456AE0 == 1 && DAT_004A2A40 != zero_check)
-            {
-                param_1[0x27] = (void*)0;
-                param_1[0x28] = (void*)0;
-                param_1[0x15] = (void*)0;
-                param_1[0x14] = (void*)0;
-                param_1[0x26] = (void*)1;
-                return;
-            }
-
-            param_1[0x26] = (void*)3;
-            param_1[0x15] = (void*)0;
-            param_1[0x14] = (void*)2;
-            return;
+        GOB_RemoveMapObject_00419840(gob);
+    } else if (gStartDoorIDs_004a2710[LEVELID_004a2a98] == gob->gob_work7) {
+        if (DAT_004a282c_startxPos >= 0 && gStartDoorType_00456ae0 == 1 && DAT_004a2a40_LoadObjects) {
+            gob->gob_work1 = 0;
+            gob->gob_work2 = 0;
+            gob->gob_currentFrameIndex = 0;
+            gob->gob_currentFrameGroup = 0;
+            gob->gob_work0 = 1;
+        } else {
+            gob->gob_work0 = 3;
+            gob->gob_currentFrameIndex = 0;
+            gob->gob_currentFrameGroup = 2;
         }
-
-        FUN_0041F8C0(0x4A);
-    }
+    } else
+        VSIT_PlayVoiceSituation_0041f8c0(0x4a);
 }
 }

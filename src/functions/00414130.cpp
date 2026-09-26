@@ -12,7 +12,7 @@ extern "C" void __cdecl GEX_Target(unsigned long *param_1)
     param_1[0x1c] = 0x37;
     param_1[0x14] = 0x59;
 
-    switch ((((param_1[0x1b] >> 0x1c) & 8UL)) |
+    switch (((param_1[0x1b] & 0x80000000) ? 8 : 0) |
             ((long)param_1[0x31] >> 0x15)) {
     case 0:
     case 0xc:

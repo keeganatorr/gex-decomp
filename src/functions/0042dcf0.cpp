@@ -1,6 +1,8 @@
 extern "C" {
-extern void *DAT_004A27FC;
+// Declaration order is load-bearing: VC4 orders the compare's operands by
+// internal symbol numbering (docs/knowledge/symbol-numbering.md).
 extern void __cdecl FUN_0042CC70(int, void *);
+extern void *DAT_004A27FC;
 int __cdecl GEX_Target(void *object)
 {
     void *subject = object;

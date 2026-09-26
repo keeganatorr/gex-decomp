@@ -1,40 +1,60 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00418D70.cpp
-// Historical source SHA256: 8bb76d5af89c08ded573719e11e7a675bb83f62f605ba6c295466c5d8328effe
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x78];
+    int gob_xpos;                 /* 0x78 */
+    int gob_ypos;                 /* 0x7c */
+    unsigned char _pad80[0xdc];
+    struct GXObject *gob_parent;  /* 0x15c */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_00420770(void**, unsigned int);
-
-extern "C" void* __cdecl GEX_Target(unsigned char* param_1, int param_2)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+extern int decl_pad_9;
+extern int decl_pad_10;
+extern int decl_pad_11;
+extern int decl_pad_12;
+extern int decl_pad_13;
+extern int decl_pad_14;
+void __cdecl FUN_00420770_Movement_unk(GXObject *gob, int voice);
+unsigned char *__cdecl GEX_Target(unsigned char *script, GXObject *gob)
 {
-    unsigned char bVar1;
-    int iVar2;
-    int iVar3;
-    int iVar4;
-    int iVar5;
-    int local_8;
-    int local_4;
-
-    bVar1 = *param_1;
-    iVar5 = *(int*)(param_2 + 0x15c);
-    if (iVar5 != 0) {
-        iVar4 = 0;
-        iVar3 = 0;
-        local_8 = *(int*)(param_2 + 0x78);
-        local_4 = *(int*)(param_2 + 0x7c);
-        iVar2 = *(int*)(iVar5 + 0x15c);
-        while (iVar2 != 0) {
-            iVar4 = iVar4 + *(int*)(iVar5 + 0x78);
-            iVar3 = iVar3 + *(int*)(iVar5 + 0x7c);
-            iVar5 = *(int*)(iVar5 + 0x15c);
-            iVar2 = *(int*)(iVar5 + 0x15c);
+    GXObject *parent;
+    int voice;
+    int dx;
+    int dy;
+    int x;
+    int y;
+    voice = *script++;
+    parent = gob->gob_parent;
+    if (parent) {
+        dx = 0;
+        dy = 0;
+        x = gob->gob_xpos;
+        y = gob->gob_ypos;
+        while (parent->gob_parent) {
+            dx += parent->gob_xpos;
+            dy += parent->gob_ypos;
+            parent = parent->gob_parent;
         }
-        *(int*)(param_2 + 0x78) = *(int*)(iVar5 + 0x78) + iVar4 + local_8;
-        *(int*)(param_2 + 0x7c) = *(int*)(iVar5 + 0x7c) + iVar3 + local_4;
+        gob->gob_xpos = parent->gob_xpos + dx + x;
+        gob->gob_ypos = parent->gob_ypos + dy + y;
     }
-    FUN_00420770((void**)param_2, (unsigned int)bVar1);
-    if (iVar5 != 0) {
-        *(int*)(param_2 + 0x78) = local_8;
-        *(int*)(param_2 + 0x7c) = local_4;
+    FUN_00420770_Movement_unk(gob, voice);
+    if (parent) {
+        gob->gob_xpos = x;
+        gob->gob_ypos = y;
     }
-    return param_1 + 1;
+    return script;
 }
 }

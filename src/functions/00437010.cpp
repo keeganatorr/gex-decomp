@@ -1,6 +1,13 @@
 typedef unsigned int Word;
 
 extern "C" {
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern "C" int decl_pad_0;
+extern "C" int decl_pad_1;
+extern "C" int decl_pad_2;
 extern Word DAT_0045c988;
 extern unsigned char DAT_004642e4;
 void __cdecl RezInit_00436cf0(Word *);

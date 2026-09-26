@@ -1,28 +1,27 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00422410.cpp
-// Historical source SHA256: 9dbc1537b2d8f99e8b30456409e3538a7d63c040efbe2b0d1a6200122e316a05
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x8];
+    int gob_type;  /* 0x08 */
+} GXObject;
 extern "C" {
-extern "C" { extern int DAT_00458C88; }
-extern "C" { extern int DAT_004A0218; }
-extern "C" { extern int DAT_004A0224; }
-extern "C" { extern int DAT_004A0254; }
-extern void* DAT_004A2888;
-extern "C" void __cdecl FUN_00419A80(void**);
-
-extern "C" void __cdecl GEX_Target()
+extern GXObject *gEatingObject_004a2888;
+extern int DAT_004a0218_pState;
+extern int DAT_004a0254_Collision;
+extern int DAT_004a0224_EatenObjectType;
+extern int DAT_00458c88;
+extern void __cdecl GOB_Remove_00419a80(GXObject *);
+void __cdecl GEX_Target(void)
 {
-    void* gEatingObject;
-    int* pType;
-
-    gEatingObject = DAT_004A2888;
-    if (gEatingObject == (void*)0x0) return;
-    DAT_004A0218 = 0x6d;
-    pType = (int*)((int)gEatingObject + 8);
-    if ((*pType >= 0x39 && *pType <= 0x42) || *pType == 0x130 || *pType == 0xea) {
-        DAT_004A0254 = 1;
-        DAT_004A0224 = *pType - 0x39;
-        FUN_00419A80((void**)DAT_004A2888);
-    } else {
-        DAT_00458C88 = 1;
+    int *type;
+    if (gEatingObject_004a2888) {
+        DAT_004a0218_pState = 0x6d;
+        type = &gEatingObject_004a2888->gob_type;
+        if ((*type >= 0x39 && *type <= 0x42) || *type == 0x130 || *type == 0xea) {
+            DAT_004a0254_Collision = 1;
+            DAT_004a0224_EatenObjectType = *type - 0x39;
+            GOB_Remove_00419a80(gEatingObject_004a2888);
+        } else
+            DAT_00458c88 = 1;
     }
 }
 }

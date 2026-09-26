@@ -1,49 +1,49 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041E720.cpp
-// Historical source SHA256: 012b49ac6b76e3ac76604d0fb670096a41ac3b864467920fd135ce1a93287eac
+// Field names from Ghidra's GXObject/CollideObject layouts (evidence, not proof).
+typedef struct GXObject GXObject;
+typedef void (__cdecl *CheckClidFunc)(GXObject *gob, GXObject *with);
+struct GXObject {
+    unsigned char _pad0[0x16c];
+    CheckClidFunc gob_pCheckClidFunc;  /* 0x16c */
+};
+typedef struct NodeType { struct NodeType *nd_next; struct NodeType *nd_prev; } NodeType;
+typedef struct CollideObject {
+    NodeType clo_node;       /* 0x0 */
+    GXObject *clo_pgobThis;  /* 0x8 */
+} CollideObject;
 extern "C" {
-extern "C" { extern int DAT_004594F8; }
-extern "C" int __cdecl FUN_0041E190(void**, void*);
-
-extern "C" void __cdecl GEX_Target(int param_1, int** param_2)
+extern unsigned int DAT_004594F8[12];
+extern CollideObject CollideObject_00463698[12];
+void __cdecl CLD_CheckCollisionNormal_0041e190(GXObject *gob, GXObject *with);
+void __cdecl GEX_Target(int priority, CollideObject *self)
 {
-    int* piVar7;
-    int* piVar1;
-    int iVar2;
-    int* piVar3;
-    unsigned int* puVar9;
-
-    piVar7 = *param_2;
-    piVar1 = param_2[2];
-    if (param_1 >= 0xc) return;
-    puVar9 = (unsigned int*)((int)&DAT_004594F8 + param_1 * 4);
-    int* list = (int*)(0x00463698 + param_1 * 12);
-    do {
-        if (((1 << (param_1 & 0x1f)) & *puVar9) != 0) {
-            iVar2 = *piVar7;
-            while (iVar2 != 0) {
-                piVar3 = (int*)piVar7[2];
-                piVar7 = (int*)*piVar7;
-                if (piVar3 != (int*)0x0 && piVar1 != piVar3) {
-                    void (*pcVar4)(int*, int*) = (void (*)(int*, int*))piVar3[0x5b];
-                    int* piVar5 = piVar3;
-                    int* piVar6 = piVar1;
-                    if (pcVar4 == (void (*)(int*, int*))&FUN_0041E190) {
-                        pcVar4 = (void (*)(int*, int*))piVar1[0x5b];
-                        piVar5 = piVar1;
-                        piVar6 = piVar3;
-                    }
-                    if (pcVar4 != (void*)0x0) {
-                        pcVar4(piVar5, piVar6);
+    GXObject *other;
+    GXObject *gob;
+    CollideObject *clo;
+    CheckClidFunc check;
+    unsigned int bit;
+    gob = self->clo_pgobThis;
+    bit = 1 << priority;
+    clo = (CollideObject *)self->clo_node.nd_next;
+    while (priority <= 11) {
+        if (DAT_004594F8[priority] & bit) {
+            while (clo->clo_node.nd_next) {
+                other = clo->clo_pgobThis;
+                clo = (CollideObject *)clo->clo_node.nd_next;
+                if (other && gob != other) {
+                    check = other->gob_pCheckClidFunc;
+                    if (check != CLD_CheckCollisionNormal_0041e190) {
+                        if (check)
+                            check(other, gob);
+                    } else {
+                        check = gob->gob_pCheckClidFunc;
+                        if (check)
+                            check(gob, other);
                     }
                 }
-                iVar2 = *piVar7;
             }
         }
-        puVar9 = puVar9 + 1;
-        list += 3;
-        if ((int)puVar9 < 0x459525) {
-            piVar7 = (int*)list[0];
-        }
-    } while ((int)puVar9 < 0x459525);
+        if (++priority <= 11)
+            clo = (CollideObject *)CollideObject_00463698[priority].clo_node.nd_next;
+    }
 }
 }

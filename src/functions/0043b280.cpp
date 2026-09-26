@@ -1,16 +1,20 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0043B280.cpp
-// Historical source SHA256: 2f26f23e8c611b684f3197eec14b6f693ef4c324413ca736331f6eb57e4e02f0
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x50];
+    int gob_currentFrameGroup;  /* 0x50 */
+    unsigned char _pad1[0x48];
+    int gob_work1;              /* 0x9c */
+    int gob_work2;              /* 0xa0 */
+    unsigned char _pad2[0x20];
+    int gob_angle;              /* 0xc4 */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_0041F8C0(int);
-
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern int DAT_0045ffe8[];
+extern void __cdecl VSIT_PlayVoiceSituation_0041f8c0(int);
+void __cdecl GEX_Target(GXObject *gob)
 {
-    unsigned int uVar1;
-    
-    uVar1 = *(unsigned int*)((char*)param_1 + 0x9c) & 1;
-    *(unsigned int*)((char*)param_1 + 0x50) = (unsigned int)(uVar1 == 0);
-    *(int*)((char*)param_1 + 0xc4) =
-        *(int*)(&((int*)0x0045ffe8)[((uVar1 == 0) - 1) & 4 | *(unsigned int*)((char*)param_1 + 0xa0)]);
-    FUN_0041F8C0(0x49);
+    gob->gob_currentFrameGroup = (gob->gob_work1 & 1) == 0;
+    gob->gob_angle = DAT_0045ffe8[((gob->gob_work1 & 1) ? 4 : 0) | gob->gob_work2];
+    VSIT_PlayVoiceSituation_0041f8c0(0x49);
 }
 }

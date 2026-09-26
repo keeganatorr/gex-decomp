@@ -1,35 +1,27 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004295C0.cpp
-// Historical source SHA256: ac77d10ee8dc613792ad5f955316a1364c4254f4774ad1f7dac5b658c32dfbb8
 extern "C" {
-extern "C" { extern const char DAT_0045ABD8[]; }
-
-extern "C" int __cdecl GEX_Target(const char* param_1)
+unsigned int __cdecl strlen(const char *text);
+extern char s_BCDFGHKLPRSTVXYZGot_password_s_0045abd8[];
+int __cdecl GEX_Target(char *password)
 {
     int i;
-    int v;
-    int len;
-
+    unsigned int j;
+    unsigned int k;
+    unsigned int sum;
     for (i = 0; i < 8; i++) {
-        v = 0;
-        while (v < 16 && DAT_0045ABD8[v] != param_1[i]) v++;
-        if (v == 16) return 0;
+        for (j = 0; j < 16; j++)
+            if (s_BCDFGHKLPRSTVXYZGot_password_s_0045abd8[j] == password[i])
+                break;
+        if (j == 16)
+            return 0;
     }
-
-    len = 0;
-    while (param_1[len] != 0) len++;
-    if (len < 8) return 0;
-
-    {
-        int sum = 0;
-        int pos;
-        for (pos = 2; pos < len; pos++) {
-            sum += (unsigned char)param_1[pos];
-        }
-        if (DAT_0045ABD8[sum & 0xf] == param_1[0] && 
-            DAT_0045ABD8[(sum & 0xf0) >> 4] == param_1[1]) {
-            return 1;
-        }
-    }
+    if (strlen(password) < 8)
+        return 0;
+    sum = 0;
+    for (k = 2; k < strlen(password); k++)
+        sum += (unsigned char)password[k];
+    if (s_BCDFGHKLPRSTVXYZGot_password_s_0045abd8[sum & 0xf] == password[0]
+        && s_BCDFGHKLPRSTVXYZGot_password_s_0045abd8[(sum & 0xf0) >> 4] == password[1])
+        return 1;
     return 0;
 }
 }

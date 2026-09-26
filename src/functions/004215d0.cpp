@@ -1,59 +1,92 @@
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x7c];
+    int gob_ypos;      /* 0x7c */
+    unsigned char _pad80[0xc];
+    int gob_yVel;      /* 0x8c */
+    unsigned char _pad90[0x34];
+    int gob_angle;     /* 0xc4 */
+    unsigned char _padC8[0x10];
+    int gob_yold;      /* 0xd8 */
+} GXObject;
+typedef struct AngleBox {
+    int unk0[6];
+    int left;    /* 0x18 */
+    int right;   /* 0x1c */
+    int top;     /* 0x20 */
+    int bottom;  /* 0x24 */
+} AngleBox;
+typedef struct GexTileStruct GexTileStruct;
 extern "C" {
-int FUN_0041CB80(int *param_1, int *local_28);
-int FUN_0041A0A0(int *param_1, int iVar2);
-int FUN_00421560_DrawCharacter(int level, int *param_1);
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+extern int decl_pad_9;
+extern int decl_pad_10;
+extern int decl_pad_11;
+extern int decl_pad_12;
+extern int decl_pad_13;
+extern int decl_pad_14;
+extern int decl_pad_15;
+extern int decl_pad_16;
+extern int decl_pad_17;
+extern int decl_pad_18;
+extern int decl_pad_19;
 extern int DAT_004a025c;
 extern int DAT_004a0218_pState;
 extern int DAT_004a23c8;
-extern int FUN_004A2990;
-
-int __cdecl GEX_Target(int *param_1)
+extern GexTileStruct *M1_CurrentLevel_004a2990;
+int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *gob, AngleBox *box);
+int __cdecl GOB_LandedOnContours_0041a0a0(GXObject *gob, int offset);
+int __cdecl FUN_00421560_DrawCharacter(GexTileStruct *tile, GXObject *gob);
+int __cdecl GEX_Target(GXObject *gex)
 {
-    int iVar2;
-    int iVar3;
-    int iVar4;
-    int iVar5;
-    int local_28[10];
-    int pGVar1;
-
-    pGVar1 = param_1[0x31];
-    iVar5 = 0;
-    param_1[0x31] = 0;
-    iVar2 = FUN_0041CB80(param_1, local_28);
-    if (iVar2 != 0) {
-        iVar5 = local_28[9] - param_1[0x1f];
-    }
-    param_1[0x31] = pGVar1;
-    iVar4 = -0x60000;
-    iVar2 = param_1[0x36] + (DAT_004a025c - param_1[0x1f]);
-    DAT_004a025c = iVar5;
-    if (iVar2 < iVar5) {
-        iVar4 = 0x60000;
-    }
+    AngleBox box;
+    int landed;
+    int target;
+    int angle;
+    int offset;
+    int step;
+    target = 0;
+    angle = gex->gob_angle;
+    gex->gob_angle = 0;
+    if (CLD_ComputeAngleEdges_0041cb80(gex, &box))
+        target = box.bottom - gex->gob_ypos;
+    gex->gob_angle = angle;
+    offset = gex->gob_yold - gex->gob_ypos + DAT_004a025c;
+    DAT_004a025c = target;
+    step = -0x60000;
+    if (offset < target)
+        step = 0x60000;
     do {
-        iVar2 += iVar4;
-        if (iVar4 > 0) {
-            if (iVar2 > iVar5) iVar2 = iVar5;
-        }
-        else {
-            if (iVar2 < iVar5) iVar2 = iVar5;
-        }
-        iVar3 = FUN_0041A0A0(param_1, iVar2);
-        if (iVar3 != 0) {
-            param_1[0x1f] = param_1[0x1f] + iVar2;
-            if (param_1[0x23] >= 0) {
-                FUN_00421560_DrawCharacter(FUN_004A2990, param_1);
-            }
+        offset += step;
+        if (step > 0) {
+            if (offset > target)
+                offset = target;
+        } else if (offset < target)
+            offset = target;
+        landed = GOB_LandedOnContours_0041a0a0(gex, offset);
+        if (landed) {
+            gex->gob_ypos += offset;
+            if (gex->gob_yVel >= 0)
+                FUN_00421560_DrawCharacter(M1_CurrentLevel_004a2990, gex);
             break;
         }
-        if (iVar2 == iVar5) {
-            break;
-        }
-    } while (1);
-    if (iVar3 != 0) {
+    } while (offset != target);
+    if (landed) {
         DAT_004a0218_pState = 0x81;
         DAT_004a23c8 = 0;
     }
-    return iVar3;
+    return landed;
 }
 }

@@ -1,49 +1,49 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00429A00.cpp
-// Historical source SHA256: 46c847bd124590169f07159b8710ec084fde20cd9552050e4b55c8d923c13776
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x54];
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad1[0x44];
+    int gob_work1;              /* 0x9c */
+    unsigned char _pad2[0x4];
+    unsigned int gob_work3;     /* 0xa4 */
+} GXObject;
 extern "C" {
-extern "C" { extern unsigned char BYTE_ARRAY_004a2540[]; }
-extern "C" { extern int FUN_0045ACC0; }
-
-extern "C" void __cdecl GEX_Target(int param_1)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern unsigned char BYTE_ARRAY_004a2540[];
+extern int DAT_0045acc0;
+void __cdecl GEX_Target(GXObject *gob)
 {
-    int iVar1;
-    unsigned int uVar2;
-
-    iVar1 = *(int*)(param_1 + 0x9c);
-    if (iVar1 == -1) {
-        *(int*)(param_1 + 0x54) = -1;
-    }
-    else {
-        uVar2 = *(unsigned int*)(param_1 + 0xa4);
-        if ((uVar2 & 0x40000000) == 0) {
-            if ((uVar2 & 0x200) == 0) {
-                *(int*)(param_1 + 0x54) = 0;
-            }
-            else if ((BYTE_ARRAY_004a2540[iVar1] & 1) == 0) {
-                *(int*)(param_1 + 0x54) = -1;
-                *(unsigned int*)(param_1 + 0xa4) = uVar2 | 0x400;
-            }
-            else {
-                *(int*)(param_1 + 0x54) = 0;
-                *(unsigned int*)(param_1 + 0xa4) = uVar2 & 0xfffffbff;
-            }
+    int tv = gob->gob_work1;
+    if (tv == -1)
+        gob->gob_currentFrameIndex = -1;
+    else if (gob->gob_work3 & 0x40000000) {
+        gob->gob_currentFrameIndex = -1;
+        if (BYTE_ARRAY_004a2540[tv] & 1)
+            gob->gob_work3 &= ~0x400;
+        else
+            gob->gob_work3 |= 0x400;
+    } else if (gob->gob_work3 & 0x200) {
+        if (BYTE_ARRAY_004a2540[tv] & 1) {
+            gob->gob_currentFrameIndex = 0;
+            gob->gob_work3 &= ~0x400;
+        } else {
+            gob->gob_currentFrameIndex = -1;
+            gob->gob_work3 |= 0x400;
         }
-        else {
-            *(int*)(param_1 + 0x54) = -1;
-            if ((BYTE_ARRAY_004a2540[iVar1] & 1) == 0) {
-                *(unsigned int*)(param_1 + 0xa4) = uVar2 | 0x400;
-            }
-            else {
-                *(unsigned int*)(param_1 + 0xa4) = uVar2 & 0xfffffbff;
-            }
-        }
-    }
-    if ((*(unsigned int*)(param_1 + 0xa4) & 0x20000000) != 0) {
-        if ((BYTE_ARRAY_004a2540[iVar1] & 1) != 0) {
-            FUN_0045ACC0 = 0;
-            return;
-        }
-        FUN_0045ACC0 = -1;
+    } else
+        gob->gob_currentFrameIndex = 0;
+    if (gob->gob_work3 & 0x20000000) {
+        if (BYTE_ARRAY_004a2540[tv] & 1)
+            DAT_0045acc0 = 0;
+        else
+            DAT_0045acc0 = -1;
     }
 }
 }

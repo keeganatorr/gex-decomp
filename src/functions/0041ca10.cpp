@@ -1,34 +1,25 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041CA10.cpp
-// Historical source SHA256: 5a9a3c8a4bf8938f5441073b7b08ce69f89e63e98d8cf9cc87e83753c08a4605
+typedef struct ObjectList { void *head; int a; int b; } ObjectList;
 extern "C" {
-extern "C" void __cdecl FUN_0042CC50(void**);
-extern "C" void* __cdecl FUN_004096C0(int size);
-extern "C" void __cdecl FUN_0042CC00(void**, void**);
-
-extern "C" { extern void* FUN_00463728; }
-extern "C" { extern void* FUN_00463680; }
-extern "C" { extern void* FUN_00463698; }
-extern "C" { extern void* DAT_0046371d_ObjectListEnd; }
-
-extern "C" void __cdecl GEX_Target()
+extern ObjectList gFreeCollisionObjects_00463728;
+extern ObjectList gCollisionObjects_00463680;
+extern ObjectList CollideObject_00463698[12];
+extern void __cdecl LST_Init_0042cc50(ObjectList *);
+extern void __cdecl LST_AddTail_0042cc00(ObjectList *, void *);
+extern void * __cdecl MEM_AllocMem_004096c0(int);
+void __cdecl GEX_Target(void)
 {
-    int* loaded_gOb;
-    void** ppGVar1;
-    int iVar2;
-
-    FUN_0042CC50((void**)&FUN_00463728);
-    FUN_0042CC50((void**)&FUN_00463680);
-    iVar2 = 100;
-    loaded_gOb = (int*)FUN_004096C0(0x4b0);
+    char *entry;
+    int n;
+    ObjectList *list;
+    LST_Init_0042cc50(&gFreeCollisionObjects_00463728);
+    LST_Init_0042cc50(&gCollisionObjects_00463680);
+    entry = (char *)MEM_AllocMem_004096c0(100 * 12);
+    n = 100;
     do {
-        FUN_0042CC00((void**)&FUN_00463728, (void**)loaded_gOb);
-        iVar2 = iVar2 - 1;
-        loaded_gOb = loaded_gOb + 3;
-    } while (iVar2 != 0);
-    ppGVar1 = (void**)&FUN_00463698;
-    do {
-        FUN_0042CC50(ppGVar1);
-        ppGVar1 = ppGVar1 + 3;
-    } while (ppGVar1 < (void**)&DAT_0046371d_ObjectListEnd);
+        LST_AddTail_0042cc00(&gFreeCollisionObjects_00463728, entry);
+        entry += 12;
+    } while (--n);
+    for (list = CollideObject_00463698; list <= &CollideObject_00463698[11]; list++)
+        LST_Init_0042cc50(list);
 }
 }

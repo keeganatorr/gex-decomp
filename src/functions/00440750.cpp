@@ -1,46 +1,51 @@
+typedef struct ImageCache {
+    short packed;           /* 0x0 */
+    unsigned char offset;   /* 0x2 */
+    unsigned char row;      /* 0x3 */
+    unsigned short source;  /* 0x4 */
+    unsigned short page;    /* 0x6 */
+} ImageCache;
+typedef struct TilePTRStruct {
+    unsigned char unk0[0x10];
+    unsigned char bank;     /* 0x10 */
+    unsigned char unk11;
+    short cacheSlot;        /* 0x12 */
+    short count;            /* 0x14 */
+} TilePTRStruct;
 extern "C" {
-int __cdecl FUN_00405390(const char *, ...);
-extern volatile int DAT_0046bc78;
-extern unsigned int *DAT_00460e08;
-extern const char DAT_00460eec[];
-extern const char DAT_00460f24[];
-
-void __cdecl GEX_Target(void *Tile)
+extern int gNumImageCaches_0046bc78;
+extern ImageCache *gImageCache_00460e08;
+extern char s_RM_ExtraResolve_on_x_tile_d_00460f24[];
+extern char s_Tile_already_loaded_at_position_00460eec[];
+void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
+void __cdecl GEX_Target(TilePTRStruct *tile)
 {
-    unsigned char *tile = (unsigned char *)Tile;
-    int tileCount;
-    unsigned int *puVar1;
-    unsigned int uVar2;
-    unsigned short w4;
-    unsigned short w6;
-    unsigned char bVar3;
-
-    if (*(short *)(tile + 0x12) >= 0 || *(short *)(tile + 0x14) == 0) {
-        FUN_00405390(DAT_00460eec, DAT_0046bc78, (int)*(short *)(tile + 0x12));
-        return;
-    }
-    FUN_00405390(DAT_00460f24, Tile, DAT_0046bc78);
-    tileCount = DAT_0046bc78;
-    puVar1 = DAT_00460e08;
-    *(short *)(tile + 0x12) = (short)DAT_0046bc78;
-    puVar1 = puVar1 + tileCount * 2;
-    DAT_0046bc78++;
-    uVar2 = (unsigned int)tile[0x10] & 3;
-    w4 = *(unsigned short *)((unsigned char *)puVar1 + 4);
-    w6 = *(unsigned short *)((unsigned char *)puVar1 + 6);
-    *(unsigned short *)puVar1 =
-        (unsigned short)((short)((w4 & 0x3c0) >> 2 | (w6 & 0x100)) >> 4) |
-        (unsigned short)((uVar2 & 3) << 7);
-    *((unsigned char *)puVar1 + 3) = (unsigned char)w6;
-    bVar3 = (unsigned char)w4;
-    if (uVar2 == 1) {
-        *((unsigned char *)puVar1 + 2) = (unsigned char)((bVar3 & 0x3f) * 2);
-        return;
-    }
-    if (uVar2 != 2) {
-        *((unsigned char *)puVar1 + 2) = (unsigned char)(bVar3 << 2);
-        return;
-    }
-    *((unsigned char *)puVar1 + 2) = (unsigned char)(bVar3 & 0x3f);
+    ImageCache *cache;
+    int bank;
+    unsigned short source;
+    unsigned short page;
+    if (tile->cacheSlot < 0 && tile->count) {
+        TracePrintf_Debug_00405390(s_RM_ExtraResolve_on_x_tile_d_00460f24, tile, gNumImageCaches_0046bc78);
+        cache = &gImageCache_00460e08[gNumImageCaches_0046bc78];
+        tile->cacheSlot = (short)gNumImageCaches_0046bc78;
+        gNumImageCaches_0046bc78++;
+        bank = tile->bank & 3;
+        source = cache->source;
+        page = cache->page;
+        cache->packed = (short)(((source & 0x3c0) >> 2) | (page & 0x100)) >> 4 | (bank & 3) << 7;
+        cache->row = (unsigned char)page;
+        switch (bank) {
+        case 1:
+            cache->offset = (source & 0x3f) * 2;
+            break;
+        case 2:
+            cache->offset = source & 0x3f;
+            break;
+        default:
+            cache->offset = source << 2;
+            break;
+        }
+    } else
+        TracePrintf_Debug_00405390(s_Tile_already_loaded_at_position_00460eec, gNumImageCaches_0046bc78, tile->cacheSlot);
 }
 }

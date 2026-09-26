@@ -13,7 +13,7 @@ extern "C" void __cdecl GEX_Target(int *param1, int param2, int param3)
     param1[0x1c] = 0x42;
     param1[0x14] = 0x51;
 
-    unsigned int uVar3 = (((unsigned int)param1[0x1b] >> 0x1f) << 0x3)
+    unsigned int uVar3 = (((unsigned int)param1[0x1b] & 0x80000000) ? 8 : 0)
                        | ((unsigned int)(param1[0x31] >> 0x15));
 
     param1[0x26] = 0;

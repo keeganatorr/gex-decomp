@@ -1,3 +1,9 @@
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern "C" int decl_pad_0;
+extern "C" int decl_pad_1;
 // Adapted from pc_decomp_backup/src/functions/FUN_004404B0.cpp
 // Historical source SHA256: 0d42736f65aef6d09ea772b17c84bb8830d8a3807c412c73c78e5d95df26d3fa
 extern "C" {

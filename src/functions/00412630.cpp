@@ -1,69 +1,70 @@
+typedef struct TurnStep { int dx; int dy; } TurnStep;
+typedef struct GXObject {
+    unsigned char _pad0[0x54];
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad58[0x6c - 0x58];
+    unsigned int gob_flags;     /* 0x6c */
+    unsigned char _pad70[0x78 - 0x70];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    unsigned char _pad80[0x98 - 0x80];
+    int gob_work0;              /* 0x98 */
+    unsigned int gob_work1;     /* 0x9c */
+    unsigned char _pada0[0xc4 - 0xa0];
+    int gob_angle;              /* 0xc4 */
+} GXObject;
+typedef struct BUTTON_RECORD {
+    unsigned char buttonLeft, buttonRight, buttonUp, buttonDown;
+    unsigned char buttonA, buttonB, buttonC, buttonX, buttonL, buttonR, buttonStart;
+    unsigned char unkB[4];
+} BUTTON_RECORD;
+typedef struct GXInputRecord {
+    BUTTON_RECORD gxir_padButtons;        /* 0x0 */
+    BUTTON_RECORD gxir_padJustOnButtons;  /* 0xf */
+    unsigned char _pad1e[2];
+    int gxir_dValue;                      /* 0x20 */
+} GXInputRecord;
 extern "C" {
-extern int DAT_00458c78;
-extern unsigned char DAT_004a0294;
-extern int DAT_004586d8[];
-extern int DAT_004586dc[];
+extern GXInputRecord gInputControllers_004a0280[];
+extern int DAT_00458c78_ButtonUnk10;
+extern TurnStep DAT_004586d8[];
 extern unsigned int DAT_00458068[];
-int __cdecl FUN_00421f20(void**);
-void __cdecl FUN_00421cd0(void**);
-void __cdecl FUN_00411160(void**);
-void __cdecl FUN_004138B0(void**);
-void __cdecl GEX_Target(void** param1) {
-    if (DAT_00458c78 == 0 && DAT_004a0294 == 0) {
-        int iVar1 = FUN_00421f20(param1);
-        if (iVar1 == 0) return;
-        FUN_00421cd0(param1);
-        int v26 = (int)param1[0x26];
-        v26 += 0x10000;
-        param1[0x26] = (void*)v26;
-        if (v26 > 0x10000) {
-            v26 -= 0x10000;
-            param1[0x26] = (void*)v26;
-            int v15 = (int)param1[0x15];
-            v15++;
-            int v27 = (int)param1[0x27];
-            param1[0x15] = (void*)v15;
-            if (v27 & 0x10) {
-                int byteIdx = (v27 & 0xF) * 8;
-                int ecx = *(int *)((char *)DAT_004586d8 + byteIdx);
-                ecx = ecx + ecx * 4;
-                ecx = ecx << 16;
-                ecx = -ecx;
-                char* x = (char*)param1[0x1E];
-                x = x + ecx;
-                char* y = (char*)param1[0x1F];
-                param1[0x1E] = x;
-                int eax = *(int *)((char *)DAT_004586dc + byteIdx);
-                eax = eax + eax * 4;
-                eax = eax << 16;
-                eax = -eax;
-                y = y + eax;
-                param1[0x1F] = y;
-            }
-            if (v15 > 3) {
-                int edx = (int)param1[0x1B];
-                void* eax = param1[0x31];
-                void* ecx = (void*)edx;
-                eax = (void*)((unsigned int)eax & 0xFFE7FFFF);
-                eax = (void*)((int)eax >> 19);
-                ecx = (void*)((unsigned int)ecx & 0x80000000U);
-                ecx = (void*)((unsigned int)ecx >> 28);
-                ecx = (void*)((int)ecx << 2);
-                ecx = (void*)((int)eax | (int)ecx);
-                edx = edx & 0x7FFFFFFF;
-                unsigned int tblVal = *(unsigned int *)((char *)DAT_00458068 + (int)ecx);
-                param1[0x1B] = (void*)edx;
-                param1[0x31] = (void*)((tblVal & 7) << 21);
-                if ((tblVal & 8) != 0) {
-                    edx = edx | 0x80000000;
-                    param1[0x1B] = (void*)edx;
+int __cdecl FUN_00421f20_pStateUnk_Side(GXObject *gex);
+void __cdecl FUN_00421cd0_xpos_ypos_related(GXObject *gex);
+void __cdecl InitPlayerSideCrawl_00411160(GXObject *gex);
+void __cdecl InitPlayerSideJump_004138b0(GXObject *gex);
+void __cdecl GEX_Target(GXObject *gex)
+{
+    unsigned int flags;
+    unsigned int dir;
+    int step;
+    TurnStep *entry;
+    if (!DAT_00458c78_ButtonUnk10 && !gInputControllers_004a0280[0].gxir_padJustOnButtons.buttonB) {
+        if (FUN_00421f20_pStateUnk_Side(gex)) {
+            FUN_00421cd0_xpos_ypos_related(gex);
+            if ((gex->gob_work0 += 0x10000) > 0x10000) {
+                gex->gob_work0 -= 0x10000;
+                gex->gob_currentFrameIndex++;
+                if (gex->gob_work1 & 0x10) {
+                    step = (gex->gob_work1 & 0xf) << 3;
+                    gex->gob_xpos += -(*(int *)((char *)DAT_004586d8 + step) * 5 << 16);
+                    gex->gob_ypos += -(*(int *)((char *)DAT_004586d8 + step + 4) * 5 << 16);
                 }
-                FUN_00411160(param1);
-                return;
+                if (gex->gob_currentFrameIndex > 3) {
+                    flags = gex->gob_flags;
+                    dir = DAT_00458068[(flags & 0x80000000 ? 8 : 0) | gex->gob_angle >> 21];
+                    gex->gob_angle = (dir & 7) << 21;
+                    flags &= 0x7fffffff;
+                    gex->gob_flags = flags;
+                    if (dir & 8) {
+                        flags |= 0x80000000;
+                        gex->gob_flags = flags;
+                    }
+                    InitPlayerSideCrawl_00411160(gex);
+                }
             }
         }
-    } else {
-        FUN_004138B0(param1);
-    }
+    } else
+        InitPlayerSideJump_004138b0(gex);
 }
 }

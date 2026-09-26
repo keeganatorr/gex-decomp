@@ -1,50 +1,56 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00412290.cpp
-// Historical source SHA256: 941197a8860023b99987102ac6e21cf9eb3d0eb758d9466d44c4f4786daf0e29
+typedef struct CornerOffset { int dx; int dy; } CornerOffset;
+typedef struct CornerRow { int ix; int iy; } CornerRow;
+typedef struct GXObject {
+    unsigned char _pad0[0x54];
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad58[0x6c - 0x58];
+    unsigned int gob_flags;     /* 0x6c */
+    unsigned char _pad70[0x78 - 0x70];
+    unsigned int gob_xpos;      /* 0x78 */
+    unsigned int gob_ypos;      /* 0x7c */
+    unsigned char _pad80[0x98 - 0x80];
+    int gob_work0;              /* 0x98 */
+    unsigned char _pad9c[0xc4 - 0x9c];
+    int gob_angle;              /* 0xc4 */
+} GXObject;
 extern "C" {
-extern "C" int __cdecl FUN_00421F20(void*);
-extern "C" void __cdecl FUN_00421CD0(void*);
-extern "C" void __cdecl FUN_00411160(void*);
-extern "C" void __cdecl FUN_004112E0(void*, int);
-extern "C" { extern int FUN_004A2864; }
-extern "C" { extern int DAT_00458548[]; }
-extern "C" { extern int DAT_004585E8[]; }
-extern "C" { extern int DAT_004585EC[]; }
-extern "C" { extern unsigned int FUN_00458668[]; }
-extern "C" { extern unsigned int FUN_00457F28[]; }
-extern "C" { extern int DAT_00457FE8[]; }
-extern "C" { extern int DAT_00457FEC[]; }
-
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern GXObject *gPlayerPlatform_004a2864;
+extern unsigned int FUN_00458668[];
+extern unsigned int FUN_00457F28[];
+extern CornerOffset DAT_00457FE8[];
+extern CornerRow DAT_004585E8[];
+extern int DAT_00458548[][5];
+int __cdecl FUN_00421f20_pStateUnk_Side(GXObject *gex);
+void __cdecl FUN_00421cd0_xpos_ypos_related(GXObject *gex);
+void __cdecl FUN_004112e0_PlatCorner(GXObject *gex, unsigned int corner);
+void __cdecl InitPlayerSideCrawl_00411160(GXObject *gex);
+void __cdecl GEX_Target(GXObject *gex)
 {
-    int iVar1 = FUN_00421F20(param_1);
-    if (iVar1 != 0) {
-        FUN_00421CD0(param_1);
-        int v26 = *(int*)((char*)param_1 + 0x98);
-        int nv26 = v26 + 0x40;
-        *(int*)((char*)param_1 + 0x98) = nv26;
-        if (nv26 > 0x10000) {
-            *(int*)((char*)param_1 + 0x98) = v26 - 0x40;
-            unsigned int uVar5 = ((unsigned int)*(int*)((char*)param_1 + 0x6c) & 0x80000000) >> 0x1c
-                               | (int)*(int*)((char*)param_1 + 0xc4) >> 0x15;
-            int v15 = *(int*)((char*)param_1 + 0x54) + 1;
-            *(int*)((char*)param_1 + 0x54) = v15;
-            if (v15 > 3) {
-                uVar5 = *(unsigned int*)((char*)FUN_00458668 + uVar5 * 4);
-                int v1b_adj = *(int*)((char*)param_1 + 0x6c) & 0x7fffffff;
-                *(int*)((char*)param_1 + 0x6c) = v1b_adj;
-                *(int*)((char*)param_1 + 0xc4) = (uVar5 & 7) << 0x15;
-                if ((uVar5 & 8) != 0) {
-                    *(int*)((char*)param_1 + 0x6c) = v1b_adj | 0x80000000;
+    int dir;
+    unsigned int next;
+    if (FUN_00421f20_pStateUnk_Side(gex)) {
+        FUN_00421cd0_xpos_ypos_related(gex);
+        if ((gex->gob_work0 += 0x8000) > 0x10000) {
+            dir = (gex->gob_flags & 0x80000000 ? 8 : 0) | gex->gob_angle >> 21;
+            gex->gob_work0 -= 0x10000;
+            gex->gob_currentFrameIndex++;
+            gex->gob_xpos += DAT_00458548[DAT_004585E8[dir].ix][gex->gob_currentFrameIndex];
+            gex->gob_ypos += DAT_00458548[DAT_004585E8[dir].iy][gex->gob_currentFrameIndex];
+            if (gex->gob_currentFrameIndex > 3) {
+                next = FUN_00458668[dir];
+                gex->gob_flags &= 0x7fffffff;
+                gex->gob_angle = (next & 7) << 21;
+                if (next & 8)
+                    gex->gob_flags |= 0x80000000;
+                if (gPlayerPlatform_004a2864)
+                    FUN_004112e0_PlatCorner(gex, FUN_00457F28[next]);
+                else {
+                    gex->gob_xpos &= 0xffe00000;
+                    gex->gob_ypos &= 0xffe00000;
                 }
-                if (FUN_004A2864 == 0) {
-                    *(int*)((char*)param_1 + 0x78) = *(int*)((char*)param_1 + 0x78) & 0xffe00000;
-                    *(int*)((char*)param_1 + 0x7c) = *(int*)((char*)param_1 + 0x7c) & 0xffe00000;
-                } else {
-                    FUN_004112E0(param_1, *(unsigned int*)((char*)FUN_00457F28 + uVar5 * 4));
-                }
-                *(int*)((char*)param_1 + 0x78) = (*(int*)((char*)param_1 + 0x78) + *(int*)((char*)DAT_00457FE8 + uVar5 * 8)) & 0xffe00000;
-                *(int*)((char*)param_1 + 0x7c) = (*(int*)((char*)param_1 + 0x7c) + *(int*)((char*)DAT_00457FEC + uVar5 * 8)) & 0xffe00000;
-                FUN_00411160(param_1);
+                gex->gob_xpos += DAT_00457FE8[next].dx;
+                gex->gob_ypos += DAT_00457FE8[next].dy;
+                InitPlayerSideCrawl_00411160(gex);
             }
         }
     }

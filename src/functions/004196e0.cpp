@@ -1,8 +1,8 @@
 typedef unsigned int Word;
 
 extern "C" {
-extern Word GOB_FreeObjectsList_004a27b0[];
 extern Word FirstObjectGroup_004a2934;
+extern Word GOB_FreeObjectsList_004a27b0[];
 extern Word obs_0045ca38[][6];
 extern Word ListType_ARRAY_004a28a0[][3];
 extern int gNumObjects_004a27a4;

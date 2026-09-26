@@ -1,32 +1,68 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00424D80.cpp
-// Historical source SHA256: 32c0dfea3c84860bb15bce0bdc3f50f1f6d33ed2f92ee369f28f021a300aa1d1
+// Field names from Ghidra's GXObject/GXInputRecord layouts (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x50];
+    int gob_currentFrameGroup;      /* 0x50 */
+    int gob_currentFrameIndex;      /* 0x54 */
+    unsigned char _pad58[0x18];
+    int gob_state;                  /* 0x70 */
+    unsigned char _pad74[4];
+    int gob_xpos;                   /* 0x78 */
+    int gob_ypos;                   /* 0x7c */
+    int gob_xVel;                   /* 0x80 */
+    int gob_maxxVel;                /* 0x84 */
+    int gob_xAccl;                  /* 0x88 */
+    int gob_yVel;                   /* 0x8c */
+    int gob_maxyVel;                /* 0x90 */
+    int gob_yAccl;                  /* 0x94 */
+    int gob_work0;                  /* 0x98 */
+    int gob_work1;                  /* 0x9c */
+    int gob_work2;                  /* 0xa0 */
+    int gob_work3;                  /* 0xa4 */
+    unsigned char _padA8[0x2c];
+    int gob_xold;                   /* 0xd4 */
+    unsigned char _padD8[0x38];
+    struct GXObject *gob_platform;  /* 0x110 */
+} GXObject;
+typedef struct BUTTON_RECORD {
+    unsigned char buttonLeft, buttonRight, buttonUp, buttonDown;
+    unsigned char buttonA, buttonB, buttonC, buttonX, buttonL, buttonR, buttonStart;
+    unsigned char unkB[4];
+} BUTTON_RECORD;
+typedef struct GXInputRecord {
+    BUTTON_RECORD gxir_padButtons;
+    BUTTON_RECORD gxir_padJustOnButtons;
+    unsigned char _pad1e[2];
+    int gxir_dValue;
+} GXInputRecord;
 extern "C" {
-extern "C" void __cdecl FUN_00420BC0(void**);
-extern "C" { extern int DAT_0045A6D0; }
-extern "C" { extern unsigned int DAT_004A0214; }
-extern "C" { extern unsigned char DAT_004A0294; }
-extern "C" void __cdecl GEX_Target(void** gOb) {
-    FUN_00420BC0(gOb);
-    gOb[0x1c] = (void*)0xc;
-    gOb[0x14] = (void*)0x27;
-    gOb[0x15] = (void*)2;
-    gOb[0x21] = (void*)&DAT_0045A6D0;
-    gOb[0x26] = (void*)((-(unsigned int)(DAT_004A0214 == 0) & 0xfffffffd) + 8);
-    unsigned int highJump = DAT_004A0214 == 0;
-    gOb[0x29] = (void*)2;
-    gOb[0x28] = 0;
-    void** gOb_local = (void**)gOb[0x44];
-    gOb[0x25] = (void*)0x14000;
-    gOb[0x24] = (void*)0xe0000;
-    void* jumpSpeed = (void*)((-(unsigned int)highJump & 0x1cccd) - 0xe0000);
-    gOb[0x23] = jumpSpeed;
-    if (gOb_local != 0) {
-        void* currentX = gOb_local[0x1e];
-        void* oldX = gOb_local[0x35];
-        gOb[0x44] = 0;
-        gOb[0x20] = (void*)((int)gOb[0x20] + ((int)currentX - (int)oldX));
+extern int INT_0045a6d0;
+extern int DAT_004a0214_HighJump;
+extern GXInputRecord gInputControllers_004a0280[];
+void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
+void __cdecl GEX_Target(GXObject *gex)
+{
+    GXObject *platform;
+    int highJump;
+    int jumpSpeed;
+    GOB_ResetState_00420bc0(gex);
+    gex->gob_state = 0xc;
+    gex->gob_currentFrameGroup = 0x27;
+    gex->gob_currentFrameIndex = 2;
+    gex->gob_maxxVel = INT_0045a6d0;
+    gex->gob_work0 = DAT_004a0214_HighJump ? 8 : 5;
+    highJump = DAT_004a0214_HighJump;
+    jumpSpeed = highJump ? -0xe0000 : -0xc3333;
+    gex->gob_work2 = 0;
+    gex->gob_yAccl = 0x14000;
+    gex->gob_work3 = 2;
+    gex->gob_maxyVel = 0xe0000;
+    gex->gob_yVel = jumpSpeed;
+    platform = gex->gob_platform;
+    if (platform) {
+        gex->gob_xVel += platform->gob_xpos - platform->gob_xold;
+        gex->gob_platform = 0;
     }
-    gOb[0x27] = jumpSpeed;
-    DAT_004A0294 = 0;
+    gex->gob_work1 = jumpSpeed;
+    gInputControllers_004a0280[0].gxir_padJustOnButtons.buttonB = 0;
 }
 }

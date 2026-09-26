@@ -1,35 +1,30 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00419140.cpp
-// Historical source SHA256: 0e490f6501ab6a34af8add86367c18c0e93f29518cf856dae07fe4d14d12b89d
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x78];
+    int gob_xpos;  /* 0x78 */
+    int gob_ypos;  /* 0x7c */
+} GXObject;
 extern "C" {
-extern "C" { extern int DAT_0049FB90; }
-extern "C" void __cdecl FUN_0040BC70(int, int, unsigned int, int*, int*, int, char*, void**);
-
-extern "C" void* __cdecl GEX_Target(unsigned char* param_1, void** param_2)
+extern int SCRIPT_WorkRegister_0049fb90;
+void __cdecl PrintWithFont_0040bc70(int x, int y, int font, int a, int b, int c, char *text, GXObject *gob);
+unsigned char *__cdecl GEX_Target(unsigned char *script, GXObject *gob)
 {
-    char local_4;
-    char local_3;
-    char local_2;
-    char local_1;
-    int work = DAT_0049FB90;
-    unsigned char* p = param_1 + 1;
-    unsigned int ch = (unsigned int)*param_1;
-    void** p2 = param_2;
-
-    local_4 = (char)(work / 100);
-    if (local_4 == 0) {
-        local_4 = ' ';
-    } else {
-        local_4 = local_4 + '0';
-    }
-    local_3 = (char)((work / 10) % 10);
-    if (local_4 == ' ' && local_3 == 0) {
-        local_3 = ' ';
-    } else {
-        local_3 = local_3 + '0';
-    }
-    local_2 = (char)(work % 10) + '0';
-    local_1 = 0;
-    FUN_0040BC70((int)p2[0x1e], (int)p2[0x1f], ch, (int*)0x0, (int*)0x0, -1, &local_4, p2);
-    return p;
+    char text[4];
+    int font;
+    font = *script++;
+    text[0] = (char)(SCRIPT_WorkRegister_0049fb90 / 100);
+    if (text[0] == 0)
+        text[0] = ' ';
+    else
+        text[0] += '0';
+    text[1] = (char)(SCRIPT_WorkRegister_0049fb90 / 10 % 10);
+    if (text[0] == ' ' && text[1] == 0)
+        text[1] = ' ';
+    else
+        text[1] += '0';
+    text[2] = (char)(SCRIPT_WorkRegister_0049fb90 % 10 + '0');
+    text[3] = 0;
+    PrintWithFont_0040bc70(gob->gob_xpos, gob->gob_ypos, font, 0, 0, -1, text, gob);
+    return script;
 }
 }

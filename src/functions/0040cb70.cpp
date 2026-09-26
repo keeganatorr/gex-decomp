@@ -1,64 +1,48 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0040CB70.cpp
-// Historical source SHA256: 7be33b4a719d0c6404a7bbe56f50fc38663c218a92c2e3ca2054b3d8bd57167f
+typedef struct GXObject {
+    unsigned char _pad0[0x9c];
+    char *gob_name;             /* 0x9c */
+} GXObject;
+typedef struct ButtonSlot {
+    char name[4];
+    int index;
+    int unused;
+} ButtonSlot;
 extern "C" {
-extern "C" void* FUN_0040C110(int, int);
-extern "C" void FUN_00405350(const char*, ...);
-
-extern "C" void __cdecl GEX_Target(int indexNumber, unsigned char* buttonNumber)
+extern ButtonSlot DAT_004560f0[8];
+extern char s_Trying_to_make_index_00456274[];
+extern char s_Active_gob_00456260[];
+extern char s_Found_button_0045624c[];
+int __cdecl strcmp(const char *, const char *);
+GXObject *__cdecl GOB_FindWithWork0_0040c110(int type, int work0);
+void __cdecl assertfail_00405350(const char *format, ...);
+void __cdecl GEX_Target(int index, char *button)
 {
-    void** activeGob = (void**)FUN_0040C110(0x7b, indexNumber);
-    void* pGVar2 = activeGob[0x27];
-    int result = 0;
-
-    {
-        unsigned char* pbVar10 = buttonNumber;
-        void* pGVar8 = pGVar2;
-        while (1) {
-            unsigned char bVar1 = *(unsigned char*)pGVar8;
-            if (bVar1 != *pbVar10) {
-                result = (bVar1 < *pbVar10) ? -1 : 1;
+    GXObject *gob;
+    GXObject *other;
+    char *old;
+    int i;
+    int j;
+    int t;
+    gob = GOB_FindWithWork0_0040c110(0x7b, index);
+    old = gob->gob_name;
+    assertfail_00405350(s_Trying_to_make_index_00456274, index, old, button);
+    assertfail_00405350(s_Active_gob_00456260, gob);
+    if (strcmp(old, button)) {
+        gob->gob_name = button;
+        for (i = 0; i < 8; i++)
+            if (DAT_004560f0[i].index == index)
                 break;
-            }
-            if (bVar1 == 0) break;
-            bVar1 = *(unsigned char*)((int)pGVar8 + 1);
-            if (bVar1 != pbVar10[1]) {
-                result = (bVar1 < pbVar10[1]) ? -1 : 1;
+        for (j = 0; j < 8; j++)
+            if (!strcmp(DAT_004560f0[j].name, button))
                 break;
-            }
-            pGVar8 = (void*)((int)pGVar8 + 2);
-            pbVar10 += 2;
+        if (DAT_004560f0[j].index != -1) {
+            other = GOB_FindWithWork0_0040c110(0x7b, DAT_004560f0[j].index);
+            assertfail_00405350(s_Found_button_0045624c, other->gob_name);
+            other->gob_name = old;
         }
-    }
-
-    if (result != 0) {
-        activeGob[0x27] = (void*)buttonNumber;
-        int iVar4 = 0;
-        int* piVar5 = (int*)0x004560F4;
-        while (*piVar5 != indexNumber) {
-            piVar5 += 3;
-            iVar4++;
-        }
-        unsigned char* pbVar6 = (unsigned char*)0x004560F0;
-        unsigned char* pbVar10 = buttonNumber;
-        int iVar9 = 0;
-        while (*pbVar6 != 0 || iVar9 < 10) {
-            unsigned char* a = pbVar6;
-            unsigned char* b = pbVar10;
-            int cmp;
-            while (1) {
-                if (*a != *b) { cmp = (*a < *b) ? -1 : 1; break; }
-                if (*a == 0) { cmp = 0; break; }
-                a++; b++;
-                if (*a != *b) { cmp = (*a < *b) ? -1 : 1; break; }
-                if (*a == 0) { cmp = 0; break; }
-                a++; b++;
-            }
-            if (cmp == 0) break;
-            pbVar6 += 10;
-            iVar9++;
-        }
-        *(int*)((int)activeGob + 0x9c + iVar4 * 4) = *(int*)(0x004560F4 + iVar9 * 4);
-        *(int*)(0x004560F4 + iVar4 * 4) = indexNumber;
+        t = DAT_004560f0[j].index;
+        DAT_004560f0[j].index = DAT_004560f0[i].index;
+        DAT_004560f0[i].index = t;
     }
 }
 }

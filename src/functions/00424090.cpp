@@ -1,28 +1,42 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00424090.cpp
-// Historical source SHA256: d97a65750ecee08be2f434a461eb2b184428c1e2797d29deb210810b1f7e694c
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x50];
+    int gob_currentFrameGroup;  /* 0x50 */
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad1[0x18];
+    int gob_state;              /* 0x70 */
+    unsigned char _pad2[0xc];
+    int gob_xVel;               /* 0x80 */
+    int gob_maxxVel;            /* 0x84 */
+    int gob_xAccl;              /* 0x88 */
+    int gob_yVel;               /* 0x8c */
+    int gob_maxyVel;            /* 0x90 */
+    int gob_yAccl;              /* 0x94 */
+    int gob_work0;              /* 0x98 */
+    unsigned char _pad3[0xc];
+    int gob_work4;              /* 0xa8 */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_00420BC0(void**);
-extern "C" void __cdecl FUN_00423C80(void**);
-extern "C" void __cdecl FUN_00423DC0(void**);
-extern "C" { extern int DAT_004a2980; }
-
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern int DAT_004a2980;
+extern void __cdecl GOB_ResetState_00420bc0(GXObject *);
+extern void __cdecl GX_ResetRotAndScale_00423c80(GXObject *);
+extern void __cdecl PlayerStand_00423dc0(GXObject *);
+void __cdecl GEX_Target(GXObject *gob)
 {
-    FUN_00420BC0(param_1);
-    if ((int)param_1[0x1c] == 12 || DAT_004a2980 != 0) { 
-        param_1[0x2a] = (void*)0x64;
-    } else {
-        param_1[0x2a] = 0;
-    }
-    param_1[0x14] = (void*)0x29;
-    param_1[0x1c] = 0;
-    param_1[0x15] = 0;
-    param_1[0x20] = 0;
-    param_1[0x23] = 0;
-    param_1[0x22] = 0;
-    param_1[0x26] = (void*)3;
-    param_1[0x25] = 0;
-    FUN_00423C80(param_1);
-    FUN_00423DC0(param_1);
+    GOB_ResetState_00420bc0(gob);
+    if (gob->gob_state == 0xb || DAT_004a2980)
+        gob->gob_work4 = 100;
+    else
+        gob->gob_work4 = 0;
+    gob->gob_currentFrameGroup = 0x29;
+    gob->gob_state = 0;
+    gob->gob_currentFrameIndex = 0;
+    gob->gob_xVel = 0;
+    gob->gob_yVel = 0;
+    gob->gob_xAccl = 0;
+    gob->gob_yAccl = 0;
+    gob->gob_work0 = 3;
+    GX_ResetRotAndScale_00423c80(gob);
+    PlayerStand_00423dc0(gob);
 }
 }

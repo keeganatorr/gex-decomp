@@ -1,10 +1,10 @@
 extern "C" int __cdecl FUN_0040FCE0(int *);
+extern "C" int DAT_0045907c;
 extern "C" void __cdecl FUN_0041A340(int *, int);
 extern "C" int * __cdecl FUN_004195D0(int, int, int, int);
 extern "C" void __cdecl FUN_00419B80(int *, int);
-extern "C" void __cdecl FUN_0041A810();
 
-extern "C" int DAT_0045907c;
+extern "C" void __cdecl FUN_0041A810();
 extern "C" int DAT_0046359c;
 extern "C" unsigned char DAT_004A2710[];
 extern "C" int DAT_004A2A98;

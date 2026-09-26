@@ -1,20 +1,21 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004218A0.cpp
-// Historical source SHA256: 2b9b8b3adb1c0ef8d39f9ace4e5b90170d20fc7b8c4cd17f98c28e95a9485f1e
+typedef struct WallProbe { int dx; int dy; } WallProbe;
+typedef struct GXObject {
+    unsigned char _pad0[0x6c];
+    unsigned int gob_flags;     /* 0x6c */
+    unsigned char _pad70[0x78 - 0x70];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    unsigned char _pad80[0xc4 - 0x80];
+    int gob_angle;              /* 0xc4 */
+} GXObject;
 extern "C" {
-extern "C" { extern int DAT_0045A710; }
-extern "C" { extern int DAT_0045A714; }
-extern "C" { extern void* DAT_004A2990; }
-extern "C" int __cdecl FUN_0040F170(void*, int, int);
-
-extern "C" unsigned int __cdecl GEX_Target(void** param_1)
+extern void *M1_CurrentLevel_004a2990;
+extern WallProbe DAT_0045A710[];
+int __cdecl M1_GetBlockAttributeIDAtPos_0040f170(void *level, int x, int y);
+int __cdecl GEX_Target(GXObject *gex)
 {
-    int result;
-    unsigned int uVar1;
-    uVar1 = (((unsigned int)param_1[0x1b] >> 0x1f) ? 8 : 0) | ((int)param_1[0x31] >> 0x15);
-    result = FUN_0040F170(
-        DAT_004A2990,
-        (int)param_1[0x1e] + *(int*)((char*)&DAT_0045A710 + uVar1 * 8),
-        (int)param_1[0x1f] + *(int*)((char*)&DAT_0045A714 + uVar1 * 8));
-    return (unsigned int)(result == 0x57);
+    int dir;
+    dir = (gex->gob_flags & 0x80000000 ? 8 : 0) | gex->gob_angle >> 21;
+    return M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, DAT_0045A710[dir].dx + gex->gob_xpos, DAT_0045A710[dir].dy + gex->gob_ypos) == 0x57;
 }
 }

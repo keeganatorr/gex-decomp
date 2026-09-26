@@ -1,83 +1,57 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004249E0.cpp
-// Historical source SHA256: a99a982ecc06f726c41400ff8432bdec751c0d32f46a5b71d2afdce1034a1cbf
+// Field names from Ghidra's GXObject/GXInputRecord layouts (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x54];
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad58[0x28];
+    int gob_xVel;               /* 0x80 */
+    unsigned char _pad84[0x14];
+    int gob_work0;              /* 0x98 */
+    int gob_work1;              /* 0x9c */
+} GXObject;
+typedef struct BUTTON_RECORD {
+    unsigned char buttonLeft, buttonRight, buttonUp, buttonDown;
+    unsigned char buttonA, buttonB, buttonC, buttonX, buttonL, buttonR, buttonStart;
+    unsigned char unkB[4];
+} BUTTON_RECORD;
+typedef struct GXInputRecord {
+    BUTTON_RECORD gxir_padButtons;        /* 0x0 */
+    BUTTON_RECORD gxir_padJustOnButtons;  /* 0xf */
+    unsigned char _pad1e[2];
+    int gxir_dValue;                      /* 0x20 */
+} GXInputRecord;
 extern "C" {
-extern "C" void __cdecl FUN_00420BC0(void**);
-extern "C" void __cdecl FUN_004213C0(void**, int);
-extern "C" void __cdecl FUN_004213F0(void**);
-extern "C" void __cdecl FUN_00421560(void**);
-extern "C" void __cdecl FUN_004245B0(void**, int);
-extern "C" void __cdecl FUN_00424AE0(void**);
-extern "C" void __cdecl FUN_00424E50(void**);
-extern "C" void __cdecl FUN_00425EF0(void**);
-extern "C" void __cdecl FUN_00427760(void**);
-extern "C" void __cdecl FUN_00427B80(void**);
-extern "C" { extern int DAT_00456018; }
-extern "C" { extern int DAT_0045A6D0; }
-extern "C" { extern int DAT_004A021C; }
-extern "C" { extern unsigned char DAT_004A0293; }
-extern "C" { extern unsigned char DAT_004A0294; }
-extern "C" { extern unsigned char DAT_004A0295; }
-extern "C" { extern int DAT_004A2990; }
-
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern int DAT_004a021c;
+extern int DAT_00456018_gex_Init_unk;
+extern GXInputRecord gInputControllers_004a0280[];
+void __cdecl InitPlayerRunJumpStart_00425ef0(GXObject *gex);
+void __cdecl InitPlayerTongueLash_00427b80(GXObject *gex);
+void __cdecl InitPlayerTailSlash_00427760(GXObject *gex);
+void __cdecl FUN_004245b0_Walk_Apply_Speed(GXObject *gex, int speed);
+void __cdecl GEX_Target(GXObject *gex)
 {
-    int pGVar2;
-    int iVar3;
-    void** ppGVar1;
-
-    if (DAT_004A021C != 0) return;
-    if (DAT_00456018 != 0) return;
-    if ((unsigned int)param_1[0x20] >> 0x1f) return;
-    if (DAT_004A0293 != 0) {
-        FUN_00420BC0(param_1);
-        return;
-    }
-    if (DAT_004A0294 != 0) {
-        FUN_004213F0(param_1);
-        return;
-    }
-    if (DAT_004A0295 != 0) {
-        FUN_00421560(param_1);
-        return;
-    }
-    {
-        int v27 = (int)param_1[0x27] - ((unsigned int)param_1[0x20] >> 0x1f);
-        param_1[0x27] = (void*)v27;
-        if (v27 < 0) {
-            param_1[0x15] = (void*)((int)param_1[0x15] + 1);
-            param_1[0x27] = (void*)(v27 + 0x580);
-            if ((int)param_1[0x27] < 0) param_1[0x27] = 0;
+    if (!DAT_004a021c && !DAT_00456018_gex_Init_unk) {
+        if (gInputControllers_004a0280[0].gxir_padJustOnButtons.buttonB) {
+            InitPlayerRunJumpStart_00425ef0(gex);
+            return;
         }
-    }
-    param_1[0x26] = 0;
-    FUN_004245B0(param_1, 0x8000);
-    
-    if ((unsigned int)param_1[0x2b] & 0x2000) return;
-    if ((int)param_1[0x2b] >> 0x1f) {
-        iVar3 = 0;
-        ppGVar1 = param_1;
-        while (iVar3 < 32) {
-            if ((unsigned int)ppGVar1[0x2b] >> 1) {
-                FUN_00424E50(param_1);
+        if (!gInputControllers_004a0280[0].gxir_padJustOnButtons.buttonA) {
+            if (gInputControllers_004a0280[0].gxir_padJustOnButtons.buttonC) {
+                InitPlayerTailSlash_00427760(gex);
                 return;
             }
-            iVar3++;
-            ppGVar1++;
+        } else {
+            InitPlayerTongueLash_00427b80(gex);
+            return;
         }
-        FUN_00424AE0(param_1);
-        return;
     }
-    if ((unsigned int)param_1[0x2b] & 0x40) {
-        FUN_004213C0(param_1, (int)param_1[0x15]);
-        return;
+    gex->gob_work1 -= gex->gob_xVel < 0 ? -gex->gob_xVel : gex->gob_xVel;
+    if (gex->gob_work1 < 0) {
+        gex->gob_currentFrameIndex++;
+        gex->gob_work1 += 0xb0000;
+        if (gex->gob_work1 < 0)
+            gex->gob_work1 = 0;
     }
-    if ((int)param_1[0x2b] >= 0) {
-        if ((int)param_1[0x15] <= 2) {
-            FUN_00425EF0(param_1);
-        }
-        FUN_00427B80(param_1);
-        FUN_00427760(param_1);
-        return;
-    }
+    gex->gob_work0 = 0;
+    FUN_004245b0_Walk_Apply_Speed(gex, 0x8000);
 }
 }

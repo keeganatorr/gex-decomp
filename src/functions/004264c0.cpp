@@ -1,62 +1,73 @@
+typedef struct GXObject {
+    unsigned char _pad0[0x78];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    unsigned char _pad80[0x98 - 0x80];
+    int gob_work0;              /* 0x98 */
+    unsigned char _pad9c[0xc4 - 0x9c];
+    int gob_angle;              /* 0xc4 */
+} GXObject;
+typedef struct BUTTON_RECORD {
+    unsigned char buttonLeft, buttonRight, buttonUp, buttonDown;
+    unsigned char buttonA, buttonB, buttonC, buttonX, buttonL, buttonR, buttonStart;
+    unsigned char unkB[4];
+} BUTTON_RECORD;
+typedef struct GXInputRecord {
+    BUTTON_RECORD gxir_padButtons;        /* 0x0 */
+    BUTTON_RECORD gxir_padJustOnButtons;  /* 0xf */
+    unsigned char _pad1e[2];
+    int gxir_dValue;                      /* 0x20 */
+} GXInputRecord;
 extern "C" {
-extern int DAT_00463AA8;
-extern int DAT_004A022C;
-extern unsigned char DAT_004A0280;
-extern unsigned char DAT_004A0281;
-extern unsigned char DAT_004A0282;
-extern unsigned char DAT_004A0283;
-
-void __cdecl FUN_00423800_pStateUnk(int *);
-int __cdecl FUN_00423910(int *);
-int __cdecl FUN_00423960(int *);
-int __cdecl FUN_004239B0(int *);
-int __cdecl FUN_00423A00(int *);
-int __cdecl FUN_00423A50(int *);
-void __cdecl FUN_004144E0(int *);
-void __cdecl FUN_00426CA0(int *);
-
-void __cdecl GEX_Target(int *state)
+extern GXInputRecord gInputControllers_004a0280[];
+extern int DAT_00463aa8;
+extern int DAT_004a022c;
+int __cdecl abs(int);
+void __cdecl FUN_00423800_pStateUnk(GXObject *gex);
+int __cdecl FUN_00423910_pStateUnk(GXObject *gex);
+int __cdecl FUN_00423960_pStateUnk(GXObject *gex);
+int __cdecl FUN_004239b0_pStateUnk(GXObject *gex);
+int __cdecl FUN_00423a00_pStateUnk(GXObject *gex);
+int __cdecl FUN_00423a50_AirToFaceCrawl(GXObject *gex);
+void __cdecl InitPlayerFaceCrawlToAir_004144e0(GXObject *gex);
+void __cdecl InitPlayerFaceStick_00426ca0(GXObject *gex);
+void __cdecl GEX_Target(GXObject *gex)
 {
-    FUN_00423800_pStateUnk(state);
-    if (state[0x26] == 0) {
-        if (DAT_004A0281 != 0)
-            DAT_00463AA8 = 0x400000;
-        else if (DAT_004A0280 != 0)
-            DAT_00463AA8 = 0xc00000;
-        else if (DAT_004A0283 != 0)
-            DAT_00463AA8 = 0x800000;
-        else if (DAT_004A0282 != 0)
-            DAT_00463AA8 = 0;
+    int diff;
+    int step;
+    FUN_00423800_pStateUnk(gex);
+    if (!gex->gob_work0) {
+        if (gInputControllers_004a0280[0].gxir_padButtons.buttonRight)
+            DAT_00463aa8 = 0x400000;
+        else if (gInputControllers_004a0280[0].gxir_padButtons.buttonLeft)
+            DAT_00463aa8 = 0xc00000;
+        else if (gInputControllers_004a0280[0].gxir_padButtons.buttonDown)
+            DAT_00463aa8 = 0x800000;
+        else if (gInputControllers_004a0280[0].gxir_padButtons.buttonUp)
+            DAT_00463aa8 = 0;
     }
-
-    int delta = DAT_00463AA8 - state[0x31];
-    int sign = delta < 0 ? -1 : 0;
-    int amount = (delta ^ sign) - sign;
-    if (amount > 0x800000)
-        delta = -delta;
-    if (amount >= 0x100000)
-        amount = 0x100000;
-    if (delta > 0)
-        state[0x31] += amount;
+    diff = DAT_00463aa8 - gex->gob_angle;
+    step = abs(diff);
+    if (step > 0x800000)
+        diff = -diff;
+    step = step < 0x100000 ? step : 0x100000;
+    if (diff > 0)
+        gex->gob_angle += step;
     else
-        state[0x31] -= amount;
-    state[0x31] &= 0xff0000;
-
-    if (FUN_00423910(state) == 0)
-        state[0x1e] += 0x40000;
-    if (FUN_00423960(state) == 0)
-        state[0x1e] -= 0x40000;
-    if (FUN_004239B0(state) == 0)
-        state[0x1f] += 0x40000;
-    if (FUN_00423A00(state) == 0)
-        state[0x1f] -= 0x40000;
-
-    if ((state[0x31] & 0x3f0000) == 0) {
-        if (FUN_00423A50(state) == 0)
-            FUN_004144E0(state);
-    }
-    if (state[0x31] == DAT_00463AA8)
-        FUN_00426CA0(state);
-    DAT_004A022C = 1;
+        gex->gob_angle -= step;
+    gex->gob_angle &= 0xff0000;
+    if (!FUN_00423910_pStateUnk(gex))
+        gex->gob_xpos += 0x40000;
+    if (!FUN_00423960_pStateUnk(gex))
+        gex->gob_xpos -= 0x40000;
+    if (!FUN_004239b0_pStateUnk(gex))
+        gex->gob_ypos += 0x40000;
+    if (!FUN_00423a00_pStateUnk(gex))
+        gex->gob_ypos -= 0x40000;
+    if (!(gex->gob_angle & 0x3f0000) && !FUN_00423a50_AirToFaceCrawl(gex))
+        InitPlayerFaceCrawlToAir_004144e0(gex);
+    if (gex->gob_angle == DAT_00463aa8)
+        InitPlayerFaceStick_00426ca0(gex);
+    DAT_004a022c = 1;
 }
 }

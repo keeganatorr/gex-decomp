@@ -1,53 +1,76 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0040E3F0.cpp
-// Historical source SHA256: c286a825063935f859327a57255c77245e39b54df2bc9f28272a9e254186d4b5
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x54];
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad58[0x20];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    unsigned char _pad80[0x1c];
+    int gob_work1;              /* 0x9c */
+    unsigned char _padA0[0x10];
+    int gob_work6;              /* 0xb0 */
+    unsigned int gob_work7;     /* 0xb4 */
+    unsigned char _padB8[4];
+    unsigned int gob_pixc;      /* 0xbc */
+    unsigned char _padC0[0x138];
+    int gob_last_x;             /* 0x1f8 */
+    int gob_last_y;             /* 0x1fc */
+} GXObject;
 extern "C" {
-extern "C" { extern int DAT_00456334; }
-extern "C" int** __cdecl FUN_0040C110(int, int);
-extern "C" int __cdecl FUN_0040C1A0(int, unsigned int);
-extern "C" void __cdecl FUN_00444590(void**);
-
-extern "C" void __cdecl GEX_Target(void** object)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern unsigned char DAT_00456334;
+GXObject *__cdecl GOB_FindWithWork0_0040c110(int type, unsigned int work0);
+void __cdecl FUN_0040c1a0(int a, int b);
+void __cdecl GOB_DisplayObject_00444590(GXObject *gob);
+void __cdecl GEX_Target(GXObject *gob)
 {
-    int oldColour = (int)object[0x2f];
-    int oldX = (int)object[0x1e];
-    int oldY = (int)object[0x1f];
-    int oldPrevX = (int)object[0x7e];
-    int oldPrevY = (int)object[0x7f];
-    int oldChar = (int)object[0x15];
-    int y = (int)object[0x27];
-
-    object[0x1f] = (void*)y;
-    object[0x7f] = (void*)y;
-    object[0x1e] = (void*)0x7d0000;
-    object[0x7e] = (void*)0x7d0000;
-    object[0x15] = (void*)4;
-
-    if (y < 0x550001) {
-        int** start = FUN_0040C110(0x7b, 1);
-        if (DAT_00456334 == 0) {
-            DAT_00456334 = 1;
-            start[0x2d] = (int*)((unsigned int)start[0x2d] & ~1u);
-            start[0x15] = 0;
-            FUN_0040C1A0(1, 8);
-            object[0x2c] = (void*)1;
-            int** password = FUN_0040C110(0x7b, 2);
-            password[0x2d] = (int*)((unsigned int)password[0x2d] & ~1u);
-            password[0x15] = (int*)-1;
-            int** exit = FUN_0040C110(0x7b, 3);
-            exit[0x2d] = (int*)((unsigned int)exit[0x2d] & ~1u);
-            exit[0x15] = (int*)-1;
-        }
+    unsigned int pixc;
+    int x;
+    int y;
+    int lastX;
+    int lastY;
+    int frame;
+    GXObject *other;
+    pixc = gob->gob_pixc;
+    x = gob->gob_xpos;
+    y = gob->gob_ypos;
+    lastX = gob->gob_last_x;
+    lastY = gob->gob_last_y;
+    frame = gob->gob_currentFrameIndex;
+    gob->gob_last_y = gob->gob_ypos = gob->gob_work1;
+    gob->gob_last_x = gob->gob_xpos = 0x7d0000;
+    gob->gob_currentFrameIndex = 4;
+    if (gob->gob_work1 > 0x550000) {
+        gob->gob_ypos = gob->gob_work1 -= 0x80000;
     } else {
-        object[0x27] = (void*)(y - 0x80000);
-        object[0x1f] = (void*)(y - 0x80000);
+        other = GOB_FindWithWork0_0040c110(0x7b, 1);
+        if (!DAT_00456334) {
+            DAT_00456334 = 1;
+            other->gob_work7 &= ~1;
+            other->gob_currentFrameIndex = 0;
+            FUN_0040c1a0(1, 8);
+            gob->gob_work6 = 1;
+            other = GOB_FindWithWork0_0040c110(0x7b, 2);
+            other->gob_work7 &= ~1;
+            other->gob_currentFrameIndex = -1;
+            other = GOB_FindWithWork0_0040c110(0x7b, 3);
+            other->gob_work7 &= ~1;
+            other->gob_currentFrameIndex = -1;
+        }
     }
-
-    FUN_00444590((void**)object);
-    object[0x1e] = (void*)oldX;
-    object[0x1f] = (void*)oldY;
-    object[0x7e] = (void*)oldPrevX;
-    object[0x7f] = (void*)oldPrevY;
-    object[0x15] = (void*)oldChar;
-    object[0x2f] = (void*)oldColour;
+    GOB_DisplayObject_00444590(gob);
+    gob->gob_xpos = x;
+    gob->gob_ypos = y;
+    gob->gob_last_x = lastX;
+    gob->gob_last_y = lastY;
+    gob->gob_currentFrameIndex = frame;
+    gob->gob_pixc = pixc;
 }
 }

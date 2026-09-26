@@ -1,24 +1,53 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00411160.cpp
-// Historical source SHA256: 877070631501f26e24f010e112fd93a05b5e7d855db29050ac0b7dd16c1abeee
+typedef struct GXObject {
+    unsigned char _pad0[0x50];
+    int gob_currentFrameGroup;  /* 0x50 */
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad58[0x6c - 0x58];
+    unsigned int gob_flags;     /* 0x6c */
+    int gob_state;              /* 0x70 */
+    unsigned char _pad74[0x78 - 0x74];
+    unsigned int gob_xpos;      /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    int gob_xVel;               /* 0x80 */
+    unsigned char _pad84[0x8c - 0x84];
+    int gob_yVel;               /* 0x8c */
+    unsigned char _pad90[0x98 - 0x90];
+    int gob_work0;              /* 0x98 */
+    unsigned char _pad9c[0xc4 - 0x9c];
+    int gob_angle;              /* 0xc4 */
+} GXObject;
 extern "C" {
-extern "C" void __cdecl FUN_00420BC0(void**);
-extern "C" void __cdecl FUN_00411A40(void**);
-extern "C" void __cdecl FUN_00427D30(void**);
-extern "C" { extern void** DAT_004a2864; }
-extern "C" { extern int DAT_004a23c8; }
-extern "C" { extern int DAT_004a0218; }
-extern "C" void __cdecl GEX_Target(void** param1) {
-    FUN_00420BC0(param1);
-    if (DAT_004a2864 != 0) { FUN_00411A40(param1); return; }
-    param1[0x1c] = (void*)0x3d;
-    param1[0x14] = (void*)0x49;
-    param1[0x15] = (void*)4;
-    param1[0x23] = 0; param1[0x20] = 0; param1[0x26] = 0;
+extern GXObject *gPlayerPlatform_004a2864;
+extern int DAT_004a23c8;
+extern int DAT_004a0218_pState;
+void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
+void __cdecl InitPlayerPlatSideCrawl_00411a40(GXObject *gex);
+void __cdecl PlayerSideCrawl_00427d30(GXObject *gex);
+void __cdecl GEX_Target(GXObject *gex)
+{
+    GOB_ResetState_00420bc0(gex);
+    if (gPlayerPlatform_004a2864) {
+        InitPlayerPlatSideCrawl_00411a40(gex);
+        return;
+    }
+    gex->gob_state = 0x3d;
+    gex->gob_currentFrameGroup = 0x49;
+    gex->gob_currentFrameIndex = 4;
+    gex->gob_yVel = 0;
+    gex->gob_xVel = 0;
+    gex->gob_work0 = 0;
     DAT_004a23c8 = 0;
-    int dir = ((int)param1[0x1b] & 0x80000000) >> 0x1c | (int)param1[0x31] >> 0x15;
-    if (dir == 0 || dir == 0xc) param1[0x1e] = (void*)((int)param1[0x1e] | 0x1f0000);
-    else if (dir == 4 || dir == 8) param1[0x1e] = (void*)((int)param1[0x1e] & 0xffe00000);
-    DAT_004a0218 = 0x6b;
-    FUN_00427D30(param1);
+    switch ((gex->gob_flags & 0x80000000 ? 8 : 0) | gex->gob_angle >> 21) {
+    case 0:
+    case 0xc:
+        gex->gob_xpos |= 0x1f0000;
+        break;
+    case 4:
+    case 8:
+        gex->gob_xpos &= 0xffe00000;
+        break;
+    }
+    DAT_004a0218_pState = 0x6b;
+    PlayerSideCrawl_00427d30(gex);
 }
 }

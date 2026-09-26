@@ -1,72 +1,71 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00417CA0.cpp
-// Historical source SHA256: 4fa6a0e58256e885ad87bd4bbd641f5064c8f88c1926922ff66725320ad0de7e
+// Field names from Ghidra's GXObject/GXInputRecord layouts (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0xb8];
+    int gob_flashTime;  /* 0xb8 */
+} GXObject;
+typedef struct BUTTON_RECORD {
+    unsigned char buttonLeft, buttonRight, buttonUp, buttonDown;
+    unsigned char buttonA, buttonB, buttonC, buttonX, buttonL, buttonR, buttonStart;
+    unsigned char unkB[4];
+} BUTTON_RECORD;
+typedef struct GXInputRecord {
+    BUTTON_RECORD gxir_padButtons;
+    BUTTON_RECORD gxir_padJustOnButtons;
+    unsigned char _pad1e[2];
+    int gxir_dValue;
+} GXInputRecord;
 extern "C" {
-extern "C" void __cdecl FUN_00422390_Reset_Powerups(void**);
-extern "C" void __cdecl FUN_0041A660();
-extern "C" int __cdecl FUN_004206b0(int);
-
-extern "C" { extern int DAT_004A27FC; }
-extern "C" { extern int DAT_004A281C; }
-extern "C" { extern int DAT_004A2878; }
-extern "C" { extern int DAT_004A2840; }
-extern "C" { extern int DAT_00455C4C; }
-extern "C" { extern int DAT_004A2850; }
-extern "C" { extern int DAT_00455B8C; }
-extern "C" { extern unsigned char DAT_004A0280; }
-extern "C" { extern unsigned char DAT_004A0281; }
-extern "C" { extern int DAT_004A2AC0; }
-extern "C" { extern int DAT_004A0218; }
-extern "C" { extern int DAT_004594A0; }
-extern "C" { extern int DAT_004594A4; }
-extern "C" { extern int DAT_004594A8; }
-extern "C" { extern int DAT_0045A6E0; }
-extern "C" { extern int DAT_00459498; }
-extern "C" { extern int DAT_00455C1C; }
-extern "C" { extern int DAT_00455C24; }
-extern "C" { extern int DAT_00456B00; }
-extern "C" { extern int DAT_00462E38; }
-
-extern "C" void __cdecl GEX_Target()
+extern GXObject *gPlayerObject_004a27fc;
+extern int gHitpoints_004a281c;
+extern int DAT_004a2878_CollisionType;
+extern int DAT_004a2840;
+extern int gNoProcess_00455c4c;
+extern int DAT_004a2850;
+extern int DAT_00455b8c_CamX2;
+extern GXInputRecord gInputControllers_004a0280[];
+extern int gIsMapLevel_004a2ac0;
+extern int DAT_004a0218_pState;
+extern int DAT_004594a0_EatenObject_unk;
+extern int DAT_004594a4_HealthUnk;
+extern int DAT_004594a8_HealthDrawUnk;
+extern int DAT_0045a6e0_GexPowerUpHealth;
+extern int gCheatPowerupToSpawn_00459498;
+extern int DAT_00455c1c_PlanetXLevelSelect;
+extern int DAT_00455c24_LivesUnk;
+extern int gNumLives_00456b00;
+extern int DAT_00462e38;
+int __cdecl FUN_004206b0(int situation);
+void __cdecl FUN_00422390_Reset_Powerups(GXObject *gex);
+void __cdecl CollectibleReset_0041a660(void);
+void __cdecl GEX_Target(void)
 {
-    void** gPlayerObject = (void**)DAT_004A27FC;
-    if ((gPlayerObject != 0) && (DAT_004A281C != 0))
-    {
-        DAT_004A2878 = 0x14;
-        if (DAT_004A2840 == 0)
-        {
-            DAT_00455C4C++;
-            DAT_004A2840 = 1;
+    if (gPlayerObject_004a27fc && gHitpoints_004a281c) {
+        DAT_004a2878_CollisionType = 0x14;
+        if (!DAT_004a2840) {
+            DAT_004a2840++;
+            gNoProcess_00455c4c++;
         }
-        gPlayerObject[0x2e] = (void*)0x5a;
-        DAT_004A2850 = 0;
-        if (DAT_00455B8C != 0)
-        {
-            DAT_004A0280 = 0;
-            DAT_004A0281 = 0;
+        gPlayerObject_004a27fc->gob_flashTime = 0x5a;
+        DAT_004a2850 = 0;
+        if (DAT_00455b8c_CamX2) {
+            gInputControllers_004a0280[0].gxir_padButtons.buttonRight = 0;
+            gInputControllers_004a0280[0].gxir_padButtons.buttonLeft = 0;
         }
-        if (DAT_004A2AC0 == 0)
-        {
-            int iVar1 = FUN_004206b0(0x55);
-            if (iVar1 == 0)
-                DAT_004A0218 = 0x76;
-            DAT_004A281C = 0;
-            FUN_00422390_Reset_Powerups(gPlayerObject);
-            DAT_004594A0 = -1;
-            DAT_004594A4 = -1;
-            DAT_004594A8 = -1;
-            DAT_0045A6E0 = -1;
-            DAT_00459498 = -1;
-            FUN_0041A660();
-            if ((DAT_00455C1C == 0) && (DAT_00455C24 == 0))
-            {
-                DAT_00456B00--;
-                return;
-            }
-        }
-        else
-        {
-            DAT_00462E38 = 1;
-        }
+        if (!gIsMapLevel_004a2ac0) {
+            if (!FUN_004206b0(0x55))
+                DAT_004a0218_pState = 0x76;
+            gHitpoints_004a281c = 0;
+            FUN_00422390_Reset_Powerups(gPlayerObject_004a27fc);
+            DAT_004594a0_EatenObject_unk = -1;
+            DAT_004594a4_HealthUnk = -1;
+            DAT_004594a8_HealthDrawUnk = -1;
+            DAT_0045a6e0_GexPowerUpHealth = -1;
+            gCheatPowerupToSpawn_00459498 = -1;
+            CollectibleReset_0041a660();
+            if (!DAT_00455c1c_PlanetXLevelSelect && !DAT_00455c24_LivesUnk)
+                gNumLives_00456b00--;
+        } else
+            DAT_00462e38 = 1;
     }
 }
 }

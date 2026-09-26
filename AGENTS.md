@@ -9,6 +9,18 @@ Source EXE: /home/keegan/.wine/drive_c/GOG Games/Gex/GEX.exe.
 The backend owns a read-only pinned copy under .work/. No binaries, database,
 Ghidra exports or compiled artifacts may be committed or published.
 
+## Read first: knowledge base and fast loop
+
+`docs/knowledge/README.md` is the triage guide: what a given diff means and
+which lever fixes it, with executable checks (`python3 tests/knowledge_checks.py`).
+Iterate with `tools/probe.py ADDRESS SOURCE -d` (scratch compile + relocated
+diff, never publishes) and `tools/perturb.py ADDRESS SOURCE --moves` before
+spending a model turn or a queue verification; publish only with
+`./scripts/verify`. Operand order, register choice and schedule differences
+are usually compiler symbol numbering (declaration order / unused declarations),
+not source. Latest checkpoint: `docs/claude-hand-decomp.md`, **773 exact /
+66,802 bytes**. The operator deprioritised CRT functions (0x449000+).
+
 ## Latest bounded campaign / loop audit
 
 Latest run: `docs/luna6-ten-current.md`, `loop-f0e3a9aab41bc12ca468d408`:

@@ -2,6 +2,12 @@ typedef int (__stdcall *PFN2C)(void *, int, int, void **, unsigned long *, void 
 typedef int (__stdcall *PFN50)(void *);
 typedef int (__stdcall *PFN4C)(void *, void *, unsigned long, void *, unsigned long);
 
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern "C" int decl_pad_0;
+extern "C" int decl_pad_1;
 extern "C" __declspec(dllimport) int __stdcall ReadFile(void *, void *, unsigned long, unsigned long *, void *);
 
 extern "C" int GEX_Target(void *obj, void *hFile, int param3)
