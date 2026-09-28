@@ -1,54 +1,50 @@
-struct Player {
-    unsigned char unknown00[0x50];
-    volatile int field50;
-    int field54;
-    unsigned char unknown58[0x14];
-    unsigned int flags;
-    volatile int state;
-    int unknown74;
-    int x;
-    int y;
-    int velocityX;
-    int velocityY;
-    int velocityZ;
-    volatile int field8c;
-    unsigned char unknown90[8];
-    int field98;
-    unsigned char unknown9c[0x28];
-    int fieldc4;
-};
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x50];
+    int gob_currentFrameGroup;  /* 0x50 */
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad1[0x14];
+    unsigned int gob_flags;     /* 0x6c */
+    int gob_state;              /* 0x70 */
+    unsigned char _pad2[0x4];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    int gob_xVel;               /* 0x80 */
+    int gob_maxxVel;            /* 0x84 */
+    int gob_xAccl;              /* 0x88 */
+    int gob_yVel;               /* 0x8c */
+    unsigned char _pad3[0x8];
+    int gob_work0;              /* 0x98 */
+    unsigned char _pad4[0x28];
+    int gob_angle;              /* 0xc4 */
+} GXObject;
 extern "C" {
-void __cdecl FUN_00420BC0(Player*);
-void __cdecl FUN_00423C80(Player*);
-int __cdecl FUN_00421560_DrawCharacter(int, Player*);
-void __cdecl FUN_0042E480(int, int, unsigned int, int, unsigned int);
-void __cdecl FUN_00426330(Player*);
-extern int FUN_004A2990;
+extern void *M1_CurrentLevel_004a2990;
+extern unsigned char gInputControllers_004a0280[];
 extern int DAT_004a27f8;
-extern unsigned char DAT_004a0280;
-extern unsigned char DAT_004A0281;
-}
-
-static inline void InitializeFall(Player* p) {
-    p->state = 0x2c;
-    p->field50 = 0x28;
-    p->field8c = 0;
-    p->field54 = 5;
-    p->velocityY = 0x90000;
-    p->field98 = 3;
-    FUN_00423C80(p);
-    if (DAT_004a0280 == 0 && DAT_004A0281 == 0) {
-        p->velocityX = 0;
-        p->velocityZ = 0;
+extern void __cdecl GOB_ResetState_00420bc0(GXObject *);
+extern void __cdecl GX_ResetRotAndScale_00423c80(GXObject *);
+extern void __cdecl FUN_00421560_DrawCharacter(void *, GXObject *);
+extern void __cdecl EFECT_AddPuff_0042e480(int, int, unsigned int, int, unsigned int);
+extern void __cdecl PlayerRunStopFall_00426330(GXObject *);
+void __cdecl GEX_Target(GXObject *gob)
+{
+    GOB_ResetState_00420bc0(gob);
+    gob->gob_state = 0x2c;
+    gob->gob_currentFrameGroup = 0x28;
+    gob->gob_currentFrameIndex = 5;
+    gob->gob_maxxVel = 0x90000;
+    gob->gob_yVel = 0;
+    gob->gob_work0 = 3;
+    GX_ResetRotAndScale_00423c80(gob);
+    if (!gInputControllers_004a0280[0] && !gInputControllers_004a0280[1]) {
+        gob->gob_xVel = 0;
+        gob->gob_xAccl = 0;
     }
-}
-
-extern "C" void __cdecl GEX_Target(Player* p) {
-    FUN_00420BC0(p);
-    InitializeFall(p);
     DAT_004a27f8 = 1;
-    FUN_00421560_DrawCharacter(FUN_004A2990, p);
-    FUN_0042E480(p->x + 0xa0000, p->y, p->flags & 0x80000000, p->fieldc4, p->flags & 0xf);
-    FUN_0042E480(p->x - 0xa0000, p->y, p->flags & 0x80000000, p->fieldc4, p->flags & 0xf);
-    FUN_00426330(p);
+    FUN_00421560_DrawCharacter(M1_CurrentLevel_004a2990, gob);
+    EFECT_AddPuff_0042e480(gob->gob_xpos + 0xa0000, gob->gob_ypos, gob->gob_flags & 0x80000000, gob->gob_angle, gob->gob_flags & 0xf);
+    EFECT_AddPuff_0042e480(gob->gob_xpos - 0xa0000, gob->gob_ypos, gob->gob_flags & 0x80000000, gob->gob_angle, gob->gob_flags & 0xf);
+    PlayerRunStopFall_00426330(gob);
+}
 }

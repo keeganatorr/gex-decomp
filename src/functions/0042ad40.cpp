@@ -1,117 +1,137 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0042AD40.cpp
-// Historical source SHA256: 12f943dda5c1d6ff507a2d9e4e0dc4192639dbc3fb399d4bce1adb5afa0f347e
+typedef struct LevelEntry {
+    unsigned short info;
+    unsigned char rest[6];
+} LevelEntry;
+
+typedef struct GXObject {
+    unsigned char pad0[0x54];
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char pad58[0x98 - 0x58];
+    int gob_work0;              /* 0x98 */
+    unsigned int gob_work1;     /* 0x9c */
+    int gob_work2;              /* 0xa0 */
+    unsigned int gob_work3;     /* 0xa4 */
+    unsigned int gob_work4;     /* 0xa8 */
+    unsigned int gob_work5;     /* 0xac */
+    unsigned int gob_work6;     /* 0xb0 */
+    int gob_work7;              /* 0xb4 */
+} GXObject;
+
 extern "C" {
-extern int DAT_0045ACD0;
-extern int DAT_0045ACF0;
-extern int DAT_0045ACF4;
-extern int DAT_0045AD00;
-extern int DAT_0045AD20;
-extern int DAT_0045AD24;
-extern unsigned char DAT_004A2540;
-extern unsigned char FUN_004577B0;
+extern LevelEntry DAT_004577B0[];
+extern unsigned char BYTE_ARRAY_004a2540[];
+extern int DAT_0045acd0_animationFrame[];
+extern int DAT_0045ad00[];
+extern int DAT_0045acf0;
+extern int DAT_0045ad20;
+extern int DAT_0045acf4;
+extern int DAT_0045ad24;
+extern unsigned int DAT_0045acf8;
+extern int DAT_0045ad28;
+GXObject * __cdecl GOB_FindWithWork0_0040c110(int type, int work0);
+unsigned int __cdecl UTL_ReallyRandom32_00428c60(void);
+void __cdecl SND_PlaySoundNoPosition_0041a360(int, int);
+void __cdecl RezInObject_004372f0(GXObject *);
 
-extern "C" int __cdecl FUN_0040C110(int a, int b);
-extern "C" unsigned int __cdecl FUN_00428C60();
-extern "C" void __cdecl FUN_0041A360(int a, int b);
-extern "C" void __cdecl FUN_004372F0(int param_1);
-
-extern "C" void __cdecl GEX_Target(int* param_1)
+void __cdecl GEX_Target(GXObject *gob)
 {
-    int pGVar2;
-    int ppGVar5;
-    unsigned int uVar6;
-    unsigned int uVar7;
-    int pGVar3;
-    int pGVar4;
-    int ppGVar1;
-    
-    pGVar2 = param_1[0x2b];
-    if ((pGVar2 & 0x20) != 0) {
-        ppGVar5 = FUN_0040C110(0xdc, (unsigned int)param_1[0x27] & 0xffff);
-        pGVar2 = *(int*)(ppGVar5 + 0x27 * 4);
-        uVar7 = *(unsigned short*)((int)&FUN_004577B0 + pGVar2 * 8) & 0xf;
-        
-        if ((((*(int*)(ppGVar5 + 0x29 * 4) & 0x200) == 0) || ((*(int*)(ppGVar5 + 0x29 * 4) & 0x400) == 0)) ||
-           ((*(int*)(pGVar2 + 0x2512 * 4 + 0x48) & 3) == 3)) {
-            
-            if ((*(int*)(pGVar2 + 0x2512 * 4 + 0x48) & 2) == 0) {
-                if ((*(int*)(pGVar2 + 0x2512 * 4 + 0x48) & 1) == 0) {
-                    uVar6 = (unsigned int)param_1[0x2b] & 0xffffff01;
-                    param_1[0x2b] = (int)(uVar6 | 1);
-                    pGVar3 = DAT_0045ACD0;
-                    if ((*(int*)(ppGVar5 + 0x29 * 4) & 0x40000000) == 0) {
-                        param_1[0x15] = DAT_0045ACD0;
-                        param_1[0x28] = (int)(((*(int*)(pGVar3 + 8) + DAT_0045AD00 + -0x1d) * 0x10000) | ((unsigned int)pGVar3 & 0xffff));
-                        param_1[0x2a] = (int)((unsigned int)param_1[0x2a] & 0xffff4000 | 0x4000);
-                        uVar6 = FUN_00428C60();
-                        param_1[0x2d] = (int)((uVar6 & 0x5f) << 0x10);
-                    } else {
-                        param_1[0x15] = -1;
-                        param_1[0x2b] = (int)(uVar6 | 0x41);
-                    }
-                } else {
-                    uVar6 = (unsigned int)param_1[0x2b] & 0xffffff03;
-                    ppGVar1 = (int)(param_1 + 0x15);
-                    param_1[0x2b] = (int)(uVar6 | 3);
-                    if ((*(int*)(ppGVar5 + 0x29 * 4) & 0x40000000) == 0) {
-                        pGVar3 = *(int*)((int)&DAT_0045ACD0 + uVar7 * 4);
-                        *(int*)(ppGVar1) = pGVar3;
-                        param_1[0x28] = (int)(((*(int*)(pGVar3 + 8) + *(int*)((int)&DAT_0045AD00 + uVar7 * 4) + -0x1d) * 0x10000) | ((unsigned int)pGVar3 & 0xffff));
-                        param_1[0x2a] = (int)((unsigned int)param_1[0x2a] & 0xffff4000 | 0x4000);
-                        *(int*)(ppGVar1) = (int)(*(int*)(pGVar3 + 8) + (*(int*)(ppGVar5 + 0x26 * 4) % *(int*)((int)&DAT_0045AD00 + uVar7 * 4)) + -0x1c);
-                        uVar6 = FUN_00428C60();
-                        param_1[0x2d] = (int)((uVar6 & 0x5f) << 0x10);
-                    } else {
-                        *(int*)(ppGVar1) = -1;
-                        param_1[0x2b] = (int)(uVar6 | 0x43);
-                    }
-                    param_1[0x2c] = (int)((unsigned int)param_1[0x2c] & 0xffff);
-                }
+    GXObject *other;
+    int level;
+    int index;
+    int *frame;
+    int anim;
+    unsigned int state;
+
+    if (gob->gob_work5 & 0x20) {
+        other = GOB_FindWithWork0_0040c110(0xdc, gob->gob_work1 & 0xffff);
+        level = other->gob_work1;
+        index = DAT_004577B0[level].info & 0xf;
+        if ((other->gob_work3 & 0x200) && (other->gob_work3 & 0x400) && (BYTE_ARRAY_004a2540[level] & 3) != 3) {
+            state = gob->gob_work5 & ~0xff | 0x11;
+            frame = &gob->gob_currentFrameIndex;
+            *frame = -1;
+            gob->gob_work5 = state;
+            if (other->gob_work3 & 0x40000000)
+                gob->gob_work5 = state | 0x40;
+        } else if (BYTE_ARRAY_004a2540[level] & 2) {
+            state = gob->gob_work5 & ~0xff | 5;
+            frame = &gob->gob_currentFrameIndex;
+            gob->gob_work5 = state;
+            if (other->gob_work3 & 0x40000000) {
+                *frame = -1;
+                gob->gob_work5 = state | 0x40;
             } else {
-                pGVar3 = param_1[0x2b];
-                param_1[0x2b] = (int)((unsigned int)pGVar3 & 0xffffff05 | 5);
-                pGVar4 = DAT_0045ACF0;
-                if ((*(int*)(ppGVar5 + 0x29 * 4) & 0x40000000) == 0) {
-                    param_1[0x15] = DAT_0045ACF0;
-                    param_1[0x28] = (int)(((*(int*)(pGVar4 + 8) + DAT_0045AD20 + -0x1d) * 0x10000) | ((unsigned int)pGVar4 & 0xffff));
-                    param_1[0x2a] = (int)((unsigned int)param_1[0x2a] & 0xffff4000 | 0x4000);
-                } else {
-                    param_1[0x15] = -1;
-                    param_1[0x2b] = (int)((unsigned int)pGVar3 & 0xffffff05 | 0x45);
-                }
+                *frame = DAT_0045acf0;
+                gob->gob_work2 = (DAT_0045ad20 + *frame - 1) << 16 | *frame & 0xffff;
+                gob->gob_work4 = gob->gob_work4 & ~0xffff | 0x4000;
             }
+        } else if (BYTE_ARRAY_004a2540[level] & 1) {
+            state = gob->gob_work5 & ~0xff | 3;
+            frame = &gob->gob_currentFrameIndex;
+            gob->gob_work5 = state;
+            if (other->gob_work3 & 0x40000000) {
+                *frame = -1;
+                gob->gob_work5 = state | 0x40;
+            } else {
+                anim = DAT_0045acd0_animationFrame[index];
+                *frame = anim;
+                gob->gob_work2 = (DAT_0045ad00[index] + anim - 1) << 16 | anim & 0xffff;
+                gob->gob_work4 = gob->gob_work4 & ~0xffff | 0x4000;
+                *frame = anim + other->gob_work0 % DAT_0045ad00[index];
+                gob->gob_work7 = (UTL_ReallyRandom32_00428c60() & 0x5f) << 16;
+            }
+            gob->gob_work6 &= 0xffff;
         } else {
-            pGVar3 = param_1[0x2b];
-            param_1[0x15] = -1;
-            param_1[0x2b] = (int)((unsigned int)pGVar3 & 0xffffff11 | 0x11);
-            if ((*(int*)(ppGVar5 + 0x29 * 4) & 0x40000000) != 0) {
-                param_1[0x2b] = (int)((unsigned int)pGVar3 & 0xffffff11 | 0x51);
+            state = gob->gob_work5 & ~0xff | 1;
+            frame = &gob->gob_currentFrameIndex;
+            gob->gob_work5 = state;
+            if (other->gob_work3 & 0x40000000) {
+                *frame = -1;
+                gob->gob_work5 = state | 0x40;
+            } else {
+                *frame = DAT_0045acd0_animationFrame[0];
+                gob->gob_work2 = (DAT_0045ad00[0] + *frame - 1) << 16 | *frame & 0xffff;
+                gob->gob_work4 = gob->gob_work4 & ~0xffff | 0x4000;
+                gob->gob_work7 = (UTL_ReallyRandom32_00428c60() & 0x5f) << 16;
             }
         }
-        param_1[0x27] = (int)((unsigned int)param_1[0x27] & 0xffff | (pGVar2 << 0x10));
-        param_1[0x2c] = (int)((unsigned int)param_1[0x2c] & 0xffff0000 | uVar7);
-        param_1[0x29] = (int)(param_1[0x15] << 0x10);
+        gob->gob_work1 = gob->gob_work1 & 0xffff | level << 16;
+        gob->gob_work6 = gob->gob_work6 & 0xffff0000 | index & 0xf;
+        gob->gob_work3 = *frame << 16;
         return;
     }
-    
-    if (((pGVar2 & 0xf) == 1) && ((*(unsigned char*)((int)&DAT_004A2540 + ((unsigned int)param_1[0x27] >> 0x10)) & 1) != 0)) {
-        if ((pGVar2 & 0x40) == 0) {
-            FUN_0041A360(0x9b, 0xff);
-            param_1[0x15] = DAT_0045ACF4;
-            if ((param_1[0x2b] & 0x10) != 0) {
-                FUN_004372F0((int)param_1);
-            }
-            pGVar2 = param_1[0x15];
-            param_1[0x2b] = (int)((unsigned int)param_1[0x2b] & 0xffffff02 | 2);
-            param_1[0x28] = (int)(((*(int*)(pGVar2 + 8) + DAT_0045AD24 + -0x1d) * 0x10000) | ((unsigned int)pGVar2 & 0xffff));
-            param_1[0x29] = (int)(pGVar2 << 0x10);
-            param_1[0x2a] = (int)((unsigned int)param_1[0x2a] & 0xffff8000 | 0x8000);
+    if ((gob->gob_work5 & 0xf) == 1 && (BYTE_ARRAY_004a2540[gob->gob_work1 >> 16] & 1)) {
+        if (gob->gob_work5 & 0x40) {
+            gob->gob_currentFrameIndex = -1;
+            gob->gob_work5 = gob->gob_work5 & ~0xff | 3;
         } else {
-            param_1[0x15] = -1;
-            param_1[0x2b] = (int)((unsigned int)pGVar2 & 0xffffff03 | 3);
+            SND_PlaySoundNoPosition_0041a360(0x9b, 0xff);
+            gob->gob_currentFrameIndex = DAT_0045acf4;
+            if (gob->gob_work5 & 0x10)
+                RezInObject_004372f0(gob);
+            gob->gob_work5 = gob->gob_work5 & ~0xff | 2;
+            anim = gob->gob_currentFrameIndex;
+            gob->gob_work2 = (DAT_0045ad24 + anim - 1) << 16 | anim & 0xffff;
+            gob->gob_work4 = gob->gob_work4 & ~0xffff | 0x8000;
+            gob->gob_work3 = anim << 16;
         }
-        param_1[0x2c] = (int)((unsigned int)param_1[0x2c] & 0xffff);
+        gob->gob_work6 &= 0xffff;
         return;
+    }
+    if ((gob->gob_work5 & 0xf) == 3 && (BYTE_ARRAY_004a2540[gob->gob_work1 >> 16] & 2)) {
+        if (gob->gob_work5 & 0x40) {
+            gob->gob_work5 = gob->gob_work5 & ~0xff | 3;
+            gob->gob_currentFrameIndex = -1;
+            return;
+        }
+        SND_PlaySoundNoPosition_0041a360(0x97, 0xff);
+        gob->gob_work5 = gob->gob_work5 & ~0xff | 4;
+        anim = DAT_0045acf8;
+        gob->gob_currentFrameIndex = anim;
+        gob->gob_work2 = (DAT_0045ad28 + anim - 1) << 16 | anim & 0xffff;
+        gob->gob_work4 = gob->gob_work4 & ~0xffff | 0x4000;
+        gob->gob_work3 = anim << 16;
+        gob->gob_work7 = 0;
     }
 }
 }

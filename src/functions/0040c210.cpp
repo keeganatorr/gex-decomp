@@ -1,57 +1,56 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0040C210.cpp
-// Historical source SHA256: aa191d3cefec6e48d5bf18606cb0319a591e440b409ae4d5c0aaf0ebf6c6d3bb
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x54];
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad1[0x40];
+    int gob_work0;              /* 0x98 */
+    unsigned char _pad2[0x10];
+    int gob_work5;              /* 0xac */
+    int gob_work6;              /* 0xb0 */
+} GXObject;
 extern "C" {
-extern "C" { extern int DAT_004A2918; }
-extern "C" { extern int DAT_004A291C; }
-extern "C" { extern int DAT_004A2920; }
-extern "C" { extern int DAT_004A2964; }
-extern "C" { extern int DAT_004A2994; }
-extern "C" { extern int DAT_004A2A7C; }
-extern "C" void __cdecl FUN_0040C2C0(void**);
-
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern int M1_IsInMap_004a2a7c;
+extern int M1_004a2994;
+extern int DAT_004a291c_LoadLevelUnk1;
+extern int DAT_004a2920_LoadLevelUnk5;
+extern int DAT_004a2918_LevelObjectsListEnd;
+extern int level_004a2964;
+extern void __cdecl FUN_0040c2c0_GameFunkUnk(GXObject *);
+void __cdecl GEX_Target(GXObject *gob)
 {
-    void* pGVar1;
-    void* pGVar2;
-
-    DAT_004A2A7C = 1;
-    DAT_004A2994 = 0;
-    pGVar1 = param_1[0x2b];
-    if (pGVar1 == (void*)1) {
-        pGVar2 = param_1[0x26];
-        if (pGVar2 == (void*)2) {
-            if (DAT_004A291C == 0) {
-                param_1[0x2c] = (void*)0;
-            } else {
-                param_1[0x2c] = (void*)1;
-            }
-        } else if (pGVar2 == (void*)4) {
-            if (DAT_004A2920 == 0) {
-                param_1[0x2c] = (void*)0;
-            } else {
-                param_1[0x2c] = (void*)1;
-            }
-        } else if (pGVar2 == (void*)6) {
-            if (DAT_004A2918 == 0) {
-                param_1[0x2c] = (void*)0;
-            } else {
-                param_1[0x2c] = (void*)1;
-            }
-        } else {
-            param_1[0x2c] = (void*)1;
-        }
-    } else if (pGVar1 == (void*)2) {
-        param_1[0x2c] = (void*)0;
-    } else {
-        param_1[0x2c] = (void*)0;
+    M1_IsInMap_004a2a7c = 1;
+    M1_004a2994 = 0;
+    switch (gob->gob_work5) {
+    case 1:
+        if (gob->gob_work0 == 2) {
+            if (DAT_004a291c_LoadLevelUnk1)
+                gob->gob_work6 = 1;
+            else
+                gob->gob_work6 = 0;
+        } else if (gob->gob_work0 == 4) {
+            if (DAT_004a2920_LoadLevelUnk5)
+                gob->gob_work6 = 1;
+            else
+                gob->gob_work6 = 0;
+        } else if (gob->gob_work0 == 6) {
+            if (DAT_004a2918_LevelObjectsListEnd)
+                gob->gob_work6 = 1;
+            else
+                gob->gob_work6 = 0;
+        } else
+            gob->gob_work6 = 1;
+        break;
+    case 2:
+        gob->gob_work6 = 0;
+        break;
+    default:
+        gob->gob_work6 = 0;
     }
-    if (DAT_004A2964 == 0x41 && (param_1[0x26] == (void*)2 || param_1[0x26] == (void*)1)) {
-        param_1[0x15] = (void*)0;
-    } else {
-        param_1[0x15] = (void*)-1;
-    }
-    if (pGVar1 == (void*)3) {
-        FUN_0040C2C0(param_1);
-    }
+    if (level_004a2964 == 0x41 && (gob->gob_work0 == 2 || gob->gob_work0 == 1))
+        gob->gob_currentFrameIndex = 0;
+    else
+        gob->gob_currentFrameIndex = -1;
+    if (gob->gob_work5 == 3)
+        FUN_0040c2c0_GameFunkUnk(gob);
 }
 }

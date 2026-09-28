@@ -1,168 +1,141 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0040E6A0.cpp
-// Historical source SHA256: ecdd32456bf639b837139e8e8264fdac2db20ca7744830fe15cc62b5893df91d
+typedef struct GXObject GXObject;
+struct GXObject {
+    unsigned char _pad0[0x54];
+    int f54;
+    unsigned char _pad58[0x8];
+    void (__cdecl *draw)(GXObject *gob);
+    unsigned char _pad64[0x14];
+    int xpos;      /* 0x78 */
+    int ypos;      /* 0x7c */
+    unsigned char _pad80[0x1c];
+    char *text;    /* 0x9c */
+    unsigned char _pada0[0x14];
+    unsigned int fb4;
+};
 extern "C" {
-extern "C" { extern unsigned char DAT_00455C08; }
-extern "C" { extern unsigned char DAT_00455C0C; }
-extern "C" { extern unsigned char DAT_00455C10; }
-extern "C" { extern unsigned char DAT_00456338; }
-extern "C" { extern unsigned char DAT_0045633C; }
-extern "C" { extern unsigned char DAT_00456340; }
-extern "C" { extern int DAT_00462C7C; }
-extern "C" { extern int DAT_00462C80; }
-extern "C" { extern int DAT_00487FD4; }
-extern "C" { extern unsigned char DAT_00487FF8; }
-extern "C" { extern unsigned char DAT_004A0204; }
-extern "C" { extern unsigned char DAT_004A0200; }
-extern "C" { extern unsigned char DAT_004A0280; }
-extern "C" { extern unsigned char DAT_004A0281; }
-extern "C" { extern unsigned char DAT_004A0282; }
-extern "C" { extern unsigned char DAT_004A0283; }
-extern "C" { extern unsigned char DAT_004A0284; }
-extern "C" { extern unsigned char DAT_004A0285; }
-extern "C" { extern unsigned char DAT_004A028F; }
-extern "C" { extern int DAT_004A2918; }
-extern "C" { extern int DAT_004A291C; }
-extern "C" { extern int DAT_004A2920; }
-extern "C" { extern int DAT_004A2A7C; }
-extern "C" { extern int DAT_004A2AC8; }
-extern "C" { extern int DAT_00487FE4; }
+extern int DAT_00462c80;
+extern int gTimer_004a2ac8;
+extern char DAT_00456338;
+extern char DAT_0045633c;
+extern unsigned char gInputControllers_004a0280[];
+extern char VK_00487fd4;
+extern unsigned char gPasswordEnter_004a0200[];
+extern int DAT_00487ff8_FreezeMovementInput;
+extern int gPasswordCurrentCharIndex_00462c7c;
+extern int DAT_004a291c_LoadLevelUnk1;
+extern int DAT_004a2918_LevelObjectsListEnd;
+extern int DAT_004a2920_LoadLevelUnk5;
+extern int gSFXEnabled_00455c08;
+extern int gVFXEnabled_00455c0c;
+extern int gMUSEnabled_00455c10;
+extern int M1_IsInMap_004a2a7c;
+extern char *STRING_WRONG_00487fe4;
+void __cdecl SND_PlaySoundNoPosition_0041a360(int sound, int volume);
+void __cdecl MainMenuButtonDraw_0040c340(GXObject *gob);
+GXObject *__cdecl GOB_FindWithWork0_0040c110(int type, int work);
+int __cdecl PasswordIsValid_004295c0(unsigned char *password);
+void __cdecl PasswordEnterLevel_00429940(void);
+void __cdecl FUN_004099b0_CloseMusic(int flag);
+void __cdecl FUN_0040b9f0_Unk(void);
 
-extern "C" void __cdecl FUN_004099B0(int);
-extern "C" void __cdecl FUN_0040B9F0(void);
-extern "C" void __cdecl FUN_0040C340(int**);
-extern "C" int** __cdecl FUN_0040C110(int, int);
-extern "C" void __cdecl FUN_0041A360(int, int);
-extern "C" int __cdecl FUN_004295C0(char*);
-extern "C" void __cdecl FUN_00429940(void);
-
-extern "C" void __cdecl GEX_Target(int** param_1)
+void __cdecl GEX_Target(GXObject *gob)
 {
-    unsigned char* pbVar1;
-    unsigned char bVar5;
-    int** ppGVar6;
-    int iVar7, iVar8;
-    int* pGVar2, *pGVar3, *pGVar4;
-    int local_8, local_4;
-    unsigned char local_a;
-    unsigned char local_9;
-    
-    pGVar2 = param_1[0x1e];
-    pGVar3 = param_1[0x27];
-    local_8 = (int)param_1[0x1f];
-    local_4 = (int)param_1[0x15];
-    param_1[0x15] = (int*)-1;
-    
-    if (DAT_00462C80 < DAT_004A2AC8) {
+    char *oldText;
+    int oldX;
+    int oldY;
+    int oldFrame;
+    GXObject *button;
+    int i;
+    char str[2];
+
+    oldText = gob->text;
+    oldX = gob->xpos;
+    oldY = gob->ypos;
+    oldFrame = gob->f54;
+    gob->f54 = -1;
+    if (gTimer_004a2ac8 > DAT_00462c80) {
         DAT_00456338 = 0;
-        
-        if (DAT_004A0284 == 0 && DAT_00487FD4 != 0x0d) {
-            if (DAT_004A0285 == 0 && DAT_00487FD4 != 0x1b) {
-                if (DAT_004A0282 == 0 && DAT_00487FD4 != 0x26) {
-                    if (DAT_004A0283 == 0 && DAT_00487FD4 != 0x28) {
-                        if (DAT_004A028F == 0 && DAT_00487FD4 != 0x25 && DAT_00487FD4 != 0x08) {
-                            if (DAT_004A0281 == 0 && DAT_00487FD4 != 0x27) {
-                                if ((0x60 < DAT_00487FD4 && DAT_00487FD4 < 0x6c) || (0x40 < DAT_00487FD4 && DAT_00487FD4 < 0x5b)) {
-                                    if (DAT_00487FD4 > 0x5a) {
-                                        DAT_00487FD4 = DAT_00487FD4 - 0x20;
-                                    }
-                                    if (DAT_00462C7C != 7 || *(unsigned char*)((int)&DAT_004A0204 + 3) != (unsigned char)DAT_00487FD4) {
-                                        FUN_0041A360(0x45, 0xff);
-                                    }
-                                    iVar7 = DAT_00462C7C;
-                                    *(unsigned char*)((int)&DAT_004A0200 + DAT_00462C7C) = (unsigned char)DAT_00487FD4;
-                                    if (iVar7 < 7) {
-                                        DAT_00462C7C = iVar7 + 1;
-                                    }
-                                } else if (DAT_00462C7C < 7) {
-                                    DAT_00462C7C = DAT_00462C7C + 1;
-                                    FUN_0041A360(0x45, 0xff);
-                                }
-                            } else if (DAT_00462C7C != 0) {
-                                DAT_00462C7C = DAT_00462C7C - 1;
-                                FUN_0041A360(0x45, 0xff);
-                            }
-                        } else {
-                            pbVar1 = (unsigned char*)((int)&DAT_004A0200 + DAT_00462C7C);
-                            bVar5 = *(unsigned char*)((int)&DAT_004A0200 + DAT_00462C7C) - 1;
-                            *pbVar1 = bVar5;
-                            if (bVar5 < 0x41) {
-                                *pbVar1 = 0x5a;
-                            }
-                            FUN_0041A360(0x45, 0xff);
-                        }
-                    } else {
-                        pbVar1 = (unsigned char*)((int)&DAT_004A0200 + DAT_00462C7C);
-                        bVar5 = *(unsigned char*)((int)&DAT_004A0200 + DAT_00462C7C) + 1;
-                        *pbVar1 = bVar5;
-                        if (bVar5 > 0x5a) {
-                            *pbVar1 = 0x41;
-                        }
-                        FUN_0041A360(0x45, 0xff);
-                    }
-                } else {
-                    param_1[0x1e] = (int*)0x280000;
-                    param_1[0x1f] = (int*)0x500000;
-                    param_1[0x27] = (int*)&DAT_004A0200;
-                    param_1[0x15] = 0;
-                    FUN_0040C340(param_1);
-                    param_1[0x18] = (int*)&FUN_0040C340;
-                    DAT_0045633C = 0;
-                    ppGVar6 = FUN_0040C110(0x7b, 1);
-                    ppGVar6[0x2d] = (int*)((unsigned int)ppGVar6[0x2d] & 0xfffffffe);
-                    ppGVar6 = FUN_0040C110(0x7b, 2);
-                    ppGVar6[0x2d] = (int*)((unsigned int)ppGVar6[0x2d] & 0xfffffffe);
-                    ppGVar6 = FUN_0040C110(0x7b, 4);
-                    ppGVar6[0x2d] = (int*)((unsigned int)ppGVar6[0x2d] | 1);
-                    ppGVar6[0x18] = (int*)&FUN_0040C340;
-                    FUN_0041A360(0x44, 0xff);
-                    DAT_00487FF8 = 0;
-                }
+        if (gInputControllers_004a0280[0x14] || VK_00487fd4 == 0xd) {
+            if (PasswordIsValid_004295c0(gPasswordEnter_004a0200)) {
+                PasswordEnterLevel_00429940();
+                gSFXEnabled_00455c08 = DAT_004a291c_LoadLevelUnk1;
+                gVFXEnabled_00455c0c = DAT_004a2918_LevelObjectsListEnd;
+                FUN_004099b0_CloseMusic(1);
+                M1_IsInMap_004a2a7c = 1;
+                gMUSEnabled_00455c10 = DAT_004a2920_LoadLevelUnk5;
+                FUN_0040b9f0_Unk();
+                DAT_00487ff8_FreezeMovementInput = 0;
             } else {
-                iVar7 = FUN_004295C0((char*)&DAT_004A0200);
-                if (iVar7 == 0) {
-                    FUN_0041A360(0x76, 0xff);
-                    DAT_00456338 = 1;
-                    DAT_00462C80 = DAT_004A2AC8 + 0x1e;
-                } else {
-                    FUN_00429940();
-                    DAT_00455C08 = (unsigned char)DAT_004A291C;
-                    DAT_00455C0C = (unsigned char)DAT_004A2918;
-                    FUN_004099B0(1);
-                    DAT_004A2A7C = 1;
-                    DAT_00455C10 = (unsigned char)DAT_004A2920;
-                    FUN_0040B9F0();
-                    DAT_00487FF8 = 0;
-                }
+                SND_PlaySoundNoPosition_0041a360(0x76, 0xff);
+                DAT_00456338 = 1;
+                DAT_00462c80 = gTimer_004a2ac8 + 0x1e;
             }
+        } else if (gInputControllers_004a0280[0x15] || VK_00487fd4 == 0x1b) {
+            gob->xpos = 0x280000;
+            gob->ypos = 0x500000;
+            gob->text = (char *)gPasswordEnter_004a0200;
+            gob->f54 = 0;
+            MainMenuButtonDraw_0040c340(gob);
+            gob->draw = MainMenuButtonDraw_0040c340;
+            DAT_0045633c = 0;
+            button = GOB_FindWithWork0_0040c110(0x7b, 1);
+            button->fb4 &= ~1;
+            button = GOB_FindWithWork0_0040c110(0x7b, 2);
+            button->fb4 &= ~1;
+            button = GOB_FindWithWork0_0040c110(0x7b, 4);
+            button->fb4 |= 1;
+            button->draw = MainMenuButtonDraw_0040c340;
+            SND_PlaySoundNoPosition_0041a360(0x44, 0xff);
+            DAT_00487ff8_FreezeMovementInput = 0;
+        } else if (gInputControllers_004a0280[0x11] || VK_00487fd4 == 0x26) {
+            if (++gPasswordEnter_004a0200[gPasswordCurrentCharIndex_00462c7c] > 'Z')
+                gPasswordEnter_004a0200[gPasswordCurrentCharIndex_00462c7c] = 'A';
+            SND_PlaySoundNoPosition_0041a360(0x45, 0xff);
+        } else if (gInputControllers_004a0280[0x12] || VK_00487fd4 == 0x28) {
+            if (--gPasswordEnter_004a0200[gPasswordCurrentCharIndex_00462c7c] < 'A')
+                gPasswordEnter_004a0200[gPasswordCurrentCharIndex_00462c7c] = 'Z';
+            SND_PlaySoundNoPosition_0041a360(0x45, 0xff);
+        } else if (gInputControllers_004a0280[0xf] || VK_00487fd4 == 0x25 || VK_00487fd4 == 8) {
+            if (gPasswordCurrentCharIndex_00462c7c) {
+                gPasswordCurrentCharIndex_00462c7c--;
+                SND_PlaySoundNoPosition_0041a360(0x45, 0xff);
+            }
+        } else if (gInputControllers_004a0280[0x10] || VK_00487fd4 == 0x27) {
+            if (gPasswordCurrentCharIndex_00462c7c < 7) {
+                gPasswordCurrentCharIndex_00462c7c++;
+                SND_PlaySoundNoPosition_0041a360(0x45, 0xff);
+            }
+        } else if ((VK_00487fd4 >= 'a' && VK_00487fd4 <= 'z') || (VK_00487fd4 >= 'A' && VK_00487fd4 <= 'Z')) {
+            if (VK_00487fd4 > 'Z')
+                VK_00487fd4 -= 0x20;
+            if (gPasswordCurrentCharIndex_00462c7c != 7 || gPasswordEnter_004a0200[gPasswordCurrentCharIndex_00462c7c] != VK_00487fd4)
+                SND_PlaySoundNoPosition_0041a360(0x45, 0xff);
+            gPasswordEnter_004a0200[gPasswordCurrentCharIndex_00462c7c] = VK_00487fd4;
+            if (gPasswordCurrentCharIndex_00462c7c < 7)
+                gPasswordCurrentCharIndex_00462c7c++;
         }
     }
-    
-    pGVar4 = (int*)(int)&DAT_00487FE4;
-    if (DAT_00456338 == 0) {
-        param_1[0x27] = (int*)&local_a;
-        local_9 = 0;
-        param_1[0x1e] = (int*)0x280000;
-        param_1[0x1f] = (int*)0x500000;
-        iVar7 = 0;
-        do {
-            iVar8 = iVar7 + 1;
-            param_1[0x15] = (int*)((DAT_00462C7C == iVar7) - 1);
-            local_a = *(unsigned char*)((int)&DAT_004A0200 + iVar7);
-            FUN_0040C340(param_1);
-            param_1[0x1e] = (int*)((int)param_1[0x1e] + 0x900);
-            iVar7 = iVar8;
-        } while (iVar8 < 8);
+    if (DAT_00456338) {
+        gob->text = STRING_WRONG_00487fe4;
+        gob->xpos = 0x280000;
+        gob->ypos = 0x500000;
+        gob->f54 = 0;
+        MainMenuButtonDraw_0040c340(gob);
     } else {
-        param_1[0x1e] = (int*)0x280000;
-        param_1[0x1f] = (int*)0x500000;
-        param_1[0x15] = 0;
-        param_1[0x27] = pGVar4;
-        FUN_0040C340(param_1);
+        gob->text = str;
+        str[1] = 0;
+        gob->xpos = 0x280000;
+        gob->ypos = 0x500000;
+        for (i = 0; i < 8; i++) {
+            gob->f54 = gPasswordCurrentCharIndex_00462c7c == i ? 0 : -1;
+            str[0] = gPasswordEnter_004a0200[i];
+            MainMenuButtonDraw_0040c340(gob);
+            gob->xpos += 0x120000;
+        }
     }
-    
-    param_1[0x27] = pGVar3;
-    param_1[0x1e] = pGVar2;
-    param_1[0x1f] = (int*)local_8;
-    param_1[0x15] = (int*)local_4;
+    gob->text = oldText;
+    gob->xpos = oldX;
+    gob->ypos = oldY;
+    gob->f54 = oldFrame;
 }
 }

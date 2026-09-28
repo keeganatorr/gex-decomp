@@ -1,43 +1,43 @@
+// Field names from Ghidra's GXObject layout (evidence, not proof).
+typedef struct GXObject {
+    unsigned char _pad0[0x78];
+    int gob_xpos;   /* 0x78 */
+    int gob_ypos;   /* 0x7c */
+    unsigned char _pad1[0xdc];
+    struct GXObject *gob_parent;   /* 0x15c */
+    struct GXObject *gob_child;    /* 0x160 */
+    struct GXObject *gob_sibling;  /* 0x164 */
+} GXObject;
 extern "C" {
-extern void __cdecl FUN_00405390(const char*);
-extern int DAT_00455c54;
-extern const char DAT_00458e3c[];
-}
-
-extern "C" int __cdecl GEX_Target(int param1, void** param2)
+extern void __cdecl TracePrintf_Debug_00405390(const char *, ...);
+extern int DAT_00455c54_DebugVar;
+extern char s_UNLINK_OBJECT_00458e3c[];
+unsigned char * __cdecl GEX_Target(unsigned char *script, GXObject *gob)
 {
-    void** pObj = param2;
-    int iVar5 = 0;
-    if (pObj[0x57] != 0) {
-        int iVar6 = 0;
-        void* pGVar3 = *(void**)((int)pObj[0x57] + 0x160);
-        if (DAT_00455c54 > 1) {
-            FUN_00405390(DAT_00458e3c);
+    GXObject *o;
+    int x;
+    int y;
+    if (gob->gob_parent) {
+        x = 0;
+        y = 0;
+        o = gob->gob_parent->gob_child;
+        if (DAT_00455c54_DebugVar > 1)
+            TracePrintf_Debug_00405390(s_UNLINK_OBJECT_00458e3c);
+        if (o == gob)
+            gob->gob_parent->gob_child = gob->gob_sibling;
+        else {
+            while (o->gob_sibling != gob)
+                o = o->gob_sibling;
+            o->gob_sibling = gob->gob_sibling;
         }
-        if (pGVar3 == pObj) {
-            *(void**)((int)pObj[0x57] + 0x160) = pObj[0x59];
-        } else {
-            void* pGVar4 = *(void**)((int)pGVar3 + 0x164);
-            while (pGVar4 != pObj) {
-                pGVar3 = *(void**)((int)pGVar3 + 0x164);
-                pGVar4 = *(void**)((int)pGVar3 + 0x164);
-            }
-            *(void**)((int)pGVar3 + 0x164) = pObj[0x59];
+        for (o = gob->gob_parent; o->gob_parent; o = o->gob_parent) {
+            x += o->gob_xpos;
+            y += o->gob_ypos;
         }
-        pGVar3 = pObj[0x57];
-        void* pGVar4 = *(void**)((int)pGVar3 + 0x15c);
-        while (pGVar4 != 0) {
-            iVar5 += *(int*)((int)pGVar3 + 0x78);
-            iVar6 += *(int*)((int)pGVar3 + 0x7c);
-            pGVar3 = *(void**)((int)pGVar3 + 0x15c);
-            pGVar4 = *(void**)((int)pGVar3 + 0x15c);
-        }
-        *(int*)((int)pObj + 0x78) += *(int*)((int)pGVar3 + 0x78) + iVar5;
-        int yAdd = *(int*)((int)pGVar3 + 0x7c);
-        int newy = *(int*)((int)pObj + 0x7c);
-        pObj[0x57] = 0;
-        newy += yAdd + iVar6;
-        *(int*)((int)pObj + 0x7c) = newy;
+        gob->gob_xpos += o->gob_xpos + x;
+        gob->gob_ypos += o->gob_ypos + y;
+        gob->gob_parent = 0;
     }
-    return param1;
+    return script;
+}
 }

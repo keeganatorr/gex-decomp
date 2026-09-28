@@ -1,132 +1,102 @@
-typedef int (__cdecl *TileCallback)(int *, unsigned char *);
-
-struct AngleEdges {
-    int unused[6];
-    int local_10;
-    int local_c;
-    int local_8;
-    int local_4;
-};
-
-struct CurrentLevel {
-    int field_0;
-    int levelData;
-    int unused_8[3];
-    int tileData;
-};
-
-struct TileAttributes {
-    int unused_0[5];
-    TileCallback til_downFunc;
-    TileCallback til_upFunc;
-    int unused_1c;
-};
+typedef int (__cdecl *TileFunction)(int *, unsigned char *);
 
 extern "C" {
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+int __cdecl CLD_ComputeAngleEdges_0041cb80(int *, int *);
+unsigned char *__cdecl TILES_GetBlockAddress_0042ce70(int, int, int, int);
+void __cdecl FUN_0042CD90(int *, TileFunction);
 extern int DAT_004A01EC;
-extern CurrentLevel *DAT_004A2990;
-extern int __cdecl FUN_0041CB80(int *, AngleEdges *);
-extern unsigned char * __cdecl FUN_0042CE70(int, int, int, int);
-extern void __cdecl FUN_0042CD90(int *, TileCallback);
-extern TileAttributes gTileAttributes[];
+extern int *M1_CurrentLevel_004a2990;
+extern unsigned char DAT_0045B9B0[];
 }
 
-extern "C" int __cdecl GEX_Target(void *, int *gOb, TileCallback Velocity_Function)
+extern "C" int __cdecl GEX_Target(void *unused, int *object, TileFunction callback)
 {
-    AngleEdges edges;
     int end;
-    int x;
-    int y;
+    int down;
+    int edges[10];
+    int x, y, type;
     unsigned char *block;
-    unsigned short tile;
-    TileCallback function;
-    int direction;
+    TileFunction handler;
 
     DAT_004A01EC = 0;
-    if (FUN_0041CB80(gOb, &edges) == 0)
+    if (!CLD_ComputeAngleEdges_0041cb80(object, edges))
         return 0;
-
-    direction = (gOb[0x1f] - gOb[0x36]) >= 0;
-    end = edges.local_c - 0x80000;
-    x = edges.local_10 + 0x80000;
-
+    down = (object[0x1f] - object[0x36]) >= 0;
+    y = edges[6] + 0x80000;
+    end = edges[7] - 0x80000;
     for (;;) {
         DAT_004A01EC++;
-        FUN_0041CB80(gOb, &edges);
-
-        if (direction)
-            y = edges.local_8;
+        CLD_ComputeAngleEdges_0041cb80(object, edges);
+        if (down)
+            x = edges[8];
         else
-            y = edges.local_4;
-
-        block = FUN_0042CE70(DAT_004A2990->levelData,
-                             DAT_004A2990->tileData, x, y);
-        if (block != 0) {
-            gOb[0x61] = x;
-            gOb[0x62] = y;
-            tile = *(unsigned short *)(block + 6);
-            if (tile < 126) {
-                if (direction)
-                    function = gTileAttributes[tile].til_downFunc;
+            x = edges[9];
+        block = TILES_GetBlockAddress_0042ce70(M1_CurrentLevel_004a2990[1], M1_CurrentLevel_004a2990[5], y, x);
+        if (block) {
+            object[0x61] = y;
+            object[0x62] = x;
+            type = *(unsigned short *)(block + 6);
+            if (type <= 125) {
+                if (down)
+                    handler = *(TileFunction *)(DAT_0045B9B0 + 4 + type * 32);
                 else
-                    function = gTileAttributes[tile].til_upFunc;
-
-                if (function != 0 &&
-                    function(gOb, block) != 0 &&
-                    Velocity_Function != 0 &&
-                    Velocity_Function(gOb, block) == 0)
+                    handler = *(TileFunction *)(DAT_0045B9B0 + 8 + type * 32);
+                if (handler && handler(object, block) && callback && !callback(object, block))
                     break;
             }
         }
-
-        if (end == x)
+        if (y == end)
             break;
-        x += 0x200000;
-        if (end < x)
-            x = end;
+        y += 0x200000;
+        if (end < y)
+            y = end;
     }
-
-    x = edges.local_10 + 0x80000;
+    y = edges[6] + 0x80000;
     for (;;) {
         DAT_004A01EC++;
-        FUN_0041CB80(gOb, &edges);
-
-        if (direction)
-            y = edges.local_4;
+        CLD_ComputeAngleEdges_0041cb80(object, edges);
+        if (down)
+            x = edges[9];
         else
-            y = edges.local_8;
-
-        block = FUN_0042CE70(DAT_004A2990->levelData,
-                             DAT_004A2990->tileData, x, y);
-        if (block != 0) {
-            gOb[0x61] = x;
-            gOb[0x62] = y;
-            tile = *(unsigned short *)(block + 6);
-            if (tile < 126) {
-                if (direction)
-                    function = gTileAttributes[tile].til_upFunc;
+            x = edges[8];
+        block = TILES_GetBlockAddress_0042ce70(M1_CurrentLevel_004a2990[1], M1_CurrentLevel_004a2990[5], y, x);
+        if (block) {
+            object[0x61] = y;
+            object[0x62] = x;
+            type = *(unsigned short *)(block + 6);
+            if (type <= 125) {
+                if (down)
+                    handler = *(TileFunction *)(DAT_0045B9B0 + 8 + type * 32);
                 else
-                    function = gTileAttributes[tile].til_downFunc;
-
-                if (function != 0 &&
-                    function(gOb, block) != 0 &&
-                    Velocity_Function != 0 &&
-                    Velocity_Function(gOb, block) == 0)
+                    handler = *(TileFunction *)(DAT_0045B9B0 + 4 + type * 32);
+                if (handler && handler(object, block) && callback && !callback(object, block))
                     break;
             }
         }
-
-        if (end == x)
+        if (y == end)
             break;
-        x += 0x200000;
-        if (end < x)
-            x = end;
+        y += 0x200000;
+        if (end < y)
+            y = end;
     }
-
-    FUN_0041CB80(gOb, &edges);
-    if (direction)
-        edges.local_8 = edges.local_4;
-    gOb[0x62] = edges.local_8;
-    FUN_0042CD90(gOb, Velocity_Function);
+    CLD_ComputeAngleEdges_0041cb80(object, edges);
+    if (down)
+        object[0x62] = edges[9];
+    else
+        object[0x62] = edges[8];
+    FUN_0042CD90(object, callback);
     return 0;
 }

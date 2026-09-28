@@ -41,7 +41,11 @@ def function_record(address, db=None):
 
 def contract(address, lang=None, flags=None):
     """Effective flags/language/symbol, as pc-decomp's CompileContract resolves them."""
-    override = PROJECT.get('functionOverrides', {}).get(address, {})
+    override = dict(PROJECT.get('functionOverrides', {}).get(address, {}))
+    # PROBE_OVERRIDE='{"targetSymbol": "_GEX_Target@16"}' trials an override
+    # (a __stdcall target, a C-only body) before it is added to project.json;
+    # verification still needs the real functionOverrides entry.
+    override.update(json.loads(os.environ.get('PROBE_OVERRIDE') or '{}'))
     return (flags or override.get('flags', TOOLCHAIN['flags']),
             lang or override.get('language', 'cpp'),
             override.get('targetSymbol', '_GEX_Target'))
@@ -260,7 +264,14 @@ class Probe:
         equal = sum(1 for a, b in zip(original, candidate) if a == b)
         trial = sorted(k for k, v in used.items() if v[1].startswith('TRIAL'))
         rejected = input_rejection(source)
-        result.update(candidate=candidate, unresolved=unresolved, used=used, percent=100.0 * equal / total, trial=trial,
+        percent = 100.0 * equal / total
+        if os.environ.get('PROBE_METRIC') == 'aligned' and candidate != original:
+            # Positional equality collapses after the first inserted or
+            # deleted byte, so a search cannot see a fix that shifts the rest
+            # of the function. Compare instruction text instead, with branch
+            # targets and relocated symbols normalised away.
+            percent = aligned_percent(original, candidate, int(self.address, 16), self.resolver)
+        result.update(candidate=candidate, unresolved=unresolved, used=used, percent=percent, trial=trial,
                       rejected=rejected, exact=candidate == original and not unresolved and not rejected)
         return result
 
@@ -285,6 +296,25 @@ def disassemble(data, address, resolver):
         text = re.sub(r'0x[0-9a-f]{6,8}', lambda m: m.group(0) + (f'<{resolver.by_address[int(m.group(0), 16)]}>' if int(m.group(0), 16) in resolver.by_address and int(m.group(0), 16) >= 0x401000 else ''), text)
         rows.append((ins.address, bytes(ins.bytes), text))
     return rows
+
+
+def aligned_percent(original, candidate, address, resolver):
+    """Similarity of two code blocks by instruction text (PROBE_METRIC=aligned).
+
+    Branch targets inside the function are replaced by a placeholder so that a
+    one-byte insertion does not make every later jump differ. 100 means the
+    instruction streams are identical apart from branch displacement."""
+    def rows(data):
+        out = []
+        for _, _, text in disassemble(data, address, resolver):
+            if text.startswith('j'):
+                text = re.sub(r'0x[0-9a-f]+', 'L', text)
+            out.append(text)
+        return out
+    a, b = rows(original), rows(candidate)
+    matcher = difflib.SequenceMatcher(None, a, b, autojunk=False)
+    same = sum(block.size for block in matcher.get_matching_blocks())
+    return 100.0 * same / max(len(a), len(b), 1)
 
 
 def spans(a, b):

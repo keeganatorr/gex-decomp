@@ -29,7 +29,14 @@ mv=$(timeout 600 python3 $(dirname $0)/mvperm.py $a $b.st.cpp | tail -1); echo "
 bp=$(timeout 900 python3 $(dirname $0)/blockperm.py $a $b.st.cpp | tail -1); echo "blockperm: $bp"
 [ "$bp" = EXACT ] && { echo "SOLVED:$b.st.bp.cpp"; exit 0; }
 [ -f $b.st.bp.cpp ] && cp $b.st.bp.cpp $b.st.cpp
+sp=$(timeout 900 python3 $(dirname $0)/storeperm.py $a $b.st.cpp | tail -1); echo "storeperm: $sp"
+case "$sp" in EXACT*) echo "SOLVED:$b.st.sp.cpp"; exit 0;; esac
+[ -f $b.st.sp.cpp ] && cp $b.st.sp.cpp $b.st.cpp
 [ "$st" = EXACT ] && { echo "SOLVED:$b.st.cpp"; exit 0; }
 out=$(python3 $(dirname $0)/perturb.py $a $b.st.cpp --moves --languages cpp,c --write $b.best2.cpp | tail -1); echo "perturb2: $out"
 case "$out" in *"100.0%"*) echo "SOLVED:$b.best2.cpp"; exit 0;; esac
+# Whole-group declaration shuffles reach orders that single moves do not
+# (00420300, 00437f40).
+ds=$(timeout 1800 python3 $(dirname $0)/declshuffle.py $a $b.st.cpp --samples 400 | tail -1); echo "declshuffle: $ds"
+case "$ds" in EXACT*) echo "SOLVED:$b.st.ds.cpp"; exit 0;; esac
 exit 2

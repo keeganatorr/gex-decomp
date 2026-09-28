@@ -1,17 +1,25 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00418040.cpp
-// Historical source SHA256: d2afc8446a7ac618ab17586544d7e1587961a5ac5a7643efdc93f55523f6301e
+// Script field block of a GXObject (0x68 in Ghidra is gob_points; scripts index words from there).
+typedef struct GXObject {
+    unsigned char _pad0[0x68];
+    int gob_fields[61];                 /* 0x68 */
+    struct GXObject *gob_parent;        /* 0x15c */
+} GXObject;
 extern "C" {
-extern "C" { extern int DAT_0049FB90; }
-extern "C" { extern int DAT_0049FB94; }
-
-extern "C" void __cdecl GEX_Target(unsigned char* p, int* parent)
+extern int SCRIPT_WorkRegister_0049fb90;
+extern GXObject *DAT_0049fb94;
+unsigned char * __cdecl GEX_Target(unsigned char *script, GXObject *gob)
 {
-    unsigned char idx = *p;
-    int* table = (int*)parent[0x57];
-    if (table == 0) {
-        table = (int*)DAT_0049FB94;
-        if (table == 0) return;
+    int field = *script++;
+    int *fields;
+    if (gob->gob_parent)
+        fields = gob->gob_parent->gob_fields;
+    else if (DAT_0049fb94)
+        fields = DAT_0049fb94->gob_fields;
+    else {
+        SCRIPT_WorkRegister_0049fb90 = -1;
+        return script;
     }
-    DAT_0049FB90 = table[0x1a + idx];  
+    SCRIPT_WorkRegister_0049fb90 = fields[field];
+    return script;
 }
 }

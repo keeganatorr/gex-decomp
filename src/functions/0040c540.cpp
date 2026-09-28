@@ -1,162 +1,177 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0040C540.cpp
-// Historical source SHA256: 54f78e697034e4e1894b989aecb3230d34568a3d344c34727a7223e320e6a463
+typedef struct GXObject {
+    unsigned char _pad0[0x98];
+    int f98;
+    unsigned char _pad9c[0x4];
+    int fa0;
+    int fa4;
+    int fa8;
+    int fac;
+    int fb0;
+} GXObject;
+typedef struct LevelEntry {
+    unsigned short info;
+    unsigned char f2;
+    unsigned char f3;
+    unsigned char music;
+    unsigned char next;
+    unsigned char f6;
+    unsigned char f7;
+} LevelEntry;
+typedef struct TitleEntry {
+    char *name;
+    int level;
+} TitleEntry;
 extern "C" {
-extern "C" { extern int DAT_0045601C; }
-extern "C" { extern int DAT_00456020; }
-extern "C" { extern int DAT_0045603C; }
-extern "C" { extern int DAT_00456228; }
-extern "C" { extern int DAT_0045622C; }
-extern "C" { extern int DAT_00456230; }
-extern "C" { extern int DAT_00456234; }
-extern "C" { extern int DAT_00456238; }
-extern "C" { extern unsigned char DAT_00455C08; }
-extern "C" { extern unsigned char DAT_00455C0C; }
-extern "C" { extern unsigned char DAT_00455C10; }
-extern "C" { extern unsigned char DAT_00455C3C; }
-extern "C" { extern unsigned char DAT_004A0280; }
-extern "C" { extern unsigned char DAT_004A0281; }
-extern "C" { extern unsigned char DAT_004A0282; }
-extern "C" { extern unsigned char DAT_004A0283; }
-extern "C" { extern unsigned char DAT_004A0284; }
-extern "C" { extern unsigned char DAT_004A0285; }
-extern "C" { extern unsigned char DAT_004A0288; }
-extern "C" { extern unsigned char DAT_004A028B; }
-extern "C" { extern unsigned char DAT_004A028C; }
-extern "C" { extern unsigned char DAT_004A028F; }
-extern "C" { extern unsigned char DAT_004A0292; }
-extern "C" { extern unsigned char DAT_004A0293; }
-extern "C" { extern unsigned char DAT_004A0294; }
-extern "C" { extern unsigned char DAT_004A0295; }
-extern "C" { extern int DAT_004A2918; }
-extern "C" { extern int DAT_004A291C; }
-extern "C" { extern int DAT_004A2920; }
-extern "C" { extern unsigned int DAT_004A2A74; }
-extern "C" { extern unsigned int DAT_004A2A7C; }
-extern "C" { extern int DAT_00462C68; }
-extern "C" { extern unsigned char DAT_00462C70; }
+extern int DAT_0045601c_LevelMusicUnk;
+extern int DAT_00456020_MusicOnUnk;
+extern unsigned char gInputControllers_004a0280[];
+extern int gGameState_00455c3c;
+extern int M1_IsInMap_004a2a7c;
+extern int level_004a2964;
+extern int DAT_004a291c_LoadLevelUnk1;
+extern int DAT_004a2918_LevelObjectsListEnd;
+extern int DAT_004a2920_LoadLevelUnk5;
+extern int gSFXEnabled_00455c08;
+extern int gVFXEnabled_00455c0c;
+extern int gMUSEnabled_00455c10;
+extern char DAT_00462c70;
+extern int DAT_00462c68;
+extern int DAT_004a2a00;
+extern TitleEntry PTR_s_Title_00456038[];
+extern LevelEntry DAT_004577B0[];
+extern int DAT_00456228[];
+int __cdecl FUN_00402eb0_Return1(void);
+void __cdecl MUS_QueuePlay_00402e70(unsigned char music);
+void __cdecl MUS_PlayMusic_00402f30(void);
+void __cdecl MUS_Stop_00402f70(int a, int b);
+void __cdecl FUN_0040c940(void);
+void __cdecl SND_PlaySoundNoPosition_0041a360(int sound, int volume);
+void __cdecl FUN_004099b0_CloseMusic(int flag);
+void __cdecl FUN_0040ca70(GXObject *gob, int item);
+void __cdecl FUN_0040cca0(GXObject *gob);
+GXObject *__cdecl GOB_FindWithWork0_0040c110(int type, int work);
+void __cdecl FUN_0040cb70_Set_Active_Gex_Object(int item, int *key);
 
-extern "C" int __cdecl FUN_00402E70(int);
-extern "C" int __cdecl FUN_00402EB0(void);
-extern "C" void __cdecl FUN_00402F30(void);
-extern "C" void __cdecl FUN_00402F70(void);
-extern "C" void __cdecl FUN_004099B0(int);
-extern "C" int** __cdecl FUN_0040C110(int, int);
-extern "C" void __cdecl FUN_0040C940(void);
-extern "C" void __cdecl FUN_0040CA70(int**, int*);
-extern "C" void __cdecl FUN_0040CCA0(int**);
-extern "C" void __cdecl FUN_0041A360(int, int);
-
-extern "C" void __cdecl GEX_Target(int** param_1)
+void __cdecl GEX_Target(GXObject *gob)
 {
-    int iVar3;
-    int** ppGVar4;
-    unsigned char bVar1;
-    int* pGVar2, *pGVar5;
-    unsigned char* buttonNumber;
-    
-    if (DAT_0045601C != 0 && (iVar3 = (int)FUN_00402EB0(), iVar3 != 0)) {
-        FUN_00402E70(DAT_0045601C);
-        DAT_0045601C = 0;
-        FUN_00402F30();
-        DAT_00456020 = 1;
+    GXObject *button;
+    int delta;
+    int old;
+    int music;
+    int *key;
+
+    if (DAT_0045601c_LevelMusicUnk && FUN_00402eb0_Return1()) {
+        MUS_QueuePlay_00402e70(DAT_0045601c_LevelMusicUnk);
+        DAT_0045601c_LevelMusicUnk = 0;
+        MUS_PlayMusic_00402f30();
+        DAT_00456020_MusicOnUnk = 1;
     }
-    
-    if (param_1[0x28] == 0 || param_1[0x29] == 0) {
-        FUN_0040CA70(param_1, (int*)param_1[0x2a]);
-    } else {
-        pGVar5 = param_1[0x2a];
-        if (pGVar5 == (int*)0x15 && DAT_004A0294 != 0) {
-            FUN_0040C940();
-            DAT_00455C3C = 1;
-            DAT_004A2A7C = 1;
-            DAT_004A2A74 = 1;
-            FUN_0041A360(0x44, 0xff);
-            DAT_00455C08 = (unsigned char)DAT_004A291C;
-            DAT_00455C0C = (unsigned char)DAT_004A2918;
-            if (DAT_00462C70 != 0) {
-                FUN_004099B0(1);
+    if (!gob->fa0 || !gob->fa4) {
+        FUN_0040ca70(gob, gob->fa8);
+        return;
+    }
+    if (gob->fa8 == 0x15 && gInputControllers_004a0280[0x14]) {
+        FUN_0040c940();
+        gGameState_00455c3c = 1;
+        M1_IsInMap_004a2a7c = 1;
+        level_004a2964 = 0x3f;
+        SND_PlaySoundNoPosition_0041a360(0x44, 0xff);
+        gSFXEnabled_00455c08 = DAT_004a291c_LoadLevelUnk1;
+        gVFXEnabled_00455c0c = DAT_004a2918_LevelObjectsListEnd;
+        if (DAT_00462c70)
+            FUN_004099b0_CloseMusic(1);
+        gMUSEnabled_00455c10 = DAT_004a2920_LoadLevelUnk5;
+        return;
+    }
+    if (gInputControllers_004a0280[0x11]) {
+        FUN_0040ca70(gob, gob->fa0);
+        FUN_0040cca0(gob);
+        SND_PlaySoundNoPosition_0041a360(0x45, 0xff);
+        DAT_00462c68 = 0xd2;
+        return;
+    }
+    if (gInputControllers_004a0280[0x12]) {
+        FUN_0040ca70(gob, gob->fa4);
+        FUN_0040cca0(gob);
+        SND_PlaySoundNoPosition_0041a360(0x45, 0xff);
+        DAT_00462c68 = 0xd2;
+        return;
+    }
+    if (gob->fac == 1 && (gInputControllers_004a0280[0xf] || gInputControllers_004a0280[0x10])) {
+        button = GOB_FindWithWork0_0040c110(0x7b, gob->fa8);
+        old = button->fb0;
+        button->fb0 = 0;
+        if (!old)
+            button->fb0 = 1;
+        SND_PlaySoundNoPosition_0041a360(0x42, 0xff);
+        if (button->f98 == 2) {
+            if (button->fb0 == 1)
+                DAT_004a291c_LoadLevelUnk1 = 1;
+            else
+                DAT_004a291c_LoadLevelUnk1 = 0;
+        } else if (button->f98 == 6) {
+            old = button->fb0;
+            DAT_004a2918_LevelObjectsListEnd = 1;
+            if (old != 1)
+                DAT_004a2918_LevelObjectsListEnd = 0;
+        }
+        if (button->f98 == 4) {
+            if (button->fb0 == 1) {
+                GOB_FindWithWork0_0040c110(0x7b, 8);
+                DAT_004a2920_LoadLevelUnk5 = 1;
+            } else
+                DAT_004a2920_LoadLevelUnk5 = 0;
+        }
+    } else if (gob->fac == 2) {
+        if (gInputControllers_004a0280[0xf])
+            delta = -1;
+        else if (gInputControllers_004a0280[0x10])
+            delta = 1;
+        else {
+            if (gInputControllers_004a0280[0x14]) {
+                button = GOB_FindWithWork0_0040c110(0x7b, 8);
+                music = DAT_004577B0[PTR_s_Title_00456038[button->fb0].level].music;
+                if (!DAT_0045601c_LevelMusicUnk) {
+                    if (DAT_00456020_MusicOnUnk)
+                        MUS_Stop_00402f70(0, DAT_004a2a00);
+                    MUS_QueuePlay_00402e70(music);
+                    old = button->fb0;
+                    DAT_00462c70 = 1;
+                    DAT_0045601c_LevelMusicUnk = DAT_004577B0[PTR_s_Title_00456038[old].level].next;
+                }
             }
-            DAT_00455C10 = (unsigned char)DAT_004A2920;
             return;
         }
-        if (DAT_004A0282 != 0) {
-            FUN_0040CA70(param_1, (int*)param_1[0x28]);
-            FUN_0040CCA0(param_1);
-            FUN_0041A360(0x45, 0xff);
-            DAT_00462C68 = 0xd2;
+        button = GOB_FindWithWork0_0040c110(0x7b, gob->fa8);
+        button->fb0 += delta;
+        if (button->fb0 < 0)
+            button->fb0 = 0x13;
+        else if (button->fb0 >= 0x14)
+            button->fb0 = 0;
+        SND_PlaySoundNoPosition_0041a360(0x45, 0xff);
+    } else if (gob->fac == 5) {
+    } else if (gob->fac == 3) {
+        if (gInputControllers_004a0280[0x13])
+            key = &DAT_00456228[8];
+        else if (gInputControllers_004a0280[0x14])
+            key = &DAT_00456228[7];
+        else if (gInputControllers_004a0280[0x15])
+            key = &DAT_00456228[6];
+        else if (gInputControllers_004a0280[0x18])
+            key = &DAT_00456228[5];
+        else if (gInputControllers_004a0280[0x17])
+            key = &DAT_00456228[4];
+        else if (gInputControllers_004a0280[0x1b])
+            key = &DAT_00456228[3];
+        else if (gInputControllers_004a0280[0x1d])
+            key = &DAT_00456228[2];
+        else if (gInputControllers_004a0280[0x1c])
+            key = &DAT_00456228[1];
+        else
             return;
-        }
-        if (DAT_004A0283 != 0) {
-            FUN_0040CA70(param_1, (int*)param_1[0x29]);
-            FUN_0040CCA0(param_1);
-            FUN_0041A360(0x45, 0xff);
-            DAT_00462C68 = 0xd2;
-            return;
-        }
-        pGVar2 = param_1[0x2b];
-        if (pGVar2 == (int*)1) {
-            if (DAT_004A028F != 0 || DAT_004A0281 != 0) {
-                ppGVar4 = (int**)FUN_0040C110(0x7b, (int)pGVar5);
-                pGVar5 = ppGVar4[0x2c];
-                ppGVar4[0x2c] = 0;
-                if (pGVar5 == 0) {
-                    ppGVar4[0x2c] = (int*)1;
-                }
-                FUN_0041A360(0x42, 0xff);
-                if (ppGVar4[0x26] == (int*)2) {
-                    DAT_004A291C = (int)(ppGVar4[0x2c] == (int*)1);
-                } else if (ppGVar4[0x26] == (int*)6) {
-                    DAT_004A2918 = (int)(ppGVar4[0x2c] != (int*)1);
-                    if (ppGVar4[0x2c] != (int*)1) {
-                        DAT_004A2918 = 0;
-                    }
-                }
-                if (ppGVar4[0x26] == (int*)4) {
-                    if (ppGVar4[0x2c] != (int*)1) {
-                        DAT_004A2920 = 0;
-                        return;
-                    }
-                    FUN_0040C110(0x7b, 8);
-                    DAT_004A2920 = 1;
-                    return;
-                }
-            }
-        } else if (pGVar2 == (int*)2) {
-            if (DAT_004A028F == 0) {
-                if (DAT_004A0281 == 0) {
-                    if (DAT_004A0294 == 0) return;
-                    ppGVar4 = (int**)FUN_0040C110(0x7b, 8);
-                    bVar1 = 0; 
-                    if (DAT_0045601C != 0) return;
-                    if (DAT_00456020 != 0) FUN_00402F70();
-                    FUN_00402E70((int)bVar1);
-                    DAT_00462C70 = 1;
-                    DAT_0045601C = 0;
-                    return;
-                }
-                iVar3 = 1;
-            } else {
-                iVar3 = -1;
-            }
-            ppGVar4 = (int**)FUN_0040C110(0x7b, (int)pGVar5);
-            pGVar5 = (int*)(*(int*)((int)ppGVar4[0x2c] + 0x78) + iVar3 + -0x1c);
-            ppGVar4[0x2c] = pGVar5;
-            if ((int)pGVar5 < 0) {
-                ppGVar4[0x2c] = (int*)0x13;
-            } else if ((int)pGVar5 > 0x13) {
-                ppGVar4[0x2c] = 0;
-            }
-            FUN_0041A360(0x45, 0xff);
-            return;
-        } else if (pGVar2 != (int*)5 && pGVar2 == (int*)3) {
-            if (DAT_004A0293 == 0 && DAT_004A0294 == 0 && DAT_004A0295 == 0 &&
-                DAT_004A028C == 0 && DAT_004A0280 == 0 && DAT_004A0288 == 0 &&
-                DAT_004A028B == 0 && DAT_004A0292 == 0) return;
-            buttonNumber = (unsigned char*)&DAT_0045622C;
-            FUN_0040CA70(param_1, (int*)buttonNumber);
-            FUN_0041A360(0x45, 0xff);
-            return;
-        }
+        FUN_0040cb70_Set_Active_Gex_Object(gob->fa8, key);
+        SND_PlaySoundNoPosition_0041a360(0x42, 0xff);
+        DAT_00462c68 = 0;
     }
 }
 }

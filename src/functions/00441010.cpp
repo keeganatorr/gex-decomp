@@ -1,35 +1,65 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00441010.cpp
-// Historical source SHA256: f64b3f2d7b1b4904fd3e538e86326af0b5a7b8f2b715a0f0c08d7cafe4c1e10d
+typedef struct TextureCache {
+    short packed;           /* 0x0 */
+    unsigned char offset;   /* 0x2 */
+    unsigned char row;      /* 0x3 */
+    union {
+        unsigned int texture;                       /* 0x4 */
+        struct { unsigned short x; unsigned short y; } pos;
+    } u;
+} TextureCache;
+typedef struct ExtraHeader { short offset; short unk2; int unk4; } ExtraHeader;
+typedef struct ExtraObject {
+    unsigned char unk0[0x10];
+    unsigned char flags;    /* 0x10 */
+    unsigned char unk11;
+    short cacheSlot;        /* 0x12 */
+    ExtraHeader headers[1]; /* 0x14 */
+} ExtraObject;
 extern "C" {
-extern "C" { extern int DAT_00460f6c; }
-extern int FUN_0046BCF8;
-extern "C" void __cdecl GEX_Target(void** gObject) {
-    if ((*(short*)((int)gObject + 0x12) >= 0) || (((unsigned int)gObject[4] & 0x40) == 0)) return;
-    
-    
-    
-    if (DAT_00460f6c != 0x0046BD00) DAT_00460f6c = 0x0046BD00;
-    *(short*)((int)gObject + 0x12) = (short)FUN_0046BCF8;
-    void** header = gObject + 5;
-    unsigned int uVar2 = *(unsigned char*)((int)(gObject + 4)) & 3;
-    if (*(short*)header == 0) return;
-    do {
-        unsigned short* puVar1 =
-            (unsigned short*)(DAT_00460f6c + FUN_0046BCF8 * 8);
-        unsigned short xPos =
-            *(unsigned short*)(DAT_00460f6c + 4 + FUN_0046BCF8 * 8);
-        unsigned short yPos = puVar1[3];
-        unsigned char local_c = (unsigned char)yPos;
-        *puVar1 = (unsigned short)((*(unsigned int*)(puVar1 + 2) >> 0x14) & 0x10) |
-                  (unsigned short)((*(unsigned int*)(puVar1 + 2) >> 6) & 0xf) | (uVar2 << 7);
-        *(unsigned char*)((int)puVar1 + 3) = local_c;
-        unsigned char bVar3 = (unsigned char)xPos;
-        if (uVar2 == 1) bVar3 = (bVar3 & 0x3f) * 2;
-        else if (uVar2 == 2) bVar3 = bVar3 & 0x3f;
-        else bVar3 = bVar3 << 2;
-        header = header + 2;
-        *(unsigned char*)(puVar1 + 1) = bVar3;
-        FUN_0046BCF8++;
-    } while (*(short*)header != 0);
+extern int UINT_0046bcf8;
+extern TextureCache *gObjectTextureMap_00460f6c;
+extern char s_GOB_ExtraResolve_on_x_00461084[];
+extern char s_Setting_up_ot_d_prefix_x_head_00461050[];
+extern char s_At_position_d_d_0046103c[];
+void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
+void __cdecl GEX_Target(ExtraObject *object)
+{
+    ExtraHeader *header;
+    TextureCache *cache;
+    unsigned int x;
+    unsigned char u;
+    int y;
+    int bank;
+    if (object->cacheSlot < 0 && (object->flags & 0x40)) {
+        TracePrintf_Debug_00405390(s_GOB_ExtraResolve_on_x_00461084, object);
+        object->cacheSlot = (short)UINT_0046bcf8;
+        bank = object->flags & 3;
+        header = object->headers;
+        if (header->offset) {
+            do {
+                TracePrintf_Debug_00405390(s_Setting_up_ot_d_prefix_x_head_00461050, UINT_0046bcf8, object, header, header->offset);
+                cache = &gObjectTextureMap_00460f6c[UINT_0046bcf8];
+                x = cache->u.pos.x;
+                y = cache->u.pos.y;
+                TracePrintf_Debug_00405390(s_At_position_d_d_0046103c, x, y);
+                cache->packed = (short)((cache->u.texture >> 20) & 0x10) | (short)((cache->u.texture >> 6) & 0xf) | (short)(bank << 7);
+                cache->row = (unsigned char)y;
+                switch (bank) {
+                case 1:
+                    u = (x & 0x3f) * 2;
+                    break;
+                case 2:
+                    u = x & 0x3f;
+                    break;
+                default:
+                    u = x << 2;
+                    break;
+                }
+                header++;
+                cache->offset = u;
+                UINT_0046bcf8++;
+            } while (header->offset);
+        }
+    }
 }
 }

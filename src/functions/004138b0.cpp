@@ -40,12 +40,11 @@ extern "C" void __cdecl GEX_Target(int *param_1)
     param_1[35] = 0;
     param_1[34] = 0;
     param_1[33] = 0xA0000;
-
-    uVar4 = (((unsigned int)param_1[27] & 0x80000000U) >> 28) |
-            (unsigned int)(param_1[49] >> 21);
-
-    param_1[37] = 0x14000;
     param_1[36] = 0xE0000;
+    param_1[37] = 0x14000;
+    uVar4 = ((unsigned int)param_1[27] & 0x80000000U ? 8 : 0) | param_1[49] >> 21;
+
+
 
     uVar2 = DAT_004587D8[uVar4].flags;
     iVar3 = DAT_004587D8[uVar4].value;

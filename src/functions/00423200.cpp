@@ -1,78 +1,93 @@
-extern "C" {
-int __cdecl CLD_ComputeAngleEdges_0041cb80(void *, int *);
-extern unsigned char IMAGE_DOS_HEADER_00400000[];
-extern unsigned char DAT_004a286c[];
-extern unsigned char DAT_004a2820[];
-extern unsigned char DAT_004a2848[];
-extern unsigned char DAT_004a2868[];
-
-void __cdecl GEX_Target(const int *state, void *other)
-{
-    int offset;
-    int finalTop;
-    int finalBottom;
+typedef struct CLDEdges {
+    int points[6];
     int left;
     int right;
-    int cursor;
+    int top;
+    int bottom;
+} CLDEdges;
+typedef struct GXObject {
+    unsigned char _pad0[0x70];
+    int gob_size;               /* 0x70 */
+    unsigned char _pad74[0x78 - 0x74];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    unsigned char _pad80[0xc4 - 0x80];
+    int gob_angle;              /* 0xc4 */
+} GXObject;
+extern "C" {
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int INT_ARRAY_00456f40[];
+extern char DAT_004a286c[];
+extern char DAT_004a2820[];
+extern char DAT_004a2848[];
+extern char DAT_004a2868[];
+int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *gob, CLDEdges *edges);
+void __cdecl GEX_Target(GXObject *gob, GXObject *other)
+{
+    CLDEdges edges;
+    int x0;
+    int x1;
+    int y0;
+    int y1;
+    int x;
     int i;
-    int upper;
-    int edges[10];
-
-    finalBottom = CLD_ComputeAngleEdges_0041cb80(other, edges);
-    if (finalBottom == 0)
-        return;
-
-    offset = (int)((unsigned int)state[0x31] + 0x200000U);
-    right = state[0x1e];
-    if ((unsigned int)offset & 0x400000U) {
-        left = right - 0x180000;
-        right += 0x180000;
-        upper = state[0x1f];
-        cursor = upper - 0x100000;
-        upper += 0x100000;
-    } else {
-        left = right - 0x100000;
-        right += 0x100000;
-        upper = state[0x1f];
-        cursor = upper - 0x180000;
-        upper += 0x180000;
-    }
-
-    i = 0;
-    offset = ((const int *)(IMAGE_DOS_HEADER_00400000 + 0x56f40))[state[0x1c]];
-    finalBottom = cursor + offset - 0x200000;
-    finalTop = upper + offset - 0x200000;
-    cursor = left;
-
-    for (;;) {
-        if (edges[6] <= cursor && cursor <= edges[7]) {
-            if (edges[8] <= finalBottom && finalBottom <= edges[9])
-                DAT_004a286c[i] = 1;
-            if (edges[8] <= finalTop && finalTop <= edges[9])
-                DAT_004a2820[i] = 1;
+    int j;
+    if (CLD_ComputeAngleEdges_0041cb80(other, &edges)) {
+        if ((gob->gob_angle + 0x200000) & 0x400000) {
+            x0 = gob->gob_xpos - 0x180000;
+            x1 = gob->gob_xpos + 0x180000;
+            y0 = gob->gob_ypos - 0x100000;
+            y1 = gob->gob_ypos + 0x100000;
+        } else {
+            x0 = gob->gob_xpos - 0x100000;
+            x1 = gob->gob_xpos + 0x100000;
+            y0 = gob->gob_ypos - 0x180000;
+            y1 = gob->gob_ypos + 0x180000;
         }
-        if (cursor == right)
-            break;
-        ++i;
-        cursor += 0x100000;
-        if (right < cursor)
-            cursor = right;
-    }
-
-    i = 0;
-    for (;;) {
-        if (edges[8] <= finalBottom && finalBottom <= edges[9]) {
-            if (edges[6] <= left && left <= edges[7])
-                DAT_004a2848[i] = 1;
-            if (edges[6] <= right && right <= edges[7])
-                DAT_004a2868[i] = 1;
+        y0 = INT_ARRAY_00456f40[gob->gob_size] + y0 - 0x200000;
+        y1 = INT_ARRAY_00456f40[gob->gob_size] + y1 - 0x200000;
+        i = 0;
+        x = x0;
+        while (1) {
+            if (x >= edges.left && x <= edges.right) {
+                if (y0 >= edges.top && y0 <= edges.bottom)
+                    DAT_004a286c[i] = 1;
+                if (y1 >= edges.top && y1 <= edges.bottom)
+                    DAT_004a2820[i] = 1;
+            }
+            if (x == x1)
+                break;
+            i++;
+            x += 0x100000;
+            if (x > x1)
+                x = x1;
         }
-        if (finalBottom == finalTop)
-            break;
-        ++i;
-        finalBottom += 0x100000;
-        if (finalTop < finalBottom)
-            finalBottom = finalTop;
+        j = 0;
+        while (1) {
+            if (y0 >= edges.top && y0 <= edges.bottom) {
+                if (x0 >= edges.left && x0 <= edges.right)
+                    DAT_004a2848[j] = 1;
+                if (x1 >= edges.left && x1 <= edges.right)
+                    DAT_004a2868[j] = 1;
+            }
+            if (y0 == y1)
+                break;
+            j++;
+            y0 += 0x100000;
+            if (y0 > y1)
+                y0 = y1;
+        }
     }
 }
 }

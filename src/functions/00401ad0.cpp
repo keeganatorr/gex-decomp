@@ -1,17 +1,11 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00401AD0.cpp
-// Historical source SHA256: 0df5f741b544ba1eb86e15c21b454bda37211796589af6a4fbdd6f3d20ea5f94
 extern "C" {
-extern "C" { extern int DAT_00455C0C; }
-extern "C" { extern int DAT_004A2A0C; }
-extern "C" { extern int DAT_0049A054; }
-extern "C" { extern int DAT_0049A078[]; }
-
-extern "C" void __cdecl GEX_Target(int vfxId)
+extern int gVFXEnabled_00455c0c;
+extern int gDemoShowing_004a2a0c;
+extern volatile int gVFXToPlay_0049a054;
+extern int gVFXTable_0049a078[];
+void __cdecl GEX_Target(int vfx)
 {
-    if (DAT_00455C0C == 0) return;
-    if (DAT_004A2A0C != 0) return;
-    if (DAT_0049A054 != 0) return;
-    
-    DAT_0049A054 = DAT_0049A078[vfxId];
+    if (gVFXEnabled_00455c0c && !gDemoShowing_004a2a0c && !gVFXToPlay_0049a054)
+        gVFXToPlay_0049a054 = gVFXTable_0049a078[vfx];
 }
 }

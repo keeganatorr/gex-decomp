@@ -1,92 +1,131 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00440CB0.cpp
-// Historical source SHA256: 7200d35b2c53ef466a7bbf490b7363c860679cd50c6c0b565f90d62b996cba38
+typedef struct BgImage {
+    int w;
+    int h;
+    int ax;
+    int ay;
+    int unk10;
+    short present;              /* 0x14 */
+} BgImage;
+typedef struct BgPart {
+    unsigned int offset;
+    unsigned int flags;
+    BgImage *image;
+    int a;
+    int b;
+} BgPart;
+typedef struct BgFrame {
+    unsigned char _pad0[0x18];
+    BgPart **parts;             /* 0x18 */
+} BgFrame;
+typedef struct BgLoad {
+    BgFrame ***groups;
+} BgLoad;
+typedef struct BgObject {
+    unsigned int flags;
+    BgLoad *load;
+    int group;
+    int frame;
+} BgObject;
 extern "C" {
-extern "C" { extern short DAT_004A0270; }
-extern "C" { extern short DAT_004A0272; }
-
-extern "C" void __cdecl FUN_0043DC70(char*, short, short, unsigned int,
-                                         unsigned int, unsigned int, short, short);
-
-extern "C" void __cdecl GEX_Target(int *param_1, unsigned int param_2, unsigned int param_3)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+extern int decl_pad_9;
+extern int decl_pad_10;
+extern int decl_pad_11;
+extern int decl_pad_12;
+extern int decl_pad_13;
+extern int decl_pad_14;
+extern int decl_pad_15;
+extern int decl_pad_16;
+extern int decl_pad_17;
+extern int decl_pad_18;
+extern int decl_pad_19;
+extern int decl_pad_20;
+extern int decl_pad_21;
+extern int decl_pad_22;
+extern int decl_pad_23;
+extern int decl_pad_24;
+extern short DAT_004a0270_Background_Unk2;
+extern short DAT_004a0272_LEVEL_MAP;
+void __cdecl FUN_0043dc70_Graphics(BgImage *image, int x, int y, int a, int b, unsigned int flags, short c, short d);
+void __cdecl GEX_Target(BgObject *obj, int x, int y)
 {
-    int *piVar1;
-    int *puVar2;
-    void *Image;
-    unsigned int uVar3;
-    unsigned int uVar4;
-    int iVar5;
-    unsigned int uVar6;
-    int iVar7;
-    unsigned int uVar8;
-    int iVar9;
-    int iVar10;
-    int *local_10;
-
-    if (((param_1[3] | param_1[2]) & 0x80000000) == 0) {
-        piVar1 = *(int **)(*(int *)param_1[1] + param_1[2] * 4);
-        iVar9 = piVar1[param_1[3]];
-        if (iVar9 == 0) {
-            iVar9 = *piVar1;
-            param_1[3] = 0;
+    BgFrame *frame;
+    BgPart **p;
+    BgPart *part;
+    BgImage *image;
+    unsigned int flags;
+    unsigned int pflags;
+    unsigned int oflags;
+    int w;
+    int px;
+    int py;
+    int h;
+    int ox;
+    int oy;
+    if ((obj->group | obj->frame) & 0x80000000)
+        return;
+    frame = obj->load->groups[obj->group][obj->frame];
+    if (!frame) {
+        frame = obj->load->groups[obj->group][0];
+        obj->frame = 0;
+    }
+    p = frame->parts;
+    x &= 0xffff0000;
+    y &= 0xffff0000;
+    while ((part = *p++) != 0) {
+        image = part->image;
+        pflags = part->flags;
+        oflags = obj->flags;
+        w = image->w;
+        h = image->h;
+        if (!image->present)
+            continue;
+        oy = part->offset << 16;
+        ox = part->offset & 0xffff0000;
+        if (pflags & 0x80000000)
+            px = w - image->ax;
+        else
+            px = image->ax;
+        if (oflags & 0x80000000)
+            px = x - px - ox;
+        else
+            px += ox + x;
+        flags = oflags ^ pflags;
+        if (flags & 0x80000000) {
+            if (px < 0 || px - w >= 0x1400000)
+                continue;
+        } else {
+            if (w + px < 0 || px >= 0x1400000)
+                continue;
         }
-        local_10 = *(int **)(iVar9 + 0x18);
-        puVar2 = (int *)*local_10;
-        while (puVar2 != 0) {
-            local_10 = local_10 + 1;
-            Image = (void *)puVar2[2];
-            uVar3 = puVar2[1];
-            iVar9 = *(int *)Image;
-            uVar4 = *param_1;
-            iVar5 = *(int *)((char *)Image + 4);
-            if (*(int *)((char *)Image + 0x14) != 0) {
-                uVar6 = *puVar2;
-                if ((uVar3 & 0x80000000) == 0) {
-                    iVar10 = *(int *)((char *)Image + 8);
-                } else {
-                    iVar10 = iVar9 - *(int *)((char *)Image + 8);
-                }
-                if ((uVar4 & 0x80000000) == 0) {
-                    iVar10 = iVar10 + (uVar6 & 0xffff0000) + (param_2 & 0xffff0000);
-                } else {
-                    iVar10 = ((param_2 & 0xffff0000) - iVar10) - (uVar6 & 0xffff0000);
-                }
-                uVar8 = uVar4 ^ uVar3;
-                if ((uVar8 & 0x80000000) == 0) {
-                    iVar7 = iVar10;
-                    if (iVar9 + iVar10 >= 0) goto LAB_0x00440dc4;
-                } else if (iVar10 >= 0) {
-                    iVar7 = iVar10 - iVar9;
-LAB_0x00440dc4:
-                    if (iVar7 < 0x1400000) {
-                        if ((uVar3 & 0x40000000) == 0) {
-                            iVar9 = *(int *)((char *)Image + 0xc);
-                        } else {
-                            iVar9 = iVar5 - *(int *)((char *)Image + 0xc);
-                        }
-                        if ((uVar4 & 0x40000000) == 0) {
-                            iVar9 = iVar9 + uVar6 * 0x10000 + (param_3 & 0xffff0000);
-                        } else {
-                            iVar9 = ((param_3 & 0xffff0000) - iVar9) + (int)(-(int)(uVar6 * 0x10000));
-                        }
-                        if ((uVar8 & 0x40000000) == 0) {
-                            iVar7 = iVar9;
-                            if (iVar5 + iVar9 >= 0) goto LAB_0x00440e25;
-                        } else if (iVar9 >= 0) {
-                            iVar7 = iVar9 - iVar5;
-LAB_0x00440e25:
-                            if (iVar7 < 0xf00000) {
-                                FUN_0043DC70((char*)Image,
-                                             (short)((unsigned int)iVar10 >> 0x10),
-                                             (short)((unsigned int)iVar9 >> 0x10),
-                                             puVar2[3], puVar2[4], uVar8,
-                                             DAT_004A0270, DAT_004A0272);
-                            }
-                        }
-                    }
-                }
-            }
-            puVar2 = (int *)*local_10;
+        if (pflags & 0x40000000)
+            py = h - image->ay;
+        else
+            py = image->ay;
+        if (oflags & 0x40000000)
+            py = y - py - oy;
+        else
+            py += oy + y;
+        if (flags & 0x40000000) {
+            if (py < 0 || py - h >= 0xf00000)
+                continue;
+        } else {
+            if (h + py < 0 || py >= 0xf00000)
+                continue;
         }
+        FUN_0043dc70_Graphics(image, px >> 16, py >> 16, part->a, part->b, flags, DAT_004a0270_Background_Unk2, DAT_004a0272_LEVEL_MAP);
     }
 }
 }

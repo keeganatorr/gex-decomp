@@ -1,95 +1,150 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0043F7F0.cpp
-// Historical source SHA256: a65ee03296f9ca69bd32cd8651534228365bc85911ce74d758c0b4d9bac6bfb2
+typedef struct DR_MODE {
+    void *tag;
+    unsigned int code[2];
+} DR_MODE;
+typedef struct SPRT {
+    void *tag;
+    unsigned char r0, g0, b0, code;
+    short x0, y0;
+    unsigned char u0, v0;
+    unsigned short clut;
+    short w, h;
+} SPRT;
+typedef struct Glyph {
+    short u, v, w, h;
+} Glyph;
+typedef struct Font {
+    int graphics;
+    char *data;
+    unsigned char first;
+    unsigned char last;
+    char pad0a[6];
+    int spacing;
+} Font;
+typedef struct GXObject {
+    char pad0[0x78];
+    int xpos;
+    int ypos;
+    char pad80[0x174];
+    int stamp;
+    int lastX;
+    int lastY;
+} GXObject;
 extern "C" {
-extern "C" unsigned int __cdecl FUN_0043ECF0(void*);
-extern "C" void __cdecl FUN_00445350(int*, int, int, unsigned int);
-
-
-extern "C" void __cdecl GEX_Target(char* text)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern char *DAT_004a2adc_Tiles2;
+extern char *PTR_004a2ae4;
+extern char *DAT_004a2ae0_TilesBack1;
+extern void **DAT_004a2b18_Draw1;
+extern void **DAT_004a2b14_Draw4;
+extern Font *DAT_004a2af4;
+extern unsigned short DAT_0046a66c;
+extern short DAT_004a2b20;
+extern int DAT_0046a664;
+extern int DAT_0046a668;
+extern GXObject *DAT_00459414_Gex_Object_For_DrawText;
+extern int gTimer_004a2ac8;
+extern short DAT_004a2a96_CameraX_After;
+extern short M1_004a2a94;
+extern int gFontX_004a2af0;
+extern int gFontY_004a2aec;
+extern unsigned char DAT_004a2af8_InitUnk4;
+extern unsigned char DAT_004a2af9_InitUnk5;
+extern unsigned char DAT_004a2afa_InitUnk6;
+int __cdecl abs(int);
+unsigned short __cdecl FUN_0043ecf0_SelectTile_Clean1(int graphics);
+void __cdecl FUN_00445350_CalculateTileOffset_Clean1(DR_MODE *p, int dfe, int dtd, int tpage, void *tw);
+void __cdecl GEX_Target(char *s)
 {
-    int* cursor = *(int**)0x004A2AE4;
-    int* end = *(int**)0x004A2ADC;
-    int* base = *(int**)0x004A2AE0;
-    int* command;
-
-    if (end < cursor + 6) {
-        cursor = base;
-        *(int**)0x004A2AE4 = base + 6;
+    unsigned short clut;
+    DR_MODE *dm;
+    DR_MODE *src;
+    SPRT *sp;
+    SPRT *ssrc;
+    Glyph *ch;
+    GXObject *g;
+    short dx;
+    short dy;
+    int c;
+    int d;
+    if (DAT_004a2adc_Tiles2 < PTR_004a2ae4 + 0x18) {
+        PTR_004a2ae4 = DAT_004a2ae0_TilesBack1 + 0x18;
+        dm = (DR_MODE *)DAT_004a2ae0_TilesBack1;
     } else {
-        *(int**)0x004A2AE4 = cursor + 6;
+        PTR_004a2ae4 += 0x18;
+        dm = (DR_MODE *)(PTR_004a2ae4 - 0x18);
     }
-    command = cursor;
-
-    unsigned char* font = *(unsigned char**)0x004A2AF4;
-    unsigned int texture = FUN_0043ECF0(*(void**)font);
-    FUN_00445350(command, 0, 1, *(unsigned int*)0x0046A66C);
-    *(unsigned short*)0x004A2B20 = (unsigned short)*(unsigned int*)0x0046A66C;
-
-    int* lowTail = *(int**)0x004A2B18;
-    *lowTail = (int)command;
-    *(int**)0x004A2B18 = command;
-    int* high = command + 3;
-    high[0] = command[0]; high[1] = command[1]; high[2] = command[2];
-    int* highTail = *(int**)0x004A2B14;
-    *highTail = (int)high;
-    *(int**)0x004A2B14 = high;
-
-    (void)texture; 
-    short cameraX = 0, cameraY = 0;
-    int* player = *(int**)0x00459414;
-    if (player != 0 && player[0x7d] - *(int*)0x004A2AC8 == -1) {
-        int dx = player[0x1e] - player[0x7e];
-        if (dx < 0) dx += 0x10000;
-        cameraX = (short)(dx >> 0x11) - *(short*)0x004A2A96;
-        int dy = player[0x1f] - player[0x7f];
-        if (dy < 0) dy += 0x10000;
-        cameraY = (short)(dy >> 0x11) - *(short*)0x004A2A94;
-        int ax = cameraX < 0 ? -(int)cameraX : (int)cameraX;
-        int ay = cameraY < 0 ? -(int)cameraY : (int)cameraY;
-        if (ax + ay > 100) cameraX = cameraY = 0;
-    }
-
-    while (*text != 0) {
-        unsigned int c = (unsigned char)*text++;
-        if (c >= 'a' && c <= 'z') c -= 0x20;
-        unsigned int minChar = font[8];
-        unsigned int maxChar = font[9];
-        if (c < minChar || c > maxChar) continue;
-
-        unsigned char* glyph = *(unsigned char**)(font + 4) + (c - minChar) * 8 + 0x24;
-        cursor = *(int**)0x004A2AE4;
-        end = *(int**)0x004A2ADC;
-        if (end < cursor + 10) {
-            cursor = base;
-            *(int**)0x004A2AE4 = base + 10;
-        } else {
-            *(int**)0x004A2AE4 = cursor + 10;
+    clut = FUN_0043ecf0_SelectTile_Clean1(DAT_004a2af4->graphics);
+    FUN_00445350_CalculateTileOffset_Clean1(dm, 0, 1, DAT_0046a66c, 0);
+    DAT_004a2b20 = DAT_0046a66c;
+    *DAT_004a2b18_Draw1 = dm;
+    DAT_004a2b18_Draw1 = (void **)dm;
+    dm++;
+    *dm = dm[-1];
+    *DAT_004a2b14_Draw4 = dm;
+    DAT_004a2b14_Draw4 = (void **)dm;
+    g = DAT_00459414_Gex_Object_For_DrawText;
+    if (g && g->stamp - gTimer_004a2ac8 == -1) {
+        d = g->xpos - g->lastX;
+        if (d < 0)
+            d += 0x10000;
+        dx = (d >> 17) - DAT_004a2a96_CameraX_After;
+        d = DAT_00459414_Gex_Object_For_DrawText->ypos - DAT_00459414_Gex_Object_For_DrawText->lastY;
+        if (d < 0)
+            d += 0x10000;
+        dy = (d >> 17) - M1_004a2a94;
+        if (abs(dy) + abs(dx) > 100) {
+            dx = 0;
+            dy = 0;
         }
-        command = cursor;
-        *(unsigned char*)((char*)command + 7) = 0x64;
-        *(short*)((char*)command + 8) = (short)*(int*)0x004A2AF0;
-        *(short*)((char*)command + 0x0a) = (short)*(int*)0x004A2AEC;
-        *(short*)((char*)command + 0x10) = *(short*)(glyph + 4);
-        *(short*)((char*)command + 0x12) = *(short*)(glyph + 6);
-        *(unsigned char*)((char*)command + 4) = *(unsigned char*)0x004A2AFA;
-        *(unsigned char*)((char*)command + 5) = *(unsigned char*)0x004A2AF9;
-        *(unsigned char*)((char*)command + 6) = *(unsigned char*)0x004A2AF8;
-        *(unsigned short*)((char*)command + 0x0e) = (unsigned short)texture;
-        *(unsigned char*)((char*)command + 0x0c) = (unsigned char)(*(short*)(glyph + 0) + *(unsigned char*)0x0046A664);
-        *(unsigned char*)((char*)command + 0x0d) = (unsigned char)(*(short*)(glyph + 2) + *(unsigned char*)0x0046A668);
-
-        int* duplicate = (int*)((char*)command + 0x14);
-        for (int i = 0; i < 5; ++i) duplicate[i] = command[i];
-        *(short*)((char*)duplicate + 8) -= cameraX;
-        *(short*)((char*)duplicate + 10) -= cameraY;
-
-        lowTail = *(int**)0x004A2B18;
-        *lowTail = (int)command;
-        *(int**)0x004A2B18 = command;
-        highTail = *(int**)0x004A2B14;
-        *highTail = (int)duplicate;
-        *(int**)0x004A2B14 = duplicate;
-        *(int*)0x004A2AF0 += *(short*)(glyph + 4) + *(int*)(font + 0x10);
+    } else {
+        dy = 0;
+        dx = 0;
+    }
+    while (*s) {
+        c = *s++;
+        if (c >= 'a' && c <= 'z')
+            c -= 0x20;
+        if ((unsigned)c >= DAT_004a2af4->first && (unsigned)c <= DAT_004a2af4->last) {
+            ch = (Glyph *)(DAT_004a2af4->data + 0x24) + (c - DAT_004a2af4->first);
+            if (DAT_004a2adc_Tiles2 < PTR_004a2ae4 + 0x28) {
+                PTR_004a2ae4 = DAT_004a2ae0_TilesBack1 + 0x28;
+                sp = (SPRT *)DAT_004a2ae0_TilesBack1;
+            } else {
+                PTR_004a2ae4 += 0x28;
+                sp = (SPRT *)(PTR_004a2ae4 - 0x28);
+            }
+            sp->code = 0x64;
+            sp->x0 = gFontX_004a2af0;
+            sp->y0 = gFontY_004a2aec;
+            sp->w = ch->w;
+            sp->h = ch->h;
+            sp->r0 = DAT_004a2afa_InitUnk6;
+            sp->g0 = DAT_004a2af9_InitUnk5;
+            sp->b0 = DAT_004a2af8_InitUnk4;
+            sp->u0 = ch->u + DAT_0046a664;
+            sp->v0 = ch->v + DAT_0046a668;
+            sp->clut = clut;
+            *DAT_004a2b18_Draw1 = sp;
+            DAT_004a2b18_Draw1 = (void **)sp;
+            sp++;
+            *sp = sp[-1];
+            sp->x0 -= dx;
+            sp->y0 -= dy;
+            *DAT_004a2b14_Draw4 = sp;
+            DAT_004a2b14_Draw4 = (void **)sp;
+            gFontX_004a2af0 += DAT_004a2af4->spacing + ch->w;
+        }
     }
 }
 }

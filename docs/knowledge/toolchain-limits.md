@@ -49,12 +49,15 @@ original compiler did not treat `_exit` as noreturn.
 `call _exit` with no epilogue; CL 10.00 has no noreturn knowledge and rejects
 `__declspec(noreturn)`, so those two stay toolchain-limited.
 
-## high-byte bit test (4 unmatched, 0 exact)
+## high-byte bit test: not a toolchain limit (solved 2026-09-27)
 
-`mov ah, byte ptr [esi + 0xe1]; test ah, 8` for `flags2 & 0x800`. CL 10.00
-loads the whole dword (`mov eax, [esi + 0xe0]; test ah, 8`) for masks, byte
-casts and bitfields alike. The three `event_*` handlers (00438e40, 00438ea0,
-00438f00) are otherwise exact.
+`mov ah, byte ptr [esi + 0xe1]; test ah, 8` for bit 11 of `flags2`. A mask
+(`flags2 & 0x800`), a bitfield, a `(char *)` byte access or a `short` view
+all load the whole dword or put the byte in `al`. The source casts the
+*shifted* value: `(unsigned char)(gob->flags2 >> 8) & 8`. CL 10.00 then loads
+only byte 1, and into `ah`. The three `event_*` handlers (00438e40, 00438ea0,
+00438f00) became exact from it. Same lesson as the narrow mask: an
+arithmetic spelling that fails says nothing about a cast spelling.
 
 ## shift-pair fold: partly a source shape
 
@@ -66,6 +69,25 @@ a signed 1-bit term, `(int)(bits << 31) >> 31`, which still folds with the
 index scale into `sar 0x1d`. 0043e2c0 (colour tint) keeps its shifts with the
 cast, but CL 10.00 reassociates the three-term sum and folds the last term's
 shift into an `lea` scale. Both also need bindings (`0x457c64`, `0x460048`).
+
+## A load hoisted above a conditional branch (2, candidate)
+
+In 00406fe0 (InitWindowVars) and 00440a30 the original loads a global that
+only the fall-through block uses *before* the `cmp`/`test` and `jcc` that
+guard that block (`mov ecx, [prev]; mov eax, [sel]; cmp eax, 1; jne`). CL
+10.00 loads it inside the block, and no statement order, local copy or
+condition spelling tried so far moves it. 00406fe0 differs in exactly these
+three loads; 00440a30 has other open differences too. Not yet proved a
+toolchain limit — the last two "limits" were source shapes — but a candidate
+for the CL 10.20 experiment.
+
+## A distributive fold the original did not make (1, candidate)
+
+0043d630 (ob218DoIt) computes `(amp * t << 8) - (amp << 15)` as two products
+and a `sub`. CL 10.00 always factors it to `(t - 0x80) * amp << 8`: ten
+spellings (separate statements, `*256` / `*0x8000`, a ternary operand, a
+compound `-=`) all fold. Everything else in the function matches, including
+the sine macro. Candidate for the CL 10.20 experiment.
 
 ## Unplaced out-of-line blocks (1)
 

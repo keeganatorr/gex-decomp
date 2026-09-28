@@ -1,65 +1,87 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00418550.cpp
-// Historical source SHA256: cab604aa78eb81603195d598f59dafd69377003605a55580e6828b471deedeba
+typedef struct WallCollisionStruct {
+    short unk0[3];
+    unsigned short attribute;  /* 0x6 */
+    short unk8;
+    unsigned short switched;   /* 0xa: tile to show when the switch flips */
+    int unkC;
+} WallCollisionStruct;
+typedef struct TileBlock { int unk0; int unk4; unsigned short cells[64]; } TileBlock;
+typedef struct GexTileStruct {
+    int unk0[3];
+    int xTile;               /* 0xc */
+    int yTile;               /* 0x10 */
+    int unk14[6];
+    TileBlock *blocks[1];    /* 0x2c */
+} GexTileStruct;
+typedef struct M1Level {
+    int unk0;
+    GexTileStruct *map;                /* 0x4 */
+    int unk8[3];
+    WallCollisionStruct **tileData;    /* 0x14 */
+} M1Level;
+typedef struct TileAttribute { unsigned int flags; int unk[7]; } TileAttribute;
 extern "C" {
-extern "C" { extern int FUN_0049FB90; }
-extern "C" { extern unsigned int FUN_004A27BC; }
-extern "C" { extern unsigned int FUN_004A27CC; }
-extern "C" { extern unsigned int FUN_004A27C8; }
-extern "C" { extern int FUN_004A27C0; }
-extern "C" { extern int FUN_004A27C4; }
-extern "C" { extern int FUN_004A27D0; }
-extern "C" { extern int FUN_004A2990; }
-extern "C" { extern unsigned int FUN_0045B9A0; }
-extern "C" void __cdecl FUN_00405350(const char*, int);
-
-extern "C" unsigned int __cdecl GEX_Target(unsigned int param_1) {
-    unsigned int uVar4;
-    int bVar3;
-    int iVar5;
-    int iVar6;
-    int iVar8;
-    int* piVar2;
-    int** ppiVar7;
-    unsigned short* puVar9;
-
-    uVar4 = FUN_0049FB90;
-    if (FUN_0049FB90 == 1) {
-        bVar3 = 1;
-        FUN_004A27BC = (unsigned int)(FUN_004A27BC == 0);
-        FUN_004A27C0 = FUN_004A27C0 + 1;
-    } else if (FUN_0049FB90 == 2) {
-        bVar3 = 1;
-        FUN_004A27CC = (unsigned int)(FUN_004A27CC == 0);
-        FUN_004A27C4 = FUN_004A27C4 + 1;
-    } else if (FUN_0049FB90 == 3) {
-        bVar3 = 1;
-        FUN_004A27C8 = (unsigned int)(FUN_004A27C8 == 0);
-        FUN_004A27D0 = FUN_004A27D0 + 1;
-    } else {
-        bVar3 = 0;
-        FUN_00405350((const char*)0x458e4c, FUN_0049FB90);
+extern unsigned int SCRIPT_WorkRegister_0049fb90;
+extern int gSwitch1_004a27bc;
+extern int gSwitch1NumToggles_004a27c0;
+extern int gSwitch2_004a27cc;
+extern int gSwitch2NumToggles_004a27c4;
+extern int gSwitch3_004a27c8;
+extern int gSwitch3NumToggles_004a27d0;
+extern M1Level *M1_CurrentLevel_004a2990;
+extern TileAttribute DAT_0045B9A0[];
+extern char s_ERROR_Bad_Switch_Number_ld_00458e4c[];
+void __cdecl assertfail_00405350(const char *format, ...);
+unsigned char *__cdecl GEX_Target(unsigned char *script)
+{
+    unsigned int number;
+    int valid;
+    int count;
+    TileBlock **blocks;
+    TileBlock *block;
+    int i;
+    unsigned short *cell;
+    WallCollisionStruct *wall;
+    unsigned int index;
+    number = SCRIPT_WorkRegister_0049fb90;
+    switch (number) {
+    case 1:
+        valid = 1;
+        gSwitch1_004a27bc = !gSwitch1_004a27bc;
+        gSwitch1NumToggles_004a27c0++;
+        break;
+    case 2:
+        valid = 1;
+        gSwitch2_004a27cc = !gSwitch2_004a27cc;
+        gSwitch2NumToggles_004a27c4++;
+        break;
+    case 3:
+        valid = 1;
+        gSwitch3_004a27c8 = !gSwitch3_004a27c8;
+        gSwitch3NumToggles_004a27d0++;
+        break;
+    default:
+        valid = 0;
+        assertfail_00405350(s_ERROR_Bad_Switch_Number_ld_00458e4c, number);
+        break;
     }
-    if (bVar3) {
-        int* pLVar1 = *(int**)(FUN_004A2990 + 4);
-        ppiVar7 = (int**)(pLVar1 + 12);
-        for (iVar5 = pLVar1[12] * pLVar1[16]; iVar5 != 0; iVar5 = iVar5 + -1) {
-            piVar2 = *ppiVar7;
-            ppiVar7 = ppiVar7 + 1;
-            if (piVar2 != (int*)0x0) {
-                puVar9 = (unsigned short*)(piVar2 + 2);
-                iVar6 = 0x40;
-                do {
-                    iVar8 = ((int)(*puVar9 & 0x1f) * 0x10) +
-                            *(int*)(FUN_004A2990 + 0x14 + (((int)(*puVar9 & 0xffffffe7) >> 3) * 4));
-                    if ((*(unsigned int*)((int)&FUN_0045B9A0 + (unsigned int)*(unsigned short*)(iVar8 + 6) * 0x20) & 0x300000) >> 0x14 == uVar4) {
-                        *puVar9 = *(unsigned short*)(iVar8 + 10);
-                    }
-                    puVar9 = puVar9 + 1;
-                    iVar6 = iVar6 + -1;
-                } while (iVar6 != 0);
+    if (valid) {
+        count = M1_CurrentLevel_004a2990->map->xTile * M1_CurrentLevel_004a2990->map->yTile;
+        blocks = M1_CurrentLevel_004a2990->map->blocks;
+        for (; count; count--) {
+            block = *blocks++;
+            if (block) {
+                cell = block->cells;
+                for (i = 64; i; i--) {
+                    index = *cell;
+                    wall = M1_CurrentLevel_004a2990->tileData[index >> 5] + (index & 0x1f);
+                    if ((DAT_0045B9A0[wall->attribute].flags & 0x300000) >> 20 == number)
+                        *cell = wall->switched;
+                    cell++;
+                }
             }
         }
     }
-    return param_1;
+    return script;
 }
 }

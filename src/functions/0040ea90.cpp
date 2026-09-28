@@ -1,54 +1,45 @@
-struct DrawState {
+struct GXObject {
     unsigned char unknown00[0x78];
-    int x;
-    int y;
+    int gob_xpos;
+    int gob_ypos;
     unsigned char unknown80[0x1c];
-    char* text;
+    char *gob_work1;
 };
 
 extern "C" {
-void __cdecl FUN_0040C340(void**);
-extern char* DAT_00487ff0;
-extern char* DAT_00488000;
-extern char* DAT_0048a010;
-extern char* DAT_0048a018;
-extern char* DAT_0048a01c;
-extern char* DAT_00487ffc;
-}
+void __cdecl MainMenuButtonDraw_0040c340(GXObject *gob);
+extern char *STRING_Up_Down_00487ff0;
+extern char *STRING_Enter_Password_00488000;
+extern char *STRING_Enter_0048a010;
+extern char *STRING_Use_Password_0048a018;
+extern char *STRING_Esc_0048a01c;
+extern char *STRING_Cancel_00487ffc;
 
-static inline char* EnterPasswordText() {
-    return DAT_00488000;
+void __cdecl GEX_Target(GXObject *gob)
+{
+    gob->gob_work1 = STRING_Up_Down_00487ff0;
+    gob->gob_xpos = 0x1e0000;
+    gob->gob_ypos = 0x780000;
+    MainMenuButtonDraw_0040c340(gob);
+    gob->gob_work1 = STRING_Enter_Password_00488000;
+    gob->gob_xpos = 0x820000;
+    gob->gob_ypos = 0x780000;
+    MainMenuButtonDraw_0040c340(gob);
+    gob->gob_work1 = STRING_Enter_0048a010;
+    gob->gob_xpos = 0x1e0000;
+    gob->gob_ypos = 0x910000;
+    MainMenuButtonDraw_0040c340(gob);
+    gob->gob_work1 = STRING_Use_Password_0048a018;
+    gob->gob_xpos = 0x820000;
+    gob->gob_ypos = 0x910000;
+    MainMenuButtonDraw_0040c340(gob);
+    gob->gob_work1 = STRING_Esc_0048a01c;
+    gob->gob_xpos = 0x1e0000;
+    gob->gob_ypos = 0xaa0000;
+    MainMenuButtonDraw_0040c340(gob);
+    gob->gob_work1 = STRING_Cancel_00487ffc;
+    gob->gob_xpos = 0x820000;
+    gob->gob_ypos = 0xaa0000;
+    MainMenuButtonDraw_0040c340(gob);
 }
-
-extern "C" void __cdecl GEX_Target(DrawState* p) {
-    char* text = DAT_00487ff0;
-    p->x = 0x1e0000;
-    p->y = 0x780000;
-    p->text = text;
-    FUN_0040C340((void**)p);
-    text = EnterPasswordText();
-    p->x = 0x820000;
-    p->text = text;
-    p->y = 0x780000;
-    FUN_0040C340((void**)p);
-    text = DAT_0048a010;
-    p->x = 0x1e0000;
-    p->text = text;
-    p->y = 0x910000;
-    FUN_0040C340((void**)p);
-    text = DAT_0048a018;
-    p->x = 0x820000;
-    p->text = text;
-    p->y = 0x910000;
-    FUN_0040C340((void**)p);
-    text = DAT_0048a01c;
-    p->x = 0x1e0000;
-    p->text = text;
-    p->y = 0xaa0000;
-    FUN_0040C340((void**)p);
-    text = DAT_00487ffc;
-    p->x = 0x820000;
-    p->text = text;
-    p->y = 0xaa0000;
-    FUN_0040C340((void**)p);
 }

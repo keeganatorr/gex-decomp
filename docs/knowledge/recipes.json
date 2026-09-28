@@ -851,6 +851,104 @@
      "file": "docs/knowledge/examples/00409350-memset-register-zero-fill-differs.cpp"
     }
    ]
+  },
+  {
+   "id": "high-byte-cast",
+   "title": "`mov ah, byte ptr [reg + off + 1]; test ah, k` is `(unsigned char)(x >> 8) & k`",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:test",
+    "shape:high-byte"
+   ],
+   "symptom": "Target loads one byte of a dword field straight into AH and tests it; the candidate loads the dword (`mov eax, [reg + off]; test ah, k`) or puts the byte in AL.",
+   "action": "Cast the shifted field: `(unsigned char)(gob->flags2 >> 8) & 8` for bit 11. A mask, a bitfield, a `(char *)` byte access or a `short` view of the field all compile differently.",
+   "evidence": [
+    "00438e40",
+    "00438ea0",
+    "00438f00"
+   ],
+   "checks": [
+    {
+     "address": "00438e40",
+     "expect": "exact",
+     "file": "docs/knowledge/examples/00438e40-high-byte-cast-exact.cpp"
+    },
+    {
+     "address": "00438e40",
+     "expect": "differs",
+     "file": "docs/knowledge/examples/00438e40-high-byte-cast-differs.cpp",
+     "why": "flags2 & 0x800 loads the whole dword"
+    }
+   ],
+   "caveats": [
+    "Listed as a toolchain limit until 2026-09-27; see toolchain-limits.md."
+   ]
+  },
+  {
+   "id": "psx-setlen-bitfield",
+   "title": "`mov edx, ecx; and edx, ecx` into a just-written global is PSX `setlen(p, 0)` through a tag pointer",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:and",
+    "shape:immediate"
+   ],
+   "symptom": "A global is stored with a register holding 0xffffff, then stored again with that register ANDed with itself; the candidate folds the AND away (direct `&=`) or reloads the global (store through the pointer).",
+   "action": "The code is a port of PSX libgpu ordering-table macros. Declare `struct Tag { unsigned addr : 24; unsigned len : 8; };` and clear the length through the list pointer that was just assigned: `((struct Tag *)DAT_0046bc6c)->len = 0;` after the direct stores of 0xffffff (termPrim).",
+   "evidence": [
+    "0043fb40"
+   ],
+   "checks": [
+    {
+     "address": "0043fb40",
+     "expect": "exact",
+     "file": "docs/knowledge/examples/0043fb40-psx-setlen-bitfield-exact.cpp"
+    },
+    {
+     "address": "0043fb40",
+     "expect": "differs",
+     "file": "docs/knowledge/examples/0043fb40-psx-setlen-bitfield-differs.cpp",
+     "why": "a direct &= 0xffffff is constant-folded and the store dropped"
+    }
+   ],
+   "caveats": [
+    "Related to store-through-global-pointer (0043daf0), which is the same macro family written as an int &=."
+   ]
+  },
+  {
+   "id": "if-else-constant-store",
+   "title": "`mov eax, [g]; mov [m], 1; test; jne; mov [m], 0` is `if (g) m = 1; else m = 0;`",
+   "status": "verifier-proved",
+   "doc": "docs/knowledge/source-shapes.md",
+   "triggers": [
+    "op:mov",
+    "shape:immediate",
+    "shape:branch"
+   ],
+   "symptom": "The original loads the condition, stores the then-constant to memory before the test, and overwrites with the else-constant on the fall-through; the candidate loads the condition after the first store.",
+   "action": "Write both arms: `if (g) m = 1; else m = 0;`. CL 10.00 emits the then-store ahead of the test with the condition load first. Writing `m = 1; if (!g) m = 0;` keeps the store first and the load after it. In an if/else-if chain, give each arm its own if/else; the identical stores are cross-jumped (`test; je zero; jmp one`).",
+   "evidence": [
+    "0040c4d0",
+    "0040c210",
+    "0042b180"
+   ],
+   "checks": [
+    {
+     "address": "0040c4d0",
+     "expect": "exact",
+     "file": "docs/knowledge/examples/0040c4d0-if-else-constant-store-exact.cpp"
+    },
+    {
+     "address": "0040c4d0",
+     "expect": "differs",
+     "file": "docs/knowledge/examples/0040c4d0-if-else-constant-store-differs.cpp",
+     "why": "m = 1; if (!g) m = 0; loads the global after the first store"
+    }
+   ],
+   "caveats": [
+    "Only for a memory destination; a register result uses setcc or sbb instead."
+   ]
   }
  ]
 }

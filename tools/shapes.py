@@ -88,6 +88,29 @@ def rewrites(src):
     for m in pat.finditer(src):
         ind, x, op, e = m.groups()
         yield 'explicit-compound', src[:m.start()] + f'{ind}{x} {op}= {e};' + src[m.end():]
+    # store then conditional overwrite <-> if/else: CL emits `if (c) m = A;
+    # else m = B;` as a store of A before the test with the condition loaded
+    # first, which `m = B; if (!c) m = A;` does not (0040c4d0, 004327f0)
+    pat = re.compile(r'(?m)^( +)([^\n;=]+?) = ([^\n;]+);\n\1if \(([^\n]+)\)\n\1    \2 = ([^\n;]+);\n')
+    for m in pat.finditer(src):
+        ind, lhs, a, c, b = m.groups()
+        yield 'store-if-else', src[:m.start()] + f'{ind}if ({c})\n{ind}    {lhs} = {b};\n{ind}else\n{ind}    {lhs} = {a};\n' + src[m.end():]
+        neg = c[1:] if c.startswith('!') and '&&' not in c and '||' not in c else f'!({c})'
+        yield 'store-if-else-neg', src[:m.start()] + f'{ind}if ({neg})\n{ind}    {lhs} = {a};\n{ind}else\n{ind}    {lhs} = {b};\n' + src[m.end():]
+    # single-bit extraction: `(x & 0x200) >> 9` and `(x & 0x200) != 0` both
+    # compile to and/shr, but the boolean is a different tree and changes the
+    # operand order of a later compare (00421740)
+    pat = re.compile(r'\((%s) & (0x[0-9a-fA-F]+)\) >> (\d+)' % IDENT)
+    for m in pat.finditer(src):
+        x, k, n = m.groups()
+        if num(k) == 1 << int(n):
+            yield 'bit-shift-bool', src[:m.start()] + f'({x} & {k}) != 0' + src[m.end():]
+    pat = re.compile(r'\((%s) & (0x[0-9a-fA-F]+)\) != 0' % IDENT)
+    for m in pat.finditer(src):
+        x, k = m.groups()
+        v = num(k)
+        if v and v & (v - 1) == 0:
+            yield 'bit-bool-shift', src[:m.start()] + f'({x} & {k}) >> {v.bit_length() - 1}' + src[m.end():]
     # commutative operands: with calls on both sides, CL evaluates them in an
     # order that follows the spelling (and differs between front ends)
     for desc, cand in commutative_swaps(src):

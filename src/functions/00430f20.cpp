@@ -1,89 +1,107 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00430F20.cpp
-// Historical source SHA256: 303f895a4427bf0dc5a1ed235599af200c037b6bf9367645aa2784d7c380c292
+typedef struct GXObject GXObject;
+struct GXObject {
+    char pad0[0xc];
+    void *loadData;
+    char pad10[0x40];
+    int group;
+    int index;
+    char pad58[8];
+    void *drawFunc;
+    char pad64[8];
+    unsigned int flags;
+    int state;
+    char pad74[4];
+    int xpos;
+    int ypos;
+    int xVel;
+    char pad84[4];
+    int xAccl;
+    int yVel;
+    int maxyVel;
+    int yAccl;
+    int work0;
+    char pad9c[0xc];
+    int work4;
+    int work5;
+    char padb0[0x14];
+    int angle;
+    char padc8[0x18];
+    unsigned int flags2;
+};
+
 extern "C" {
-extern "C" { extern int DAT_004A2AD4; }
-extern "C" int __cdecl FUN_004195D0(int, int, int, int);
-extern "C" void __cdecl FUN_00419840(void**);
-extern "C" void __cdecl FUN_00419BE0(void**, void**);
-extern "C" int __cdecl FUN_00419C00(void**, int, int, int*, int*);
-extern "C" void __cdecl FUN_004339C0(void**);
-extern "C" int __cdecl FUN_00449E10(void);
-extern "C" void __cdecl FUN_004322A0(int);
+int __cdecl rand(void);
+extern void *GEX_pGlob_004a2ad4;
+int __cdecl GOB_GetHotSpot_00419c00(GXObject *, int, int, int *, int *);
+GXObject *__cdecl GOB_AddObject_004195d0(int, int, int, void *);
+void __cdecl GOB_PutObjectInfrontOfObject_00419be0(GXObject *, GXObject *);
+void __cdecl GOB_RemoveMapObject_00419840(GXObject *);
+void __cdecl DefDoIt_004339c0(GXObject *);
+void __cdecl FUN_004322a0(GXObject *);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+void __cdecl GEX_Target(GXObject *g)
 {
-    int iVar2, iVar4;
-    void** ppGVar3;
-    int local_c, local_8;
-    unsigned int local_4;
-    unsigned int uVar1, uVar6;
-
-    if (param_1[0x26] == (void*)0x200) {
-        uVar1 = FUN_00449E10();
-        uVar6 = (int)uVar1 >> 0x1f;
-        param_1[0x38] = (void*)((unsigned int)param_1[0x38] | 0x40);
-        param_1[0x20] = (void*)((int)param_1[0x20] + (int)param_1[0x22] + -0xc - 4);
-        param_1[0x23] = (void*)((int)param_1[0x23] + (int)param_1[0x25] + -0xc - 4);
-        param_1[0x1e] = (void*)((int)param_1[0x20] + (int)param_1[0x1e] + -0xc - 4);
-        param_1[0x1f] = (void*)((int)param_1[0x23] + (int)param_1[0x1f] + -0xc - 4);
-        param_1[0x31] = (void*)(((int)param_1[0x31] + (int)param_1[0x2b] + -0xc) & 0xff0000);
-
-        iVar2 = FUN_00419C00(param_1, 0, ((uVar1 ^ uVar6) - uVar6 & 3 ^ uVar6) - uVar6, &local_8, &local_c);
-        if (iVar2 != 0) {
-            local_8 = (int)param_1[0x1e] + local_8 + -0x1c;
-            local_c = (int)param_1[0x1f] + local_c + -0x1c;
-            ppGVar3 = (void**)FUN_004195D0(0x5c, local_8, local_c, DAT_004A2AD4);
-            if (ppGVar3 != 0) {
-                ppGVar3[0x1b] = (void*)((unsigned int)ppGVar3[0x1b] | 0x8000);
-                ppGVar3[0x24] = (void*)0x7fff0000;
-                ppGVar3[0x23] = 0;
-                ppGVar3[0x25] = (void*)0xa000;
-                ppGVar3[0x14] = (void*)0x1b;
-                ppGVar3[0x26] = (void*)0x3;
-                ppGVar3[0x1c] = (void*)0x30;
-                ppGVar3[0x38] = (void*)((unsigned int)ppGVar3[0x38] | 0x40);
-                FUN_00419BE0(ppGVar3, param_1);
+    int hy;
+    int hx;
+    int r;
+    int i;
+    int k;
+    GXObject *o;
+    if (g->work0 == 0x200) {
+        k = rand() % 4;
+        g->flags2 |= 0x40;
+        g->xVel += g->xAccl;
+        g->yVel += g->yAccl;
+        g->xpos += g->xVel;
+        g->ypos += g->yVel;
+        g->angle = (g->work5 + g->angle) & 0xff0000;
+        if (GOB_GetHotSpot_00419c00(g, 0, k, &hx, &hy)) {
+            hx += g->xpos;
+            hy += g->ypos;
+            o = GOB_AddObject_004195d0(0x5c, hx, hy, GEX_pGlob_004a2ad4);
+            if (o) {
+                o->flags |= 0x8000;
+                o->maxyVel = 0x7fff0000;
+                o->yVel = 0;
+                o->yAccl = 0xa000;
+                o->group = 0x1b;
+                o->work0 = 3;
+                o->state = 0x30;
+                o->flags2 |= 0x40;
+                GOB_PutObjectInfrontOfObject_00419be0(o, g);
             }
         }
-        if (((0x2a00000 < (int)param_1[0x1f]) || (0x5800000 < (int)param_1[0x1e])) ||
-           ((int)param_1[0x1e] < 0xe00000)) {
-            FUN_00419840(param_1);
-        }
+        if (g->ypos > 0x2a00000 || g->xpos > 0x5800000 || g->xpos < 0xe00000)
+            GOB_RemoveMapObject_00419840(g);
     } else {
-        param_1[0x38] = (void*)((unsigned int)param_1[0x38] | 0x40);
-        FUN_004339C0(param_1);
-        if (param_1[0x2a] != 0) {
-            param_1[0x2a] = 0;
-            iVar2 = 0;
-            do {
-                iVar4 = FUN_00419C00(param_1, 0, iVar2, &local_8, &local_c);
-                if (iVar4 != 0) {
-                    local_8 = (int)param_1[0x1e] + local_8 + -0x1c;
-                    local_c = (int)param_1[0x1f] + local_c + -0x1c;
-                    ppGVar3 = (void**)FUN_004195D0(0xe8, local_8, local_c, (int)param_1[3]);
-                    if (ppGVar3 != 0) {
-                        local_4 = FUN_00449E10();
-                        uVar1 = (int)local_4 >> 0x1f;
-                        ppGVar3[0x14] = (void*)0x3;
-                        ppGVar3[0x15] = (void*)(iVar2 + 1);
-                        ppGVar3[0x26] = (void*)0x200;
-                        if (((local_4 ^ uVar1) - uVar1 & 1 ^ uVar1) == uVar1) {
-                            ppGVar3[0x2b] = (void*)((8 - (((local_4 ^ uVar1) - uVar1 & 0xf ^ uVar1) - uVar1)) * 0x10000);
-                        } else {
-                            ppGVar3[0x2b] = (void*)(((((local_4 ^ uVar1) - uVar1 & 0xf ^ uVar1) - uVar1) + 8) * 0x10000);
-                        }
-                        ppGVar3[0x25] = (void*)0x10000;
-                        uVar1 = (local_c - (int)param_1[0x1f]) + 0x140000;
-                        ppGVar3[0x23] = (void*)(((int)local_4 % ((int)uVar1 >> 0x11)) * 0x10000 + ((int)(uVar1 & 0xfffe0001) >> 1));
-                        ppGVar3[0x22] = 0;
-                        ppGVar3[0x20] = (void*)(((int)local_4 % (local_8 - (int)param_1[0x1e] >> 0x12)) * 0x10000 + ((int)(local_8 - (int)param_1[0x1e] & 0xfffc0003U) >> 2));
-                        ppGVar3[0x18] = (void*)&FUN_004322A0;
-                        ppGVar3[0x38] = (void*)((unsigned int)ppGVar3[0x38] | 0x40);
-                        FUN_00419BE0(ppGVar3, param_1);
+        g->flags2 |= 0x40;
+        DefDoIt_004339c0(g);
+        if (g->work4) {
+            g->work4 = 0;
+            for (i = 0; i < 6; i++) {
+                if (GOB_GetHotSpot_00419c00(g, 0, i, &hx, &hy)) {
+                    hx += g->xpos;
+                    hy += g->ypos;
+                    o = GOB_AddObject_004195d0(0xe8, hx, hy, g->loadData);
+                    if (o) {
+                        r = rand();
+                        o->group = 3;
+                        o->index = i + 1;
+                        o->work0 = 0x200;
+                        if (r % 2)
+                            o->work5 = (r % 16 + 8) << 16;
+                        else
+                            o->work5 = (8 - r % 16) << 16;
+                        o->yAccl = 0x10000;
+                        o->yVel = (r % ((hy - g->ypos + 0x140000) >> 17) << 16) + (((hy - g->ypos + 0x140000) >> 17) << 16);
+                        o->xAccl = 0;
+                        o->xVel = (r % ((hx - g->xpos) >> 18) << 16) + (((hx - g->xpos) >> 18) << 16);
+                        o->drawFunc = FUN_004322a0;
+                        o->flags2 |= 0x40;
+                        GOB_PutObjectInfrontOfObject_00419be0(o, g);
                     }
                 }
-                iVar2 = iVar2 + 1;
-            } while (iVar2 < 6);
+            }
         }
     }
 }

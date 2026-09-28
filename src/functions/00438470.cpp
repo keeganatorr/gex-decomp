@@ -1,59 +1,141 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_00438470.cpp
-// Historical source SHA256: 589803986dea7218b028197abbb6d1df8b899afb09a55febcedfe1a3a1b05ce5
+typedef struct GXObject {
+    unsigned char pad0[0x6c];
+    unsigned int gob_flags;     /* 0x6c */
+    unsigned char pad70[0x78 - 0x70];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    unsigned char pad80[0xcc - 0x80];
+    int gob_yScale;             /* 0xcc */
+    unsigned char padd0[0xe0 - 0xd0];
+    unsigned int gob_flags2;    /* 0xe0 */
+} GXObject;
+
+typedef struct Frame {
+    int unk0;
+    int top;                    /* 0x04 */
+    int unk8;
+    int bottom;                 /* 0x0c */
+} Frame;
+
+typedef struct TileAttribute {
+    unsigned int flags;
+    int rest[7];
+} TileAttribute;
+
 extern "C" {
-extern "C" { extern int DAT_0045B9A0[]; }
-extern "C" { extern int DAT_004A2990; }
-extern "C" int __cdecl FUN_0040F100(int, int, int);
-extern "C" int __cdecl FUN_0040F170(int, int, int);
-extern "C" int __cdecl FUN_00419C00(void**, int, int, int*, int*);
-extern "C" int __cdecl FUN_00419FE0(int, int, int);
-extern "C" int __cdecl FUN_0041A090(void**);
-extern "C" void** __cdecl FUN_0041A380(void**);
+extern void *M1_CurrentLevel_004a2990;
+extern TileAttribute DAT_0045B9A0[];
+int __cdecl GOB_GetHotSpot_00419c00(GXObject *gob, int group, int index, int *x, int *y);
+Frame *__cdecl GOB_GetCurrentFrameWithDefault_0041a380(GXObject *gob);
+int __cdecl M1_GetBlockAttributeIDAtPos_0040f170(void *level, int x, int y);
+unsigned short *__cdecl GOB_GetBlockAddress_00419fe0(void *level, int x, int y);
+int __cdecl M1_GetContourDataFromID_0040f100(void *level, unsigned int id, unsigned int position);
+int __cdecl FUN_0041a090(GXObject *);
 
-extern "C" void __cdecl GEX_Target(void** param_1, int param_2)
+void __cdecl GEX_Target(GXObject *gob, int dy)
 {
-    int iVar3;
-    unsigned int uVar4, uVar5, uVar8, uVar9;
-    void* pGVar6;
-    void** ppGVar7;
-    int local_c, local_8;
-    unsigned int local_18, local_14, local_4;
+    Frame *frame;
+    int flip;
+    int top;
+    int bottom;
+    unsigned int right;
+    unsigned int left;
+    unsigned int upRight;
+    unsigned int upLeft;
+    unsigned int type;
+    unsigned int blockRight;
+    unsigned int blockLeft;
+    unsigned int px;
+    int contour;
+    int hx;
+    int hy;
 
-    param_1[0x1f] = (void*)((int)param_1[0x1f] + param_2 - 0x1c);
-    pGVar6 = param_1[0x38];
-    param_1[0x38] = (void*)((unsigned int)pGVar6 & 0xff7fffff);
-    if ((((unsigned int)pGVar6 & 0x80) != 0) && (iVar3 = FUN_00419C00(param_1, 0, 0, &local_c, &local_8), iVar3 != 0)) {
-        param_1[0x1e] = (void*)((int)param_1[0x1e] + local_c - 0x1c);
-        param_1[0x1f] = (void*)((int)param_1[0x1f] + local_8 - 0x1c);
+    gob->gob_ypos += dy;
+    gob->gob_flags2 &= ~0x800000;
+    if ((gob->gob_flags2 & 0x80) && GOB_GetHotSpot_00419c00(gob, 0, 0, &hx, &hy)) {
+        gob->gob_xpos += hx;
+        gob->gob_ypos += hy;
     }
-    if ((((unsigned int)param_1[0x1b] & 0x20000) == 0) || (((unsigned int)param_1[0x38] & 0x400) != 0))
-        goto LAB_EXIT;
-    FUN_0041A380(param_1);
-    uVar4 = FUN_0040F170(DAT_004A2990, (unsigned int)((int)param_1[0x1e] + 0x800), (unsigned int)param_1[0x1f]);
-    uVar4 = DAT_0045B9A0[uVar4 * 8];
-    uVar5 = FUN_0040F170(DAT_004A2990, (unsigned int)((int)param_1[0x1e] - 0x800), (unsigned int)param_1[0x1f]);
-    if (((uVar4 & 0x800000) == 0) && ((DAT_0045B9A0[uVar5 * 8] & 0x800000) == 0)) {
-        param_1[0x38] = (void*)((unsigned int)param_1[0x38] | 0x800000);
-    }
-    iVar3 = FUN_0041A090(param_1);
-    if (iVar3 == 0) {
-        if (param_2 < 0) {
-            ppGVar7 = FUN_0041A380(param_1);
-            if (((unsigned int)param_1[0x1b] & 0x40000000) == 0) pGVar6 = ppGVar7[1];
-            else pGVar6 = (void*)-(int)ppGVar7[3];
-            if (((unsigned int)param_1[0x38] & 0x400000) != 0) {
-                pGVar6 = (void*)(((int)param_1[0x33] >> 8) * ((int)pGVar6 >> 8));
+    if ((gob->gob_flags & 0x20000) && !(gob->gob_flags2 & 0x400)) {
+        frame = GOB_GetCurrentFrameWithDefault_0041a380(gob);
+        flip = gob->gob_flags & 0x40000000;
+        if (flip)
+            top = -frame->bottom;
+        else
+            top = frame->top;
+        if (flip)
+            bottom = -frame->top;
+        else
+            bottom = frame->bottom;
+        right = DAT_0045B9A0[M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, gob->gob_xpos + 0x100000, gob->gob_ypos)].flags;
+        left = DAT_0045B9A0[M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, gob->gob_xpos - 0x100000, gob->gob_ypos)].flags;
+        if (!(right & 0x800000) && !(left & 0x800000))
+            gob->gob_flags2 |= 0x800000;
+        if (FUN_0041a090(gob)) {
+            if ((gob->gob_flags & 0x20000) && !(gob->gob_flags & 0x1f000000)) {
+                type = DAT_0045B9A0[M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, gob->gob_xpos, gob->gob_ypos)].flags & 0xf000000;
+                if (type == 0x4000000)
+                    gob->gob_flags = gob->gob_flags & 0xeaffffff | 0xa000000;
+                else if (type == 0x8000000)
+                    gob->gob_flags = gob->gob_flags & 0xe9ffffff | 0x9000000;
+                else
+                    gob->gob_flags = gob->gob_flags & 0xe4ffffff | 0x4000000;
             }
-            uVar4 = FUN_0040F170(DAT_004A2990, (unsigned int)((int)param_1[0x1e] + 0x800), (int)pGVar6 + (int)param_1[0x1f] - 0x1c);
-            local_18 = DAT_0045B9A0[uVar4 * 8];
-            uVar4 = FUN_0040F170(DAT_004A2990, (unsigned int)((int)param_1[0x1e] - 0x800), (int)pGVar6 + (int)param_1[0x1f] - 0x1c);
-            local_14 = DAT_0045B9A0[uVar4 * 8];
-            uVar4 = FUN_0040F170(DAT_004A2990, (unsigned int)((int)param_1[0x1e] + 0x800), (unsigned int)param_1[0x1f]);
-            uVar4 = DAT_0045B9A0[uVar4 * 8];
-            uVar5 = FUN_0040F170(DAT_004A2990, (unsigned int)((int)param_1[0x1e] - 0x800), (unsigned int)param_1[0x1f]);
+        } else if (dy < 0) {
+            frame = GOB_GetCurrentFrameWithDefault_0041a380(gob);
+            if (gob->gob_flags & 0x40000000)
+                top = -frame->bottom;
+            else
+                top = frame->top;
+            if (gob->gob_flags2 & 0x400000)
+                top = (gob->gob_yScale >> 8) * (top >> 8);
+            upRight = DAT_0045B9A0[M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, gob->gob_xpos + 0x100000, gob->gob_ypos + top)].flags;
+            right = DAT_0045B9A0[M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, gob->gob_xpos - 0x100000, gob->gob_ypos + top)].flags;
+            upLeft = DAT_0045B9A0[M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, gob->gob_xpos + 0x100000, gob->gob_ypos)].flags;
+            left = DAT_0045B9A0[M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, gob->gob_xpos - 0x100000, gob->gob_ypos)].flags;
+            blockRight = GOB_GetBlockAddress_00419fe0(M1_CurrentLevel_004a2990, gob->gob_xpos + 0x100000, gob->gob_ypos + top)[1];
+            blockLeft = GOB_GetBlockAddress_00419fe0(M1_CurrentLevel_004a2990, gob->gob_xpos - 0x100000, gob->gob_ypos + top)[1];
+            px = gob->gob_xpos + 0x100000 & 0x1fffff;
+            if (blockRight & 0xfff) {
+                contour = M1_GetContourDataFromID_0040f100(M1_CurrentLevel_004a2990, blockRight, px);
+                if ((int)(gob->gob_ypos + top & 0x1fffff) < contour)
+                    upRight &= ~0x800000;
+            }
+            if (blockLeft & 0xfff) {
+                contour = M1_GetContourDataFromID_0040f100(M1_CurrentLevel_004a2990, blockLeft, px);
+                if ((int)(gob->gob_ypos + top & 0x1fffff) < contour)
+                    right &= ~0x800000;
+            }
+            if (!(upRight & 0x800000) && !(right & 0x800000) && ((upLeft & 0x800000) || (left & 0x800000)))
+                gob->gob_flags = gob->gob_flags & 0xe3ffffff | 0x3000000;
+            type = DAT_0045B9A0[M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, gob->gob_xpos, gob->gob_ypos + top)].flags;
+            if ((type & 0x800000) && (type & 0xf000000) != 0x8000000 && (type & 0xf000000) != 0x4000000) {
+                gob->gob_flags |= 0x1f000000;
+                if (!(gob->gob_flags2 & 0x2000))
+                    gob->gob_ypos = gob->gob_ypos - (gob->gob_ypos + top & 0x1fffff) + 0x220000;
+            }
+        } else if (dy > 0) {
+            frame = GOB_GetCurrentFrameWithDefault_0041a380(gob);
+            flip = gob->gob_flags & 0x40000000;
+            if (flip)
+                top = -frame->bottom;
+            else
+                top = frame->top;
+            if (flip)
+                bottom = -frame->top;
+            else
+                bottom = frame->bottom;
+            blockRight = DAT_0045B9A0[M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, gob->gob_xpos + 0x100000, gob->gob_ypos + bottom + 0x40000)].flags;
+            upRight = DAT_0045B9A0[M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, gob->gob_xpos - 0x100000, gob->gob_ypos + bottom + 0x40000)].flags;
+            right = DAT_0045B9A0[M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, gob->gob_xpos + 0x100000, gob->gob_ypos + top)].flags;
+            upLeft = DAT_0045B9A0[M1_GetBlockAttributeIDAtPos_0040f170(M1_CurrentLevel_004a2990, gob->gob_xpos - 0x100000, gob->gob_ypos + top)].flags;
+            if (!(blockRight & 0x800000) && !(upRight & 0x800000) && ((right & 0x800000) || (upLeft & 0x800000)))
+                gob->gob_flags = gob->gob_flags & 0xe3ffffff | 0x3000000;
         }
     }
-LAB_EXIT:
-    return;
+    if (gob->gob_flags2 & 0x80) {
+        gob->gob_xpos -= hx;
+        gob->gob_ypos -= hy;
+    }
 }
 }

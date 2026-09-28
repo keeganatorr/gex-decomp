@@ -1,68 +1,156 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041D0E0.cpp
-// Historical source SHA256: e3a37dd47ea129e67284075d192de5c634f0a623ce2772379bcccf383781c06e
+typedef struct GXFrame {
+    int left;
+    int top;
+    int right;
+    int bottom;
+} GXFrame;
+typedef struct GXObject GXObject;
+struct GXObject {
+    unsigned char _pad0[0x50];
+    int gob_currentFrameGroup;  /* 0x50 */
+    int gob_currentFrameIndex;  /* 0x54 */
+    unsigned char _pad58[0x6c - 0x58];
+    unsigned int gob_flags;     /* 0x6c */
+    unsigned char _pad70[0x78 - 0x70];
+    int gob_xpos;               /* 0x78 */
+    int gob_ypos;               /* 0x7c */
+    unsigned char _pad80[0xc8 - 0x80];
+    int gob_xScale;             /* 0xc8 */
+    int gob_yScale;             /* 0xcc */
+    unsigned char _padd0[0x15c - 0xd0];
+    GXObject *gob_parent;       /* 0x15c */
+};
+typedef struct CLDPoints {
+    GXFrame *frame;
+    int x0, y0;
+    int x1, y1;
+    int x2, y2;
+    int x3, y3;
+} CLDPoints;
 extern "C" {
-extern "C" void ** __cdecl FUN_0041A380(void **);
-extern "C" void __cdecl FUN_0041CC70(int, int, int, int, int, unsigned int, int, int);
-
-extern "C" int __cdecl GEX_Target(void **param_1, int param_2, int param_3, unsigned int param_4, int **param_5)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+extern int decl_pad_9;
+extern int decl_pad_10;
+extern int decl_pad_11;
+extern int decl_pad_12;
+extern int decl_pad_13;
+extern int decl_pad_14;
+extern int decl_pad_15;
+extern int decl_pad_16;
+extern int decl_pad_17;
+extern int decl_pad_18;
+extern int decl_pad_19;
+extern int decl_pad_20;
+extern int decl_pad_21;
+extern int decl_pad_22;
+extern int decl_pad_23;
+extern int decl_pad_24;
+extern int decl_pad_25;
+extern int decl_pad_26;
+extern int decl_pad_27;
+extern int decl_pad_28;
+extern int decl_pad_29;
+extern int decl_pad_30;
+extern int decl_pad_31;
+extern int decl_pad_32;
+extern int decl_pad_33;
+extern int decl_pad_34;
+extern int decl_pad_35;
+extern int decl_pad_36;
+extern int decl_pad_37;
+extern int decl_pad_38;
+extern int decl_pad_39;
+extern int decl_pad_40;
+extern int decl_pad_41;
+extern int decl_pad_42;
+extern int decl_pad_43;
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+extern int decl_pad_9;
+extern int decl_pad_10;
+extern int decl_pad_11;
+GXFrame *__cdecl GOB_GetCurrentFrameWithDefault_0041a380(GXObject *gob);
+void __cdecl CLD_ApplyAngleToPoints_0041cc70(CLDPoints *points, int x, int y, int a, int b, unsigned int c, int xScale, int yScale);
+int __cdecl GEX_Target(GXObject *gob, int a, int b, unsigned int c, CLDPoints *points)
 {
-    void **ppGVar1;
-    int iVar3;
-    int iVar4;
-    int pGVar5;
-    int pGVar2;
-
-    pGVar5 = (int)param_1[0x57];
-    if (((int)param_1[0x14] < 0) || ((int)param_1[0x15] < 0)) {
-        return 0;
-    }
-    ppGVar1 = FUN_0041A380(param_1);
-    if ((ppGVar1 != (void **)0x0) && ((int)*ppGVar1 <= (int)ppGVar1[2])) {
-        *param_5 = (int *)ppGVar1;
-        if (((unsigned int)param_1[0x1b] & 0x80000000) == 0) {
-            param_5[1] = (int *)*ppGVar1;
-            param_5[3] = (int *)ppGVar1[2];
-            param_5[5] = (int *)ppGVar1[2];
-            pGVar2 = (int)*ppGVar1;
-        }
-        else {
-            param_5[1] = (int *)-(int)ppGVar1[2];
-            param_5[3] = (int *)-(int)*ppGVar1;
-            param_5[5] = (int *)-(int)*ppGVar1;
-            pGVar2 = -(int)ppGVar1[2];
-        }
-        param_5[7] = (int *)pGVar2;
-        if (((unsigned int)param_1[0x1b] & 0x40000000) == 0) {
-            param_5[2] = (int *)ppGVar1[1];
-            param_5[4] = (int *)ppGVar1[1];
-            param_5[6] = (int *)ppGVar1[3];
-            param_5[8] = (int *)ppGVar1[3];
-        }
-        else {
-            param_5[2] = (int *)-(int)ppGVar1[3];
-            param_5[4] = (int *)-(int)ppGVar1[3];
-            param_5[6] = (int *)-(int)ppGVar1[1];
-            param_5[8] = (int *)-(int)ppGVar1[1];
-        }
-        if (pGVar5 == 0) {
-            pGVar2 = (int)param_1[0x1e];
-            pGVar5 = (int)param_1[0x1f];
-        }
-        else {
-            iVar4 = 0;
-            iVar3 = 0;
-            pGVar2 = *(int *)(pGVar5 + 4);
-            while (pGVar2 != 0) {
-                iVar4 = iVar4 + *(int *)(pGVar5 + 8);
-                iVar3 = iVar3 + *(int *)(pGVar5 + 12);
-                pGVar5 = *(int *)(pGVar5 + 4);
-                pGVar2 = *(int *)(pGVar5 + 4);
+    GXObject *parent;
+    int originalX;
+    int originalY;
+    int x;
+    GXFrame *frame;
+    int y;
+    parent = gob->gob_parent;
+    if (gob->gob_currentFrameGroup >= 0 && gob->gob_currentFrameIndex >= 0) {
+        frame = GOB_GetCurrentFrameWithDefault_0041a380(gob);
+        if (frame && frame->left <= frame->right) {
+            points->frame = frame;
+            if (gob->gob_flags & 0x80000000) {
+                points->x0 = -frame->right;
+                points->x1 = -frame->left;
+                points->x2 = -frame->left;
+                points->x3 = -frame->right;
+            } else {
+                points->x0 = frame->left;
+                points->x1 = frame->right;
+                points->x2 = frame->right;
+                points->x3 = frame->left;
             }
-            pGVar2 = (int)param_1[0x1e] + *(int *)(pGVar5 + 8) + iVar4 - 0x1c;
-            pGVar5 = (int)param_1[0x1f] + *(int *)(pGVar5 + 12) + iVar3 - 0x1c;
+            if (gob->gob_flags & 0x40000000) {
+                points->y0 = -frame->bottom;
+                points->y1 = -frame->bottom;
+                points->y2 = -frame->top;
+                points->y3 = -frame->top;
+            } else {
+                points->y0 = frame->top;
+                points->y1 = frame->top;
+                points->y2 = frame->bottom;
+                points->y3 = frame->bottom;
+            }
+            if (parent) {
+                int dx;
+                int dy;
+                originalX = gob->gob_xpos;
+                originalY = gob->gob_ypos;
+                dx = 0;
+                dy = 0;
+                while (parent->gob_parent) {
+                    dx += parent->gob_xpos;
+                    dy += parent->gob_ypos;
+                    parent = parent->gob_parent;
+                }
+                x = parent->gob_xpos + dx + originalX;
+                y = originalY + (parent->gob_ypos + dy);
+            } else {
+                x = gob->gob_xpos;
+                y = gob->gob_ypos;
+            }
+            CLD_ApplyAngleToPoints_0041cc70(points, x, y, a, b, c, gob->gob_xScale, gob->gob_yScale);
+            return 1;
         }
-        FUN_0041CC70((int)param_5, pGVar2, pGVar5, param_2, param_3, param_4, (int)param_1[0x32], (int)param_1[0x33]);
-        return 1;
+        return 0;
     }
     return 0;
 }

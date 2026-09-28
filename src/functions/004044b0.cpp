@@ -83,9 +83,8 @@ extern "C" void __cdecl GEX_Target(char *param_1, long *param_2)
     MCI_GENERIC_PARMS realizeParams;
     MCI_DGV_WINDOW_PARMS windowParams;
     WindowRect rect;
-    MCI_PLAY_PARMS playParams;
-    MCI_PLAY_PARMS *playParamsPtr = &playParams;
     MCI_DGV_OPEN_PARMS openParams;
+    MCI_PLAY_PARMS playParams;
     MCIERROR error;
 
     DAT_00451798_aviLoaded = 1;
@@ -104,7 +103,7 @@ extern "C" void __cdecl GEX_Target(char *param_1, long *param_2)
     if (error == 0) {
         gMCIDevice_004626a8 = openParams.wDeviceID;
         statusParams.dwItem = 0x4001;
-        error = mciSendCommandA(openParams.wDeviceID, 0x814, 0x100UL, (DWORD)&statusParams);
+        error = mciSendCommandA(gMCIDevice_004626a8, 0x814, 0x100UL, (DWORD)&statusParams);
         if (error == 0) {
             gVideoWindow_00451794 = (HWND)statusParams.dwReturn;
             setParams.dwTimeFormat = 0;
@@ -125,10 +124,10 @@ extern "C" void __cdecl GEX_Target(char *param_1, long *param_2)
                         windowParams.lpstrText = 0;
                         error = mciSendCommandA(gMCIDevice_004626a8, 0x841, 0x40000UL, (DWORD)&windowParams);
                         if (error == 0) {
-                            playParamsPtr->dwCallback = (DWORD)gMainWindow_004875a0;
-                            playParamsPtr->dwFrom = 0;
-                            playParamsPtr->dwTo = 0;
-                            error = mciSendCommandA(gMCIDevice_004626a8, 0x806, 0x1000001UL, (DWORD)playParamsPtr);
+                            playParams.dwCallback = (DWORD)gMainWindow_004875a0;
+                            playParams.dwFrom = 0;
+                            playParams.dwTo = 0;
+                            error = mciSendCommandA(gMCIDevice_004626a8, 0x806, 0x1000001UL, (DWORD)&playParams);
                             if (error == 0) {
                                 DAT_004626a4 = param_2;
                                 if (GetForegroundWindow() == gMainWindow_004875a0)

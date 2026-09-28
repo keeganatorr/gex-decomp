@@ -1,23 +1,17 @@
 extern "C" {
-extern int FUN_004638D0;
-extern int FUN_004638D4[];
-extern int FUN_00463954[];
-extern int DAT_004638b4;
+extern int gNumPlayingVoices_004638d0;
+extern int gPlayingVFX_004638d4[];
+extern int gPlayingVSIT_00463954[];
+extern int DAT_004638b4_LoadedVoiceCounter;
 
 void __cdecl GEX_Target(int voiceEffectId, int voiceSetId)
 {
-    int nextIndex = FUN_004638D0;
-    int effect = voiceEffectId;
-    int set = voiceSetId;
-    nextIndex++;
-    FUN_004638D0 = nextIndex;
-    FUN_004638D4[nextIndex] = effect;
-    FUN_00463954[nextIndex] = set;
-    if (nextIndex >= 0x20) {
-        FUN_004638D0 = 0;
-    }
-    if (DAT_004638b4 < 0x20) {
-        DAT_004638b4 = DAT_004638b4 + 1;
-    }
+    gPlayingVFX_004638d4[gNumPlayingVoices_004638d0 + 1] = voiceEffectId;
+    gPlayingVSIT_00463954[gNumPlayingVoices_004638d0 + 1] = voiceSetId;
+    gNumPlayingVoices_004638d0++;
+    if (gNumPlayingVoices_004638d0 >= 0x20)
+        gNumPlayingVoices_004638d0 = 0;
+    if (DAT_004638b4_LoadedVoiceCounter < 0x20)
+        DAT_004638b4_LoadedVoiceCounter++;
 }
 }
