@@ -70,5 +70,5 @@ inline long __cdecl FUN_00420fa0_xpos_movement(GXObject *param_1)
 }
 }
 
-typedef long (__cdecl *GEX_TargetPointer)(GXObject *);
-static GEX_TargetPointer volatile GEX_TargetReference = FUN_00420fa0_xpos_movement;
+typedef long (__cdecl *FUN_00420fa0_xpos_movementPointer)(GXObject *);
+static FUN_00420fa0_xpos_movementPointer volatile FUN_00420fa0_xpos_movementReference = FUN_00420fa0_xpos_movement;

@@ -58,5 +58,5 @@ inline void __cdecl ob237Init_0041b3e0(void **param_1)
     }
 }
 
-static void (__cdecl * volatile GEX_Target_reference)(void **) = ob237Init_0041b3e0;
+static void (__cdecl * volatile ob237Init_0041b3e0_reference)(void **) = ob237Init_0041b3e0;
 }

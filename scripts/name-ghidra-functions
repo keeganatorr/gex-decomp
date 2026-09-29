@@ -126,9 +126,15 @@ for source in "${SOURCES[@]}"; do
         echo "$source has neither GEX_Target nor its expected Ghidra name" >&2
         exit 1
     fi
+    # Also rename identifiers such as GEX_TargetReference that kept the old
+    # placeholder in the resulting source and COFF data symbols.
     GEX_NEW_NAME=$candidate perl -pe \
-        'BEGIN { $name = $ENV{GEX_NEW_NAME} } s/(?<![A-Za-z0-9_])_?GEX_Target(?![A-Za-z0-9_])/$name/g' \
+        'BEGIN { $name = $ENV{GEX_NEW_NAME} } s/(?<![A-Za-z0-9_])_?GEX_Target/$name/g' \
         "$source" > "$STAGE/functions/$address.cpp"
+    if grep -Fq 'GEX_Target' "$STAGE/functions/$address.cpp"; then
+        echo "placeholder remains in $source after naming" >&2
+        exit 1
+    fi
     printf '%s\t%s\t%s\t%s\n' "$address" "$original" "$candidate" "$status" \
         >> "$STAGE/names.tsv"
 done
