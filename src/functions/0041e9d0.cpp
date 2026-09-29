@@ -1,108 +1,142 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041E9D0.cpp
-// Historical source SHA256: c524f34dd865cfc0fe233e4b3226838e780b6dc7216068c91ae032b24ad24381
-extern "C" {
-extern "C" void __cdecl FUN_0041CB80(int *, int **);
+typedef struct Contour {
+    int x;
+    int y;
+    int width;
+    unsigned char heights[1];
+} Contour;
+typedef struct CFrame {
+    unsigned int flags;
+    unsigned char _pad4[0x20 - 4];
+    Contour *contour;           /* 0x20 */
+} CFrame;
+typedef struct CLDEdges {
+    CFrame *frame;
+    int unk4;
+    int x;
+    int y;
+    int flip;
+    int unk14;
+    int left;
+    int right;
+    int top;
+    int bottom;
+} CLDEdges;
+typedef struct HitRecord {
+    int unk0;
+    int type;
+    CLDEdges a;
+    CLDEdges b;
+} HitRecord;
+typedef struct GXObject GXObject;
+struct GXObject {
+    unsigned char _pad0[0x6c];
+    unsigned int gob_flags;     /* 0x6c */
+    unsigned char _pad70[0x178 - 0x70];
+    GXObject *gob_hitObject;    /* 0x178 */
+};
 
-extern "C" int __cdecl GEX_Target(int *param_1, int param_2)
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int decl_pad_8;
+extern int decl_pad_9;
+extern int decl_pad_10;
+extern int decl_pad_11;
+extern int decl_pad_12;
+extern int decl_pad_13;
+extern int decl_pad_14;
+extern int decl_pad_15;
+extern int decl_pad_16;
+extern int decl_pad_17;
+extern int decl_pad_18;
+extern int decl_pad_19;
+extern int decl_pad_20;
+extern int decl_pad_21;
+extern int decl_pad_22;
+extern int decl_pad_23;
+extern int decl_pad_24;
+extern int decl_pad_25;
+extern int decl_pad_26;
+extern int decl_pad_27;
+int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *gob, CLDEdges *edges);
+int __cdecl GEX_Target(GXObject *gob, HitRecord *hit)
 {
-    int pGVar1;
-    int *piVar2;
-    int iVar3;
-    int iVar4;
-    int iVar5;
-    int iVar6;
-    int *piVar7;
-    int **ppiVar8;
-    unsigned int **ppuVar9;
-    int iVar10;
-    unsigned int local_68;
-    int local_60;
-    int local_5c;
-    int local_58;
-    int local_54;
-    unsigned int *local_50[10];
-    int local_48;
-    int local_44;
-    int local_40;
-    int local_38;
-    int local_34;
-    int *local_28[10];
-    int local_10;
-    int local_c;
-    int local_4;
-
-    pGVar1 = param_1[0x5e];
-    if (*(int *)(param_2 + 4) == 1) {
-        FUN_0041CB80(param_1, (int **)local_28);
-        FUN_0041CB80((int *)pGVar1, (int **)local_50);
+    CLDEdges b;
+    CLDEdges a;
+    GXObject *other;
+    int r;
+    int h;
+    int l;
+    int limit;
+    int bl;
+    int br;
+    int i4;
+    int li;
+    Contour *contour;
+    int i3;
+    int start;
+    int end;
+    int ri;
+    other = gob->gob_hitObject;
+    if (hit->type == 1) {
+        CLD_ComputeAngleEdges_0041cb80(gob, &a);
+        CLD_ComputeAngleEdges_0041cb80(other, &b);
+    } else {
+        a = hit->a;
+        b = hit->b;
     }
-    else {
-        piVar7 = (int *)(param_2 + 8);
-        ppiVar8 = (int **)local_28;
-        for (iVar4 = 10; iVar4 != 0; iVar4 = iVar4 + -1) {
-            *ppiVar8 = (int *)*piVar7;
-            piVar7 = piVar7 + 1;
-            ppiVar8 = ppiVar8 + 1;
+    if (b.frame->flags & 2) {
+        contour = b.frame->contour;
+        if (gob->gob_flags & 0x80000000) {
+            l = a.right;
+            r = a.left;
+        } else {
+            l = a.left;
+            r = a.right;
         }
-        piVar7 = (int *)(param_2 + 0x30);
-        ppuVar9 = (unsigned int **)local_50;
-        for (iVar4 = 10; iVar4 != 0; iVar4 = iVar4 + -1) {
-            *ppuVar9 = (unsigned int *)*piVar7;
-            piVar7 = piVar7 + 1;
-            ppuVar9 = ppuVar9 + 1;
+        if (b.flip) {
+            bl = b.right;
+            br = b.left;
+            start = b.x - (contour->width << 16) - contour->x;
+            end = b.x - contour->x;
+            i3 = contour->width;
+            i4 = 0;
+            li = l - end >> 16;
+            ri = r - end >> 16;
+        } else {
+            bl = b.left;
+            br = b.right;
+            start = b.x + contour->x;
+            end = (contour->width << 16) + contour->x + b.x;
+            i4 = contour->width;
+            li = l - start >> 16;
+            i3 = 0;
+            ri = r - start >> 16;
         }
-    }
-    if ((*local_50[0] & 2) != 0) {
-        piVar2 = (int *)local_50[0][8];
-        iVar4 = local_c;
-        if (((unsigned int)param_1[0x1b] & 0x80000000) != 0) {
-            iVar4 = local_10;
-            local_10 = local_c;
-        }
-        if (local_40 == 0) {
-            local_60 = local_38;
-            local_5c = local_34;
-            iVar5 = local_48 + *piVar2;
-            local_54 = piVar2[2];
-            iVar10 = local_54 * 0x10000 + *piVar2 + local_48;
-            local_58 = 0;
-            iVar3 = iVar5;
-        }
-        else {
-            local_58 = piVar2[2];
-            local_60 = local_34;
-            local_5c = local_38;
-            iVar10 = local_48 - *piVar2;
-            iVar5 = (local_48 + local_58 * -0x10000) - *piVar2;
-            local_54 = 0;
-            iVar3 = iVar10;
-        }
-        iVar6 = (local_4 - piVar2[1]) - local_44;
-        if ((iVar5 < local_10 && local_10 < iVar10) &&
-            (local_68 = (unsigned int)*(unsigned char *)(((local_10 - iVar3) >> 0x10) + 0xc + (int)piVar2),
-            iVar6 < (int)(local_68 * 0x10000)))
-        {
-            return 1;
-        }
-        if ((iVar5 < iVar4 && iVar4 < iVar10) &&
-            (iVar6 < (int)((unsigned int)*(unsigned char *)(((iVar4 - iVar3) >> 0x10) + 0xc + (int)piVar2) * 0x10000)))
-        {
-            return 1;
-        }
-        if ((local_10 < local_60 || iVar5 <= local_10) && (iVar4 < local_60 || iVar5 <= iVar4))
-        {
-            if ((iVar10 <= local_10) &&
-                ((local_10 < local_5c || (iVar10 <= local_10 && local_10 < local_5c)) &&
-                 iVar6 < (int)((unsigned int)*(unsigned char *)(local_54 + 0xc + (int)piVar2) * 0x10000)))
-            {
+        limit = a.bottom - contour->y - b.y;
+        if (start < l && end > l) {
+            h = contour->heights[li] << 16;
+            if (h > limit)
                 return 1;
-            }
         }
-        else if (iVar6 < (int)((unsigned int)*(unsigned char *)((int)piVar2 + local_58 + 0xc) * 0x10000))
-        {
+        if (start < r && end > r && contour->heights[ri] << 16 > limit)
             return 1;
+        if (bl <= l && start > l || bl <= r && start > r) {
+            if (contour->heights[i3] << 16 > limit)
+                return 1;
+        } else if (end <= l && br > l || end <= l && br > l) {
+            if (contour->heights[i4] << 16 > limit)
+                return 1;
         }
     }
     return 0;
-}
 }

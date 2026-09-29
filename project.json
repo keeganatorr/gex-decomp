@@ -189,6 +189,39 @@
     },
     "00420300": {
       "language": "c"
+    },
+    "00401f20": {
+      "flags": [
+        "/O2",
+        "/G5",
+        "/Oy",
+        "/GR-",
+        "/Oa"
+      ]
+    },
+    "00408350": {
+      "targetSymbol": "_GEX_Target@16"
+    },
+    "00408a30": {
+      "targetSymbol": "_GEX_Target@16"
+    },
+    "00407de0": {
+      "targetSymbol": "_GEX_Target@16"
+    },
+    "004036f0": {
+      "targetSymbol": "_GEX_Target@16"
+    },
+    "00403590": {
+      "targetSymbol": "_GEX_Target@16"
+    },
+    "00405850": {
+      "targetSymbol": "_GEX_Target@16"
+    },
+    "004083a0": {
+      "targetSymbol": "_GEX_Target@16"
+    },
+    "0041e9d0": {
+      "language": "c"
     }
   },
   "symbolBindings": {
@@ -2361,7 +2394,17 @@
     "_gVFXTable_0049a078": "0049a078",
     "_DAT_0046dc40": "0046dc40",
     "_DAT_004626ec": "004626ec",
-    "_UINT_ARRAY_0045a578": "0045a578"
+    "_UINT_ARRAY_0045a578": "0045a578",
+    "_gInputBits_004a02c8": "004a02c8",
+    "_DAT_00463e98": "00463e98",
+    "_DAT_0045f00c": "0045f00c",
+    "_DAT_0045adf8": "0045adf8",
+    "_FUN_0041f950": "0041f950",
+    "_FUN_0043f070": "0043f070",
+    "_gStartupInfo_0047f060": "0047f060",
+    "_gProcessInfo_0047f0b0": "0047f0b0",
+    "_FUN_00408350@16": "00408350",
+    "_FUN_004083a0@16": "004083a0"
   },
   "policy": {
     "autonomousAgents": false,

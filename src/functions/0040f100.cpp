@@ -12,9 +12,8 @@ extern "C" int __cdecl GEX_Target(int param_1, unsigned int param_2, unsigned in
     }
     if ((param_2 & 0x4000) == 0) {
         bVar2 = *(unsigned char*)(((param_3 & 0x1f0000) >> 0x10) + iVar1);
-        if (((param_2 & 0x8000) != 0) && (bVar2 != 0)) {
-            return (unsigned int)(unsigned char)(0x21 - bVar2) << 0x10;
-        }
+        if (((param_2 & 0x8000) != 0) && (bVar2 != 0))
+            bVar2 = 0x21 - bVar2;
     } else {
         bVar2 = *(unsigned char*)((iVar1 - ((param_3 & 0x1f0000) >> 0x10)) + 0x1f);
         if (((param_2 & 0x8000) != 0) && (bVar2 != 0)) {

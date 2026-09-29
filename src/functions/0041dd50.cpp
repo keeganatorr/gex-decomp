@@ -1,176 +1,217 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041DD50.cpp
-// Historical source SHA256: 86a4ba477791db4bd3c16e357e556070de8181b2949b95e43498da2ac9533def
-extern "C" {
-extern int DAT_0046368C;
-extern int DAT_00463690;
-extern "C" int __cdecl FUN_0041CB80(int* param_1, int** local_28);
+typedef struct HitBox {
+    int left;
+    int top;
+    int right;
+    int bottom;
+} HitBox;
+typedef struct CFrame {
+    unsigned int flags;
+    unsigned char _pad4[0x10 - 4];
+    HitBox *boxes;              /* 0x10 */
+} CFrame;
+typedef struct CLDEdges {
+    CFrame *frame;
+    int unk4;
+    int x;
+    int y;
+    int flipX;
+    int flipY;
+    int left;
+    int right;
+    int top;
+    int bottom;
+} CLDEdges;
+typedef struct HitRecord {
+    int unk0;
+    int type;
+    CLDEdges a;
+    CLDEdges b;
+} HitRecord;
+typedef struct HitMessage {
+    int unk0;
+    int type;
+} HitMessage;
+typedef struct GXObject GXObject;
+struct GXObject {
+    unsigned char _pad0[0x64];
+    void (__cdecl *gob_hitCallback)(GXObject *, void *);    /* 0x64 */
+    unsigned char _pad68[0xc4 - 0x68];
+    int gob_angle;              /* 0xc4 */
+    int gob_xScale;             /* 0xc8 */
+    int gob_yScale;             /* 0xcc */
+    unsigned char _padd0[0x170 - 0xd0];
+    HitBox *gob_hitBox;         /* 0x170 */
+    HitBox *gob_hitOtherBox;    /* 0x174 */
+    GXObject *gob_hitObject;    /* 0x178 */
+};
 
-extern "C" int __cdecl GEX_Target(int* param_1, int param_2)
+extern "C" {
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+extern int decl_pad_0;
+extern int decl_pad_1;
+extern int decl_pad_2;
+extern int decl_pad_3;
+extern int decl_pad_4;
+extern int decl_pad_5;
+extern int decl_pad_6;
+extern int decl_pad_7;
+extern int DAT_00463690;
+extern int DAT_0046368c;
+int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *gob, CLDEdges *edges);
+int __cdecl CLD_CheckCollisionAngle_0041dd50(GXObject *gob, GXObject *other);
+int __cdecl CLD_CheckCollisionFunkyAngle_0041d310(GXObject *gob, GXObject *other);
+
+int __cdecl GEX_Target(GXObject *gob, GXObject *other)
 {
-    int iVar4;
-    int pGVar7;
-    int pGVar2;
-    int pNVar5;
-    int local_bc;
-    int local_b8;
-    int pGVar12;
-    int pGVar9;
-    int pGVar8;
-    int pNVar6;
-    int pNVar15;
-    int pGVar11;
-    int pGVar13;
-    int pNVar16;
-    int local_58[12];
-    int local_28[10];
-    
-    int local_b0;
-    int local_ac;
-    int* local_a8;
-    int local_a4;
-    int local_a0;
-    int local_9c;
-    int local_98;
-    int local_94;
-    int local_90;
-    int local_8c;
-    int local_88;
-    int local_84;
-    int* local_80;
-    int local_7c;
-    int local_78;
-    int local_74;
-    int local_70;
-    int local_6c;
-    int local_68;
-    int local_64;
-    int local_60;
-    int local_5c;
-    
-    DAT_00463690 = DAT_00463690 + 1;
-    iVar4 = FUN_0041CB80(param_1, &local_a8);
-    if (iVar4 == 0) {
+    HitBox *ha;
+    HitBox *hb;
+    int al;
+    int ar;
+    int at;
+    int ab;
+    int br;
+    HitRecord self;
+    int bt;
+    int t;
+    int bb;
+    int bl;
+
+    DAT_00463690++;
+    if (!CLD_ComputeAngleEdges_0041cb80(gob, &self.a))
         return 0;
-    }
-    
-    iVar4 = FUN_0041CB80((int*)param_2, &local_80);
-    if (iVar4 == 0) {
+    if (!CLD_ComputeAngleEdges_0041cb80(other, &self.b))
         return 0;
-    }
-    
-    if (((local_8c < local_68) || (local_84 < local_60)) || ((local_64 < local_90) || (local_5c < local_88))) {
+    if (self.a.right < self.b.left || self.a.bottom < self.b.top || self.b.right < self.a.left || self.a.top > self.b.bottom)
         return 0;
-    }
-    
-    DAT_0046368C = DAT_0046368C + 1;
-    
-    pGVar7 = local_a8[4];
-    if (pGVar7 != 0) {
-        pGVar2 = local_80[4];
-        if (pGVar2 != 0) {
-            pNVar5 = *(int*)(pGVar7 + 4);
-            while (pNVar5 != (int)0x80000000) {
-                if (local_98 == 0) {
-                    local_bc = *(int*)(pGVar7 + 4);
-                    pGVar12 = *(int*)(pGVar7 + 0xc);
+    DAT_0046368c++;
+    if (self.a.frame->boxes) {
+        hb = self.b.frame->boxes;
+        if (hb) {
+            ha = self.a.frame->boxes;
+            while (ha->left != (int)0x80000000) {
+                hb = self.b.frame->boxes;
+                if (self.a.flipX) {
+                    al = -ha->right;
+                    ar = -ha->left;
                 } else {
-                    local_bc = -*(int*)(pGVar7 + 0xc);
-                    pGVar12 = -*(int*)(pGVar7 + 4);
+                    al = ha->left;
+                    ar = ha->right;
                 }
-                
-                if (local_94 == 0) {
-                    local_b8 = *(int*)(pGVar7 + 8);
-                    pGVar9 = *(int*)(pGVar7 + 0x10);
+                if (self.a.flipY) {
+                    at = -ha->bottom;
+                    ab = -ha->top;
                 } else {
-                    local_b8 = -*(int*)(pGVar7 + 0x10);
-                    pGVar9 = -*(int*)(pGVar7 + 8);
+                    at = ha->top;
+                    ab = ha->bottom;
                 }
-                
-                pNVar5 = local_b8;
-                
-                if (local_a4 != 0) {
-                    if (local_a4 == 0x400000) {
-                        local_b8 = local_bc;
-                        pGVar9 = pGVar12;
-                        pGVar11 = -pNVar5;
-                        local_bc = -pGVar9;
-                    } else if (local_a4 == 0x800000) {
-                        pGVar9 = -local_b8;
-                        pGVar11 = -local_bc;
-                        local_bc = -pGVar12;
-                        local_b8 = -pGVar9;
-                    } else if (local_a4 == 0xc00000) {
-                        pGVar9 = -local_bc;
-                        local_bc = local_b8;
-                        local_b8 = -pGVar12;
-                    } else {
-                        pGVar11 = pGVar12;
-                        pGVar13 = pGVar9;
+                if (self.a.unk4) {
+                    if (self.a.unk4 == 0x400000) {
+                        int t = at;
+                        at = al;
+                        al = -ab;
+                        ab = ar;
+                        ar = -t;
+                    } else if (self.a.unk4 == 0x800000) {
+                        t = at;
+                        at = -ab;
+                        ab = -t;
+                        t = al;
+                        al = -ar;
+                        ar = -t;
+                    } else if (self.a.unk4 == 0xc00000) {
+                        t = at;
+                        at = -ar;
+                        ar = ab;
+                        ab = -al;
+                        al = t;
                     }
-                } else {
-                    pGVar11 = pGVar12;
-                    pGVar13 = pGVar9;
                 }
-                
-                if (*(int*)(pGVar2 + 4) != (int)0x80000000) {
-                    local_58[0] = (int)&pGVar11 + local_a0;
-                    pGVar8 = pGVar2;
-                    
-                    do {
-                        if (local_70 == 0) {
-                            pNVar5 = *(int*)(pGVar8 + 4);
-                            pGVar12 = *(int*)(pGVar8 + 0xc);
-                        } else {
-                            pNVar5 = -*(int*)(pGVar8 + 0xc);
-                            pGVar12 = -*(int*)(pGVar8 + 4);
+                for (; hb->left != (int)0x80000000; hb++) {
+                    if (self.b.flipX) {
+                        bl = -hb->right;
+                        br = -hb->left;
+                    } else {
+                        bl = hb->left;
+                        br = hb->right;
+                    }
+                    if (self.b.flipY) {
+                        bt = -hb->bottom;
+                        bb = -hb->top;
+                    } else {
+                        bt = hb->top;
+                        bb = hb->bottom;
+                    }
+                    if (self.b.unk4) {
+                        if (self.b.unk4 == 0x400000) {
+                            t = bt;
+                            bt = bl;
+                            bl = -bb;
+                            bb = br;
+                            br = -t;
+                        } else if (self.b.unk4 == 0x800000) {
+                            t = bt;
+                            bt = -bb;
+                            bb = -t;
+                            t = bl;
+                            bl = -br;
+                            br = -t;
+                        } else if (self.b.unk4 == 0xc00000) {
+                            t = bt;
+                            bt = -br;
+                            br = bb;
+                            bb = -bl;
+                            bl = t;
                         }
-                        
-                        if (local_6c == 0) {
-                            pNVar15 = *(int*)(pGVar8 + 8);
-                            pGVar9 = *(int*)(pGVar8 + 0x10);
-                        } else {
-                            pNVar15 = -*(int*)(pGVar8 + 0x10);
-                            pGVar9 = -*(int*)(pGVar8 + 8);
+                    }
+                    if (self.b.x + bl <= self.a.x + ar && self.b.y + bt <= self.a.y + ab && self.b.x + br >= self.a.x + al && self.a.y + at <= self.b.y + bb) {
+                        gob->gob_hitObject = other;
+                        gob->gob_hitBox = ha;
+                        gob->gob_hitOtherBox = hb;
+                        other->gob_hitObject = gob;
+                        other->gob_hitBox = hb;
+                        other->gob_hitOtherBox = ha;
+                        if (gob->gob_hitCallback) {
+                            self.unk0 = 1;
+                            self.type = 0;
+                            gob->gob_hitCallback(gob, &self);
                         }
-                        
-                        pNVar6 = pNVar5;
-                        pGVar11 = pGVar12;
-                        pGVar13 = pGVar9;
-                        pNVar16 = pNVar15;
-                        
-                        if (local_7c != 0) {
-                            if (local_7c == 0x400000) {
-                                pNVar6 = -pGVar9;
-                                pGVar11 = -pNVar15;
-                                pGVar13 = pGVar12;
-                                pNVar16 = pNVar5;
-                            } else if (local_7c == 0x800000) {
-                                pNVar6 = -pGVar12;
-                                pGVar11 = -pNVar5;
-                                pGVar13 = -pNVar15;
-                                pNVar16 = -pGVar9;
-                            } else if (local_7c == 0xc00000) {
-                                pNVar16 = -pGVar12;
-                                pGVar13 = -pNVar5;
-                                pNVar6 = pNVar15;
-                                pGVar11 = pGVar9;
-                            }
+                        if (other->gob_hitCallback) {
+                            HitRecord hit;
+                            hit.a = self.b;
+                            hit.b = self.a;
+                            hit.unk0 = 1;
+                            hit.type = 0;
+                            other->gob_hitCallback(other, &hit);
                         }
-                        
-                        if (((int)&pNVar6 + local_78 <= local_58[0]) &&
-                            ((int)&pNVar16 + local_74 > local_58[0] - local_a0 + (int)&pGVar11)) {
-                            break;
-                        }
-                        
-                        pGVar8 = *(int*)(pGVar8 + 4);
-                    } while (pGVar8 != (int)0x80000000);
+                        return 1;
+                    }
                 }
-                
-                pGVar7 = *(int*)(pGVar7 + 4);
+                ha++;
             }
         }
     }
-    
-    return 0;
+    gob->gob_hitObject = other;
+    gob->gob_hitBox = 0;
+    gob->gob_hitOtherBox = 0;
+    other->gob_hitObject = gob;
+    other->gob_hitBox = 0;
+    other->gob_hitOtherBox = 0;
+    if (gob->gob_hitCallback) {
+        self.unk0 = 0;
+        self.type = 0;
+        gob->gob_hitCallback(gob, &self);
+    }
+    if (other->gob_hitCallback) {
+        HitRecord hit;
+        hit.a = self.b;
+        hit.b = self.a;
+        hit.unk0 = 0;
+        hit.type = 0;
+        other->gob_hitCallback(other, &hit);
+    }
+    return 1;
 }
 }

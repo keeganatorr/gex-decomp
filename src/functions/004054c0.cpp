@@ -1,79 +1,56 @@
-struct tagRECT {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
-
-struct tagPOINT {
-    int x;
-    int y;
-};
-
-struct tagWINDOWPLACEMENT {
+typedef struct RECT {
+    long left;
+    long top;
+    long right;
+    long bottom;
+} RECT;
+typedef struct POINT {
+    long x;
+    long y;
+} POINT;
+typedef struct WINDOWPLACEMENT {
     unsigned int length;
     unsigned int flags;
     unsigned int showCmd;
-    tagPOINT ptMinPosition;
-    tagPOINT ptMaxPosition;
-    tagRECT rcNormalPosition;
-};
-
+    POINT ptMinPosition;
+    POINT ptMaxPosition;
+    RECT rcNormalPosition;
+} WINDOWPLACEMENT;
 extern "C" {
-    extern int DAT_0045103C;
-    extern void* DAT_004875A0;
-    extern int DAT_00487768_ScreenWidth;
+extern int gFullscreen_0045103c;
+extern void *gMainWindow_004875a0;
+extern int DAT_00487768_ScreenWidth;
+void __cdecl FUN_004013e0_ExitFullscreen_Clean1(int);
+void *__cdecl memset(void *, int, unsigned int);
+__declspec(dllimport) int __stdcall AdjustWindowRect(RECT *rect, unsigned long style, int menu);
+__declspec(dllimport) int __stdcall GetWindowPlacement(void *hwnd, WINDOWPLACEMENT *wp);
+__declspec(dllimport) int __stdcall SetWindowPlacement(void *hwnd, const WINDOWPLACEMENT *wp);
+__declspec(dllimport) int __stdcall GetSystemMetrics(int index);
+void __cdecl GEX_Target(int width, int height)
+{
+    RECT r;
+    WINDOWPLACEMENT wp;
+    int w;
+    int h;
 
-    void FUN_004013E0(int mode);
-    void* __cdecl memset(void* destination, int value, unsigned int count);
-
-    __declspec(dllimport) void __stdcall AdjustWindowRect(tagRECT* lpRect, unsigned long dwStyle, int bMenu);
-    __declspec(dllimport) int __stdcall GetSystemMetrics(int nIndex);
-    __declspec(dllimport) int __stdcall GetWindowPlacement(void* hWnd, tagWINDOWPLACEMENT* lpwndpl);
-    __declspec(dllimport) int __stdcall SetWindowPlacement(void* hWnd, const tagWINDOWPLACEMENT* lpwndpl);
-
-    void GEX_Target(int width, int height)
-    {
-        tagRECT rect;
-        void* handle;
-        int cx;
-        int cy;
-        int metric;
-
-        if (DAT_0045103C != 0) {
-            FUN_004013E0(0);
-        }
-
-        rect.left = 0;
-        rect.top = 0;
-        rect.right = width;
-        rect.bottom = height;
-        AdjustWindowRect(&rect, 0xcf0000, 1);
-
-        cx = rect.right - rect.left;
-        cy = rect.bottom - rect.top;
-
-        tagWINDOWPLACEMENT wp;
-        memset(&wp, 0, sizeof(wp));
-
-        wp.length = 0x2c;
-        GetWindowPlacement(DAT_004875A0, &wp);
-
-        wp.rcNormalPosition.left = (GetSystemMetrics(0) - cx) / 2;
-        wp.rcNormalPosition.left = ((wp.rcNormalPosition.left + 2) & 0xfffffffc) - DAT_00487768_ScreenWidth;
-
-        metric = GetSystemMetrics(1);
-        metric = (metric - cy) / 2;
-        cx += wp.rcNormalPosition.left;
-        cy += metric;
-
-        SetWindowPlacement(
-            (handle = *(void* volatile*)&DAT_004875A0,
-             wp.rcNormalPosition.top = metric,
-             wp.rcNormalPosition.right = cx,
-             wp.showCmd = 1,
-             wp.rcNormalPosition.bottom = cy,
-             handle),
-            &wp);
-    }
+    if (gFullscreen_0045103c)
+        FUN_004013e0_ExitFullscreen_Clean1(0);
+    r.left = 0;
+    r.top = 0;
+    r.right = width;
+    r.bottom = height;
+    AdjustWindowRect(&r, 0xcf0000, 1);
+    w = r.right - r.left;
+    h = r.bottom - r.top;
+    memset(&wp, 0, sizeof wp);
+    wp.length = 0x2c;
+    GetWindowPlacement(gMainWindow_004875a0, &wp);
+    wp.rcNormalPosition.left = (GetSystemMetrics(0) - w) / 2;
+    wp.rcNormalPosition.left = ((wp.rcNormalPosition.left + 2) & ~3) - DAT_00487768_ScreenWidth;
+    wp.rcNormalPosition.top = (GetSystemMetrics(1) - h) / 2;
+    wp.rcNormalPosition.right = w + wp.rcNormalPosition.left;
+    wp.rcNormalPosition.bottom = h + wp.rcNormalPosition.top;
+    wp.showCmd = 1;
+    SetWindowPlacement(gMainWindow_004875a0, &wp);
+}
 }

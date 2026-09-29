@@ -1,15 +1,22 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0040F700.cpp
-// Historical source SHA256: 0fe4dffe5919701c6ef17e169d8b6750d0f48f0161fc662b15f614e66185280e
+// Unused declarations below are compiler-state padding, not recovered source:
+// VC4 orders commutative operands/registers by internal symbol numbering,
+// which the original headers set. They emit no code or relocations.
+// See docs/knowledge/symbol-numbering.md.
+void __cdecl decl_fn_0(void);
+void __cdecl decl_fn_1(void);
+void __cdecl decl_fn_2(void);
+void __cdecl decl_fn_3(void);
+void __cdecl decl_fn_4(void);
+void __cdecl decl_fn_5(void);
+void __cdecl decl_fn_6(void);
+void __cdecl decl_fn_7(void);
+void __cdecl decl_fn_8(void);
 extern "C" {
-extern "C" { extern unsigned int DAT_00457c88[]; }
-extern "C" void __cdecl GEX_Target(unsigned int keyInput, int param2, unsigned char* keyBytes) {
-    if (DAT_00457c88[0] == -1) return;
-    int i = 0;
-    do {
-        unsigned int mask = DAT_00457c88[i];
-        unsigned char* pb = (unsigned char*)(param2 + i);
-        keyBytes[*pb] = (mask & keyInput) != 0;
-        i++;
-    } while (DAT_00457c88[i] != 0xffffffff);
+extern unsigned int UINT_ARRAY_00457c88[];
+void __cdecl GEX_Target(unsigned int buttons, unsigned char *map, unsigned char *out)
+{
+    int i;
+    for (i = 0; UINT_ARRAY_00457c88[i] != 0xffffffff; i++)
+        out[map[i]] = (UINT_ARRAY_00457c88[i] & buttons) != 0;
 }
 }
