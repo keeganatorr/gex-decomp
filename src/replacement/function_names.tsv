@@ -495,6 +495,7 @@ address	ghidra_name	emitted_name	status
 0041a660	CollectibleReset_0041a660	CollectibleReset_0041a660	ghidra
 0041a680	FUN_0041a680	FUN_0041a680	ghidra
 0041a6f0	CameraInit_0041a6f0	CameraInit_0041a6f0	ghidra
+0041a810	(no Ghidra entry)	FUN_0041a810	fallback
 0041a920	CameraDoIt_0041a920	CameraDoIt_0041a920	ghidra
 0041ab00	CameraDraw_0041ab00	CameraDraw_0041ab00	ghidra
 0041ab10	CameraClid_0041ab10	CameraClid_0041ab10	ghidra
@@ -552,6 +553,7 @@ address	ghidra_name	emitted_name	status
 0041f860	VSIT_MarkForPlay_0041f860	VSIT_MarkForPlay_0041f860	ghidra
 0041f8b0	FUN_0041f8b0_Stub	FUN_0041f8b0_Stub	ghidra
 0041f8c0	VSIT_PlayVoiceSituation_0041f8c0	VSIT_PlayVoiceSituation_0041f8c0	ghidra
+0041f950	(no Ghidra entry)	FUN_0041f950	fallback
 0041fa10	FUN_0041fa10_ProcessVoiceLoadingCompletion_Clean1	FUN_0041fa10_ProcessVoiceLoadingCompletion_Clean1	ghidra
 0041fa80	VFX_Play_0041fa80	VFX_Play_0041fa80	ghidra
 0041faf0	VFX_Update_0041faf0	VFX_Update_0041faf0	ghidra
@@ -569,6 +571,7 @@ address	ghidra_name	emitted_name	status
 0041fdd0	FUN_0041FDD0	FUN_0041FDD0	ghidra
 0041feb0	FUN_0041FEB0	FUN_0041FEB0	ghidra
 0041fec0	ParaContainerDraw_0041fec0	ParaContainerDraw_0041fec0	ghidra
+0041fef0	PAR_DrawParallax_0041fef0	PAR_DrawParallax_0041fef0	ghidra
 00420190	PAR_ResolveParallax_00420190	PAR_ResolveParallax_00420190	ghidra
 00420210	PAR_LoadParallaxs_00420210	PAR_LoadParallaxs_00420210	ghidra
 004202b0	PAR_FreeParallaxs_004202b0	PAR_FreeParallaxs_004202b0	ghidra
@@ -590,6 +593,7 @@ address	ghidra_name	emitted_name	status
 00420c70	FUN_00420c70_GexWallCollisionInner	FUN_00420c70_GexWallCollisionInner	ghidra
 00420ce0	FUN_00420ce0_GexWallCollision	FUN_00420ce0_GexWallCollision	ghidra
 00420d30	FUN_00420D30	FUN_00420D30	ghidra
+00420d40	(no Ghidra entry)	FUN_00420d40	fallback
 00420e60	(no Ghidra entry)	FUN_00420e60	fallback
 00420f30	FUN_00420f30	FUN_00420f30	ghidra
 00420fa0	FUN_00420fa0_xpos_movement	FUN_00420fa0_xpos_movement	ghidra
@@ -925,6 +929,7 @@ address	ghidra_name	emitted_name	status
 00433900	GOB_ProcessEvents_00433900	GOB_ProcessEvents_00433900	ghidra
 004339c0	DefDoIt_004339c0	DefDoIt_004339c0	ghidra
 00433a70	EnemyDoIt_00433a70	EnemyDoIt_00433a70	ghidra
+00433b20	DefDraw_00433b20	DefDraw_00433b20	ghidra
 00433e60	ExitTVDraw_00433e60	ExitTVDraw_00433e60	ghidra
 00433ec0	FUN_00433ec0	FUN_00433ec0	ghidra
 00434080	KFBossDraw_00434080	KFBossDraw_00434080	ghidra
@@ -1130,6 +1135,7 @@ address	ghidra_name	emitted_name	status
 00440830	GFX_FreeImageCache_00440830	GFX_FreeImageCache_00440830	ghidra
 00440850	FUN_00440850_GameOver	FUN_00440850_GameOver	ghidra
 00440930	FUN_00440930_ContainsInput_POSSMAINGAMELOOP	FUN_00440930_ContainsInput_POSSMAINGAMELOOP	ghidra
+00440a30	FUN_00440a30_ContainsInput_CallsInputFunction_MAINGAMELOOP	FUN_00440a30_ContainsInput_CallsInputFunction_MAINGAMELOOP	ghidra
 00440cb0	FUN_00440cb0_DrawBackgroundInnerInner	FUN_00440cb0_DrawBackgroundInnerInner	ghidra
 00440e70	GOB_LoadTextures_00440e70	GOB_LoadTextures_00440e70	ghidra
 00441010	GOB_ExtraResolve_00441010	GOB_ExtraResolve_00441010	ghidra
