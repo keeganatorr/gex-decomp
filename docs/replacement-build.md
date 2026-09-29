@@ -105,23 +105,28 @@ the replacement remains near the start with zero points and one fewer life.
 The replacement loses the remaining lives and returns to the title around
 60 seconds; the original continues through the graveyard at 90 seconds.
 After a help-box repair the replacement starts a second attract level by
-85 seconds. A longer run faults while walking that level: the graphics
-list reaches a command whose next link is zero. The dispatcher matches
-the pinned null-pointer behavior, so the upstream list writer remains
-under investigation. A temporary list trace found the high list head
-pointing to an all-zero pool entry at the fault; the writer's recorded tail
-points to a different, later command. The previous `00443ae0` quad renderer
-stopped after one tile and used the address of a pool pointer as its pool;
-its source now writes all tiles and links both command lists using the
-read-only Ghidra analysis. The same list fault still occurs with that repair,
-so its cause is not yet isolated. The pinned `0043dc70` instructions also
-show that the graphics mode field is read 0x16 bytes into the second command;
-the previous source accidentally added 0x3e *int elements* from the first.
-That correction was built and run through the second attract sequence, but the
-graphics fault remains. The demo overlay appears in both at some
+85 seconds. It formerly faulted while walking that level: the graphics list
+reached a command whose next link was zero. A temporary list trace found
+both list heads pointing to the same zeroed pool entry at draw frame 2666,
+while their tails pointed to newer commands. The dispatcher matched the
+pinned null-pointer behavior. The `00441150` graphics writer was the source
+error: the backup translation treated 16-byte command records as 4-byte
+integers, wrote image and texture data over their list links, and failed to
+advance either list tail. Its command allocation, fields, paired copy and
+links now follow the read-only Ghidra analysis. The rebuilt replacement
+passed frame 2666, continued through the second demo at 105 seconds, and
+returned to the title by 120 seconds without that fault. A separate clean
+build with tracing removed remained in the second demo at 110 seconds without
+a memory fault. This establishes
+progress through the attract sequence, not gameplay parity. The previous
+`00443ae0` quad renderer also stopped after one tile and used the address of
+a pool pointer as its pool; its source now writes all tiles and links both
+command lists. The pinned `0043dc70` instructions show that the graphics
+mode field is read 0x16 bytes into the second command; the previous source
+accidentally added 0x3e *int elements* from the first. The demo overlay appears in both at some
 frames; its absence in a single capture can be the normal blinking phase.
 Captures and logs are retained locally under
-`.work/replacement-runtime/attract-{oracle,camera,player,state,helpbox,final,collision-buffer,quad}-*`.
+`.work/replacement-runtime/attract-{oracle,camera,player,state,helpbox,final,collision-buffer,quad,object-scale}-*`.
 Temporary output tracing in `ReadController` showed recording playback is
 active: the input bits change and the player enters walk, jump and attack
 states while X advances from about 12.8 million to 93.6 million fixed-point

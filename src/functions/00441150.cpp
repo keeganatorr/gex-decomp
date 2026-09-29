@@ -789,7 +789,7 @@ FUN_00441C57:
             }
           }
           else {
-            local_b0 = (unsigned short*)(DAT_00460F6C + imageStruct[4] * 8);
+            local_b0 = (unsigned short*)(DAT_00460F6C + *(short*)((char*)imageStruct + 0x12) * 8);
           }
           if ((bVar2 & 3) != 2) {
             tileSelectPtr = local_4;
@@ -802,17 +802,17 @@ FUN_00441C57:
           sVar25 = *psVar34;
           pMVar36 = (int*)DAT_004A2AE4;
           while (sVar25 != 0) {
-            if (pMVar36[5] < (unsigned int)DAT_004A2ADC) {
-              DAT_004A2AE4 = (int)(pMVar36 + 5);
+            if ((unsigned int)(pMVar36 + 20) <= (unsigned int)DAT_004A2ADC) {
+              DAT_004A2AE4 = (int)(pMVar36 + 20);
             } else {
               pMVar36 = (int*)DAT_004A2AE0;
-              DAT_004A2AE4 = (int)(pMVar36 + 5);
+              DAT_004A2AE4 = (int)(pMVar36 + 20);
             }
             {
               int tile_val = (int)(uVar27 | (-(unsigned int)((local_d4 & 0x8080) == 0) & 0xfe000000) + 0x2e000000);
-              pMVar36[0] = tile_val;
+              pMVar36[1] = tile_val;
             }
-            *(short*)((int)&pMVar36[0] + 6) = local_f6;
+            *(short*)((char*)pMVar36 + 14) = local_f6;
             sVar25 = psVar34[2];
             puVar18 = (unsigned short*)local_f0_0;
             if ((sVar25 != 0) && (iVar30 = (int)sVar25, puVar18 = (unsigned short*)local_e0_0, iVar26 != iVar30)) {
@@ -856,7 +856,7 @@ FUN_00441C57:
               local_4c_1 = sStack_aa;
               puVar20 = (unsigned short*)((local_4c_1 << 16) | (local_4c_0 & 0xffff));
             }
-            pMVar36[1] = (int)puVar20;
+            pMVar36[2] = (int)puVar20;
             iVar30 = (int)(unsigned char)*(unsigned char*)(psVar34 + 1) + (int)psVar34[2];
             puVar19 = (unsigned short*)local_f0_0;
             if ((iVar30 != 0) && (puVar19 = (unsigned short*)local_e0_0, iVar26 != iVar30)) {
@@ -900,7 +900,7 @@ FUN_00441C57:
               local_40_1 = sStack_a6;
               puVar21 = (unsigned short*)((local_40_1 << 16) | (local_40_0 & 0xffff));
             }
-            pMVar36[2] = (int)puVar21;
+            pMVar36[4] = (int)puVar21;
             sVar25 = psVar34[2];
             puVar20 = (unsigned short*)local_f0_0;
             if ((sVar25 != 0) && (iVar30 = (int)sVar25, puVar20 = (unsigned short*)local_e0_0, iVar26 != iVar30)) {
@@ -945,7 +945,7 @@ FUN_00441C57:
               local_34_1 = sStack_a2;
               puVar22 = (unsigned short*)((local_34_1 << 16) | (local_34_0 & 0xffff));
             }
-            *(int*)((int)pMVar36 + 12) = (int)puVar22;
+            pMVar36[6] = (int)puVar22;
             iVar30 = (int)(unsigned char)*(unsigned char*)(psVar34 + 1) + (int)psVar34[2];
             puVar21 = (unsigned short*)local_f0_0;
             if ((iVar30 != 0) && (puVar21 = (unsigned short*)local_e0_0, iVar26 != iVar30)) {
@@ -990,72 +990,55 @@ FUN_00441C57:
               local_28_1 = sStack_9e;
               puVar23 = (unsigned short*)((local_28_1 << 16) | (local_28_0 & 0xffff));
             }
-            pMVar36[4] = (int)puVar23;
+            pMVar36[8] = (int)puVar23;
+            // The command pool stores two 40-byte tiles. The backup source
+            // treated Ghidra's 16-byte table elements as 4-byte ints and
+            // wrote the image and texture bytes over their list links.
+            unsigned short mode;
+            unsigned char u, v;
             if ((bVar2 & 0x40) == 0) {
-              unsigned short* puVar22_u16 = (unsigned short*)((int)&pMVar36[1] + 2);
-              uVar10 = *(unsigned short*)(local_b8 + 4);
-              if ((local_d4 & 1) == 0) {
-                uVar10 = uVar10 | 0x20;
-              }
-              *puVar22_u16 = uVar10;
-              DAT_004A2B20 = *puVar22_u16;
-              *(char*)&pMVar36[0] = *(char*)((int)local_b8 + 0x12);
-              *(char*)((int)&pMVar36[0] + 1) = *(char*)((int)local_b8 + 0x13);
-              *(unsigned char*)&pMVar36[1] = *(unsigned char*)(psVar34 + 1) + *(char*)((int)local_b8 + 0x12) + -1;
-              *(char*)((int)&pMVar36[1] + 1) = *(char*)((int)local_b8 + 0x13);
-              *(char*)((int)&pMVar36[1] + 4) = *(char*)((int)local_b8 + 0x12);
-              *(char*)((int)&pMVar36[1] + 5) = *(char*)((int)local_b8 + 0x13) + *(unsigned char*)((int)psVar34 + 3) + -1;
-              *(unsigned char*)&pMVar36[2] = *(unsigned char*)(psVar34 + 1) + *(char*)((int)local_b8 + 0x12) + -1;
-              *(unsigned char*)((int)&pMVar36[2] + 1) = *(char*)((int)local_b8 + 0x13) + *(unsigned char*)((int)psVar34 + 3) + -1;
+              mode = *(unsigned short*)((char*)local_b8 + 16);
+              u = *((unsigned char*)local_b8 + 18);
+              v = *((unsigned char*)local_b8 + 19);
               local_b8 = (int*)local_b8[1];
+            } else {
+              mode = *local_b0;
+              u = *((unsigned char*)local_b0 + 2);
+              v = *((unsigned char*)local_b0 + 3);
+              local_b0 += 4;
             }
-            else {
-              unsigned short* puVar22_u16 = (unsigned short*)((int)&pMVar36[1] + 2);
-              uVar10 = *local_b0;
-              if ((local_d4 & 1) == 0) {
-                uVar10 = uVar10 | 0x20;
-              }
-              *puVar22_u16 = uVar10;
-              DAT_004A2B20 = *puVar22_u16;
-              *(char*)&pMVar36[0] = (char)local_b0[1];
-              *(char*)((int)&pMVar36[0] + 1) = *(char*)((int)local_b0 + 3);
-              *(unsigned char*)&pMVar36[1] = (char)local_b0[1] + *(unsigned char*)(psVar34 + 1) + -1;
-              *(char*)((int)&pMVar36[1] + 1) = *(char*)((int)local_b0 + 3);
-              *(char*)((int)&pMVar36[1] + 4) = (char)local_b0[1];
-              *(char*)((int)&pMVar36[1] + 5) = *(unsigned char*)((int)psVar34 + 3) + *(char*)((int)local_b0 + 3) + -1;
-              *(unsigned char*)&pMVar36[2] = (char)local_b0[1] + *(unsigned char*)(psVar34 + 1) + -1;
-              *(unsigned char*)((int)&pMVar36[2] + 1) = *(unsigned char*)((int)psVar34 + 3) + *(char*)((int)local_b0 + 3) + -1;
-              local_b0 = local_b0 + 4;
-            }
-            *(int*)DAT_004A2B18 = (int)pMVar36;
-            ppuVar37 = (unsigned short**)(pMVar36 + 2);
-            pMVar39 = pMVar36;
-            ppuVar43 = ppuVar37;
-            for (iVar30 = 10; iVar30 != 0; iVar30 = iVar30 + -1) {
-              *ppuVar43 = (unsigned short*)pMVar39[0];
-              pMVar39 = (int*)((int)pMVar39 + 4);
-              ppuVar43 = ppuVar43 + 1;
-            }
+            if ((local_d4 & 1) == 0) mode |= 0x20;
+            unsigned char *command = (unsigned char*)pMVar36;
+            *(unsigned short*)(command + 22) = mode;
+            DAT_004A2B20 = mode;
+            command[12] = u;
+            command[13] = v;
+            command[20] = (unsigned char)(u + *(unsigned char*)(psVar34 + 1) - 1);
+            command[21] = v;
+            command[28] = u;
+            command[29] = (unsigned char)(v + *(unsigned char*)((char*)psVar34 + 3) - 1);
+            command[36] = command[20];
+            command[37] = command[29];
+
+            *(int*)DAT_004A2B18 = (int)command;
+            DAT_004A2B18 = (int)command;
+            for (int word = 0; word < 10; ++word)
+              pMVar36[10 + word] = pMVar36[word];
             if (local_f4 != 0) {
-              *(short*)&pMVar36[3] = *(short*)&pMVar36[3] - local_f4;
-              ppuVar43 = (unsigned short**)(pMVar36 + 2);
-              *(short*)ppuVar43 = *(short*)ppuVar43 - local_f4;
-              *(short*)&pMVar36[4] = *(short*)&pMVar36[4] - local_f4;
-              ppuVar43 = (unsigned short**)(pMVar36 + 2);
-              *(short*)ppuVar43 = *(short*)ppuVar43 - local_f4;
+              *(short*)(command + 48) -= local_f4;
+              *(short*)(command + 56) -= local_f4;
+              *(short*)(command + 64) -= local_f4;
+              *(short*)(command + 72) -= local_f4;
             }
             if (local_f2 != 0) {
-              short* ps1 = (short*)((int)&pMVar36[3] + 2);
-              *ps1 = *ps1 - local_f2;
-              ps1 = (short*)((int)&pMVar36[2] + 2);
-              *ps1 = *ps1 - local_f2;
-              ps1 = (short*)((int)&pMVar36[4] + 2);
-              *ps1 = *ps1 - local_f2;
-              ps1 = (short*)((int)&pMVar36[2] + 2);
-              *ps1 = *ps1 - local_f2;
+              *(short*)(command + 50) -= local_f2;
+              *(short*)(command + 58) -= local_f2;
+              *(short*)(command + 66) -= local_f2;
+              *(short*)(command + 74) -= local_f2;
             }
             psVar34 = psVar34 + 4;
-            *(unsigned short**)DAT_004A2B14 = (unsigned short*)ppuVar37;
+            *(int*)DAT_004A2B14 = (int)(command + 40);
+            DAT_004A2B14 = (int)(command + 40);
             pMVar36 = (int*)DAT_004A2AE4;
             sVar25 = *psVar34;
           }
