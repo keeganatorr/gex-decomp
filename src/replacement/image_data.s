@@ -9321,6 +9321,8 @@ _GEX_DATA_00462740:
 .zero 192
 .section .bss
 .balign 16
+.globl _GEX_DATA_00462800
+_GEX_DATA_00462800:
 .space 600
 .globl _GEX_DATA_00462a58
 _GEX_DATA_00462a58:

@@ -18,6 +18,7 @@ SOURCE = ROOT / "src/replacement/image_data.s"
 OBJECTS = ROOT / ".work/replacement-objects"
 WORK = ROOT / ".work/replacement-data"
 TARGET = re.compile(r"_GEX_FN_([0-9a-f]{8})$")
+DATA_REFERENCE = re.compile(r"_GEX_(RDATA|DATA)_([0-9a-f]{8})$")
 
 
 def main() -> None:
@@ -32,6 +33,21 @@ def main() -> None:
     referenced = {}
     for path in sorted((ROOT / "src/functions").glob("[0-9a-f]" * 8 + ".cpp")):
         referenced.update(literal_targets(path.read_text()))
+    # Declarations such as DAT_004a2b28 also become address-based references
+    # after rebind_source_symbols. Include those, even when the source has no
+    # literal address for address_literals to find.
+    rebound_objects = [ROOT / ".work/replacement-rebound" / f"{path.stem}.obj"
+                       for path in sorted((ROOT / "src/functions").glob("[0-9a-f]" * 8 + ".cpp"))]
+    run = subprocess.run(["llvm-nm", "-u", "--format=posix",
+                          *(str(obj) for obj in rebound_objects)],
+                         capture_output=True, text=True, check=True)
+    for line in run.stdout.splitlines():
+        fields = line.split()
+        if len(fields) < 2 or fields[1] != "U":
+            continue
+        match = DATA_REFERENCE.fullmatch(fields[0])
+        if match:
+            referenced[int(match.group(2), 16)] = "GEX_" + match.group(1)
     additions = []
     for address, kind in sorted(referenced.items()):
         if kind not in ("GEX_RDATA", "GEX_DATA"):
@@ -39,7 +55,16 @@ def main() -> None:
         symbol = f"_GEX_{kind.removeprefix('GEX_')}_{address:08x}"
         if symbol in defined:
             continue
-        base = 0x450000 if kind == "GEX_RDATA" else 0x451000
+        if kind == "GEX_RDATA":
+            if not 0x450000 <= address < 0x450600:
+                raise ValueError(f"rdata alias outside checked-in image: {address:08x}")
+            base = 0x450000
+        elif 0x451000 <= address < 0x462800:
+            base = 0x451000
+        elif 0x462800 <= address < 0x4a44e0:
+            base = 0x462800
+        else:
+            raise ValueError(f"data alias outside checked-in image: {address:08x}")
         additions += [f".globl {symbol}",
                       f".set {symbol}, _{kind}_{base:08x} + {address - base}"]
     expanded = WORK / "image_data.expanded.s"
