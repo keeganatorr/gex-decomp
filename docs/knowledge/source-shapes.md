@@ -197,6 +197,31 @@ the jump target is the `else` body or the code after the `if`.
   == 10) { a = 1; b = 0; }` and nothing else. CL gives it the dead slot's
   home, so writing an initial value is what breaks the match (00410280,
   00416320's `shake`/`cycle` in a `switch` without `default`).
+- A stack home belongs to a variable, not to a live range: if one value
+  sits in two different slots in two halves of a function (x1 at 0x18 in
+  the first pass, 0x10 in the second), the source used two variables. In
+  0042eaf0 the second projection pass needed its own `x1b`/`y1b`, and the
+  order result `yorder` shares `y2`'s slot because the source reused the
+  variable (`y2 = order;` style), which a fresh variable never reproduces.
+  The converse holds across switch cases: in 0x4083a0 the WM_INITDIALOG loop
+  counter and the 0x590 handler's focused-control index share one slot, so
+  the source wrote `n = GetWindowLongA(...)` into the loop counter rather
+  than a fresh `idx`, and the 0x590 handler's own loop took a second
+  variable. With a separate `idx` the three slots came out in reverse order
+  and no declaration order (declclimb) could fix it.
+- A temporary's register can hinge on which *one* case declares it in its
+  own block. 0041dd50 rotates two hit boxes through six `if/else if` cases,
+  each swapping four values through a temp `t`; it was exact only with
+  `int t` block-scoped in the first case and the function-level `t` used by
+  the other five (all 64 combinations tried; `tools/blockscope.py ADDR SRC t` runs that
+  search). Block scope
+  everywhere and nowhere were both wrong.
+- A register that holds a value past the end of one if-branch cannot be
+  reused inside it. In 0x4083a0 the high word of wParam stayed in `esi`
+  through the WM_COMMAND tests, and the original reuses `esi` for the
+  CloseHandle pointer in the first branch, so that branch must end with
+  `break` (hiword dead afterwards); with `else if` falling through to a
+  later `hiword == 0` test, CL picked `edi` instead.
 - A pointer spilled once and reloaded at the top of an outer loop is a
   common subexpression written again at the loop top
   (`hb = e.b.frame->boxes;` both before the null check and first in the loop
@@ -312,3 +337,41 @@ No `#` is allowed, so a macro in the original has to be written out. Signs:
 12. `tools/shapes.py` now also swaps `(x & 2^n) >> n` with `(x & 2^n) != 0`:
     the same `and`/`shr` either way, but a different tree for the compare
     that follows (00421740).
+13. When `altsearch.py` stalls on a register swap, run
+    `tools/declpos.py ADDRESS FILE a,b,c`: every placement of the named
+    declarations, not one move at a time. It fixed the 00439390 prologue
+    (`prev`/`row` placement also flips `cmp` operand order, as in 004397f0)
+    and, when it finds nothing, it tells you the residue is not a
+    declaration-order one (see toolchain-limits.md, register choices).
+14. Loops over a table of structs: an induction pointer at `&T[0].y`
+    (`mov eax, 0x45fb14 … [eax-4]`) means the source indexes the table
+    (`T[i].y`, `T[i].x`) and the body reads `.y` first; a pointer variable
+    keeps the base at the struct start. `T[n++]` inside the body instead of
+    `n++` in the `for` header moves the IV increment to the loop top where
+    the original has it (0041bfc0). Two global arrays with equal element size
+    indexed by one `i` share a single offset register (`[ecx+A]`, `[ecx+B]`);
+    two pointer registers mean two pointer variables.
+15. A pointer loop whose bound is the *next* symbol's address
+    (`p < &DAT_0049fb14`, the label right after the array) keeps an entry
+    test, because CL cannot compare two symbols at compile time. Write the
+    bound against the same array (`p < &arr[281]`) and the test disappears
+    (00401f20).
+16. A load through one pointer scheduled above a store through another, or a
+    temporary in a fresh callee-saved register while a dead variable's
+    register is free: trial `/Oa` (`PROBE_OVERRIDE`, toolchain-limits.md)
+    before searching spellings.
+17. Mask registers and stack offsets before reading a diff
+    (`.work/.../w/uds.sh`): what remains is structure. Fix structure first,
+    then permute short statement runs (`tools/stmtperm.py`, check the winner is
+    still the same program: it does not know about data dependences), then
+    declaration order (`tools/declclimb.py`). 0042f910 went from 79 to 2 lines
+    that way in a few minutes.
+
+18. When only a temporary's register or an address's operand order is left,
+    try its declaration scope per block (`tools/blockscope.py ADDR SRC VAR`),
+    joint declaration positions of the two or three variables involved
+    (`tools/declgrid.py ADDR SRC a b c`; 0041e9d0's `[ecx+eax]` vs
+    `[eax+ecx]` needed three to move together, which declclimb cannot), then whether two values the
+    original keeps in one stack slot are one variable in the source: a
+    loop counter reused for an unrelated index (0x4083a0) or a stored-once
+    value that the original never keeps in a register.

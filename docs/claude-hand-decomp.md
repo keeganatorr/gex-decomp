@@ -1,18 +1,19 @@
-# Hand decompilation by Claude, and what it taught the tooling — 2026-09-25/28
+# Hand decompilation by Claude, and what it taught the tooling — 2026-09-25/29
 
 No campaign, no provider calls from the loop: one interactive agent (Claude,
 in a Nexus/Claude Code session) decompiling functions directly with a fast
 scratch compiler, then publishing through the normal durable queue.
 
-**Result: 752 → 1074 exact proofs, 63,353 → 166,735 exact bytes (+322 / +103,382),
+**Result: 752 → 1101 exact proofs, 63,353 → 180,028 exact bytes (+349 / +116,675),
 all game code (CRT at 0x449000+ skipped on purpose).**
 Every proof is a current `scripts/verify` receipt under
 `.work/claude-hand-decomp-20260925/` (`verify-<address>.json`, sources, prior
 working sources). Compiler, Ghidra and proof status were never edited. The
-project.json changes are ten reviewed config batches (`config-batch-1..10/`,
+project.json changes are seventeen reviewed config batches (`config-batch-1..17/`,
 each with a backup and a README naming the evidence): symbol bindings proved
-by original operands, and per-function `language: c` or `targetSymbol`
-overrides for bodies that only C compiles or that are `__stdcall`.
+by original operands, and per-function `language: c`, `targetSymbol` or
+`flags` overrides for bodies that only C compiles, that are `__stdcall`, or
+that were built with `/Oa`.
 
 The first pass (752 → 773, table below) was mostly symbol numbering. The later
 passes were mostly *source shapes*: code that means the same thing but compiles
@@ -177,6 +178,116 @@ First pass:
 Not deployed: the running service is still the staged
 `function-time-b3b4984fd40aa68a`; activating needs an immutable stage, a
 service restart and the project.json opt-in.
+
+## 2026-09-28: large functions, and a flag the project does not allow
+
+A reboot cleared `/tmp` mid-session, taking the scratch directory (search
+states, best sources of parked near misses). Every heredoc and `echo >>` in
+the session transcript was replayed into
+`.work/claude-hand-decomp-20260925/w/` (`recover.py`); scripts, notes and first
+drafts came back, tool-written best sources did not. The scratch directory now
+lives under `.work/`, which survives a reboot.
+
+Four functions never tried before went from nothing to within a few lines,
+using the Ghidra pseudocode stored in decomp.db (the Ghidra bridge was down):
+ProcessPaused `0041bfc0` (2599 B, 6 lines), HuntDiveInner `004397f0`
+(2412 B, 12 lines), `00439390` (10 lines) and CLD_ComputeAngleEdges
+`0041cb80` (12 lines). All four stop on a register choice that no spelling
+and no declaration order moves; they are listed with the evidence in
+[knowledge/toolchain-limits.md](knowledge/toolchain-limits.md).
+
+The one real finding: SFX_Open `00401f20` is **exact under `/Oa`** (assume no
+aliasing) with its natural source and cannot match under the project's
+`/O2 /G5 /Oy /GR-`: its loop loads through one pointer before storing through
+another and puts the temporary in a fresh `ebx`. `/Oa` is per function (the
+neighbouring sound code gets worse with it). pc-decomp's verifier accepted a
+fixed list of flags without `/Oa`, so the first attempt stopped the service
+and was reverted at once; `/Oa` and `/Ow` were added to the allowlist (with a
+selftest), a new backend was staged and activated, and 00401f20 verified exact
+under a per-function flag override (config batch 11).
+
+Three more were exact long ago and blocked by the backend, not the source.
+WND_CleanUp `004064d0` and SCRIPT_ExitScriptError `00436c90` end at `call _exit`
+in Ghidra's analysis, but the original carries on with the epilogue; MainMenuButtonDraw
+`0040c340` ends on a jump back into its body with its switch table after it.
+pc-decomp gained two offline, byte-checked extent repairs for exactly those
+shapes (`extend-noreturn-tails`, `confirm-switch-tails`; rules in its AGENTS.md),
+and all three verified exact. Each backend change was staged immutably and
+activated with a read-only database backup and the previous launch entry kept
+under `.work/*-activation-*/`.
+
+Tools added: `tools/declpos.py` (every placement of a few declarations,
+scored per case), and `PROBE_OVERRIDE='{"flags": [...]}'` is the documented
+way to trial a flag set with every probe-based tool. New shapes in
+source-shapes.md: index loops over struct tables, `T[n++]` in the body, bounds
+written against the same array.
+
+## 2026-09-29: functions Ghidra cut into pieces
+
+Two of the largest unmatched functions were never unmatched sources: Ghidra
+had split them. ob229DoIt `00430090` ends at `mov ebp, 0x20000` and falls
+straight into the record `00430244`, which nothing calls; the map hub state
+machine `00429ce0` ends at its switch dispatch and every case is imported as
+a function of its own (nine records, 0x429ce0..0x42a530, table at 0x42a534).
+pc-decomp gained two more offline, byte-checked repairs
+(`merge-fallthrough-fragments`, `merge-switch-fragments`), and
+`TrailingData` stopped counting a merged fragment's own entry as "another
+function inside the span". With those, both functions were written from the
+Ghidra pseudocode and the disassembly and verified exact: 1802 and 2129
+bytes, three and one evidence bindings (config batches 12 and 13). casediff
+took both from a first draft (24 and 84 mismatched instructions) to zero in a
+handful of edits: signed loop variable, a local for the event number, a
+`for (i = 0; i < 12; i++)` counter, `if (r != 4) {...} else` block order, a
+`switch` for the two cheat codes.
+
+The rest of the day's attempts stopped on register or slot allocation:
+`0042f910` (99.7%, one `neg` placement), `0042eaf0`, `00410280`, `0043dc70`,
+`004092d0` (parked notes list what was tried). Two measured facts came out of
+them, now in knowledge/codegen-notes.md: CL 10.00 gives `esi`, `edi`, `ebx`,
+`ebp` to register candidates in descending use count, and a chain of
+statements into a *spilled* local keeps one store per statement.
+
+Two backend gaps were found and filed rather than fixed in passing: the
+verifier does not require the original's relocations to be matched (00433900
+verified with a literal `0x0045f00c`), and a few real functions have no
+Ghidra record at all or a record that starts mid-function (0x408350,
+0x4083a0). The second gap is now closed: `define-functions` (below and
+`.work/define-functions-20260929/`) recorded all seven, and all seven are
+verified exact — the options/joystick/version dialog procedures and their
+edit-control subclasses, 4,313 bytes. They are `__stdcall` with four
+arguments, so each needs `targetSymbol: _GEX_Target@16` (config batch 15).
+0x4083a0's switch table sits after its recorded extent; the verifier's
+trailing-data rule accepts it, and `tools/probe.py` now skips merged
+fragments exactly as the verifier does — before that it saw a table target
+(0x408418, a former Ghidra "function") as another function's entry and
+reported the proof as a 25-byte mismatch.
+
+## 2026-09-29, later: volatile, joint declarations, lost drafts
+
+Six more proofs came from three levers, each now a tool or a documented
+search step:
+
+- `volatile` pins store order. 0042ff10 (two globals of a dozen), 00436cf0
+  (three fields of a state struct, plus extern order for the load order) and
+  0040af60 (one global, found by the `perturb --volatile` sweep over every
+  open draft). `--volatile` used to try nothing above six globals; it now
+  tries subsets of up to three among the globals the function stores to.
+- Joint placement. 0041e9d0 needed three declarations to move together,
+  which `declclimb` cannot do: `tools/declgrid.py`. 00437e50 needed plain
+  declarations assigned in one order (`tools/stmtperm.py` over four lines),
+  and 0040f700 needed nine prototype pads (`padgrid`).
+- Lost drafts. A reboot wiped the /tmp workdir with many 97-99% drafts; a
+  `cat` of 0041e9d0's draft survived in the session transcript, and the
+  004066d0 chain was replayed from it (`.work/.../replay.py`). Everything now
+  lives under `.work/claude-hand-decomp-20260925/w`.
+
+Four more came from rewriting lost drafts from scratch with these rules in
+hand: 004054c0 (exact on the first compile), 0040e2f0, 0041b600 (its tables
+were already bound under `_DAT_*`; `probe.py` now prints that hint) and
+00406fe0 (a global spelled as a scalar instead of an array element).
+
+00434b10 (EVENT_Collision_Unk, 2722 B) is written in full at the right size
+but parked on one allocation puzzle (parked.txt).
 
 ## Left alone on purpose
 
