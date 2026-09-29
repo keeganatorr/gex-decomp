@@ -29,6 +29,75 @@ void __cdecl FUN_00434AD0(int, int*);
 void __cdecl FUN_00405390_EmptyStringDebugFunction(char*, ...);
 }
 
+static unsigned int CollisionDistance(int value)
+{
+  return value < 0 ? 0U - (unsigned int)value : (unsigned int)value;
+}
+
+// Resolve the old-frame left-side contact before the contour test. In the
+// pinned routine this classification precedes its platform-height handling.
+// The backup source lost the old-frame offsets and replaced every table mask
+// with zero, so it could never take this branch.
+static int HandleLeftSideContact(int *platform, unsigned int *event)
+{
+  int *other = (int *)platform[0x5e];
+  if (other != DAT_004a27fc_PlayerClassInstance || !event[0] || event[1] ||
+      !(platform[0x2d] & 0x80)) return 0;
+
+  int oldOther[10] = {0};
+  int oldPlatform[10] = {0};
+  oldOther[0] = FUN_0041A400((int)other);
+  oldPlatform[0] = FUN_0041A400((int)platform);
+  if (!oldOther[0] || !oldPlatform[0]) return 0;
+  oldOther[1] = (other[0x31] + 0x200000) & 0xc00000;
+  oldOther[2] = other[0x35];
+  oldOther[3] = other[0x36];
+  oldOther[4] = (unsigned int)other[0x3f] >> 31;
+  oldOther[5] = ((unsigned int)other[0x3f] >> 30) & 1;
+  oldPlatform[1] = (platform[0x31] + 0x200000) & 0xc00000;
+  oldPlatform[2] = platform[0x35];
+  oldPlatform[3] = platform[0x36];
+  oldPlatform[4] = (unsigned int)platform[0x3f] >> 31;
+  oldPlatform[5] = ((unsigned int)platform[0x3f] >> 30) & 1;
+  FUN_0041CA70(oldOther);
+  FUN_0041CA70(oldPlatform);
+
+  int highY = event[10] > event[20] ? event[10] : event[20];
+  int lowY = event[11] < event[21] ? event[11] : event[21];
+  int highX = event[8] > event[18] ? event[8] : event[18];
+  int lowX = event[9] < event[19] ? event[9] : event[19];
+  unsigned int bits =
+      (CollisionDistance(highX - lowX) > CollisionDistance(highY - lowY) ? 16 : 0) |
+      (oldOther[9] > oldPlatform[8] ? 0 : 4) |
+      (oldPlatform[9] > oldOther[8] ? 0 : 8) |
+      (oldOther[7] <= oldPlatform[6] ? 1 : 0) |
+      (oldPlatform[7] > oldOther[6] ? 0 : 2);
+  if (((int *)&_DAT_0045B628)[bits] != 1) return 0;
+
+  int top = event[10];
+  unsigned int *frame = (unsigned int *)event[2];
+  if (frame && (frame[0] & 2)) {
+    int *contour = (int *)frame[8];
+    if (contour) {
+      int index = event[6] ? contour[2] - 1 : 0;
+      unsigned int height = ((unsigned char *)contour)[12 + index];
+      if (height) top = (height - 1) * 0x10000 + contour[1] + event[5];
+    }
+  }
+  if ((int)event[21] < top) {
+    other[0x44] = (int)platform;
+    other[0x45] = 4;
+    return 1;
+  }
+  if (other[0x3a]) FUN_00434AD0((int)platform, other);
+  other[0x39] = event[8];
+  other[0x1e] += (int)event[8] - (int)event[19];
+  if (platform[0x2d] & 0x1000) FUN_00421D50((int)platform, (int)event, 1);
+  _DAT_004A2860 = 1;
+  _DAT_004A27F0 = (int)platform;
+  return 1;
+}
+
 // The backup translation below erased field offsets and fixed-point constants.
 // Recover the static contour-platform branch directly from the pinned routine:
 // the frame's height bytes describe the surface under the player, and a close
@@ -53,7 +122,7 @@ static int HandleStaticContourPlatform(int *platform, unsigned int *event)
   if (!height) return 1;
   int top = height * 0x10000 + contour[1] + platform[0x1f];
   int y = other[0x1f];
-  if ((top <= y && y < top + 0x80000) ||
+  if ((top <= y && other[0x36] <= top + 0x20000 && other[0x23] >= 0) ||
       (y <= top && top - 0x80000 < y && other[0x37] == 0))
       other[0x44] = (int)platform;
   if (other[0x44] == (int)platform && other[0x23] >= 0) {
@@ -67,6 +136,7 @@ static int HandleStaticContourPlatform(int *platform, unsigned int *event)
 
 extern "C" void __cdecl FUN_00434b10_EVENT_Collision_Unk(int param_1,unsigned int *param_2)
 {
+  if (HandleLeftSideContact((int *)param_1, param_2)) return;
   if (HandleStaticContourPlatform((int *)param_1, param_2)) return;
   int *paVar1;
   int *piVar2;

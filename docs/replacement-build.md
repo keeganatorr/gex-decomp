@@ -216,17 +216,63 @@ and health. This comparison covers the sampled player fields and that one
 enemy, not all objects or rendered pixels. The process traces are retained
 under `.work/replacement-runtime/{type53-*,path-motion-*}`.
 
-A longer frame-indexed comparison matches the same sampled player fields
-through frame 567. At frame 568, the original moves X from `125624323` to
-`125698050`; the replacement moves it to `125845507`, leaving a `147457`
-fixed-point-unit gap (about 2.25 pixels). By frame 572 the original also
-records contact with a type 155 enemy/platform, while the replacement misses
-it. The original and replacement 430–850 player traces are retained as
-`.work/replacement-runtime/long-{oracle,replacement}-player.log`. The type 155
-collision callback eventually reaches `00434b10`, whose remaining backup body
-still has erased edge offsets and constants. This is the next identified
-behavioral mismatch; the 90-second replacement capture still returns to the
-title before the original.
+A longer comparison first found a `147457` fixed-point-unit X gap (about
+2.25 pixels) at frame 568 and missed type 155 contact shortly afterward.
+The original and pre-repair 430–850 traces are retained as
+`.work/replacement-runtime/long-{oracle,replacement}-player.log`. A read-only
+debugger capture of the original at timer 568 found the same 22-word collision
+event as the replacement, with platform left edge `126353410` and player right
+edge `126500867`. The original selects side-contact case 1 from the pinned
+`0045b628` table; the backup source for `00434b10` had erased the old-frame
+edge setup and every table mask. The source now restores the left-side
+classification and its X/edge response. The pinned old-frame angle is at
+object offset `0xc4` (`object[0x31]`). The read-only debugger receipt is
+`.work/replacement-runtime/oracle-frame568-gdb.log`.
+
+With that repair, the sampled player fields matched through frame 622. At
+frame 623 the original landed on a type 148 spring at Y=`52887552`, but the
+replacement fell through it. Both saw the same contour height and surface;
+the replacement's close-range landing check rejected a crossing of more than
+eight pixels in one frame. The static contour branch now checks the previous
+Y against the surface as the pinned collision logic does. The sampled player
+state, position, velocity, flags, input, health and support type match from
+frame 175 through **700** in `.work/replacement-runtime/crossing-player.log`
+against the original traces. These are behavioral comparisons of selected
+fields; other object state and rendering still need comparison.
+
+Extending that trace exposed a missing side-crawl transition at frame 727.
+The source for `00421a00` had only summed a collision edge array and returned
+it. The pinned PE first checks the recorded direction, probes the side wall
+and adjacent heights, then stores the edge and calls `00414130`. The source
+now follows those checks, including the separate upward ceiling path. The
+replacement enters state 55 at frame 727 at exactly the original X and Y.
+Fresh original and replacement runs match the selected player state, position,
+velocity, facing flags, input field, health and support fields for every shared
+sample from frame 700 through **940**. The runtime traces are retained under
+`.work/replacement-runtime/sidecrawl-{oracle,player}.log`.
+
+At frame 941 the replacement enters standing state while the original keeps
+running. The first difference is a recorded Right input gap: the original pad
+byte at `004a0281` stays set through frame 947, while the replacement clears
+it for frames 941–945. Both playback run counters reached 8 at frame 940.
+The replacement's default hit handler for a type 7 object called player damage
+at timer 940. A held health powerup kept health at four, but damage set
+`gNoProcess` to one. The level loop then stopped advancing the game timer
+while it continued reading the recording. The original did not enter this
+damage pause at that point. Temporary call-site and level-loop traces are
+retained under `.work/replacement-runtime/frame941-*-game.log`.
+
+A read-only scan at frame 940 found one type 7 object in the player vicinity
+in each run. The replacement object was at X=`184940544`, animation group 9,
+frame 7, visible; the original candidate was at X=`186390272`, animation
+group 1, frame 2, hidden. Both had Y=`39714816`. Their script bytes also
+differ, so the scan alone cannot establish that they are the same instance.
+The next comparison must match object identities and trace script progression
+or introduction before changing the hit handler. The scans are retained as
+`.work/replacement-runtime/type7-{oracle,replacement}.log`.
+The isolated captures are `.work/replacement-runtime/pad-{oracle,replacement}.log`
+and `record-{oracle,replacement}.log`. The input field in the earlier player
+traces is a separate word, so its equality did not establish pad-byte parity.
 
 The attract run identified source faults: a doubly scaled camera history
 index; cache pointers addressed two or four bytes too early and incorrect
