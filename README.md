@@ -17,7 +17,7 @@ whose gameplay matches the original as closely as practical.
 - The [previous documented checkpoint](docs/claude-hand-decomp.md) reported
   1,101 exact functions / 180,028 bytes; one further 122-byte proof brought
   the pre-rename record to **1,102 functions / 180,150 bytes**. The source tree
-  currently has 1,195 isolated function files. Renaming changed their hashes,
+  currently has 1,206 isolated function files. Renaming changed their hashes,
   so those exact records are historical until a compatible verifier rechecks
   the renamed sources. They do not yet form a linked game. The completed
   [smallest-first pass](docs/smallest-pass.md), [backup recovery](docs/backup-import.md)
@@ -64,9 +64,9 @@ The current whole-source build assessment also needs no original executable:
 ```
 
 It compiles all current sources and attempts a full link with source-built
-Windows resources. The current expected result is exit 2 with 57 unresolved
-externals and no duplicate definitions.
-This uses a diagnostic main and is not a playable replacement. Its scope and
+Windows resources. The current expected result is exit 2 with 49 unresolved
+externals in the real Windows startup link and no duplicate definitions.
+The replacement executable does not link yet. Its scope and
 the remaining work are in [replacement-build.md](docs/replacement-build.md).
 
 ```sh

@@ -9,9 +9,15 @@
 - [x] Rename `src/functions` definitions from live Ghidra function names by
   filename address, and track the name map
   (`scripts/name-ghidra-functions`)
-- [x] Compile all 1,195 current source functions with Ghidra-named exports, normalize
-  1,149 remaining function and 3,547 data COFF references, and measure the full link
-  (`scripts/assess-replacement-link`): 57 unresolved in LLD, zero duplicates
+- [x] Compile all 1,206 current source functions with Ghidra-named exports,
+  normalize 1,154 function and 3,547 data COFF references, and measure the
+  real WinMain startup link (`scripts/assess-replacement-link`): 49 unresolved
+  in LLD, zero duplicates
+- [x] Reconstruct WinMain, WndProc, registry startup, GDI initialization,
+  graphics flush, CDIO open/seek, and HSV conversion as compiling behavior candidates;
+  retain original-byte caveats for the two edited Ghidra bodies
+- [x] Add source bodies for VC4 `_x_ismbbtype`, `_flsall`, and `_doexit` so
+  startup and exit references resolve in the real game link
 - [x] Preserve pinned `.rdata`/`.data` initial values and zero tail as textual
   source with 2,685 symbolic relocations; ordinary builds use the source,
   not `GEX.exe` (`src/replacement/image_data.s`)
@@ -27,7 +33,7 @@
   rebase 61 distinct original image-address literals in scratch build copies
 - [ ] Recover semantic data types and editable resource scripts from the raw
   source bridges
-- [ ] Resolve the 57 remaining link externals, including file I/O, text,
+- [ ] Resolve the 49 remaining game-link externals, including text,
   graphics, import and CRT/debug helpers
 - [ ] Fill source gaps, including startup/window/graphics paths, and produce a
   whole-game Windows executable from source

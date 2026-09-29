@@ -27,29 +27,32 @@ Windows PE link work with this toolchain. It does not establish whole-game
 linkability or gameplay parity.
 
 `./scripts/assess-replacement-link` is the current end-to-end source-only
-build assessment. It compiles all **1,195** current function files with their
+build assessment. It compiles all **1,206** current function files with their
 Ghidra-based exported names and per-function C/C++ flags. It changes COFF
 *symbol references* to the exports at their justified addresses, assembles
 `src/replacement/image_data.s` and
 `image_resources.s`, and runs both the recovered VC4 linker and a modern LLD
-link with Win32 imports. The executable and all objects stay under `.work/`.
+link with Win32 imports. It attempts a Windows subsystem link through the
+reconstructed `WinMain_00405bf0` and VC4's `WinMainCRTStartup`. The executable
+and all objects stay under `.work/`.
 The command exits 2 while unresolved externals remain.
 
-At this checkpoint all 1,195 function sources compile. The normalization
-resolved 1,149 remaining function-name references and 3,547 data-name
+At this checkpoint all 1,206 function sources compile. The normalization
+resolved 1,154 remaining function-name references and 3,547 data-name
 references to shared address identities. There are **zero duplicate global
-definitions**. LLD reports **57 unresolved externals** and VC4 LINK reports 58
-(the latter does not supply LLD's `___ImageBase` symbol), down from 1,748 before
+definitions**. The real game-entry LLD link reports **49 unresolved externals**;
+the diagnostic LLD link reports 49 and VC4 LINK reports 50 (the latter does not
+supply LLD's `___ImageBase` symbol), down from 1,748 before
 source/data normalization. The formerly largest call gaps, `00444590`
 (`GOB_DisplayObject`) and `00441150` (scale/rotate), now have compiling behavior
 candidates. The latter emits 6,684 bytes versus 7,306 original bytes; neither
-is byte exact or gameplay validated. The current gaps include file I/O,
-text and graphics functions, import-style thunks, CRT/debug helpers, two
-pointers to CRT code interiors and image-base labels. The new `00420e60`
+is byte exact or gameplay validated. The current gaps include collision,
+text, graphics and level functions, CRT/debug helpers, and pointers to
+unreconstructed code. The new `00420e60`
 bubble callback, `0043dc70` graphics command writer and `0043e2c0` palette
 helper are also behavior candidates, not verifier proofs. The exact list and
 object-to-address map are in
-`.work/replacement-short/report.json` and `object-addresses.json`.
+`.work/replacement-short/game-lld-report.json` and `object-addresses.json`.
 
 `image_data.s` is a **textual, generated data source**, not a recovered set of
 historical declarations. It contains 1,536 raw `.rdata` bytes, 71,680 raw
@@ -60,10 +63,12 @@ called by the ordinary build. After assembly, every non-relocation byte in
 the two raw sections was compared with the pinned PE (zero mismatches), and
 the object has all 2,685 DIR32 relocations. The replacement build now
 converts four source-defined globals to external references in scratch copies,
-so the generated image data has sole storage ownership.
+so the generated image data has sole storage ownership. The assembler adds
+39 symbol-only aliases for source-referenced addresses within the checked-in
+data; it changes no initialized bytes.
 
-Forty-one function sources contain original image-address literals. The
-replacement build rewrites their 61 distinct in-image addresses into symbolic
+Fifty-one function sources contain original image-address literals. The
+replacement build rewrites their 198 distinct in-image addresses into symbolic
 relocations in scratch copies, so relinking does not leave pointers back to the
 old image base. These replacements still need semantic review, particularly
 function pointers and interior code addresses.
@@ -100,7 +105,7 @@ matches each source filename's eight-digit address to a function name. It
 renames the definitions in `src/functions/` and writes the name map to
 `src/replacement/function_names.tsv`. It retains a snapshot under
 `.work/replacement-named/`. An offline Ghidra inventory can be supplied with
-`--inventory JSON`. The current map names 1,185 sources from Ghidra and gives
+`--inventory JSON`. The current map names 1,196 sources from Ghidra and gives
 ten source addresses without Ghidra entries an address-based fallback. It
 sanitizes three names that are not C identifiers and disambiguates the two
 Ghidra functions both named `__atodbl`.
@@ -110,7 +115,7 @@ suffix because VC4's `libc.lib` defines the same decorated `__exit` symbol.
 Current callers use several different names and calling conventions for the
 same address, and some referenced functions
 have no source. The COFF address rebinder above already reconciles available
-source function identities; the 57 remaining LLD externals require implementations,
+source function identities; the 49 remaining game-link externals require implementations,
 imports or separately justified bindings.
 
 The current pass wired the pinned DirectDraw and DirectSound import thunks to
@@ -120,6 +125,19 @@ implementations now cover the 13-byte `00431820` callback that sets
 `DAT_00463fe0` and the 15-byte `00437f00` async-read completion callback.
 Both were recovered from their complete original instruction spans; neither
 is claimed as an exact verifier proof or as gameplay validation.
+
+The Windows startup path now has compiling sources for `WinMain`, `WndProc`,
+registry settings, GDI setup, graphics flush, CDIO open/seek and HSV conversion.
+The source
+keeps the original launcher token check and uses the pinned PE bytes to recover
+WndProc's F4 branch missing from edited Ghidra memory. These are behavioral
+candidates, not exact matches. The game entry adapter is a separate source
+file; LLD links with a scratch copy of VC4 `libc.lib` that retains its Windows
+startup member and removes four conflicting alternative startup members.
+The current link still fails before producing `gex-source.exe`.
+Source bodies for VC4 `_x_ismbbtype`, `_flsall` and `_doexit` now resolve the
+multibyte, stream-flush and exit references. They are source reconstruction
+candidates and have not been promoted to verifier proofs.
 
 Seven new function sources came from this work: `0041a380` is a fresh 122-byte
 exact verifier proof derived from the already exact `0041a500` layout and
@@ -135,7 +153,7 @@ are the bubble callback and three rendering helpers described above.
    source-defined data ownership and indirect calls, then form real shared
    translation units.
 2. **Code coverage.** Turn provisional and parked source into compilable,
-   reviewed implementations. Recover the startup, window, graphics, sound,
+   reviewed implementations. Continue the startup, window, graphics, sound,
    input and save paths. Complete or link the CRT and import thunks through
    their appropriate libraries. Keep exact proofs as regression evidence.
 3. **Data and resources.** Raw initialized/zero data and Windows resources are
@@ -143,7 +161,7 @@ are the bubble callback and three rendering helpers described above.
    then review the scratch-build storage/address rewrites. A clean build cannot
    extract these from the original EXE. The
    game's separately supplied asset files may remain runtime inputs.
-4. **Game link.** Add the real entry point and produce a replacement PE with
+4. **Game link.** Resolve the remaining symbols and produce a replacement PE with
    zero unresolved symbols. A link alone is insufficient: static initializers,
    resource IDs, imports and section contracts must be checked at runtime.
 5. **Behavior comparison.** Run repeatable original-versus-replacement cases
@@ -167,7 +185,7 @@ The current source policy forbids inline assembly in matching translation
 units, so some hand-written routines need either a justified equivalent or a
 deliberate policy decision before byte-exact reconstruction.
 
-The current full link still uses the link-smoke main. Its successful completion
-will be a linker milestone, not
-a playable-game claim. No model campaign, backend deployment or Ghidra
+The assessment retains a diagnostic-main link and now also attempts the real
+Windows startup link. A successful link will be a linker milestone, not a
+playable-game claim. No model campaign, backend deployment or Ghidra
 modification was part of this build milestone.

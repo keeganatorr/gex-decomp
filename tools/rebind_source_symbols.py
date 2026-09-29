@@ -36,6 +36,8 @@ LIBRARY_ALIASES = {
     "___fcloseall": "__fcloseall",
     "___setmbcp": "__setmbcp",
     "___debugbreak": "_DebugBreak@0",
+    "_doexit": "__doexit",
+    "___doexit": "__doexit",
 }
 
 

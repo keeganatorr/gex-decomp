@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+from address_literals import literal_targets
 from function_names import coff_export
 
 
@@ -25,7 +26,25 @@ def main() -> None:
     WORK.mkdir(parents=True, exist_ok=True)
     raw = WORK / "image_data.obj"
     rebound = WORK / "image_data.rebound.obj"
-    subprocess.run(["i686-w64-mingw32-as", "-o", str(raw), str(SOURCE)], check=True)
+    source_text = SOURCE.read_text()
+    defined = set(re.findall(r"^\.globl (_GEX_(?:RDATA|DATA)_[0-9a-f]{8})$",
+                             source_text, re.MULTILINE))
+    referenced = {}
+    for path in sorted((ROOT / "src/functions").glob("[0-9a-f]" * 8 + ".cpp")):
+        referenced.update(literal_targets(path.read_text()))
+    additions = []
+    for address, kind in sorted(referenced.items()):
+        if kind not in ("GEX_RDATA", "GEX_DATA"):
+            continue
+        symbol = f"_GEX_{kind.removeprefix('GEX_')}_{address:08x}"
+        if symbol in defined:
+            continue
+        base = 0x450000 if kind == "GEX_RDATA" else 0x451000
+        additions += [f".globl {symbol}",
+                      f".set {symbol}, _{kind}_{base:08x} + {address - base}"]
+    expanded = WORK / "image_data.expanded.s"
+    expanded.write_text(source_text + "\n".join(additions) + "\n")
+    subprocess.run(["i686-w64-mingw32-as", "-o", str(raw), str(expanded)], check=True)
     objects = sorted(OBJECTS.glob("[0-9a-f][0-9a-f][0-9a-f][0-9a-f]"
                                    "[0-9a-f][0-9a-f][0-9a-f][0-9a-f].obj"))
     run = subprocess.run(["llvm-nm", "-g", "--format=posix", *(str(obj) for obj in objects)],
@@ -63,6 +82,7 @@ def main() -> None:
                     str(raw), str(rebound)], check=True)
     report = {"format": "gex-image-data-build-v1", "source": str(SOURCE.relative_to(ROOT)),
               "functionSymbolsRebound": len(changes), "missingFunctionAddresses": sorted(missing_code),
+              "sourceAddressAliases": len(additions) // 2,
               "note": "Assembled from checked-in text source; no original EXE read."}
     (WORK / "image_data.report.json").write_text(json.dumps(report, indent=2) + "\n")
     print(f"image data assembled: {len(changes)} function symbols rebound; "

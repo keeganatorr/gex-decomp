@@ -8,11 +8,13 @@ ROOT=$(cd -- "$(dirname -- "$0")/.." && pwd)
 "$ROOT/tools/build_image_data.py"
 "$ROOT/tools/try_full_link.py"
 python3 "$ROOT/tools/try_lld_link.py"
-python3 - "$ROOT/.work/replacement-short/lld-report.json" <<'PY'
+python3 "$ROOT/tools/build_game_entry.py"
+python3 "$ROOT/tools/try_lld_link.py" --game
+python3 - "$ROOT/.work/replacement-short/game-lld-report.json" <<'PY'
 import json,sys
 report=json.load(open(sys.argv[1]))
 if report['linkerExitCode'] or report['unresolvedCount']:
-    print('source-only whole-game link remains incomplete')
+    print('source-only Gex startup link remains incomplete')
     raise SystemExit(2)
-print('source-only link completed; gameplay validation remains required')
+print('source-only Gex startup link completed; runtime validation remains required')
 PY

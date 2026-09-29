@@ -51,6 +51,7 @@ address	ghidra_name	emitted_name	status
 00403590	(no Ghidra entry)	FUN_00403590	fallback
 0040359e	FUN_0040359e	FUN_0040359e	ghidra
 004036f0	(no Ghidra entry)	FUN_004036f0	fallback
+00403960	WndProc_00403960	WndProc_00403960	ghidra
 00404230	DebugVramWndProc_00404230	DebugVramWndProc_00404230	ghidra
 00404410	FUN_00404410_LoadAvi_Clean1	FUN_00404410_LoadAvi_Clean1	ghidra
 00404440	CloseVideoWindow_00404440	CloseVideoWindow_00404440	ghidra
@@ -86,9 +87,12 @@ address	ghidra_name	emitted_name	status
 00405810	VRAM_Hide_00405810	VRAM_Hide_00405810	ghidra
 00405850	(no Ghidra entry)	FUN_00405850	fallback
 0040585e	FUN_0040585e_Drawing	FUN_0040585e_Drawing	ghidra
+00405bf0	WinMain_00405bf0	WinMain_00405bf0	ghidra
 004063d0	WinShowError_004063d0	WinShowError_004063d0	ghidra
 004064d0	WND_CleanUp_004064d0	WND_CleanUp_004064d0	ghidra
+004066d0	GDI_Init_004066d0	GDI_Init_004066d0	ghidra
 00406c00	FUN_00406c00_IfFreeGameNotEquals1_Unk_WHAT_DOES_THIS_DO_CONTAINS_PPVBITS	FUN_00406c00_IfFreeGameNotEquals1_Unk_WHAT_DOES_THIS_DO_CONTAINS_PPVBITS	ghidra
+00406c30	GFX_Flush_00406c30	GFX_Flush_00406c30	ghidra
 00406fd0	FUN_00406fd0_timeSetEventInner	FUN_00406fd0_timeSetEventInner	ghidra
 00406fe0	FUN_00406fe0_InitWindowVars	FUN_00406fe0_InitWindowVars	ghidra
 00407330	WindowSizeDialogProc_00407330	WindowSizeDialogProc_00407330	ghidra
@@ -100,10 +104,13 @@ address	ghidra_name	emitted_name	status
 004083a0	(no Ghidra entry)	FUN_004083a0	fallback
 00408432	FUN_00408432_Button1	FUN_00408432_Button1	ghidra
 00408a30	(no Ghidra entry)	FUN_00408a30	fallback
+00408b60	SettingsGetFromRegistry_00408b60	SettingsGetFromRegistry_00408b60	ghidra
 00408f40	SettingsSetFromRegistry_00408f40	SettingsSetFromRegistry_00408f40	ghidra
+00409170	CDIO_FileOpen_00409170	CDIO_FileOpen_00409170	ghidra
 00409200	CDIO_FileClose_00409200	CDIO_FileClose_00409200	ghidra
 00409250	CDIO_FileRead_00409250	CDIO_FileRead_00409250	ghidra
 004092a0	CDIO_FileSize_004092a0	CDIO_FileSize_004092a0	ghidra
+004092d0	CDIO_FileSeek_004092d0	CDIO_FileSeek_004092d0	ghidra
 00409320	CDIO_CloseDirectory_00409320	CDIO_CloseDirectory_00409320	ghidra
 00409350	CDIO_OpenDirectory_00409350	CDIO_OpenDirectory_00409350	ghidra
 004093e0	CDIO_ReadFileTables_004093e0	CDIO_ReadFileTables_004093e0	ghidra
@@ -727,6 +734,7 @@ address	ghidra_name	emitted_name	status
 00428c80	UTL_ReallyRandom_00428c80	UTL_ReallyRandom_00428c80	ghidra
 00428cc0	GFX_DrawRectHelper_00428cc0	GFX_DrawRectHelper_00428cc0	ghidra
 00428cf0	FUN_00428cf0	FUN_00428cf0	ghidra
+00428e50	FUN_00428e50	FUN_00428e50	ghidra
 00428fa0	AdjustPlut_00428fa0	AdjustPlut_00428fa0	ghidra
 00429190	FUN_00429190	FUN_00429190	ghidra
 00429200	FUN_00429200_PasswordRelated	FUN_00429200_PasswordRelated	ghidra
@@ -1157,6 +1165,7 @@ address	ghidra_name	emitted_name	status
 00449750	__cinit	__cinit	ghidra
 00449780	_exit	_exit_00449780	ghidra,crt-collision
 004497a0	__exit	__exit	ghidra
+004497c0	_doexit	_doexit	ghidra
 00449870	__initterm	__initterm	ghidra
 00449a90	FUN_00449A90	FUN_00449A90	ghidra
 00449aa0	FUN_00449aa0_fpMathInner	FUN_00449aa0_fpMathInner	ghidra
@@ -1169,6 +1178,7 @@ address	ghidra_name	emitted_name	status
 0044a5d0	FUN_0044a5d0_fpMathInnerInner	FUN_0044a5d0_fpMathInnerInner	ghidra
 0044a9a2	FUN_0044a9a2	FUN_0044a9a2	ghidra
 0044ab50	__ismbblead	__ismbblead	ghidra
+0044ab70	_x_ismbbtype	_x_ismbbtype	ghidra
 0044b370	___initmbctable	___initmbctable	ghidra
 0044c490	_get_int_arg	_get_int_arg	ghidra
 0044c4a0	_get_int64_arg	_get_int64_arg	ghidra
@@ -1190,6 +1200,7 @@ address	ghidra_name	emitted_name	status
 0044d710	___dtold	___dtold	ghidra
 0044d970	_malloc	_malloc	ghidra
 0044e7e0	FUN_0044e7e0	FUN_0044e7e0	ghidra
+0044e7f0	_flsall	_flsall	ghidra
 0044e9a0	___addl	___addl	ghidra
 0044ea40	___shl_12	___shl_12	ghidra
 0044ea80	___shr_12	___shr_12	ghidra
