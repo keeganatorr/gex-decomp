@@ -1,0 +1,45 @@
+{
+  "format": "gex-replacement-aliases-v1",
+  "aliases": {
+    "_WindowTitle_GEX": {
+      "address": "0045152c",
+      "evidence": "00405331 pushes 0045152c as MessageBoxA caption; data is the string GEX"
+    },
+    "_SkipIntroBool": {
+      "address": "00487fc0",
+      "evidence": "00405108 loads 00487fc0 immediately before GameMain_0040b0a0"
+    },
+    "_MainGame_NextKeyInput": {
+      "address": "004a27e0",
+      "evidence": "0040f7a7 clears 004a27e0 and subsequent bit tests OR into the same word"
+    },
+    "_MainGame_KeyInput": {
+      "address": "004a27d8",
+      "evidence": "0040f883 loads 004a27d8 and 0040f88f stores the accumulated bits there"
+    },
+    "_GraphicsModeCurrent": {
+      "address": "00460678",
+      "evidence": "0043f087 compares and 0043f22e stores the graphics mode at 00460678"
+    },
+    "?SciFiLevelStrings@@3HA": {
+      "address": "0045a3c4",
+      "evidence": "00441150 archived source indexes &SciFiLevelStrings+4; original 00441477 reads [eax*4+0045a3c8]"
+    },
+    "_String_Waiting_For_Speech_To_Load": {
+      "address": "00459794",
+      "evidence": "0041ecd0 case 6 jumps to 0041f12f, which stores the string at 00459794"
+    },
+    "_String_Waiting_For_GX_To_Load": {
+      "address": "0045977c",
+      "evidence": "0041ecd0 case 7 jumps to 0041f1a1, which stores the string at 0045977c"
+    },
+    "_String_Waiting_For_GX_Idle_To_Load": {
+      "address": "00459760",
+      "evidence": "0041ecd0 case 8 jumps to 0041f23c, which stores the string at 00459760"
+    },
+    "_String_Finished_Loading": {
+      "address": "0045974c",
+      "evidence": "0041ecd0 case 9 jumps to 0041f272, which stores the string at 0045974c"
+    }
+  }
+}

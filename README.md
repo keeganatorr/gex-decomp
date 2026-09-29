@@ -1,8 +1,10 @@
 # Gex / GOG — matching decompilation baseline
 
 A fresh project at `/home/keegan/Repos/gex-decomp`, separate from all previous
-Gex injection, SDL, pemod and recompilation work. This is a **per-function C/C++
-source reconstruction and verification baseline**, not yet a full rebuilt game.
+Gex injection, SDL, pemod and recompilation work. The current source set is a
+**per-function C/C++ reconstruction and verification baseline**. The active
+goal is a [source-built replacement executable](docs/replacement-build.md)
+whose gameplay matches the original as closely as practical.
 
 ## Working now
 
@@ -12,13 +14,12 @@ source reconstruction and verification baseline**, not yet a full rebuilt game.
   recovered structures). Ghidra reports 1,515 functions including 180 externals.
 - Recovered compiler runs: **Microsoft C/C++ 10.00.5270**, with the old project's
   `/O2 /G5 /Oy /GR-` flags. It is **not MSVC 2010**.
-- **409 C/C++ candidates match 15,439 original bytes**, including actual DIR32/REL32
-  destinations. No wildcard masking. The latest
-  [EditedGex iterative checkpoint](docs/iterative-editedgex.md) and subsequent
-  bounded recovery work preserve these proofs under the activated 179-entry
-  pinned-PE import map; all 409 were reverified after activation. **926 functions
-  remain non-exact**; this is not completion of the game. There are now 898 source
-  files. The completed
+- The [previous documented checkpoint](docs/claude-hand-decomp.md) reported
+  1,101 exact functions / 180,028 bytes. The live service now reports
+  **1,102 exact functions / 180,150 bytes** after one further 122-byte proof.
+  The source tree currently has
+  1,193 isolated function files. Exact bodies are independently verified;
+  they do not yet form a linked game. The completed
   [smallest-first pass](docs/smallest-pass.md), [backup recovery](docs/backup-import.md)
   and [ten-function results](docs/ten-functions.md) remain documented.
 - A persistent backend serves real data to Nexus over a private named Unix socket.
@@ -46,6 +47,25 @@ it reads this project's AGENTS.md and writes here, not into the Nexus repository
 Nexus's own agents and actual session viewers remain the place for discussion.
 
 ## Build / verify
+
+The first source-only link milestone builds and runs three reconstructed
+functions as a Windows executable without reading `GEX.exe`:
+
+```sh
+./scripts/build-source-link-smoke
+./tools/link_inventory.py
+```
+
+The current whole-source build assessment also needs no original executable:
+
+```sh
+./scripts/assess-replacement-link
+```
+
+It compiles all current sources and attempts a full link. The current expected
+result is exit 2 with 69 unresolved externals and no duplicate definitions.
+This uses a diagnostic main and is not a playable replacement. Its scope and
+the remaining work are in [replacement-build.md](docs/replacement-build.md).
 
 ```sh
 # Start the already-installed user service; waits for its actual identity handshake.

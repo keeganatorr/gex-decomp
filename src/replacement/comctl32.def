@@ -1,0 +1,3 @@
+LIBRARY COMCTL32.DLL
+EXPORTS
+    PropertySheetA@4

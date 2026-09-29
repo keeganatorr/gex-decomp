@@ -1,5 +1,32 @@
 # Gex decompilation
 
+## Replacement executable from source
+- [x] Link and run a three-function Windows PE from reconstructed source with
+  the recovered VC4 compiler/linker, with no original executable input
+  (`scripts/build-source-link-smoke`; `docs/replacement-build.md`)
+- [x] Inventory current source/link references without reading the EXE or DB
+  (`tools/link_inventory.py`)
+- [x] Compile all 1,193 current source functions with unique exports, normalize
+  2,503 function and 3,544 data COFF references, and measure the full link
+  (`scripts/assess-replacement-link`): 69 unresolved, zero duplicates
+- [x] Preserve pinned `.rdata`/`.data` initial values and zero tail as textual
+  source with 2,685 symbolic relocations; ordinary builds use the source,
+  not `GEX.exe` (`src/replacement/image_data.s`)
+- [x] Publish exact `0041a380` current-frame fallback (122 bytes), and add
+  behavior-focused `00409740` tracked-memory free and `00420e60` bubble callback sources
+- [x] Add compiling behavior candidates for display, scale/rotate, graphics
+  commands and palette adjustment (`00444590`, `00441150`, `0043dc70`, `0043e2c0`);
+  the large renderer still differs substantially from the original
+- [x] Give the generated data object sole storage ownership for four globals;
+  rebase 61 distinct original image-address literals in scratch build copies
+- [ ] Recover semantic data types and resource scripts
+- [ ] Resolve the 69 remaining link externals, including file I/O, text,
+  graphics, import and CRT/debug helpers
+- [ ] Fill source gaps, including startup/window/graphics paths, and produce a
+  whole-game Windows executable from source
+- [ ] Compare repeatable gameplay scenarios against the original and fix
+  behavioral differences
+
 ## Done — hand decompilation and executable knowledge base (Claude, 2026-09-25/26)
 - [x] Twenty-one functions exact by hand through the durable queue: **773 exact / 66,802 bytes** (+21 / +3,449), no config/binding/Ghidra edits (`docs/claude-hand-decomp.md`)
 - [x] Fast scratch loop: `tools/probe.py` (compile + relocated diff, ~0.1 s warm), `tools/perturb.py` (declaration orders + padding + front end), `tools/ghidra_struct.py`, `tools/idiom_scan.py`

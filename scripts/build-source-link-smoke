@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+"""Link and run three reconstructed functions without reading the Gex EXE.
+
+This is a whole-program toolchain milestone, not a replacement game build.
+Objects and the executable stay under .work/replacement-link-smoke/.
+"""
+
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+
+ROOT = Path(__file__).resolve().parent.parent
+PROJECT = json.loads((ROOT / "project.json").read_text())
+TC = PROJECT["toolchain"]
+COMPILER = Path(TC["compiler"])
+LINKER = COMPILER.with_name("link.exe")
+CRT = COMPILER.parent.parent / "lib" / "libc.lib"
+# This SDK's Chicago import archive is readable by the recovered VC4 linker.
+SDK_KERNEL32 = COMPILER.parents[5] / "public/sdk/lib/chicago/i386/kernel32.lib"
+WORK = ROOT / ".work/replacement-link-smoke"
+FUNCTIONS = (
+    ("00420d30", "GEX_FN_00420d30"),
+    ("00418e20", "GEX_FN_00418e20"),
+    ("0041fbc0", "GEX_FN_0041fbc0"),
+)
+
+
+def win(path: Path) -> str:
+    return "Z:" + str(path.resolve()).replace("/", "\\")
+
+
+def run(command: list[str], env: dict[str, str]) -> None:
+    result = subprocess.run(command, cwd=WORK, env=env, text=True,
+                            stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                            timeout=90)
+    if result.returncode:
+        print(result.stdout, file=sys.stderr)
+        raise SystemExit(result.returncode)
+
+
+def compile_file(source: Path, obj: Path, flags: list[str], name: str | None,
+                 env: dict[str, str]) -> None:
+    command = [TC["wine"], str(COMPILER), "/nologo", "/c", *flags]
+    if name:
+        command.append("/DGEX_Target=" + name)
+    command += ["/Fo" + win(obj), "/Tp" + win(source)]
+    run(command, env)
+
+
+def main() -> None:
+    for path in (COMPILER, LINKER, CRT, SDK_KERNEL32,
+                 ROOT / "src/replacement/link_smoke.cpp"):
+        if not path.is_file():
+            raise SystemExit(f"missing build input: {path}")
+    WORK.mkdir(parents=True, exist_ok=True)
+    env = dict(os.environ, WINEPREFIX=TC["winePrefix"], WINEDEBUG="-all",
+               INCLUDE="", LIB="", CL="", _CL_="")
+    objects = []
+    for address, name in FUNCTIONS:
+        source = ROOT / "src/functions" / f"{address}.cpp"
+        if not source.is_file():
+            raise SystemExit(f"missing reconstructed source: {source}")
+        obj = WORK / f"{address}.obj"
+        override = PROJECT.get("functionOverrides", {}).get(address, {})
+        if override.get("language", "cpp") != "cpp":
+            raise SystemExit(f"link smoke only supports C++ source: {address}")
+        compile_file(source, obj, override.get("flags", TC["flags"]), name, env)
+        objects.append(obj)
+    # The caller retains its recovered source name. Normalize that COFF
+    # reference to the source-built callee's unique export without a wrapper.
+    caller = WORK / "00418e20.obj"
+    rebound = WORK / "00418e20.rebound.obj"
+    run(["llvm-objcopy",
+         "--redefine-sym=_VSIT_UnforceVoiceSituation_0041fbc0=_GEX_FN_0041fbc0",
+         str(caller), str(rebound)], env)
+    objects[1] = rebound
+    harness = WORK / "link_smoke.obj"
+    compile_file(ROOT / "src/replacement/link_smoke.cpp", harness,
+                 TC["flags"], None, env)
+    output = WORK / "link-smoke.exe"
+    run([TC["wine"], str(LINKER), "/NOLOGO", "/SUBSYSTEM:CONSOLE",
+         "/OUT:" + win(output), *(win(obj) for obj in objects), win(harness),
+         win(CRT), win(SDK_KERNEL32)], env)
+    run([TC["wine"], str(output)], env)
+    print(f"source-only link and run succeeded: {output}")
+
+
+if __name__ == "__main__":
+    main()
