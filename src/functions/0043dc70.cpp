@@ -272,7 +272,9 @@ FUN_0043E123:
         }
         psVar7 = psVar7 + 4;
         *DAT_004a2b14 = (int)piVar8;
-        DAT_004a2b20 = *(short *)((int)piVar9 + 0x3e);
+        // The pinned instruction reads 0x16 bytes into the second 40-byte
+        // command (0x3e bytes from the first), not 0x3e int elements.
+        DAT_004a2b20 = *(short *)((char *)piVar8 + 0x16);
         DAT_004a2b14 = piVar8;
       } while (*psVar7 != 0);
     }

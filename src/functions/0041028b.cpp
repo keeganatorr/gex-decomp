@@ -1,6 +1,8 @@
 // Adapted from pc_decomp_backup/src/functions/FUN_00410280_SetScrollPosition_ScrollScreen.cpp
 // Historical source SHA256: 2ed79c2ac04a28f0079cc436eb02f507e429c936f5cf4349f3dfde0f5f4a3071
 // Behavior candidate; original bytes are not claimed to match.
+// The history tables below are byte-addressed: adding an index to an int *
+// would scale their four-byte offsets a second time and corrupt camera state.
 extern "C" {
 extern int DAT_00455b8c;
 extern int DAT_00455b90;
@@ -118,8 +120,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
       }
       if (bVar12) {
         if (bVar1) {
-          iVar2 = *(int *)(&DAT_00462d50 + DAT_00457e8c * 4);
-          *(int *)(&DAT_00462d50 + DAT_00457e8c * 4) = iStack_18;
+          iVar2 = *(int *)((char *)&DAT_00462d50 + DAT_00457e8c * 4);
+          *(int *)((char *)&DAT_00462d50 + DAT_00457e8c * 4) = iStack_18;
           DAT_00462d48 = (DAT_00462d48 - iVar2) + iStack_18;
           DAT_00457e8c = DAT_00457e8c + 1 & 7;
           if (iStack_14 == 0) {
@@ -137,8 +139,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
         }
       }
       else {
-        DAT_00462d48 = DAT_00462d48 - *(int *)(&DAT_00462d50 + DAT_00457e8c * 4);
-        *(int *)(&DAT_00462d50 + DAT_00457e8c * 4) = iStack_18;
+        DAT_00462d48 = DAT_00462d48 - *(int *)((char *)&DAT_00462d50 + DAT_00457e8c * 4);
+        *(int *)((char *)&DAT_00462d50 + DAT_00457e8c * 4) = iStack_18;
         DAT_00462d48 = DAT_00462d48 + iStack_18;
         DAT_00457e8c = DAT_00457e8c + 1 & 7;
         if (iVar2 == 0) {
@@ -218,8 +220,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
         iVar6 = iVar6 + 0x40000;
         DAT_00462d44 = DAT_00455bb8;
       }
-      iVar2 = *(int *)(&DAT_00462cb0 + DAT_00457e84 * 4);
-      *(int *)(&DAT_00462cb0 + DAT_00457e84 * 4) = iVar6;
+      iVar2 = *(int *)((char *)&DAT_00462cb0 + DAT_00457e84 * 4);
+      *(int *)((char *)&DAT_00462cb0 + DAT_00457e84 * 4) = iVar6;
       DAT_00462d38 = (DAT_00462d38 - iVar2) + iVar6;
       uVar7 = DAT_00462d38 >> 5;
       DAT_00457e84 = DAT_00457e84 + 1 & 0x1f;
@@ -228,8 +230,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
     uVar5 = (int)uVar3 >> 0x1f;
     DAT_00462d4c = iVar4;
     if ((DAT_00462e08 == 0) || ((DAT_00462d30 != 0 && (DAT_00462d30 != 1)))) {
-      DAT_00462d3c = DAT_00462d3c - *(int *)(&DAT_00462d70 + DAT_00457e88 * 4);
-      *(int *)(&DAT_00462d70 + DAT_00457e88 * 4) = 0;
+      DAT_00462d3c = DAT_00462d3c - *(int *)((char *)&DAT_00462d70 + DAT_00457e88 * 4);
+      *(int *)((char *)&DAT_00462d70 + DAT_00457e88 * 4) = 0;
       iVar10 = DAT_00455be0;
       DAT_00462d4c = DAT_00455bd4;
       DAT_00457e88 = DAT_00457e88 + 1 & 1;
@@ -243,8 +245,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
         DAT_00455bd4 = DAT_00455bac;
         DAT_00455bd8 = DAT_00455bb0;
         iVar10 = (uVar11 - uVar5) + (uVar3 ^ uVar5);
-        iVar2 = *(int *)(&DAT_00462d88 + DAT_00462d80 * 4);
-        *(int *)(&DAT_00462d88 + DAT_00462d80 * 4) = iVar10;
+        iVar2 = *(int *)((char *)&DAT_00462d88 + DAT_00462d80 * 4);
+        *(int *)((char *)&DAT_00462d88 + DAT_00462d80 * 4) = iVar10;
         DAT_00462d40 = (DAT_00462d40 - iVar2) + iVar10;
         DAT_00462d80 = DAT_00462d80 + 1 & 0x1f;
         uVar11 = DAT_00462d40 >> 5;
@@ -259,8 +261,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
           DAT_00462d4c = iVar10;
           uVar11 = (uVar11 - uVar5) + (uVar3 ^ uVar5);
           if (DAT_00462d30 != 4) {
-            iVar2 = *(int *)(&DAT_00462d88 + DAT_00462d80 * 4);
-            *(unsigned int *)(&DAT_00462d88 + DAT_00462d80 * 4) = uVar11;
+            iVar2 = *(int *)((char *)&DAT_00462d88 + DAT_00462d80 * 4);
+            *(unsigned int *)((char *)&DAT_00462d88 + DAT_00462d80 * 4) = uVar11;
             DAT_00462d40 = (DAT_00462d40 - iVar2) + uVar11;
             uVar11 = DAT_00462d40 >> 5;
             DAT_00462d80 = DAT_00462d80 + 1 & 0x1f;
@@ -269,8 +271,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
       }
     }
     else {
-      iVar2 = *(int *)(&DAT_00462d70 + DAT_00457e88 * 4);
-      *(unsigned int *)(&DAT_00462d70 + DAT_00457e88 * 4) = uVar3;
+      iVar2 = *(int *)((char *)&DAT_00462d70 + DAT_00457e88 * 4);
+      *(unsigned int *)((char *)&DAT_00462d70 + DAT_00457e88 * 4) = uVar3;
       DAT_00462d3c = (DAT_00462d3c - iVar2) + uVar3;
       DAT_00457e88 = DAT_00457e88 + 1 & 1;
       if ((-1 < (int)uVar3) || (DAT_00455bbc <= iVar4)) {
@@ -292,8 +294,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
           DAT_00457e80 = 2;
           iVar10 = (uVar11 - uVar5) + (uVar3 ^ uVar5);
           DAT_00462d4c = DAT_00455bc0;
-          iVar2 = *(int *)(&DAT_00462d88 + DAT_00462d80 * 4);
-          *(int *)(&DAT_00462d88 + DAT_00462d80 * 4) = iVar10;
+          iVar2 = *(int *)((char *)&DAT_00462d88 + DAT_00462d80 * 4);
+          *(int *)((char *)&DAT_00462d88 + DAT_00462d80 * 4) = iVar10;
           DAT_00462d40 = (DAT_00462d40 - iVar2) + iVar10;
           DAT_00462d80 = DAT_00462d80 + 1 & 0x1f;
           uVar11 = DAT_00462d40 >> 5;
@@ -308,8 +310,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
             DAT_00462d4c = DAT_00455bbc;
           }
           iVar10 = (uVar11 - uVar5) + (uVar3 ^ uVar5);
-          iVar2 = *(int *)(&DAT_00462d88 + DAT_00462d80 * 4);
-          *(int *)(&DAT_00462d88 + DAT_00462d80 * 4) = iVar10;
+          iVar2 = *(int *)((char *)&DAT_00462d88 + DAT_00462d80 * 4);
+          *(int *)((char *)&DAT_00462d88 + DAT_00462d80 * 4) = iVar10;
           DAT_00462d40 = (DAT_00462d40 - iVar2) + iVar10;
           uVar11 = DAT_00462d40 >> 5;
           DAT_00462d80 = DAT_00462d80 + 1 & 0x1f;
@@ -319,8 +321,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
         DAT_00457e80 = 2;
         iVar10 = (uVar11 - uVar5) + (uVar3 ^ uVar5);
         DAT_00462d4c = DAT_00455bbc;
-        iVar2 = *(int *)(&DAT_00462d88 + DAT_00462d80 * 4);
-        *(int *)(&DAT_00462d88 + DAT_00462d80 * 4) = iVar10;
+        iVar2 = *(int *)((char *)&DAT_00462d88 + DAT_00462d80 * 4);
+        *(int *)((char *)&DAT_00462d88 + DAT_00462d80 * 4) = iVar10;
         DAT_00462d40 = (DAT_00462d40 - iVar2) + iVar10;
         DAT_00462d80 = DAT_00462d80 + 1 & 0x1f;
         uVar11 = DAT_00462d40 >> 5;

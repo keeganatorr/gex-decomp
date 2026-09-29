@@ -76,7 +76,9 @@ extern "C" void __cdecl FUN_004457b0_DrawTilesInner2(void* param_1)
                     if (uVar2 >> 16 != 0) puVar10[1] = (unsigned short)(uVar2 >> 16);
                     puVar10 = puVar4;
                 }
-                if (uVar6 != 0xfffffffe) {
+                // The pinned loop uses the carry from subtracting two: only
+                // an odd pixel count reaches this single-pixel tail.
+                if (uVar6 != 0) {
                     uVar6 = *(unsigned int*)((int)puVar5 + (unsigned int)*pbVar8 * 2 - 2);
                     if (uVar6 >> 16 != 0) *puVar10 = (unsigned short)(uVar6 >> 16);
                     pbVar8++;

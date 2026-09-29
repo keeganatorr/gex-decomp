@@ -89,16 +89,67 @@ screen, a reversed
 branch at `004060a1` in the edited Ghidra WinMain caused the replacement to
 open its 1024-by-512 debug VRAM window. The pinned PE's `test`/`je` instruction
 shows the call must be skipped when `00487bc0` is zero; the source now follows
-that branch. The replacement now reaches a centered title screen, but it lacks
-the original's background and Start/Password/Exit text. Pressing Start with
-the `J` token leaves a black frame six seconds later, while the pinned original
-reaches the fully rendered level-select screen in the same prefix and assets.
-Earlier AVI-path captures showed a static filled frame at 105 and 120 seconds
-instead of level select. The source for
-`0040bc70` also restored an uninitialized local into the object's previous-Y
-field; original instructions restore the saved field value, and that source is
-corrected. The `J`-token runtime capture includes that text fix and still has
-missing text. Level selection and gameplay are not yet working in the replacement.
+that branch. Later fixes to the 4-bit text sprite renderer and scaled and
+tiled drawing paths restored the title background and Start/Password/Exit
+text. The source for `0040bc70` also restored an uninitialized local into
+the object's previous-Y field; original instructions restore the saved field
+value, and that source is corrected.
+
+The unattended title screen now enters attract mode in both executables.
+Using the isolated assets and Wine prefix, the replacement renders the
+graveyard demo without the earlier memory faults.
+At 40 seconds it shows the graveyard tiles, player sprite and HUD. This is a
+running gameplay path, but it is not yet faithful: at 60 seconds the pinned
+original has advanced much farther and scored about 20,000 points, while
+the replacement remains near the start with zero points and one fewer life.
+The replacement loses the remaining lives and returns to the title around
+60 seconds; the original continues through the graveyard at 90 seconds.
+After a help-box repair the replacement starts a second attract level by
+85 seconds. A longer run faults while walking that level: the graphics
+list reaches a command whose next link is zero. The dispatcher matches
+the pinned null-pointer behavior, so the upstream list writer remains
+under investigation. A temporary list trace found the high list head
+pointing to an all-zero pool entry at the fault; the writer's recorded tail
+points to a different, later command. The previous `00443ae0` quad renderer
+stopped after one tile and used the address of a pool pointer as its pool;
+its source now writes all tiles and links both command lists using the
+read-only Ghidra analysis. The same list fault still occurs with that repair,
+so its cause is not yet isolated. The pinned `0043dc70` instructions also
+show that the graphics mode field is read 0x16 bytes into the second command;
+the previous source accidentally added 0x3e *int elements* from the first.
+That correction was built and run through the second attract sequence, but the
+graphics fault remains. The demo overlay appears in both at some
+frames; its absence in a single capture can be the normal blinking phase.
+Captures and logs are retained locally under
+`.work/replacement-runtime/attract-{oracle,camera,player,state,helpbox,final,collision-buffer,quad}-*`.
+Temporary output tracing in `ReadController` showed recording playback is
+active: the input bits change and the player enters walk, jump and attack
+states while X advances from about 12.8 million to 93.6 million fixed-point
+units across demo frames 32–448. The tracing code was removed after the
+local capture (`.work/replacement-runtime/attract-input-debug.log`).
+Temporary ground-contact tracing confirmed that the map lookup returns zero
+distance on the opening platform, and again after the player has descended to
+the lower path (about X=953, Y=894 in map pixels). The player follows a
+different trajectory before that descent; the trace does not identify its
+cause. The tracing source was removed after the capture
+(`.work/replacement-runtime/attract-glue-trace.log`). The remaining divergence
+is downstream of recording input, in movement, state processing, scoring or
+their timing.
+
+The attract run identified source faults: a doubly scaled camera history
+index; cache pointers addressed two or four bytes too early and incorrect
+LRU links; quad lookup offsets scaled fourfold by C pointer arithmetic;
+an old-frame animation accessor reading the wrong structure offsets; and a
+player collision path and help-box animation treating fixed-point values as
+pointers. The player collision processor also copied 129 words into a
+20-word local array and gave fields within that copy separate uninitialized
+storage; its stack-record layout is now restored. These
+repairs are behavioral candidates, not verifier byte proofs. The player
+state path also lacked the original's map transition and second processing
+call after clearing super-speed input; these have been restored from pinned
+instructions. Further timed comparisons are needed to isolate the remaining
+demo movement, collision and rendering differences. Pressing Start and
+normal level selection need another comparison after these fixes.
 
 `image_data.s` is a **textual, generated data source**, not a recovered set of
 historical declarations. It contains 1,536 `.rdata` bytes, 71,680 raw
@@ -234,7 +285,7 @@ The current source policy forbids inline assembly in matching translation
 units, so some hand-written routines need either a justified equivalent or a
 deliberate policy decision before byte-exact reconstruction.
 
-The assessment retains a diagnostic-main link and now also attempts the real
-Windows startup link. A successful link will be a linker milestone, not a
-playable-game claim. No model campaign, backend deployment or Ghidra
-modification was part of this build milestone.
+The assessment retains a diagnostic-main link and links the real Windows
+startup path. The title and attract demo now run, but matching gameplay is
+unfinished. No model campaign, backend deployment or Ghidra modification
+was part of this build milestone.

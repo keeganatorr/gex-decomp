@@ -621,7 +621,7 @@ FUN_00448AA6:
       bVar12 = ((unsigned int)(DAT_004a33a8) + (unsigned int)(DAT_004a2b38) < (unsigned int)(DAT_004a33a8));
       DAT_004a33a8 = DAT_004a33a8 + DAT_004a2b38;
       DAT_004a33a4 = DAT_004a2b40;
-      DAT_004a2b3c = DAT_004a2b3c + DAT_004a2b34 + *(int *)(&DAT_004610d4 + (unsigned int)bVar12 * -4);
+      DAT_004a2b3c = DAT_004a2b3c + DAT_004a2b34 + *(int *)((char *)&DAT_004610d4 - (unsigned int)bVar12 * 4);
       DAT_004a2f88 = DAT_004a2f88 + -1;
       iVar7 = DAT_004a2f8c;
       uVar2 = DAT_004a2b3c;
@@ -650,7 +650,7 @@ FUN_00448AA6:
     bVar12 = ((unsigned int)(DAT_004a33a8) + (unsigned int)(DAT_004a2b38) < (unsigned int)(DAT_004a33a8));
     DAT_004a33a8 = DAT_004a33a8 + DAT_004a2b38;
     DAT_004a33a4 = DAT_004a2b40;
-    DAT_004a2b3c = DAT_004a2b3c + DAT_004a2b34 + *(int *)(&DAT_004610d4 + (unsigned int)bVar12 * -4);
+    DAT_004a2b3c = DAT_004a2b3c + DAT_004a2b34 + *(int *)((char *)&DAT_004610d4 - (unsigned int)bVar12 * 4);
     DAT_004a2f88 = DAT_004a2f88 + -1;
     iVar7 = DAT_004a2f8c;
     uVar2 = DAT_004a2b3c;

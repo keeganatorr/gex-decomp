@@ -27,10 +27,19 @@ extern int DAT_004A27F0;
 extern int DAT_004A2814;
 extern int DAT_004A2874;
 extern int DAT_00458960;
-extern int DAT_004630D8;
-extern int DAT_004630DC;
+extern int* DAT_004630D8;
+extern int* DAT_004630DC;
+extern int* DAT_00462E84;
+extern int* DAT_00462E88;
 extern int DAT_00457210;
 extern int DAT_004A028F;
+extern unsigned char DAT_004A0290;
+extern unsigned char DAT_004A0291;
+extern unsigned char DAT_004A0292;
+extern unsigned char DAT_004A0293;
+extern unsigned char DAT_004A0294;
+extern unsigned char DAT_004A0295;
+extern unsigned char DAT_004A0297;
 extern int FUN_004A281C;
 extern int FUN_00455C4C;
 extern int FUN_004577B0;
@@ -44,6 +53,7 @@ extern "C" int __cdecl FUN_0041A480(int);
 extern "C" void __cdecl FUN_00415BB0();
 extern "C" int __cdecl FUN_00419C00(int*, int, int, int*, int*);
 extern "C" void __cdecl FUN_0041E880(int*, int*);
+extern "C" void __cdecl FUN_00410DC0(int);
 
 extern "C" void __cdecl PlayerDoIt_00415e80(int* param_1)
 {
@@ -80,8 +90,11 @@ extern "C" void __cdecl PlayerDoIt_00415e80(int* param_1)
         goto after_eat;
     }
 
-    if ((FUN_004A2964 != 0x44) && (FUN_004A281C <= 0)) return;
-    if (DAT_00462E38 != 0) return;
+    if (((FUN_004A2964 != 0x44) && (FUN_004A281C <= 0)) ||
+        (DAT_00462E38 != 0)) {
+        FUN_00415BB0();
+        goto store_state;
+    }
 
     if (DAT_004A2850 == 0) {
         if (DAT_00459498 != -1) {
@@ -129,13 +142,20 @@ eat_done:
             param_1[0x15] = 0;
         }
         *(unsigned char*)((int)&DAT_004A028F) = 0;
-        // Clear input buttons
-        DAT_004A2870 = 0;
+        DAT_004A0290 = 0;
+        DAT_004A0291 = 0;
+        DAT_004A0292 = 0;
+        DAT_004A0294 = 0;
+        DAT_004A0295 = 0;
+        DAT_004A0293 = 0;
+        DAT_004A0297 = 0;
+        FUN_00415C10(param_1);
     }
-
-after_eat:
+    DAT_004A2870 = 0;
+store_state:
     DAT_004A2804 = param_1[0x1c];
 
+after_eat:
     DAT_004A2874 = 0;
     DAT_004A2814 = 0;
     DAT_004A27F0 = 0;
@@ -144,31 +164,50 @@ after_eat:
     DAT_004A2890 = 0;
     DAT_004A2858 = (unsigned int)((*(int*)((int)&DAT_00457210 + (int)param_1[0x1c] * 4) & 0xf0000000) == 0x30000000);
 
+    // These globals hold object pointers. The old export treated the address
+    // of each pointer as an object and dereferenced fixed-point coordinates.
     if (DAT_004A284C == 0) {
-        if (*(int*)((int)&DAT_004630D8 + 0x60 * 4) != 0) {
-            FUN_0041E880((int*)&DAT_004630D8, 0);
-            if (*(int*)((int)&DAT_004630DC + 0x60 * 4) != 0) {
-                FUN_0041E880((int*)&DAT_004630DC, 0);
-            }
+        if (DAT_004630D8[0x60] != 0) {
+            FUN_0041E880(DAT_004630D8, 0);
+            if (DAT_004630DC[0x60] != 0)
+                FUN_0041E880(DAT_004630DC, 0);
         }
     } else {
-        iVar2 = FUN_00419C00(param_1, 0, 0, &local_8, &local_4);
-        if (iVar2 != 0) {
-            if (*(int*)((int)&DAT_004630D8 + 0x60 * 4) == 0) {
-                FUN_0041E880((int*)&DAT_004630D8, (int*)2);
-            }
-            *(int*)((int)&DAT_004630D8 + 0x1e * 4) = (int)(*(int*)((int)param_1[0x1e] + 8) + local_8 + -0x1c);
-            *(int*)((int)&DAT_004630D8 + 0x1f * 4) = (int)(*(int*)((int)param_1[0x1f] + 8) + local_4 + -0x1c);
+        if (FUN_00419C00(param_1, 0, 0, &local_8, &local_4)) {
+            if (DAT_004630D8[0x60] == 0)
+                FUN_0041E880(DAT_004630D8, (int*)2);
+            DAT_004630D8[0x1e] = param_1[0x1e] + local_8;
+            DAT_004630D8[0x1f] = param_1[0x1f] + local_4;
         }
-        iVar2 = FUN_00419C00(param_1, 0, 1, &local_8, &local_4);
-        if (iVar2 != 0) {
-            if (*(int*)((int)&DAT_004630DC + 0x60 * 4) == 0) {
-                FUN_0041E880((int*)&DAT_004630DC, (int*)2);
-            }
-            *(int*)((int)&DAT_004630DC + 0x1e * 4) = (int)(*(int*)((int)param_1[0x1e] + 8) + local_8 + -0x1c);
-            *(int*)((int)&DAT_004630DC + 0x1f * 4) = (int)(*(int*)((int)param_1[0x1f] + 8) + local_4 + -0x1c);
+        if (FUN_00419C00(param_1, 0, 1, &local_8, &local_4)) {
+            if (DAT_004630DC[0x60] == 0)
+                FUN_0041E880(DAT_004630DC, (int*)2);
+            DAT_004630DC[0x1e] = param_1[0x1e] + local_8;
+            DAT_004630DC[0x1f] = param_1[0x1f] + local_4;
         }
     }
-
-    DAT_004A2870 = 0;
+    if ((*(unsigned int*)((int)&DAT_00457210 + param_1[0x1c] * 4) & 0x80) == 0) {
+        if (DAT_00462E84[0x60] != 0) {
+            FUN_0041E880(DAT_00462E84, 0);
+            if (DAT_00462E88[0x60] != 0)
+                FUN_0041E880(DAT_00462E88, 0);
+        }
+    } else {
+        if (FUN_00419C00(param_1, 0, 0, &local_8, &local_4)) {
+            if (DAT_00462E84[0x60] == 0)
+                FUN_0041E880(DAT_00462E84, (int*)2);
+            DAT_00462E84[0x1e] = param_1[0x1e] + local_8;
+            DAT_00462E84[0x1f] = param_1[0x1f] + local_4;
+        }
+        if (FUN_00419C00(param_1, 0, 1, &local_8, &local_4)) {
+            if (DAT_00462E88[0x60] == 0)
+                FUN_0041E880(DAT_00462E88, (int*)2);
+            DAT_00462E88[0x1e] = param_1[0x1e] + local_8;
+            DAT_00462E88[0x1f] = param_1[0x1f] + local_4;
+        }
+    }
+    FUN_00410DC0((int)param_1);
+    if (param_1[0x45] == -1)
+        param_1[0x44] = 0;
+    param_1[0x45] = -1;
 }

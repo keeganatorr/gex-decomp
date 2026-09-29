@@ -1,41 +1,32 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0041A400.cpp
-// Historical source SHA256: 86efbc9142d080c4008b5cf3d7fac6ea6908a34d9b0d0065e921175691b6d086
+// Recovered from the pinned 0041a400 body. The previous translation used
+// unrelated offsets inside GXLoadObject and treated its frame table as data.
 extern "C" {
-extern "C" { extern int DAT_00458FE8; }
-extern "C" { extern int DAT_00459018; }
-extern "C" void __cdecl FUN_00405350(int, int);
+extern char DAT_00458FE8[];
+extern char DAT_00459018[];
+void __cdecl FUN_00405350(char *, int);
 
-extern "C" int __cdecl GOB_GetOldFrame_0041a400(void** param_1)
+int __cdecl GOB_GetOldFrame_0041a400(int *object)
 {
-    int result;
-    void* pGVar1;
-    int iVar2;
-    int iVar3;
-
-    result = 0;
-    pGVar1 = param_1[3];
-    if (pGVar1 != 0) {
-        iVar2 = (int)param_1[0x3e];
-        if (iVar2 >= 0) {
-            iVar3 = (int)param_1[0x3d];
-            if (iVar3 >= 0) {
-                if (*(int*)((int)pGVar1 + 0x6c) != 0) {
-                    if (*(int*)((int)pGVar1 + 0x70) <= iVar3) {
-                        FUN_00405350((int)&DAT_00459018, (int)param_1[2]);
-                        return 0;
-                    }
-                    if (*(int*)(*(int*)((int)pGVar1 + 0x74) + iVar3 * 4) < iVar2) {
-                        FUN_00405350((int)&DAT_00458FE8, (int)param_1[2]);
-                        return 0;
-                    }
-                }
-                result = *(int*)(*(int*)(*(int*)((int)pGVar1 + 0x6c) + 4 + *(int*)((int)pGVar1 + 0x70) + iVar3 * 8) + iVar2 * 4 + 4);
-                if (result == 0) {
-                    result = *(int*)(*(int*)(*(int*)((int)pGVar1 + 0x6c) + 4 + *(int*)((int)pGVar1 + 0x70) + iVar3 * 8) + 4);
-                }
-            }
+    int *load = reinterpret_cast<int *>(object[3]);
+    if (load == 0)
+        return 0;
+    int index = object[0x3e]; // previous frame index at +0xf8
+    int group = object[0x3d]; // previous frame group at +0xf4
+    if (index < 0 || group < 0)
+        return 0;
+    if (load[2] != 0) {
+        if (group >= load[3]) {
+            FUN_00405350(DAT_00459018, object[2]);
+            return 0;
+        }
+        if (index > reinterpret_cast<int *>(load[4])[group]) {
+            FUN_00405350(DAT_00458FE8, object[2]);
+            return 0;
         }
     }
-    return result;
+    int **animations = reinterpret_cast<int **>(load[0]);
+    int *frames = animations[group];
+    int result = frames[index];
+    return result ? result : frames[0];
 }
 }

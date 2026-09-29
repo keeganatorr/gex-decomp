@@ -600,7 +600,7 @@ FUN_00447BDF:
       bVar12 = CARRY4(DAT_004a33a8,DAT_004a2b38);
       DAT_004a33a8 = DAT_004a33a8 + DAT_004a2b38;
       DAT_004a33a4 = DAT_004a2b40;
-      iVar3 = DAT_004a2b3c + DAT_004a2b34 + *(int *)(&DAT_004610cc + (unsigned int)bVar12 * -4);
+      iVar3 = DAT_004a2b3c + DAT_004a2b34 + *(int *)((char *)&DAT_004610cc - (unsigned int)bVar12 * 4);
       puVar11 = (unsigned int *)((int)puVar11 + DAT_004a2b24);
       DAT_004a2b3c = iVar3;
       DAT_004a2f88 = DAT_004a2f88 + -1;
@@ -624,7 +624,7 @@ FUN_00447BDF:
     bVar12 = CARRY4(DAT_004a33a8,DAT_004a2b38);
     DAT_004a33a8 = DAT_004a33a8 + DAT_004a2b38;
     DAT_004a33a4 = DAT_004a2b40;
-    iVar3 = DAT_004a2b3c + DAT_004a2b34 + *(int *)(&DAT_004610cc + (unsigned int)bVar12 * -4);
+    iVar3 = DAT_004a2b3c + DAT_004a2b34 + *(int *)((char *)&DAT_004610cc - (unsigned int)bVar12 * 4);
     DAT_004a2b3c = iVar3;
     puVar11 = (unsigned int *)((int)puVar11 + DAT_004a2b24);
     DAT_004a2f88 = DAT_004a2f88 + -1;

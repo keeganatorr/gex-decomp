@@ -153,21 +153,24 @@ extern "C" void __cdecl FUN_00416320_CollisionsProcessing(PlayerStruct *param_1)
   int iVar20;
   int uVar21;
   int uVar22;
-  int local_22c [6];
-  int local_214;
-  int local_210;
-  int local_20c;
-  int local_208;
-  int local_204 [20];
-  int local_1b4;
-  int local_1b0;
-  int local_18c;
-  int local_188;
-  int local_148;
-  unsigned char *local_144;
-  int local_140;
-  int local_13c;
-  int local_138;
+  // The decompiler split two contiguous stack records into named locals.
+  // 0x81 words are copied into local_204 below, and the named fields must
+  // refer to that same copy rather than separate uninitialized variables.
+  int local_22c [10];
+  int &local_214 = local_22c[6];
+  int &local_210 = local_22c[7];
+  int &local_20c = local_22c[8];
+  int &local_208 = local_22c[9];
+  int local_204 [0x81];
+  int &local_1b4 = local_204[20];
+  int &local_1b0 = local_204[21];
+  int &local_18c = local_204[30];
+  int &local_188 = local_204[31];
+  int &local_148 = local_204[47];
+  int &local_144 = local_204[48];
+  int &local_140 = local_204[49];
+  int &local_13c = local_204[50];
+  int &local_138 = local_204[51];
 
   bVar7 = 1;
   bVar6 = 0;
@@ -180,10 +183,10 @@ extern "C" void __cdecl FUN_00416320_CollisionsProcessing(PlayerStruct *param_1)
         iVar16 = (int)param_1->MovementSpeed * 4;
         piVar11 = param_1->Animation;
         piVar5 = param_1->field78_0x54;
-        if ((*(unsigned int *)(&DAT_00457210 + iVar16) & 0xf0000000) == 0x10000000) {
+        if ((*(unsigned int *)((char *)&DAT_00457210 + iVar16) & 0xf0000000) == 0x10000000) {
           *(int *)&param_1[1].field_0x28 = 0;
         }
-        param_1->Animation = *(int **)(&DAT_004570a8 + iVar16);
+        param_1->Animation = *(int **)((char *)&DAT_004570a8 + iVar16);
         param_1->field78_0x54 = (int *)0x0;
         param_1->field12_0xc = DAT_004a2ad4;
         FUN_00441150_Flashing((int)param_1);
@@ -244,7 +247,7 @@ FUN_00416421:
   if ((iVar16 != 0) && (DAT_004a0258 == 0)) {
     FUN_0041a250((int)param_1,iVar16,0x80,0x60);
   }
-  if ((*(int *)(&DAT_004589d0 + DAT_004a0258 * 8) < 0) || (bVar6)) {
+  if ((*(int *)((char *)&DAT_004589d0 + DAT_004a0258 * 8) < 0) || (bVar6)) {
     DAT_00455c4c = DAT_00455c4c - DAT_004a27ec;
     DAT_004a27ec = 0;
     DAT_004a0238_HealthLost = 0;
@@ -264,7 +267,7 @@ FUN_00416421:
     }
     goto switchD_004166d3_caseD_2;
   }
-  if ((*(unsigned int *)(&DAT_004589d4 + DAT_004a0258 * 8) & 1) == 0) goto switchD_0041649a_caseD_3;
+  if ((*(unsigned int *)((char *)&DAT_004589d4 + DAT_004a0258 * 8) & 1) == 0) goto switchD_0041649a_caseD_3;
   switch(DAT_004a0224) {
   case 1:
     DAT_004a023c = 1;
@@ -317,19 +320,19 @@ switchD_0041649a_caseD_3:
   }
   local_204[3] = DAT_004a2ad4;
   local_1b4 = 0x15;
-  local_1b0 = *(int *)(&DAT_004589d0 + DAT_004a0258 * 8);
-  local_13c = *(int *)(&DAT_004589d4 + DAT_004a0258 * 8);
-  local_144 = (unsigned char *)&DAT_004632ec;
+  local_1b0 = *(int *)((char *)&DAT_004589d0 + DAT_004a0258 * 8);
+  local_13c = *(int *)((char *)&DAT_004589d4 + DAT_004a0258 * 8);
+  local_144 = (int)&DAT_004632ec;
   local_148 = DAT_00458b5c;
   local_188 = local_188 -
-              (-(unsigned int)(*(int *)(&DAT_00456f40 + (int)param_1->MovementSpeed * 4) == 0) & 0x180000);
+              (-(unsigned int)(*(int *)((char *)&DAT_00456f40 + (int)param_1->MovementSpeed * 4) == 0) & 0x180000);
   local_138 = local_13c;
   iVar16 = FUN_0041a480((int)local_204);
   if ((iVar16 != 0) && (*(int **)(iVar16 + 0x18) != (int *)0x0)) {
     FUN_00428fa0(*(unsigned short **)(**(int **)(iVar16 + 0x18) + 0xc),(unsigned short *)&DAT_004632ec,
-                 *(int *)(&DAT_00458a60 + DAT_004a0224 * 0xc),
-                 *(int *)(&DAT_00458a64 + DAT_004a0224 * 0xc),
-                 *(int *)(&DAT_00458a68 + DAT_004a0224 * 0xc));
+                 *(int *)((char *)&DAT_00458a60 + DAT_004a0224 * 0xc),
+                 *(int *)((char *)&DAT_00458a64 + DAT_004a0224 * 0xc),
+                 *(int *)((char *)&DAT_00458a68 + DAT_004a0224 * 0xc));
   }
   FUN_00441150_Flashing((int)local_204);
 switchD_004166d3_caseD_2:
@@ -338,7 +341,7 @@ FUN_004167B8:
   if ((DAT_00455c4c == 0) && (*(int *)&param_1[1].field_0x1c != 0)) {
     *(int *)&param_1[1].field_0x1c = *(int *)&param_1[1].field_0x1c + -1;
   }
-  uVar21 = *(int *)(&DAT_00458b60 + (*(unsigned int *)&param_1[1].field_0x1c & 3) * 4);
+  uVar21 = *(int *)((char *)&DAT_00458b60 + (*(unsigned int *)&param_1[1].field_0x1c & 3) * 4);
   *(int *)&param_1[1].field_0x20 = uVar21;
   if (DAT_004a022c != 0) {
     uVar22 = *(int *)&param_1->field_0x78;
@@ -352,7 +355,7 @@ FUN_004167B8:
   }
   if ((DAT_004a023c != 0) && (DAT_004a0254 == 0)) {
     DAT_00462e8c = DAT_00462e8c + 1;
-    uVar13 = *(unsigned int *)(&DAT_00457210 + (int)param_1->MovementSpeed * 4) >> 0x1c;
+    uVar13 = *(unsigned int *)((char *)&DAT_00457210 + (int)param_1->MovementSpeed * 4) >> 0x1c;
     if (2 < DAT_00462e8c) {
       DAT_00462e8c = 0;
     }
@@ -366,19 +369,19 @@ FUN_004167B8:
     local_204[3] = DAT_004a2ad4;
     local_1b4 = 0x24;
     local_1b0 = DAT_00462e8c;
-    local_148 = *(int *)(&DAT_00456888 + DAT_00462e7c * 4);
-    local_144 = (unsigned char *)0x0;
+    local_148 = *(int *)((char *)&DAT_00456888 + DAT_00462e7c * 4);
+    local_144 = 0;
     iVar16 = FUN_0041cb80((int)param_1,local_22c);
     if (iVar16 == 0) {
-      local_18c = local_18c - *(int *)(&DAT_00458988 + uVar13 * 0x10);
-      local_188 = local_188 - *(int *)(&DAT_0045898c + uVar13 * 0x10);
+      local_18c = local_18c - *(int *)((char *)&DAT_00458988 + uVar13 * 0x10);
+      local_188 = local_188 - *(int *)((char *)&DAT_0045898c + uVar13 * 0x10);
     }
     else {
       local_18c = local_210 + local_214 >> 1;
       local_188 = local_208 + local_20c >> 1;
     }
-    local_13c = (*(int *)(&DAT_00458980 + uVar13 * 0x10) >> 8) * (local_13c >> 8);
-    local_138 = (*(int *)(&DAT_00458984 + uVar13 * 0x10) >> 8) * (local_138 >> 8);
+    local_13c = (*(int *)((char *)&DAT_00458980 + uVar13 * 0x10) >> 8) * (local_13c >> 8);
+    local_138 = (*(int *)((char *)&DAT_00458984 + uVar13 * 0x10) >> 8) * (local_138 >> 8);
     if (uVar13 == 1) {
       local_140 = 0;
     }
@@ -593,8 +596,8 @@ FUN_00416B3B:
       (&DAT_00463510)[iVar16] = (int)piVar5;
       DAT_00462e10 = DAT_00462e10 + 1;
       (&DAT_004634f0)[iVar16] = uVar3;
-      *(int *)(&DAT_004630b8 + iVar10) = uVar4;
-      *(int *)(&DAT_00463098 + iVar10) = uVar22;
+      *(int *)((char *)&DAT_004630b8 + iVar10) = uVar4;
+      *(int *)((char *)&DAT_00463098 + iVar10) = uVar22;
       (&DAT_00462e18)[iVar16] = uVar1;
       if (DAT_00462e10 == 8) {
         DAT_00462e10 = 0;
@@ -618,7 +621,7 @@ FUN_00416B3B:
     if ((DAT_004a2ac8_FrameCount & 3) == 0) {
       FUN_0041a340((int)param_1,0x7a);
     }
-    uVar13 = *(unsigned int *)(&DAT_00457210 + (int)param_1->MovementSpeed * 4) >> 0x1c;
+    uVar13 = *(unsigned int *)((char *)&DAT_00457210 + (int)param_1->MovementSpeed * 4) >> 0x1c;
     pPVar15 = param_1;
     piVar11 = local_204;
     for (iVar16 = 0x81; iVar16 != 0; iVar16 = iVar16 + -1) {
@@ -629,19 +632,19 @@ FUN_00416B3B:
     local_204[3] = DAT_004a2ad4;
     local_1b4 = 0x23;
     local_1b0 = DAT_00462e8c;
-    local_148 = *(int *)(&DAT_00456888 + DAT_00462e7c * 4);
-    local_144 = (unsigned char *)0x0;
+    local_148 = *(int *)((char *)&DAT_00456888 + DAT_00462e7c * 4);
+    local_144 = 0;
     iVar16 = FUN_0041cb80((int)param_1,local_22c);
     if (iVar16 == 0) {
-      local_18c = local_18c - *(int *)(&DAT_00458988 + uVar13 * 0x10);
-      local_188 = local_188 - *(int *)(&DAT_0045898c + uVar13 * 0x10);
+      local_18c = local_18c - *(int *)((char *)&DAT_00458988 + uVar13 * 0x10);
+      local_188 = local_188 - *(int *)((char *)&DAT_0045898c + uVar13 * 0x10);
     }
     else {
       local_18c = local_210 + local_214 >> 1;
       local_188 = local_208 + local_20c >> 1;
     }
-    local_13c = (*(int *)(&DAT_00458980 + uVar13 * 0x10) >> 8) * (local_13c >> 8);
-    local_138 = (*(int *)(&DAT_00458984 + uVar13 * 0x10) >> 8) * (local_138 >> 8);
+    local_13c = (*(int *)((char *)&DAT_00458980 + uVar13 * 0x10) >> 8) * (local_13c >> 8);
+    local_138 = (*(int *)((char *)&DAT_00458984 + uVar13 * 0x10) >> 8) * (local_138 >> 8);
     if (uVar13 == 1) {
       local_140 = 0;
     }
@@ -652,7 +655,7 @@ FUN_00416B3B:
     if (DAT_00462e54 == 0) {
       DAT_00462e54 = 8;
       DAT_00462e7c = DAT_00462e7c + 1;
-      if (*(int *)(&DAT_00456888 + DAT_00462e7c * 4) == 0) {
+      if (*(int *)((char *)&DAT_00456888 + DAT_00462e7c * 4) == 0) {
         DAT_004a023c = 0;
       }
     }
@@ -674,20 +677,20 @@ FUN_004170FB:
       }
       local_204[3] = DAT_004a2ad4;
       local_1b4 = 0x16;
-      local_1b0 = *(int *)(&DAT_004589d0 + DAT_004a0258 * 8);
-      local_13c = *(int *)(&DAT_004589d4 + DAT_004a0258 * 8);
-      local_144 = (unsigned char *)&DAT_004630e4;
+      local_1b0 = *(int *)((char *)&DAT_004589d0 + DAT_004a0258 * 8);
+      local_13c = *(int *)((char *)&DAT_004589d4 + DAT_004a0258 * 8);
+      local_144 = (int)&DAT_004630e4;
       local_148 = DAT_00458b74;
       local_188 = local_188 -
-                  (-(unsigned int)(*(int *)(&DAT_00456f40 + (int)param_1->MovementSpeed * 4) == 0) &
+                  (-(unsigned int)(*(int *)((char *)&DAT_00456f40 + (int)param_1->MovementSpeed * 4) == 0) &
                   0x180000);
       local_138 = local_13c;
       iVar16 = FUN_0041a480((int)local_204);
       if ((iVar16 != 0) && (*(int **)(iVar16 + 0x18) != (int *)0x0)) {
         FUN_00428fa0(*(unsigned short **)(**(int **)(iVar16 + 0x18) + 0xc),(unsigned short *)&DAT_004630e4,
-                     *(int *)(&DAT_00458a60 + DAT_004a0224 * 0xc),
-                     *(int *)(&DAT_00458a64 + DAT_004a0224 * 0xc),
-                     *(int *)(&DAT_00458a68 + DAT_004a0224 * 0xc));
+                     *(int *)((char *)&DAT_00458a60 + DAT_004a0224 * 0xc),
+                     *(int *)((char *)&DAT_00458a64 + DAT_004a0224 * 0xc),
+                     *(int *)((char *)&DAT_00458a68 + DAT_004a0224 * 0xc));
       }
       FUN_00441150_Flashing((int)local_204);
       DAT_004a024c = DAT_004a024c + -1;

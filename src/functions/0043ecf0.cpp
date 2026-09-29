@@ -26,20 +26,22 @@ extern "C" unsigned int __cdecl FUN_0043ecf0_SelectTile_Clean1(void *tileSelectP
     char *errorFormat;
     int *tileDataPtr;
 
-    if (*(char *)((int)tileSelectPtr - 8) == 0) {
+    // The pinned 0043ecf7 subtracts four from the palette-data pointer;
+    // 0043ed00 reads the kind byte and 0043ed4e reads the slot at +2.
+    if (*(char *)((int)tileSelectPtr - 4) == 0) {
         cacheEnd = (int)&DAT_00464e28_DrawCacheClear5;
         cacheArray = &FUN_00465370[0];
-        cacheSlot = *(short *)((int)tileSelectPtr - 6);
+        cacheSlot = *(short *)((int)tileSelectPtr - 2);
         if ((-2 < cacheSlot) && (cacheSlot < 0x180)) goto FUN_0043ED6F;
         errorFormat = (char *)0x004601f8;
     }
     else {
         cacheEnd = (int)&FUN_0046A518;
         cacheArray = &FUN_00464E58[0];
-        cacheSlot = *(short *)((int)tileSelectPtr - 6);
+        cacheSlot = *(short *)((int)tileSelectPtr - 2);
         if ((-2 < cacheSlot) && (cacheSlot < 0x40)) {
 FUN_0043ED6F:
-            slotIndexPtr = (int)tileSelectPtr - 6;
+            slotIndexPtr = (int)tileSelectPtr - 2;
             if (*(short *)slotIndexPtr < 0) {
                 cacheSlotPtr = *(int **)(cacheEnd + 4);
                 *(int **)(cacheEnd + 4) = *(int **)(cacheSlotPtr + 1);
@@ -49,25 +51,28 @@ FUN_0043ED6F:
                 }
                 *(int *)(cacheSlotPtr + 2) = slotIndexPtr;
                 *(short *)slotIndexPtr = (short)(((int)cacheSlotPtr - (int)cacheArray) / 0x14);
-                tilePtr = (int *)(PTR_004a2ae4 + 4);
+                // 0043edd7 advances the command pool by 16 bytes.
+                tilePtr = (int *)(PTR_004a2ae4 + 0x10);
                 tileStruct = (int *)PTR_004a2ae4;
                 PTR_004a2ae4 = (int)tilePtr;
                 if (DAT_004a2adc_Tiles2 < (int)tilePtr) {
                     tileStruct = (int *)DAT_004a2ae0_TilesBack1;
-                    PTR_004a2ae4 = DAT_004a2ae0_TilesBack1 + 4;
+                    PTR_004a2ae4 = DAT_004a2ae0_TilesBack1 + 0x10;
                 }
                 *(int *)PTR_004a2b1c = (int)tileStruct;
                 tileDataPtr = (int *)*(int *)PTR_004a2b1c;
                 PTR_004a2b1c = (int)tileDataPtr;
                 tileDataPtr[1] = *(int *)(cacheSlotPtr + 3);
-                *(short *)(tileDataPtr + 2) = (-(short)(*(char *)((int)tileSelectPtr - 8) == 0) & 0xff10) + 0x100;
+                *(short *)(tileDataPtr + 2) = (-(short)(*(char *)((int)tileSelectPtr - 4) == 0) & 0xff10) + 0x100;
                 *(short *)((int)tileDataPtr + 10) = 1;
                 tileDataPtr[3] = (int)tileSelectPtr;
             }
             else {
                 cacheSlotPtr = (int *)(cacheArray + *(short *)slotIndexPtr * 5);
                 *(int **)(*(int *)(cacheSlotPtr + 1)) = (int *)*cacheSlotPtr;
-                *(int **)(*cacheSlotPtr + 4) = (int *)(cacheSlotPtr + 1);
+                // 0043ed92 stores the previous node, not the address of this
+                // node's prev field. The latter corrupts the LRU list.
+                *(int **)(*cacheSlotPtr + 4) = (int *)*(cacheSlotPtr + 1);
             }
             *cacheSlotPtr = *(int *)cacheEnd;
             *(int *)(cacheSlotPtr + 1) = cacheEnd;

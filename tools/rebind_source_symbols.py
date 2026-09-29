@@ -121,7 +121,8 @@ def main() -> None:
                 target = import_exports[destination]
                 changed_data_symbols += name != target
             elif destination is not None and int(destination, 16) >= 0x450000 and not name.startswith("__imp_"):
-                target = data_exports.get(destination, "_GEX_DATA_" + destination)
+                section = "RDATA" if int(destination, 16) < 0x451000 else "DATA"
+                target = data_exports.get(destination, "_GEX_" + section + "_" + destination)
                 changed_data_symbols += name != target
             else:
                 continue

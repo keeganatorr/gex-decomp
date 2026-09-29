@@ -1,57 +1,116 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_004432c0.cpp
-// Historical source SHA256: a29d1793b2e215751d94d80df002e255d36f4804bdbcb8c67e82068c7a35ad5e
-// Provisional behavior candidate; original bytes and gameplay are not claimed to match.
+// Scaled object drawing reconstructed from a read-only decompilation of the
+// pinned game's 004432c0 function. Ghidra field names are evidence, not proof.
+typedef unsigned char byte;
+typedef unsigned char undefined1;
+typedef unsigned short undefined2;
+typedef unsigned short ushort;
+typedef unsigned int uint;
+struct struct_select_tile_ptr { int value; };
+struct ImageStruct {
+    int width;
+    int height;
+    int x_offset;
+    int y_offset;
+    byte field16_0x10;
+    byte pad11;
+    short field_0x12_CacheSlotNumber;
+    short field_0x14_Image;
+    byte pad16[6];
+    short field24_0x1c;
+};
+struct DrawStructUnk {
+    DrawStructUnk *field_0x0_NextDrawStruct_unk;
+    uint field_0x4_NextDrawStruct;
+    ImageStruct *field_0x8_ImageObject;
+    struct_select_tile_ptr *field3_0xc;
+    uint field4_0x10;
+};
+struct SpriteStruct {
+    byte pad0[0x18];
+    DrawStructUnk *field_0x18_DrawStruct;
+};
+struct GXObject {
+    byte pad0[0x6c];
+    uint gob_flags;
+    byte pad70[8];
+    int gob_xpos;
+    int gob_ypos;
+    byte pad80[0x3c];
+    uint gob_pixc;
+    struct_select_tile_ptr *gob_plut;
+    byte padc4[4];
+    int gob_xScale;
+    int gob_yScale;
+    byte padd0[0x10];
+    uint gob_flags2;
+    byte pade4[0x110];
+    int gob_lastShown;
+    int gob_last_x;
+    int gob_last_y;
+};
+struct M1Tile {
+    void *mt_image;
+    ushort *mt_plut;
+    uint mt_pixc;
+};
+struct M1TileTable {
+    int mtt_tileID;
+    M1Tile mtt_tile;
+};
 extern "C" {
-extern int _DAT_00460F6C;
-extern int _DAT_004A2988;
-extern int _DAT_004A2A94;
-extern int _DAT_004A2A96;
-extern int* _DAT_004A2ADC;
-extern int* _DAT_004A2AE0;
-extern int* _DAT_004A2AE4;
-extern int* _DAT_004A2B14;
-extern int* _DAT_004A2B18;
-extern int _DAT_004A2B20;
-extern int DAT_004a2974_Camera;
-extern int DAT_004a2ac8_FrameCount;
-int __cdecl FUN_0041A500(int);
-unsigned int __cdecl FUN_0043E2C0(unsigned int);
-int* __cdecl FUN_0043E580(const char*);
-int* __cdecl FUN_0043E920(const char*);
-unsigned int __cdecl FUN_0043ECF0(unsigned int);
-void __cdecl FUN_00444590_DrawBehindAndInfrontObjects(int);
-}
+extern int DAT_004a2974_CameraX_TrueCam2;
+extern int DAT_004a2988_CameraY_TrueCam2;
+extern int DAT_004a2a96_CameraX_After;
+extern int M1_004a2a94;
+extern int gTimer_004a2ac8;
+extern int gObjectTextureMap_00460f6c;
+extern M1TileTable *PTR_004a2ae4;
+extern M1TileTable *DAT_004a2adc_Tiles2;
+extern M1TileTable *DAT_004a2ae0_TilesBack1;
+extern M1TileTable *DAT_004a2b18_Draw1;
+extern ushort **DAT_004a2b14_Draw4;
+extern ushort _DAT_004a2b20_Draw6;
+void __cdecl GOB_DisplayObject_00444590(GXObject *);
+SpriteStruct *__cdecl GOB_GetCurrentFrameOrReset_0041a500(GXObject *);
+uint __cdecl FUN_0043e2c0(uint);
+int *__cdecl FUN_0043e580_Image_Clean1(ImageStruct *);
+int *__cdecl FUN_0043e920_Image(ImageStruct *);
+uint __cdecl FUN_0043ecf0_SelectTile_Clean1(struct_select_tile_ptr *);
+void __cdecl FUN_004432c0_Graphics(GXObject *param_1)
 
-extern "C" void __cdecl FUN_004432c0_Graphics(int param_1)
 {
-  unsigned char bVar1;
-  unsigned int uVar2;
-  unsigned int uVar3;
-  unsigned int uVar4;
-  unsigned int *puVar5;
-  int *piVar6;
-  int iVar7;
-  int iVar8;
-  short sVar9;
-  unsigned short uVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
-  unsigned int uVar14;
-  int uVar15;
-  unsigned int uVar16;
-  int iVar17;
-  unsigned int uVar18;
-  unsigned int uVar19;
-  unsigned int uVar20;
-  int *piVar21;
-  int *puVar22;
-  int *puVar23;
-  unsigned int uVar24;
-  int *puVar25;
-  unsigned int uVar26;
-  int *puVar27;
-  unsigned short local_5a;
+  ushort *puVar1;
+  short *psVar2;
+  byte bVar3;
+  uint uVar4;
+  uint uVar5;
+  struct_select_tile_ptr *psVar6;
+  DrawStructUnk *pDVar7;
+  ImageStruct *imageStruct;
+  DrawStructUnk *pDVar8;
+  int iVar9;
+  int iVar10;
+  short sVar11;
+  ushort uVar12;
+  SpriteStruct *pSVar13;
+  int iVar14;
+  int iVar15;
+  uint uVar16;
+  uint uVar17;
+  struct_select_tile_ptr *tileSelectPtr;
+  uint uVar18;
+  int iVar19;
+  uint uVar20;
+  uint uVar21;
+  int iVar22;
+  uint uVar23;
+  short *psVar24;
+  M1TileTable *pMVar25;
+  ushort **ppuVar26;
+  M1TileTable *pMVar27;
+  uint uVar28;
+  ushort **ppuVar29;
+  undefined2 local_5a;
   short local_58;
   short local_56;
   int local_50;
@@ -59,296 +118,316 @@ extern "C" void __cdecl FUN_004432c0_Graphics(int param_1)
   int *local_48;
   int local_44;
   int local_40;
-  unsigned short *local_3c;
+  ushort *local_3c;
   int *local_20;
-  int *local_1c;
-  unsigned int local_18;
-  uVar2 = *(unsigned int *)(param_1 + 200);
-  uVar3 = *(unsigned int *)(param_1 + 0);
-  if ((uVar2 == 0) && (uVar3 == 0)) {
-    FUN_00444590_DrawBehindAndInfrontObjects(param_1);
+  uint *local_1c;
+  uint local_18;
+
+  uVar4 = param_1->gob_xScale;
+  uVar5 = param_1->gob_yScale;
+  if ((uVar4 == 0x10000) && (uVar5 == 0x10000)) {
+    GOB_DisplayObject_00444590(param_1);
     return;
   }
-  iVar11 = FUN_0041A500(param_1);
-  if (iVar11 == 0) {
+  pSVar13 = GOB_GetCurrentFrameOrReset_0041a500(param_1);
+  if (pSVar13 == (SpriteStruct *)0x0) {
     return;
   }
-  iVar12 = *(int *)(param_1 + 0) - DAT_004a2974_Camera;
-  iVar13 = *(int *)(param_1 + 0) - _DAT_004A2988;
-  uVar4 = *(unsigned int *)(param_1 + 0);
-  if (((*(unsigned int *)(param_1 + 0) & 0) == 0) &&
-     (*(int *)(param_1 + 500) - DAT_004a2ac8_FrameCount == -1)) {
-    iVar17 = *(int *)(param_1 + 0) - *(int *)(param_1 + 0);
-    if (iVar17 < 0) {
-      iVar17 = iVar17 + 0;
+  iVar14 = param_1->gob_xpos - DAT_004a2974_CameraX_TrueCam2;
+  iVar15 = param_1->gob_ypos - DAT_004a2988_CameraY_TrueCam2;
+  psVar6 = param_1->gob_plut;
+  if (((param_1->gob_flags2 & 0x1000000U) == 0) && (param_1->gob_lastShown - gTimer_004a2ac8 == -1))
+  {
+    iVar19 = param_1->gob_xpos - param_1->gob_last_x;
+    if (iVar19 < 0) {
+      iVar19 = iVar19 + 0x10000;
     }
-    local_58 = (short)(iVar17 >> 0) - _DAT_004A2A96;
-    iVar17 = *(int *)(param_1 + 0) - *(int *)(param_1 + 0);
-    if (iVar17 < 0) {
-      iVar17 = iVar17 + 0;
+    local_58 = (short)(iVar19 >> 0x11) - DAT_004a2a96_CameraX_After;
+    iVar19 = param_1->gob_ypos - param_1->gob_last_y;
+    if (iVar19 < 0) {
+      iVar19 = iVar19 + 0x10000;
     }
-    local_56 = (short)(iVar17 >> 0) - _DAT_004A2A94;
-    uVar18 = (int)local_56 >> 0;
-    uVar19 = (int)local_58 >> 0;
-    if ((int)(((((int)local_56 ^ uVar18) - uVar18) - uVar19) + ((int)local_58 ^ uVar19)) < 0)
-    goto label_004433dc;
+    local_56 = (short)(iVar19 >> 0x11) - M1_004a2a94;
+    uVar20 = (int)local_56 >> 0x1f;
+    uVar21 = (int)local_58 >> 0x1f;
+    if ((int)(((((int)local_56 ^ uVar20) - uVar20) - uVar21) + ((int)local_58 ^ uVar21)) < 0x65)
+    goto LAB_004433dc;
   }
   local_58 = 0;
   local_56 = 0;
-label_004433dc:
-  local_1c = *(int **)(iVar11 + 0);
-  if (local_1c != (int *)0) {
-    puVar5 = (unsigned int *)*local_1c;
-    while (puVar5 != (unsigned int *)0) {
-      local_1c = local_1c + 1;
-      piVar6 = (int *)puVar5[2];
-      piVar21 = piVar6 + 5;
-      if ((short)*piVar21 != 0) {
-        uVar18 = puVar5[1];
-        uVar19 = *puVar5;
-        uVar24 = *(unsigned int *)(param_1 + 0) >> 2 | uVar18;
-        if ((uVar18 & 0) == 0) {
-          local_50 = piVar6[2];
+LAB_004433dc:
+  local_1c = (uint *)pSVar13->field_0x18_DrawStruct;
+  if ((DrawStructUnk *)local_1c != (DrawStructUnk *)0x0) {
+    pDVar7 = ((DrawStructUnk *)local_1c)->field_0x0_NextDrawStruct_unk;
+    while (pDVar7 != (DrawStructUnk *)0x0) {
+      local_1c = &((DrawStructUnk *)local_1c)->field_0x4_NextDrawStruct;
+      imageStruct = pDVar7->field_0x8_ImageObject;
+      psVar24 = &imageStruct->field_0x14_Image;
+      if (*psVar24 != 0) {
+        uVar20 = pDVar7->field_0x4_NextDrawStruct;
+        pDVar8 = pDVar7->field_0x0_NextDrawStruct_unk;
+        uVar21 = param_1->gob_flags >> 2 | uVar20;
+        if ((uVar20 & 0x80000000) == 0) {
+          local_50 = *(int *)&imageStruct->x_offset;
         }
         else {
-          local_50 = *piVar6 - piVar6[2];
+          local_50 = *(int *)imageStruct - *(int *)&imageStruct->x_offset;
         }
-        if ((uVar18 & 0) == 0) {
-          local_4c = piVar6[3];
-        }
-        else {
-          local_4c = piVar6[1] - piVar6[3];
-        }
-        if ((uVar24 & 0) == 0) {
-          local_50 = local_50 + (uVar19 & 0) + iVar12;
+        if ((uVar20 & 0x40000000) == 0) {
+          local_4c = *(int *)&imageStruct->y_offset;
         }
         else {
-          local_50 = (iVar12 - local_50) - (uVar19 & 0);
+          local_4c = *(int *)&imageStruct->height - *(int *)&imageStruct->y_offset;
         }
-        if ((uVar24 & 0) == 0) {
-          local_4c = local_4c + uVar19 * 0 + iVar13;
+        if ((uVar21 & 0x20000000) == 0) {
+          local_50 = local_50 + ((uint)pDVar8 & 0xffff0000) + iVar14;
         }
         else {
-          local_4c = (iVar13 - local_4c) + uVar19 * -0;
+          local_50 = (iVar14 - local_50) - ((uint)pDVar8 & 0xffff0000);
         }
-        uVar24 = uVar24 ^ uVar24 * 4;
-        uVar18 = uVar24 & 0;
-        if (uVar18 == 0) {
-          local_44 = local_50 + *piVar6;
+        if ((uVar21 & 0x10000000) == 0) {
+          local_4c = local_4c + (int)pDVar8 * 0x10000 + iVar15;
+        }
+        else {
+          local_4c = (iVar15 - local_4c) + (int)pDVar8 * -0x10000;
+        }
+        uVar21 = uVar21 ^ uVar21 * 4;
+        uVar20 = uVar21 & 0x80000000;
+        if (uVar20 == 0) {
+          local_44 = local_50 + *(int *)imageStruct;
         }
         else {
           local_44 = local_50;
-          local_50 = local_50 - *piVar6;
+          local_50 = local_50 - *(int *)imageStruct;
         }
-        uVar24 = uVar24 & 0;
-        if (uVar24 == 0) {
-          local_40 = local_4c + piVar6[1];
+        uVar21 = uVar21 & 0x40000000;
+        if (uVar21 == 0) {
+          local_40 = local_4c + *(int *)&imageStruct->height;
         }
         else {
           local_40 = local_4c;
-          local_4c = local_4c - piVar6[1];
+          local_4c = local_4c - *(int *)&imageStruct->height;
         }
-        local_20 = piVar6 + 1;
-        if (uVar2 == 0) {
-          local_50 = local_50 >> 0;
-        }
-        else {
-          uVar26 = local_50 - iVar12;
-          uVar19 = (uVar26 ^ (int)uVar26 >> 0) - ((int)uVar26 >> 0);
-          uVar14 = (uVar2 ^ (int)uVar2 >> 0) - ((int)uVar2 >> 0);
-          uVar16 = uVar14 & 0;
-          iVar17 = (uVar14 & 0) + uVar16;
-          uVar20 = uVar19 & 0;
-          iVar11 = ((int)uVar19 >> 0) * iVar17 + ((int)(uVar16 * uVar20) >> 0) +
-                   ((int)uVar14 >> 0) * uVar20;
-          if (0 < (int)uVar26 != 0 < (int)uVar2) {
-            iVar11 = -iVar11;
-          }
-          local_50 = iVar12 + iVar11 >> 0;
-          uVar26 = local_44 - iVar12;
-          uVar19 = (uVar26 ^ (int)uVar26 >> 0) - ((int)uVar26 >> 0);
-          uVar20 = uVar19 & 0;
-          local_44 = ((int)(uVar16 * uVar20) >> 0) + ((int)uVar19 >> 0) * iVar17 +
-                     ((int)uVar14 >> 0) * uVar20;
-          if (0 < (int)uVar26 == 0 < (int)uVar2) {
-            local_44 = local_44 + iVar12;
-          }
-          else {
-            local_44 = iVar12 - local_44;
-          }
-        }
-        local_44 = local_44 >> 0;
-        iVar11 = local_44;
-        if (uVar3 == 0) {
-          local_4c = local_4c >> 0;
-          local_40 = local_40 >> 0;
+        local_20 = &imageStruct->height;
+        if (uVar4 == 0x10000) {
+          local_50 = local_50 >> 0x10;
         }
         else {
-          uVar19 = local_4c - iVar13;
-          uVar14 = (uVar19 ^ (int)uVar19 >> 0) - ((int)uVar19 >> 0);
-          uVar16 = (uVar3 ^ (int)uVar3 >> 0) - ((int)uVar3 >> 0);
-          uVar20 = uVar14 & 0;
-          uVar26 = uVar16 & 0;
-          iVar17 = ((int)uVar16 >> 0) * uVar20 +
-                   ((uVar16 & 0) + uVar26) * ((int)uVar14 >> 0) +
-                   ((int)(uVar26 * uVar20) >> 0);
-          if (0 < (int)uVar19 != 0 < (int)uVar3) {
-            iVar17 = -iVar17;
+          uVar28 = local_50 - iVar14;
+          uVar16 = (uVar28 ^ (int)uVar28 >> 0x1f) - ((int)uVar28 >> 0x1f);
+          uVar17 = (uVar4 ^ (int)uVar4 >> 0x1f) - ((int)uVar4 >> 0x1f);
+          uVar18 = uVar17 & 0xffff;
+          iVar22 = (uVar17 & 0xffff0000) + uVar18;
+          uVar23 = uVar16 & 0xffff;
+          iVar19 = ((int)uVar16 >> 0x10) * iVar22 + ((int)(uVar18 * uVar23) >> 0x10) +
+                   ((int)uVar17 >> 0x10) * uVar23;
+          if (0 < (int)uVar28 != 0 < (int)uVar4) {
+            iVar19 = -iVar19;
           }
-          local_4c = iVar13 + iVar17 >> 0;
-          uVar14 = local_40 - iVar13;
-          uVar19 = (uVar14 ^ (int)uVar14 >> 0) - ((int)uVar14 >> 0);
-          iVar17 = ((uVar19 & 0) + (uVar19 & 0)) * ((int)uVar16 >> 0) +
-                   ((int)uVar19 >> 0) * uVar26 + ((int)(uVar26 * (uVar19 & 0)) >> 0);
-          if (0 < (int)uVar14 == 0 < (int)uVar3) {
-            local_40 = iVar17 + iVar13 >> 0;
+          local_50 = iVar14 + iVar19 >> 0x10;
+          uVar28 = local_44 - iVar14;
+          uVar16 = (uVar28 ^ (int)uVar28 >> 0x1f) - ((int)uVar28 >> 0x1f);
+          uVar23 = uVar16 & 0xffff;
+          local_44 = ((int)(uVar18 * uVar23) >> 0x10) + ((int)uVar16 >> 0x10) * iVar22 +
+                     ((int)uVar17 >> 0x10) * uVar23;
+          if (0 < (int)uVar28 == 0 < (int)uVar4) {
+            local_44 = local_44 + iVar14;
           }
           else {
-            local_40 = iVar13 - iVar17 >> 0;
+            local_44 = iVar14 - local_44;
           }
         }
-        iVar17 = local_4c;
-        if ((((local_50 < 0) && (-1 < local_44)) && (local_4c < 0)) && (-1 < local_40)) {
-          bVar1 = *(unsigned char *)(piVar6 + 4);
-          iVar7 = *piVar6;
-          iVar8 = *local_20;
-          local_18 = *(unsigned int *)(param_1 + 0);
+        local_44 = local_44 >> 0x10;
+        iVar19 = local_44;
+        if (uVar5 == 0x10000) {
+          local_4c = local_4c >> 0x10;
+          local_40 = local_40 >> 0x10;
+        }
+        else {
+          uVar16 = local_4c - iVar15;
+          uVar17 = (uVar16 ^ (int)uVar16 >> 0x1f) - ((int)uVar16 >> 0x1f);
+          uVar18 = (uVar5 ^ (int)uVar5 >> 0x1f) - ((int)uVar5 >> 0x1f);
+          uVar23 = uVar17 & 0xffff;
+          uVar28 = uVar18 & 0xffff;
+          iVar22 = ((int)uVar18 >> 0x10) * uVar23 +
+                   ((uVar18 & 0xffff0000) + uVar28) * ((int)uVar17 >> 0x10) +
+                   ((int)(uVar28 * uVar23) >> 0x10);
+          if (0 < (int)uVar16 != 0 < (int)uVar5) {
+            iVar22 = -iVar22;
+          }
+          local_4c = iVar15 + iVar22 >> 0x10;
+          uVar17 = local_40 - iVar15;
+          uVar16 = (uVar17 ^ (int)uVar17 >> 0x1f) - ((int)uVar17 >> 0x1f);
+          iVar22 = ((uVar16 & 0xffff0000) + (uVar16 & 0xffff)) * ((int)uVar18 >> 0x10) +
+                   ((int)uVar16 >> 0x10) * uVar28 + ((int)(uVar28 * (uVar16 & 0xffff)) >> 0x10);
+          if (0 < (int)uVar17 == 0 < (int)uVar5) {
+            local_40 = iVar22 + iVar15 >> 0x10;
+          }
+          else {
+            local_40 = iVar15 - iVar22 >> 0x10;
+          }
+        }
+        iVar22 = local_4c;
+        if ((((local_50 < 0x140) && (-1 < local_44)) && (local_4c < 0xf0)) && (-1 < local_40)) {
+          bVar3 = imageStruct->field16_0x10;
+          iVar9 = *(int *)imageStruct;
+          iVar10 = *(int *)local_20;
+          local_18 = param_1->gob_pixc;
           if (local_18 == 0) {
-            local_18 = puVar5[4];
+            local_18 = pDVar7->field4_0x10;
           }
-          uVar19 = FUN_0043E2C0(local_18);
-          if (uVar18 == 0) {
-            if (uVar24 != 0) {
+          uVar16 = FUN_0043e2c0(local_18);
+          if (uVar20 == 0) {
+            if (uVar21 != 0) {
               local_4c = local_40;
-              local_40 = iVar17;
+              local_40 = iVar22;
             }
           }
           else {
             local_44 = local_50;
-            local_50 = iVar11;
-            if (uVar24 != 0) {
+            local_50 = iVar19;
+            if (uVar21 != 0) {
               local_4c = local_40;
-              local_40 = iVar17;
+              local_40 = iVar22;
             }
           }
-          if ((*(unsigned char *)(piVar6 + 4) & 0) == 0) {
-            if ((short)piVar6[7] == 0) {
-              local_48 = FUN_0043E580((const char*)piVar6);
+          if ((imageStruct->field16_0x10 & 0x40) == 0) {
+            if (imageStruct->field24_0x1c == 0) {
+              local_48 = FUN_0043e580_Image_Clean1(imageStruct);
             }
             else {
-              local_48 = FUN_0043E920((const char*)piVar6);
+              local_48 = FUN_0043e920_Image(imageStruct);
             }
           }
           else {
-            local_3c = (unsigned short *)(_DAT_00460F6C + *(short *)((int)piVar6 + 0) * 8);
+            local_3c = (ushort *)
+                       (gObjectTextureMap_00460f6c + imageStruct->field_0x12_CacheSlotNumber * 8);
           }
-          if ((bVar1 & 3) != 2) {
-            uVar18 = uVar4;
-            if (uVar4 == 0) {
-              uVar18 = puVar5[3];
+          if ((bVar3 & 3) != 2) {
+            tileSelectPtr = psVar6;
+            if (psVar6 == (struct_select_tile_ptr *)0x0) {
+              tileSelectPtr = (struct_select_tile_ptr *)pDVar7->field3_0xc;
             }
-            uVar15 = FUN_0043ECF0(uVar18);
-            local_5a = (unsigned short)uVar15;
+            uVar20 = FUN_0043ecf0_SelectTile_Clean1(tileSelectPtr);
+            local_5a = (undefined2)uVar20;
           }
-          if ((short)*piVar21 != 0) {
+          if (*psVar24 != 0) {
             do {
-              puVar25 = _DAT_004A2AE4 + 0;
-              puVar22 = _DAT_004A2AE4;
-              _DAT_004A2AE4 = puVar25;
-              if (_DAT_004A2ADC < puVar25) {
-                puVar22 = _DAT_004A2AE0;
-                _DAT_004A2AE4 = _DAT_004A2AE0 + 0;
+              pMVar27 = PTR_004a2ae4 + 5;
+              pMVar25 = PTR_004a2ae4;
+              PTR_004a2ae4 = pMVar27;
+              if (DAT_004a2adc_Tiles2 < pMVar27) {
+                pMVar25 = DAT_004a2ae0_TilesBack1;
+                PTR_004a2ae4 = DAT_004a2ae0_TilesBack1 + 5;
               }
-              puVar22[1] = uVar19 | (-(unsigned int)((local_18 & 0) == 0) & 0) + 0;
-              *(unsigned short *)((int)puVar22 + 0) = local_5a;
-              sVar9 = (short)(((int)(short)piVar21[1] * (local_44 - local_50)) / (iVar7 >> 0)) +
-                      (short)local_50;
-              *(short *)(puVar22 + 6) = sVar9;
-              *(short *)(puVar22 + 2) = sVar9;
-              sVar9 = (short)((int)(((unsigned int)*(unsigned char *)((int)piVar21 + 2) + (int)(short)piVar21[1]) *
-                                   (local_44 - local_50)) / (iVar7 >> 0)) + (short)local_50;
-              *(short *)(puVar22 + 8) = sVar9;
-              *(short *)(puVar22 + 4) = sVar9;
-              sVar9 = (short)(((int)*(short *)((int)piVar21 + 6) * (local_40 - local_4c)) /
-                             (iVar8 >> 0)) + (short)local_4c;
-              *(short *)((int)puVar22 + 0) = sVar9;
-              *(short *)((int)puVar22 + 10) = sVar9;
-              sVar9 = (short)((int)(((unsigned int)*(unsigned char *)((int)piVar21 + 3) +
-                                    (int)*(short *)((int)piVar21 + 6)) * (local_40 - local_4c)) /
-                             (iVar8 >> 0)) + (short)local_4c;
-              *(short *)((int)puVar22 + 0) = sVar9;
-              *(short *)((int)puVar22 + 0) = sVar9;
-              if ((*(unsigned char *)(piVar6 + 4) & 0) == 0) {
-                uVar10 = *(unsigned short *)(local_48 + 4);
+              (pMVar25->mtt_tile).mt_image =
+                   (void *)
+                   (uVar16 | (-(uint)((local_18 & 0x8080) == 0) & 0xfe000000) + 0x2e000000);
+              *(undefined2 *)((int)&(pMVar25->mtt_tile).mt_pixc + 2) = local_5a;
+              sVar11 = (short)(((int)psVar24[2] * (local_44 - local_50)) / (iVar9 >> 0x10)) +
+                       (short)local_50;
+              *(short *)&pMVar25[1].mtt_tile.mt_plut = sVar11;
+              *(short *)&(pMVar25->mtt_tile).mt_plut = sVar11;
+              sVar11 = (short)((int)(((uint)*(byte *)(psVar24 + 1) + (int)psVar24[2]) *
+                                    (local_44 - local_50)) / (iVar9 >> 0x10)) + (short)local_50;
+              *(short *)&pMVar25[2].mtt_tileID = sVar11;
+              *(short *)&pMVar25[1].mtt_tileID = sVar11;
+              sVar11 = (short)(((int)psVar24[3] * (local_40 - local_4c)) / (iVar10 >> 0x10)) +
+                       (short)local_4c;
+              *(short *)((int)&pMVar25[1].mtt_tileID + 2) = sVar11;
+              *(short *)((int)&(pMVar25->mtt_tile).mt_plut + 2) = sVar11;
+              sVar11 = (short)((int)(((uint)*(byte *)((int)psVar24 + 3) + (int)psVar24[3]) *
+                                    (local_40 - local_4c)) / (iVar10 >> 0x10)) + (short)local_4c;
+              *(short *)((int)&pMVar25[2].mtt_tileID + 2) = sVar11;
+              *(short *)((int)&pMVar25[1].mtt_tile.mt_plut + 2) = sVar11;
+              if ((imageStruct->field16_0x10 & 0x40) == 0) {
+                puVar1 = (ushort *)((int)&pMVar25[1].mtt_tile.mt_image + 2);
+                uVar12 = *(ushort *)(local_48 + 4);
                 if ((local_18 & 1) == 0) {
-                  uVar10 = uVar10 | 0;
+                  uVar12 = uVar12 | 0x20;
                 }
-                *(unsigned short *)((int)puVar22 + 0) = uVar10;
-                _DAT_004A2B20 = *(unsigned short *)((int)puVar22 + 0);
-                *(unsigned char *)(puVar22 + 3) = *(unsigned char *)((int)local_48 + 0);
-                *(unsigned char *)((int)puVar22 + 0) = *(unsigned char *)((int)local_48 + 0);
-                *(char *)(puVar22 + 5) =
-                     *(char *)((int)piVar21 + 2) + *(char *)((int)local_48 + 0) + -1;
-                *(unsigned char *)((int)puVar22 + 0) = *(unsigned char *)((int)local_48 + 0);
-                *(unsigned char *)(puVar22 + 7) = *(unsigned char *)((int)local_48 + 0);
-                *(char *)((int)puVar22 + 0) =
-                     *(char *)((int)piVar21 + 3) + *(char *)((int)local_48 + 0) + -1;
-                *(char *)(puVar22 + 9) =
-                     *(char *)((int)piVar21 + 2) + *(char *)((int)local_48 + 0) + -1;
-                *(char *)((int)puVar22 + 0) =
-                     *(char *)((int)piVar21 + 3) + *(char *)((int)local_48 + 0) + -1;
+                *puVar1 = uVar12;
+                _DAT_004a2b20_Draw6 = *puVar1;
+                *(undefined1 *)&(pMVar25->mtt_tile).mt_pixc = *(undefined1 *)((int)local_48 + 0x12);
+                *(undefined1 *)((int)&(pMVar25->mtt_tile).mt_pixc + 1) =
+                     *(undefined1 *)((int)local_48 + 0x13);
+                *(byte *)&pMVar25[1].mtt_tile.mt_image =
+                     *(byte *)(psVar24 + 1) + *(char *)((int)local_48 + 0x12) + -1;
+                *(undefined1 *)((int)&pMVar25[1].mtt_tile.mt_image + 1) =
+                     *(undefined1 *)((int)local_48 + 0x13);
+                *(undefined1 *)&pMVar25[1].mtt_tile.mt_pixc = *(undefined1 *)((int)local_48 + 0x12);
+                *(byte *)((int)&pMVar25[1].mtt_tile.mt_pixc + 1) =
+                     *(byte *)((int)psVar24 + 3) + *(char *)((int)local_48 + 0x13) + -1;
+                *(byte *)&pMVar25[2].mtt_tile.mt_image =
+                     *(byte *)(psVar24 + 1) + *(char *)((int)local_48 + 0x12) + -1;
+                *(byte *)((int)&pMVar25[2].mtt_tile.mt_image + 1) =
+                     *(byte *)((int)psVar24 + 3) + *(char *)((int)local_48 + 0x13) + -1;
                 local_48 = (int *)local_48[1];
               }
               else {
-                uVar10 = *local_3c;
+                puVar1 = (ushort *)((int)&pMVar25[1].mtt_tile.mt_image + 2);
+                uVar12 = *local_3c;
                 if ((local_18 & 1) == 0) {
-                  uVar10 = uVar10 | 0;
+                  uVar12 = uVar12 | 0x20;
                 }
-                *(unsigned short *)((int)puVar22 + 0) = uVar10;
-                _DAT_004A2B20 = *(unsigned short *)((int)puVar22 + 0);
-                *(char *)(puVar22 + 3) = (char)local_3c[1];
-                *(unsigned char *)((int)puVar22 + 0) = *(unsigned char *)((int)local_3c + 3);
-                *(char *)(puVar22 + 5) = (char)local_3c[1] + *(char *)((int)piVar21 + 2) + -1;
-                *(unsigned char *)((int)puVar22 + 0) = *(unsigned char *)((int)local_3c + 3);
-                *(char *)(puVar22 + 7) = (char)local_3c[1];
-                *(char *)((int)puVar22 + 0) =
-                     *(char *)((int)local_3c + 3) + *(char *)((int)piVar21 + 3) + -1;
-                *(char *)(puVar22 + 9) = (char)local_3c[1] + *(char *)((int)piVar21 + 2) + -1;
-                *(char *)((int)puVar22 + 0) =
-                     *(char *)((int)local_3c + 3) + *(char *)((int)piVar21 + 3) + -1;
+                *puVar1 = uVar12;
+                _DAT_004a2b20_Draw6 = *puVar1;
+                *(char *)&(pMVar25->mtt_tile).mt_pixc = (char)local_3c[1];
+                *(undefined1 *)((int)&(pMVar25->mtt_tile).mt_pixc + 1) =
+                     *(undefined1 *)((int)local_3c + 3);
+                *(byte *)&pMVar25[1].mtt_tile.mt_image =
+                     (char)local_3c[1] + *(byte *)(psVar24 + 1) + -1;
+                *(undefined1 *)((int)&pMVar25[1].mtt_tile.mt_image + 1) =
+                     *(undefined1 *)((int)local_3c + 3);
+                *(char *)&pMVar25[1].mtt_tile.mt_pixc = (char)local_3c[1];
+                *(byte *)((int)&pMVar25[1].mtt_tile.mt_pixc + 1) =
+                     *(char *)((int)local_3c + 3) + *(byte *)((int)psVar24 + 3) + -1;
+                *(byte *)&pMVar25[2].mtt_tile.mt_image =
+                     (char)local_3c[1] + *(byte *)(psVar24 + 1) + -1;
+                *(byte *)((int)&pMVar25[2].mtt_tile.mt_image + 1) =
+                     *(char *)((int)local_3c + 3) + *(byte *)((int)psVar24 + 3) + -1;
                 local_3c = local_3c + 4;
               }
-              *(int**)_DAT_004A2B18 = puVar22;
-              puVar23 = puVar22 + 10;
-              puVar25 = puVar22;
-              puVar27 = puVar23;
-              _DAT_004A2B18 = puVar22;
-              for (iVar11 = 10; iVar11 != 0; iVar11 = iVar11 + -1) {
-                *puVar27 = *puVar25;
-                puVar25 = puVar25 + 1;
-                puVar27 = puVar27 + 1;
+              DAT_004a2b18_Draw1->mtt_tileID = (int)pMVar25;
+              ppuVar26 = &pMVar25[2].mtt_tile.mt_plut;
+              pMVar27 = pMVar25;
+              ppuVar29 = ppuVar26;
+              DAT_004a2b18_Draw1 = pMVar25;
+              for (iVar19 = 10; iVar19 != 0; iVar19 = iVar19 + -1) {
+                *ppuVar29 = (ushort *)pMVar27->mtt_tileID;
+                pMVar27 = (M1TileTable *)&pMVar27->mtt_tile;
+                ppuVar29 = ppuVar29 + 1;
               }
               if (local_58 != 0) {
-                *(short *)(puVar22 + 0) = *(short *)(puVar22 + 0) - local_58;
-                *(short *)(puVar22 + 0) = *(short *)(puVar22 + 0) - local_58;
-                *(short *)(puVar22 + 0) = *(short *)(puVar22 + 0) - local_58;
-                *(short *)(puVar22 + 0) = *(short *)(puVar22 + 0) - local_58;
+                *(short *)&pMVar25[3].mtt_tileID = (short)pMVar25[3].mtt_tileID - local_58;
+                ppuVar29 = &pMVar25[3].mtt_tile.mt_plut;
+                *(short *)ppuVar29 = *(short *)ppuVar29 - local_58;
+                *(short *)&pMVar25[4].mtt_tileID = (short)pMVar25[4].mtt_tileID - local_58;
+                ppuVar29 = &pMVar25[4].mtt_tile.mt_plut;
+                *(short *)ppuVar29 = *(short *)ppuVar29 - local_58;
               }
               if (local_56 != 0) {
-                *(short *)((int)puVar22 + 0) = *(short *)((int)puVar22 + 0) - local_56;
-                *(short *)((int)puVar22 + 0) = *(short *)((int)puVar22 + 0) - local_56;
-                *(short *)((int)puVar22 + 0) = *(short *)((int)puVar22 + 0) - local_56;
-                *(short *)((int)puVar22 + 0) = *(short *)((int)puVar22 + 0) - local_56;
+                psVar2 = (short *)((int)&pMVar25[3].mtt_tileID + 2);
+                *psVar2 = *psVar2 - local_56;
+                psVar2 = (short *)((int)&pMVar25[3].mtt_tile.mt_plut + 2);
+                *psVar2 = *psVar2 - local_56;
+                psVar2 = (short *)((int)&pMVar25[4].mtt_tileID + 2);
+                *psVar2 = *psVar2 - local_56;
+                psVar2 = (short *)((int)&pMVar25[4].mtt_tile.mt_plut + 2);
+                *psVar2 = *psVar2 - local_56;
               }
-              piVar21 = piVar21 + 2;
-              *(int**)_DAT_004A2B14 = puVar23;
-              _DAT_004A2B14 = puVar23;
-            } while ((short)*piVar21 != 0);
+              psVar24 = psVar24 + 4;
+              *DAT_004a2b14_Draw4 = (ushort *)ppuVar26;
+              DAT_004a2b14_Draw4 = ppuVar26;
+            } while (*psVar24 != 0);
           }
         }
       }
-      puVar5 = (unsigned int *)*local_1c;
+      pDVar7 = (DrawStructUnk *)*local_1c;
     }
   }
   return;
+}
+
+
 }

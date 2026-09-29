@@ -18,7 +18,8 @@ extern "C" int __cdecl FUN_00421560_DrawCharacter(void* param_1, void** param_2)
         iVar4 = -0x80000;
     }
     do {
-        pGVar5 = (void*)((int)pGVar5 + iVar4 - 0x1c);
+        // The pinned loop adds only the fixed-point step to the previous Y.
+        pGVar5 = (void*)((int)pGVar5 + iVar4);
         if (iVar4 < 0) {
             if ((int)pGVar5 < (int)pGVar1) {
                 bVar2 = 1;
