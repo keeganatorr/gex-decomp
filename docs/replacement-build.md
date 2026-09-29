@@ -95,15 +95,14 @@ text. The source for `0040bc70` also restored an uninitialized local into
 the object's previous-Y field; original instructions restore the saved field
 value, and that source is corrected.
 
-The unattended title screen now enters attract mode in both executables.
+The unattended title screen enters attract mode in both executables.
 Using the isolated assets and Wine prefix, the replacement renders the
-graveyard demo without the earlier memory faults.
-At 40 seconds it shows the graveyard tiles, player sprite and HUD. This is a
-running gameplay path, but it is not yet faithful: at 60 seconds the pinned
-original has advanced much farther and scored about 20,000 points, while
-the replacement remains near the start with zero points and one fewer life.
-The replacement loses the remaining lives and returns to the title around
-60 seconds; the original continues through the graveyard at 90 seconds.
+graveyard demo without the earlier memory faults. Before the script and
+contour-platform repairs below, a 40-second capture showed the graveyard
+tiles, player sprite and HUD, but a 60-second capture found the original
+farther ahead with about 20,000 points and the replacement near the start
+with zero points and one fewer life. The replacement returned to the title
+around 60 seconds; the original continued through the graveyard at 90 seconds.
 After a help-box repair the replacement starts a second attract level by
 85 seconds. It formerly faulted while walking that level: the graphics list
 reached a command whose next link was zero. A temporary list trace found
@@ -137,9 +136,9 @@ distance on the opening platform, and again after the player has descended to
 the lower path (about X=953, Y=894 in map pixels). The player follows a
 different trajectory before that descent; the trace does not identify its
 cause. The tracing source was removed after the capture
-(`.work/replacement-runtime/attract-glue-trace.log`). The remaining divergence
-is downstream of recording input, in movement, state processing, scoring or
-their timing.
+(`.work/replacement-runtime/attract-glue-trace.log`). At that checkpoint, the
+remaining divergence was downstream of recording input, in movement, state
+processing, scoring or their timing.
 
 Two-second captures from 28 through 44 seconds narrow the first visible
 split. Both executables enter the graveyard at about 31 seconds. At 34 seconds
@@ -168,10 +167,66 @@ nearby objects. The retained traces are `attract-gate-trace.log` and
 and angle mask; it has been reconstructed from read-only Ghidra output into a
 source-level collision path. A source-only link and 55-second and 110-second
 attract runs complete with that repair, including the second demo, but the
-first enemy and score still differ. This collision source is a behavioral
-translation, not a verifier byte proof. The
-next target is the exact object/collision interaction at that first encounter,
-not another change to recorded input playback.
+first enemy and score still differed at that checkpoint. This collision source
+is a behavioral translation, not a verifier byte proof. The later repairs
+below resolve the first encounter and pit in the recorded demo.
+
+The original `00435d90` script interpreter had been reduced by the backup
+translation to a timer-clearing stub. The source now executes movement,
+animation, waits, branches, object and game-variable access, and native calls
+through the source-rebound dispatch table. The pinned instructions confirm that
+the game-variable table at `0045b808` contains **pointers to variables**: script
+opcodes `0x94` and `0xa6` dereference those pointers. The first translation of
+those two opcodes instead read or overwrote the table itself. Correcting them
+lets a spring script set game variable 14 (`004a2870`) and launch Gex.
+
+Read-only Wine process tracing of the original and source-built replacement
+found matching player state, position, velocity, and input through demo frame
+189. At frame 190, the original attached Gex to a type 127 contour platform
+and snapped Y from `0x033eb338` to `0x033f0000`; the replacement left the
+platform pointer null and fell. The backup source for the `00434b10` collision
+callback had erased field offsets and fixed-point constants. A focused source
+translation of its static contour-platform branch now reads the frame's height
+map and attaches the player at the calculated surface. The corrected build
+matches the original's sampled player state, position, velocity, platform type,
+and surface Y through frame 221. Both enter launch state 83 at frame 222 and
+match those sampled fields through frame 225. At about 40 seconds, both show
+the upper route, 500 points, and the same HUD count. Wall-clock screenshots
+can differ by a few frames, so the frame-indexed process traces are the more
+precise comparison. Local evidence includes
+`.work/replacement-runtime/oracle-support-type-trace.log`,
+`platform-correct-state.log`, `gamevar-repair-state.log`, and the corresponding
+`attract-*-{38,40}.png` captures. The process reader and binaries are retained
+only under `.work/`; the ordinary source-only build still does not read the
+original executable. These are behavioral matches for this demo segment, not
+whole-game proof. Most of `00434b10` still needs a proper translation for other
+collision shapes and moving platforms.
+
+The next exact player-state split was frame 409: the replacement lost health
+to a type 53 enemy and moved differently from frame 411. The original enemy
+was about 79 pixels left of the replacement at frame 408. Its `00433a70`
+update calls path-motion function `00434260`; the backup translation of that
+function calculated a step count but never applied any signed path deltas to
+the object's coordinates. Its source now implements the original path cursor,
+fixed-point speed and phase, signed X/Y steps, reversal markers and flags.
+At frame 408 both enemy copies have X=`84475904`, Y=`43581440`, and previous
+X=`84606976`. With that repair, every sampled demo frame from 220 through
+430 matches in player state, position, velocity, facing flags, recorded input
+and health. This comparison covers the sampled player fields and that one
+enemy, not all objects or rendered pixels. The process traces are retained
+under `.work/replacement-runtime/{type53-*,path-motion-*}`.
+
+A longer frame-indexed comparison matches the same sampled player fields
+through frame 567. At frame 568, the original moves X from `125624323` to
+`125698050`; the replacement moves it to `125845507`, leaving a `147457`
+fixed-point-unit gap (about 2.25 pixels). By frame 572 the original also
+records contact with a type 155 enemy/platform, while the replacement misses
+it. The original and replacement 430–850 player traces are retained as
+`.work/replacement-runtime/long-{oracle,replacement}-player.log`. The type 155
+collision callback eventually reaches `00434b10`, whose remaining backup body
+still has erased edge offsets and constants. This is the next identified
+behavioral mismatch; the 90-second replacement capture still returns to the
+title before the original.
 
 The attract run identified source faults: a doubly scaled camera history
 index; cache pointers addressed two or four bytes too early and incorrect

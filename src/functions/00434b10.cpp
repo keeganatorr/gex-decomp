@@ -29,8 +29,45 @@ void __cdecl FUN_00434AD0(int, int*);
 void __cdecl FUN_00405390_EmptyStringDebugFunction(char*, ...);
 }
 
+// The backup translation below erased field offsets and fixed-point constants.
+// Recover the static contour-platform branch directly from the pinned routine:
+// the frame's height bytes describe the surface under the player, and a close
+// descending contact attaches the player to that platform.
+static int HandleStaticContourPlatform(int *platform, unsigned int *event)
+{
+  int *other = (int *)platform[0x5e]; // gob_pgobClidWith at +0x178
+  if (other != DAT_004a27fc_PlayerClassInstance || event[1] ||
+      (platform[0x2d] & 0x100)) return 0;
+  unsigned int *frame = FUN_0041A380((int)platform);
+  if (!frame || !(frame[0] & 2)) return 0;
+  if (platform[0x1e] != platform[0x35] ||
+      platform[0x1f] != platform[0x36]) return 0;
+  int *contour = (int *)frame[8];
+  if (!contour || contour[2] <= 0) return 0;
+  int distance = (platform[0x1b] & 0x80000000U) ?
+      platform[0x1e] - other[0x1e] - contour[0] :
+      other[0x1e] - platform[0x1e] - contour[0];
+  int index = distance >> 16;
+  if (index < 0 || index >= contour[2]) return 0;
+  unsigned int height = ((unsigned char *)contour)[12 + index];
+  if (!height) return 1;
+  int top = height * 0x10000 + contour[1] + platform[0x1f];
+  int y = other[0x1f];
+  if ((top <= y && y < top + 0x80000) ||
+      (y <= top && top - 0x80000 < y && other[0x37] == 0))
+      other[0x44] = (int)platform;
+  if (other[0x44] == (int)platform && other[0x23] >= 0) {
+      platform[0x38] |= 0x800;
+      other[0x45] = 0;
+      other[0x3b] = top;
+      other[0x1f] = top;
+  }
+  return 1;
+}
+
 extern "C" void __cdecl FUN_00434b10_EVENT_Collision_Unk(int param_1,unsigned int *param_2)
 {
+  if (HandleStaticContourPlatform((int *)param_1, param_2)) return;
   int *paVar1;
   int *piVar2;
   unsigned int uVar3;
