@@ -141,6 +141,24 @@ cause. The tracing source was removed after the capture
 is downstream of recording input, in movement, state processing, scoring or
 their timing.
 
+Two-second captures from 28 through 44 seconds narrow the first visible
+split. Both executables enter the graveyard at about 31 seconds. At 34 seconds
+the original has scored 250 points and Gex is airborne; the replacement has
+zero points and Gex is still on the ground. At 38 seconds the original is
+above the first pit while the replacement is on its lower platform. The
+read-only captures are `.work/replacement-runtime/attract-{oracle,replacement}-fine-*.png`.
+Temporary pad/state tracing showed a `0x02000000` demo input at pad frame 99
+mapped to the jump button, including its one-frame just-pressed flag. No
+player-state processing occurred for approximately 20 pad reads around that
+press; when player processing resumed, the just-pressed flag had cleared and
+Gex stayed in walking state. The preceding tail attack did create its collision
+object and both animation hot spots; this rules out a missing attack object
+but does not establish why the original scores and the replacement does not.
+The next comparison should establish why the player processing pause and first
+enemy interaction differ. Traces are retained at
+`.work/replacement-runtime/attract-{pad,state,tail}-trace.log`; all temporary
+tracing source was removed.
+
 The attract run identified source faults: a doubly scaled camera history
 index; cache pointers addressed two or four bytes too early and incorrect
 LRU links; quad lookup offsets scaled fourfold by C pointer arithmetic;
