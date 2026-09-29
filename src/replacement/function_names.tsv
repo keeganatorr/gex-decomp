@@ -257,6 +257,7 @@ address	ghidra_name	emitted_name	status
 00410200	FUN_00410200	FUN_00410200	ghidra
 00410250	FUN_00410250_UpdateCameraBounds	FUN_00410250_UpdateCameraBounds	ghidra
 00410280	CAMERA_SomeKindOfLogic_00410280	CAMERA_SomeKindOfLogic_00410280	ghidra
+0041028b	FUN_0041028b_CameraStuff	FUN_0041028b_CameraStuff	ghidra
 00410c60	FUN_00410c60_CameraFollowGex	FUN_00410c60_CameraFollowGex	ghidra
 00410d10	FUN_00410d10_CollisionInner	FUN_00410d10_CollisionInner	ghidra
 00410dc0	FUN_00410dc0_CollisionInner	FUN_00410dc0_CollisionInner	ghidra
@@ -527,6 +528,7 @@ address	ghidra_name	emitted_name	status
 0041bde0	AddVisualScore_0041bde0	AddVisualScore_0041bde0	ghidra
 0041be80	AddVisualScoreFromTable_0041be80	AddVisualScoreFromTable_0041be80	ghidra
 0041beb0	FUN_0041beb0_MusicUnk	FUN_0041beb0_MusicUnk	ghidra
+0041bfc0	ProcessPaused_0041bfc0	ProcessPaused_0041bfc0	ghidra
 0041ca10	CLD_InitCollides_0041ca10	CLD_InitCollides_0041ca10	ghidra
 0041ca70	CLD_ComputeAngleEdgesWithFrame_0041ca70	CLD_ComputeAngleEdgesWithFrame_0041ca70	ghidra
 0041cb80	CLD_ComputeAngleEdges_0041cb80	CLD_ComputeAngleEdges_0041cb80	ghidra
@@ -786,6 +788,7 @@ address	ghidra_name	emitted_name	status
 0042b180	ob270Draw_0042b180	ob270Draw_0042b180	ghidra
 0042b530	MapPlayerInit_0042b530	MapPlayerInit_0042b530	ghidra
 0042b760	FUN_0042b760	FUN_0042b760	ghidra
+0042b7f0	MapPlayerDoIt_0042b7f0	MapPlayerDoIt_0042b7f0	ghidra
 0042bfe0	FUN_0042bfe0_TV_Level_unk	FUN_0042bfe0_TV_Level_unk	ghidra
 0042c0a0	FUN_0042c0a0	FUN_0042c0a0	ghidra
 0042c1a0	FUN_0042c1a0	FUN_0042c1a0	ghidra
@@ -864,6 +867,7 @@ address	ghidra_name	emitted_name	status
 0042f7e0	FUN_0042f7e0	FUN_0042f7e0	ghidra
 0042f800	FUN_0042f800	FUN_0042f800	ghidra
 0042f860	FUN_0042f860	FUN_0042f860	ghidra
+0042f910	FUN_0042f910_GRAPHICSDRAWING	FUN_0042f910_GRAPHICSDRAWING	ghidra
 0042ff10	ob229Init_0042ff10	ob229Init_0042ff10	ghidra
 00430060	FUN_00430060_MovePos	FUN_00430060_MovePos	ghidra
 00430090	ob229DoIt_00430090	ob229DoIt_00430090	ghidra
@@ -1074,6 +1078,7 @@ address	ghidra_name	emitted_name	status
 0043bb70	ob259Draw_0043bb70	ob259Draw_0043bb70	ghidra
 0043bba0	ob261Init_0043bba0	ob261Init_0043bba0	ghidra
 0043bc80	ob261DoIt_0043bc80	ob261DoIt_0043bc80	ghidra
+0043c490	ob261Draw_0043c490	ob261Draw_0043c490	ghidra
 0043cbd0	ob261Clid_0043cbd0	ob261Clid_0043cbd0	ghidra
 0043cca0	ob1Init_0043cca0	ob1Init_0043cca0	ghidra
 0043cd00	ob1DoIt_0043cd00	ob1DoIt_0043cd00	ghidra

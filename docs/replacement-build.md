@@ -27,7 +27,7 @@ Windows PE link work with this toolchain. It does not establish whole-game
 linkability or gameplay parity.
 
 `./scripts/assess-replacement-link` is the current end-to-end source-only
-build assessment. It compiles all **1,241** current function files with their
+build assessment. It compiles all **1,246** current function files with their
 Ghidra-based exported names and per-function C/C++ flags. It changes COFF
 *symbol references* to the exports at their justified addresses, assembles
 `src/replacement/image_data.s` and
@@ -37,11 +37,11 @@ reconstructed `WinMain_00405bf0` and VC4's `WinMainCRTStartup`. The executable
 and all objects stay under `.work/`.
 The command exits 2 while unresolved externals remain.
 
-At this checkpoint all 1,241 function sources compile. The normalization
-resolved 1,217 remaining function-name references and 3,773 data-name
+At this checkpoint all 1,246 function sources compile. The normalization
+resolved 1,238 remaining function-name references and 3,947 data-name
 references to shared address identities. There are **zero duplicate global
-definitions**. The real game-entry LLD link reports **13 unresolved externals**;
-the diagnostic LLD link reports 13 and VC4 LINK reports 14 (the latter does not
+definitions**. The real game-entry LLD link reports **6 unresolved externals**;
+the diagnostic LLD link reports 6 and VC4 LINK reports 7 (the latter does not
 supply LLD's `___ImageBase` symbol), down from 1,748 before
 source/data normalization. The formerly largest call gaps, `00444590`
 (`GOB_DisplayObject`) and `00441150` (scale/rotate), now have compiling behavior
@@ -65,34 +65,42 @@ added the map resolver, graphics tile dispatcher and its three draw helpers,
 tube transition, help box drawing, another tile helper, cel-to-quad drawing and
 the hunt/dive callback. The latest pass added HUD drawing, player update,
 object 261 update, text drawing, middle tile drawing and a graphics helper.
+The current pass added pause handling, map player update, camera motion and two
+draw paths. These remain provisional translations where the backup decompiler
+lost field offsets or call arguments; the source explicitly recovers several
+arguments from the original call instructions.
 These are compiling behavior candidates, not gameplay or byte proofs. The
 replacement data builder now creates aliases for data addresses referenced by
 compiled objects, including offsets within the zero-initialized tail; it does
-not need the original executable at build time. The two unresolved `00449d23` and `00449d3e`
-addresses are interior SEH labels in the original CRT startup body; neither is
-a standalone C function.
+not need the original executable at build time. The former `00449d23` and
+`00449d3e` references were interior SEH labels in the original CRT startup
+body, not standalone C functions.
 
-The 13 linker symbols correspond to nine missing function entry addresses:
-`0041028b`, `00416320`, `0041bfc0`, `0041d310`, `0042b7f0`, `0042eaf0`,
-`0042f910`, `00434b10` and `0043c490`; plus the two interior CRT startup
-addresses above. Several addresses appear under multiple symbol names. A
+The six linker symbols correspond to four missing function entry addresses:
+`00416320`, `0041d310`, `0042eaf0` and `00434b10`. Several addresses appear
+under multiple symbol names. A
 successful link will still need startup and gameplay behavior checks.
 
 `image_data.s` is a **textual, generated data source**, not a recovered set of
-historical declarations. It contains 1,536 raw `.rdata` bytes, 71,680 raw
-`.data` bytes, the 269,536-byte zero-initialized tail, and 2,685 symbolic
+historical declarations. It contains 1,536 `.rdata` bytes, 71,680 raw
+`.data` bytes, the 269,536-byte zero-initialized tail, and 2,683 symbolic
 pointer relocations. The one-time development generator
 `tools/generate_image_data_source.py` checks the pinned EXE hash; it is not
-called by the ordinary build. After assembly, every non-relocation byte in
-the two raw sections was compared with the pinned PE (zero mismatches), and
-the object has all 2,685 DIR32 relocations. The replacement build now
+called by the ordinary build. Before the startup adjustment, every
+non-relocation byte in the two raw sections was compared with the pinned PE
+(zero mismatches), and the object had all 2,685 DIR32 relocations. The current
+source clears two orphan original-CRT SEH handler pointers at `.rdata`
+`00450024` and `00450028`. Only the original startup at `00449bd0` referred to
+that scope table; the replacement links VC4's startup instead. Its layout is
+preserved, but those two pointer values intentionally differ from the original.
+The replacement build now
 converts four source-defined globals to external references in scratch copies,
 so the generated image data has sole storage ownership. The assembler adds
-114 symbol-only aliases for source-referenced addresses within the checked-in
+185 symbol-only aliases for source-referenced addresses within the checked-in
 data; it changes no initialized bytes.
 
-Sixty-three function sources contain original image-address literals. The
-replacement build rewrites their 256 distinct in-image addresses into symbolic
+Sixty-seven function sources contain original image-address literals. The
+replacement build rewrites their 270 distinct in-image addresses into symbolic
 relocations in scratch copies, so relinking does not leave pointers back to the
 old image base. These replacements still need semantic review, particularly
 function pointers and interior code addresses.
@@ -129,7 +137,7 @@ matches each source filename's eight-digit address to a function name. It
 renames the definitions in `src/functions/` and writes the name map to
 `src/replacement/function_names.tsv`. It retains a snapshot under
 `.work/replacement-named/`. An offline Ghidra inventory can be supplied with
-`--inventory JSON`. The current map names 1,227 sources from Ghidra and gives
+`--inventory JSON`. The current map names 1,232 sources from Ghidra and gives
 14 source addresses without Ghidra entries an address-based fallback. It
 sanitizes three names that are not C identifiers and disambiguates the two
 Ghidra functions both named `__atodbl`.
@@ -139,7 +147,7 @@ suffix because VC4's `libc.lib` defines the same decorated `__exit` symbol.
 Current callers use several different names and calling conventions for the
 same address, and some referenced functions
 have no source. The COFF address rebinder above already reconciles available
-source function identities; the 13 remaining game-link externals require implementations,
+source function identities; the six remaining game-link externals require implementations,
 imports or separately justified bindings.
 
 The current pass wired the pinned DirectDraw and DirectSound import thunks to
