@@ -41,10 +41,12 @@ def main() -> None:
     objects = [INPUT / f"{source.stem}.obj" for source in sources]
     harness = ROOT / ".work/replacement-link-smoke/link_smoke.obj"
     image_data = ROOT / ".work/replacement-data/image_data.rebound.obj"
+    image_resources = ROOT / ".work/replacement-data/image_resources.obj"
     libraries = [crt / "libc.lib", sdk / "kernel32.lib", sdk / "user32.lib",
                  sdk / "gdi32.lib", sdk / "advapi32.lib", crt / "winmm.lib",
                  crt / "shell32.lib", crt / "comdlg32.lib", crt / "oldnames.lib"]
-    missing = [path for path in [linker, harness, image_data, comctl_def, *objects, *libraries]
+    missing = [path for path in [linker, harness, image_data, image_resources,
+                                  comctl_def, *objects, *libraries]
                if not path.is_file()]
     if missing:
         raise SystemExit(f"missing build input: {missing[0]} ({len(missing)} total)")
@@ -59,11 +61,12 @@ def main() -> None:
         object_map[short] = source.stem
     shutil.copyfile(harness, WORK / "main.obj")
     shutil.copyfile(image_data, WORK / "data.obj")
+    shutil.copyfile(image_resources, WORK / "rsrc.obj")
     (WORK / "object-addresses.json").write_text(json.dumps(object_map, indent=2) + "\n")
     response = WORK / "link.rsp"
     response.write_text("/NOLOGO\n/SUBSYSTEM:CONSOLE\n/OUT:full-link-probe.exe\n" +
                         "\n".join(object_map) + "\nmain.obj\n" +
-                        "data.obj\n" +
+                        "data.obj\nrsrc.obj\n" +
                         "\n".join(win(path) for path in libraries) + "\n")
     if response.stat().st_size >= 16000:
         raise SystemExit("VC4 response file is too long; shorten object names")
@@ -85,6 +88,7 @@ def main() -> None:
         "format": "gex-source-link-probe-v1",
         "sourceObjects": len(objects), "linkerExitCode": exit_code,
         "dataObject": str(image_data.relative_to(ROOT)),
+        "resourceObject": str(image_resources.relative_to(ROOT)),
         "reportedUnresolvedTotal": int(total_match.group(1)) if total_match else None,
         "uniqueLnk2001Symbols": len(unresolved), "lnk2001Occurrences": sum(unresolved.values()),
         "unresolvedSymbols": dict(unresolved.most_common()),

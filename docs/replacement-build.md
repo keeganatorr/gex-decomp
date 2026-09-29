@@ -29,14 +29,15 @@ linkability or gameplay parity.
 `./scripts/assess-replacement-link` is the current end-to-end source-only
 build assessment. It compiles all **1,193** current function files with their
 per-function C/C++ flags, changes COFF *symbol references* to the exports at
-their justified addresses, assembles `src/replacement/image_data.s`, and runs
-the recovered VC4 linker. The executable and all objects stay under `.work/`.
+their justified addresses, assembles `src/replacement/image_data.s` and
+`image_resources.s`, and runs both the recovered VC4 linker and a modern LLD
+link with Win32 imports. The executable and all objects stay under `.work/`.
 The command exits 2 while unresolved externals remain.
 
 At this checkpoint all 1,193 function sources compile. The normalization
 resolved 2,503 function-name references and 3,544 data-name references to
 shared address identities. There are **zero duplicate global definitions**.
-The real linker reports **69 unresolved externals**, down from 1,748 before
+Both linkers report **69 unresolved externals**, down from 1,748 before
 source/data normalization. The formerly largest call gaps, `00444590`
 (`GOB_DisplayObject`) and `00441150` (scale/rotate), now have compiling behavior
 candidates. The latter emits 6,684 bytes versus 7,306 original bytes; neither
@@ -65,6 +66,17 @@ replacement build rewrites their 61 distinct in-image addresses into symbolic
 relocations in scratch copies, so relinking does not leave pointers back to the
 old image base. These replacements still need semantic review, particularly
 function pointers and interior code addresses.
+
+`image_resources.s` is a second textual source bridge for the 313,856-byte
+Windows resource section. Its 27 resource data pointers use image-relative
+COFF relocations. After assembly, all non-pointer bytes matched the pinned PE;
+`./scripts/build-resource-link-smoke` links a PE that exposes the original
+bitmap, icon, menu and dialog resource IDs to `wrestool` and runs under Wine.
+The one-time converter
+checks the pinned EXE, but ordinary builds read only the checked-in source.
+The recovered VC4 linker fails internally with a source-built `.rsrc` object
+(`ZeroPad`), so the final resource-bearing link currently uses LLD plus modern
+Win32 import archives. This keeps VC4 CL for per-function code generation.
 
 ## What Yodecomp demonstrates
 
@@ -99,10 +111,10 @@ are the bubble callback and three rendering helpers described above.
    reviewed implementations. Recover the startup, window, graphics, sound,
    input and save paths. Complete or link the CRT and import thunks through
    their appropriate libraries. Keep exact proofs as regression evidence.
-3. **Data and resources.** The raw initialized/zero data bridge is in source.
-   Recover semantic structures, review the scratch-build storage/address
-   rewrites, and add Windows resources from independently maintained
-   source. A clean build cannot extract these from the original EXE. The
+3. **Data and resources.** Raw initialized/zero data and Windows resources are
+   in textual source bridges. Recover semantic structures and resource scripts,
+   then review the scratch-build storage/address rewrites. A clean build cannot
+   extract these from the original EXE. The
    game's separately supplied asset files may remain runtime inputs.
 4. **Game link.** Add the real entry point and produce a replacement PE with
    zero unresolved symbols. A link alone is insufficient: static initializers,
@@ -125,7 +137,7 @@ The current source policy forbids inline assembly in matching translation
 units, so some hand-written routines need either a justified equivalent or a
 deliberate policy decision before byte-exact reconstruction.
 
-The current full link still uses the link-smoke main and contains no Windows
-resource section. Its successful completion will be a linker milestone, not
+The current full link still uses the link-smoke main. Its successful completion
+will be a linker milestone, not
 a playable-game claim. No model campaign, backend deployment or Ghidra
 modification was part of this build milestone.

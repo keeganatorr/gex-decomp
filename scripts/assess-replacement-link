@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT=$(cd -- "$(dirname -- "$0")/.." && pwd)
-"$ROOT/scripts/build-source-link-smoke"
+"$ROOT/scripts/build-resource-link-smoke"
 "$ROOT/tools/compile_source_set.py"
 "$ROOT/tools/rebind_source_symbols.py"
 "$ROOT/tools/coff_link_census.py" --objects-dir "$ROOT/.work/replacement-rebound"
 "$ROOT/tools/build_image_data.py"
 "$ROOT/tools/try_full_link.py"
-python3 - "$ROOT/.work/replacement-short/report.json" <<'PY'
+python3 "$ROOT/tools/try_lld_link.py"
+python3 - "$ROOT/.work/replacement-short/lld-report.json" <<'PY'
 import json,sys
 report=json.load(open(sys.argv[1]))
-if report['linkerExitCode'] or report['reportedUnresolvedTotal']:
+if report['linkerExitCode'] or report['unresolvedCount']:
     print('source-only whole-game link remains incomplete')
     raise SystemExit(2)
 print('source-only link completed; gameplay validation remains required')

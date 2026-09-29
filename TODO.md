@@ -12,6 +12,9 @@
 - [x] Preserve pinned `.rdata`/`.data` initial values and zero tail as textual
   source with 2,685 symbolic relocations; ordinary builds use the source,
   not `GEX.exe` (`src/replacement/image_data.s`)
+- [x] Preserve the Windows resource tree in textual source with 27
+  image-relative relocations; an LLD-linked resource-bearing smoke runs under
+  Wine without `GEX.exe` at build time (`src/replacement/image_resources.s`)
 - [x] Publish exact `0041a380` current-frame fallback (122 bytes), and add
   behavior-focused `00409740` tracked-memory free and `00420e60` bubble callback sources
 - [x] Add compiling behavior candidates for display, scale/rotate, graphics
@@ -19,7 +22,8 @@
   the large renderer still differs substantially from the original
 - [x] Give the generated data object sole storage ownership for four globals;
   rebase 61 distinct original image-address literals in scratch build copies
-- [ ] Recover semantic data types and resource scripts
+- [ ] Recover semantic data types and editable resource scripts from the raw
+  source bridges
 - [ ] Resolve the 69 remaining link externals, including file I/O, text,
   graphics, import and CRT/debug helpers
 - [ ] Fill source gaps, including startup/window/graphics paths, and produce a

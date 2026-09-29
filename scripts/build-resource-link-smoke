@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+"""Build and run a source-only PE that carries the reconstructed resources."""
+
+import json
+import os
+from pathlib import Path
+import subprocess
+
+
+ROOT = Path(__file__).resolve().parent.parent
+WORK = ROOT / ".work/replacement-link-smoke"
+TOOLCHAIN = json.loads((ROOT / "project.json").read_text())["toolchain"]
+
+
+def main() -> None:
+    subprocess.run([str(ROOT / "scripts/build-source-link-smoke")], check=True)
+    subprocess.run(["python3", str(ROOT / "tools/build_image_resources.py")], check=True)
+    compiler = Path(TOOLCHAIN["compiler"])
+    crt = compiler.parent.parent / "lib"
+    query = subprocess.run(["i686-w64-mingw32-gcc", "-print-file-name=libkernel32.a"],
+                           capture_output=True, text=True, check=True)
+    kernel32 = Path(query.stdout.strip()).resolve()
+    output = WORK / "link-resource-smoke.exe"
+    command = ["lld-link", "/nologo", "/subsystem:console", "/safeseh:no",
+               "/nodefaultlib", "/out:" + str(output),
+               *(str(WORK / name) for name in (
+                   "00420d30.obj", "00418e20.rebound.obj", "0041fbc0.obj",
+                   "link_smoke.obj")),
+               str(ROOT / ".work/replacement-data/image_resources.obj"),
+               str(crt / "libc.lib"), str(crt / "oldnames.lib"), str(kernel32)]
+    subprocess.run(command, cwd=WORK, check=True)
+    env = dict(os.environ, WINEPREFIX=TOOLCHAIN["winePrefix"], WINEDEBUG="-all")
+    subprocess.run([TOOLCHAIN["wine"], str(output)], cwd=WORK, env=env,
+                   check=True, timeout=30)
+    listing = subprocess.run(["wrestool", "-l", str(output)],
+                             capture_output=True, text=True, check=True)
+    resources = [line for line in listing.stdout.splitlines() if line.startswith("--type=")]
+    if len(resources) != 27:
+        raise SystemExit(f"expected 27 resource leaves, found {len(resources)}")
+    print(f"source-only resource PE ran with {len(resources)} resources: {output}")
+
+
+if __name__ == "__main__":
+    main()

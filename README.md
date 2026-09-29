@@ -53,6 +53,7 @@ functions as a Windows executable without reading `GEX.exe`:
 
 ```sh
 ./scripts/build-source-link-smoke
+./scripts/build-resource-link-smoke
 ./tools/link_inventory.py
 ```
 
@@ -62,8 +63,9 @@ The current whole-source build assessment also needs no original executable:
 ./scripts/assess-replacement-link
 ```
 
-It compiles all current sources and attempts a full link. The current expected
-result is exit 2 with 69 unresolved externals and no duplicate definitions.
+It compiles all current sources and attempts a full link with source-built
+Windows resources. The current expected result is exit 2 with 69 unresolved
+externals and no duplicate definitions.
 This uses a diagnostic main and is not a playable replacement. Its scope and
 the remaining work are in [replacement-build.md](docs/replacement-build.md).
 
