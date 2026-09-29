@@ -240,7 +240,10 @@ class Probe:
         env = dict(b.split('=', 1) for b in os.environ.get('PROBE_BIND', '').split(',') if '=' in b)
         self.resolver = Resolver(db, {**env, **(bind or {})} or None)
         self.original = original_bytes(int(self.address, 16), int(self.record['size']))
-        self.entries = [int(json.loads(b)['entry'], 16) for (b,) in db.execute("select body from records where resource='functions'")]
+        # Merged fragments are no longer functions, so a switch table may sit
+        # on one (Verifier.TrailingData ignores them the same way).
+        rows = [json.loads(b) for (b,) in db.execute("select body from records where resource='functions'")]
+        self.entries = [int(r['entry'], 16) for r in rows if not r.get('mergedInto')]
 
     def measure(self, source, lang=None, flags=None, keep_asm=False):
         flags, lang, target = contract(self.address, lang, flags)
@@ -337,6 +340,14 @@ def report(probe, result, diff_only=False):
     print(f"original {len(probe.original)}B candidate {len(r['candidate'])}B  positional {r['percent']:.1f}%  "
           f"{'EXACT' if r['exact'] else 'differs'}" + (f"  UNRESOLVED {r['unresolved']}" if r['unresolved'] else ''))
     if r.get('rejected'): print('REJECTED:', r['rejected'])
+    # An address can already be bound under another spelling (0041b600's
+    # tables were bound as _DAT_* while the source said UINT_ARRAY_ARRAY_*);
+    # say so before anyone drafts a config batch for it.
+    for symbol in sorted(set(r['unresolved'] or [])):
+        for text in HEX8.findall(symbol):
+            bound = [k for k, v in probe.resolver.bindings.items() if v == int(text, 16)]
+            if bound:
+                print(f'hint: {symbol} names {text}, already bound as {", ".join(bound)}')
     print('mismatch spans (offset,len):', spans(probe.original if not r.get('trailing') else original_bytes(int(probe.address, 16), len(probe.original) + r['trailing']), r['candidate'])[:24])
     trial = sorted(k for k, v in r['used'].items() if v[1].startswith('TRIAL'))
     if trial: print('uses TRIAL bindings (not proof until in project.json):', ', '.join(trial))

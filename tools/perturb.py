@@ -72,15 +72,24 @@ def volatile_variants(source):
     original: CL then keeps constant 0 in a callee-saved register and reloads
     the flag each iteration (0040b2d0, 0040ab00, 0040b320)."""
     lines = source.split('\n')
-    idx = [i for i, l in enumerate(lines) if re.match(r'\s*extern\s+(?:"C"\s+)?(?:unsigned\s+)?(?:int|long|short|char)\s+\w+\s*;', l)]
-    if not idx or len(idx) > 6:
+    decl = re.compile(r'\s*extern\s+(?:"C"\s+)?(?:unsigned\s+)?(?:int|long|short|char)\s+(\w+)\s*;')
+    idx = [i for i, l in enumerate(lines) if decl.match(l)]
+    if not idx:
         return
-    for mask in range(1, 1 << len(idx)):
+    if len(idx) <= 6:
+        subsets = [[i for bit, i in enumerate(idx) if mask >> bit & 1] for mask in range(1, 1 << len(idx))]
+    else:
+        # Too many for every subset. Volatile only matters for a global the
+        # function stores to (it pins that store's position, 0042ff10), so
+        # keep those and try subsets of up to three: 0042ff10 needed exactly
+        # two of its twenty-odd globals.
+        stored = [i for i in idx if re.search(r'\b' + decl.match(lines[i]).group(1) + r'\s*(?:[-+|&^]?=[^=]|\+\+|--)', source)]
+        subsets = [list(c) for k in (1, 2, 3) for c in itertools.combinations(stored, k)]
+    for subset in subsets:
         out = list(lines)
-        for bit, i in enumerate(idx):
-            if mask >> bit & 1:
-                out[i] = re.sub(r'extern(\s+"C")?\s+', lambda m: 'extern' + (m.group(1) or '') + ' volatile ', out[i], count=1)
-        yield f'volatile-{mask:x}', '\n'.join(out)
+        for i in subset:
+            out[i] = re.sub(r'extern(\s+"C")?\s+', lambda m: 'extern' + (m.group(1) or '') + ' volatile ', out[i], count=1)
+        yield 'volatile-' + '-'.join(str(i + 1) for i in subset), '\n'.join(out)
 
 
 def variants(source, lang, pad_limit, moves, volatile=False):
