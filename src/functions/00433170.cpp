@@ -23,11 +23,7 @@ extern "C" void __cdecl ob95Clid_00433170(int *param_1, int *param_2)
     int pGVar6;
     int *ppGVar5;
     int *piVar7;
-    int *local_28[6];
-    int local_10;
-    int local_c;
-    int local_8;
-    int local_4;
+    int local_28[10];
     int bVar2;
 
     if (*param_2 != 0) {
@@ -45,8 +41,8 @@ extern "C" void __cdecl ob95Clid_00433170(int *param_1, int *param_2)
 
                 iVar3 = FUN_0041CB80((int *)pGVar6, (int **)local_28);
                 if (iVar3 != 0) {
-                    param_1[0x1e] = local_10 + ((local_c - local_10) + 1) / 2;
-                    param_1[0x1f] = local_8 + ((local_4 - local_8) + 1) / 2;
+                    param_1[0x1e] = local_28[6] + ((local_28[7] - local_28[6]) + 1) / 2;
+                    param_1[0x1f] = local_28[8] + ((local_28[9] - local_28[8]) + 1) / 2;
                 }
                 param_1[0x17] = (int)&FUN_00432D40;
                 param_1[0x15] = 0;

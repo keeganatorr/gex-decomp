@@ -43,10 +43,10 @@ extern "C" int __cdecl FUN_00431fa0(int* param_1, int param_2)
     if (ppGVar6 == 0) { _result = 0; return _result; }
     
     param_1[0x30] = (int)(param_1 + 0x47);
-    param_1[0x33] = (int)(&param_1[0x32] - 1);
+    param_1[0x33] -= 0x100;
     
     if (param_1[0x28] != 0x20) {
-        param_1[0x28] = (int)((int*)param_1[0x28] + 1);
+        ++param_1[0x28];
     }
     
     if (param_2 == 0) {
@@ -55,14 +55,13 @@ extern "C" int __cdecl FUN_00431fa0(int* param_1, int param_2)
             pGVar2 = param_1[0x2b];
             ppGVar8 = DAT_004A2AD4;
             uVar7 = FUN_00428C60();
-            iVar9 = (int)(*(int*)(pGVar2 + (int)((uVar7 & 0xf) * -0x80) + 8) + 2) +
-                    (int)(param_1 + 0x1f) + 0x37f * 4 + 3 + 0x3 * 4;
+            iVar9 = pGVar2 - ((uVar7 & 0xf) << 16) +
+                    param_1[0x1f] + 0x70000;
             
             pGVar2 = param_1[0x2a];
             uVar7 = FUN_00428C60();
             ppGVar8 = FUN_004195D0(0x5c,
-                (int)(*(int*)(pGVar2 + (int)((uVar7 & 0xf) * -0x80) + 8) + 2) +
-                (int)(param_1 + 0x1e) + 0x37f * 4 + 3 + 0x3 * 4,
+                pGVar2 - ((uVar7 & 0xf) << 16) + param_1[0x1e] + 0x70000,
                 iVar9, ppGVar8);
             
             if (ppGVar8 != 0) {
@@ -86,10 +85,11 @@ extern "C" int __cdecl FUN_00431fa0(int* param_1, int param_2)
     }
     
     if (*(int*)(ppGVar6 + 0x18) != 0) {
-        pNVar3 = *(int*)(*(int*)(ppGVar6 + 0x18) + 4);
+        pNVar3 = *(int*)(*(int*)(ppGVar6 + 0x18));
         if (pNVar3 != 0) {
             pGVar2 = param_1[0x28];
-            puVar14 = (unsigned short*)(*(int*)(DAT_0045B210 + param_2 * 4) + param_1[0x27] * 2 + 4);
+            puVar14 = (unsigned short*)((*(&DAT_0045B210 + param_2)) +
+                                      param_1[0x27] * 2 + 4);
             
             if (puVar14[pGVar2] == (unsigned short)-1) {
                 if (((unsigned int)param_1[0x38] & 0x20000) == 0) {
@@ -99,34 +99,18 @@ extern "C" int __cdecl FUN_00431fa0(int* param_1, int param_2)
                 return _result;
             }
             
-            if (*(char*)(pNVar3 + 8 - 4) == '\0') {
+            if (*(char*)(*(int*)(pNVar3 + 0xc) - 4) == '\0') {
                 puVar15 = (unsigned short*)((int)param_1 + 0x11e);
-                param_1[0x46] = -256;
-                *(unsigned short*)(param_1[0x30] + 4) = 0;
-                pGVar10 = 1;
-                
-                if ((int)pGVar2 > 1) {
-                    do {
-                        uVar1 = *puVar14;
-                        puVar14++;
-                        *puVar15 = uVar1;
-                        puVar15++;
-                        pGVar10 = pGVar2;
-                        pGVar2--;
-                    } while (pGVar2 != 0);
-                    pGVar2 = param_1[0x28];
-                }
-                
-                puVar14 = (unsigned short*)(*(int*)(pNVar3 + 8) + pGVar10 * 2);
+                *(int*)((char*)param_1 + 0x11a) = -256;
+                *(unsigned short*)((char*)param_1 + 0x11c) = 0;
+                pGVar10 = pGVar2;
+                for (int copied = 1; copied < pGVar10; ++copied)
+                    *puVar15++ = *puVar14++;
+
+                puVar14 = (unsigned short*)(*(int*)(pNVar3 + 0xc) + pGVar10 * 2);
                 if (pGVar10 < 0x10) {
-                    iVar9 = 0x10 - pGVar10;
-                    do {
-                        uVar1 = *puVar14;
-                        puVar14++;
-                        *puVar15 = uVar1;
-                        puVar15++;
-                        iVar9--;
-                    } while (iVar9 != 0);
+                    for (iVar9 = pGVar10; iVar9 < 0x10; ++iVar9)
+                        *puVar15++ = *puVar14++;
                 }
             } else {
                 puVar15 = (unsigned short*)&DAT_00463FEC;
@@ -147,7 +131,8 @@ extern "C" int __cdecl FUN_00431fa0(int* param_1, int param_2)
                         } while (pGVar10 != 0);
                     }
                     
-                    puVar14 = (unsigned short*)(pNVar3 + 8 - 28 + local_c * 2 + iVar9 * 2);
+                    puVar14 = (unsigned short*)(*(int*)(pNVar3 + 0xc) +
+                                                local_c * 2 + iVar9 * 2);
                     
                     if (local_c < 0x20) {
                         iVar11 = 0x20 - local_c;
@@ -163,7 +148,7 @@ extern "C" int __cdecl FUN_00431fa0(int* param_1, int param_2)
                     iVar9 = iVar9 + 0x20;
                 } while (iVar9 < 0x100);
                 
-                *(unsigned short*)(param_1[0x30] + 4) = 0;
+                *(unsigned short*)param_1[0x30] = 0;
             }
             
             if (((unsigned int)param_1[0x38] & 0x40) == 0) {
@@ -183,7 +168,7 @@ extern "C" int __cdecl FUN_00431fa0(int* param_1, int param_2)
         }
     }
     
-    param_1[0x27] = (int)((int*)param_1[0x27] + 1);
+    ++param_1[0x27];
     _result = 0;
     return _result;
 }

@@ -99,18 +99,24 @@ static int HandleLeftSideContact(int *platform, unsigned int *event)
 }
 
 // The backup translation below erased field offsets and fixed-point constants.
-// Recover the static contour-platform branch directly from the pinned routine:
-// the frame's height bytes describe the surface under the player, and a close
-// descending contact attaches the player to that platform.
-static int HandleStaticContourPlatform(int *platform, unsigned int *event)
+// The frame's height bytes describe the surface under the player, including
+// platforms whose Y position changes between frames.
+static int HandleContourPlatform(int *platform, unsigned int *event)
 {
   int *other = (int *)platform[0x5e]; // gob_pgobClidWith at +0x178
   if (other != DAT_004a27fc_PlayerClassInstance || event[1] ||
       (platform[0x2d] & 0x100)) return 0;
   unsigned int *frame = FUN_0041A380((int)platform);
   if (!frame || !(frame[0] & 2)) return 0;
-  if (platform[0x1e] != platform[0x35] ||
-      platform[0x1f] != platform[0x36]) return 0;
+  // The original carries an existing rider by the platform's frame delta
+  // before testing the current contour. This also covers the edge where the
+  // next contour height is zero and the rider steps off.
+  if (other[0x44] == (int)platform) {
+    other[0x1e] += platform[0x1e] - platform[0x35];
+    FUN_0042D060(DAT_004a2990_BlockAnims, other, 0);
+    other[0x1f] += platform[0x1f] - platform[0x36];
+    FUN_0042D2C0(DAT_004a2990_BlockAnims, other, 0);
+  }
   int *contour = (int *)frame[8];
   if (!contour || contour[2] <= 0) return 0;
   int distance = (platform[0x1b] & 0x80000000U) ?
@@ -137,7 +143,7 @@ static int HandleStaticContourPlatform(int *platform, unsigned int *event)
 extern "C" void __cdecl FUN_00434b10_EVENT_Collision_Unk(int param_1,unsigned int *param_2)
 {
   if (HandleLeftSideContact((int *)param_1, param_2)) return;
-  if (HandleStaticContourPlatform((int *)param_1, param_2)) return;
+  if (HandleContourPlatform((int *)param_1, param_2)) return;
   int *paVar1;
   int *piVar2;
   unsigned int uVar3;

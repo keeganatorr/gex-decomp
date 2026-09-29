@@ -273,8 +273,96 @@ at the same cursor while another field counted upward. The replacement had
 no type 93 contact in that vicinity, so type 7 continued its movement and
 script. A wider scan of the replacement at frame 909 found no plausible type
 93 object in the level-coordinate window (X 100–200 million, Y 10–60
-million). The next target is the type 93 introduction or its precursor, not
-the faithful default hit-handler condition. The scans are retained as
+million). A read-only breakpoint on the pinned PE's `GOB_AddObject` caught
+the type 93 creation at timer 903, returning to `0042294d` inside the lash
+callback `00422790`. The previous source for that callback had only a small
+held-projectile position branch and omitted the ordinary firing path. The
+reconstructed path uses the player's third hotspot, the original type and
+sound tables, `GOB_AddObject`, and `00422580` for projectile motion. It also
+restores the held-projectile callback and collision setup. The large fixed
+point angle spread for projectile type 1 remains provisional.
+
+In the first rebuilt attract trace, the replacement type 7 object now makes
+type 93 contact at frame 909. Its X=`186390272`, animation group 1/frame 2,
+hit work field 192 and paused script cursor match the original at that frame.
+The subsequent long run reached frame 934, then faulted reading through a
+pointer calculated by `00431fa0`, the type 93 draw helper. Its backup source
+had turned fixed-point coordinate arithmetic into pointer reads, multiplied
+frame counters by four, and assigned an address to a coordinate field. The
+pinned instructions give the coordinate formula
+`object position + stored offset - (random nibble << 16) + 0x70000`;
+the source now uses those values and restores the frame and structure offsets
+for this path. The rebuilt replacement completes the long trace without that
+fault. The original and replacement each yielded 251 frame samples from 700
+through 950, with **zero differences** in player state, next state, position,
+velocity, facing flags, recorded input word, health, contact flag, support type,
+support X and support Y. This establishes parity only for those sampled fields
+in this one unattended playback, not for all objects, rendering or later play.
+The sampled hit timer differs with wall-clock sampling. A subsequent
+frame-1300 trace of the replacement faulted at timer 965 in
+`GOB_RemoveObject`. A debugger caught the invalid recursive child pointer
+`8de48d24` on a type 7 enemy object. Its sprite buffer begins at offset
+`0x11c`; `00431fa0` had copied 14 surplus words after the original capped
+count of 32 and overwritten object links at `0x160`. The pinned loop copies
+`count - 1` words and fills only when `count < 16`. The source now follows
+those bounds and writes the header word at `0x11c`. The rebuilt replacement
+reaches frame 1300 without that fault. Comparing 601 player samples from
+frames 700–1300 found no selected-field difference through **1291**. At
+1292 the original lands on a vertically moving type 3 platform at
+X=`271712256`, Y=`38273024`, while the replacement keeps falling and has
+no support object. The original platform has the type 3 callback set
+`00434a50`/`00434570`/`00434670`/`004355d0`. Its position and collision
+state match the replacement around frames 1288–1291, including contact with
+the player. At timer 1291 a debugger read the replacement collision event:
+the frame has contour flag 2; its contour width is 96 and the active height
+byte is 1. At frame 1292, that contour's top is platform Y minus nine pixels,
+exactly the original player's grounded Y. The provisional contour handler in
+`00434b10` wrongly required an unmoving platform, so it skipped this case.
+Removing that restriction made the landing match through 1296. At frame 1297
+the original carried Gex upward two pixels as he stepped off, while the
+replacement left his Y unchanged. The pinned collision routine applies a
+platform's position delta to an existing rider before checking the current
+contour. That carry and its tile collision calls are restored. A fresh
+frame-1300 run matches the platform landing, step off and ensuing jump.
+The 601-frame field comparison found only one replacement sample at frame
+914 that held the preceding frame's X and Y while its timer had advanced;
+the following sample realigned. This appears to be a sampling race, not a
+persistent game-state divergence. The original's first attract run reaches
+timer 1823, where health is zero and the timer stops. A trace from 700 through
+1823 found a persistent difference starting at 1618: both runs entered
+inside-corner state 66 at 1616, but only the original applied the next corner
+movement offsets. The backup source for `00411e40` advanced its phase by
+`0x40`, where the pinned instructions use `0x8000`; it also dereferenced
+position values as pointers and scaled the movement table index again. The
+state handler now uses the original phase increment, five-entry movement rows,
+fourth-frame exit and corner snap conditions. The rebuilt trace matches every selected player field
+through frame **1768**, apart from a one-frame X/velocity sample at 1144 that
+realigns at 1145. At frame 1769 the replacement faulted trying to execute
+`025e4000`; the original continues. A debugger found fixed-point coordinates
+`025e4000` and `027f4000` in the return-address slots above a call to
+`004256e0`. That function allocated eight integers for `0041cb80`, which
+writes ten edge values. The pinned function reserves 40 bytes. Its local edge
+record now has ten integers; `00433170` had the same split six-plus-four
+decompiler artifact and now uses one ten-integer record. That removed the
+crash but exposed a missing movement sequence in `004256e0`: the replacement
+stayed at the same Y in jump tongue-lash state 20 while the original fell
+onto an object at frame 1775. The pinned routine calls the level movement
+setup, vertical integration, Y tile collision, landing helpers and state
+transitions after horizontal movement. The source now follows that sequence,
+including its input and ceiling exits. A rebuilt source-only image links with
+zero unresolved symbols and zero duplicates. The isolated attract run reaches
+timer **1823** in both executables. Across 1,124 frame samples from 700 through
+1823, state, next state, position, velocity, flags, input, health, contact,
+support type and support position match at every frame except one X/velocity
+sample at 1144 that realigns at 1145. Comparing every captured field adds
+only raw support and script pointer differences at 26 and 20 frames,
+respectively; their pointee behavior is outside this player-state trace.
+The isolated replacement result is
+`.work/replacement-runtime/lash-motion-player.log`. This confirms the sampled
+player path in this unattended playback, not rendering, sound, every object
+or other gameplay paths.
+
+The earlier scans are retained as
 `.work/replacement-runtime/type7-{oracle,replacement}.log`,
 `type7-progress-{oracle,replacement}.log`,
 `type7-900-{oracle,replacement}.log`, `type7-partner-oracle.log`, and
