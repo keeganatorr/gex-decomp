@@ -13,7 +13,7 @@ void __cdecl FUN_00413BA0(void *);
 void __cdecl FUN_00421900(void *);
 void __cdecl FUN_00412D00(void *);
 
-void __cdecl GEX_Target(int *param_1)
+void __cdecl PlayerFaceSpin_00412a50(int *param_1)
 {
     int angle;
     int step;

@@ -15,7 +15,7 @@ typedef struct AngleBoxPair {
 extern "C" {
 int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *gob, AngleBox *box);
 void __cdecl FUN_0042e5e0(GXObject *gob, int x, int y);
-void __cdecl GEX_Target(GXObject *gob, AngleBoxPair *pair)
+void __cdecl FUN_0042e660(GXObject *gob, AngleBoxPair *pair)
 {
     AngleBox box;
     int x1;

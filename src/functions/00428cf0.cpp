@@ -10,7 +10,7 @@ typedef struct ColourHSV {
     int h, s, v;
 } ColourHSV;
 extern "C" {
-void __cdecl GEX_Target(ColourHSV *c)
+void __cdecl FUN_00428cf0(ColourHSV *c)
 {
     int r;
     int g;

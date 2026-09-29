@@ -33,7 +33,7 @@ void __cdecl InitPlayerFalling_004252b0(GXObject *gex);
 void __cdecl FUN_00421cc0_Set_Stop_to_1(void);
 void __cdecl TILES_CheckOneXPoint_0042cec0(GexTileStruct *level, GXObject *gex, void (__cdecl *hit)(void), int offset);
 void __cdecl InitPlayerStand_00424090(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl PlayerRunSkid_00426fc0(GXObject *gex)
 {
     unsigned int facingLeft;
     facingLeft = gex->gob_flags & 0x80000000;

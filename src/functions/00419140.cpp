@@ -7,7 +7,7 @@ typedef struct GXObject {
 extern "C" {
 extern int SCRIPT_WorkRegister_0049fb90;
 void __cdecl PrintWithFont_0040bc70(int x, int y, int font, int a, int b, int c, char *text, GXObject *gob);
-unsigned char *__cdecl GEX_Target(unsigned char *script, GXObject *gob)
+unsigned char *__cdecl SCRIPT_PrintNumWithFont_00419140(unsigned char *script, GXObject *gob)
 {
     char text[4];
     int font;

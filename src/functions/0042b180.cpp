@@ -42,7 +42,7 @@ void __cdecl GOB_DisplayObject_00444590(GXObject *);
 unsigned int __cdecl UTL_ReallyRandom32_00428c60(void);
 GXObject * __cdecl GOB_FindFirstWithType_00429c60(int);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob270Draw_0042b180(GXObject *gob)
 {
     int saved;
     int frame;

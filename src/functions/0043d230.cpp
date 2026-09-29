@@ -1,7 +1,7 @@
 extern "C" int __cdecl FUN_0040FCE0(int*);
 extern "C" void __cdecl FUN_00434260(int*);
 
-extern "C" void __cdecl GEX_Target(int* p)
+extern "C" void __cdecl ob120DoIt_0043d230(int* p)
 {
     p[0x35] = p[0x1e];
     p[0x36] = p[0x1f];

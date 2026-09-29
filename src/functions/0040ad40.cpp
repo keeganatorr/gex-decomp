@@ -37,7 +37,7 @@ void FUN_00440830(void);
 void FUN_00401B40(int);
 void FUN_0041F6F0(void *);
 
-void GEX_Target(void)
+void M1_GameLoop_0040ad40(void)
 {
     unsigned char *blockAnims;
     unsigned int levelId;

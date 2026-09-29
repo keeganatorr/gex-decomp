@@ -14,7 +14,7 @@ extern unsigned int DAT_00457210[];
 extern void __cdecl FUN_00420FA0(GXObject *);
 extern void __cdecl FUN_00421120(GXObject *);
 extern int __cdecl FUN_00420CE0(GXObject *);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_004213f0_GexMovementLeftandRight(GXObject *gob)
 {
     int divisor;
     gob->gob_xVel += gob->gob_xAccl;

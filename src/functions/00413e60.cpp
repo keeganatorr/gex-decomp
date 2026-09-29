@@ -5,7 +5,7 @@ extern "C" void __cdecl FUN_00420BC0(void**);
 extern "C" void __cdecl FUN_00423C80(void**);
 extern "C" void __cdecl FUN_00420960(void**);
 extern "C" void __cdecl FUN_00413D60(void**);
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl InitPlayerBounceFall_00413e60(void** param_1)
 {
     FUN_00420BC0(param_1);
     param_1[0x15] = 0;

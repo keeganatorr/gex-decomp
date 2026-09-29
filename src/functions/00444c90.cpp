@@ -8,7 +8,7 @@ extern "C" {
     extern unsigned char DAT_004a2b50_TRUETILESMAYBE[1024];
 }
 
-extern "C" int GEX_Target(void)
+extern "C" int FUN_00444c90_InitTiles_TrueMaybe(void)
 {
     void** ppv = (void**)FUN_004A33AC;
     for (int n = 0x40000; n != 0; n--) {

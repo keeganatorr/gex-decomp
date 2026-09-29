@@ -13,7 +13,7 @@ typedef struct GXObject {
 } GXObject;
 extern "C" {
 void __cdecl EnemyInitPath_00434a20(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob89Init_0043ce20(GXObject *gob)
 {
     GXLoadObject *lob;
     int scripted;

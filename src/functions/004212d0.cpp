@@ -3,7 +3,7 @@ extern int DAT_004A2890;
 extern void __cdecl FUN_00425250(void*);
 extern void __cdecl FUN_00424D80(void*);
 
-int __cdecl GEX_Target(void* param_1)
+int __cdecl FUN_004212d0_pStateUnk_yVel(void* param_1)
 {
     if (DAT_004A2890 < 0) {
         DAT_004A2890 = 0;

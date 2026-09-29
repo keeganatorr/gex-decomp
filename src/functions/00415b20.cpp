@@ -5,7 +5,7 @@ extern "C" void __cdecl FUN_00420BC0(void**);
 extern "C" { extern int DAT_004a283c; }
 extern "C" void __cdecl FUN_00415820(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl InitPlayerGoThruTube_00415b20(void** param_1)
 {
     FUN_00420BC0(param_1);
     param_1[0x15] = (void*)0;

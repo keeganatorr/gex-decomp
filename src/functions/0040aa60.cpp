@@ -16,7 +16,7 @@ extern "C" {
     extern const char FUN_00455E70[];
 }
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl M1_FreeLevel_0040aa60()
 {
     if (DAT_004a2954_DrawTiles != 0 && FUN_00455C40 >= 0) {
         FUN_00405390(FUN_00455E9C);

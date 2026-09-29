@@ -5,7 +5,7 @@ extern "C" void __cdecl FUN_00420BC0(void**);
 extern "C" void __cdecl FUN_004248E0(void**);
 extern "C" { extern unsigned char DAT_004A0280; }
 
-extern "C" void __cdecl GEX_Target(void** p) {
+extern "C" void __cdecl InitPlayerWalk_00424940(void** p) {
     FUN_00420BC0(p);
     p[0x20] = (void*)((DAT_004A0280 != 0) ? -0x30000 : 0x30000);
     FUN_004248E0(p);

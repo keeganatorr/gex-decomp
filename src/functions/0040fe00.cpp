@@ -6,7 +6,7 @@ void FUN_00419B80(void*, int);
 void FUN_0040FE80(int, int, int);
 }
 
-extern "C" void GEX_Target(int *param_1)
+extern "C" void FUN_0040FE00(int *param_1)
 {
     int temp = param_1[0x1e];
     param_1[0x2a] = temp - CAMERA_XPos_004a2a38;

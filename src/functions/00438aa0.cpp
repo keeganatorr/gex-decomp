@@ -5,7 +5,7 @@ extern "C" void __cdecl FUN_00405390(const char*, ...);
 extern "C" { extern int DAT_00455c54; }
 extern "C" { extern const char DAT_0045f088[]; }
 extern "C" { extern const char DAT_0045f0c0[]; }
-extern "C" int __cdecl GEX_Target(int param1) {
+extern "C" int __cdecl event_hit45up_00438aa0(int param1) {
     if ((*(unsigned int*)(param1 + 0x6c) & 0x1f000000) == 0xa000000) {
         if (DAT_00455c54 > 1) {
             FUN_00405390(DAT_0045f088, *(int*)(param1 + 8));

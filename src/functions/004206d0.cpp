@@ -9,7 +9,7 @@ extern "C" {
 extern GXObject *gPlayerObject_004a27fc;
 extern unsigned int DAT_00457210[];
 extern int DAT_0045a6e8[];
-int __cdecl GEX_Target(void)
+int __cdecl FUN_004206d0(void)
 {
     int dir;
     dir = 6;

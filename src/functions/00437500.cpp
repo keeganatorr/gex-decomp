@@ -52,7 +52,7 @@ int __cdecl FUN_004373c0_KFInner(int d);
 void __cdecl FUN_004374a0(int *dx, int *dy);
 int __cdecl FUN_00439130_KFInner(int dx, int dy);
 int __cdecl FUN_00439190_KFInner(int angle);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_00437500_KFBossStateInner(GXObject *gob)
 {
     int hx;
     int hy;

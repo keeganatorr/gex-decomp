@@ -27,7 +27,7 @@ extern int decl_pad_20;
 extern int decl_pad_21;
 extern int decl_pad_22;
 extern int CAMERA_XPos_004a2a38;
-void __cdecl GEX_Target(int x1, int x2, int x3, unsigned int order)
+void __cdecl FUN_0042e930_GRAPHICSDRAWING_SetCamera(int x1, int x2, int x3, unsigned int order)
 {
     switch (order) {
     case 1:

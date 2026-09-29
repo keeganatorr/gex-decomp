@@ -9,7 +9,7 @@ extern void __cdecl FUN_004213C0(void*, void*);
 extern int __cdecl FUN_00421560(void*, void*);
 extern void __cdecl FUN_00421900(void**);
 
-void __cdecl GEX_Target(void** param_1)
+void __cdecl PlayerTailBounce_00413be0(void** param_1)
 {
     int newVal;
 

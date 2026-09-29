@@ -33,7 +33,7 @@ void __cdecl PrintWithFont_0040bc70(int x, int y, int type, int p4, int p5, int 
 void __cdecl GOB_DisplayObject_00444590(GXObject *gob);
 void __cdecl FUN_0040bc50_PrintStringInner(int scale);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl MainMenuButtonDraw_0040c340(GXObject *gob)
 {
     int scale;
     int frame;

@@ -6,7 +6,7 @@ extern "C" { extern int DAT_00462E80; }
 extern "C" int __cdecl FUN_00412A00(int);
 extern "C" void __cdecl FUN_00412DE0(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl InitPlayerFaceUnspin_00412ee0(void** param_1)
 {
     int iVar1;
 

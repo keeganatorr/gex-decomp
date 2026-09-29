@@ -14,7 +14,7 @@ void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
 void __cdecl FUN_00445140_InnerGraphics(Prim *list);
 void __cdecl FUN_0043f310_InitializeGraphicsVariables(void);
 void __cdecl FUN_0043f2d0_CheckF3ForUnpauseGameDrawWindow(int flag);
-void __cdecl GEX_Target(void)
+void __cdecl PAL_WaitForFade_0043f580(void)
 {
     unsigned char r;
     unsigned char g;

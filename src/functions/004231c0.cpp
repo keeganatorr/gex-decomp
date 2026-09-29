@@ -7,7 +7,7 @@ extern "C" { extern unsigned char DAT_004A0282; }
 extern "C" void __cdecl FUN_00425930(void**);
 extern "C" void __cdecl FUN_00425690(void**);
 
-extern "C" int __cdecl GEX_Target(void** param_1)
+extern "C" int __cdecl FUN_004231c0_JumpTongueLash(void** param_1)
 {
     if (DAT_004A0293 != 0 && DAT_004A0295 == 0) {
         if (DAT_004A0282 != 0)

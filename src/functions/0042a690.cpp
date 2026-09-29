@@ -63,7 +63,7 @@ int __cdecl TXT_PixelLength_0043fae0(char *text);
 void __cdecl FUN_00444800_Tiles(int a, int x, int y, int w, int h, int b, int color);
 void __cdecl TXT_DrawPrintFP_0043faa0(int x, int y, char *text);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_0042a690(GXObject *gob)
 {
     int tx;
     int x;

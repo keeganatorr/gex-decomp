@@ -5,7 +5,7 @@ extern unsigned short *DAT_004a2f54_ppvBitsUnk;
 extern int FUN_004A33AC;
 extern int DAT_004a2f78_TileRelated;
 
-extern "C" void __cdecl GEX_Target(int param_1, int param_2, int param_3, unsigned int param_4, int param_5, int param_6, unsigned int param_7, int param_8)
+extern "C" void __cdecl FUN_00448560_InnerGraphicsTiles3_Tiles3(int param_1, int param_2, int param_3, unsigned int param_4, int param_5, int param_6, unsigned int param_7, int param_8)
 {
     unsigned short uVar1;
     int iVar2, iVar3, iVar4, iVar5, iVar6;

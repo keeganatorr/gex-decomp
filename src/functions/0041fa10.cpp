@@ -10,7 +10,7 @@ extern int __cdecl FUN_004019C0(void);
 extern int __cdecl FUN_0041FBA0(void);
 }
 
-extern "C" int __cdecl GEX_Target(void) {
+extern "C" int __cdecl FUN_0041fa10_ProcessVoiceLoadingCompletion_Clean1(void) {
     if (DAT_004638C0 != 0) {
         if (FUN_004019C0() == 0) return 0;
         int v = DAT_004638B0;

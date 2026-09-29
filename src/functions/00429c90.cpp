@@ -2,7 +2,7 @@ extern "C" { extern unsigned char BYTE_ARRAY_004a25d0[]; }
 typedef unsigned int uint;
 typedef unsigned __int64 ulonglong;
 extern "C" {
-uint GEX_Target(void)
+uint FUN_00429c90_RemoteUnk(void)
 {
   uint uVar1;
   int iVar2;

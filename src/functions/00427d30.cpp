@@ -52,7 +52,7 @@ void __cdecl InitPlayerStand_00424090(GXObject *);
 void __cdecl InitPlayerDuck_00427850(GXObject *);
 void __cdecl InitPlayerSideUTurn_00412750(GXObject *);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl PlayerSideCrawl_00427d30(GXObject *gob)
 {
     int dir;
     int moved;

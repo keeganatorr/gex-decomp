@@ -15,7 +15,7 @@ extern int DAT_00467178;
 extern unsigned char DAT_0046003C;
 extern unsigned short DAT_004A2B20;
 
-void __cdecl GEX_Target(int param1) {
+void __cdecl CEL_DrawCels_0043db70(int param1) {
     *(int*)DAT_004A2B1C = 0;
     int local_Draw6 = DAT_00464e48;
     while (local_Draw6 != 0) {

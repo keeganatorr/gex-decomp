@@ -5,7 +5,7 @@ extern "C" {
     extern unsigned char DAT_004a0282;
     extern unsigned char DAT_004a0285;
 
-    void __cdecl GEX_Target(void** param_1)
+    void __cdecl InitPlayerBounceRise_00414030(void** param_1)
     {
         void* pGVar1;
         int iVar2;

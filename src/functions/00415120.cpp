@@ -6,7 +6,7 @@ extern "C" { extern int FUN_004A2888; }
 extern "C" void __cdecl FUN_00422410_EatingObject_pState_Call(void**);
 extern "C" void __cdecl FUN_00415080(void**);
 
-extern "C" void __cdecl GEX_Target(void** p)
+extern "C" void __cdecl InitPlayerSideSwallow_00415120(void** p)
 {
     FUN_00420BC0(p);
     p[0x15] = 0;

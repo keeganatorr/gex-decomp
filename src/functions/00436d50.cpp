@@ -16,7 +16,7 @@ extern unsigned char DAT_004642e4;
 extern ObjectType obs_0045ca38[];
 }
 
-extern "C" void __cdecl GEX_Target(int *obj)
+extern "C" void __cdecl RezInDraw2_00436d50(int *obj)
 {
     int oldX, oldY;
     int savedX, savedY, savedW, savedH;

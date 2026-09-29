@@ -4,7 +4,7 @@ extern "C" {
 extern CachePos DAT_00460040_MAIN_GAME_WIDTH;
 extern short DAT_004600c8_DrawCacheCount;
 void __cdecl FUN_0043eb50_LoadTilePoss(DrawCache *cache, int initialise);
-void __cdecl GEX_Target(DrawCache *tile)
+void __cdecl FUN_0043ec20_TileLoadinPoss(DrawCache *tile)
 {
     if (DAT_00460040_MAIN_GAME_WIDTH.y <= 0x100 && tile->height + DAT_00460040_MAIN_GAME_WIDTH.y > 0x100)
         DAT_00460040_MAIN_GAME_WIDTH.y = 0x100;

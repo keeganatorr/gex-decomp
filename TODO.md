@@ -6,12 +6,12 @@
   (`scripts/build-source-link-smoke`; `docs/replacement-build.md`)
 - [x] Inventory current source/link references without reading the EXE or DB
   (`tools/link_inventory.py`)
-- [x] Generate replacement source copies with live Ghidra function names by
-  filename address, preserving byte-match sources and proofs
+- [x] Rename `src/functions` definitions from live Ghidra function names by
+  filename address, and track the name map
   (`scripts/name-ghidra-functions`)
-- [x] Compile all 1,193 current source functions with unique exports, normalize
-  2,503 function and 3,544 data COFF references, and measure the full link
-  (`scripts/assess-replacement-link`): 69 unresolved, zero duplicates
+- [x] Compile all 1,193 current source functions with Ghidra-named exports, normalize
+  1,140 remaining function and 3,544 data COFF references, and measure the full link
+  (`scripts/assess-replacement-link`): 67 unresolved, zero duplicates
 - [x] Preserve pinned `.rdata`/`.data` initial values and zero tail as textual
   source with 2,685 symbolic relocations; ordinary builds use the source,
   not `GEX.exe` (`src/replacement/image_data.s`)
@@ -27,7 +27,7 @@
   rebase 61 distinct original image-address literals in scratch build copies
 - [ ] Recover semantic data types and editable resource scripts from the raw
   source bridges
-- [ ] Resolve the 69 remaining link externals, including file I/O, text,
+- [ ] Resolve the 67 remaining link externals, including file I/O, text,
   graphics, import and CRT/debug helpers
 - [ ] Fill source gaps, including startup/window/graphics paths, and produce a
   whole-game Windows executable from source

@@ -1,7 +1,7 @@
 typedef struct Rect16 { short x, y, w, h; } Rect16;
 extern "C" {
 extern unsigned short *gPaletteDataPtr_004a33ac;
-int __cdecl GEX_Target(Rect16 *rect, unsigned short *data)
+int __cdecl FUN_004451e0_LEV_SetUpDrawCacheWithFileData(Rect16 *rect, unsigned short *data)
 {
     unsigned short *dest = gPaletteDataPtr_004a33ac + (rect->y << 10) + rect->x;
     unsigned short *src = data;

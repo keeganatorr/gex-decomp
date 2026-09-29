@@ -50,7 +50,7 @@ void __cdecl VSIT_PlayVoiceSituation_0041f8c0(int);
 void __cdecl VFX_Play_0041fa80(int);
 void __cdecl EFECT_AddPuff_0042e480(int, int, unsigned int, int, unsigned int);
 
-void __cdecl GEX_Target(int *p)
+void __cdecl PlayerDoit2_00415c10(int *p)
 {
     int d;
     DAT_004a022c = 0;

@@ -12,7 +12,7 @@ extern "C" { extern int DAT_00455BB8; }
 extern "C" { extern int DAT_00455BBC; }
 extern "C" { extern int DAT_00455BC0; }
 
-extern "C" void __cdecl GEX_Target(unsigned int param_1)
+extern "C" void __cdecl FUN_00410d10_CollisionInner(unsigned int param_1)
 {
     if ((param_1 & 0x1000) != 0) {
         DAT_00455BBC = 0xb40000;

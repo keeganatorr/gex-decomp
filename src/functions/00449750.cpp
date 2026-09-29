@@ -1,7 +1,7 @@
 extern "C" void (__cdecl *PTR___fpmath_00461160)(void);
 extern "C" int __cdecl __initterm(void**, void**);
 
-extern "C" int __cdecl GEX_Target(int)
+extern "C" int __cdecl __cinit(int)
 {
     if (PTR___fpmath_00461160 != 0) {
         PTR___fpmath_00461160();

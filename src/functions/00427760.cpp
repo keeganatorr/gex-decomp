@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_004276E0(int obj);
 
-extern "C" void __cdecl GEX_Target(int param_1)
+extern "C" void __cdecl InitPlayerTailSlash_00427760(int param_1)
 {
     *(int*)(param_1 + 0x54) = 0;
     FUN_004276E0(param_1);

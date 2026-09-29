@@ -22,7 +22,7 @@ extern char s_GOB_ExtraResolve_on_x_00461084[];
 extern char s_Setting_up_ot_d_prefix_x_head_00461050[];
 extern char s_At_position_d_d_0046103c[];
 void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
-void __cdecl GEX_Target(ExtraObject *object)
+void __cdecl GOB_ExtraResolve_00441010(ExtraObject *object)
 {
     ExtraHeader *header;
     TextureCache *cache;

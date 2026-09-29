@@ -18,7 +18,7 @@ extern "C" { extern int DAT_004A29B8; }
 extern "C" void __cdecl FUN_0041A660();
 extern "C" void __cdecl FUN_00422390(void**);
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl ResetPlayerHP_00417e70()
 {
     int three = 3;
     int zero = 0;

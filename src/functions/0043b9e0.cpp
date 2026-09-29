@@ -12,7 +12,7 @@ extern int DAT_00464e0c;
 extern int DAT_004a293c_CameraX_After2;
 int __cdecl abs(int);
 
-void __cdecl GEX_Target(void)
+void __cdecl ob259DoIt_0043b9e0(void)
 {
     if (DAT_00464de0 != 0) {
         if (DAT_00464e0c > 0)

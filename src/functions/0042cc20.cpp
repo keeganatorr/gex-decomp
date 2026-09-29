@@ -1,7 +1,7 @@
 struct Node { Node* next; Node* previous; };
 struct List { Node* head; Node* tailSentinel; Node* tailPrevious; };
 extern "C" void __cdecl LST_Remove_0042cbf0(Node* node);
-extern "C" Node* __cdecl GEX_Target(List* list)
+extern "C" Node* __cdecl LST_RemTail_0042cc20(List* list)
 {
     Node* node = list->tailPrevious;
     if (node->previous)

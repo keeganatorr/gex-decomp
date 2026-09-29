@@ -1,5 +1,5 @@
 extern "C" void __cdecl FUN_00433900(void**);
-extern "C" void __cdecl GEX_Target(void** param1) {
+extern "C" void __cdecl DefDoIt_004339c0(void** param1) {
     unsigned int flags = (unsigned int)param1[0x38];
     if ((flags & 0x100000) == 0) {
         param1[0x35] = param1[0x1e];

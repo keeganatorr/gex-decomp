@@ -4,7 +4,7 @@ extern "C" {
 extern "C" { extern int DAT_004A27FC; }
 extern "C" { extern int DAT_0049FB90; }
 
-extern "C" int __cdecl GEX_Target(int param_1, void* param_2)
+extern "C" int __cdecl SCRIPT_TrackGXPositionY_004182a0(int param_1, void* param_2)
 {
     void* pGVar2;
     void* pGVar1;

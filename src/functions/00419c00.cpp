@@ -17,7 +17,7 @@ typedef struct Frame {
 extern "C" {
 extern int gTrigTable_0045a5c8[];
 Frame *__cdecl GOB_GetCurrentFrameWithDefault_0041a380(GXObject *gob);
-int __cdecl GEX_Target(GXObject *gob, int set, int index, int *outX, int *outY)
+int __cdecl GOB_GetHotSpot_00419c00(GXObject *gob, int set, int index, int *outX, int *outY)
 {
     Frame *frame;
     HotSpots *hotspots;

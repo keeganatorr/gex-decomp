@@ -10,7 +10,7 @@ extern int decl_pad_3;
 extern int decl_pad_4;
 extern int decl_pad_5;
 extern unsigned int gCollectibles_004a2660[6];
-unsigned int __cdecl GEX_Target(void)
+unsigned int __cdecl FUN_0041a680(void)
 {
     int i;
     unsigned int v;

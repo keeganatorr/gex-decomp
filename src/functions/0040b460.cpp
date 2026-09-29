@@ -45,7 +45,7 @@ void __cdecl assertfail_00405350(char *, ...);
 void __cdecl FUN_00409680_ReadFile(int *, int *, int *, int, int);
 void __cdecl BLOC_Loaded_0040b3b0(void *);
 
-void __cdecl GEX_Target(void)
+void __cdecl BLOC_BlockLoader_0040b460(void)
 {
     int n;
     ReadRequest *req;

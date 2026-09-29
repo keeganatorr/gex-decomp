@@ -6,7 +6,7 @@ extern int CAMERA_XPos_004a2a38;
 extern int __cdecl FUN_0041CB80(int *param_1, int *param_2);
 extern void __cdecl FUN_0042cc70_Object_unk(int param_1, int *param_2);
 
-int __cdecl GEX_Target(int *param_1, void (__cdecl *param_2)(int *, int))
+int __cdecl TILES_CheckVertForcedScroll_0042cd90(int *param_1, void (__cdecl *param_2)(int *, int))
 {
     int local[10];
     int v;

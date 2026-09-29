@@ -7,7 +7,7 @@ extern "C" int __cdecl FUN_004206B0(int);
 extern "C" void __cdecl FUN_004134B0(void**);
 extern "C" { extern int DAT_004A0218; }
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl InitPlayerSideSlap_004135a0(void** param_1)
 {
     int iVar2;
 

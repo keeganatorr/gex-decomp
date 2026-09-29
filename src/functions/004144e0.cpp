@@ -11,7 +11,7 @@ void __cdecl FUN_00420BC0(void**);
 void __cdecl FUN_00420960(void**);
 void __cdecl FUN_004143B0(void**);
 
-void __cdecl GEX_Target(void** param_1)
+void __cdecl InitPlayerFaceCrawlToAir_004144e0(void** param_1)
 {
     FUN_00420BC0(param_1);
     param_1[0x15] = 0;

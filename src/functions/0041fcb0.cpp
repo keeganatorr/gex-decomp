@@ -10,7 +10,7 @@ extern "C" { extern int FUN_00463A34; }
 extern "C" { extern int DAT_00463a38; }
 extern "C" { extern int DAT_00463a30; }
 
-extern "C" void __cdecl GEX_Target(int param_1)
+extern "C" void __cdecl IDL_Open_0041fcb0(int param_1)
 {
     if (PTR_004a2a10 == 0 && DAT_00463a2c == 0 && DAT_004a298c_FileLoaded != 0) {
         FUN_0040B8C0(DAT_00455B78, param_1, &DAT_00463a38, &DAT_00463a30);

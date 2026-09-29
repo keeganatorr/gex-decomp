@@ -1,7 +1,7 @@
 extern "C" {
 extern int DAT_0045C998;
 
-int __cdecl GEX_Target(int param_1)
+int __cdecl FUN_004373c0_KFInner(int param_1)
 {
     if (DAT_0045C998 == 1) {
         return ((200 - param_1) * param_1 * 4) / 1000;

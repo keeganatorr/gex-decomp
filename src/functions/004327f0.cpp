@@ -51,7 +51,7 @@ void __cdecl GOB_DisplayObject_00444590(GXObject *gob);
 void __cdecl GOB_DisplayObjectScaleAndRotate_00441150(GXObject *gob);
 void __cdecl GOB_ResetPos_004317e0(GXObject *gob);
 void __cdecl RezOutAll_00437330(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_004327F0(GXObject *gob)
 {
     GXObject temp;
     if (gob->gob_work1 < 0) {

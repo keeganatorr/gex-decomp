@@ -5,7 +5,7 @@ extern "C" { extern unsigned char DAT_0046067C; }
 
 extern "C" void __cdecl FUN_0043F290(void);
 
-extern "C" void __cdecl GEX_Target(int param_1)
+extern "C" void __cdecl FUN_0043f2d0_CheckF3ForUnpauseGameDrawWindow(int param_1)
 {
     if (param_1)
         FUN_0043F290();

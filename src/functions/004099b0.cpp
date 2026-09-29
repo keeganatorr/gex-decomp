@@ -24,7 +24,7 @@ extern int level_004a2964;
 extern int DAT_004a2a00;
 extern LevelEntry DAT_004577B0[];
 extern void __cdecl MUS_Stop_00402f70(int, int);
-void __cdecl GEX_Target(int force)
+void __cdecl FUN_004099b0_CloseMusic(int force)
 {
     int music;
     if (DAT_004a2a08_LoadLevelMusic4) {

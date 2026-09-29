@@ -14,7 +14,7 @@ extern "C" {
 // DAT_0045b7c0: three pixel-colour words, then a frame-group table at +0x18.
 extern unsigned int DAT_0045b7c0[];
 extern void __cdecl GOB_DisplayObject_00444590(GXObject *);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_00435a10(GXObject *gob)
 {
     unsigned int pixc = gob->gob_pixc;
     gob->gob_pixc = DAT_0045b7c0[0];

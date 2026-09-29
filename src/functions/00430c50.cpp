@@ -28,7 +28,7 @@ extern char s_Damage_To_GEX_0045b140[];
 void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
 void __cdecl PlayerDamage_00417b70(GXObject *gob);
 int __cdecl FUN_00430b40(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob, int *hit)
+void __cdecl ob229Clid_00430c50(GXObject *gob, int *hit)
 {
     unsigned int a;
     unsigned int b;

@@ -9,7 +9,7 @@ extern int DAT_00464ab8[];
 extern int DAT_00464bb8[];
 extern int DAT_00464cb8[];
 int __cdecl rand(void);
-void __cdecl GEX_Target(void)
+void __cdecl FUN_0043b0c0_GRAPHICSDRAWING(void)
 {
     int i;
     int count;

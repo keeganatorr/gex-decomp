@@ -5,7 +5,7 @@ extern int DAT_004a2950;
 void __cdecl FUN_0043f070(void);
 void __cdecl FUN_0043eed0(void);
 void __cdecl FUN_0043f080(int);
-void __cdecl GEX_Target(void)
+void __cdecl FUN_00409970_BetweenLevelsTVFuzz(void)
 {
     if (!DAT_004a288c) {
         if (DAT_004a2994 != 1)

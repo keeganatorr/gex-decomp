@@ -1,4 +1,4 @@
-int * __cdecl GEX_Target(int *destination, int value, int count)
+int * __cdecl BLOC_InitTable_0040b6d0(int *destination, int value, int count)
 {
     if (count > 0)
     {

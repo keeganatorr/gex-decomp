@@ -5,7 +5,7 @@ extern int DAT_00455B8C;
 extern int DAT_004A01E4;
 extern int CAMERA_XPos_004a2a38;
 
-int __cdecl GEX_Target(void** param1, void (__cdecl *param2)(void**, int)) {
+int __cdecl TILES_CheckHorizForcedScroll_0042cc90(void** param1, void (__cdecl *param2)(void**, int)) {
     int edges[10];
     if (DAT_00455B8C != 0) {
         if (FUN_0041CB80(param1, edges) == 0) return 0;

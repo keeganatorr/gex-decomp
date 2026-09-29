@@ -27,7 +27,7 @@ struct IDirectSound { IDirectSoundVtbl *lpVtbl; };
 extern "C" {
 void *__cdecl memset(void *dst, int value, unsigned int count);
 extern IDirectSound *gDirectSound_0049a070;
-int __cdecl GEX_Target(int unused, IDirectSoundBuffer **buffer, unsigned long bytes, unsigned long rate)
+int __cdecl SND_CreateDirectSoundBuffer_00401720(int unused, IDirectSoundBuffer **buffer, unsigned long bytes, unsigned long rate)
 {
     PCMWAVEFORMAT format;
     DSBUFFERDESC desc;

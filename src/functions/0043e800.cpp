@@ -13,7 +13,7 @@ extern "C" { extern M1TileTable* DAT_004a2adc_Tiles2; }
 extern "C" { extern M1TileTable* DAT_004a2ae0_TilesBack1; }
 extern "C" { extern int* PTR_004a2b1c; }
 
-extern "C" void __cdecl GEX_Target(int param_1, short* param_2, int param_3, int param_4)
+extern "C" void __cdecl FUN_0043e800_ProcessTileData(int param_1, short* param_2, int param_3, int param_4)
 {
     short* psVar1;
     int iVar2;

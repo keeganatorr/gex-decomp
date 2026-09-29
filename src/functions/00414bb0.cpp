@@ -14,7 +14,7 @@ extern unsigned char DAT_004a0295;
 extern int FUN_004A2990;
 extern int FUN_004A284C;
 
-void __cdecl GEX_Target(void** param_1)
+void __cdecl PlayerDuckSpin_00414bb0(void** param_1)
 {
     int stateResult = FUN_00421820_pStateUnk_Duck(param_1);
     int drawResult = FUN_00421560_DrawCharacter(FUN_004A2990, param_1);

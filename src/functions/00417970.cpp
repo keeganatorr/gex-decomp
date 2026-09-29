@@ -10,7 +10,7 @@ extern "C" void __cdecl FUN_00419BE0(void*, void*);
 extern "C" void __cdecl FUN_00423130_pStateUnk_Eating(void*);
 extern "C" void __cdecl FUN_0042e660(void*, int);
 
-extern "C" void __cdecl GEX_Target(int *param_1, int *param_2)
+extern "C" void __cdecl PlayerClid_00417970(int *param_1, int *param_2)
 {
     int gOb_param;
     unsigned int uVar2;

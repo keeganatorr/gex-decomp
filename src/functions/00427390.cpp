@@ -30,7 +30,7 @@ long __cdecl FUN_00421560_DrawCharacter(long, GXObject **);
 void __cdecl FUN_004250B0(GXObject **);
 void __cdecl FUN_00427B80(GXObject **);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl PlayerTurn_00427390(GXObject *gob)
 {
     long iVar2;
 

@@ -12,7 +12,7 @@ extern "C" void __cdecl FUN_0043ec20_TileLoadinPoss(void *);
 extern "C" void __cdecl FUN_004451e0_LEV_SetUpDrawCacheWithFileData(void *, short *);
 extern "C" void __cdecl FUN_0040B860(void *);
 
-extern "C" void __cdecl GEX_Target(void *blockTable, unsigned int rootLink)
+extern "C" void __cdecl RM_LoadTextures_004405b0(void *blockTable, unsigned int rootLink)
 {
     int cellCount = 0;
     int *listSlots;

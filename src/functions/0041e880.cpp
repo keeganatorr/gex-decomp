@@ -3,5 +3,5 @@
 extern "C" {
 extern "C" void __cdecl FUN_0041E7C0(void**);
 extern "C" void __cdecl FUN_0041E7E0(void**, int*, int*, int*);
-extern "C" void __cdecl GEX_Target(void** p, int* p2) { FUN_0041E7C0(p); FUN_0041E7E0(p, (int*)p[0x5a], p2, (int*)p[0x5b]); }
+extern "C" void __cdecl CLD_SetObjectCollisionType_0041e880(void** p, int* p2) { FUN_0041E7C0(p); FUN_0041E7E0(p, (int*)p[0x5a], p2, (int*)p[0x5b]); }
 }

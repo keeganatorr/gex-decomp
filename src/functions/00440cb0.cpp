@@ -59,7 +59,7 @@ extern int decl_pad_24;
 extern short DAT_004a0270_Background_Unk2;
 extern short DAT_004a0272_LEVEL_MAP;
 void __cdecl FUN_0043dc70_Graphics(BgImage *image, int x, int y, int a, int b, unsigned int flags, short c, short d);
-void __cdecl GEX_Target(BgObject *obj, int x, int y)
+void __cdecl FUN_00440cb0_DrawBackgroundInnerInner(BgObject *obj, int x, int y)
 {
     BgFrame *frame;
     BgPart **p;

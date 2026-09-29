@@ -4,7 +4,7 @@ extern "C" {
 extern "C" { extern void* DAT_00487F70; }
 extern "C" { extern int DAT_004A295C; }
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl FUN_00409fe0_RestartHWND()
 {
     void** base;
     int outer;

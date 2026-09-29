@@ -6,7 +6,7 @@ extern "C" { extern int DAT_0049fba0[]; }
 extern "C" { extern void** DAT_0045b09c; }
 extern "C" { extern int DAT_0045b130; }
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl ob234Init_004313d0(void** param_1)
 {
     int pGVar1;
     int pNVar2;

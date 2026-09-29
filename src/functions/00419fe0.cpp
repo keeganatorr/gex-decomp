@@ -21,7 +21,7 @@ extern "C" {
     extern GexTileStruct* M1_CurrentLevel_004a2990;
     extern int __cdecl FUN_00440430_CheckWallCollisionInner(void*, void*, int, int);
 
-    int __cdecl GEX_Target(GexTileStruct* param_1, int param_2, unsigned int param_3)
+    int __cdecl GOB_GetBlockAddress_00419fe0(GexTileStruct* param_1, int param_2, unsigned int param_3)
     {
         if (param_2 >= 0 &&
             param_2 < M1_CurrentLevel_004a2990->f_0x4_levelData->field_0x4_CameraX &&

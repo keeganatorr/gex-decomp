@@ -29,7 +29,7 @@ struct TileMap {
 
 void __cdecl FUN_0043fce0_DrawTilesInner(int, void *, int, int);
 
-void __cdecl GEX_Target(struct TileMap *map, void *gfx, int camX, int camY)
+void __cdecl RM_DrawTiles_0043fb40(struct TileMap *map, void *gfx, int camX, int camY)
 {
     int cols;
     int rows;

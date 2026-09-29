@@ -23,7 +23,7 @@ extern int DAT_004a0218_pState;
 void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
 void __cdecl InitPlayerPlatSideCrawl_00411a40(GXObject *gex);
 void __cdecl PlayerSideCrawl_00427d30(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl InitPlayerSideCrawl_00411160(GXObject *gex)
 {
     GOB_ResetState_00420bc0(gex);
     if (gPlayerPlatform_004a2864) {

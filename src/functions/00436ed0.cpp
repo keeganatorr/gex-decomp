@@ -16,7 +16,7 @@ void __cdecl FUN_0042e850(Word *);
 void __cdecl FUN_00436cb0_Graphics_unk(Word *);
 void __cdecl RezInDraw2_00436d50(Word *);
 
-void __cdecl GEX_Target(Word *object)
+void __cdecl RezInDraw_00436ed0(Word *object)
 {
     Word originalX, originalY;
     Word *parent = (Word *)object[0x57];

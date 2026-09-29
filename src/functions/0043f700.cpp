@@ -14,7 +14,7 @@ extern "C" {
         short field0x6;
     };
 
-    void __cdecl GEX_Target(void* LoadedLevel, void* idl_file_handle, int LEV) {
+    void __cdecl TXT_LoadFont_0043f700(void* LoadedLevel, void* idl_file_handle, int LEV) {
         char* ll = (char*)LoadedLevel;
         ll[8] = 0x20;
         ll[9] = 0x7f;

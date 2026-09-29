@@ -23,7 +23,7 @@ extern int decl_pad_7;
 extern int decl_pad_8;
 void __cdecl FUN_004211d0(GXObject *gob);
 int __cdecl FUN_00420ce0_GexWallCollision(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl FUN_004214d0_y_pos_movement(GXObject *gex)
 {
     int slowdown;
     gex->gob_yVel += gex->gob_yAccl;

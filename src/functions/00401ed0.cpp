@@ -1,7 +1,7 @@
 extern "C" {
 void __cdecl SND_PlayPreviewSound_00401d00(int, int);
 extern int DAT_0048a030;
-void __cdecl GEX_Target(int param_1, int param_2)
+void __cdecl SetMusicVolume_00401ed0(int param_1, int param_2)
 {
     if (param_1 != 0) {
         int newVol = (param_1 * 5 - 500) * 5;

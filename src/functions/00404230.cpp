@@ -58,7 +58,7 @@ extern "C" int DAT_00487F88;
 extern "C" int DAT_00487768_ScreenWidth;
 extern "C" HWND gDebugVRAMWindow_0048750c;
 
-extern "C" __declspec(dllexport) LRESULT __stdcall GEX_Target(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+extern "C" __declspec(dllexport) LRESULT __stdcall DebugVramWndProc_00404230(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     PAINTSTRUCT paint;
     POINT point;

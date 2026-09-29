@@ -24,7 +24,7 @@ int __cdecl FUN_00421f20_pStateUnk_Side(GXObject *gex);
 void __cdecl FUN_00421cd0_xpos_ypos_related(GXObject *gex);
 void __cdecl FUN_004112e0_PlatCorner(GXObject *gex, unsigned int corner);
 void __cdecl InitPlayerSideCrawl_00411160(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl PlayerSideOutside90Trans_00412290(GXObject *gex)
 {
     int dir;
     unsigned int next;

@@ -8,7 +8,7 @@ extern void __cdecl FUN_0041E930();
 extern void __cdecl FUN_0042CBF0(void**);
 extern void __cdecl FUN_0042CC00(void**, void**);
 
-void __cdecl GEX_Target()
+void __cdecl GOB_FreeRemovedObjects_00419b20()
 {
     void* loaded_gOb;
     void* pGVar2;

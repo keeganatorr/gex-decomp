@@ -5,7 +5,7 @@ extern "C" { extern int DAT_00463ACC; }
 extern void* DAT_004A2990;
 extern "C" int __cdecl FUN_0040F030(void*, unsigned int, unsigned int);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl FUN_00421780_pStateUnk_Fall(void** param_1)
 {
     int iVar1;
     int iVar2;

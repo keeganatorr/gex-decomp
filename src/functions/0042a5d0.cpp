@@ -1,6 +1,6 @@
 extern "C" {
 extern int __cdecl FUN_00429cb0_RemoteTVSelect_Unk1(int, int);
-int __cdecl GEX_Target(int *remote, int tv)
+int __cdecl FUN_0042a5d0_RemoteUnk(int *remote, int tv)
 {
     int i, n = 0;
     int selected = FUN_00429cb0_RemoteTVSelect_Unk1(0, remote[0x9c / 4] + 1);

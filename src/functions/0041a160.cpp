@@ -6,7 +6,7 @@ extern int DAT_00455c54;
 extern void** DAT_004a27fc;
 extern const char DAT_00458f68[];
 
-int __cdecl GEX_Target(void* param1, void** param2) {
+int __cdecl GOB_LandedOnContoursWithOffset_0041a160(void* param1, void** param2) {
     int glueDist;
     int bVar1 = param2[0x44] != 0 && param2[0x45] == 0;
     glueDist = FUN_0040F1D0(param1, param2);

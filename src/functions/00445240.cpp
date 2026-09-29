@@ -8,7 +8,7 @@ extern "C" { extern int DAT_004A2F7C; }
 extern "C" { extern int DAT_004A2F80; }
 extern "C" { extern int DAT_004A2F70; }
 
-extern "C" int __cdecl GEX_Target(int param_1)
+extern "C" int __cdecl FUN_00445240_DrawWindowAlways(int param_1)
 {
     DAT_004A2F84 = 0;
     DAT_004A2F74 = -1;

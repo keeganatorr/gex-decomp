@@ -4,7 +4,7 @@ extern "C" {
 extern "C" { extern int DAT_004635a0; }
 extern "C" void __cdecl FUN_0041B500(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl FUN_0041b700_ObjCallUnkInner(void** param_1)
 {
     if (DAT_004635a0 == 0) {
         DAT_004635a0 = 1;

@@ -45,7 +45,7 @@ void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
 void __cdecl InitPlayerSideSlap_004135a0(GXObject *gex);
 void __cdecl InitPlayerTailWhap_004136d0(GXObject *gex);
 void __cdecl PlayerSideSpin_004130a0(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl InitPlayerSideSpin_00413170(GXObject *gex)
 {
     unsigned int pad;
     unsigned int dir;

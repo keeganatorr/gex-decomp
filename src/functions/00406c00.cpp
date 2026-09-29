@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" { extern int DAT_004a294c; }
 extern "C" { extern unsigned int* FUN_00487F70; }
-extern "C" void __cdecl GEX_Target() {
+extern "C" void __cdecl FUN_00406c00_IfFreeGameNotEquals1_Unk_WHAT_DOES_THIS_DO_CONTAINS_PPVBITS() {
     if (DAT_004a294c == 1) return;
     int y = 0;
     do {

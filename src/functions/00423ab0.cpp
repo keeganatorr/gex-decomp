@@ -6,7 +6,7 @@ extern "C" { extern unsigned char FUN_004A0285; }
 extern "C" int __cdecl FUN_00423AA0(void**);
 extern "C" void __cdecl FUN_00414370(void**);
 
-extern "C" int __cdecl GEX_Target(void** param_1)
+extern "C" int __cdecl FUN_00423ab0_AirToFaceCrawl(void** param_1)
 {
     param_1[0x61] = param_1[0x1e];
     param_1[0x62] = param_1[0x1f];

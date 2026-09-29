@@ -3,7 +3,7 @@ extern int DAT_0045b7d8_framecount_;
 extern void __cdecl FUN_0041A340(void** param_1, int param_2);
 extern void __cdecl FUN_00422470_EatObjects(void** param_1);
 
-void __cdecl GEX_Target(void** param_1, int* param_2)
+void __cdecl ob2Clid_004356e0(void** param_1, int* param_2)
 {
     int iVar1;
     void* pGVar2;

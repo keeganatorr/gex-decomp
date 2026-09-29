@@ -12,7 +12,7 @@ void __cdecl FUN_00405350(char *, ...);
 void __cdecl FUN_00405390(char *, ...);
 void __cdecl FUN_00419520(void **);
 
-inline void __cdecl GEX_Target(void **param_1)
+inline void __cdecl ob237Init_0041b3e0(void **param_1)
 {
     long dataID = (long)param_1[0x26];
     long subID;
@@ -58,5 +58,5 @@ inline void __cdecl GEX_Target(void **param_1)
     }
 }
 
-static void (__cdecl * volatile GEX_Target_reference)(void **) = GEX_Target;
+static void (__cdecl * volatile GEX_Target_reference)(void **) = ob237Init_0041b3e0;
 }

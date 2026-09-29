@@ -7,7 +7,7 @@ extern "C" { extern void* FUN_004A2990; }
 extern "C" int __cdecl FUN_00421560_DrawCharacter(void*, void**);
 extern "C" void __cdecl FUN_00424BD0(void**);
 
-extern "C" void __cdecl GEX_Target(void** p)
+extern "C" void __cdecl PlayerLaunch_00415600(void** p)
 {
     if (FUN_004A2870 != 0) {
         if (FUN_00421560_DrawCharacter(FUN_004A2990, p) != 0) return;

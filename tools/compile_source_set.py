@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compile each reconstructed Gex function to a uniquely named COFF object.
+"""Compile each reconstructed Gex function to a Ghidra-named COFF object.
 
 This source-only build inventory does not open the original EXE, database or
 retained verifier artifacts. It changes no proof or backend state. Objects and
@@ -14,6 +14,7 @@ from pathlib import Path
 import subprocess
 import sys
 from address_literals import relocate
+from function_names import NAMES
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -47,14 +48,13 @@ def compile_one(source: Path, env: dict[str, str], cached: dict,
     override = PROJECT.get("functionOverrides", {}).get(address, {})
     language = override.get("language", "cpp")
     flags = override.get("flags", TC["flags"])
-    export = f"GEX_FN_{address}"
-    original_name = "_GEX_Target" if address == "0044a9a2" else "GEX_Target"
+    export = NAMES[address]
     obj = WORK / f"{address}.obj"
     transformed, literals = relocate(use_image_storage(source.read_text(), address), language)
     scratch_source = WORK / "source" / f"{address}.cpp"
     source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
     contract = {"language": language, "flags": flags, "export": export,
-                "originalName": original_name, "compilerHash": TC["componentHashes"]["cl.exe"],
+                "compilerHash": TC["componentHashes"]["cl.exe"],
                 "literalRelocation": "v1", "imageStorage": "v1"}
     basis = hashlib.sha256((source_hash + hashlib.sha256(transformed.encode()).hexdigest() +
                             json.dumps(contract, sort_keys=True)).encode()).hexdigest()
@@ -66,7 +66,7 @@ def compile_one(source: Path, env: dict[str, str], cached: dict,
     scratch_source.parent.mkdir(parents=True, exist_ok=True)
     scratch_source.write_text(transformed)
     command = [TC["wine"], TC["compiler"], "/nologo", "/c", *flags,
-               f"/D{original_name}={export}", "/Fo" + win(obj),
+               "/Fo" + win(obj),
                ("/Tc" if language == "c" else "/Tp") + win(scratch_source)]
     try:
         run = subprocess.run(command, cwd=WORK, env=env, text=True,

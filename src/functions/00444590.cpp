@@ -11,7 +11,7 @@ extern "C" void* __cdecl FUN_0041A500(void**);
 extern "C" void __cdecl FUN_0043DC70(char*, short, short, unsigned int, unsigned int, unsigned int, short, short);
 
 
-extern "C" void __cdecl GEX_Target(void** objectPointer)
+extern "C" void __cdecl GOB_DisplayObject_00444590(void** objectPointer)
 {
     char* object = (char*)objectPointer;
     char* sprite = (char*)FUN_0041A500(objectPointer);

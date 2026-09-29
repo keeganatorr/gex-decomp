@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_00405350(const char *msg);
 extern "C" { extern const char DAT_00458E84[]; }
 
-extern "C" unsigned int __cdecl GEX_Target(unsigned int param_1)
+extern "C" unsigned int __cdecl EVENT_Unimplemented_00418cd0(unsigned int param_1)
 {
     FUN_00405350(DAT_00458E84);
     return param_1;

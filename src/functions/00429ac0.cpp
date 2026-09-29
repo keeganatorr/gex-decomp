@@ -12,7 +12,7 @@ struct GXObject {
     unsigned int  flags;            /* +0xa4 */
 };
 
-extern "C" void __cdecl GEX_Target(GXObject *obj)
+extern "C" void __cdecl ob220DoIt_00429ac0(GXObject *obj)
 {
     unsigned int flags = obj->flags;
 

@@ -16,7 +16,7 @@ int **__cdecl LINK_RESOLVE_0040b390(void *base, unsigned int offset);
 void __cdecl FUN_0043ec20_TileLoadinPoss(DrawCache *cache);
 void __cdecl FUN_004451e0_LEV_SetUpDrawCacheWithFileData(DrawCache *cache, short *data);
 void __cdecl BLOC_FreeBlocks_0040b860(void *base);
-void __cdecl GEX_Target(void *base, unsigned int offset)
+void __cdecl GOB_LoadTextures_00440e70(void *base, unsigned int offset)
 {
     int ***table;
     int ***p;

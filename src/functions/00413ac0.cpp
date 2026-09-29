@@ -13,7 +13,7 @@ extern unsigned char DAT_004A0295;
 extern void** DAT_004A2888;
 extern int DAT_004A022C;
 
-void __cdecl GEX_Target(void** param_1)
+void __cdecl PlayerFaceTongueLash_00413ac0(void** param_1)
 {
     if ((DAT_004A0295 != 0 || DAT_004A0294 != 0) && DAT_004A0293 == 0) {
         FUN_00423120(param_1);

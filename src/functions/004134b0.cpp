@@ -13,7 +13,7 @@ extern "C" { extern int DAT_004A284C; }
 extern "C" { extern unsigned char DAT_004A0293; }
 extern "C" { extern unsigned char DAT_004A0294; }
 extern "C" { extern unsigned char DAT_004A0295; }
-extern "C" void __cdecl GEX_Target(void** param1) {
+extern "C" void __cdecl PlayerSideSlap_004134b0(void** param1) {
     if (DAT_00458C78 != 0) { FUN_004138B0(param1); return; }
     if ((DAT_004A0294 != 0) || (FUN_00421f90(param1) == 0)) { FUN_004138B0(param1); return; }
     if ((DAT_004A0293 != 0) && (DAT_004A0295 == 0)) {

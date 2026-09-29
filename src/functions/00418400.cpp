@@ -12,7 +12,7 @@ extern "C" {
 extern void __cdecl TracePrintf_Debug_00405390(const char *, ...);
 extern int DAT_00455c54_DebugVar;
 extern char s_UNLINK_OBJECT_00458e3c[];
-unsigned char * __cdecl GEX_Target(unsigned char *script, GXObject *gob)
+unsigned char * __cdecl SCRIPT_UnlinkObject_00418400(unsigned char *script, GXObject *gob)
 {
     GXObject *o;
     int x;

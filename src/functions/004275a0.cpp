@@ -4,7 +4,7 @@ extern "C" {
 extern unsigned char FUN_004A0280;
 extern unsigned char FUN_004A0281;
 
-extern "C" void __cdecl GEX_Target(void** param_1, int param_2)
+extern "C" void __cdecl PlayerSetXAccl_004275a0(void** param_1, int param_2)
 {
     if (FUN_004A0281 != 0) {
         param_1[0x22] = (void*)param_2;

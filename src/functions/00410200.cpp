@@ -4,7 +4,7 @@ extern int CAMERA_YPos_004a2a1c;
 extern int DAT_00455b8c_CamX2;
 extern int DAT_00455b90_CamY2;
 
-void __cdecl GEX_Target(int param_1)
+void __cdecl FUN_00410200(int param_1)
 {
   int iVar1;
   int iVar2;

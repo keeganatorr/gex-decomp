@@ -4,7 +4,7 @@ extern "C" {
 extern "C" int __cdecl FUN_0041A380(void**);
 extern "C" int __cdecl FUN_0041CA70(int*);
 
-extern "C" int __cdecl GEX_Target(void** param_1, int** param_2)
+extern "C" int __cdecl CLD_ComputeAngleEdges_0041cb80(void** param_1, int** param_2)
 {
     int pGVar1 = (int)param_1[0x57];
     int ppGVar4 = FUN_0041A380(param_1);

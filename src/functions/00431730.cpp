@@ -25,7 +25,7 @@ typedef struct GXObject {
     int gob_last_y;               /* 0x1fc */
 } GXObject;
 extern "C" {
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_00431730(GXObject *gob)
 {
     GXObject *parent;
     int dx;

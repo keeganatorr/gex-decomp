@@ -4,7 +4,7 @@ extern int DAT_004a2834;
 extern void InitPlayerGoThruTube_00415b20(int *);
 }
 
-extern "C" void GEX_Target(int *param_1)
+extern "C" void PlayerShrinkToTube_00415790(int *param_1)
 {
     switch (param_1[0x26]) {
     case 0:

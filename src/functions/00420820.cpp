@@ -5,7 +5,7 @@ extern "C" { extern int DAT_004A2990; }
 extern "C" int* FUN_00419FE0(int, unsigned int, unsigned int);
 extern "C" int __cdecl FUN_0040F100(int, unsigned int, unsigned int);
 
-extern "C" int __cdecl GEX_Target(unsigned int xPos, unsigned int yPos)
+extern "C" int __cdecl FUN_00420820(unsigned int xPos, unsigned int yPos)
 {
     int* block = FUN_00419FE0(DAT_004A2990, xPos, yPos);
     int attr = *(int*)((char*)0x0045b9a0 + *(unsigned short*)((char*)block + 6) * 0x20);

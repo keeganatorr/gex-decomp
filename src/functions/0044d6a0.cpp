@@ -28,7 +28,7 @@ extern "C" {
     int $I10_OUTPUT(struct _LDOUBLE ld, int ndigits, int flags, void *buf);
     extern struct _FLT_DATA DAT_0047eef0;
 
-    void *GEX_Target(double x)
+    void *__fltout(double x)
     {
         struct _LDOUBLE ld;
         ___dtold(&ld, &x);

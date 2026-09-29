@@ -38,7 +38,7 @@ extern int decl_pad_14;
 extern char s_ERROR_currentFrameGroup_out_of_r_00458fb0[];
 extern char s_ERROR_currentFrameIndex_out_of_r_00458f78[];
 void __cdecl assertfail_00405350(const char *format, ...);
-GXObFrame *__cdecl GEX_Target(GXObject *gob)
+GXObFrame *__cdecl GOB_GetCurrentFrameOrReset_0041a500(GXObject *gob)
 {
     GXObFrame *frame;
     GXLoadObject *lob;

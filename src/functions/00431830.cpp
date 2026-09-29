@@ -21,7 +21,7 @@ extern int FUN_004A2990;
 extern unsigned int DAT_0045B9A0[];
 extern int DAT_00463FE0;
 
-void __cdecl GEX_Target(void** param1, unsigned int param2, unsigned int param3) {
+void __cdecl FUN_00431830(void** param1, unsigned int param2, unsigned int param3) {
     DAT_00463FE0 = 0;
     unsigned int id = FUN_0040F170(FUN_004A2990, param2, param3);
     if ((DAT_0045B9A0[id * 8] & 0x80000000) != 0) {

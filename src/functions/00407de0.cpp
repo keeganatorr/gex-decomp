@@ -36,7 +36,7 @@ extern long DAT_004626c8;
 extern void *DAT_004626d8;
 extern Remap DAT_00455480[8];
 extern unsigned int gRemapKeys_00455750[];
-long __stdcall GEX_Target(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
+long __stdcall FUN_00407de0(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
 {
     int i;
     int idx;

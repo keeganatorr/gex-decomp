@@ -13,7 +13,7 @@ extern "C" {
     extern unsigned int DAT_004626ac;
 }
 
-extern "C" void GEX_Target(void)
+extern "C" void FUN_00404890_AVIWindow(void)
 {
     MCIERROR MVar1;
     unsigned char local_4[4];

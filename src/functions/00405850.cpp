@@ -39,7 +39,7 @@ __declspec(dllimport) int __stdcall DeleteDC(void *dc);
 extern void *DAT_00487fc4;
 extern void *DAT_00487fcc;
 extern long DAT_00487fc8;
-long __stdcall GEX_Target(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
+long __stdcall FUN_00405850(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
 {
     PAINTSTRUCT ps;
     BITMAP bm;

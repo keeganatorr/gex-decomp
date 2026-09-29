@@ -33,7 +33,7 @@ extern "C" void *gMainWindow_004875a0;
 extern "C" __declspec(dllimport) void __stdcall OutputDebugStringA(const char *);
 extern "C" const char s_Could_not_create_Direct_Sound_Ob_00451504[];
 
-extern "C" void GEX_Target(void)
+extern "C" void SND_Init_00401fb0(void)
 {
     int iVar1;
     int *puVar2;

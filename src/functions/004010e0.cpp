@@ -12,7 +12,7 @@ struct IDirectDraw
 
 extern "C" IDirectDraw *gDirectDraw_00451030;
 
-extern "C" void GEX_Target(void)
+extern "C" void DDRAW_Destroy_004010e0(void)
 {
     if (gDirectDraw_00451030 != 0)
     {

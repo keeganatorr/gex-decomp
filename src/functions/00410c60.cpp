@@ -7,7 +7,7 @@ extern int DAT_004A2A38;
 extern int DAT_004A2A90;
 extern int DAT_004A2A9C;
 
-void __cdecl GEX_Target()
+void __cdecl FUN_00410c60_CameraFollowGex()
 {
     int iVar1;
 

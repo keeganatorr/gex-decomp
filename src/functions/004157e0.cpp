@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_00420BC0(void**);
 extern "C" void __cdecl FUN_0041A250(void**, int, int, int);
 extern "C" void __cdecl FUN_00415790(void**);
-extern "C" void __cdecl GEX_Target(void** p)
+extern "C" void __cdecl InitPlayerShrinkToTube_004157e0(void** p)
 {
     FUN_00420BC0(p);
     p[0x1c] = (void*)0x56;

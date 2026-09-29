@@ -110,7 +110,7 @@ extern "C" void __cdecl FUN_0040F740(int, int, int);
 extern "C" void __cdecl FUN_00409970();
 extern "C" void __cdecl FUN_00405350(int, int);
 
-extern "C" void __cdecl GEX_Target(int param_1)
+extern "C" void __cdecl M1_EnterLevel_00409a30(int param_1)
 {
     int iVar2;
     int object_unk;

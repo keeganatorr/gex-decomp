@@ -25,7 +25,7 @@ extern int decl_pad_18;
 extern char DAT_00487a10_FileAccessErrorString[];
 extern void __cdecl WinShowError_004063d0(int, char *);
 __declspec(dllimport) unsigned long __stdcall GetFileSize(void *, unsigned long *);
-unsigned long __cdecl GEX_Target(void *file)
+unsigned long __cdecl CDIO_FileSize_004092a0(void *file)
 {
     unsigned long size;
     while ((size = GetFileSize(file, 0)) == (unsigned long)-1)

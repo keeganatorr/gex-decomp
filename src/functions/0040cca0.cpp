@@ -8,7 +8,7 @@ typedef struct GXObject {
 typedef struct Slot { int a, b, c, d; } Slot;
 extern "C" {
 extern Slot DAT_00456168[];
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_0040cca0(GXObject *gob)
 {
     int old = gob->gob_work6;
     if (gob->gob_work4 == 0x10)

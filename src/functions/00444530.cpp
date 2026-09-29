@@ -1,7 +1,7 @@
 extern "C" void* __cdecl FUN_0041A500(void*);
 extern "C" void __cdecl FUN_00444410(int);
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl GOB_RezzifyObject_00444530(void* param_1)
 {
     int* self = (int*)param_1;
     int* spr;

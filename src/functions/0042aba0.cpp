@@ -12,7 +12,7 @@ extern "C" {
 extern unsigned char BYTE_ARRAY_004a2540[];
 GXObject *__cdecl GOB_FindWithWork0_0040c110(int type, unsigned int work0);
 void __cdecl RezInObject_004372f0(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob262DoIt_0042aba0(GXObject *gob)
 {
     GXObject *source;
     unsigned int remote;

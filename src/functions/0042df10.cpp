@@ -3,5 +3,5 @@
 extern "C" {
 extern "C" void __cdecl FUN_0042DE30(void**, void**);
 extern "C" void __cdecl FUN_0042D7B0(void**, void**);
-extern "C" void __cdecl GEX_Target(void** p1, void** p2) { void** v1 = p1; void** v2 = p2; FUN_0042DE30(v1, v2); FUN_0042D7B0(v1, v2); }
+extern "C" void __cdecl FUN_0042df10_ObjCallUnk(void** p1, void** p2) { void** v1 = p1; void** v2 = p2; FUN_0042DE30(v1, v2); FUN_0042D7B0(v1, v2); }
 }

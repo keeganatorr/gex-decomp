@@ -29,7 +29,7 @@ typedef struct GXObject {
 extern "C" void SCRIPT_DoEvent_00433590(GXObject *obj, void *script, void *eventToCall, int eventNumber);
 extern "C" int GXAniScript_004641f0;
 
-extern "C" void GEX_Target(GXObject *param_1, int param_2)
+extern "C" void DefInit_004335f0(GXObject *param_1, int param_2)
 {
   if (param_2 != 0) {
     int i;

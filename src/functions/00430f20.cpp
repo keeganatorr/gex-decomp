@@ -39,7 +39,7 @@ void __cdecl GOB_RemoveMapObject_00419840(GXObject *);
 void __cdecl DefDoIt_004339c0(GXObject *);
 void __cdecl FUN_004322a0(GXObject *);
 
-void __cdecl GEX_Target(GXObject *g)
+void __cdecl ob232DoIt_00430f20(GXObject *g)
 {
     int hy;
     int hx;

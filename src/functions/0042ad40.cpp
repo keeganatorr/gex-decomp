@@ -33,7 +33,7 @@ unsigned int __cdecl UTL_ReallyRandom32_00428c60(void);
 void __cdecl SND_PlaySoundNoPosition_0041a360(int, int);
 void __cdecl RezInObject_004372f0(GXObject *);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob270DoIt_0042ad40(GXObject *gob)
 {
     GXObject *other;
     int level;

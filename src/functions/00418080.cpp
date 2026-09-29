@@ -2,7 +2,7 @@ extern "C" { extern int FUN_004A2934; }
 extern "C" { extern int DAT_0049fb90; }
 typedef unsigned int undefined4;
 extern "C" {
-undefined4 __cdecl GEX_Target(undefined4 param_1)
+undefined4 __cdecl SCRIPT_LookupObjectData_00418080(undefined4 param_1)
 
 {
   DAT_0049fb90 =

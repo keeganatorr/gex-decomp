@@ -8,7 +8,7 @@ typedef struct GXObject {
 } GXObject;
 extern "C" {
 extern void __cdecl FUN_00438470_MoveGuillotine(GXObject *, int);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl GOB_ProcessYPositionChange_004390d0(GXObject *gob)
 {
     gob->gob_yVel += gob->gob_yAccl;
     if (gob->gob_yVel > gob->gob_maxyVel)

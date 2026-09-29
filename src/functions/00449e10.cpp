@@ -1,6 +1,6 @@
 extern "C" {
 extern unsigned DAT_00461180;
-int __cdecl GEX_Target(void)
+int __cdecl _rand(void)
 
 {
   DAT_00461180 = DAT_00461180 * 0x343fd + 0x269ec3;

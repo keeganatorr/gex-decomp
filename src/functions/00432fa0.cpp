@@ -6,7 +6,7 @@ int __cdecl FUN_0041CB80(void *param_1, int *param_2);
 unsigned int __cdecl FUN_00420C10(unsigned int param_1, unsigned int param_2);
 void __cdecl FUN_004355D0(void *param_1, unsigned int *param_2);
 
-void __cdecl GEX_Target(void **param_1, unsigned int *param_2)
+void __cdecl FUN_00432fa0_Event_unk(void **param_1, unsigned int *param_2)
 {
     int local_28[10];
     int iVar1;

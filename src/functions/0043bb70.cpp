@@ -5,7 +5,7 @@ extern "C" { extern int CAMERA_XPos_004a2a38; }
 extern "C" { extern void* PTR_00464e08; }
 extern "C" void __cdecl FUN_00444590(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl ob259Draw_0043bb70(void** param_1)
 {
     *(int*)((char*)PTR_00464e08 + 0x78) = CAMERA_XPos_004a2a38 + 0xa00000;
     *(int*)((char*)PTR_00464e08 + 0x7c) = 0xe10000;

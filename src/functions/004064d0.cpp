@@ -47,7 +47,7 @@ __declspec(dllimport) long __stdcall RegFlushKey(HKEY);
 __declspec(dllimport) long __stdcall RegCloseKey(HKEY);
 __declspec(dllimport) int __stdcall SystemParametersInfoA(unsigned int, unsigned int, void *, unsigned int);
 
-void __cdecl GEX_Target(void)
+void __cdecl WND_CleanUp_004064d0(void)
 {
     SettingsSetFromRegistry_00408f40();
     FUN_004013e0_ExitFullscreen_Clean1(0);

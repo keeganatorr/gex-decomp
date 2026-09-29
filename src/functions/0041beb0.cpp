@@ -6,7 +6,7 @@ extern int DAT_00463640;
 extern int DAT_0046366C;
 extern int DAT_0046367C;
 
-void GEX_Target(void)
+void FUN_0041beb0_MusicUnk(void)
 {
     unsigned int uVar1;
     int iVar2;

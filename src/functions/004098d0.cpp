@@ -7,7 +7,7 @@ extern "C" {
     extern void FUN_00405390(const char *, ...);
     extern void *FUN_0040EB70(int, int);
 
-    int GEX_Target(void)
+    int GX_Resolve_004098d0(void)
     {
         if (GEX_pGlob_004a2ad4 == 0 && FUN_00462700 != 0)
         {

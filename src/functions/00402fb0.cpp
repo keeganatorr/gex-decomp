@@ -25,7 +25,7 @@ __declspec(dllimport) int __stdcall MessageBoxA(void *window, const char *text, 
 extern char s_write_gex_wri_0045172c[];
 extern char WINSTRING_Cannot_find_readme_00487520[];
 extern char DAT_00487c60_WindowName_GexString[];
-void __cdecl GEX_Target(void)
+void __cdecl FUN_00402fb0_GEX_wri(void)
 {
     PROCESS_INFORMATION process;
     STARTUPINFOA startup;

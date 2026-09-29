@@ -31,7 +31,7 @@ extern "C" void __cdecl FUN_00421CD0(int**);
 extern "C" int __cdecl FUN_00421F90(int**);
 extern "C" void __cdecl FUN_004252B0(int**);
 
-extern "C" void __cdecl GEX_Target(int** param_1)
+extern "C" void __cdecl PlayerPlatSideCrawl_00411380(int** param_1)
 {
     int iVar2, iVar7;
     unsigned int uVar6;

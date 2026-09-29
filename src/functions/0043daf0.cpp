@@ -8,7 +8,7 @@ extern short DAT_004a2b20;
 extern void *DAT_00464e48_Draw6;
 extern void **PTR_004a2b1c;
 void __cdecl DRAW_CacheInit_0043e350(void);
-void __cdecl GEX_Target(void)
+void __cdecl DRAW_Init_0043daf0(void)
 {
     DAT_004a2b18_Draw1 = &DAT_00467178;
     DAT_00467170_Draw3_GraphicsDataUnk2 = 0;

@@ -1,6 +1,6 @@
 extern "C" int __cdecl FUN_0040FCE0(void**);
 
-extern "C" void __cdecl GEX_Target(int* param_1)
+extern "C" void __cdecl ob1DoIt_0043cd00(int* param_1)
 {
     int pGVar1;
     int iVar2;

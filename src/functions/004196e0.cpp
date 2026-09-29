@@ -15,7 +15,7 @@ void __cdecl GOB_CallInit_0040f2e0(Word *, int);
 void *__cdecl memset(void *, int, unsigned int);
 }
 
-extern "C" Word *__cdecl GEX_Target(int type, int x, int y, Word group)
+extern "C" Word *__cdecl GOB_AddObjectByIndex_004196e0(int type, int x, int y, Word group)
 {
     Word *object = LST_RemTail_0042cc20(GOB_FreeObjectsList_004a27b0);
     if (object) {

@@ -11,7 +11,7 @@ extern "C" { extern const char DAT_0045A198[]; }
 extern "C" void __cdecl FUN_00405390(const char*, ...);
 extern "C" int __cdecl FUN_0040EB70(int, int);
 
-extern "C" int __cdecl GEX_Target()
+extern "C" int __cdecl IDL_Resolve_0041fd00()
 {
     if (DAT_004A2A10 == 0 && DAT_00463A2C != 0) {
         if (DAT_00463A30 == 0) {

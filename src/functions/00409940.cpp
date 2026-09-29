@@ -5,6 +5,6 @@ extern "C" { extern void** DAT_004A2AD4; }
 extern "C" { extern int DAT_00462704; }
 extern "C" { extern int DAT_004626F8; }
 extern "C" void __cdecl FUN_0040B860(int);
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl FUN_00409940_AfterGame()
 { if (DAT_004A2AD4 != 0) { FUN_0040B860(DAT_00462704); DAT_004A2AD4 = 0; DAT_004626F8 = 0; } }
 }

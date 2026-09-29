@@ -32,7 +32,7 @@ unsigned short *__cdecl GOB_GetBlockAddress_00419fe0(void *level, int x, int y);
 int __cdecl M1_GetContourDataFromID_0040f100(void *level, unsigned int id, unsigned int position);
 int __cdecl FUN_0041a090(GXObject *);
 
-void __cdecl GEX_Target(GXObject *gob, int dy)
+void __cdecl FUN_00438470_MoveGuillotine(GXObject *gob, int dy)
 {
     Frame *frame;
     int flip;

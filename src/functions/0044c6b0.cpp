@@ -2,7 +2,7 @@ typedef unsigned char byte;
 typedef unsigned int uint;
 typedef unsigned int undefined4;
 extern "C" {
-undefined4 __cdecl GEX_Target(int param_1,int param_2)
+undefined4 __cdecl __ZeroTail(int param_1,int param_2)
 
 {
   byte bVar1;

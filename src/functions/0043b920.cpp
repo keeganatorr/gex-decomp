@@ -11,7 +11,7 @@ extern "C" { extern int DAT_004A2A04; }
 extern "C" { extern int DAT_00464E0C; }
 extern "C" { extern int DAT_00455B8C; }
 
-extern "C" void __cdecl GEX_Target(void** param_1, int param_2)
+extern "C" void __cdecl ob259Init_0043b920(void** param_1, int param_2)
 {
     if ((int)param_1[0x26] == 0x100) {
         if (param_2 != 0) {

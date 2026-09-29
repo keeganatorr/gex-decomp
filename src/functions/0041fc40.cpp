@@ -11,7 +11,7 @@ extern unsigned char DAT_004A0280[];
 extern unsigned char DAT_0045A178[];
 extern unsigned char DAT_004A028F[];
 
-void __cdecl GEX_Target(void)
+void __cdecl GXINP_ReadPads_0041fc40(void)
 {
     int keyInput;
 

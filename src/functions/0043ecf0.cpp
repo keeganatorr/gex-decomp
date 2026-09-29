@@ -12,7 +12,7 @@ extern int PTR_004a2b1c;
 
 extern "C" void __cdecl FUN_00405350(char *fmt, int val);
 
-extern "C" unsigned int __cdecl GEX_Target(void *tileSelectPtr)
+extern "C" unsigned int __cdecl FUN_0043ecf0_SelectTile_Clean1(void *tileSelectPtr)
 {
     unsigned int crashResult;
     int *tilePtr;

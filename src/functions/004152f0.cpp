@@ -18,7 +18,7 @@ void __cdecl SND_PlayObSound_0041a250(int *, int, int, int);
 void __cdecl FUN_00415170_LevelLoading(int *);
 }
 
-extern "C" void __cdecl GEX_Target(int *p)
+extern "C" void __cdecl FUN_004152F0(int *p)
 {
     GOB_ResetState_00420bc0(p);
     p[0x27] = p[0x1c];

@@ -9,7 +9,7 @@ typedef struct GXObject {
 extern "C" {
 extern GXObject *DAT_0049fb94;
 int __cdecl GOB_GetHotSpot_00419c00(GXObject *gob, int group, int index, int *x, int *y);
-unsigned char *__cdecl GEX_Target(unsigned char *script, GXObject *gob)
+unsigned char *__cdecl SCRIPT_MoveToParentHotSpot_00418180(unsigned char *script, GXObject *gob)
 {
     int x;
     int y;

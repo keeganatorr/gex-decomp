@@ -40,7 +40,7 @@ void __cdecl FUN_004046b0_AVI(DWORD);
 void __cdecl FUN_004013e0_ExitFullscreen_Clean1(int);
 }
 
-extern "C" void __cdecl GEX_Target(void)
+extern "C" void __cdecl FUN_00404710_Window(void)
 {
     RECT tRect;
     MCI_GENERIC_PARMS closeParameters;

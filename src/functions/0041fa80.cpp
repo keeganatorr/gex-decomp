@@ -6,7 +6,7 @@ void __cdecl FUN_0041f8b0_Stub(int voice);
 extern int DAT_004638b8_VoiceInner6;
 extern int DAT_004638bc_VoiceInnerCounter;
 extern int gIsVFXPlaying_004639d8;
-int __cdecl GEX_Target(int voice)
+int __cdecl VFX_Play_0041fa80(int voice)
 {
     int slot;
     if (VFX_VoiceFinished_0041fb50() && (UINT_ARRAY_004a02d0[0] == voice || UINT_ARRAY_004a02d0[1] == voice)) {

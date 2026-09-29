@@ -14,7 +14,7 @@ extern "C" {
 extern unsigned int DAT_004594F8[12];
 extern CollideObject CollideObject_00463698[12];
 void __cdecl CLD_CheckCollisionNormal_0041e190(GXObject *gob, GXObject *with);
-void __cdecl GEX_Target(int priority, CollideObject *self)
+void __cdecl CLD_CollideWithRest_0041e720(int priority, CollideObject *self)
 {
     GXObject *other;
     GXObject *gob;

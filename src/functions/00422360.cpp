@@ -6,5 +6,5 @@ extern "C" { extern int DAT_00455C4C; }
 extern "C" { extern int DAT_004A27EC; }
 extern "C" { extern int DAT_004A0258; }
 extern "C" { extern int DAT_004A0238; }
-extern "C" void __cdecl GEX_Target() { if (DAT_004A0254) { DAT_00455C4C++; DAT_004A27EC++; DAT_004A0258 = 0; DAT_004A0254 = 0; DAT_004A0238 = 1; } }
+extern "C" void __cdecl FUN_00422360_COLLISION_HEALTHLOSTINHERE() { if (DAT_004A0254) { DAT_00455C4C++; DAT_004A27EC++; DAT_004A0258 = 0; DAT_004A0254 = 0; DAT_004A0238 = 1; } }
 }

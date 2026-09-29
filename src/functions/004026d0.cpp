@@ -15,7 +15,7 @@ extern int DAT_0049a05c;
 extern void *gMusicFile_0048a04c;
 extern char s_DS_GetCurrentPosition_failed_00451678[];
 void __cdecl FUN_004025b0_DS_Lock(int half);
-void __cdecl GEX_Target(void)
+void __cdecl SoundThreadCloseMusic_004026d0(void)
 {
     unsigned long play;
     unsigned long write;

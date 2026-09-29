@@ -22,7 +22,7 @@ extern char s_CDIO_have_d_open_Files_on_Clos_00455a04[];
 void __cdecl assertfail_00405350(const char *fmt, ...);
 void __cdecl FreeMemory_00409740(void *block);
 __declspec(dllimport) int __stdcall CloseHandle(HANDLE h);
-void __cdecl GEX_Target(void)
+void __cdecl CDIO_CloseFileSystem_004095c0(void)
 {
     HANDLE *handle;
     if (nFileHandles_0047f004) {

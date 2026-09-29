@@ -28,7 +28,7 @@ void __cdecl InitPlayer_00417ee0(void);
 void __cdecl VSIT_PlayVoiceSituation_0041f8c0(int situation);
 void __cdecl FUN_0040b950_VoiceInner(void);
 GXObject *__cdecl GOB_FindWithWork0_0040c110(int type, int work0);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl MainMenuControllerInit_0040dda0(GXObject *gex)
 {
     GXObject *start;
     GXObject *password;

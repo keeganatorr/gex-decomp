@@ -17,7 +17,7 @@ extern "C" {
     extern const char DAT_004590b0[];
     extern const char DAT_004590e4[];
 
-    void __cdecl GEX_Target(astruct_4* LevelStruct) {
+    void __cdecl RemoteInit_0041abb0(astruct_4* LevelStruct) {
         if (LevelStruct->RemoteLevelID < 0) {
             FUN_00405350(DAT_004590e4,
                          LevelStruct->RemoteX >> 0x10,

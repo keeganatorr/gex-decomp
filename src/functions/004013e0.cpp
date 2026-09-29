@@ -38,7 +38,7 @@ int __cdecl FUN_00401270_ChangeVideoMode(int, int, int);
 void __cdecl FUN_00404a80_StopMCIMedia(void);
 void __cdecl FUN_00401340_CalculateWindowRect(WRECT *);
 
-void __cdecl GEX_Target(int mode)
+void __cdecl FUN_004013e0_ExitFullscreen_Clean1(int mode)
 {
     WRECT r;
     int m;

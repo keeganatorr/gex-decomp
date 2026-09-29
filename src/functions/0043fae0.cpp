@@ -19,7 +19,7 @@ struct Font {
 
 extern Font *gFont_004a2af4;
 
-extern "C" int GEX_Target(char *passwordString) {
+extern "C" int TXT_PixelLength_0043fae0(char *passwordString) {
     int iVar1 = 0;
     if (*passwordString != 0) {
         do {

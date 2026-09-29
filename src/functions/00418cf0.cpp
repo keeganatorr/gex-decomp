@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_0041F8C0(unsigned int);
 
-extern "C" unsigned char* __cdecl GEX_Target(unsigned char* param_1)
+extern "C" unsigned char* __cdecl SCRIPT_AddVoiceEntries_00418cf0(unsigned char* param_1)
 {
     FUN_0041F8C0((unsigned int)*param_1);
     return param_1 + 1;

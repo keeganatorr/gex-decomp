@@ -13,7 +13,7 @@ extern "C" void __cdecl FUN_0044A140();
 extern "C" void __cdecl FUN_0044A210();
 extern "C" void __cdecl FUN_0044A5D0();
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl FUN_00449aa0_fpMathInner()
 {
     DAT_004613B4 = (void *)&FUN_0044A1B0;
     DAT_004613B8 = (void *)&FUN_0044A230;

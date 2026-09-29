@@ -5,7 +5,7 @@ extern "C" void __cdecl FUN_0042CBF0(void**);
 extern "C" void __cdecl FUN_0042CC00(void**, void**);
 extern "C" { extern void* DAT_004A28A0[]; }
 
-extern "C" void __cdecl GEX_Target(void** param_1, unsigned int gObNumber)
+extern "C" void __cdecl GOB_SetObjectDisplayPriority_00419b80(void** param_1, unsigned int gObNumber)
 {
     FUN_0042CBF0(param_1);
     FUN_0042CC00(&DAT_004A28A0[gObNumber * 3], param_1);

@@ -5,7 +5,7 @@ extern "C" { extern int DAT_0048A024; }
 extern "C" void __cdecl FUN_0040D5F0(int, int, int, int);
 extern "C" void __cdecl FUN_0042A630(void**);
 
-extern "C" void __cdecl GEX_Target(void** context)
+extern "C" void __cdecl FUN_0042a405_MapFunkUnk(void** context)
 {
     FUN_0042A630(context);
     

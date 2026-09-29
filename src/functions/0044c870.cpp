@@ -1,5 +1,5 @@
 typedef unsigned int uint;
-uint __cdecl GEX_Target(uint *value)
+uint __cdecl __IsZeroMan(uint *value)
 {
     int index = 0;
     while (index < 3) {

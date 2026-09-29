@@ -4,7 +4,7 @@ extern "C" {
 extern "C" { extern int DAT_0049FB90; }
 extern "C" void* __cdecl FUN_00437B70(void**);
 
-extern "C" int __cdecl GEX_Target(int param_1, void** param_2)
+extern "C" int __cdecl SCRIPT_TurtleHeadAttack_004189c0(int param_1, void** param_2)
 {
     int result = (int)FUN_00437B70(param_2);
     int ecx_dummy = param_1;

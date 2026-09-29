@@ -24,7 +24,7 @@ extern "C" __declspec(dllimport) int __stdcall SetDlgItemTextA(HWND, int, const 
 extern "C" __declspec(dllimport) int __stdcall SetWindowTextA(HWND, const char *);
 extern "C" char *__cdecl strcpy(char *, const char *);
 
-extern "C" LRESULT __cdecl GEX_Target(HWND window, UINT message, DWORD key, DWORD keyData)
+extern "C" LRESULT __cdecl FUN_00407ded_Window_Unk(HWND window, UINT message, DWORD key, DWORD keyData)
 {
     if (message != 0x100) {
         if (message == 0x102)

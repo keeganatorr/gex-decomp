@@ -5,7 +5,7 @@ extern int DAT_0046a648, DAT_0046a644, DAT_0046a640;
 extern unsigned char DAT_004a2afa, DAT_004a2af8, DAT_004a2af9;
 extern int DAT_004a2afc, DAT_004a2b00;
 
-void __cdecl GEX_Target(int p1, int p2, int p3, int p4, int p5, int p6, int p7) {
+void __cdecl GFX_Fade_0043f490(int p1, int p2, int p3, int p4, int p5, int p6, int p7) {
     DAT_004a2b00 = 1;
     if (p3 < p2) p3 = p2;
     if (p5 < p4) p5 = p4;

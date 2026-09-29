@@ -64,7 +64,7 @@ GXObject *__cdecl GOB_FindWithWork0_0040c110(int type, int work);
 void __cdecl PasswordMenuDraw_0040e6a0(GXObject *gob);
 void __cdecl PasswordKeyHintsDraw_0040ea90(GXObject *gob);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl MainMenuControllerDraw_0040def0(GXObject *gob)
 {
     int dir;
     GXObject *button;

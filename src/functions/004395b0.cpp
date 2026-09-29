@@ -30,7 +30,7 @@ extern DiveState UINT_ARRAY_ARRAY_004645b0[8];
 extern GXObject *PTR_ARRAY_00464610[8];
 extern DiveTrack DAT_00464528[8];
 extern DiveSpeed DAT_00464660[8];
-void __cdecl GEX_Target(int x, int y)
+void __cdecl FUN_004395b0_HuntDiveInner(int x, int y)
 {
     int i;
     for (i = 0; i < 8; i++) {

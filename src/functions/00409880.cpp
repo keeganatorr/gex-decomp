@@ -10,7 +10,7 @@ extern int pGlobOffset_004626f8;
 extern int GEX_IsResolving_00462700;
 }
 
-extern "C" void GEX_Target(void)
+extern "C" void LoadGex_00409880(void)
 {
     if (GEX_pGlob_004a2ad4 == 0) {
         DRAW_CacheClear_0043e430(1);

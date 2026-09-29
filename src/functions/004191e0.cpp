@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" { extern int DAT_0049FB90; }
 extern "C" int __cdecl FUN_0041A590(int);
-extern "C" int __cdecl GEX_Target(int param_1)
+extern "C" int __cdecl SCRIPT_GetRemoteStatus_004191e0(int param_1)
 {
     DAT_0049FB90 = FUN_0041A590(DAT_0049FB90);
     return param_1;

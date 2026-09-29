@@ -16,7 +16,7 @@ extern int DAT_004a2920_LoadLevelUnk5;
 extern int DAT_004a2918_LevelObjectsListEnd;
 extern int level_004a2964;
 extern void __cdecl FUN_0040c2c0_GameFunkUnk(GXObject *);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl MainMenuButtonInit_0040c210(GXObject *gob)
 {
     M1_IsInMap_004a2a7c = 1;
     M1_004a2994 = 0;

@@ -1,7 +1,7 @@
 typedef unsigned char byte;
 extern "C" {
 extern void __cdecl FUN_0041E880(void *, int);
-unsigned char *__cdecl GEX_Target(byte *cursor, unsigned int *object)
+unsigned char *__cdecl SCRIPT_SetCollisionType_00418740(byte *cursor, unsigned int *object)
 {
     byte value = *cursor;
     FUN_0041E880(object, (int)value);

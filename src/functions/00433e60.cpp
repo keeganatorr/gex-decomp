@@ -7,7 +7,7 @@ extern "C" void __cdecl FUN_00433B20(void**);
 extern "C" { extern int DAT_00455BE8; }
 extern "C" { extern int DAT_00455BEC; }
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl ExitTVDraw_00433e60(void* param_1)
 {
     if (*(int*)((int*)param_1 + 0x27) == (int)0x80000000) {
         *(int*)((int*)param_1 + 0x32) = DAT_00455BE8;

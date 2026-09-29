@@ -22,7 +22,7 @@ extern int decl_pad_6;
 extern void __cdecl GOB_RezzifyObject_00444530(GXObject *);
 extern void __cdecl FUN_0042e850(GXObject *);
 extern void __cdecl GOB_DisplayObjectScaleAndRotate_00441150(GXObject *);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob369Draw_004334c0(GXObject *gob)
 {
     int xpos = gob->gob_xpos;
     int ypos = gob->gob_ypos;

@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_00419B80(int, int);
 
-extern "C" unsigned char* __cdecl GEX_Target(unsigned char* str, int priority)
+extern "C" unsigned char* __cdecl SCRIPT_SetDisplayPriority_00418720(unsigned char* str, int priority)
 {
     FUN_00419B80(priority, str[0]);
     return str + 1;

@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" { extern int DAT_004A02C8; }
 
-extern "C" unsigned char* __cdecl GEX_Target(unsigned char* param_1)
+extern "C" unsigned char* __cdecl SCRIPT_ClearController_00419080(unsigned char* param_1)
 {
     unsigned int uVar2;
     unsigned int offset;

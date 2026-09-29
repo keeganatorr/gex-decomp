@@ -34,7 +34,7 @@ extern char s_numFrames____x_00456378[];
 extern char s_scripts__d_____x_00456364[];
 extern char s_gxlob_anims__d_____x_0045634c[];
 
-Glob *__cdecl GEX_Target(int base, unsigned int offset)
+Glob *__cdecl GOB_ResolveLoadObject_0040eb70(int base, unsigned int offset)
 {
     Glob *glob;
     unsigned int *entry;

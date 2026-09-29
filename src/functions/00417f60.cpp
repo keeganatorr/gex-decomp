@@ -8,7 +8,7 @@ extern "C" {
     extern int __cdecl FUN_0040F170(int, int, int);
 }
 
-extern "C" int __cdecl GEX_Target(unsigned char* pos, void* obj)
+extern "C" int __cdecl SCRIPT_CheckTileAtPos_00417f60(unsigned char* pos, void* obj)
 {
     int idx1 = pos[0];
     int idx2 = pos[1];

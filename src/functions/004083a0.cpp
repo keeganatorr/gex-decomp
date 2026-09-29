@@ -74,7 +74,7 @@ long __stdcall FUN_00408350(void *hwnd, unsigned int msg, unsigned int wParam, l
 void *__cdecl FUN_00405660_GFXUnk(void *instance, int resource, void **palette);
 int __cdecl FUN_00406fd0_timeSetEventInner(unsigned int bits);
 void *__cdecl memset(void *, int, unsigned int);
-int __stdcall GEX_Target(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
+int __stdcall FUN_004083a0(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
 {
     int n;
     int j;

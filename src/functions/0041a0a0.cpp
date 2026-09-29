@@ -25,7 +25,7 @@ extern int decl_pad_4;
 extern char s_landeddist_ld_old_ld_00458f48[];
 int __cdecl GetGlueDist_0040f1d0(void *level, GXObject *gob);
 void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
-int __cdecl GEX_Target(GXObject *gob, int offset)
+int __cdecl GOB_LandedOnContours_0041a0a0(GXObject *gob, int offset)
 {
     int dist;
     gob->gob_ypos += offset;

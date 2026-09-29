@@ -24,7 +24,7 @@ int __cdecl FUN_004215d0_pStateUnk_Jump(int *, int);
 void __cdecl FUN_00425C10(int *);
 }
 
-extern "C" void __cdecl GEX_Target(int *p)
+extern "C" void __cdecl PlayerFall_00424e80(int *p)
 {
     int continueFall = 1;
     if (FUN_00420c70_GexWallCollisionInner(p) != 0 &&

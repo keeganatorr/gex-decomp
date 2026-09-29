@@ -4,6 +4,6 @@ extern "C" {
 extern "C" { extern int DAT_004A295C; }
 extern "C" void __cdecl FUN_00405450();
 extern "C" void __cdecl FUN_00406C30();
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl GFX_Init_0043f2f0()
 { if (DAT_004A295C == 0) { FUN_00405450(); FUN_00406C30(); DAT_004A295C = 1; } }
 }

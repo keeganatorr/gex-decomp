@@ -6,7 +6,7 @@ extern "C" void __cdecl FUN_00420BC0(void**);
 extern "C" int __cdecl FUN_004206B0(int);
 extern "C" void __cdecl FUN_004275E0(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl PlayerStartTailSlashImpl_004276e0(void** param_1)
 {
     int iVar1;
 

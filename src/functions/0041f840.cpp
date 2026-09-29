@@ -3,7 +3,7 @@ extern "C" unsigned int DAT_004638bc_VoiceInnerCounter;
 extern "C" unsigned int UINT_ARRAY_004a02d0[];
 extern "C" unsigned int DAT_004638b8_VoiceInner6;
 
-extern "C" void GEX_Target(void)
+extern "C" void VFX_Reset_0041f840(void)
 {
     DAT_004638b4_LoadedVoiceCounter = 0;
     DAT_004638bc_VoiceInnerCounter = 0;

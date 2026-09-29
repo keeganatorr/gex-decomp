@@ -24,7 +24,7 @@ int __cdecl FUN_004215d0_pStateUnk_Jump(int *, int);
 void __cdecl InitPlayerRunStopFall_004263b0(int *);
 }
 
-extern "C" void __cdecl GEX_Target(int *p)
+extern "C" void __cdecl PlayerRunFall_00426180(int *p)
 {
     int continueFall = 1;
     FUN_00423b80_pStateUnk(p);

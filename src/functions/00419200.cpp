@@ -37,7 +37,7 @@ extern int CAMERA_YPos_004a2a1c;
 unsigned int __cdecl SCRIPT_GetUInt_00417f00(unsigned char **script);
 int __cdecl GOB_GetHotSpot_00419c00(GXObject *gob, int index, int flag, int *x, int *y);
 void __cdecl GOB_DisplayCelToQuad_00443ae0(GXObject *gob, int cel, int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3);
-unsigned char *__cdecl GEX_Target(unsigned char *script, GXObject *gob)
+unsigned char *__cdecl SCRIPT_CelToQuad_00419200(unsigned char *script, GXObject *gob)
 {
     int hx;
     int hy;

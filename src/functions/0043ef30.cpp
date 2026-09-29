@@ -16,7 +16,7 @@ void __cdecl FUN_00444c90_InitTiles_TrueMaybe(int flag);
 void __cdecl FUN_00445380_GFXInit1(int flag);
 void __cdecl FUN_00445280_GFXInit2(GfxBuffer *buffer, int x, int y, int width, int height);
 void __cdecl FUN_004452d0_GFXInit3(GfxSurface *surface, int x, int y, int width, int height);
-void __cdecl GEX_Target(void)
+void __cdecl GFX_Init_0043ef30(void)
 {
     TracePrintf_Debug_00405390(s_GFX_Init_00460dc0);
     FUN_00444c90_InitTiles_TrueMaybe(0);

@@ -5,7 +5,7 @@ extern "C" void __cdecl FUN_0040B860(void**);
 extern "C" void __cdecl FUN_00405390(const char*, int);
 extern "C" { extern int DAT_004A2924; }
 extern "C" { extern const unsigned char DAT_004514D0[]; }
-extern "C" void __cdecl GEX_Target(void** levelData) {
+extern "C" void __cdecl SND_LoadSounds_00401df0(void** levelData) {
     FUN_0040B860(levelData);
     FUN_00405390((const char*)DAT_004514D0, DAT_004A2924);
 }

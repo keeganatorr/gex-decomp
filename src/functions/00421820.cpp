@@ -8,7 +8,7 @@ extern "C" {
 // CLD_ComputeAngleEdges fills a 40-byte record; this caller reads words 6 and 7.
 extern int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *, int *);
 extern unsigned int __cdecl GetTileFlagsAtPosition_00420c10(int, int);
-int __cdecl GEX_Target(GXObject *gob)
+int __cdecl FUN_00421820_pStateUnk_Duck(GXObject *gob)
 {
     int edges[10];
     int y;

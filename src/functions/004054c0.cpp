@@ -26,7 +26,7 @@ __declspec(dllimport) int __stdcall AdjustWindowRect(RECT *rect, unsigned long s
 __declspec(dllimport) int __stdcall GetWindowPlacement(void *hwnd, WINDOWPLACEMENT *wp);
 __declspec(dllimport) int __stdcall SetWindowPlacement(void *hwnd, const WINDOWPLACEMENT *wp);
 __declspec(dllimport) int __stdcall GetSystemMetrics(int index);
-void __cdecl GEX_Target(int width, int height)
+void __cdecl FUN_004054c0_SetWindowSize(int width, int height)
 {
     RECT r;
     WINDOWPLACEMENT wp;

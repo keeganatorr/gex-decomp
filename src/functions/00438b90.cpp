@@ -10,7 +10,7 @@ struct ObjectStructPoss {
   int field105_0x6c;
 };
 
-extern "C" int GEX_Target(struct ObjectStructPoss *param_1) {
+extern "C" int event_ledgeleft_00438b90(struct ObjectStructPoss *param_1) {
   if ((param_1->field105_0x6c & 0x1f000000) == 0x5000000) {
     if (DAT_00455c54_DebugVar > 1) {
       FUN_00405390(DAT_0045f088, param_1->ObjectType);

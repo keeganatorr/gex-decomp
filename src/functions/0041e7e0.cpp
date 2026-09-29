@@ -15,7 +15,7 @@ extern "C" void __cdecl FUN_00405390(int);
 extern "C" void* __cdecl FUN_0042CC20(void**);
 extern "C" void __cdecl FUN_0042CC00(void**, void**);
 
-extern "C" void __cdecl GEX_Target(void** objectType, int* func1, int* func2, int* func3)
+extern "C" void __cdecl CLD_AddObjectCollision_0041e7e0(void** objectType, int* func1, int* func2, int* func3)
 {
     void* CollisionObjects;
 

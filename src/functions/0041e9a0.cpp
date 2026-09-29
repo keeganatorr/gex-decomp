@@ -5,5 +5,5 @@ extern "C" void** __cdecl FUN_0042CC20(void**);
 extern "C" void __cdecl FUN_0042CC00(void**, void**);
 extern "C" { extern int DAT_004A23C0; }
 extern "C" { extern int DAT_00463728; }
-extern "C" void __cdecl GEX_Target(void** p) { void** obj; while (obj = FUN_0042CC20(p), obj) { FUN_0042CC00((void**)&DAT_00463728, obj); DAT_004A23C0--; } }
+extern "C" void __cdecl CLD_RemoveAllCldObjsFromList_0041e9a0(void** p) { void** obj; while (obj = FUN_0042CC20(p), obj) { FUN_0042CC00((void**)&DAT_00463728, obj); DAT_004A23C0--; } }
 }

@@ -64,7 +64,7 @@ int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *gob, CLDEdges *edges);
 int __cdecl CLD_CheckCollisionAngle_0041dd50(GXObject *gob, GXObject *other);
 int __cdecl CLD_CheckCollisionFunkyAngle_0041d310(GXObject *gob, GXObject *other);
 
-int __cdecl GEX_Target(GXObject *gob, GXObject *other)
+int __cdecl CLD_CheckCollisionAngle_0041dd50(GXObject *gob, GXObject *other)
 {
     HitBox *ha;
     HitBox *hb;

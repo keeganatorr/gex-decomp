@@ -12,7 +12,7 @@ extern "C" {
 extern GXObject *gPlayerObject_004a27fc;
 extern int __cdecl FUN_0042d680_ObjCallUnk(GXObject *, int);
 extern void __cdecl FUN_0042cc70_Object_unk(int, GXObject *);
-int __cdecl GEX_Target(GXObject *gob, int arg)
+int __cdecl FUN_0042da40_ObjCallUnk(GXObject *gob, int arg)
 {
     if (gob != gPlayerObject_004a27fc)
         return FUN_0042d680_ObjCallUnk(gob, arg);

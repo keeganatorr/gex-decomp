@@ -3,7 +3,7 @@ extern char s_Put_value_d_d_d_2x_addr_0045ac88[];
 extern char s_Error_numbits_d_too_small_for_v_0045ac5c[];
 extern char s_stream_value_now_2x_0045ac44[];
 void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
-void __cdecl GEX_Target(unsigned char *stream, int value, int bitpos, int numbits)
+void __cdecl FUN_004296d0_ParseLoadPasswords(unsigned char *stream, int value, int bitpos, int numbits)
 {
     unsigned char *p;
     int count;

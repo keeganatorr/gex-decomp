@@ -4,7 +4,7 @@ extern "C" {
 extern int GXObject_00463b70_gob_xScale;
 extern int DAT_00463b5c;
 
-extern "C" void __cdecl GEX_Target(int *param_1, int param_2, int param_3)
+extern "C" void __cdecl FUN_0042c860(int *param_1, int param_2, int param_3)
 {
     int iVar2, iVar3, iVar4;
 

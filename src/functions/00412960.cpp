@@ -29,7 +29,7 @@ extern unsigned int DAT_00458758[];
 void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
 void __cdecl InitPlayerSideTongueLash90_00413050(GXObject *gex);
 void __cdecl PlayerSideTongueLash_00412880(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl InitPlayerSideTongueLash_00412960(GXObject *gex)
 {
     unsigned int pad;
     unsigned int dir;

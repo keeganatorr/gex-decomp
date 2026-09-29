@@ -7,7 +7,7 @@ extern "C" void __cdecl FUN_0041BE80(void**, int, int);
 extern "C" void __cdecl FUN_00432930(void**);
 extern "C" void __cdecl FUN_00419520(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1, int* param_2)
+extern "C" void __cdecl ob94Clid_004329f0(void** param_1, int* param_2)
 {
     int iVar2;
     int *pObj5d, *pObj5e;

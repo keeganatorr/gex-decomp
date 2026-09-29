@@ -34,7 +34,7 @@ extern unsigned int DAT_00457210[];
 extern int DAT_00458c78_ButtonUnk10;
 void __cdecl FUN_00421cd0_xpos_ypos_related(GXObject *gex);
 void __cdecl InitPlayerPlatAirToSideCrawl_00414290(GXObject *gex);
-void __cdecl GEX_Target(GXObject *platform, HitBox *box, int side)
+void __cdecl FUN_00421d50_EVENT_Collision_Inner_unk(GXObject *platform, HitBox *box, int side)
 {
     int right;
     int over;

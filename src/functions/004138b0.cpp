@@ -19,7 +19,7 @@ extern "C" int DAT_004A0264;
 extern "C" int DAT_004A2864;
 extern "C" int DAT_004A025C;
 
-extern "C" void __cdecl GEX_Target(int *param_1)
+extern "C" void __cdecl InitPlayerSideJump_004138b0(int *param_1)
 {
     int bVar1;
     unsigned int uVar2;

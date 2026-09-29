@@ -2,7 +2,7 @@ extern "C" {
 extern "C" int __cdecl FUN_00419C00(void**, int, int, int*, int*);
 extern "C" unsigned int __cdecl FUN_0041B140(int, int);
 
-extern "C" unsigned int __cdecl GEX_Target(void** param_1)
+extern "C" unsigned int __cdecl PlayerBreakSomething_00421900(void** param_1)
 {
     unsigned int result = 0;
     int local_4, local_8;

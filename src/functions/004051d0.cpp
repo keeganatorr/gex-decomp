@@ -10,7 +10,7 @@ extern "C" int __cdecl FUN_004013E0(int);
 extern "C" int __cdecl FUN_0040B320();
 extern "C" void __cdecl FUN_00402E30();
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl GameUnpause_004051d0()
 {
     if (DAT_00487F88 != 0 && DAT_00487F74 == 0) {
         if (DAT_00451794 != 0) {

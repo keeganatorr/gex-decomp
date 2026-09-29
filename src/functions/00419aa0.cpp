@@ -23,7 +23,7 @@ extern "C" {
     void CLD_RemoveAllCollisionObjects_0041e970(void);
 }
 
-extern "C" void GEX_Target(void)
+extern "C" void GOB_FreeAllObjects_00419aa0(void)
 {
     ListType *p = &ListType_ARRAY_004a28a0;
     GXObject *gob;

@@ -8,7 +8,7 @@ void __cdecl BLOC_WaitForBlocksToLoad_0040b940(int **list);
 int __cdecl LINK_RESOLVE_0040b390(int base, int offset);
 int __cdecl PAR_ResolveParallax_00420190(int base, int offset);
 
-int *__cdecl GEX_Target(int id, int *outBase)
+int *__cdecl PAR_LoadParallaxs_00420210(int id, int *outBase)
 {
     int *list;
     int base;

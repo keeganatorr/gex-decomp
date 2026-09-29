@@ -25,7 +25,7 @@ int __cdecl FUN_004212d0_pStateUnk_yVel(int *);
 int __cdecl FUN_004215d0_pStateUnk_Jump(int *, int);
 void __cdecl FUN_00425C10(int *);
 
-void __cdecl GEX_Target(int *state)
+void __cdecl PlayerJumpSwallow_004252e0(int *state)
 {
     int bounceClear;
     if ((DAT_004A0295 != 0 ||

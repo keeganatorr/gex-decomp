@@ -2,7 +2,7 @@ extern "C" int DAT_004a27d4;
 
 typedef void (__cdecl *ObjectCallback)(int*, int*);
 
-extern "C" void __cdecl GEX_Target(int* objectSet)
+extern "C" void __cdecl OBI_IntroduceAllImmediate_0040f8c0(int* objectSet)
 {
     int index = 0;
     int* object = (int*)objectSet[0];

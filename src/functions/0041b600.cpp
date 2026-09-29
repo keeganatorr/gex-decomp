@@ -3,7 +3,7 @@ extern int DAT_004592b8[4][4][2];
 extern int DAT_00459338[][4];
 extern int DAT_00459398[3][2];
 void __cdecl FUN_0041b6d0_ObjCallUnkInner4(int x, int y, int tile);
-void __cdecl GEX_Target(int x, int y, int dir, int row, int col)
+void __cdecl FUN_0041b600_ObjCallUnkInner3(int x, int y, int dir, int row, int col)
 {
     int n;
     int *off;

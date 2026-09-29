@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_00424E50(void*);
 
-extern "C" void __cdecl GEX_Target(void* obj)
+extern "C" void __cdecl PlayerSlide45Jump_004242e0(void* obj)
 {
     int val;
 

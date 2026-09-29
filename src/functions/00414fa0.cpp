@@ -8,7 +8,7 @@ extern void __cdecl FUN_00414C90(void**);
 extern void __cdecl FUN_00423800(void**);
 extern void __cdecl FUN_00426CA0(void**);
 
-void __cdecl GEX_Target(void** param_1)
+void __cdecl PlayerFaceSwallow_00414fa0(void** param_1)
 {
     if ((DAT_004A0295 != 0 || DAT_004A0294 != 0) && DAT_004A0293 == 0) {
         FUN_00422360(param_1);

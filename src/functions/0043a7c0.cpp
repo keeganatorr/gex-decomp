@@ -23,7 +23,7 @@ extern int DAT_00464700;
 extern char s_Damage_To_GEX_0045b140[];
 int __cdecl _printf(const char *format, ...);
 void __cdecl PlayerDamage_00417b70(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob, int *event)
+void __cdecl ob315Clid_0043a7c0(GXObject *gob, int *event)
 {
     int mine;
     int theirs;

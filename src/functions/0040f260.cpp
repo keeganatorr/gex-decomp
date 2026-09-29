@@ -1,4 +1,4 @@
-extern "C" void __cdecl GEX_Target(int* p)
+extern "C" void __cdecl GOB_PhysicsStepX_0040f260(int* p)
 {
     p[0x20] = p[0x22] + p[0x20];
     if (p[0x20] > p[0x21])

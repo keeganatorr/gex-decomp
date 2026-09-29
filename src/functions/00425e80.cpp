@@ -7,7 +7,7 @@ extern "C" void __cdecl FUN_004213C0(void*, void*);
 extern "C" int __cdecl FUN_00421560(void*, void*);
 extern "C" void __cdecl FUN_004260C0(void*);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl PlayerRunJumpStart_00425e80(void** param_1)
 {
     if (param_1[0x26] != (void*)0x0) {
         param_1[0x26] = (void*)((int)param_1[0x26] - 1);

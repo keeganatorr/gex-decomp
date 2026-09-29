@@ -22,7 +22,7 @@ extern "C" {
 
 
 void __cdecl
-GEX_Target(char *param_1,short param_2,short param_3,uint param_4,uint param_5,uint param_6,
+FUN_0043dc70_Graphics(char *param_1,short param_2,short param_3,uint param_4,uint param_5,uint param_6,
             short param_7,short param_8)
 
 {

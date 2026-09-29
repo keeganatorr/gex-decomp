@@ -11,7 +11,7 @@ struct GXObject {
 extern "C" GXObject **__cdecl FUN_0041A380(GXObject **);
 extern "C" void __cdecl FUN_00434A20(GXObject **);
 
-extern "C" void __cdecl GEX_Target(GXObject **param_1)
+extern "C" void __cdecl ob121Init_0043d350(GXObject **param_1)
 {
     GXObject *pGVar1;
     NodeType *pNVar2;

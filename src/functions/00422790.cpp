@@ -6,7 +6,7 @@ extern "C" { extern int DAT_004A2838; }
 
 extern "C" int __cdecl FUN_00419C00(int, int, int, int*, int*);
 
-extern "C" void __cdecl GEX_Target(int param_1)
+extern "C" void __cdecl FUN_00422790_pStateUnk_Lash(int param_1)
 {
     int a;
     int b;

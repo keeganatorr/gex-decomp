@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_0041E9A0(void**);
 extern "C" { extern int DAT_00463680; }
-extern "C" void __cdecl GEX_Target() {
+extern "C" void __cdecl CLD_RemoveAllCollisionObjects_0041e970() {
     void** pp = (void**)0x463698;
     do {
         FUN_0041E9A0(pp);

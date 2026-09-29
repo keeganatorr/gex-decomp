@@ -29,7 +29,7 @@ void *__cdecl memset(void *dst, int value, unsigned int count);
 extern IDirectSound *gDirectSound_0049a070;
 extern IDirectSoundBuffer *gMusicDirectSoundBuffer_0048a040;
 void __cdecl FUN_004028b0_DS_Lock2(int half, unsigned long bytes);
-int __cdecl GEX_Target(void)
+int __cdecl FUN_00402940_LoadMusicInner(void)
 {
     PCMWAVEFORMAT format;
     DSBUFFERDESC desc;

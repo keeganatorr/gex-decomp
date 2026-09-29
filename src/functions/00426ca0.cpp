@@ -5,7 +5,7 @@ extern "C" void __cdecl FUN_00420BC0(void*);
 extern "C" void __cdecl FUN_00426690(void*);
 extern "C" { extern int DAT_004A23C8; }
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl InitPlayerFaceStick_00426ca0(void* param_1)
 {
     FUN_00420BC0(param_1);
     *(int*)((char*)param_1 + 0x8c) = 0;

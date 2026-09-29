@@ -4,7 +4,7 @@ extern "C" {
 extern "C" { extern int DAT_004A2660[]; }
 extern "C" void __cdecl FUN_00419520(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl VCRInit_0041b040(void** param_1)
 {
     int *p = DAT_004A2660;
     do {

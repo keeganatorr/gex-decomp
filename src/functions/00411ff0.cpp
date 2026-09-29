@@ -6,7 +6,7 @@ extern "C" int DAT_004583e8;
 extern "C" int DAT_00458488;
 extern "C" int DAT_0045848c;
 
-extern "C" void __cdecl GEX_Target(int *param1, int param2, int param3)
+extern "C" void __cdecl FUN_00411ff0_SideInside90Trans(int *param1, int param2, int param3)
 {
     FUN_00420BC0(param1);
 

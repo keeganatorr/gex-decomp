@@ -13,7 +13,7 @@ extern "C" void __cdecl FUN_004213F0(void*);
 extern "C" void __cdecl FUN_004213C0(int, void*);
 extern "C" int __cdecl FUN_00421560(int, void*);
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl PlayerStopFalling_00425cf0(void* param_1)
 {
     if (DAT_004A0280 == 0 && DAT_004A0281 == 0 && DAT_004A0294 == 0 && DAT_004A0295 == 0 && DAT_004A0293 == 0) {
         int val;

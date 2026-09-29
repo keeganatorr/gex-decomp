@@ -9,7 +9,7 @@ typedef struct GXObject {
 typedef struct ObjectList { GXObject *head; int a; int b; } ObjectList;
 extern "C" {
 extern ObjectList ListType_ARRAY_004a28a0[10];
-GXObject * __cdecl GEX_Target(void)
+GXObject * __cdecl FUN_00429bd0_Object_unk(void)
 {
     ObjectList *list;
     GXObject *gob;

@@ -13,7 +13,7 @@ void __cdecl FUN_00411160(void*);
 void __cdecl FUN_004138B0(void*);
 void __cdecl FUN_00413170(void*);
 
-void __cdecl GEX_Target(void* param_1)
+void __cdecl PlayerSideTongueLash_00412880(void* param_1)
 {
     if ((DAT_004A0295 != 0 || DAT_004A0294 != 0) && DAT_004A0293 == 0) {
         FUN_00423120(param_1);

@@ -8,7 +8,7 @@ extern "C" {
     extern char s_Error__Object_Typ__ld_with_colli_0045a130[];
 }
 
-extern "C" void GEX_Target(int VoiceToLoad)
+extern "C" void VSIT_PlayVoiceSituation_0041f8c0(int VoiceToLoad)
 {
     int voiceSetIndex;
     unsigned short *voiceEffectPtr;

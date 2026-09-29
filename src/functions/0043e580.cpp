@@ -19,7 +19,7 @@ void __cdecl FUN_0043e800_ProcessTileData(CacheSlot *, void *, void *, unsigned 
 void * __cdecl _alloca(unsigned int);
 }
 
-extern "C" CacheSlot *__cdecl GEX_Target(unsigned char *image)
+extern "C" CacheSlot *__cdecl FUN_0043e580_Image_Clean1(unsigned char *image)
 {
     unsigned char * volatile data;
     unsigned char * volatile processed;

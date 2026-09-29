@@ -5,7 +5,7 @@ extern int DAT_004a2b04;
 extern unsigned int PTR_UINT_00460700[];
 extern unsigned int DAT_0046a534_StaticGraphics;
 
-extern "C" void GEX_Target(void)
+extern "C" void FUN_0043eed0_TvStatic(void)
 {
     unsigned short *puVar1 = USHORT_ARRAY_00460274;
     int iVar2 = 0x200;

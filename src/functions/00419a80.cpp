@@ -3,5 +3,5 @@
 extern "C" {
 extern "C" void __cdecl FUN_00419840(void**);
 extern "C" void __cdecl FUN_00419520(void**);
-extern "C" void __cdecl GEX_Target(void** p) { if (((unsigned int)p[0x1b] & 0x2000)) FUN_00419840(p); else FUN_00419520(p); }
+extern "C" void __cdecl GOB_Remove_00419a80(void** p) { if (((unsigned int)p[0x1b] & 0x2000)) FUN_00419840(p); else FUN_00419520(p); }
 }

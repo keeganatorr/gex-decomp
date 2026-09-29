@@ -5,7 +5,7 @@ extern "C" { extern int DAT_0049FB90; }
 
 extern "C" unsigned int __cdecl FUN_0041FB50(void);
 
-extern "C" unsigned int __cdecl GEX_Target(unsigned int param_1)
+extern "C" unsigned int __cdecl SCRIPT_VoiceFinished_00418d60(unsigned int param_1)
 {
     DAT_0049FB90 = FUN_0041FB50();
     return param_1;

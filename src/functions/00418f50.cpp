@@ -8,7 +8,7 @@ extern "C" {
 extern int SCRIPT_WorkRegister_0049fb90;
 extern GXObject *DAT_0049fb94;
 extern unsigned int __cdecl SCRIPT_GetUInt_00417f00(unsigned char **);
-unsigned char * __cdecl GEX_Target(unsigned char *script, GXObject *gob)
+unsigned char * __cdecl SCRIPT_SetLinkField_00418f50(unsigned char *script, GXObject *gob)
 {
     int link = *script++;
     int field = *script++;

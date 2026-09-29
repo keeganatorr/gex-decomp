@@ -40,7 +40,7 @@ extern int DAT_004a0214_HighJump;
 extern GXInputRecord gInputControllers_004a0280[];
 void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
 void __cdecl PlayerRunJump_00425f40(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl InitPlayerRunJump_004260c0(GXObject *gex)
 {
     GXObject *platform;
     int highJump;

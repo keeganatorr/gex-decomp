@@ -32,7 +32,7 @@ void __cdecl VSIT_PlayVoiceSituation_0041f8c0(int situation);
 void __cdecl VFX_Play_0041fa80(int situation);
 void __cdecl GOB_DisplayObject_00444590(GXObject *gob);
 void __cdecl PrintWithFont_0040bc70(int x, int y, int a, int b, int c, int d, char *text, int e);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob212Draw_0040cd30(GXObject *gob)
 {
     VoiceAnim *anims;
     int situation;

@@ -5,7 +5,7 @@ extern "C" {
     extern void FreeMemory_00409740(void*);
 }
 
-extern "C" void GEX_Target(void) {
+extern "C" void BLOC_CloseBlockSupport_0040b830(void) {
     FreeMemory_00409740(gDRAMBlocks_0046270c);
     FreeMemory_00409740(gVRAMBlocks_00462708);
     FreeMemory_00409740(gFreeBlockTable_0046271c);

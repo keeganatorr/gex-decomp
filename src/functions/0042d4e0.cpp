@@ -4,7 +4,7 @@ extern "C" {
 extern "C" int __cdecl FUN_0040F100(int, unsigned int, unsigned int);
 extern "C" void __cdecl FUN_0042cc70_Object_unk(int, void**);
 extern int FUN_004A2990;
-extern "C" int __cdecl GEX_Target(void** param1, int param2) {
+extern "C" int __cdecl FUN_0042d4e0_Object_unk(void** param1, int param2) {
     unsigned int w = *(unsigned short*)(param2 + 2);
     unsigned int uVar2 = (unsigned int)param1[0x61] & 0x1fffff;
     if ((w & 0xfff) == 0) {

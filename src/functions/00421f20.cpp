@@ -14,7 +14,7 @@ typedef struct GXObject {
 } GXObject;
 extern "C" {
 extern unsigned int DAT_0045a790[];
-int __cdecl GEX_Target(GXObject *gex)
+int __cdecl FUN_00421f20_pStateUnk_Side(GXObject *gex)
 {
     unsigned int sides;
     sides = DAT_0045a790[(gex->gob_flags & 0x80000000 ? 8 : 0) | gex->gob_angle >> 21];

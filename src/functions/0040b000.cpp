@@ -23,7 +23,7 @@ extern "C" void __cdecl FUN_0043F050();
 extern "C" void __cdecl FUN_00402080();
 extern "C" void __cdecl FUN_004097B0();
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl GEX_Run_0040b000()
 {
     int loadedLevel[5];
 

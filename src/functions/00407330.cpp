@@ -32,7 +32,7 @@ extern char dwNewLong_00405850[];
 extern void *ghInstance_00487f90;
 void *__cdecl FUN_00405660_GFXUnk(void *, int, void **);
 
-int __stdcall GEX_Target(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
+int __stdcall WindowSizeDialogProc_00407330(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
 {
     char name[0x80];
     char text[0x80];

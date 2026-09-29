@@ -1,6 +1,6 @@
 extern "C" void __cdecl FUN_00420BC0(void**);
 extern "C" void __cdecl FUN_00413AC0(void**);
-extern "C" void __cdecl GEX_Target(void** p)
+extern "C" void __cdecl InitPlayerFaceTongueLash_00413ba0(void** p)
 {
     FUN_00420BC0(p);
     p[0x15] = 0;

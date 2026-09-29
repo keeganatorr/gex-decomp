@@ -26,7 +26,7 @@ int __cdecl FUN_00421f20_pStateUnk_Side(GXObject *gex);
 int __cdecl FUN_00411230(GXObject *platform, AngleEdge *edge, int *left, int *right);
 int __cdecl FUN_00421560_DrawCharacter(GexTileStruct *level, GXObject *gex);
 void __cdecl InitPlayerStand_00424090(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl PlayerSideGetup_004124c0(GXObject *gex)
 {
     int left;
     int right;

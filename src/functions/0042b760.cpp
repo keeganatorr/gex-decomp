@@ -24,7 +24,7 @@ struct GXLocal {
     int pad_f[77];
 };
 
-void __cdecl GEX_Target(int param_1, int param_2)
+void __cdecl FUN_0042b760(int param_1, int param_2)
 {
     GXLocal local;
 

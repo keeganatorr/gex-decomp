@@ -6,7 +6,7 @@ extern "C" {
 extern "C" void __cdecl FUN_0043EEA0(int);
 extern "C" void __cdecl FUN_0043EE60(int);
 
-extern "C" void __cdecl GEX_Target(int **param_1)
+extern "C" void __cdecl FUN_0040eea0(int **param_1)
 
 {
   int iVar1;

@@ -3,7 +3,7 @@ extern void __cdecl FUN_00420BC0(void *);
 extern void __cdecl FUN_00422410(void *);
 extern void __cdecl FUN_00420960(void *);
 extern void __cdecl FUN_004252E0(void *);
-void __cdecl GEX_Target(int *object)
+void __cdecl InitPlayerJumpSwallow_00425460(int *object)
 {
     FUN_00420BC0(object);
     object[0x15] = 0;

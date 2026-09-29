@@ -31,7 +31,7 @@ extern int decl_pad_11;
 void __cdecl GOB_RezzifyObject_00444530(GXObject *gob);
 void __cdecl FUN_00433ec0(GXObject *gob);
 void __cdecl GOB_DisplayObjectScaleAndRotate_00441150(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl KFBossDraw_00434080(GXObject *gob)
 {
     GXObject *parent;
     int dx;

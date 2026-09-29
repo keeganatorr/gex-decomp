@@ -7,7 +7,7 @@ extern void __cdecl FUN_0042CC00(int *list, int *object);
 
 typedef void (__cdecl *ObjectCallback)(int *object);
 
-extern "C" void __cdecl GEX_Target(int *object)
+extern "C" void __cdecl GOB_DrawList_0040efa0(int *object)
 {
     while (object[0] != 0) {
         if (object[0x1b] & 0x100000) {

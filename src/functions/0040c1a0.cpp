@@ -2,7 +2,7 @@ extern "C" {
 unsigned int* __cdecl FUN_0040C110(int, int);
 extern int DAT_00456034;
 
-int __cdecl GEX_Target(int param_1, unsigned int param_2)
+int __cdecl FUN_0040c1a0(int param_1, unsigned int param_2)
 {
     unsigned int* obj = FUN_0040C110(0x7b, param_1);
     if (param_2 & 1) obj[0x2d] &= 0xfffffffe;

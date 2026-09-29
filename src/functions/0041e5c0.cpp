@@ -49,7 +49,7 @@ CLDNode *__cdecl LST_RemTail_0042cc20(CLDList *list);
 void __cdecl LST_Remove_0042cbf0(CLDNode *node);
 void __cdecl LST_AddTail_0042cc00(CLDList *list, CLDNode *node);
 void __cdecl assertfail_00405350(const char *format, ...);
-void __cdecl GEX_Target(void)
+void __cdecl CLD_ProcessCollisions_0041e5c0(void)
 {
     CLDNode *node;
     CLDNode *next;

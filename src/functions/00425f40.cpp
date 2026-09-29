@@ -23,7 +23,7 @@ int __cdecl FUN_004212d0_pStateUnk_yVel(int *);
 int __cdecl FUN_004215d0_pStateUnk_Jump(int *, int);
 void __cdecl InitPlayerRunStopFall_004263b0(int *);
 
-void __cdecl GEX_Target(int *p)
+void __cdecl PlayerRunJump_00425f40(int *p)
 {
     FUN_00423b80_pStateUnk(p);
     if (DAT_004A0285) {

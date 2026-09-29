@@ -3,7 +3,7 @@ int __cdecl FUN_0040FCE0(void**);
 extern int DAT_0045B608;
 extern int DAT_0045B618;
 
-void __cdecl GEX_Target(void** param1) {
+void __cdecl PlatformDoIt_00434570(void** param1) {
     param1[0x35] = param1[0x1e];
     param1[0x36] = param1[0x1f];
     param1[0x3f] = param1[0x1b];

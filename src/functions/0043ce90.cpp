@@ -2,7 +2,7 @@ extern "C" int __cdecl FUN_0040FCE0(void*);
 extern "C" void __cdecl FUN_00434260(void*);
 extern "C" void* __cdecl FUN_00435D90(void*, void*, void*);
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl ob89DoIt_0043ce90(void* param_1)
 {
     int iRet;
     *(int*)((char*)param_1 + 0xd4) = *(int*)((char*)param_1 + 0x78);

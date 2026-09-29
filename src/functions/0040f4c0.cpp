@@ -13,7 +13,7 @@ struct InputRecord {
 
 extern "C" InputRecord* gInputRecords_004a27dc;
 
-extern "C" unsigned int __cdecl GEX_Target(int param_1)
+extern "C" unsigned int __cdecl ReadController_0040f4c0(int param_1)
 {
     unsigned int KeyInput;
     if (gInputRecords_004a27dc[param_1].recorded != 0)

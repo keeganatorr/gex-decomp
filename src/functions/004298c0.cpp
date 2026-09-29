@@ -2,7 +2,7 @@ extern "C" {
 extern "C" { extern char DAT_0045ABD8; }
 extern "C" { extern unsigned int DAT_0045ABA8; }
 
-extern "C" int __cdecl GEX_Target(unsigned char* param_1, char* param_2)
+extern "C" int __cdecl FUN_004298c0_ProcessPasswordInput(unsigned char* param_1, char* param_2)
 {
     char cVar1;
     char c2;

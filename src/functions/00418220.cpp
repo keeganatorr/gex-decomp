@@ -1,7 +1,7 @@
 extern "C" int DAT_0049fb90;
 extern "C" int *DAT_004a27fc;
 
-extern "C" int __cdecl GEX_Target(int param1, int *param2)
+extern "C" int __cdecl SCRIPT_TrackGXPositionX_00418220(int param1, int *param2)
 {
     int pGVar2;
     int pGVar1;

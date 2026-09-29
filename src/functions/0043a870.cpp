@@ -5,7 +5,7 @@ extern "C" void* __cdecl FUN_004195D0(int, int, int, int);
 extern "C" void __cdecl FUN_00419B80(void**, int);
 extern "C" void __cdecl FUN_00444590();
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl ob371Init_0043a870(void** param_1)
 {
     void* pGVar1;
 

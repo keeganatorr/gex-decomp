@@ -19,7 +19,7 @@ extern "C" {
     extern DrawCacheEntry DrawCacheEntry_ARRAY_00464e58[];
 }
 
-extern "C" void GEX_Target(void)
+extern "C" void DRAW_CacheInit_0043e350(void)
 {
     TracePrintf_Debug_00405390(s_DRAW_CacheInit___004600cc);
 

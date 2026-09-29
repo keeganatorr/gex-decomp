@@ -17,7 +17,7 @@ void __cdecl FUN_00421740(void**);
 int __cdecl FUN_004215D0(void**, int);
 void __cdecl FUN_00424090(void**);
 
-void __cdecl GEX_Target(void** param_1)
+void __cdecl PlayerBounceRise_00413f10(void** param_1)
 {
     int iVar1;
     if (-0xe0000 < (int)param_1[0x23]) {

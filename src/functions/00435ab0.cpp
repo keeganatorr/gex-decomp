@@ -25,7 +25,7 @@ extern int gHitpoints2_00456afc;
 extern int gHitpoints_004a281c;
 unsigned int __cdecl UTL_ReallyRandom32_00428c60(void);
 void __cdecl VSIT_PlayVoiceSituation_0041f8c0(int situation);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob2Init_00435ab0(GXObject *gob)
 {
     if (gob->gob_work7 & 3) {
         gob->gob_yAccl = DAT_0045b7a8;

@@ -4,10 +4,10 @@ extern "C" {
 extern "C" void __cdecl FUN_004317B0(void**);
 extern "C" void __cdecl FUN_0041E7E0(void**, int*, int*, int*);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl FUN_00432c90_find_gOb_Unk(void** param_1)
 {
-    if (param_1[0x59] != 0) GEX_Target((void**)param_1[0x59]);
-    if (param_1[0x58] != 0) GEX_Target((void**)param_1[0x58]);
+    if (param_1[0x59] != 0) FUN_00432c90_find_gOb_Unk((void**)param_1[0x59]);
+    if (param_1[0x58] != 0) FUN_00432c90_find_gOb_Unk((void**)param_1[0x58]);
     FUN_004317B0(param_1);
     param_1[0x17] = param_1[0x40];
     param_1[0x18] = param_1[0x41];

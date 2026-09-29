@@ -13,8 +13,8 @@ extern "C" char *STRING_CHOOSEREMOTEANDPRESSJUMP_0048a020;
 extern "C" void  HelpBoxNew_0040d5f0(int a, int b, char *s, int c);
 
 /* Free function with C linkage: the object-level symbol emitted for the
-   identifier GEX_Target is _GEX_Target, which is the contract target. */
-extern "C" void GEX_Target(MapFunkUnk *self)
+   identifier FUN_00429fad_MapFunkUnk is FUN_00429fad_MapFunkUnk, which is the contract target. */
+extern "C" void FUN_00429fad_MapFunkUnk(MapFunkUnk *self)
 {
     if (FUN_0042a630_Gex_Frames(self) == 0)
         return;

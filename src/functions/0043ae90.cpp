@@ -5,7 +5,7 @@ extern "C" { extern int DAT_00464788; }
 extern "C" { extern int DAT_00464794; }
 extern "C" void __cdecl FUN_0043F490(int, int, int, int, int, int, int);
 
-extern "C" void __cdecl GEX_Target(int param_1, int param_2)
+extern "C" void __cdecl FUN_0043ae90_GameFuncUnk(int param_1, int param_2)
 {
     if (param_2 == 0) {
         if (DAT_00464794 == 0) {

@@ -1,6 +1,6 @@
 extern "C" {
 extern char s_BCDFGHKLPRSTVXYZGot_password_s_0045abd8[];
-void __cdecl GEX_Target(unsigned char *password)
+void __cdecl FUN_00429690_PasswordString(unsigned char *password)
 {
     unsigned int sum = 0;
     unsigned char *p;

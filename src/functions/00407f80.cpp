@@ -36,7 +36,7 @@ extern void *ghInstance_00487f90;
 extern Remap DAT_00455480[8];
 void *__cdecl FUN_00405660_GFXUnk(void *, int, void **);
 
-int __stdcall GEX_Target(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
+int __stdcall InputDialogProc_00407f80(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
 {
     int i;
     Remap *e;

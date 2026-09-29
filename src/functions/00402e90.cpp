@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" { extern int FUN_00455C10; }
 extern "C" { extern void* FUN_0048A040; }
-extern "C" int __cdecl GEX_Target()
+extern "C" int __cdecl FUN_00402e90()
 {
     if (FUN_00455C10 != 0 && FUN_0048A040 != 0) return 0;
     return 1;

@@ -15,7 +15,7 @@ struct WinX_t {
     int Height;
 };
 
-extern "C" void __cdecl GEX_Target(void) {
+extern "C" void __cdecl FUN_00404a20_MoveWindow(void) {
     WinX_t WinX;
     if (gVideoWindow_00451794 != 0 && gFullscreen_0045103c == 0 && DAT_00451040_FreezeInput == 0) {
         FUN_00401340_CalculateWindowRect(&WinX);

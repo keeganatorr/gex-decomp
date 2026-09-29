@@ -5,7 +5,7 @@ extern int DAT_00455018;
 extern int DAT_0047F050;
 extern int DAT_00488004;
 
-extern "C" int __cdecl GEX_Target()
+extern "C" int __cdecl FUN_00408432_Button1()
 {
     unsigned int uVar2;
     unsigned int uVar3;

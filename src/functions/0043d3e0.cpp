@@ -1,7 +1,7 @@
 extern "C" int __cdecl FUN_0040FCE0(void**);
 extern "C" void* __cdecl FUN_00435D90(void**, void*, void*);
 extern "C" void __cdecl FUN_00434260(void**);
-extern "C" void __cdecl GEX_Target(void** param1) {
+extern "C" void __cdecl ob121DoIt_0043d3e0(void** param1) {
     param1[0x35] = param1[0x1e];
     param1[0x36] = param1[0x1f];
     param1[0x3f] = param1[0x1b];

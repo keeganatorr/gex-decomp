@@ -3,7 +3,7 @@ void __cdecl FUN_00420BC0(int *);
 void __cdecl FUN_00422410_EatingObject_pState_Call(int *);
 void __cdecl PlayerFaceSwallow_00414fa0(int *);
 
-void __cdecl GEX_Target(int *param_1)
+void __cdecl InitPlayerFaceSwallow_00415040(int *param_1)
 {
     FUN_00420BC0(param_1);
     param_1[0x15] = 0;

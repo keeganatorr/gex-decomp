@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_00434540(int dummy);
 
-extern "C" void __cdecl GEX_Target(int param_1)
+extern "C" void __cdecl FUN_00434550(int param_1)
 {
     *(int*)(param_1 + 0x70) = 2;
     FUN_00434540(param_1);

@@ -9,7 +9,7 @@ extern "C" __declspec(dllimport) BOOL __stdcall mciGetErrorStringA(MCIERROR mciE
 extern "C" void __cdecl WinShowError_004063d0(int, const CHAR*, const CHAR*, const CHAR*);
 extern "C" const CHAR s_AVI_ERROR___s__s_004517a8[];
 
-extern "C" void __cdecl GEX_Target(MCIERROR param_1)
+extern "C" void __cdecl FUN_004046b0_AVI(MCIERROR param_1)
 {
   CHAR local_400[512];
   CHAR local_200[512];

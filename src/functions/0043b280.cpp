@@ -11,7 +11,7 @@ typedef struct GXObject {
 extern "C" {
 extern int DAT_0045ffe8[];
 extern void __cdecl VSIT_PlayVoiceSituation_0041f8c0(int);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob271Init_0043b280(GXObject *gob)
 {
     gob->gob_currentFrameGroup = (gob->gob_work1 & 1) == 0;
     gob->gob_angle = DAT_0045ffe8[((gob->gob_work1 & 1) ? 4 : 0) | gob->gob_work2];

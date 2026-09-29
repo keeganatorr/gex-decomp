@@ -5,7 +5,7 @@ extern "C" int DAT_00464634;
 extern "C" int DAT_00464658;
 extern "C" int __cdecl rand(void);
 
-extern "C" void __cdecl GEX_Target(int *param_1, int *param_2, int *param_3, int *param_4)
+extern "C" void __cdecl FUN_00439390_HuntDiveInner(int *param_1, int *param_2, int *param_3, int *param_4)
 {
   int hi;
   int lo;

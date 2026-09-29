@@ -9,7 +9,7 @@ extern "C" { extern int DAT_0046a640; }
 extern "C" { extern int DAT_0046a644; }
 extern "C" { extern int DAT_0046a648; }
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl FUN_0043f450_Unk()
 {
     int c = 0x808080;
     DAT_004a2afc = c;

@@ -3,5 +3,5 @@
 extern "C" {
 extern "C" unsigned int __cdecl FUN_0040F170(unsigned int, unsigned int, unsigned int);
 extern "C" { extern unsigned int DAT_0045B9A0; }
-extern "C" unsigned int __cdecl GEX_Target(unsigned int p1, unsigned int p2, unsigned int p3) { unsigned int id = FUN_0040F170(p1, p2, p3); return *(unsigned int*)((char*)&DAT_0045B9A0 + id * 0x20) & 0xef008000; }
+extern "C" unsigned int __cdecl FUN_00420c40_CheckWallCollision(unsigned int p1, unsigned int p2, unsigned int p3) { unsigned int id = FUN_0040F170(p1, p2, p3); return *(unsigned int*)((char*)&DAT_0045B9A0 + id * 0x20) & 0xef008000; }
 }

@@ -3,7 +3,7 @@ extern "C" int FUN_00405390(const char *, ...);
 extern "C" char DAT_0045f088[];
 extern "C" char s_event_hitright_0045f078[];
 
-extern "C" int GEX_Target(int objectType)
+extern "C" int event_hitright_004389b0(int objectType)
 {
     if ((*(unsigned int *)(objectType + 0x6c) & 0x1f000000) == 0x2000000) {
         if (DAT_00455c54_DebugVar > 1) {

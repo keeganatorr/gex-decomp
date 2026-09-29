@@ -6,7 +6,7 @@ extern int DAT_00455c24_LivesUnk;
 extern int gNumLives_00456b00;
 extern int gCheatPowerupToSpawn_00459498;
 extern int gInvincible_00455c28;
-void __cdecl GEX_Target(void)
+void __cdecl CheckInputCodes_00409f00(void)
 {
     if (level_004a2964 == 0x44 || gIsMapLevel_004a2ac0)
         return;

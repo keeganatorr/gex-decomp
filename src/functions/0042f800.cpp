@@ -4,7 +4,7 @@ extern "C" void FUN_0042f7e0();
 struct Blob8 { int a[8]; };
 extern "C" struct Blob8 DAT_0049ffa0;
 
-extern "C" void GEX_Target(int param_1, int param_2, int param_3)
+extern "C" void FUN_0042f800(int param_1, int param_2, int param_3)
 {
     int *psVar;
 

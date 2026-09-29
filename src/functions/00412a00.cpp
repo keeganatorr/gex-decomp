@@ -6,7 +6,7 @@ extern "C" { extern unsigned char DAT_004A0281; }
 extern "C" { extern unsigned char DAT_004A0282; }
 extern "C" { extern unsigned char DAT_004A0283; }
 extern "C" { extern int DAT_00400000; }
-extern "C" int __cdecl GEX_Target(int param_1)
+extern "C" int __cdecl FUN_00412a00_CheckInput(int param_1)
 {
     if (DAT_004A0282 != 0) return 0;
     if (DAT_004A0283 != 0) return 0x800000;

@@ -14,7 +14,7 @@ extern int gTimer_004a2ac8;
 extern void *M1_CurrentLevel_004a2990;
 void __cdecl TILES_CheckXTileClid_0042d060(void *level, GXObject *gob, int flags);
 void __cdecl TILES_CheckYTileClid_0042d2c0(void *level, GXObject *gob, int flags);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_00421cd0_xpos_ypos_related(GXObject *gob)
 {
     int dy;
     if (gPlayerPlatform_004a2864 && gTimer_004a2ac8 != DAT_00463ac8) {

@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_00441150(void*);
 extern "C" void __cdecl FUN_00444590(void*);
 
-extern "C" void __cdecl GEX_Target(void* param1)
+extern "C" void __cdecl FUN_00436cb0_Graphics_unk(void* param1)
 {
     int flags = *(int*)((char*)param1 + 0xe0);
     if (flags & 0x40) {

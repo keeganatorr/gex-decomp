@@ -37,7 +37,7 @@ extern unsigned int JOYSTICK_yRange1_00487bc8;
 extern unsigned int JOYSTICK_xRange2_00487c58;
 extern unsigned int JOYSTICK_yRange2_00487c54;
 
-int __cdecl GEX_Target(void)
+int __cdecl INPUT_GetActiveKeys_00404ba0(void)
 {
     JOYINFOEX ji;
     int keys;

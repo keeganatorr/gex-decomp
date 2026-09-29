@@ -5,7 +5,7 @@ typedef struct AnglePoints {
 } AnglePoints;
 extern "C" {
 extern int gTrigTable_0045a5c8[];
-void __cdecl GEX_Target(AnglePoints *p, int dx, int dy, int ox, int oy, int angle, int sx, int sy)
+void __cdecl CLD_ApplyAngleToPoints_0041cc70(AnglePoints *p, int dx, int dy, int ox, int oy, int angle, int sx, int sy)
 {
     int s;
     int c;

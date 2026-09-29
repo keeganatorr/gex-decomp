@@ -2,7 +2,7 @@ extern "C" int DAT_004a2824;
 extern "C" int DAT_004a2844;
 extern "C" int DAT_004a285c;
 
-extern "C" void GEX_Target(int *param_1)
+extern "C" void FUN_00421120(int *param_1)
 {
     if (DAT_004a2824 == 0) return;
     int iVar1 = param_1[0x1e];

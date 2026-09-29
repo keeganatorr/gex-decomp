@@ -21,7 +21,7 @@ extern int DAT_00456208;
 extern void* FUN_004A2AD4;
 extern PlayerState* FUN_004A27FC;
 
-void __cdecl GEX_Target(void** gOb)
+void __cdecl ob256Init_0040cf60(void** gOb)
 {
     DAT_00456018_gex_Init_unk = 1;
     FUN_004A2A7C = 1;

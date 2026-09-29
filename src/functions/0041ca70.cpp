@@ -3,7 +3,7 @@
 typedef unsigned int uint;
 typedef unsigned int undefined4;
 extern "C" {
-undefined4 __cdecl GEX_Target(int *param_1)
+undefined4 __cdecl CLD_ComputeAngleEdgesWithFrame_0041ca70(int *param_1)
 
 {
   int *piVar1;

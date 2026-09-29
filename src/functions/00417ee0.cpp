@@ -6,5 +6,5 @@ extern "C" { extern int DAT_004a2808_Flies; }
 extern "C" { extern int FUN_004A23C4; }
 extern "C" void __cdecl FUN_0041A610();
 extern "C" void __cdecl FUN_00417E70();
-extern "C" void __cdecl GEX_Target() { FUN_00456B00 = 3; DAT_004a2808_Flies = 0; FUN_004A23C4 = 0; FUN_0041A610(); FUN_00417E70(); }
+extern "C" void __cdecl InitPlayer_00417ee0() { FUN_00456B00 = 3; DAT_004a2808_Flies = 0; FUN_004A23C4 = 0; FUN_0041A610(); FUN_00417E70(); }
 }

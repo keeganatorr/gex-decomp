@@ -2,7 +2,7 @@ extern "C" {
 void *__cdecl memset(void *dst, int value, unsigned int count);
 extern unsigned char *PTR_00487f70;
 extern short DAT_00453510_BeforeDrawWindow1[];
-void __cdecl GEX_Target(void)
+void __cdecl FUN_00405450_BeforeDrawWindow(void)
 {
     unsigned char *row;
     short key;

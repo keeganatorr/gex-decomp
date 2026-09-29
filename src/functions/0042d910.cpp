@@ -17,7 +17,7 @@ int __cdecl FUN_0042d5c0_JumpingAboveScreen(GXObject *gob, unsigned short *block
 int __cdecl M1_GetContourDataFromID_0040f100(void *level, unsigned int id, unsigned int position);
 extern GXObject *gPlayerObject_004a27fc;
 void __cdecl FUN_0042cc70_Object_unk(int reason, GXObject *object);
-int __cdecl GEX_Target(GXObject *gob, unsigned short *block)
+int __cdecl FUN_0042d910_RightWallCollision(GXObject *gob, unsigned short *block)
 {
     unsigned int id;
     int offset;

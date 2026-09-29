@@ -10,7 +10,7 @@ int __cdecl FUN_00428C80(int);
 void ** __cdecl FUN_004195D0(int, int, int, int);
 void __cdecl FUN_00419BE0(void **, void **);
 
-void __cdecl GEX_Target(void **param_1)
+void __cdecl ob93DoIt_00431e00(void **param_1)
 {
     void *pGVar1;
     int iVar2;

@@ -1,6 +1,6 @@
 typedef void (__cdecl *PFN)(void);
 
-extern "C" void __cdecl GEX_Target(PFN *pfbegin, PFN *pfend)
+extern "C" void __cdecl __initterm(PFN *pfbegin, PFN *pfend)
 {
     while (pfbegin < pfend)
     {

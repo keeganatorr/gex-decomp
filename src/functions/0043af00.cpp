@@ -30,7 +30,7 @@ extern int DAT_004a2b00;
 extern int DAT_00455be4;
 extern int DAT_0045ffd8;
 void __cdecl GFX_Fade_0043f490(int mode, int from, int to, int a, int b, int c, int d);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_0043af00_GRAPHICSDRAWING(GXObject *gob)
 {
     int level;
     int fade;

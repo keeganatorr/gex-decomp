@@ -44,7 +44,7 @@ GXObject *__cdecl GOB_AddObject_004195d0(int type, int x, int y, void *loadData)
 void __cdecl GOB_PutObjectInfrontOfObject_00419be0(GXObject *behind, GXObject *front);
 void __cdecl GOB_SetObjectDisplayPriority_00419b80(GXObject *gob, int priority);
 void __cdecl DefInit_004335f0(GXObject *gob, int flag);
-void __cdecl GEX_Target(GXObject *gob, int flag)
+void __cdecl ob258Init_0043b3c0(GXObject *gob, int flag)
 {
     if (gob->gob_work0 == 0x40) {
         if (flag)

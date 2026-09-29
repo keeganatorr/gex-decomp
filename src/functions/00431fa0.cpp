@@ -15,7 +15,7 @@ extern "C" void __cdecl FUN_0042E850(int param_1);
 extern "C" void __cdecl FUN_00441150(int param_1);
 extern "C" void __cdecl FUN_00419A80(int param_1);
 
-extern "C" int __cdecl GEX_Target(int* param_1, int param_2)
+extern "C" int __cdecl FUN_00431fa0(int* param_1, int param_2)
 {
     int ppGVar6;
     int pGVar2;

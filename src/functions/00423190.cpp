@@ -3,7 +3,7 @@ extern "C" {
 extern unsigned char DAT_004A0295;
 extern unsigned char DAT_004A0293;
 extern void __cdecl FUN_00425AF0(void *);
-uint __cdecl GEX_Target(void *object)
+uint __cdecl FUN_00423190_CollisionIntoJumpTailWhack(void *object)
 {
     if (DAT_004A0295 == 0 || DAT_004A0293 != 0)
         return 0;

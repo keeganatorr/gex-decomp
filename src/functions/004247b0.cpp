@@ -18,7 +18,7 @@ void __cdecl FUN_004245B0(int *, int);
 int __cdecl abs(int);
 }
 
-extern "C" void __cdecl GEX_Target(int *p)
+extern "C" void __cdecl PlayerWalk_004247b0(int *p)
 {
     unsigned int *support;
     unsigned int attributes = DAT_0045B9A0[FUN_0040F170(DAT_004A2990, p[0x1e], p[0x1f])][0];

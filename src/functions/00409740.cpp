@@ -11,7 +11,7 @@ extern void *PTR_ARRAY_0047ef80[32];
 extern int DAT_0047ef70_FreeMemory;
 extern char s_MEM__can_t_free_mem__unknown_ptr_00455a54[];
 
-void __cdecl GEX_Target(void *memory)
+void __cdecl FreeMemory_00409740(void *memory)
 {
     for (int index = 0; index < 32; ++index) {
         if (PTR_ARRAY_0047ef80[index] == memory) {

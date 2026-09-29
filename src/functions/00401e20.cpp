@@ -1,7 +1,7 @@
 extern "C" {
 extern void __cdecl FUN_00401D00(int, int);
 extern int DAT_0049FB20;
-void __cdecl GEX_Target(int volume, int applyNow)
+void __cdecl SetSoundEffectVolume_00401e20(int volume, int applyNow)
 {
     if (volume != 0) {
         int newVol = (volume * 5 - 500) * 5;

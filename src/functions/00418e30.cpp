@@ -1,7 +1,7 @@
 extern "C" unsigned int __cdecl FUN_00417F40(unsigned char **);
 extern "C" void __cdecl FUN_0043F490(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
-extern "C" unsigned char * __cdecl GEX_Target(unsigned char *param_1)
+extern "C" unsigned char * __cdecl SCRIPT_AdjustScreenPalette_00418e30(unsigned char *param_1)
 {
     unsigned int uVar1;
     unsigned int local_4;

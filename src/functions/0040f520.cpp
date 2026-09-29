@@ -1,4 +1,4 @@
-extern "C" void __cdecl GEX_Target(int* param_1)
+extern "C" void __cdecl PlayRecording_0040f520(int* param_1)
 {
     unsigned int bVar1, bVar2, bVar3, bVar4;
     unsigned char bVar5;

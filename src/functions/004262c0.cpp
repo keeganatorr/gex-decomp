@@ -21,7 +21,7 @@ extern int DAT_0045a6d4;
 extern void __cdecl GOB_ResetState_00420bc0(GXObject *);
 extern void __cdecl GOB_KeepOutOfTiles_00420960(GXObject *);
 extern void __cdecl PlayerRunFall_00426180(GXObject *);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl InitPlayerRunFall_004262c0(GXObject *gob)
 {
     GOB_ResetState_00420bc0(gob);
     gob->gob_state = 0xf;

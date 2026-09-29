@@ -39,7 +39,7 @@ void __cdecl SoundThreadOpenMusic_00402a00(void);
 void __cdecl SoundThreadCloseMusic_004026d0(void);
 void __cdecl VFX_DoPlay_004019d0(void);
 void __cdecl FUN_00402790_DS_Readfile(void);
-unsigned long __stdcall GEX_Target(void *param)
+unsigned long __stdcall SoundThread_00402c00(void *param)
 {
     unsigned long status;
     unsigned long start;

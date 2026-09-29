@@ -5,7 +5,7 @@ void __cdecl FUN_00405350(int, int, int);
 void __cdecl FUN_00409430(int, void*, int);
 void __cdecl FUN_00409680(void*, int, void*, int, void*);
 
-void __cdecl GEX_Target(int param_1, int LEV, void* fileHandle, void* fileOutputBytes, int BytesToRead)
+void __cdecl ASYNC_LoadFileToMem_00437e90(int param_1, int LEV, void* fileHandle, void* fileOutputBytes, int BytesToRead)
 {
     void* levFileStruct;
     int numberOfBytesToRead;

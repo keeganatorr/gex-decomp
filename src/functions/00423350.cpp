@@ -55,7 +55,7 @@ extern char DAT_004a2868[];
 Tile *__cdecl FUN_00440430_CheckWallCollisionInner(TileMap *map, int tiles, int x, int y);
 int __cdecl M1_GetContourDataFromID_0040f100(Level *level, int id, int x);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_00423350_xpos_ypos_movement(GXObject *gob)
 {
     int left;
     int right;

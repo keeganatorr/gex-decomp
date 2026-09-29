@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" int __cdecl FUN_00440430(int, int, int, int);
 
-extern "C" int __cdecl GEX_Target(int param_1, int xPos, int yPos)
+extern "C" int __cdecl FUN_0040f030(int param_1, int xPos, int yPos)
 {
     unsigned short uVar1;
     int pGVar2;

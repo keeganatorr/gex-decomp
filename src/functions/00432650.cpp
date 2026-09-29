@@ -1,4 +1,4 @@
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl ob94Init_00432650(void* param_1)
 {
     unsigned int* p = (unsigned int*)param_1;
     p[0x14] = 0x1D;

@@ -13,7 +13,7 @@ void __cdecl PAR_ClearParallaxs_004202d0(void);
 void __cdecl M1_OpenLevelDirs_0040a8c0(void);
 void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
 int __cdecl M1_LoadLevel_0041ebe0(char *directory, char *name, int flags);
-void __cdecl GEX_Target(void)
+void __cdecl FUN_0040a990_LoadLevel_Clean1(void)
 {
     if (LEVELID_00455c40 < 0) {
         DRAW_CacheClear_0043e430(1);

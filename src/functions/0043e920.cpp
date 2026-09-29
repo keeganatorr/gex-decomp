@@ -35,7 +35,7 @@ extern byte *DAT_004a2adc_Tiles2;
 extern byte *DAT_004a2ae0_TilesBack1;
 }
 
-extern "C" TileSlotStruct * __cdecl GEX_Target(CD_UIMAGE *Image)
+extern "C" TileSlotStruct * __cdecl FUN_0043e920_Image(CD_UIMAGE *Image)
 {
     short sVar1;
     TileSlotStruct *pTVar3;

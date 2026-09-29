@@ -15,7 +15,7 @@ extern "C" void __cdecl FUN_00412960(void*);
 extern "C" void __cdecl FUN_00413470(void*);
 extern "C" void __cdecl FUN_00421900(void*);
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl PlayerSideSpinAround_00413230(void* param_1)
 {
     int iVar1;
 

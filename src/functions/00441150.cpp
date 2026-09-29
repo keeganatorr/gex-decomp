@@ -35,7 +35,7 @@ extern "C" int* __cdecl FUN_0043E580_Image_Clean1(int*);
 extern "C" int* __cdecl FUN_0043E920_Image(int*);
 extern "C" unsigned int __cdecl FUN_0043ECF0_SelectTile_Clean1(int*);
 
-extern "C" void __cdecl GEX_Target(int* param_1)
+extern "C" void __cdecl GOB_DisplayObjectScaleAndRotate_00441150(int* param_1)
 {
   short *psVar1;
   int bVar2;

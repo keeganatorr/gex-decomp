@@ -23,7 +23,7 @@ extern "C" void __cdecl FUN_00425460(void**);
 extern "C" void __cdecl FUN_00425AF0(void**);
 extern "C" void __cdecl FUN_00425C10(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl PlayerJumpTongueLashUp_004256e0(void** param_1)
 {
     int local_28[8];
     FUN_00423B80(param_1);

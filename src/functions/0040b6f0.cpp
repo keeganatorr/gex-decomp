@@ -19,7 +19,7 @@ extern void *gDRAMBlocks_0046270c;
 void *__cdecl MEM_AllocMem_004096c0(int size);
 void *__cdecl BLOC_InitTable_0040b6d0(void *table, void *blocks, int count);
 
-void __cdecl GEX_Target(void)
+void __cdecl BLOC_OpenBlockSupport_0040b6f0(void)
 {
     void *next;
     void *table;

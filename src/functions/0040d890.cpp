@@ -2,7 +2,7 @@
 // Historical source SHA256: bb59022a477a64a12eae9578bb1dc388b991ee610bcf93104cfe930eab3da98a
 typedef unsigned int undefined4;
 extern "C" {
-void __cdecl GEX_Target(char *param_1,undefined4 *param_2)
+void __cdecl HelpBoxGetLine_0040d890(char *param_1,undefined4 *param_2)
 
 {
   char cVar1;

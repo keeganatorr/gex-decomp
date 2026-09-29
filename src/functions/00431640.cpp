@@ -14,7 +14,7 @@ extern "C" {
 extern int DAT_0045b130;
 extern void __cdecl FUN_0042f5f0(GXObject *, int);
 extern void __cdecl RezOutObject_00437310(GXObject *);
-void __cdecl GEX_Target(GXObject *gob, int *hit)
+void __cdecl ob234Clid_00431640(GXObject *gob, int *hit)
 {
     int i;
     unsigned int kind, collision;

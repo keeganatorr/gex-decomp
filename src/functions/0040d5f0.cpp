@@ -7,7 +7,7 @@ extern "C" int DAT_004a2964;
 extern "C" int DAT_00455c04;
 extern "C" void* DAT_004a2400[];
 
-extern "C" void __cdecl GEX_Target(int param_1, int param_2, int inputString, int param_4)
+extern "C" void __cdecl HelpBoxNew_0040d5f0(int param_1, int param_2, int inputString, int param_4)
 {
     void** gOb = (void**)FUN_004195D0(0x160, param_1, param_2, 0);
 

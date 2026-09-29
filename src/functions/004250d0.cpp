@@ -25,7 +25,7 @@ int __cdecl FUN_004215d0_pStateUnk_Jump(int *, int);
 void __cdecl InitPlayerStopFall_00425c10(int *);
 void __cdecl InitPlayerStopFalling_00425da0(int *);
 
-void __cdecl GEX_Target(int *p)
+void __cdecl PlayerFalling_004250d0(int *p)
 {
     if (FUN_00420c70_GexWallCollisionInner(p) != 0 && DAT_004A0294 != 0) {
         InitPlayerStandJumpStart_00424b80(p);

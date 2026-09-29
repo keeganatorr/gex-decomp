@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void* FUN_004096C0(int);
 extern "C" void __cdecl FUN_0040FD50(int, int*, int*, int, int, int, int, int);
 
-extern "C" int* __cdecl GEX_Target(int param_1, int param_2, int* param_3, int* param_4, int param_5, int param_6, int param_7, int param_8, int param_9)
+extern "C" int* __cdecl OBI_NewObjectIntroTracker_0040fda0(int param_1, int param_2, int* param_3, int* param_4, int param_5, int param_6, int param_7, int param_8, int param_9)
 {
     int* mem = (int*)FUN_004096C0(0x3c);
     if (mem == 0) return 0;

@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_00420960(void**);
 extern int FUN_00456B04;
-extern "C" void __cdecl GEX_Target(void** param1) {
+extern "C" void __cdecl FUN_00423b80_pStateUnk(void** param1) {
     void* pGVar2 = param1[0x31];
     if (pGVar2 != 0) {
         void* pGVar3 = (void*)-(int)pGVar2;

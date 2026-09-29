@@ -114,7 +114,7 @@ void __cdecl FUN_0043db50_UpdateGraphicsState(void);
 void __cdecl FUN_00409970_BetweenLevelsTVFuzz(void);
 int __cdecl ReadControllerNoPlayback_0040f400(int);
 
-int __cdecl GEX_Target(M1Level *level)
+int __cdecl M1_PlayLevel_0040a010(M1Level *level)
 {
     int i;
     GobFunc doit;

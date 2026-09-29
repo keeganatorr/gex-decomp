@@ -32,7 +32,7 @@ __declspec(dllimport) void *__stdcall GlobalLock(HANDLE memory);
 __declspec(dllimport) int __stdcall GlobalUnlock(HANDLE memory);
 __declspec(dllimport) HANDLE __stdcall GlobalFree(HANDLE memory);
 __declspec(dllimport) HANDLE __stdcall CreatePalette(const LOGPALETTE *palette);
-HANDLE __cdecl GEX_Target(BITMAPINFO *info, int *colors)
+HANDLE __cdecl FUN_004055b0_GFXUnk(BITMAPINFO *info, int *colors)
 {
     HANDLE palette;
     HANDLE memory;

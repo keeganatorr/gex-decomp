@@ -5,7 +5,7 @@ extern "C" { extern int DAT_00458FE8; }
 extern "C" { extern int DAT_00459018; }
 extern "C" void __cdecl FUN_00405350(int, int);
 
-extern "C" int __cdecl GEX_Target(void** param_1)
+extern "C" int __cdecl GOB_GetOldFrame_0041a400(void** param_1)
 {
     int result;
     void* pGVar1;

@@ -1,7 +1,7 @@
 // Adapted from pc_decomp_backup/src/functions/FUN_0041D250.cpp
 // Historical source SHA256: 23a062346a21567869546bfef8e3594396b389f1d2c128eaf1f451b747625e24
 extern "C" {
-extern "C" int __cdecl GEX_Target(int param_1, int param_2)
+extern "C" int __cdecl CLD_CheckRotatedRects_0041d250(int param_1, int param_2)
 {
     int* piVar1;
     int iVar2;

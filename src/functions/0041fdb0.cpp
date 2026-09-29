@@ -4,7 +4,7 @@ extern "C" {
 extern "C" { extern int DAT_00463A34; }
 extern "C" void __cdecl FUN_0041FD70();
 extern "C" void __cdecl FUN_0041FCB0(int);
-extern "C" void __cdecl GEX_Target(int p) {
+extern "C" void __cdecl IDL_SetIdle_0041fdb0(int p) {
     int g = DAT_00463A34;
     if (g == p) return;
     FUN_0041FD70();

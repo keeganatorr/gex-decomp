@@ -1,5 +1,5 @@
 extern "C" {
-void __cdecl GEX_Target(void** param_1)
+void __cdecl ob231DoIt_00430e20(void** param_1)
 {
     if ((int)param_1[0x26] == 1) {
         param_1[0x14] = 0;

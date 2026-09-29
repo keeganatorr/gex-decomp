@@ -3,5 +3,5 @@
 extern "C" {
 extern "C" { extern int DAT_004A2A38; }
 extern "C" void __cdecl FUN_004322A0(void**);
-extern "C" void __cdecl GEX_Target(void** p) { p[0x1e] = (void*)((int)p[0x2b] + DAT_004A2A38); FUN_004322A0(p); }
+extern "C" void __cdecl FUN_0043b550_GameFuncUnk(void** p) { p[0x1e] = (void*)((int)p[0x2b] + DAT_004A2A38); FUN_004322A0(p); }
 }

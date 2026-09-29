@@ -18,7 +18,7 @@ extern "C" { extern unsigned char DAT_0045A184; }
 extern "C" { extern unsigned char DAT_0045A185; }
 extern "C" { extern unsigned char DAT_0045A186; }
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl FUN_0040b9f0_Unk()
 {
     DAT_0045A17C = DAT_004561C0;
     DAT_0045A17D = DAT_004561C1;

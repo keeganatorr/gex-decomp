@@ -13,7 +13,7 @@ void __cdecl FUN_004213F0(void*);
 void __cdecl FUN_004213C0(int, void*);
 int __cdecl FUN_00421560(int, void*);
 
-void __cdecl GEX_Target(void* param_1)
+void __cdecl PlayerSwallow_00427c00(void* param_1)
 {
     if ((DAT_004A0295 != 0 || DAT_004A0294 != 0) && DAT_004A0293 == 0) {
         FUN_00422360(param_1);

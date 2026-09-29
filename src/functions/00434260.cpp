@@ -6,7 +6,7 @@ extern "C" { extern int DAT_004a2864; }
 extern "C" { extern int DAT_004a2814; }
 extern "C" { extern int DAT_004a2874; }
 
-extern "C" void __cdecl GEX_Target(void* param1) {
+extern "C" void __cdecl FUN_00434260(void* param1) {
     int flags;
     int val_b4;
     int result;

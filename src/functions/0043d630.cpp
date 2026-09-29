@@ -8,7 +8,7 @@ extern "C" { extern int DAT_0045A9C8[]; }
 extern "C" { extern int DAT_004A2AC8; }
 extern "C" int __cdecl FUN_0040FCE0(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl ob218DoIt_0043d630(void** param_1)
 {
     int iVar1;
     unsigned int uVar2;

@@ -1,7 +1,7 @@
 extern "C" int TracePrintf_Debug_00405390(const char *fmt, ...);
 extern "C" void assertfail_00405350(const char *fmt, ...);
 
-extern "C" void GEX_Target(unsigned int *dataEnd, int *dataStart, int byteSize)
+extern "C" void IMG_Unpack_0043e730(unsigned int *dataEnd, int *dataStart, int byteSize)
 {
     unsigned int *puVar7;
     unsigned int *puVar1;

@@ -40,7 +40,7 @@ extern int DAT_0045b11c;
 extern int DAT_00463eb8;
 extern int DAT_004a2b00;
 void __cdecl GFX_Fade_0043f490(int mode, int from, int to, int a, int b, int c, int d);
-void __cdecl GEX_Target(GXObject *gob, int flag)
+void __cdecl ob229Init_0042ff10(GXObject *gob, int flag)
 {
     LoadData *data;
     int i;

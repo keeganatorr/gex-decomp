@@ -6,7 +6,7 @@ extern "C" {
     void VFX_Play_0041fa80(int);
 }
 
-extern "C" void GEX_Target(void)
+extern "C" void FUN_0043A1F0(void)
 {
     DAT_0045ffb0 = DAT_0045ffb0 + 1;
     if (DAT_0045ffb0 % 0x3c == 0) {

@@ -1,7 +1,7 @@
 typedef unsigned int uint;
 
 extern "C" {
-void __cdecl GEX_Target(int param_1, int *param_2)
+void __cdecl HelpBoxClid_0040d910(int param_1, int *param_2)
 {
   if (*param_2) {
     uint flags = *(uint *)(param_1 + 0xa0);

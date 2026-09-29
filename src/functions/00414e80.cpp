@@ -14,7 +14,7 @@ void __cdecl FUN_00427850(void*);
 void __cdecl FUN_004213F0(void*);
 void __cdecl FUN_004213C0(int, void*);
 
-void __cdecl GEX_Target(void* param_1)
+void __cdecl PlayerDuckUnspin_00414e80(void* param_1)
 {
     int iVar1 = FUN_00421820(param_1);
     if (FUN_00421560(FUN_004A2990, param_1) == 0) {

@@ -4,7 +4,7 @@ extern "C" int FUN_00428c80(int);
 extern "C" int *FUN_004195d0(int, int, int, int);
 extern "C" void FUN_00419be0(int *, int *);
 
-extern "C" void GEX_Target(int *param_1)
+extern "C" void FUN_00432e60(int *param_1)
 {
     int iVar5 = 0;
     int *puVar3 = DAT_0045b268;

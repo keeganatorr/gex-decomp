@@ -15,7 +15,7 @@ extern char *STRING_Use_Password_0048a018;
 extern char *STRING_Esc_0048a01c;
 extern char *STRING_Cancel_00487ffc;
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl PasswordKeyHintsDraw_0040ea90(GXObject *gob)
 {
     gob->gob_work1 = STRING_Up_Down_00487ff0;
     gob->gob_xpos = 0x1e0000;

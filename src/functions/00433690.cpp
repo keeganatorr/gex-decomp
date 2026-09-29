@@ -32,7 +32,7 @@ extern int *gEventLastCollideInfo_0045b570;
 extern char s_Damage_To_GEX_0045b140[];
 }
 
-extern "C" void __cdecl GEX_Target(GXObject *gob, int *hit)
+extern "C" void __cdecl DefHit_00433690(GXObject *gob, int *hit)
 {
     unsigned int a;
     unsigned int b;

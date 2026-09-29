@@ -15,7 +15,7 @@ extern "C" {
 extern int DAT_004a0218_pState;
 extern void __cdecl GOB_ResetState_00420bc0(GXObject *);
 extern void __cdecl PlayerDuckSpinAround_00414ce0(GXObject *);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl InitPlayerDuckSpinAround_00414e20(GXObject *gob)
 {
     GOB_ResetState_00420bc0(gob);
     gob->gob_state = 0x22;

@@ -34,7 +34,7 @@ extern char s_Found_level_number__d_0045ac14[];
 extern char s_Got_level_number__d_0045abfc[];
 }
 
-extern "C" int __cdecl GEX_Target(char *pw)
+extern "C" int __cdecl FUN_00429390_EnterPasswordSelectLevel(char *pw)
 {
     unsigned char c;
     int k;

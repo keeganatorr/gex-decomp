@@ -1,4 +1,4 @@
-extern "C" void __cdecl GEX_Target(int *param_1, int param_2) {
+extern "C" void __cdecl FUN_00434190(int *param_1, int param_2) {
     int cVar1;
     int cVar2;
     int pGVar4;

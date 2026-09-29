@@ -38,7 +38,7 @@ void __cdecl PasswordEnterLevel_00429940(void);
 void __cdecl FUN_004099b0_CloseMusic(int flag);
 void __cdecl FUN_0040b9f0_Unk(void);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl PasswordMenuDraw_0040e6a0(GXObject *gob)
 {
     char *oldText;
     int oldX;

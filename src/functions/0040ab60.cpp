@@ -10,7 +10,7 @@ extern void __cdecl FUN_0040a990_LoadLevel_Clean1(void);
 extern void __cdecl M1_EnsureLevelLoaded_0040aa10(void);
 extern void __cdecl FUN_0040ab00_EnterMainLoop(void);
 extern void __cdecl M1_FreeLevel_0040aa60(void);
-void __cdecl GEX_Target(void)
+void __cdecl FUN_0040ab60_MainGame_Clean1(void)
 {
     if (!GEX_pGlob_004a2ad4) {
         GFX_Init_0043f2f0();

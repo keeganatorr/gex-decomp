@@ -11,7 +11,7 @@ extern void FUN_00419BE0(int*, int*);
 extern void FUN_00419BC0(int*, int*);
 extern void FUN_00419B80(int*, int);
 
-void __cdecl GEX_Target(int* param_1)
+void __cdecl ob261Init_0043bba0(int* param_1)
 {
     int i;
     int** slot;

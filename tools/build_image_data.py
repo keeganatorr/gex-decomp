@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+from function_names import coff_export
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -29,17 +30,17 @@ def main() -> None:
                                    "[0-9a-f][0-9a-f][0-9a-f][0-9a-f].obj"))
     run = subprocess.run(["llvm-nm", "-g", "--format=posix", *(str(obj) for obj in objects)],
                          capture_output=True, text=True, check=True)
-    exports = {}
+    by_object = {}
     current = None
     for line in run.stdout.splitlines():
         if line.endswith(":"):
             current = Path(line[:-1]).stem
         elif line and current:
             fields = line.split()
-            if len(fields) >= 2 and fields[1].upper() == "T" and f"GEX_FN_{current}" in fields[0]:
-                if current in exports:
-                    raise SystemExit(f"multiple target exports for {current}")
-                exports[current] = fields[0]
+            if len(fields) >= 2:
+                by_object.setdefault(current, []).append((fields[0], fields[1]))
+    exports = {address: coff_export(address, symbols)
+               for address, symbols in by_object.items()}
     run = subprocess.run(["llvm-nm", "-u", "--format=posix", str(raw)],
                          capture_output=True, text=True, check=True)
     changes = {}

@@ -22,7 +22,7 @@ extern int *M1_CurrentLevel_004a2990;
 extern unsigned char DAT_0045B9B0[];
 }
 
-extern "C" int __cdecl GEX_Target(void *unused, int *object, TileFunction callback)
+extern "C" int __cdecl TILES_CheckYTileClid_0042d2c0(void *unused, int *object, TileFunction callback)
 {
     int end;
     int down;

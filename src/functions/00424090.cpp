@@ -21,7 +21,7 @@ extern int DAT_004a2980;
 extern void __cdecl GOB_ResetState_00420bc0(GXObject *);
 extern void __cdecl GX_ResetRotAndScale_00423c80(GXObject *);
 extern void __cdecl PlayerStand_00423dc0(GXObject *);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl InitPlayerStand_00424090(GXObject *gob)
 {
     GOB_ResetState_00420bc0(gob);
     if (gob->gob_state == 0xb || DAT_004a2980)

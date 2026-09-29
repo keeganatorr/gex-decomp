@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void* __cdecl FUN_00444BF0(unsigned int, unsigned short*, int);
 
-extern "C" void __cdecl GEX_Target(char* textBuffer, char* text, char** param_3)
+extern "C" void __cdecl vsprintf_00444930(char* textBuffer, char* text, char** param_3)
 {
     int local_18 = 0;
     int iVar7 = 0;

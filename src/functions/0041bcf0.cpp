@@ -11,7 +11,7 @@ extern "C" {
     extern int CAMERA_YPos_004a2a1c;
 }
 
-extern "C" void __cdecl GEX_Target(int *param_1)
+extern "C" void __cdecl ob215Draw_0041bcf0(int *param_1)
 {
     int draw;
     int value;

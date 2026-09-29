@@ -26,7 +26,7 @@ int __cdecl VFX_Play_0041fa80(int voice);
 void __cdecl FUN_0040b9f0_Unk(void);
 void __cdecl CollectibleReset_0041a660(void);
 int __cdecl FUN_00429390_EnterPasswordSelectLevel(char *password);
-void __cdecl GEX_Target(void)
+void __cdecl PasswordEnterLevel_00429940(void)
 {
     VFX_Play_0041fa80(1);
     M1_IsInMap_004a2a7c = 1;

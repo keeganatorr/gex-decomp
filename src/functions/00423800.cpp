@@ -21,7 +21,7 @@ extern int DAT_00463AD8;
 extern int FUN_004A2AC8;
 extern int FUN_004A2990;
 
-void __cdecl GEX_Target(void** param1) {
+void __cdecl FUN_00423800_pStateUnk(void** param1) {
     void** ppGVar4 = (void**)DAT_004A2874;
     void** ppGVar3 = (void**)DAT_004A2814;
     int iVar7 = 0;

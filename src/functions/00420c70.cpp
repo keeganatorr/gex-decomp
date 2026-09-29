@@ -18,7 +18,7 @@ extern int gTimer_004a2ac8;
 extern GXObject *DAT_00463ac0_PlayerStruct;
 extern void *M1_CurrentLevel_004a2990;
 int __cdecl M1_GetBlockAttributeIDAtPos_0040f170(void *level, int x, int y);
-unsigned int __cdecl GEX_Target(GXObject *gob)
+unsigned int __cdecl FUN_00420c70_GexWallCollisionInner(GXObject *gob)
 {
     int attribute;
     if (gTimer_004a2ac8 != DAT_00463ab4_FrameCount || DAT_00463ac0_PlayerStruct != gob) {

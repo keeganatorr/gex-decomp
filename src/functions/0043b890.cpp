@@ -3,7 +3,7 @@ extern int CAMERA_XPos_004a2a38;
 extern void __cdecl FUN_00441150(void*);
 }
 
-extern "C" void __cdecl GEX_Target(int* param_1)
+extern "C" void __cdecl ob258Draw_0043b890(int* param_1)
 {
     int val;
 

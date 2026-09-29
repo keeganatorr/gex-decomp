@@ -3,7 +3,7 @@ unsigned int __cdecl INPUT_GetActiveKeys_00404ba0(int);
 extern unsigned int MainGame_NextKeyInput;
 extern unsigned int MainGame_KeyInput;
 
-int __cdecl GEX_Target(int param_1, unsigned int param_2, unsigned int *CurrentInputPTR)
+int __cdecl PCTranslateBits_0040f7a0(int param_1, unsigned int param_2, unsigned int *CurrentInputPTR)
 {
     unsigned int KeyInput = INPUT_GetActiveKeys_00404ba0(0);
     MainGame_NextKeyInput = 0;

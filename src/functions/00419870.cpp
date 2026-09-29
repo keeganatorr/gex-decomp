@@ -14,7 +14,7 @@ void __cdecl FUN_0041E7E0(int *, int *, int *, int *);
 void __cdecl FUN_0040F2E0(int *, int);
 int __cdecl FUN_0041E190(void **, void *);
 
-void __cdecl GEX_Target(int *objectType, int *param_2)
+void __cdecl GOB_AddMapObject_00419870(int *objectType, int *param_2)
 {
     int *loaded_gOb;
     unsigned int uVar6;
@@ -86,7 +86,7 @@ void __cdecl GEX_Target(int *objectType, int *param_2)
                 tracker = ((int **)FUN_004A2A78)[(unsigned int)pGVar2 >> 0x10];
                 objectType_00 = (int *)(tracker[0] + ((unsigned int)pGVar2 & 0xffff) * 16);
                 if ((objectType_00[1] & 0x8000) == 0) {
-                    GEX_Target(objectType_00, tracker);
+                    GOB_AddMapObject_00419870(objectType_00, tracker);
                 }
             } else {
                 fields[fieldCode & 0xffff] = pGVar2;

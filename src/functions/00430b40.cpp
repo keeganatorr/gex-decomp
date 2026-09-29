@@ -13,7 +13,7 @@ extern int DAT_00463f08;
 extern int DAT_00463f0c;
 GXObFrame *__cdecl GOB_GetCurrentFrameWithDefault_0041a380(GXObject *gob);
 int __cdecl FUN_00430990(GXObject *gob, int top, int bottom, int left, int right, int a, int b, int c, int d);
-int __cdecl GEX_Target(void)
+int __cdecl FUN_00430b40(void)
 {
     GXObFrame *frame;
     GXHitArea *area;

@@ -8,7 +8,7 @@ void ** __cdecl FUN_004195D0(int, int, int, int);
 void __cdecl FUN_00419BE0(void **, void **);
 void __cdecl FUN_00419520(void **);
 
-void __cdecl GEX_Target(void **param_1)
+void __cdecl ob94DoIt_00432680(void **param_1)
 {
     void *counter;
     void **obj;

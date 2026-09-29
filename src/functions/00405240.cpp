@@ -8,7 +8,7 @@ extern void __cdecl FUN_004048E0();
 extern void __cdecl FUN_00402E60();
 extern void __cdecl FUN_0040B380();
 
-void __cdecl GEX_Target()
+void __cdecl GamePause_00405240()
 {
     int *ppvVar1;
     int iVar2;

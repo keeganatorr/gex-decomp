@@ -11,7 +11,7 @@ void __cdecl FUN_00405350(int);
 void __cdecl FUN_0041A250(void**, int, int, int);
 void __cdecl FUN_00422360(int);
 
-void __cdecl GEX_Target(void** gOb)
+void __cdecl FUN_00422470_EatObjects(void** gOb)
 {
     if (DAT_004A2888 != (void*)0x0) {
         FUN_00405350((int)&DAT_0045AAEC);

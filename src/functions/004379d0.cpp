@@ -8,7 +8,7 @@ extern int DAT_0045c9a0;
 extern unsigned char IMAGE_DOS_HEADER_00400000[];
 int __cdecl GOB_GetHotSpot_00419c00(int *, int, int, int *, int *);
 
-void __cdecl GEX_Target(int *object)
+void __cdecl FUN_004379d0_KFBossStateInner_MoveGex(int *object)
 {
     int hotspotX;
     int hotspotY;

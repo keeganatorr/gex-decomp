@@ -6,7 +6,7 @@ extern int M1_004a2a80;
 extern int DAT_004a295c_IsHWNDSetup;
 extern void __cdecl FUN_004051a0_WindowDrawing2(void);
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
-int __cdecl GEX_Target(void)
+int __cdecl FUN_0040b320_WindowDrawing3(void)
 {
     if (gMainState_004a2970 != 2 && gMainState_004a2970 != 6)
         return 0;

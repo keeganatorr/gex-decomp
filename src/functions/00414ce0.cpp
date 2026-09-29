@@ -17,7 +17,7 @@ void __cdecl FUN_00421900(int *);
 void __cdecl FUN_004213f0_GexMovementLeftandRight(int *);
 void __cdecl FUN_004213c0(void *, int *);
 
-void __cdecl GEX_Target(int *player)
+void __cdecl PlayerDuckSpinAround_00414ce0(int *player)
 {
     int duck = FUN_00421820_pStateUnk_Duck(player);
     if (FUN_00421560_DrawCharacter(DAT_004A2990, player) == 0) {

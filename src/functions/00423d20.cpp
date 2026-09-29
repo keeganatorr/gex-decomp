@@ -5,7 +5,7 @@ extern "C" {
     extern const char DAT_0045ab14[];
 }
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl InitPlayerOldMan_00423d20(void** param_1)
 {
     void* pGVar1;
     void* pNVar2;

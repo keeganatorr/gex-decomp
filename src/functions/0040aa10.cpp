@@ -9,7 +9,7 @@ extern "C" {
     void TracePrintf_Debug_00405390(char *, int);
 }
 
-extern "C" void GEX_Target(void)
+extern "C" void M1_EnsureLevelLoaded_0040aa10(void)
 {
     int iVar1;
     if (DAT_004a2954_DrawTiles == 0) {

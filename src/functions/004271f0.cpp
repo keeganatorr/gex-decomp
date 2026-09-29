@@ -20,7 +20,7 @@ void __cdecl EFECT_AddPuff_0042e480(int, int, Word, int, Word);
 int __cdecl abs(int);
 }
 
-extern "C" void __cdecl GEX_Target(Word *p)
+extern "C" void __cdecl PlayerRunTurn_004271f0(Word *p)
 {
     Word direction = p[0x1b] & 0x80000000U;
     if ((direction == 0 && DAT_004A0280 != 0) ||

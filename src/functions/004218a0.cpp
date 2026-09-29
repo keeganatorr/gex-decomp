@@ -12,7 +12,7 @@ extern "C" {
 extern void *M1_CurrentLevel_004a2990;
 extern WallProbe DAT_0045A710[];
 int __cdecl M1_GetBlockAttributeIDAtPos_0040f170(void *level, int x, int y);
-int __cdecl GEX_Target(GXObject *gex)
+int __cdecl FUN_004218a0_CheckWallCollision(GXObject *gex)
 {
     int dir;
     dir = (gex->gob_flags & 0x80000000 ? 8 : 0) | gex->gob_angle >> 21;

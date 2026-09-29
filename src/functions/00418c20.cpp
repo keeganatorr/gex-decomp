@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" { extern int DAT_0049FB90; }
 
-extern "C" unsigned char * __cdecl GEX_Target(unsigned char *p, void **pp)
+extern "C" unsigned char * __cdecl SCRIPT_ModWorkField_00418c20(unsigned char *p, void **pp)
 {
     unsigned char idx = *p;
     int val = (int)pp[idx + 0x1a];

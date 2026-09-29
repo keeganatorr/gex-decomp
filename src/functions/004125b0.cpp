@@ -18,7 +18,7 @@ extern int DAT_004586a8;
 extern int DAT_004586c0;
 void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
 void __cdecl PlayerSideGetup_004124c0(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl InitPlayerSideGetup_004125b0(GXObject *gex)
 {
     GOB_ResetState_00420bc0(gex);
     gex->gob_currentFrameIndex = 0;

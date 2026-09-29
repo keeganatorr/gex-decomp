@@ -2,7 +2,7 @@ typedef unsigned short ushort;
 typedef unsigned int uint;
 typedef unsigned short undefined2;
 extern "C" {
-void __cdecl GEX_Target(uint *param_1,uint *param_2)
+void __cdecl ___dtold(uint *param_1,uint *param_2)
 
 {
   ushort uVar1;

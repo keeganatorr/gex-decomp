@@ -3,5 +3,5 @@
 extern "C" {
 extern "C" void __cdecl FUN_00444800(int*, int, int, int, int, unsigned int, unsigned int);
 extern "C" { extern int DAT_00463AE0; }
-extern "C" void __cdecl GEX_Target(int p1, int p2, int p3, int p4, unsigned int p5, unsigned int p6) { FUN_00444800(&DAT_00463AE0, p1, p2, p3, p4, p5, p6); }
+extern "C" void __cdecl GFX_DrawRectHelper_00428cc0(int p1, int p2, int p3, int p4, unsigned int p5, unsigned int p6) { FUN_00444800(&DAT_00463AE0, p1, p2, p3, p4, p5, p6); }
 }

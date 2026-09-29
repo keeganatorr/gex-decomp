@@ -20,7 +20,7 @@ extern int CAMERA_YPos_004a2a1c;
 void *__cdecl memset(void *, int, unsigned int);
 int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *gob, CLDEdges *edges);
 void __cdecl GOB_DisplayCelToQuad_00443ae0(GXObject *gob, int cel, int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob371Draw_0043aa40(GXObject *gob)
 {
     CLDEdges a;
     CLDEdges b;

@@ -6,7 +6,7 @@ extern GXObject *PTR_00463d80;
 extern GXObject *PTR_00463d7c;
 extern GXObject *gPlayerObject_004a27fc;
 void __cdecl FUN_0042eaf0_GRAPHICSDRAWING(GXObject *first, GXObject *second, GXObject *third);
-void __cdecl GEX_Target(void)
+void __cdecl FUN_00431300(void)
 {
     switch (DAT_0045b114_zoomstate) {
     case 0x65:

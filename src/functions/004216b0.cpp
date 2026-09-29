@@ -5,7 +5,7 @@ extern void* GOB_AddObject_004195d0(int, int, int, int);
 extern void SND_PlaySound_0041a340(void*, int);
 extern void GOB_PutObjectInfrontOfObject_00419be0(void*, void**);
 
-void __cdecl GEX_Target(void** param_1)
+void __cdecl EFECT_MakeSplash_004216b0(void** param_1)
 {
     int iVar3;
     unsigned int uVar4;

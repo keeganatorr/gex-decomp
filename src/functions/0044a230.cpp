@@ -4,7 +4,7 @@ extern "C" {
 extern "C" int __cdecl FUN_0044CB50(void*, char*);
 extern "C" int __cdecl FUN_0044CB90(void*, char*);
 
-extern "C" void __cdecl GEX_Target(int param_1, void* param_2, char* param_3)
+extern "C" void __cdecl FUN_0044a230_fpMathInnerInner(int param_1, void* param_2, char* param_3)
 {
     int local_8[2];
     int local_c[1];

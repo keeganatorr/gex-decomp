@@ -4,5 +4,5 @@ extern "C" {
 extern "C" unsigned int __cdecl FUN_0040F170(unsigned int, unsigned int, unsigned int);
 extern "C" { extern unsigned int DAT_0045B9A0; }
 extern "C" { extern unsigned int DAT_004A2990; }
-extern "C" unsigned int __cdecl GEX_Target(unsigned int p1, unsigned int p2) { unsigned int id = FUN_0040F170(DAT_004A2990, p1, p2); return *(unsigned int*)((char*)&DAT_0045B9A0 + id * 0x20); }
+extern "C" unsigned int __cdecl GetTileFlagsAtPosition_00420c10(unsigned int p1, unsigned int p2) { unsigned int id = FUN_0040F170(DAT_004A2990, p1, p2); return *(unsigned int*)((char*)&DAT_0045B9A0 + id * 0x20); }
 }

@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_0040B860(int**);
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl M1_UnloadLevel_0041f6f0(void* param_1)
 {
     FUN_0040B860((int**)(*(int**)((char*)param_1 + 8) + 0));
 }

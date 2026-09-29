@@ -1,7 +1,7 @@
 extern "C" {
 extern unsigned char PasswordDecipherKey_0045aba8[4];
 extern char s_BCDFGHKLPRSTVXYZGot_password_s_0045abd8[];
-void __cdecl GEX_Target(char *text, unsigned char *data, int bits)
+void __cdecl FUN_00429850_PasswordRelated(char *text, unsigned char *data, int bits)
 {
     int i;
     int n;

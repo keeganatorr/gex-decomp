@@ -31,7 +31,7 @@ void __cdecl FUN_00422790_pStateUnk_Lash(GXObject *gex);
 void __cdecl FUN_004213f0_GexMovementLeftandRight(GXObject *gex);
 void __cdecl FUN_004213c0(void *level, GXObject *gex);
 void __cdecl FUN_00423130_pStateUnk_Eating(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl PlayerDuckTongueLash_00414900(GXObject *gex)
 {
     int ducked;
     ducked = FUN_00421820_pStateUnk_Duck(gex);

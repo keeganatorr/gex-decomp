@@ -31,7 +31,7 @@ int __cdecl FUN_00423a00_pStateUnk(GXObject *gex);
 int __cdecl FUN_00423a50_AirToFaceCrawl(GXObject *gex);
 void __cdecl InitPlayerFaceCrawlToAir_004144e0(GXObject *gex);
 void __cdecl InitPlayerFaceStick_00426ca0(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl PlayerFaceTurn_004264c0(GXObject *gex)
 {
     int diff;
     int step;

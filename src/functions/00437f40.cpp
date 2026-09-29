@@ -43,7 +43,7 @@ int __cdecl M1_GetBlockAttributeIDAtPos_0040f170(void *level, int x, int y);
 unsigned short *__cdecl GOB_GetBlockAddress_00419fe0(void *level, int x, int y);
 int __cdecl M1_GetContourDataFromID_0040f100(void *level, unsigned int id, unsigned int position);
 
-void __cdecl GEX_Target(GXObject *gob, int dx)
+void __cdecl FUN_00437f40(GXObject *gob, int dx)
 {
     Frame *frame;
     int top;

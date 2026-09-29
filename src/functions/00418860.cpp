@@ -4,7 +4,7 @@ extern "C" {
 extern "C" { extern int DAT_0049FB90; }
 extern "C" void __cdecl FUN_0041BDE0(void**, int, int, int);
 
-extern "C" int __cdecl GEX_Target(int param_1, void** param_2)
+extern "C" int __cdecl SCRIPT_AddVisualScore_00418860(int param_1, void** param_2)
 {
     FUN_0041BDE0(param_2, DAT_0049FB90, 0, 0);
     return param_1;

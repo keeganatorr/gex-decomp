@@ -2,7 +2,7 @@ struct GXObject;
 // Adapted from pc_decomp_backup/src/functions/FUN_004317b0.cpp
 // Historical source SHA256: c822ad64a1f1bb5aab33a68dfac16ddd3153fcf032c7984eb7d5483c705af406
 extern "C" {
-void __cdecl GEX_Target(GXObject **param_1)
+void __cdecl FUN_004317b0_prev_gOb(GXObject **param_1)
 
 {
   GXObject **temp_gOb;

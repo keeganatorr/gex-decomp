@@ -22,7 +22,7 @@ extern "C" int decl_pad_16;
 extern "C" int decl_pad_17;
 extern "C" int decl_pad_18;
 extern "C" {
-unsigned int __cdecl GEX_Target(unsigned char **cursor)
+unsigned int __cdecl EVENT_ExtractUShort_00417f40(unsigned char **cursor)
 {
     unsigned int v = ((*cursor)[1] << 8) | (*cursor)[0];
     *cursor += 2;

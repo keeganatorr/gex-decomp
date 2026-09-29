@@ -43,7 +43,7 @@ extern CornerRow DAT_00458148[];
 extern int DAT_004580A8[][5];
 int __cdecl FUN_00421f20_pStateUnk_Side(GXObject *gex);
 void __cdecl InitPlayerSideCrawl_00411160(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl PlayerSideInside45Trans_00411a90(GXObject *gex)
 {
     unsigned int dir;
     if (FUN_00421f20_pStateUnk_Side(gex)) {

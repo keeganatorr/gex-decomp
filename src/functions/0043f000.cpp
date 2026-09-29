@@ -10,7 +10,7 @@ extern "C" { extern int DAT_0046A560[1]; }
 extern "C" { extern int DAT_0046A574[1]; }
 extern "C" { extern const char DAT_00460DCC[]; }
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl GFX_OpenGraphics_0043f000()
 {
     FUN_00444D10(DAT_0046A560, 0, 0, 0);
     FUN_00444D10(DAT_0046A574, 0, 0, 0);

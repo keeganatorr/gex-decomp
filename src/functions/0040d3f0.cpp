@@ -2,7 +2,7 @@ extern "C" void *GOB_FindWithWork0_0040c110(int objectType, int frame);
 extern "C" int sprintf(char *buffer, const char *format, ...);
 extern "C" unsigned int strlen(const char *string);
 
-extern "C" void GEX_Target(int param_1, int param_2)
+extern "C" void FUN_0040d3f0(int param_1, int param_2)
 {
     char local_8[8];
     char *pDest;

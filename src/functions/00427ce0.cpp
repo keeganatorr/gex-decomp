@@ -5,7 +5,7 @@ extern "C" void __cdecl FUN_00420BC0(void*);
 extern "C" void __cdecl FUN_00422410(void*);
 extern "C" void __cdecl FUN_00427C00(void*);
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl InitPlayerSwallow_00427ce0(void* param_1)
 {
     FUN_00420BC0(param_1);
     *(int*)((char*)param_1 + 0x54) = 0;

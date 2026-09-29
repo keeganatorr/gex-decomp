@@ -1,7 +1,7 @@
 typedef unsigned int uint;
 extern "C" {
 void __cdecl
-GEX_Target(void *tileStructPtr,int tileRow,int baseOffset,uint tileCol)
+FUN_00445350_CalculateTileOffset_Clean1(void *tileStructPtr,int tileRow,int baseOffset,uint tileCol)
 
 {
                      

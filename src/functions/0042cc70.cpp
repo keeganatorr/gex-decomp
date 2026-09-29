@@ -27,7 +27,7 @@ extern int decl_pad_19;
 extern int decl_pad_20;
 extern GXObject *gPlayerObject_004a27fc;
 void __cdecl PlayerKill_00417ca0(int reason);
-void __cdecl GEX_Target(int reason, GXObject *object)
+void __cdecl FUN_0042cc70_Object_unk(int reason, GXObject *object)
 {
     if (object == gPlayerObject_004a27fc)
         PlayerKill_00417ca0(reason);

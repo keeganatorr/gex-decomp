@@ -4,7 +4,7 @@ typedef unsigned char byte;
 // x86 SAR instruction masks CL for all byte values; do not assume that on another target.
 extern "C" {
 extern int DAT_0049fb90;
-unsigned char *__cdecl GEX_Target(unsigned char *cursor)
+unsigned char *__cdecl SCRIPT_ShiftRight_00418a80(unsigned char *cursor)
 {
     DAT_0049fb90 >>= *cursor++;
     return cursor;

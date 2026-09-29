@@ -13,7 +13,7 @@ extern "C" {
 extern void *M1_CurrentLevel_004a2990;
 int __cdecl M1_GetContourDataFromID_0040f100(void *level, unsigned int id, unsigned int position);
 void __cdecl FUN_0042cc70_Object_unk(int reason, GXObject *object);
-int __cdecl GEX_Target(GXObject *gob, unsigned short *block)
+int __cdecl FUN_0042d6e0_ObjCallUnk(GXObject *gob, unsigned short *block)
 {
     unsigned int id;
     unsigned int xoffset;

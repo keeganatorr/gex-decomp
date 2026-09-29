@@ -9,7 +9,7 @@ int __cdecl VFX_VoiceFinished_0041fb50(void);
 void __cdecl VFX_Reset_0041f840(void);
 void __cdecl VSIT_PlayVoiceSituation_0041f8c0(int situation);
 void __cdecl FUN_0041f950(void);
-void __cdecl GEX_Target(void)
+void __cdecl VFX_Update_0041faf0(void)
 {
     FUN_0041fa10_ProcessVoiceLoadingCompletion_Clean1();
     VFX_VoiceFinished_0041fb50();

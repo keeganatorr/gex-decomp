@@ -10,7 +10,7 @@ extern int DAT_004a0254_Collision;
 extern int DAT_004a0224_EatenObjectType;
 extern int DAT_00458c88;
 extern void __cdecl GOB_Remove_00419a80(GXObject *);
-void __cdecl GEX_Target(void)
+void __cdecl FUN_00422410_EatingObject_pState_Call(void)
 {
     int *type;
     if (gEatingObject_004a2888) {

@@ -70,7 +70,7 @@ extern void *gMainWindow_004875a0;
 extern char DAT_00487630_SoundDeviceAccessErrorString[];
 extern char WindowTitle_GEX[];
 
-void __cdecl GEX_Target(int enable)
+void __cdecl FUN_00402140_Sound(int enable)
 {
     unsigned long n1;
     void *p1;

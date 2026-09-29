@@ -22,7 +22,7 @@ extern int __cdecl GetGlueDist_0040f1d0(void *, GXObject *);
 extern void __cdecl GOB_RemoveMapObject_00419840(GXObject *);
 extern void __cdecl DefInit_004335f0(GXObject *, int);
 int __cdecl abs(int);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob115Init_0043d570(GXObject *gob)
 {
     int dist;
     if (gIsAddingObjectIntros_004a27d4) {

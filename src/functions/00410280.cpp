@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_0041028B(void);
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl CAMERA_SomeKindOfLogic_00410280()
 {
     
     

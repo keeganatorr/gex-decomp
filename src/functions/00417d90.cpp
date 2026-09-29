@@ -15,7 +15,7 @@ extern int DAT_0045a6e0_GexPowerUpHealth;
 void FUN_0041A250(void *, int, int, int);
 void FUN_00416320(void *);
 
-void GEX_Target(void)
+void FUN_00417d90_COLLISIONS(void)
 {
   int ofs;
   if (DAT_004A288C == 0 &&

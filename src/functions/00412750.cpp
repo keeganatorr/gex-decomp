@@ -8,7 +8,7 @@ extern int DAT_004586d8[];
 extern int DAT_004586dc[];
 }
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl InitPlayerSideUTurn_00412750(void** param_1)
 {
     unsigned int uVar1;
     unsigned int uVar2;

@@ -1,7 +1,7 @@
 // Adapted from pc_decomp_backup/src/functions/FUN_00440430.cpp
 // Historical source SHA256: 5e31653ef61650e306786c30c846b14772683e5fa302b891ecaf46938e09fc16
 extern "C" {
-extern "C" void* __cdecl GEX_Target(void* param_1, void** tileData, unsigned int xPos, unsigned int yPos)
+extern "C" void* __cdecl FUN_00440430_CheckWallCollisionInner(void* param_1, void** tileData, unsigned int xPos, unsigned int yPos)
 {
     int iVar2;
     unsigned short uVar1;

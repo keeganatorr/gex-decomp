@@ -17,7 +17,7 @@ struct GXObject {
     int field_98;
 };
 
-extern "C" void GEX_Target(GXObject *param_1)
+extern "C" void ob1Init_0043cca0(GXObject *param_1)
 {
     int bVar3 = 0;
     GobNode *gob = param_1->field_c;

@@ -14,6 +14,7 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
+from function_names import coff_export
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -58,11 +59,7 @@ def main() -> None:
     by_object, definitions = symbols(objects)
     exports = {}
     for address in addresses:
-        candidates = [name for name, kind in by_object[address]
-                      if kind.upper() == "T" and f"GEX_FN_{address}" in name]
-        if len(candidates) != 1:
-            raise SystemExit(f"{address}: expected one unique source export, got {candidates}")
-        exports[address] = candidates[0]
+        exports[address] = coff_export(address, by_object[address])
     data_exports = {}
     for name in sorted(definitions):
         destination = bindings.get(name)

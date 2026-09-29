@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" { extern int DAT_00462C9C; }
 
-extern "C" int __cdecl GEX_Target(int param_1)
+extern "C" int __cdecl ReadBitsFromAI_0040f3c0(int param_1)
 {
     int result = 0;
     if (DAT_00462C9C != 0) {

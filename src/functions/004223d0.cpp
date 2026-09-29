@@ -6,7 +6,7 @@ extern "C" { extern int DAT_004594A8; }
 extern "C" { extern int DAT_004594A4; }
 extern "C" { extern int DAT_004594A0; }
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl FUN_004223d0_ProcessGexHurtTimerUnk()
 {
     int h = DAT_0045A6E0;
     if (h >= 0) {

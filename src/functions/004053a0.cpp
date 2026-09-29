@@ -11,7 +11,7 @@ extern int decl_pad_4;
 void *__cdecl memcpy(void *dst, const void *src, unsigned int count);
 extern unsigned char *PTR_00487f70;
 extern short DAT_004517f0[];
-void __cdecl GEX_Target(void)
+void __cdecl FUN_004053a0_SaveScreenshotAndPauseGame(void)
 {
     unsigned char *from;
     unsigned char *to;

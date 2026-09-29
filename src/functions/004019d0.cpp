@@ -25,7 +25,7 @@ int __cdecl SND_CreateDirectSoundBuffer_00401720(void *, SoundBuffer **, DWORD, 
 int __cdecl FUN_004018b0_LoadVFX(SoundBuffer *, HANDLE, DWORD);
 }
 
-extern "C" void GEX_Target(void)
+extern "C" void VFX_DoPlay_004019d0(void)
 {
     char filename[256];
     HANDLE hFile;

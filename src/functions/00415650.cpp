@@ -7,7 +7,7 @@ extern "C" {
     extern int DAT_004a2884;
     extern int FUN_0045A6D0;
 
-    void __cdecl GEX_Target(void** param_1)
+    void __cdecl InitPlayerLaunch_00415650(void** param_1)
     {
         void* pGVar1;
         FUN_00420BC0(param_1);

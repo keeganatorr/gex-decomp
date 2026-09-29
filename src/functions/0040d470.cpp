@@ -20,7 +20,7 @@ extern int DAT_004561fc;
 extern int DAT_00456200;
 extern int DAT_00456204;
 void __cdecl GOB_DisplayObject_00444590(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob256Draw_0040d470(GXObject *gob)
 {
     unsigned char frames[21];
     unsigned int *p;

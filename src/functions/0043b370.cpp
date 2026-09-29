@@ -6,7 +6,7 @@ extern "C" void __cdecl FUN_00441150(void*);
 extern "C" { extern int DAT_0045FFE0; }
 extern "C" { extern int DAT_0045FFE4; }
 
-extern "C" void __cdecl GEX_Target(int* param_1)
+extern "C" void __cdecl ob271Draw_0043b370(int* param_1)
 {
     if (param_1[0x27] & 2) return;
     if (param_1[0x27] & 1) {

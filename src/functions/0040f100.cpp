@@ -1,7 +1,7 @@
 // Adapted from pc_decomp_backup/src/functions/FUN_0040F100.cpp
 // Historical source SHA256: 587e21a096abc30c11611d4acdab2dac303c0f0f8a45418fad1584cfcc07055a
 extern "C" {
-extern "C" int __cdecl GEX_Target(int param_1, unsigned int param_2, unsigned int param_3)
+extern "C" int __cdecl M1_GetContourDataFromID_0040f100(int param_1, unsigned int param_2, unsigned int param_3)
 {
     int iVar1;
     unsigned char bVar2;

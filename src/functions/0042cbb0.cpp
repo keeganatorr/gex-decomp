@@ -4,7 +4,7 @@ typedef struct Node {
     struct Node *previous;
 } Node;
 // EAX contains the old predecessor at return. Its original API return type is unproven.
-Node *__cdecl GEX_Target(Node *next, Node *node)
+Node *__cdecl LST_InsertBefore_0042cbb0(Node *next, Node *node)
 {
     Node *previous = next->previous;
     node->previous = previous;

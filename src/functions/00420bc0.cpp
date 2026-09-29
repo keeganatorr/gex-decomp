@@ -4,7 +4,7 @@ extern "C" int debugLevel_00455c54;
 extern "C" const char* stateNames_00457648[];
 extern "C" const char stateTraceFormat_0045aad8[];
 extern "C" void __cdecl TracePrintf_00405390(const char*, ...);
-extern "C" void __cdecl GEX_Target(unsigned int* object)
+extern "C" void __cdecl GOB_ResetState_00420bc0(unsigned int* object)
 {
     object[3] = GEX_pGlob_004a2ad4;
     object[0x39] = 0;

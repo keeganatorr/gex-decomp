@@ -16,7 +16,7 @@ extern int __cdecl FUN_00421560(int, void*);
 extern void __cdecl FUN_004213F0(void*);
 extern void __cdecl FUN_004213C0(int, void*);
 
-void __cdecl GEX_Target(void* param_1)
+void __cdecl PlayerDuck_00427780(void* param_1)
 {
     int iVar1;
     int iVar2;

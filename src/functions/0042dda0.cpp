@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_0042DCF0(void**, int);
 extern "C" void __cdecl FUN_0042D6E0(void**, int);
 
-extern "C" void __cdecl GEX_Target(void** param_1, int param_2)
+extern "C" void __cdecl FUN_0042dda0_Object_unk(void** param_1, int param_2)
 {
     int p2 = param_2;
     void** p1 = param_1;

@@ -17,7 +17,7 @@ typedef struct GXObject {
 extern "C" {
 extern int DAT_00462c78;
 void __cdecl GOB_DisplayObject_00444590(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_0040e2f0_y_velocity(GXObject *gob)
 {
     int x;
     int y;

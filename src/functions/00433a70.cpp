@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_00433900(void**);
 extern "C" void __cdecl FUN_00434260(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl EnemyDoIt_00433a70(void** param_1)
 {
     void* pGVar1;
 

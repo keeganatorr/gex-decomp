@@ -1,6 +1,6 @@
 extern "C" void __cdecl FUN_0041E8B0(void***, int);
 
-extern "C" void __cdecl GEX_Target(void)
+extern "C" void __cdecl CLD_RemoveAllCldObjsFromList_0041e930(void)
 {
     int list = 0;
     void*** head = (void***)0x00463698;

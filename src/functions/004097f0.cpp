@@ -5,7 +5,7 @@ extern "C" unsigned char DAT_0047EF6E;
 extern "C" unsigned char DAT_0047EF6F;
 extern "C" int __cdecl _tolower(int);
 
-extern "C" void __cdecl GEX_Target(char param_1)
+extern "C" void __cdecl FUN_004097f0_ProcessCheatInputs(char param_1)
 {
     char *pcVar1;
     unsigned char uVar2;

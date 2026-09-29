@@ -5,7 +5,7 @@ extern int DAT_004A2AD4;
 extern void** __cdecl FUN_004195D0(int, int, int, int);
 extern void __cdecl FUN_00419BE0(void**, void**);
 
-void __cdecl GEX_Target(int* param_1, int ScoreToAdd, int param_3, int param_4)
+void __cdecl AddVisualScore_0041bde0(int* param_1, int ScoreToAdd, int param_3, int param_4)
 {
     void** ppGVar1;
 

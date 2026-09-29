@@ -17,7 +17,7 @@ void __cdecl PlayerKill_00417ca0(int);
 int __cdecl FUN_004206b0(int);
 void __cdecl FUN_00422390_Reset_Powerups(int *);
 
-void __cdecl GEX_Target(void)
+void __cdecl PlayerDamage_00417b70(void)
 {
     int state;
     int *damageTimer;

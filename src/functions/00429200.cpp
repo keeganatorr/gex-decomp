@@ -19,7 +19,7 @@ void __cdecl FUN_004296d0_ParseLoadPasswords(unsigned char *bits, unsigned int v
 void __cdecl FUN_00429850_PasswordRelated(char *text, unsigned char *bits, unsigned int count);
 void __cdecl FUN_00429690_PasswordString(passwordStruct *password);
 void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
-void __cdecl GEX_Target(passwordStruct *password)
+void __cdecl FUN_00429200_PasswordRelated(passwordStruct *password)
 {
     unsigned int i;
     unsigned int bit;

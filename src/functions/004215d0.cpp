@@ -49,7 +49,7 @@ extern GexTileStruct *M1_CurrentLevel_004a2990;
 int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *gob, AngleBox *box);
 int __cdecl GOB_LandedOnContours_0041a0a0(GXObject *gob, int offset);
 int __cdecl FUN_00421560_DrawCharacter(GexTileStruct *tile, GXObject *gob);
-int __cdecl GEX_Target(GXObject *gex)
+int __cdecl FUN_004215d0_pStateUnk_Jump(GXObject *gex)
 {
     AngleBox box;
     int landed;

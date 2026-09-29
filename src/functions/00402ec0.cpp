@@ -9,7 +9,7 @@ extern "C" {
     __declspec(dllimport) void __stdcall OutputDebugStringA(const char*);
 }
 
-extern "C" void GEX_Target(int param_1)
+extern "C" void MUS_SetMusicPlaying_00402ec0(int param_1)
 {
     int *piVar1 = gMusicAndOffsetTable_00451530;
     int musicFile = 0;

@@ -18,7 +18,7 @@ extern unsigned char DAT_004A0283;
 extern int DAT_004a01e0;
 int __cdecl FUN_004219C0(void**);
 extern int FUN_004A2990;
-void __cdecl GEX_Target(void** GexObject) {
+void __cdecl PlayerBounceFall_00413d60(void** GexObject) {
     FUN_004A284C = 1;
     if (DAT_004A0283 == 0) FUN_00413EE0(GexObject);
     if ((int)GexObject[0x23] > 0x20000) GexObject[0x15] = (void*)1;

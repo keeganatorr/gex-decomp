@@ -1,7 +1,7 @@
 extern "C" {
 unsigned int __cdecl strlen(const char *text);
 extern char s_BCDFGHKLPRSTVXYZGot_password_s_0045abd8[];
-int __cdecl GEX_Target(char *password)
+int __cdecl PasswordIsValid_004295c0(char *password)
 {
     int i;
     unsigned int j;

@@ -43,7 +43,7 @@ void __cdecl SetSoundEffectVolume_00401e20(int, int);
 void __cdecl SetVoiceVolume_00401e70(int, int);
 void __cdecl SetMusicVolume_00401ed0(int, int);
 
-int __stdcall GEX_Target(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
+int __stdcall MusicDialogProc_00407710(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
 {
     int v;
     switch (msg) {

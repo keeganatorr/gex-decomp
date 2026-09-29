@@ -13,7 +13,7 @@ extern int DAT_004a2920_LoadLevelUnk5;
 extern int DAT_00456020_MusicOnUnk;
 extern int DAT_0045601c_LevelMusicUnk;
 extern int DAT_00462c68;
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob212Init_0040c4d0(GXObject *gob)
 {
     Slot *slot;
     DAT_00462c70 = 0;

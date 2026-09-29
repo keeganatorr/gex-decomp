@@ -14,7 +14,7 @@ extern "C" int __cdecl FUN_00421f20_pStateUnk_Side(void **);
 extern "C" int __cdecl FUN_0041CB80(void **, int **);
 extern "C" void __cdecl FUN_00411160(void **);
 
-extern "C" void __cdecl GEX_Target(void **param_1)
+extern "C" void __cdecl PlayerSideInside90Trans_00411e40(void **param_1)
 {
     int iVar1;
     int pGVar2;

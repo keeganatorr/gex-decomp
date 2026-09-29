@@ -51,7 +51,7 @@ extern DWORD DAT_0048a038;
 extern DWORD DAT_0049a05c;
 }
 
-extern "C" void __cdecl GEX_Target(void)
+extern "C" void __cdecl SoundThreadOpenMusic_00402a00(void)
 {
     LPVOID audioPtr1;
     DWORD audioBytes2;

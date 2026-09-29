@@ -19,7 +19,7 @@ extern int DAT_004a023c_PowerUp_Invincibility;
 extern void *PTR_00464e14;
 void __cdecl PlayerDamage_00417b70(GXObject *gob);
 void __cdecl SND_PlaySound_0041a340(void *sound, int id);
-void __cdecl GEX_Target(GXObject *gob, int *event)
+void __cdecl ob261Clid_0043cbd0(GXObject *gob, int *event)
 {
     unsigned int mine;
     unsigned int theirs;

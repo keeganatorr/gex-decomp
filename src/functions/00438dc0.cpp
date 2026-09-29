@@ -4,7 +4,7 @@ extern "C" {
 extern "C" { extern int DAT_00455c54; }
 extern "C" void __cdecl FUN_00405390(const char*, ...);
 
-extern "C" int __cdecl GEX_Target(void* param_1)
+extern "C" int __cdecl event_endPath_00438dc0(void* param_1)
 {
     if ((*(unsigned char*)((char*)param_1 + 0xe0) & 0x20) != 0) {
         if (DAT_00455c54 > 1) {

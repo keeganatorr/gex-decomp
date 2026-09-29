@@ -10,7 +10,7 @@ static inline int AbsI(int x)
     return x < 0 ? -x : x;
 }
 
-extern "C" unsigned int __cdecl GEX_Target(void* param_1, unsigned int* param_2)
+extern "C" unsigned int __cdecl GetGlueDist_0040f1d0(void* param_1, unsigned int* param_2)
 {
     int uVar1;
     int iVar2;

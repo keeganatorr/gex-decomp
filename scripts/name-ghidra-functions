@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Give replacement-build source copies the function names in Ghidra.
-# The byte-matching src/functions tree and its verifier proofs stay unchanged.
+# Give src/functions definitions the function names in Ghidra.
 set -euo pipefail
 
 ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
@@ -11,8 +10,8 @@ usage() {
     cat <<'EOF'
 Usage: scripts/name-ghidra-functions [--output DIR] [--inventory JSON]
 
-Copy src/functions/*.cpp to .work/replacement-named/functions/ and replace
-GEX_Target with the function name at that file's address in Ghidra.
+Rename GEX_Target in src/functions/*.cpp using the function name at each
+file's address in Ghidra. Also retain generated copies under .work/.
 The default inventory comes from the live Ghidra /list_functions endpoint.
 --inventory accepts a saved /list_functions response or Ghidra import JSON.
 EOF
@@ -110,14 +109,21 @@ for source in "${SOURCES[@]}"; do
         status="${status},duplicate"
         (( collisions += 1 ))
     fi
+    # VC4's libc.lib(crt0dat.obj) defines the COFF symbol __exit. A C
+    # function named _exit produces that same decorated symbol.
+    if [[ $address == 00449780 && $candidate == _exit ]]; then
+        candidate="${candidate}_${address}"
+        status="${status},crt-collision"
+    fi
     if [[ -n ${USED_NAME[$candidate]:-} ]]; then
         echo "duplicate emitted name $candidate for $address and ${USED_NAME[$candidate]}" >&2
         exit 1
     fi
     USED_NAME[$candidate]=$address
     FINAL_NAME[$address]=$candidate
-    if ! grep -Eq '(^|[^[:alnum:]_])_?GEX_Target([^[:alnum:]_]|$)' "$source"; then
-        echo "$source has no GEX_Target definition" >&2
+    if ! grep -Eq '(^|[^[:alnum:]_])_?GEX_Target([^[:alnum:]_]|$)' "$source" &&
+       ! grep -Fq "$candidate" "$source"; then
+        echo "$source has neither GEX_Target nor its expected Ghidra name" >&2
         exit 1
     fi
     GEX_NEW_NAME=$candidate perl -pe \
@@ -127,6 +133,11 @@ for source in "${SOURCES[@]}"; do
         >> "$STAGE/names.tsv"
 done
 
+for source in "${SOURCES[@]}"; do
+    address=${source##*/}
+    cp -- "$STAGE/functions/$address" "$source"
+done
+cp -- "$STAGE/names.tsv" "$ROOT/src/replacement/function_names.tsv"
 touch "$STAGE/.generated-by-name-ghidra-functions"
 mkdir -p "$(dirname -- "$OUTPUT")"
 if [[ -e $OUTPUT ]]; then rm -rf -- "$OUTPUT"; fi
@@ -134,4 +145,5 @@ mv -- "$STAGE" "$OUTPUT"
 trap - EXIT
 printf '%s sources named: %s Ghidra, %s fallback, %s sanitized, %s duplicate names\n' \
     "${#SOURCES[@]}" "$mapped" "$missing" "$sanitized" "$collisions"
-printf 'source copies: %s/functions\nname map: %s/names.tsv\n' "$OUTPUT" "$OUTPUT"
+printf 'renamed sources: %s/src/functions\nname map: %s/src/replacement/function_names.tsv\n' "$ROOT" "$ROOT"
+printf 'retained copies: %s/functions\n' "$OUTPUT"

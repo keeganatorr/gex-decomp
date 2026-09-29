@@ -8,7 +8,7 @@ extern "C" void __cdecl FUN_00427760(void**);
 extern "C" void __cdecl FUN_00424B80(void**);
 extern "C" void __cdecl FUN_00427B80(void**);
 
-extern "C" int __cdecl GEX_Target(void** param_1)
+extern "C" int __cdecl FUN_00424980_CheckGexInputs(void** param_1)
 {
     if (DAT_004A0295 != 0) {
         FUN_00427760(param_1);

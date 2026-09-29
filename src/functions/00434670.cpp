@@ -10,7 +10,7 @@ extern int DAT_004642a4;
 extern unsigned char gInputControllers_004a0280[];
 void __cdecl GOB_DisplayObjectScaleAndRotate_00441150(GXObject *gob);
 void __cdecl GOB_DisplayObject_00444590(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl PlatformDraw_00434670(GXObject *gob)
 {
     int sx;
     int sy;

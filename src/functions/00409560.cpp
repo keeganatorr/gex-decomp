@@ -12,7 +12,7 @@ extern "C" int CDIO_FileSize_004092a0(int handle);
 extern "C" void *MEM_AllocMem_004096c0(int size);
 extern "C" void CDIO_FileRead_00409250(int handle, void *buffer, int size);
 
-extern "C" int GEX_Target(void)
+extern "C" int IDL_Open_00409560(void)
 {
     PTR_gIDLDirectory_00455998->handle_0x0_LevelData = (void *)0;
     PTR_gIDLDirectory_00455998->f_0x8_gOb_Tiles_gexTileStruct = (void *)1;

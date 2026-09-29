@@ -37,7 +37,7 @@ extern int DAT_00462e38;
 int __cdecl FUN_004206b0(int situation);
 void __cdecl FUN_00422390_Reset_Powerups(GXObject *gex);
 void __cdecl CollectibleReset_0041a660(void);
-void __cdecl GEX_Target(void)
+void __cdecl PlayerKill_00417ca0(void)
 {
     if (gPlayerObject_004a27fc && gHitpoints_004a281c) {
         DAT_004a2878_CollisionType = 0x14;

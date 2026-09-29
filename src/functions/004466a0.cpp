@@ -4,7 +4,7 @@ extern "C" {
 extern int FUN_004A33AC;
 extern unsigned short *DAT_004a2f54_ppvBitsUnk;
 
-extern "C" void __cdecl GEX_Target(int xPos, int yPos, unsigned int Blue, int Green, unsigned int Red, int Transparency)
+extern "C" void __cdecl FUN_004466a0_DrawBoxBehindText(int xPos, int yPos, unsigned int Blue, int Green, unsigned int Red, int Transparency)
 {
     unsigned int uVar1, uVar2;
     unsigned int *puVar3, *puVar4;

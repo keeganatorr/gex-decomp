@@ -24,7 +24,7 @@ void* __cdecl FUN_00435D90(void**, void*, void*);
 extern const char* DAT_0045B57C[];
 extern const char DAT_0045B5F0[];
 
-void* __cdecl GEX_Target(void** param_1, void* param_2, void* PointerToScript, int eventNumber)
+void* __cdecl SCRIPT_DoEvent_00433590(void** param_1, void* param_2, void* PointerToScript, int eventNumber)
 {
     if (DAT_00464278 != 0 && param_1[2] == (void*)DAT_004642A0) {
         FUN_00405390(DAT_0045B5F0, DAT_0045B57C[eventNumber], PointerToScript);

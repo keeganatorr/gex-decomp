@@ -1,7 +1,7 @@
 extern "C" {
 extern void __cdecl FUN_00420BC0(void *);
 extern void __cdecl FUN_00424360(void *);
-void __cdecl GEX_Target(int *object)
+void __cdecl InitPlayerPush_004244a0(int *object)
 {
     FUN_00420BC0(object);
     object[0x15] = 0;

@@ -63,7 +63,7 @@ extern unsigned char DAT_0046A5FF;
 IMAGE *__cdecl FUN_0043e580_Image_Clean1(void *image);
 unsigned short __cdecl FUN_0043ecf0_SelectTile_Clean1(int graphics);
 void __cdecl FUN_00445350_CalculateTileOffset_Clean1(DR_MODE *p, int dfe, int dtd, int tpage, void *tw);
-void __cdecl GEX_Target(unsigned int mode)
+void __cdecl FUN_0043f080_ResetGraphics_Clean1(unsigned int mode)
 {
     IMAGE *img;
     unsigned short clut;

@@ -8,7 +8,7 @@ extern "C" {
     extern char WINSTRING_Memory_Error_00487d60[];
 }
 
-extern "C" void * GEX_Target(unsigned int allocationSize) {
+extern "C" void * MEM_AllocMem_004096c0(unsigned int allocationSize) {
     void *allocatedMemory;
     int size;
     void **memPtr;

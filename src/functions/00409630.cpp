@@ -11,7 +11,7 @@ struct FileHandle {
     int Offset;
 };
 
-void* __cdecl GEX_Target(void* idl_file_handle, int LEV)
+void* __cdecl FNT_Load_00409630(void* idl_file_handle, int LEV)
 {
     FileHandle fh;
     int fileSize;

@@ -4,7 +4,7 @@ extern "C" void __cdecl FUN_00441150(void*);
 extern "C" void __cdecl FUN_00444590(void*);
 extern "C" { extern int DAT_0045b7b4; }
 
-extern "C" void __cdecl GEX_Target(void** gOb)
+extern "C" void __cdecl ob2Draw_00435980(void** gOb)
 {
     int val = (int)gOb[0x1c];
     switch (val) {

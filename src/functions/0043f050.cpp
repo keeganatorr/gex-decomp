@@ -4,5 +4,5 @@ extern "C" {
 extern "C" void __cdecl FUN_00445340(int);
 extern "C" void __cdecl FUN_00405390(const char*);
 extern "C" { extern char DAT_00460DE0[]; }
-extern "C" void GEX_Target() { FUN_00445340(0); FUN_00405390(DAT_00460DE0); }
+extern "C" void GFX_CloseGraphics_0043f050() { FUN_00445340(0); FUN_00405390(DAT_00460DE0); }
 }

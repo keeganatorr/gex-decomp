@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_0042e850(void**);
 extern "C" void __cdecl FUN_00441150(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl ob232Draw_00431220(void** param_1)
 {
     void* pGVar1 = param_1[0x1e];
     void* pGVar2 = param_1[0x1f];

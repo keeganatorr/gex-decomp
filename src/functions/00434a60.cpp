@@ -1,7 +1,7 @@
 extern "C" {
 extern "C" int __cdecl FUN_0041CB80(void**, int*);
 
-extern "C" void __cdecl GEX_Target(void** param_1, void** param_2)
+extern "C" void __cdecl FUN_00434a60(void** param_1, void** param_2)
 {
     int local_50[10];
     int local_28[10];

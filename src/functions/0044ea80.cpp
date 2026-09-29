@@ -1,6 +1,6 @@
 typedef unsigned int uint;
 extern "C" {
-void __cdecl GEX_Target(uint *param_1)
+void __cdecl ___shr_12(uint *param_1)
 
 {
   uint uVar1;

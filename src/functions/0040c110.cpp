@@ -15,7 +15,7 @@ typedef struct ObjectList {
 extern "C" {
 extern ObjectList ListType_ARRAY_004a28a0[10];
 
-GXObject *__cdecl GEX_Target(int type, int work0)
+GXObject *__cdecl GOB_FindWithWork0_0040c110(int type, int work0)
 {
     int i;
     GXObject *gob;

@@ -1,7 +1,7 @@
 extern "C" {
 extern unsigned char DAT_0045A178[];
 extern unsigned char DAT_004561c0_Unk1[8];
-void __cdecl GEX_Target(void)
+void __cdecl FUN_0040b950_VoiceInner(void)
 {
     DAT_004561c0_Unk1[0] = DAT_0045A178[4];
     DAT_004561c0_Unk1[1] = DAT_0045A178[5];

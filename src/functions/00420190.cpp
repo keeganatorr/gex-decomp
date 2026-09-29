@@ -2,7 +2,7 @@ extern "C" {
 extern "C" void* __cdecl FUN_0040B390(int, unsigned int);
 extern "C" void* __cdecl FUN_0040EB70(int, unsigned int);
 
-extern "C" void* __cdecl GEX_Target(int param_1, unsigned int param_2)
+extern "C" void* __cdecl PAR_ResolveParallax_00420190(int param_1, unsigned int param_2)
 {
     unsigned char* parallax = (unsigned char*)FUN_0040B390(param_1, param_2);
     unsigned int* layers = (unsigned int*)(parallax + 0x18);

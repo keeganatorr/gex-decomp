@@ -11,7 +11,7 @@ __declspec(dllimport) int __cdecl wsprintfA(char *buffer, const char *format, ..
 extern char s_LEV_GEX_3d_LEV_004559e4[];
 int __cdecl CDIO_FileOpen_00409170(const char *name);
 int __cdecl CDIO_FileSize_004092a0(int handle);
-int __cdecl GEX_Target(GexLevFileStruct *directory, GexLevFileStruct *file, int index)
+int __cdecl FILE_Open_00409430(GexLevFileStruct *directory, GexLevFileStruct *file, int index)
 {
     char name[256];
     memset(file, 0, sizeof(*file));

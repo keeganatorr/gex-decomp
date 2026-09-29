@@ -13,7 +13,7 @@ void __cdecl decl_fn_7(void);
 void __cdecl decl_fn_8(void);
 extern "C" {
 extern unsigned int UINT_ARRAY_00457c88[];
-void __cdecl GEX_Target(unsigned int buttons, unsigned char *map, unsigned char *out)
+void __cdecl FUN_0040f700_InputInner(unsigned int buttons, unsigned char *map, unsigned char *out)
 {
     int i;
     for (i = 0; UINT_ARRAY_00457c88[i] != 0xffffffff; i++)

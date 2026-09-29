@@ -5,7 +5,7 @@ extern "C" {
     extern "C" void __cdecl FUN_00413600(void**);
     extern int DAT_004a0218_pState;
 
-    void __cdecl GEX_Target(void** param_1)
+    void __cdecl InitPlayerTailWhap_004136d0(void** param_1)
     {
         unsigned int uVar1;
         int iVar2;

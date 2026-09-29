@@ -21,7 +21,7 @@ extern JumpStep DAT_0045b008[];
 void __cdecl FUN_0041b700_ObjCallUnkInner(GXObject *gob);
 GXObject *__cdecl GOB_AddObject_004195d0(int type, int x, int y, int flags);
 int __cdecl FUN_0042da40_ObjCallUnk(GXObject *gob, int arg);
-int __cdecl GEX_Target(GXObject *gob, int arg)
+int __cdecl FUN_0042e040_gOb_GexFuncUnk(GXObject *gob, int arg)
 {
     GXObject *spawned;
     if (gob == gPlayerObject_004a27fc) {

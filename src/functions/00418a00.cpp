@@ -4,7 +4,7 @@ extern "C" {
 extern "C" unsigned int __cdecl FUN_00417F00(unsigned char**);
 extern "C" int __cdecl FUN_0041A480(int);
 extern "C" void __cdecl FUN_00428FA0(unsigned short*, unsigned short*, unsigned int, unsigned int, unsigned int);
-extern "C" unsigned char* __cdecl GEX_Target(unsigned char* param1, void** param2) {
+extern "C" unsigned char* __cdecl SCRIPT_AdjustPlut_00418a00(unsigned char* param1, void** param2) {
     unsigned int uVar2 = FUN_00417F00(&param1);
     unsigned int uVar3 = FUN_00417F00(&param1);
     unsigned int uVar4 = FUN_00417F00(&param1);

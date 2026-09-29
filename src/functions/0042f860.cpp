@@ -24,7 +24,7 @@ extern GXAniScript DAT_0049ff20;
 int __cdecl GOB_GetHotSpot_00419c00(GXObject *gob, int group, int index, int *x, int *y);
 GXObject *__cdecl GOB_AddObject_004195d0(int type, int x, int y, void *loadData);
 int __cdecl DefDoIt_004339c0(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_0042f860(GXObject *gob)
 {
     int x;
     int y;

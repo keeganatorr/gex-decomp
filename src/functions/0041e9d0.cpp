@@ -68,7 +68,7 @@ extern int decl_pad_25;
 extern int decl_pad_26;
 extern int decl_pad_27;
 int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *gob, CLDEdges *edges);
-int __cdecl GEX_Target(GXObject *gob, HitRecord *hit)
+int __cdecl CLD_CheckAboveContour_0041e9d0(GXObject *gob, HitRecord *hit)
 {
     CLDEdges b;
     CLDEdges a;

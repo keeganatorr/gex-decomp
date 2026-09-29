@@ -20,7 +20,7 @@ void __cdecl FUN_004213f0_GexMovementLeftandRight(U32 *);
 int __cdecl FUN_00421560_DrawCharacter(void *, U32 *);
 }
 
-extern "C" void __cdecl GEX_Target(U32 *p)
+extern "C" void __cdecl PlayerSlide45_00424110(U32 *p)
 {
     U32 flags;
     U32 *support;

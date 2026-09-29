@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_0042CBF0(void**);
 extern "C" void __cdecl FUN_0042CBB0(void**, void**);
-extern "C" void __cdecl GEX_Target(void** p1, void** p2) {
+extern "C" void __cdecl GOB_PutObjectBehindObject_00419bc0(void** p1, void** p2) {
     FUN_0042CBF0(p1);
     FUN_0042CBB0(p2, p1);
 }

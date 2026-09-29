@@ -7,7 +7,7 @@ extern "C" { extern int DAT_004a0244; }
 extern "C" { extern int DAT_004a0214; }
 extern "C" { extern int DAT_004a023c; }
 extern "C" { extern int DAT_00456b04; }
-extern "C" void __cdecl GEX_Target(void** param1) {
+extern "C" void __cdecl FUN_00422390_Reset_Powerups(void** param1) {
     DAT_004a0264 = 0;
     DAT_004a0248 = 0;
     DAT_004a0244 = 0;

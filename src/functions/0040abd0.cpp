@@ -45,7 +45,7 @@ int __cdecl M1_PlayLevel_0040a010(M1Level *level);
 int __cdecl M1_StreamLevel_0041ecd0(M1Level *level);
 void __cdecl M1_ExitLevel_0040a660(M1Level *level);
 void __cdecl M1_UnloadLevel_0041f6f0(M1Level *level);
-void __cdecl GEX_Target(void)
+void __cdecl FUN_0040abd0_TransitionMenu_and_Setup_Load_Next_Level(void)
 {
     M1_FreeLevel_0040aa60();
     if (DAT_00455c44 && (DAT_004577B0[level_004a2964].info & 0x40)) {

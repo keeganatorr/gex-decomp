@@ -32,7 +32,7 @@ extern int decl_pad_22;
 extern int decl_pad_23;
 extern int decl_pad_24;
 extern Tile * __cdecl FUN_00440430_CheckWallCollisionInner(TileMap *, void *, int, int);
-unsigned int __cdecl GEX_Target(Level *level, int x, int y)
+unsigned int __cdecl M1_GetBlockAttributeIDAtPos_0040f170(Level *level, int x, int y)
 {
     if (x < 0)
         return 1;

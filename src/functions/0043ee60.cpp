@@ -11,7 +11,7 @@ struct DrawCacheEntry {
 extern DrawCacheEntry DrawCacheEntry_ARRAY_00464e58[];
 extern DrawCacheEntry DrawCacheEntry_ARRAY_00465370[];
 
-void __cdecl GEX_Target(char *param_1)
+void __cdecl FUN_0043ee60(char *param_1)
 {
     short sVar1 = *(short *)(param_1 - 2);
     DrawCacheEntry *ppDVar2;

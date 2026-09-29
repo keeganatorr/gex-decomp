@@ -16,7 +16,7 @@ void __cdecl FUN_0041F8C0(long);
 void __cdecl FUN_0041FA80(long);
 void __cdecl FUN_00420f30(GXObject *);
 
-inline long __cdecl GEX_Target(GXObject *param_1)
+inline long __cdecl FUN_00420fa0_xpos_movement(GXObject *param_1)
 {
     unsigned long attribute;
 
@@ -71,4 +71,4 @@ inline long __cdecl GEX_Target(GXObject *param_1)
 }
 
 typedef long (__cdecl *GEX_TargetPointer)(GXObject *);
-static GEX_TargetPointer volatile GEX_TargetReference = GEX_Target;
+static GEX_TargetPointer volatile GEX_TargetReference = FUN_00420fa0_xpos_movement;

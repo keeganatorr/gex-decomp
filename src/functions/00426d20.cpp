@@ -8,7 +8,7 @@ void __cdecl FUN_00424090(void*);
 int __cdecl FUN_00424980(void*);
 void __cdecl FUN_004250B0(void*);
 
-void __cdecl GEX_Target(void** param_1)
+void __cdecl PlayerRunSkidStop_00426d20(void** param_1)
 {
     param_1[0x26] = (void*)((int)param_1[0x26] + 1);
     if ((int)param_1[0x26] >= 2) {

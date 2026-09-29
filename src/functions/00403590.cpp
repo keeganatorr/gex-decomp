@@ -14,7 +14,7 @@ extern char dwNewLong_00405850[];
 extern char s_Version__1_00_00451784[];
 extern char lpData_00487750[];
 void *__cdecl FUN_00405660_GFXUnk(void *instance, int resource, void **palette);
-int __stdcall GEX_Target(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
+int __stdcall FUN_00403590(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
 {
     char format[128];
     char text[128];

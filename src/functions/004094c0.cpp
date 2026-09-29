@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_00409200(void*);
 
-extern "C" void __cdecl GEX_Target(void* fileHandle)
+extern "C" void __cdecl FILE_Close_004094c0(void* fileHandle)
 {
     int flag = *(int*)(*(int*)((char*)fileHandle + 4) + 8);
     if (flag == 1) FUN_00409200(*(void**)((char*)fileHandle + 8));

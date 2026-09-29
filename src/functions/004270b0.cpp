@@ -1,7 +1,7 @@
 extern "C" void __cdecl FUN_00420BC0(void**);
 extern "C" void __cdecl FUN_00426FC0(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl InitPlayerRunSkid_004270b0(void** param_1)
 {
     FUN_00420BC0(param_1);
     param_1[0x1c] = (void*)0x18;

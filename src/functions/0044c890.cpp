@@ -1,7 +1,7 @@
 typedef unsigned char byte;
 typedef unsigned int uint;
 extern "C" {
-void __cdecl GEX_Target(uint *param_1,int param_2)
+void __cdecl __ShrMan(uint *param_1,int param_2)
 
 {
   uint uVar1;

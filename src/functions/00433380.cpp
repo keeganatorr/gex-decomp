@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" int __cdecl FUN_00428C80(int);
 
-extern "C" void __cdecl GEX_Target(void** p)
+extern "C" void __cdecl ob369Init_00433380(void** p)
 {
     p[0x14] = (void*)0x1a;
     int r = FUN_00428C80(5);

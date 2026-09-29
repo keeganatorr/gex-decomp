@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_004344B0(int*);
 extern "C" void __cdecl FUN_00434550(int*);
 
-extern "C" void __cdecl GEX_Target(int* param_1)
+extern "C" void __cdecl FUN_004344d0(int* param_1)
 {
     if (*(int*)(param_1 + 0xb4) & 2) {
         *(int*)(param_1 + 0x70) = 1;

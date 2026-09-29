@@ -6,10 +6,10 @@ int* FUN_00429bd0_Object_unk(void);
 int* GOB_FindFirstWithType_00429c60(int type);
 extern int LEVELID_004a2a74;
 extern char s_ERROR__Couldn_t_find_TV_for_leve_0045af9c[];
-int GEX_Target(int* gOb, int frame);
+int FUN_0042bfe0_TV_Level_unk(int* gOb, int frame);
 }
 
-int GEX_Target(int* gOb, int frame)
+int FUN_0042bfe0_TV_Level_unk(int* gOb, int frame)
 {
     int* l_gOb;
     int* l_gOb2;

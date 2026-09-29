@@ -15,7 +15,7 @@ extern char s_Found_button_0045624c[];
 int __cdecl strcmp(const char *, const char *);
 GXObject *__cdecl GOB_FindWithWork0_0040c110(int type, int work0);
 void __cdecl assertfail_00405350(const char *format, ...);
-void __cdecl GEX_Target(int index, char *button)
+void __cdecl FUN_0040cb70_Set_Active_Gex_Object(int index, char *button)
 {
     GXObject *gob;
     GXObject *other;

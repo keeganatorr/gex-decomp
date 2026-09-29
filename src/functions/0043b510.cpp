@@ -1,6 +1,6 @@
 extern "C" {
 extern void __cdecl FUN_00419840(void *);
-void __cdecl GEX_Target(int *object)
+void __cdecl FUN_0043b510_Call_Events_GT9(int *object)
 {
     object[0x2c] -= 1;
     if (object[0x2c] <= 0) {

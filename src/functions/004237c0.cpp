@@ -5,7 +5,7 @@ extern "C" { extern unsigned char DAT_004A286B[5]; }
 extern "C" { extern unsigned char DAT_004A2847[5]; }
 extern "C" { extern unsigned char DAT_004A2820[4]; }
 extern "C" { extern unsigned char DAT_004A2868[4]; }
-extern "C" int __cdecl GEX_Target() {
+extern "C" int __cdecl FUN_004237c0_pStateUnk() {
     int s = 0;
     for (int i = 0; i < 4; i++)
         s += DAT_004A2868[i] + DAT_004A2820[i] + DAT_004A2847[i + 1] + DAT_004A286B[i + 1];

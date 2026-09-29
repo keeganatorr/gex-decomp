@@ -47,7 +47,7 @@ void __cdecl TILES_CheckYTileClid_0042d2c0(GexTileStruct *level, GXObject *gob, 
 void __cdecl FUN_004211d0(GXObject *gob);
 void __cdecl FUN_00421120(GXObject *gob);
 
-int __cdecl GEX_Target(GXObject *gob)
+int __cdecl FUN_00421f90(GXObject *gob)
 {
     AngleBox box;
     unsigned int index;

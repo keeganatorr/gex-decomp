@@ -22,7 +22,7 @@ extern "C" { extern int DAT_004A2F88; }
 extern "C" { extern unsigned int DAT_004A2F8C; }
 extern "C" { extern unsigned short* DAT_004A33AC; }
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl FUN_004459e0_DrawTilesInner3(void* param_1)
 {
     unsigned int uVar3;
     int iVar6;

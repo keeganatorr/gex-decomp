@@ -63,7 +63,7 @@ void __cdecl GOB_PhysicsStepY_0040f2a0(GXObject *gob);
 int __cdecl GOB_LandedOnContours_0041a0a0(GXObject *gob, int offset);
 void __cdecl GOB_LandedOnContoursWithOffset_0041a160(void *level, GXObject *gob);
 void __cdecl GOB_Remove_00419a80(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob2DoIt_00435760(GXObject *gob)
 {
     int v;
     gob->gob_xold = gob->gob_xpos;

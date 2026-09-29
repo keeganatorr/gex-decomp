@@ -16,7 +16,7 @@ extern int DAT_004A27A4;
 extern unsigned char DAT_004A27B0;
 }
 
-extern "C" void __cdecl GEX_Target(GXObject *p)
+extern "C" void __cdecl GOB_DoIt_0040ef40(GXObject *p)
 {
     while (p->next != 0) {
         if ((p->flags & 0x100000u) != 0) {

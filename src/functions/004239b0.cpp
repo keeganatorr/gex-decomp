@@ -1,7 +1,7 @@
 extern "C" void __cdecl FUN_00423780(void*);
 extern "C" unsigned char DAT_004a286c[];
 
-extern "C" int __cdecl GEX_Target(void** param_1)
+extern "C" int __cdecl FUN_004239b0_pStateUnk(void** param_1)
 {
     int iVar1;
     int iVar2;

@@ -2,7 +2,7 @@ extern "C" {
 extern int (__cdecl *DAT_00462C9C)(int, int, int, int, int*, int, int);
 }
 
-extern "C" int __cdecl GEX_Target(int param_1, int param_2)
+extern "C" int __cdecl ReadAxisFromAI_0040f6c0(int param_1, int param_2)
 {
     int local_4 = 0;
     if (DAT_00462C9C != 0) {

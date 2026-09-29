@@ -21,7 +21,7 @@ extern int DAT_004626b4_timeSetEventUnk3;
 extern void *gVideoWindow_00451794;
 int __cdecl FUN_00406fd0_timeSetEventInner(unsigned long bits);
 void __cdecl FUN_00404460_timeSetEventInner(void);
-void __stdcall GEX_Target(unsigned int id, unsigned int message, unsigned long user, unsigned long dw1, unsigned long dw2)
+void __stdcall FUN_00404ab0_timeSetEvent(unsigned int id, unsigned int message, unsigned long user, unsigned long dw1, unsigned long dw2)
 {
     JOYINFOEX info;
     DAT_004517e4_timeSetEventUnk2++;

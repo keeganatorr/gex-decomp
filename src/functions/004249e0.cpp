@@ -27,7 +27,7 @@ void __cdecl InitPlayerRunJumpStart_00425ef0(GXObject *gex);
 void __cdecl InitPlayerTongueLash_00427b80(GXObject *gex);
 void __cdecl InitPlayerTailSlash_00427760(GXObject *gex);
 void __cdecl FUN_004245b0_Walk_Apply_Speed(GXObject *gex, int speed);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl PlayerRun_004249e0(GXObject *gex)
 {
     if (!DAT_004a021c && !DAT_00456018_gex_Init_unk) {
         if (gInputControllers_004a0280[0].gxir_padJustOnButtons.buttonB) {

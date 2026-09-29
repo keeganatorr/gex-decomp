@@ -7,7 +7,7 @@ extern "C" { extern unsigned char FUN_004A0293; }
 extern "C" { extern unsigned char FUN_004A0295; }
 extern "C" void __cdecl FUN_00413E60(void**);
 
-extern "C" int __cdecl GEX_Target(void** param_1)
+extern "C" int __cdecl FUN_00423b40_CollisionIntoBounceFall(void** param_1)
 {
     if (DAT_0045a6d8 != 0 &&
         FUN_004A0283 != 0 &&

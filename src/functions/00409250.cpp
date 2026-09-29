@@ -22,7 +22,7 @@ extern int decl_pad_15;
 extern char DAT_00487a10_FileAccessErrorString[];
 extern void __cdecl WinShowError_004063d0(int, char *);
 __declspec(dllimport) int __stdcall ReadFile(void *, void *, unsigned long, unsigned long *, void *);
-void __cdecl GEX_Target(void *file, void *buffer, unsigned long size)
+void __cdecl CDIO_FileRead_00409250(void *file, void *buffer, unsigned long size)
 {
     unsigned long read;
     while (!ReadFile(file, buffer, size, &read, 0))

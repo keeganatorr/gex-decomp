@@ -5,7 +5,7 @@ typedef struct ColourHSV {
 extern "C" {
 void __cdecl FUN_00428cf0(ColourHSV *c);
 void __cdecl FUN_00428e50(ColourHSV *c);
-void __cdecl GEX_Target(unsigned short *src, unsigned short *dst, int dh, int ds, int dv)
+void __cdecl AdjustPlut_00428fa0(unsigned short *src, unsigned short *dst, int dh, int ds, int dv)
 {
     ColourHSV hsv;
     unsigned short c;

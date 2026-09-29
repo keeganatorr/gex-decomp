@@ -8,7 +8,7 @@ void __cdecl FUN_00420920_ypos(int *, int *);
 void __cdecl assertfail_00405350(char *, ...);
 extern char s_GOB_KeepOutOfTiles_ERROR_0045aa9c[];
 
-void __cdecl GEX_Target(int *gob)
+void __cdecl GOB_KeepOutOfTiles_00420960(int *gob)
 {
     int edges[10];
     unsigned int hits;

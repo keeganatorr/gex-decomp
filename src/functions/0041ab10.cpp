@@ -5,7 +5,7 @@ extern int DAT_004A2710;
 void __cdecl FUN_00405350(int, int, int);
 void __cdecl FUN_0041FA80(int);
 
-void __cdecl GEX_Target(void** LevelRelated, int* param_2)
+void __cdecl CameraClid_0041ab10(void** LevelRelated, int* param_2)
 {
     int CameraID;
     unsigned int flags_shifted;

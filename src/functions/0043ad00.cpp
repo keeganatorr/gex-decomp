@@ -8,7 +8,7 @@ void __cdecl SND_PlaySoundNoPosition_0041a360(int, int);
 void __cdecl GFX_Fade_0043f490(int, int, int, int, int, int, int);
 int __cdecl FUN_00449E10(void);
 
-void __cdecl GEX_Target(void *object)
+void __cdecl FUN_0043ad00_OBJECTFUNCTION(void *object)
 {
     ++DAT_00464798;
     if (DAT_004647a0[0] == DAT_00464798 ||

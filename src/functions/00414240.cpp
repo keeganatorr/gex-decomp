@@ -2,7 +2,7 @@ extern "C" {
 extern "C" void __cdecl FUN_00421cd0(void**);
 extern "C" void __cdecl FUN_00411A40(void**);
 
-extern "C" void __cdecl GEX_Target(void** p)
+extern "C" void __cdecl PlayerPlatAirToSideCrawl_00414240(void** p)
 {
     FUN_00421cd0(p);
     int v = (int)p[0x26] + 1;

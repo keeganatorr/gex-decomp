@@ -9,7 +9,7 @@ void __cdecl FUN_00419520(void*);
 extern void* DAT_004a2990;
 extern int DAT_004a2ac8;
 
-void __cdecl GEX_Target(void* bubble)
+void __cdecl FUN_00420e60(void* bubble)
 {
     int* fields = (int*)bubble;
     int remove = 0;

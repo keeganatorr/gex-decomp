@@ -7,7 +7,7 @@ extern int DAT_0045B9A4;
 extern int DAT_004A23D0;
 extern int FUN_004A2990;
 
-void __cdecl GEX_Target(void** param1) {
+void __cdecl ob284DoIt_0041b500(void** param1) {
     void* pGVar1 = param1[0x29];
     unsigned int uVar2 = (unsigned int)(param1[0x28] != 0);
     void* xPos = param1[0x1e];

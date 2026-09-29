@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" int __cdecl FUN_0041A160(void*, void**);
 
-extern "C" int __cdecl GEX_Target(void* param_1, void** param_2)
+extern "C" int __cdecl FUN_00421560_DrawCharacter(void* param_1, void** param_2)
 {
     int bVar2;
     int iVar4;

@@ -2,7 +2,7 @@ extern "C" {
 extern int FUN_0049FB50;
 extern int FUN_00455C0C;
 void __cdecl FUN_00401D00(int, int);
-void __cdecl GEX_Target(int param_1, int param_2)
+void __cdecl SetVoiceVolume_00401e70(int param_1, int param_2)
 {
     int p_Var1;
     if (param_1 != 0) {

@@ -23,7 +23,7 @@ void __cdecl CloseVideoWindow_00404440(void);
 void __cdecl GEX_Run_0040b000(void);
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
 
-int __cdecl GEX_Target(int SkipIntro)
+int __cdecl GameMain_0040b0a0(int SkipIntro)
 {
     long local_c;
     long local_8;

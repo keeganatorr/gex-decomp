@@ -27,7 +27,7 @@ extern int decl_pad_12;
 extern int decl_pad_13;
 extern int decl_pad_14;
 void __cdecl FUN_00420770_Movement_unk(GXObject *gob, int voice);
-unsigned char *__cdecl GEX_Target(unsigned char *script, GXObject *gob)
+unsigned char *__cdecl SCRIPT_PlayVoiceIfGexSeesMe_00418d70(unsigned char *script, GXObject *gob)
 {
     GXObject *parent;
     int voice;

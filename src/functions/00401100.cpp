@@ -21,7 +21,7 @@ extern int gScreenDisplayMode_00454fc8;
 extern int gScreenResolution_00451038;
 }
 
-extern "C" int __cdecl GEX_Target(int resolutionCode, int isFullscreen)
+extern "C" int __cdecl DDRAW_SetResolution_00401100(int resolutionCode, int isFullscreen)
 {
     long result;
     int previousBpp;

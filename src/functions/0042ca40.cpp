@@ -1,6 +1,6 @@
 extern "C" int GXObject_00463b70_gob_xScale[];
 
-extern "C" void GEX_Target(int *param_1)
+extern "C" void FUN_0042ca40_UnknownSwitchCase(int *param_1)
 {
     int value;
 

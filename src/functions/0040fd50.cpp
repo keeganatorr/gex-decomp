@@ -16,7 +16,7 @@ typedef struct ObjectIntroTracker {
     int field38;
 } ObjectIntroTracker;
 
-extern "C" void __cdecl GEX_Target(ObjectIntroTracker *pThis, int param_2, int *param_3, int param_4, int param_5, int param_6, int param_7, int param_8)
+extern "C" void __cdecl OBI_InitializeObjectIntroTracker_0040fd50(ObjectIntroTracker *pThis, int param_2, int *param_3, int param_4, int param_5, int param_6, int param_7, int param_8)
 {
     pThis->field04 = param_2;
     pThis->field0C = param_5;

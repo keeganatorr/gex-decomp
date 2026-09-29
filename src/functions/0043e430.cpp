@@ -24,7 +24,7 @@ extern unsigned long *DAT_004A2B18;
 extern short DAT_004A2B20;
 }
 
-extern "C" void __cdecl GEX_Target(int clearMode)
+extern "C" void __cdecl DRAW_CacheClear_0043e430(int clearMode)
 {
     TracePrintf_Debug_00405390(s_DRAW_CacheClear___004600e0);
 

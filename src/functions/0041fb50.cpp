@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" int __cdecl FUN_00401B00();
 extern "C" { extern int DAT_004639D8; }
-extern "C" int __cdecl GEX_Target() {
+extern "C" int __cdecl VFX_VoiceFinished_0041fb50() {
     int g = DAT_004639D8;
     if (g != 0) {
         int playing = FUN_00401B00();

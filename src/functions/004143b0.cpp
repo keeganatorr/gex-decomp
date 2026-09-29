@@ -31,7 +31,7 @@ void __cdecl TILES_CheckYTileClid_0042d2c0(void *, GXObject *, void (__cdecl *)(
 void __cdecl FUN_00421740_pStateUnk_Jump(GXObject *);
 int __cdecl FUN_004212d0_pStateUnk_yVel(GXObject *);
 int __cdecl FUN_004215d0_pStateUnk_Jump(GXObject *, int);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl PlayerFaceCrawlToAir_004143b0(GXObject *gob)
 {
     gob->gob_a = gob->gob_c;
     gob->gob_b = gob->gob_d;

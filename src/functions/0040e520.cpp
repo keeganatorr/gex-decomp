@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" int __cdecl FUN_00428C60(void);
 extern "C" int __cdecl FUN_00428C80(int);
-extern "C" void __cdecl GEX_Target(void)
+extern "C" void __cdecl FUN_0040e520_Music_unk(void)
 {
     FUN_00428C60();
     FUN_00428C80(100);

@@ -48,7 +48,7 @@ void __cdecl SND_PlaySoundNoPosition_0041a360(int, int);
 void __cdecl VFX_Play_0041fa80(int);
 void __cdecl GOB_DisplayObjectScaleAndRotate_00441150(GXObject *);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl MapPlayerDraw_0042c230(GXObject *gob)
 {
     struct { int y; int xScale; int yScale; int work9; } saved;
     int restore;

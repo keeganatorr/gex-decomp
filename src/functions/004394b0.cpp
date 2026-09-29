@@ -19,7 +19,7 @@ int __cdecl UTL_ReallyRandom_00428c80(int range);
 GXObject *__cdecl GOB_AddObject_004195d0(int type, int x, int y, void *loadData);
 int __cdecl FUN_00439460_HuntDiveInner(GXObject *gob);
 void __cdecl GOB_PutObjectInfrontOfObject_00419be0(GXObject *gob, GXObject *other);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_004394b0_HuntDiveInner_Music(GXObject *gob)
 {
     int dx;
     int dy;

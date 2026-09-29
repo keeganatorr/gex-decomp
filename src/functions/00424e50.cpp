@@ -4,5 +4,5 @@ extern "C" {
 extern "C" void __cdecl FUN_00420BC0(void**);
 extern "C" void __cdecl FUN_00424D80(void**);
 extern "C" void __cdecl FUN_00424BD0(void**);
-extern "C" void __cdecl GEX_Target(void** p) { FUN_00420BC0(p); FUN_00424D80(p); FUN_00424BD0(p); }
+extern "C" void __cdecl InitPlayerStandJump_00424e50(void** p) { FUN_00420BC0(p); FUN_00424D80(p); FUN_00424BD0(p); }
 }

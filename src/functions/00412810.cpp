@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_00420BC0(int*);
 extern "C" void __cdecl FUN_00412800(int*);
 
-extern "C" void __cdecl GEX_Target(int* p)
+extern "C" void __cdecl InitPlayerPlatSideGetup_00412810(int* p)
 {
     int* esi = p;
     FUN_00420BC0(esi);

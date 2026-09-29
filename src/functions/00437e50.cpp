@@ -1,5 +1,5 @@
 extern "C" {
-int __cdecl GEX_Target(int a, int b)
+int __cdecl FUN_00437e50(int a, int b)
 {
     int bhi;
     int alo;

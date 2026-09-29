@@ -21,7 +21,7 @@ extern int decl_pad_3;
 extern int decl_pad_4;
 extern int decl_pad_5;
 extern GroupEntry *FirstObjectGroup_004a2934;
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl HelpBoxInit_0040d6d0(GXObject *gob)
 {
     int ok = 0;
     LoadData *data = gob->gob_objectLoadData;

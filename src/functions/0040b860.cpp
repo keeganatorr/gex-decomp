@@ -4,7 +4,7 @@ extern int FUN_00462734;
 extern int FUN_00455EF0;
 extern int FUN_004A2924;
 
-void __cdecl GEX_Target(int **levelDataArray)
+void __cdecl BLOC_FreeBlocks_0040b860(int **levelDataArray)
 {
     if (levelDataArray == 0) return;
     while (*levelDataArray != 0) {

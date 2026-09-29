@@ -22,7 +22,7 @@ extern unsigned char DAT_0045B9AC[];
 extern unsigned char DAT_0045B9B0[];
 }
 
-extern "C" int __cdecl GEX_Target(void *unused, int *object, TileFunction callback)
+extern "C" int __cdecl TILES_CheckXTileClid_0042d060(void *unused, int *object, TileFunction callback)
 {
     int end;
     int right;

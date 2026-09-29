@@ -8,7 +8,7 @@ extern "C" { extern int DAT_004647A4; }
 extern "C" { extern int DAT_004647A8; }
 extern "C" { extern int DAT_004647AC; }
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl FUN_0043acd0_GameFuncUnk()
 {
     DAT_00464798 = 0;
     DAT_00464790 = 0;

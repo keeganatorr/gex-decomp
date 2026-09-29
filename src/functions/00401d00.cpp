@@ -19,7 +19,7 @@ extern unsigned long gSndSizes_00451048[];
 extern unsigned char *gSNDPointerArray_0049f6b0[];
 int __cdecl SND_CreateDirectSoundBuffer_00401720(IDirectSound *sound, IDirectSoundBuffer **buffer, unsigned long bytes, unsigned long rate);
 int __cdecl SND_FillDirectSoundBuffer_004017d0(IDirectSoundBuffer *buffer, unsigned long offset, unsigned char *data, unsigned long bytes);
-void __cdecl GEX_Target(int sound, long volume)
+void __cdecl SND_PlayPreviewSound_00401d00(int sound, long volume)
 {
     unsigned long status;
     int index;

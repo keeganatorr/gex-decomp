@@ -8,7 +8,7 @@ extern "C" { extern unsigned int DAT_004A2B08; }
 extern "C" {
 extern "C" void __cdecl FUN_00445240(int);
 extern "C" void __cdecl FUN_00445270(void*);
-extern "C" void GEX_Target(void)
+extern "C" void FUN_0043f290_DrawWindowAlways(void)
 
 {
   DAT_004A2B08 = DAT_004A2B08 ^ 1;

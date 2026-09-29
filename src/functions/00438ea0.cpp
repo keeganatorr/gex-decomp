@@ -11,7 +11,7 @@ typedef struct GXObject {
     unsigned int flags2;
 } GXObject;
 
-int __cdecl GEX_Target(GXObject *gob)
+int __cdecl event_contourGone_00438ea0(GXObject *gob)
 {
     if ((unsigned char)(gob->flags2 >> 8) & 0x10) {
         if (DAT_00455c54_DebugVar > 1) {

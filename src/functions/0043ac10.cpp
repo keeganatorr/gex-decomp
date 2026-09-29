@@ -6,7 +6,7 @@ extern "C" { extern int FUN_004593C0; }
 extern "C" { extern int DAT_004593c4; }
 extern "C" { extern int DAT_004593c8; }
 
-extern "C" void __cdecl GEX_Target(void* param_1, int param_2)
+extern "C" void __cdecl FUN_0043ac10_ResetTotalHit(void* param_1, int param_2)
 {
     if (param_2 != 0) {
         DAT_004593bc = 0;

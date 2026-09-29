@@ -32,7 +32,7 @@ extern M1Level *M1_CurrentLevel_004a2990;
 extern TileAttribute DAT_0045B9A0[];
 extern char s_ERROR_Bad_Switch_Number_ld_00458e4c[];
 void __cdecl assertfail_00405350(const char *format, ...);
-unsigned char *__cdecl GEX_Target(unsigned char *script)
+unsigned char *__cdecl SCRIPT_SwitchBlocks_00418550(unsigned char *script)
 {
     unsigned int number;
     int valid;

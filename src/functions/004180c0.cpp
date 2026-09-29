@@ -10,7 +10,7 @@ extern "C" void TracePrintf_Debug_00405390(const char*);
 extern "C" int DAT_00455c54_DebugVar;
 extern "C" const char s_REMOVING_OBJECT_00458e28[];
 
-extern "C" int __cdecl GEX_Target(int param_1, GXObject* param_2)
+extern "C" int __cdecl SCRIPT_RemoveObject_004180c0(int param_1, GXObject* param_2)
 {
     GXObject* pGVar1;
     GXObject* pGVar2;

@@ -39,7 +39,7 @@ void __cdecl FUN_0040d3f0(int, int);
 void __cdecl InitPlayerRun_00424aa0(GXObject *);
 int __cdecl FUN_00402e90(void);
 
-void __cdecl GEX_Target(GXObject *g)
+void __cdecl ob256DoIt_0040d050(GXObject *g)
 {
     unsigned int flag;
     int found;

@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_00401B50(int, int, int, int, int, int);
 
-extern "C" void __cdecl GEX_Target(int a, int b)
+extern "C" void __cdecl SND_PlaySoundNoPosition_0041a360(int a, int b)
 {
     FUN_00401B50(a, 0, 0, b >> 1, 0x40, 1000);
 }

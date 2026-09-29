@@ -4,5 +4,5 @@ extern "C" {
 extern "C" unsigned int __cdecl FUN_00417F00(unsigned char**);
 extern "C" int __cdecl FUN_00449E10();
 extern "C" { extern int DAT_0049FB90; }
-extern "C" unsigned char* __cdecl GEX_Target(unsigned char* p) { unsigned int m = FUN_00417F00(&p); DAT_0049FB90 = FUN_00449E10() % (int)m; return p; }
+extern "C" unsigned char* __cdecl SCRIPT_Random_00418270(unsigned char* p) { unsigned int m = FUN_00417F00(&p); DAT_0049FB90 = FUN_00449E10() % (int)m; return p; }
 }

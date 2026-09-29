@@ -60,7 +60,7 @@ typedef struct _IDirectDraw {
 
 extern "C" IDirectDraw* gDirectDraw_00451030;
 
-extern "C" int GEX_Target(void)
+extern "C" int DDRAW_GetDisplayMode_00401000(void)
 {
     int result = 0x555;
     DDSURFACEDESC desc;

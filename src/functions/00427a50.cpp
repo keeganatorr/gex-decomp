@@ -18,7 +18,7 @@ int __cdecl FUN_00421560_DrawCharacter(void *, int *);
 void __cdecl FUN_004250B0(int *);
 void __cdecl FUN_00423130_pStateUnk_Eating(int *);
 
-void __cdecl GEX_Target(int *p)
+void __cdecl PlayerTongueLash_00427a50(int *p)
 {
     if ((DAT_004A0295 != 0 || DAT_004A0294 != 0) && DAT_004A0293 == 0) {
         FUN_00423120_Lash_unk(p);

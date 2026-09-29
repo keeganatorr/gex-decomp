@@ -15,7 +15,7 @@ extern "C" int decl_pad_6;
 extern "C" int decl_pad_7;
 extern "C" void __cdecl FUN_00437F40(void*, int);
 
-extern "C" void __cdecl GEX_Target(void** p)
+extern "C" void __cdecl GOB_ProcessXPositionChange_00439090(void** p)
 {
     int b = (int)p[0x20];
     int a = (int)p[0x22];

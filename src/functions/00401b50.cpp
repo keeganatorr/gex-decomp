@@ -23,7 +23,7 @@ int __cdecl SND_CreateDirectSoundBuffer_00401720(void *, SoundBuffer **, unsigne
 int __cdecl SND_FillDirectSoundBuffer_004017d0(SoundBuffer *, unsigned int, void *, unsigned int);
 }
 
-extern "C" void __cdecl GEX_Target(int Sound, int Pan, int Unused, int Volume)
+extern "C" void __cdecl SND_PlaySound_00401b50(int Sound, int Pan, int Unused, int Volume)
 {
     SoundBuffer *buffer;
     unsigned int soundIndex;

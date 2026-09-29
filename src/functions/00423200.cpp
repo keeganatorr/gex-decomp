@@ -33,7 +33,7 @@ extern char DAT_004a2820[];
 extern char DAT_004a2848[];
 extern char DAT_004a2868[];
 int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *gob, CLDEdges *edges);
-void __cdecl GEX_Target(GXObject *gob, GXObject *other)
+void __cdecl FUN_00423200_pStateUnk(GXObject *gob, GXObject *other)
 {
     CLDEdges edges;
     int x0;

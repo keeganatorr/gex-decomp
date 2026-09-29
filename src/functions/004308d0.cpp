@@ -19,7 +19,7 @@ extern "C" void __cdecl FUN_00441150(GXObject*);
 extern "C" void __cdecl FUN_0042f910_GRAPHICSDRAWING(GXObject*, unsigned int);
 extern "C" int DAT_0045b128;
 
-extern "C" void __cdecl GEX_Target(GXObject* param_1)
+extern "C" void __cdecl ob229Draw_004308d0(GXObject* param_1)
 {
     int xpos;
     int ypos;

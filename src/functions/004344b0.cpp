@@ -3,5 +3,5 @@
 extern "C" {
 extern "C" void __cdecl FUN_0040F260(void**);
 extern "C" void __cdecl FUN_0040F2A0(void**);
-extern "C" void __cdecl GEX_Target(void** p) { FUN_0040F260(p); FUN_0040F2A0(p); }
+extern "C" void __cdecl FUN_004344b0_X_Y_Movement(void** p) { FUN_0040F260(p); FUN_0040F2A0(p); }
 }

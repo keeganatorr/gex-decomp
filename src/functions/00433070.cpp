@@ -6,7 +6,7 @@ struct GXObject {
 
 extern "C" void GOB_DisplayObjectScaleAndRotate_00441150(struct GXObject *);
 
-extern "C" void __cdecl GEX_Target(struct GXObject *param_1) {
+extern "C" void __cdecl FUN_00433070(struct GXObject *param_1) {
     GOB_DisplayObjectScaleAndRotate_00441150(param_1);
     unsigned int uVar1 = param_1->gob_pixc;
     param_1->gob_pixc = 0x1f801f80;

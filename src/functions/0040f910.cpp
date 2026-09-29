@@ -3,7 +3,7 @@
 extern "C" {
 typedef void (__cdecl *ObjectCallback)(unsigned int*, int*);
 
-extern "C" void __cdecl GEX_Target(int* objectSet, int cameraX, int cameraY, int initialize)
+extern "C" void __cdecl OBI_IntroduceObjects_0040f910(int* objectSet, int cameraX, int cameraY, int initialize)
 {
     unsigned int* objects = (unsigned int*)objectSet[0];
     int radius = objectSet[13];

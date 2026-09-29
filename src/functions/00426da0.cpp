@@ -1,7 +1,7 @@
 extern "C" void __cdecl FUN_00420BC0(void**);
 extern "C" void __cdecl FUN_00426D20(void**);
 
-extern "C" void __cdecl GEX_Target(void** p)
+extern "C" void __cdecl InitPlayerRunSkidStop_00426da0(void** p)
 {
     FUN_00420BC0(p);
     p[0x26] = 0;

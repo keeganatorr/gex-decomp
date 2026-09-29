@@ -11,7 +11,7 @@ extern "C" { extern int FUN_004A2A7C; }
 extern "C" { extern int FUN_00455C3C; }
 extern "C" { extern const char DAT_00458c20[]; }
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl M1_GoToMap_00415bb0()
 {
     int MapLevel;
 

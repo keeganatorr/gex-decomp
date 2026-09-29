@@ -3,5 +3,5 @@
 extern "C" {
 extern "C" void __cdecl FUN_0041A630(int);
 extern "C" void __cdecl FUN_00419520(void**);
-extern "C" void __cdecl GEX_Target(void** p1, int* p2) { if (*p2) { FUN_0041A630(3); FUN_00419520(p1); } }
+extern "C" void __cdecl VCRClid_0041b0a0(void** p1, int* p2) { if (*p2) { FUN_0041A630(3); FUN_00419520(p1); } }
 }

@@ -3,6 +3,6 @@
 extern "C" {
 extern "C" { extern int DAT_00455C10; }
 extern "C" void __cdecl FUN_00402EC0(int);
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl MUS_StopMusic_00402f50()
 { if (DAT_00455C10 != 0) FUN_00402EC0(0); }
 }

@@ -24,7 +24,7 @@ extern int decl_pad_16;
 extern int decl_pad_17;
 void __cdecl FUN_0042de30_ObjCallUnk(GXObject *gob, int arg);
 void __cdecl FUN_0042d4e0_Object_unk(GXObject *gob, int arg);
-void __cdecl GEX_Target(GXObject *gob, int arg)
+void __cdecl FUN_0042de50_ObjCallUnk(GXObject *gob, int arg)
 {
     FUN_0042de30_ObjCallUnk(gob, arg);
     FUN_0042d4e0_Object_unk(gob, arg);

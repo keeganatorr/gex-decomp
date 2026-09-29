@@ -14,7 +14,7 @@ typedef struct AnglePoint { int x; int y; } AnglePoint;
 typedef struct AnglePoints { int unk0; AnglePoint points[4]; } AnglePoints;
 extern "C" {
 void __cdecl CLD_ApplyAngleToPoints_0041cc70(AnglePoints *points, int x, int y, int a, int b, unsigned int angle, int xScale, int yScale);
-void __cdecl GEX_Target(GXObject *gob, GXHitArea *area, int a, int b, unsigned int angle, AnglePoints *points)
+void __cdecl CLD_ComputeAnglePointsWithHitArea_0041d010(GXObject *gob, GXHitArea *area, int a, int b, unsigned int angle, AnglePoints *points)
 {
     if (gob->gob_flags & 0x80000000) {
         points->points[0].x = -area->gxha_right;

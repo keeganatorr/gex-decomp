@@ -5,7 +5,7 @@ extern "C" void __cdecl FUN_00439090(void**);
 extern "C" void __cdecl FUN_004390D0(void**);
 extern "C" void* __cdecl FUN_00433590(void**, void*, void*, int);
 
-extern "C" void __cdecl GEX_Target(void** objectType)
+extern "C" void __cdecl GOB_ProcessEvents_00433900(void** objectType)
 {
     if (objectType[0x57] == 0 && FUN_0040FCE0(objectType) != 0) return;
 

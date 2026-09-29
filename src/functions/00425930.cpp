@@ -5,7 +5,7 @@ extern "C" void __cdecl FUN_00420BC0(void**);
 extern "C" void __cdecl FUN_00420960(void**);
 extern "C" void __cdecl FUN_004256E0(void**);
 
-extern "C" void __cdecl GEX_Target(void** p)
+extern "C" void __cdecl InitPlayerJumpTongueLashUp_00425930(void** p)
 {
     FUN_00420BC0(p);
     p[0x26] = 0;

@@ -8,7 +8,7 @@ extern "C" void __cdecl FUN_00424E50(int*);
 
 // Fields are 32-bit; indices are byte-offset/4:
 //   0x26 -> 0x98, 0x15 -> 0x54, 0x20 -> 0x80
-extern "C" void __cdecl GEX_Target(int* param_1)
+extern "C" void __cdecl PlayerStandJumpStart_00424ae0(int* param_1)
 {
     int pGVar2;
     int iVar1;

@@ -37,7 +37,7 @@ extern void *DAT_00487fc4;
 extern void *DAT_00487fcc;
 extern void *ghInstance_00487f90;
 void *__cdecl FUN_00405660_GFXUnk(void *instance, int resource, void **palette);
-int __stdcall GEX_Target(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
+int __stdcall FUN_004036f0(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
 {
     RECT rc;
     BITMAP bm;

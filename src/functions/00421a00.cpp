@@ -10,7 +10,7 @@ extern "C" { extern unsigned char DAT_004A0282; }
 
 extern "C" int __cdecl FUN_0041CB80(void**, int**);
 
-extern "C" int __cdecl GEX_Target(void** param_1)
+extern "C" int __cdecl FUN_00421a00_AirToSideCrawl(void** param_1)
 {
     int local_28[10];
     int v1, v2, v3, v4, v5, v6, v7, v8;

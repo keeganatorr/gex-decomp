@@ -79,7 +79,7 @@ void __cdecl GFX_Fade_0043f490(int, int, int, int, int, int, int);
 void __cdecl PAL_WaitForFade_0043f580(void);
 void *__cdecl memset(void *, int, unsigned int);
 
-void __cdecl GEX_Target(void)
+void __cdecl DoLevelSelectScreen_00420300(void)
 {
     int running;
     unsigned short blink;

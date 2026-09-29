@@ -8,7 +8,7 @@ typedef struct GXObject {
 } GXObject;
 extern "C" {
 extern int __cdecl rand(void);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob231Init_00430de0(GXObject *gob)
 {
     gob->gob_flags2 |= 0x40;
     gob->gob_work5 = rand() % 10;

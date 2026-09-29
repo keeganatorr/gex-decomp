@@ -8,7 +8,7 @@ extern "C" { extern int DAT_00463a38; }
 extern "C" { extern int DAT_00463a30; }
 extern "C" { extern int FUN_00463A34; }
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl IDL_Free_0041fd70()
 {
     if (PTR_004a2a10 != 0) {
         FUN_0040eea0(PTR_004a2a10);

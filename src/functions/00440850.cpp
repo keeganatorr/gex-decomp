@@ -15,7 +15,7 @@ extern "C" {
     void FUN_0043f490(int, int, int, int, int, int, int);
     void FUN_0043f580(void);
 
-    void GEX_Target(void) {
+    void FUN_00440850_GameOver(void) {
         if (DAT_00456B00 == 0) {
             DAT_004A2964 = 0x42;
             FUN_0040AA60();

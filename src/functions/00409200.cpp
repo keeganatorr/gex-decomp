@@ -8,9 +8,9 @@ extern int nFileHandles_0047f004;
 extern int gIDLDirectory_0047f030;
 extern char s_CDIO__Unknown_FileHandle_used_in_004559b8[];
 
-extern "C" void GEX_Target(void *pHandle);
+extern "C" void CDIO_FileClose_00409200(void *pHandle);
 
-void GEX_Target(void *pHandle)
+void CDIO_FileClose_00409200(void *pHandle)
 {
     void **lHandle = HANDLE_ARRAY_0047f010;
     int handle = 0;

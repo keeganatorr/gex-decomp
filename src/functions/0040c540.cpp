@@ -52,7 +52,7 @@ void __cdecl FUN_0040cca0(GXObject *gob);
 GXObject *__cdecl GOB_FindWithWork0_0040c110(int type, int work);
 void __cdecl FUN_0040cb70_Set_Active_Gex_Object(int item, int *key);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob212DoIt_0040c540(GXObject *gob)
 {
     GXObject *button;
     int delta;

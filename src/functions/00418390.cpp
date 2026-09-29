@@ -20,7 +20,7 @@ extern int decl_pad_7;
 extern int decl_pad_8;
 extern int SCRIPT_WorkRegister_0049fb90;
 extern GXObject *DAT_0049fb94;
-unsigned char * __cdecl GEX_Target(unsigned char *script, GXObject *gob)
+unsigned char * __cdecl SCRIPT_CopyFieldToRoot_00418390(unsigned char *script, GXObject *gob)
 {
     int field = *script++;
     int value = gob->gob_fields[field];

@@ -11,7 +11,7 @@ typedef struct InputRecord {
 } InputRecord;
 extern "C" {
 extern InputRecord *gInputRecords_004a27dc;
-void __cdecl GEX_Target(int player, void *buffer, int length)
+void __cdecl StartInputPlayback_0040f740(int player, void *buffer, int length)
 {
     InputPlayback *p;
     p = &gInputRecords_004a27dc[player].playback;

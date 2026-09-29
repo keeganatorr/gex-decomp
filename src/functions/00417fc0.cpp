@@ -1,6 +1,6 @@
 extern "C" int GOB_GetHotSpot_00419c00(int* obj, unsigned int a, unsigned int b, int* o1, int* o2);
 
-extern "C" unsigned char* GEX_Target(unsigned char* p, int* obj)
+extern "C" unsigned char* SCRIPT_MoveToHotSpot_00417fc0(unsigned char* p, int* obj)
 {
     int dx;
     int dy;

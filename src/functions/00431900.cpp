@@ -14,7 +14,7 @@ extern int __cdecl FUN_0041a090(GXObject *);
 extern void __cdecl FUN_00431830(GXObject *, int, int);
 extern int DAT_0045b150;
 extern int DAT_00463fe0;
-int __cdecl GEX_Target(GXObject *gob)
+int __cdecl FUN_00431900_Movement_unk(GXObject *gob)
 {
     if (FUN_0041a090(gob))
         return 1;

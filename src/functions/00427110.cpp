@@ -7,7 +7,7 @@ extern int __cdecl FUN_00421560(void*, void*);
 extern void __cdecl FUN_004250B0(void*);
 extern void __cdecl FUN_00424AA0(void**);
 
-extern void __cdecl GEX_Target(void** param_1)
+extern void __cdecl PlayerRunTurnStop_00427110(void** param_1)
 {
     int iVar1;
 

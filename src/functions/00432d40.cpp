@@ -39,7 +39,7 @@ void __cdecl SND_PlaySound_0041a340(GXObject *gob, int id);
 void __cdecl FUN_00432e60(GXObject *gob);
 void __cdecl FUN_00432d10(GXObject *gob);
 void __cdecl GOB_RemoveObject_00419520(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_00432d40(GXObject *gob)
 {
     gob->gob_xold = gob->gob_xpos;
     gob->gob_yold = gob->gob_ypos;

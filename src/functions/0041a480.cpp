@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_00405350(const char*, int);
 
-extern "C" int __cdecl GEX_Target(int param_1)
+extern "C" int __cdecl GOB_GetCurrentFrame_0041a480(int param_1)
 {
     int* piVar1;
     int iVar2;

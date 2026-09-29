@@ -16,7 +16,7 @@ struct GXObjectWork {
     int counter;
 };
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl PlayerDucking_00427980(void* param_1)
 {
     if (DAT_004a0294 != 0) {
         FUN_00424B80(param_1);

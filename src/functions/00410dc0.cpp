@@ -47,7 +47,7 @@ extern int DAT_004a2930;
 extern int DAT_00457ed8;
 void __cdecl FUN_00410d10_CollisionInner(int value);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_00410dc0_CollisionInner(GXObject *gob)
 {
     unsigned int index;
 

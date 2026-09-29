@@ -7,7 +7,7 @@ extern int DAT_0045814C;
 extern void __cdecl FUN_00420BC0(void**);
 extern void __cdecl FUN_00411A90(void**);
 
-void __cdecl GEX_Target(void** param_1)
+void __cdecl InitPlayerSideInside45Trans_00411b90(void** param_1)
 {
     unsigned int uVar1;
     unsigned int pGVar2;

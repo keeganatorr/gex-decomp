@@ -14,7 +14,7 @@ void __cdecl FUN_004250B0(void**);
 void __cdecl FUN_004213f0_GexMovementLeftandRight(void*);
 void __cdecl FUN_004213c0(int, void**);
 
-void __cdecl GEX_Target(void** param1) {
+void __cdecl PlayerLookup_00414600(void** param1) {
     if (DAT_004a0220 == 0) {
         DAT_004a0220 = 1;
         if (DAT_004a0282 == 0) {

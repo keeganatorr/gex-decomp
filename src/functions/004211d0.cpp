@@ -5,7 +5,7 @@ extern "C" int DAT_004a285c;
 extern "C" unsigned int DAT_00457210[];
 extern "C" int __cdecl abs(int);
 
-extern "C" void __cdecl GEX_Target(int *param_1)
+extern "C" void __cdecl FUN_004211d0(int *param_1)
 {
     int *base = param_1;
     int pGVar1;

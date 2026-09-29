@@ -11,7 +11,7 @@ extern "C" { extern int DAT_004A2408; }
 extern "C" { extern int DAT_004A2410; }
 extern "C" { extern int DAT_004A23F0; }
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl FUN_0041b3b0()
 {
     DAT_004A23E0 = 0;
     DAT_004A23E4 = 0;

@@ -31,7 +31,7 @@ GXObject *__cdecl GOB_AddObject_004195d0(int type, int x, int y, void *glob);
 unsigned int __cdecl UTL_ReallyRandom32_00428c60(void);
 int __cdecl UTL_ReallyRandom_00428c80(int range);
 void __cdecl GOB_PutObjectInfrontOfObject_00419be0(GXObject *gob, GXObject *other);
-void __cdecl GEX_Target(GXObject *gob, int big)
+void __cdecl FUN_00431990(GXObject *gob, int big)
 {
     int i;
     int dir;

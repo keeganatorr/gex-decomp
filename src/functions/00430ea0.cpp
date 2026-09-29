@@ -9,7 +9,7 @@ extern int DAT_00463F98;
 extern int DAT_00463F14;
 extern int DAT_00463E0C;
 
-void __cdecl GEX_Target(GXObject** param_1)
+void __cdecl ob231Draw_00430ea0(GXObject** param_1)
 {
     GXObject* pGVar1 = param_1[0x1e];
     GXObject* pGVar2 = param_1[0x1f];

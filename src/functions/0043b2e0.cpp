@@ -8,7 +8,7 @@ extern int DAT_004a2834;
 extern int DAT_00460008[];
 extern int DAT_0046000c[];
 
-void __cdecl GEX_Target(char* param_1, int* param_2)
+void __cdecl ob271Clid_0043b2e0(char* param_1, int* param_2)
 {
     int uVar1;
 

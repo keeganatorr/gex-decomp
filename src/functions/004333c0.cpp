@@ -6,7 +6,7 @@ unsigned int __cdecl FUN_00431900_Movement_unk(void**);
 void __cdecl FUN_00433370_Stub(void**);
 void __cdecl FUN_00419520(void**);
 
-void __cdecl GEX_Target(void** param1) {
+void __cdecl ob369DoIt_004333c0(void** param1) {
     param1[0x35] = param1[0x1e];
     param1[0x36] = param1[0x1f];
     param1[0x3f] = param1[0x1b];

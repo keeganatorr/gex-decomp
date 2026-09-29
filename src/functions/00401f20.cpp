@@ -11,7 +11,7 @@ extern unsigned char *gSFXTable_0049fb54;
 extern int gSndSizes_00451048[];
 extern unsigned char *gSNDPointerArray_0049f6b0[];
 extern unsigned char *DAT_0049fb14_DS_pDSCaps;
-void __cdecl GEX_Target(void)
+void __cdecl SFX_Open_00401f20(void)
 {
     HANDLE file;
     unsigned char *data;

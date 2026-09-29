@@ -1,5 +1,5 @@
 extern "C" {
-void GEX_Target(void)
+void FUN_00417960(void)
 
 {
   return;

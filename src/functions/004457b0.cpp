@@ -15,7 +15,7 @@ extern "C" { extern unsigned short* DAT_004A33AC; }
 
 extern "C" void* __cdecl FUN_00402400(unsigned char, unsigned char, unsigned char, unsigned int, int);
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl FUN_004457b0_DrawTilesInner2(void* param_1)
 {
     DAT_004A2F58 = (unsigned int)*(unsigned char*)((int)param_1 + 0xc);
     DAT_004A2F5C = (unsigned int)*(unsigned char*)((int)param_1 + 0xd);

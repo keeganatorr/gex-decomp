@@ -1,7 +1,7 @@
 extern "C" {
 void __cdecl FUN_00420BC0(void**);
 void __cdecl FUN_00427780(void**);
-void __cdecl GEX_Target(void** p)
+void __cdecl InitPlayerDuck_00427850(void** p)
 {
     FUN_00420BC0(p);
     p[0x20] = 0;

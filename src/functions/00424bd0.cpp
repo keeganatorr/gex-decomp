@@ -24,7 +24,7 @@ int __cdecl FUN_004212d0_pStateUnk_yVel(int *);
 int __cdecl FUN_004215d0_pStateUnk_Jump(int *, int);
 void __cdecl FUN_00425C10(int *);
 
-void __cdecl GEX_Target(int *p)
+void __cdecl PlayerStandJump_00424bd0(int *p)
 {
     int proceed;
     FUN_00423b80_pStateUnk(p);

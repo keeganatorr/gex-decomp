@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_0040F2E0(int obj, int param);
 
-extern "C" unsigned int __cdecl GEX_Target(unsigned int param_1, int param_2)
+extern "C" unsigned int __cdecl SCRIPT_InitObject_004180a0(unsigned int param_1, int param_2)
 {
     FUN_0040F2E0(param_2, 0);
     return param_1;

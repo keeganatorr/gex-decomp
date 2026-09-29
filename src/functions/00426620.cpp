@@ -11,7 +11,7 @@ extern "C" { extern unsigned char DAT_004A0283; }
 extern "C" { extern int DAT_00463AAC; }
 extern "C" { extern int DAT_00463AA8; }
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl InitPlayerFaceTurn_00426620(void** param_1)
 {
     FUN_00420BC0(param_1);
     DAT_00463AAC = (int)param_1[0x31];

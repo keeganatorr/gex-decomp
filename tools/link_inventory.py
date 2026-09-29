@@ -10,6 +10,7 @@ from collections import Counter, defaultdict
 import json
 from pathlib import Path
 import re
+from function_names import NAMES
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -42,7 +43,7 @@ def inventory() -> dict:
     for address, path in sorted(sources.items()):
         tokens = Counter(IDENTIFIER.findall(code_only(path.read_text())))
         identifiers = set(tokens)
-        if not {"GEX_Target", "_GEX_Target"} & identifiers:
+        if NAMES[address] not in identifiers:
             no_target.append(address)
         for identifier in identifiers & source_names.keys():
             # A lone occurrence is normally an unused extern declaration.
@@ -63,7 +64,7 @@ def inventory() -> dict:
             data_range[symbol] = count
     return {
         "sourceFiles": len(sources),
-        "sourcesWithoutTargetName": no_target,
+        "sourcesWithoutMappedName": no_target,
         "boundSymbolsReferenced": len(referenced),
         "boundSymbolsPointingToSource": sum(
             count for symbol, count in referenced.items()
@@ -91,7 +92,7 @@ def main() -> None:
         print(json.dumps(result, indent=2))
         return
     print(f"{result['sourceFiles']} isolated function sources")
-    print(f"{len(result['sourcesWithoutTargetName'])} without GEX_Target")
+    print(f"{len(result['sourcesWithoutMappedName'])} without mapped function name")
     print(f"{result['boundSymbolsReferenced']} distinct bound symbols referenced")
     print(f"{result['boundSymbolsPointingToSource']} bound symbol uses point to a source file")
     print(f"{len(result['candidateCodeRangeReferencesWithoutSource'])} distinct bound code-range references lack a source file")

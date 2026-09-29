@@ -14,7 +14,7 @@ extern int decl_pad_2;
 extern int decl_pad_3;
 void __cdecl EFECT_MakeSplash_004216b0(GXObject *gob);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_00421740_pStateUnk_Jump(GXObject *gob)
 {
     int wasHit;
     int hit;

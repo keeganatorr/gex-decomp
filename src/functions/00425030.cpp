@@ -6,7 +6,7 @@ extern "C" {
     extern int FUN_004A2A0C;
     extern unsigned char DAT_004a0294;
 
-    void __cdecl GEX_Target(void** param_1)
+    void __cdecl FUN_00425030_Fall(void** param_1)
     {
         FUN_00420BC0(param_1);
         param_1[0x1c] = (void*)0xd;

@@ -22,7 +22,7 @@ void __cdecl GOB_SetObjectDisplayPriority_00419b80(GXObject *gob, int priority);
 void __cdecl GOB_PutObjectBehindObject_00419bc0(GXObject *front, GXObject *behind);
 extern GXObject *PTR_004a2838;
 void __cdecl FUN_00422500_pStateUnk_Lash_Inner(GXObject *tongue);
-void __cdecl GEX_Target(GXObject *gex, GXObject *tongue)
+void __cdecl FUN_00422580_pStateUnk_Lash_Inner(GXObject *gex, GXObject *tongue)
 {
     int dir;
     int angle;

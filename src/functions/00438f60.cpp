@@ -13,7 +13,7 @@ extern "C" {
     void FUN_00405390(const char *format, ...);
 }
 
-extern "C" int GEX_Target(char *opjectType)
+extern "C" int event_buttonpressed_00438f60(char *opjectType)
 {
     if (DAT_004A2964 != 0x44 &&
         (DAT_004A0282 != '\0' ||

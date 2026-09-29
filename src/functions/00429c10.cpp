@@ -16,7 +16,7 @@ extern int decl_pad_0;
 extern int decl_pad_1;
 extern int decl_pad_2;
 extern ObjectList ListType_ARRAY_004a28a0[10];
-GXObject * __cdecl GEX_Target(unsigned int id)
+GXObject * __cdecl FUN_00429c10_Object_unk(unsigned int id)
 {
     ObjectList *list;
     GXObject *gob;

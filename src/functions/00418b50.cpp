@@ -6,7 +6,7 @@ extern "C" {
 extern uint __cdecl FUN_00417F40(uint **cursor);
 extern void __cdecl FUN_0041A320(void *, uint, int);
 
-ushort *__cdecl GEX_Target(ushort *cursor, void *object)
+ushort *__cdecl SCRIPT_PlaySoundWithVolume_00418b50(ushort *cursor, void *object)
 {
     uint sound = FUN_00417F40((uint **)&cursor);
     int volume = *(uchar *)cursor;

@@ -1,7 +1,7 @@
 extern "C" int * __cdecl GOB_FindWithWork0_0040c110(int, int);
 extern "C" unsigned char BYTE_ARRAY_004a2540[];
 
-extern "C" __declspec(dllexport) inline void __cdecl GEX_Target(int *param_1, int param_2, int *param_3)
+extern "C" __declspec(dllexport) inline void __cdecl FUN_0042c0a0(int *param_1, int param_2, int *param_3)
 {
     int *object;
     int candidate;

@@ -8,7 +8,7 @@ extern "C" void __cdecl FUN_0041FA80(int);
 extern "C" void __cdecl FUN_00419BE0(void**, void**);
 extern "C" { extern int DAT_004A2AC8; }
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl FUN_00420f30(void** param_1)
 {
     unsigned int uVar1;
     void** ppGVar2;

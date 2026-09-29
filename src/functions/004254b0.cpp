@@ -41,7 +41,7 @@ void __cdecl FUN_00425C10(PlayerState *);
 void __cdecl FUN_0042D2C0(void *, PlayerState *, VelocityFunction);
 }
 
-extern "C" void __cdecl GEX_Target(PlayerState *param_1)
+extern "C" void __cdecl PlayerJumpTongueLash_004254b0(PlayerState *param_1)
 {
     int iVar2;
 

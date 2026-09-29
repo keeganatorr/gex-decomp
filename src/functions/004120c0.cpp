@@ -26,7 +26,7 @@ extern int DAT_004583e8[][5];
 void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
 int __cdecl FUN_00421560_DrawCharacter(void *level, GXObject *gex);
 void __cdecl PlayerSideInside90Trans_00411e40(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl FUN_004120c0_SideInside90Trans(GXObject *gex)
 {
     int dir;
     unsigned int x;

@@ -27,7 +27,7 @@ extern "C" {
     extern FreeList DAT_00463728;
 }
 
-extern "C" void __cdecl GEX_Target(GXObject** list, int param_2)
+extern "C" void __cdecl CLD_FreeAllRemovedCldObjectsFromList_0041e8b0(GXObject** list, int param_2)
 {
     GXObject* node = *list;
     if (node->next != 0) {

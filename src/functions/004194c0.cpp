@@ -12,7 +12,7 @@ extern void *GOB_ObjectsMem_004a27a0;
 extern void __cdecl LST_Init_0042cc50(ObjectList *);
 extern void __cdecl LST_AddTail_0042cc00(ObjectList *, void *);
 extern void * __cdecl MEM_AllocMem_004096c0(int);
-void __cdecl GEX_Target(void)
+void __cdecl GOB_InitObjects_004194c0(void)
 {
     int n;
     char *object;

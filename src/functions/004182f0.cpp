@@ -2,7 +2,7 @@ typedef unsigned char byte;
 typedef unsigned int uint;
 
 extern "C" {
-byte * __cdecl GEX_Target(byte *param_1, void **param_2)
+byte * __cdecl SCRIPT_CopyFieldToChildren_004182f0(byte *param_1, void **param_2)
 {
   uint idx;
   void *v;

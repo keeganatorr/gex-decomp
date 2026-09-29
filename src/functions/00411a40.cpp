@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_00420BC0(void**);
 extern "C" void __cdecl FUN_00411380(void**);
 extern "C" { extern int DAT_004A0218; }
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl InitPlayerPlatSideCrawl_00411a40(void** param_1)
 {
     FUN_00420BC0(param_1);
     param_1[0x23] = 0;

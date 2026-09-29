@@ -11,7 +11,7 @@ struct MoveState {
     int acceleration;
 };
 
-extern "C" void __cdecl GEX_Target(MoveState* p, int amount)
+extern "C" void __cdecl FUN_004244e0_left_right_move_xpos(MoveState* p, int amount)
 {
     if (DAT_004A0280 != 0) {
         if (p->velocity > 0 && DAT_004A23C8 == 0) {

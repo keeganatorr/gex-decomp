@@ -8,7 +8,7 @@ extern "C" { extern int DAT_004A2A1C; }
 extern "C" { extern int DAT_004A2A90; }
 extern "C" { extern int DAT_004A2940; }
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl FUN_00410250_UpdateCameraBounds()
 {
     int tmp1 = DAT_004A2A9C;
     int tmp2 = DAT_004A2A2C;

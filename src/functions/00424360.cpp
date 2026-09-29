@@ -20,7 +20,7 @@ void __cdecl FUN_004213c0(void *, int *);
 int __cdecl FUN_00421560_DrawCharacter(void *, int *);
 }
 
-extern "C" void __cdecl GEX_Target(int *player)
+extern "C" void __cdecl PlayerPush_00424360(int *player)
 {
     if (DAT_004A0230 == 0) {
         ++DAT_004A0230;

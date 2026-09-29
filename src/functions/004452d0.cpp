@@ -1,6 +1,6 @@
 extern "C" unsigned short __cdecl FUN_004451A0(int, int, int, int);
 
-extern "C" int* __cdecl GEX_Target(int* param_1, unsigned int param_2, unsigned int param_3, unsigned int param_4, unsigned int param_5)
+extern "C" int* __cdecl FUN_004452d0_GFXInit3(int* param_1, unsigned int param_2, unsigned int param_3, unsigned int param_4, unsigned int param_5)
 {
     int* p = param_1;
     for (int i = 0x17; i != 0; i--) { *p++ = 0; }

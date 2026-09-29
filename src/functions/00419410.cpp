@@ -10,7 +10,7 @@ extern int SCRIPT_WorkRegister_0049fb90;
 unsigned int __cdecl SCRIPT_GetUInt_00417f00(unsigned char **script);
 unsigned short *__cdecl GOB_GetBlockAddress_00419fe0(void *level, int x, int y);
 unsigned int __cdecl M1_GetContourDataFromID_0040f100(void *level, unsigned int id, unsigned int position);
-unsigned char *__cdecl GEX_Target(unsigned char *script, GXObject *gob)
+unsigned char *__cdecl SCRIPT_CheckContour_00419410(unsigned char *script, GXObject *gob)
 {
     int dx;
     int dy;

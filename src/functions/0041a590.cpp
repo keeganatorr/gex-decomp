@@ -23,7 +23,7 @@ extern int decl_pad_16;
 extern unsigned char BYTE_ARRAY_004a25d0[];
 extern unsigned char BYTE_ARRAY_004a2540[];
 extern unsigned int gCollectibles_004a2660[6];
-int __cdecl GEX_Target(unsigned int RemoteLevelID)
+int __cdecl GetRemoteStatus_0041a590(unsigned int RemoteLevelID)
 {
     int status;
     int i;

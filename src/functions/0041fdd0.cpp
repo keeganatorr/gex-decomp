@@ -13,7 +13,7 @@ extern char s_ERROR_To_many_parallaxs_in_one_l_0045a1ac[];
 void __cdecl GOB_SetObjectDisplayPriority_00419b80(GXObject *gob, unsigned int priority);
 void __cdecl assertfail_00405350(const char *format, ...);
 void *__cdecl PAR_LoadParallaxs_00420210(int index, void **file);
-void __cdecl GEX_Target(GXObject *gob, int loaded)
+void __cdecl FUN_0041FDD0(GXObject *gob, int loaded)
 {
     int i;
     int freeSlot;

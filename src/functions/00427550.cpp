@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_00420BC0(void**);
 extern "C" void __cdecl FUN_00427390(void**);
 
-extern "C" void __cdecl GEX_Target(void** Gob)
+extern "C" void __cdecl InitPlayerTurn_00427550(void** Gob)
 {
     FUN_00420BC0(Gob);
     Gob[0x15] = (void*)0;

@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_00444590(void*);
 extern "C" void __cdecl FUN_00441150(void*);
 
-extern "C" void __cdecl GEX_Target(void* param1)
+extern "C" void __cdecl RemoteDraw_0041b010(void* param1)
 {
     if (*(int*)((char*)param1 + 0xac) == 0) {
         FUN_00444590(param1);

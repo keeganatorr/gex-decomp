@@ -26,7 +26,7 @@ extern "C" {
     extern int M1_StreamedLevel_004638a4;
 }
 
-extern "C" void GEX_Target(CDirectory *levelFileHandle, M1Level *tilePointer, unsigned int levNumber)
+extern "C" void M1_LoadLevel_0041ebe0(CDirectory *levelFileHandle, M1Level *tilePointer, unsigned int levNumber)
 {
     int loopCounter;
     unsigned int *zeroPtr;

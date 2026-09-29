@@ -21,7 +21,7 @@ void __cdecl FUN_0042CEC0(int, int *, void (__cdecl *)(), int);
 void __cdecl InitPlayerPush_004244a0(int *);
 }
 
-extern "C" int __cdecl GEX_Target(int *param_1, int velocity)
+extern "C" int __cdecl FUN_004245b0_Walk_Apply_Speed(int *param_1, int velocity)
 {
     int iVar1;
     int animationType;

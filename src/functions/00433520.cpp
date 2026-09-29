@@ -3,7 +3,7 @@ extern "C" int __cdecl FUN_0041E9D0(void**, int);
 extern "C" void __cdecl FUN_00433370_Stub(void**);
 extern "C" void __cdecl FUN_00419520(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1, int* param_2)
+extern "C" void __cdecl ob369Clid_00433520(void** param_1, int* param_2)
 {
     int iVar1;
     unsigned int uVar2;

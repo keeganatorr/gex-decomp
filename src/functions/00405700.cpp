@@ -31,7 +31,7 @@ extern HWND gDebugVRAMWindow_0048750c;
 extern HDC gVRAMHDC_00487510;
 extern HMENU gMenu_00487f78;
 
-void GEX_Target(void)
+void VRAM_Show_00405700(void)
 {
     int screenWidth;
     WindowRect windowRect = { 0, 0, 0x400, 0x200 };

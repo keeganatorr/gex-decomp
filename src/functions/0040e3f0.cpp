@@ -29,7 +29,7 @@ extern unsigned char DAT_00456334;
 GXObject *__cdecl GOB_FindWithWork0_0040c110(int type, unsigned int work0);
 void __cdecl FUN_0040c1a0(int a, int b);
 void __cdecl GOB_DisplayObject_00444590(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_0040e3f0_frameIndex4(GXObject *gob)
 {
     unsigned int pixc;
     int x;

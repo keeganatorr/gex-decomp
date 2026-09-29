@@ -9,7 +9,7 @@ typedef struct GXObject {
 extern "C" {
 extern GXObject *gPlayerObject_004a27fc;
 int __cdecl VFX_Play_0041fa80(int voice);
-void __cdecl GEX_Target(GXObject *gob, int voice)
+void __cdecl FUN_00420770_Movement_unk(GXObject *gob, int voice)
 {
     int dx;
     int dy;

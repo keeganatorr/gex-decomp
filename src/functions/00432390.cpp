@@ -44,7 +44,7 @@ void __cdecl GOB_PutObjectInfrontOfObject_00419be0(GXObject *, GXObject *);
 void __cdecl FUN_00431990(GXObject *, int);
 void __cdecl GOB_RemoveObject_00419520(GXObject *);
 
-void __cdecl GEX_Target(GXObject *g, int *hit)
+void __cdecl ob93Clid_00432390(GXObject *g, int *hit)
 {
     int *box;
     int y0;

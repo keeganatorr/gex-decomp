@@ -30,7 +30,7 @@ extern char lpValueName_00451778[];
 extern char s_shell_open_command_00451764[];
 extern char s_http_0045173c[];
 
-int __cdecl GEX_Target(int dryRun)
+int __cdecl FUN_00403030_Registry(int dryRun)
 {
     void *key;
     unsigned long size;

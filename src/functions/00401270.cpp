@@ -29,7 +29,7 @@ extern "C" {
     int __cdecl DDRAW_SetResolution_00401100(int, int);
 }
 
-extern "C" int __cdecl GEX_Target(int WidthAndHeight, int param_2, int param_3)
+extern "C" int __cdecl FUN_00401270_ChangeVideoMode(int WidthAndHeight, int param_2, int param_3)
 {
     UINT uVar1;
     int iVar2;

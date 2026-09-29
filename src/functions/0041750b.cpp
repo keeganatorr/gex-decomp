@@ -30,7 +30,7 @@ extern int DAT_004A2840;
 extern int DAT_004A2854;
 extern int DAT_004A2878;
 
-extern "C" void __cdecl GEX_Target(int param1, int param2, int player)
+extern "C" void __cdecl FUN_0041750b_CollisionOuterLoop(int param1, int param2, int player)
 {
     int savedX, savedY, savedXScale, savedYScale;
     int i, a, b, ppObj, result;

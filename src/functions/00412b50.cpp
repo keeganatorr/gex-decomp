@@ -14,7 +14,7 @@ void __cdecl FUN_004144E0(int *);
 void __cdecl FUN_00421900(int *);
 void __cdecl InitPlayerFaceUnspin_00412ee0(int *);
 
-void __cdecl GEX_Target(int *p)
+void __cdecl PlayerFaceSpinAround_00412b50(int *p)
 {
     FUN_00423800_pStateUnk(p);
     if (DAT_00458c78_ButtonUnk10 != 0 || DAT_004A0294 != 0)

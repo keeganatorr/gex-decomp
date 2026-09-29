@@ -28,7 +28,7 @@ extern int DAT_004a297c_CamY1;
 extern int DAT_004a2a30_CameraXResult;
 extern int DAT_004a2a34_CameraYResult;
 
-void __cdecl GEX_Target(GXObject *g, int unused, int snap)
+void __cdecl CameraBarrierAdjustCamera_0040fe80(GXObject *g, int unused, int snap)
 {
     int x;
     int y;

@@ -33,7 +33,7 @@ void __cdecl SND_PlayObSound_0041a250(GXObject *gob, int id, int volume, int pan
 void __cdecl FUN_004153e0_Falling_unk(GXObject *gex);
 void __cdecl GFX_Fade_0043f490(int steps, int r0, int r1, int g0, int g1, int b0, int b1);
 void __cdecl InitPlayerStartFromCamera_004155c0(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl FUN_00415480_First_pState(GXObject *gex)
 {
     GOB_ResetState_00420bc0(gex);
     switch (gStartDoorType_00456ae0) {

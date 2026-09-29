@@ -4,7 +4,7 @@ extern void* DAT_004A2864;
 extern void __cdecl FUN_00405350(const char*);
 extern int __cdecl FUN_00411230(void*, int*, int*, int*);
 
-void __cdecl GEX_Target(int param_1, unsigned int param_2)
+void __cdecl FUN_004112e0_PlatCorner(int param_1, unsigned int param_2)
 {
     int local_28[10];
     int local_2c;

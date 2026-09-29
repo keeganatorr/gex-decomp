@@ -2,7 +2,7 @@ extern "C" void __cdecl GOB_ResetState_00420bc0(void**);
 extern "C" void __cdecl GOB_KeepOutOfTiles_00420960(void**);
 extern "C" int INT_0045a6d0;
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl FUN_00425250_Falling(void** param_1)
 {
     GOB_ResetState_00420bc0(param_1);
     param_1[0x15] = 0;

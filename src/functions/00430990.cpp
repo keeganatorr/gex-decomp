@@ -32,7 +32,7 @@ typedef struct GXObject {
     int gob_ypos;               /* 0x7c */
 } GXObject;
 
-int __cdecl GEX_Target(GXObject *gob, int top, int bottom, int left, int right, int x0, int y0, int x1, int y1)
+int __cdecl FUN_00430990(GXObject *gob, int top, int bottom, int left, int right, int x0, int y0, int x1, int y1)
 {
     int dx;
     int dy;

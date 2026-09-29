@@ -1,7 +1,7 @@
 extern "C" int __cdecl FUN_0040FCE0(void**);
 extern "C" void* __cdecl FUN_00435D90(void**, void*, void*);
 extern "C" void __cdecl FUN_00434260(void**);
-extern "C" void __cdecl GEX_Target(void** gOb) {
+extern "C" void __cdecl ob90DoIt_0043d050(void** gOb) {
     gOb[0x35] = gOb[0x1e];
     gOb[0x36] = gOb[0x1f];
     gOb[0x3f] = gOb[0x1b];

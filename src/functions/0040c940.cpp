@@ -21,7 +21,7 @@ extern int decl_pad_8;
 extern int decl_pad_9;
 extern AnimEntry DAT_004560f0[8];
 extern unsigned char DAT_0045A178[];
-void __cdecl GEX_Target(void)
+void __cdecl FUN_0040c940(void)
 {
     int i;
     int value;

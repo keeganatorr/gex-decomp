@@ -41,7 +41,7 @@ extern "C" {
     HRESULT __stdcall DirectDrawCreate_00409876(void*, IDirectDraw**, void*);
     DWORD DDRAW_GetDisplayMode_00401000(void);
 
-    int GEX_Target(void)
+    int DDRAW_Create_004010a0(void)
     {
         HRESULT directDrawCreateResult;
         DWORD mode;

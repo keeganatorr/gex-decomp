@@ -11,7 +11,7 @@ extern unsigned char DAT_0045B9AC[];
 extern unsigned char DAT_0045B9B0[];
 }
 
-extern "C" int __cdecl GEX_Target(void *unused, int *object, TileFunction callback, int yOffset)
+extern "C" int __cdecl TILES_CheckOneXPoint_0042cec0(void *unused, int *object, TileFunction callback, int yOffset)
 {
     int edges[10];
     int x, y, right, type;

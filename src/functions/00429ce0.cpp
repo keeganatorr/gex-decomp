@@ -82,7 +82,7 @@ int __cdecl FUN_00429cb0_RemoteTVSelect_Unk1(int a, int b);
 GXObject *__cdecl RemoteFindWithLevel_00429b40(int lvl);
 GXObject *__cdecl FUN_00429b80_Object_unk(void);
 GXObject *__cdecl FUN_00429c10_Object_unk(int lvl);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl DAT_00429ce0_OBJECTFUNCTION_FunctionPointer_(GXObject *gob)
 {
     unsigned int r;
     GXObject *o;

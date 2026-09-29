@@ -41,7 +41,7 @@ void __cdecl FUN_00419840(int *);
 void __cdecl FUN_00419B80(int *, int);
 int * __cdecl FUN_004195D0(int, int, int, int);
 
-void __cdecl GEX_Target(int *gOb)
+void __cdecl PlayerInit_00417780(int *gOb)
 {
     DAT_004A2888 = 0;
     PTR_004a2838 = 0;

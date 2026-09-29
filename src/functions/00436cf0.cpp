@@ -3,7 +3,7 @@ extern "C" {
 extern RezState DAT_004642d8;
 extern int gTimer_004a2ac8;
 extern unsigned int __cdecl UTL_ReallyRandom32_00428c60(void);
-void __cdecl GEX_Target(void)
+void __cdecl RezInit_00436cf0(void)
 {
     int i;
     short *noise;

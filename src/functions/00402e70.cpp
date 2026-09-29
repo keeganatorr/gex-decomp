@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" { extern int FUN_00455C10; }
 extern "C" { extern int FUN_004626A0; }
-extern "C" int __cdecl GEX_Target(int param_1)
+extern "C" int __cdecl MUS_QueuePlay_00402e70(int param_1)
 {
     if (FUN_00455C10 != 0) FUN_004626A0 = param_1;
     return 1;

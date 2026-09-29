@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_004335F0(void**, int);
 extern "C" void __cdecl FUN_00434A20(void**);
-extern "C" void __cdecl GEX_Target(void** p1, int p2) {
+extern "C" void __cdecl EnemyInit_00433670(void** p1, int p2) {
     FUN_004335F0(p1, p2);
     FUN_00434A20(p1);
 }

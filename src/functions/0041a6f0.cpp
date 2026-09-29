@@ -30,7 +30,7 @@ extern int DAT_004a2a40_LoadObjects;
 int __cdecl GetGlueDist_0040f1d0(GexTileStruct *level, GXObject *gob);
 void __cdecl GOB_RemoveMapObject_00419840(GXObject *gob);
 void __cdecl VSIT_PlayVoiceSituation_0041f8c0(int situation);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl CameraInit_0041a6f0(GXObject *gob)
 {
     int dist;
     if (gIsAddingObjectIntros_004a27d4) {

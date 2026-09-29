@@ -12,7 +12,7 @@ extern void __cdecl FUN_00424090(void**);
 extern void __cdecl FUN_004213F0(void*);
 extern void __cdecl FUN_004213C0(void*, void*);
 
-void __cdecl GEX_Target(void** param_1)
+void __cdecl PlayerUnDucking_004278a0(void** param_1)
 {
     int iVar1;
 

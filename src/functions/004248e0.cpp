@@ -16,7 +16,7 @@ extern "C" {
 extern unsigned char gInputControllers_004a0280[];
 extern void __cdecl GOB_ResetState_00420bc0(GXObject *);
 extern void __cdecl PlayerWalk_004247b0(GXObject *);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl PlayerStartWalkImpl_004248e0(GXObject *gob)
 {
     GOB_ResetState_00420bc0(gob);
     gob->gob_state = 0x15;

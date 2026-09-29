@@ -22,7 +22,7 @@ extern "C" void FUN_00402e30_MusicUnk(void);
 extern "C" void FUN_00402e60_ReleaseMusicInner(void);
 extern "C" __declspec(dllimport) void __stdcall CloseHandle(void*);
 
-extern "C" void GEX_Target(void)
+extern "C" void SND_DeInit_00402080(void)
 {
     if (gDirectSound_0049a070 != 0) {
         int *piVar2 = &PTR_ARRAY_0049fb30;

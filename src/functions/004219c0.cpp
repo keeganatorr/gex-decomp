@@ -3,5 +3,5 @@
 extern "C" {
 extern "C" { extern int DAT_00463acc_GexVelocityInAir; }
 extern "C" { extern int DAT_004a2890_velocity_unk; }
-extern "C" int __cdecl GEX_Target(void** p) { if ((int)p[0x23] > 0) DAT_00463acc_GexVelocityInAir = 1; if (!DAT_004a2890_velocity_unk) p[0x23] = 0; return 1; }
+extern "C" int __cdecl FUN_004219c0_Velocity(void** p) { if ((int)p[0x23] > 0) DAT_00463acc_GexVelocityInAir = 1; if (!DAT_004a2890_velocity_unk) p[0x23] = 0; return 1; }
 }

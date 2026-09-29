@@ -19,7 +19,7 @@ extern GXObject *gPlayerPlatform_004a2864;
 void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
 int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *gob, CLDEdges *edges);
 void __cdecl FUN_00411ff0_SideInside90Trans(GXObject *gex, int x, int y);
-void __cdecl GEX_Target(GXObject *gex, int x, int y)
+void __cdecl FUN_004121b0_SideInside90Trans_Outer(GXObject *gex, int x, int y)
 {
     CLDEdges edges;
     int dir;

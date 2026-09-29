@@ -2,7 +2,7 @@ extern "C" {
 extern unsigned __cdecl GOB_PutObjectBehindObject_00419bc0(...);extern unsigned DAT_0049fb94;
 typedef unsigned int undefined4;
 struct GXObject;
-undefined4 __cdecl GEX_Target(undefined4 param_1,GXObject **param_2)
+undefined4 __cdecl SCRIPT_DisplayBehindParent_004187f0(undefined4 param_1,GXObject **param_2)
 
 {
   if (param_2[0x57] != (GXObject *)0x0) {

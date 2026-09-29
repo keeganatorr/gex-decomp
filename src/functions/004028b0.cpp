@@ -36,7 +36,7 @@ extern "C" const char s_DS_Lock_2_failed_004516ac[];
 extern "C" __declspec(dllimport) void __stdcall OutputDebugStringA(const char *);
 extern "C" void * __cdecl memset(void *, int, unsigned int);
 
-extern "C" void GEX_Target(DWORD param_1, DWORD param_2)
+extern "C" void FUN_004028b0_DS_Lock2(DWORD param_1, DWORD param_2)
 {
     HRESULT HVar1;
     LPVOID *ppvVar4;

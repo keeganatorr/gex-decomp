@@ -38,7 +38,7 @@ extern int decl_pad_25;
 extern int decl_pad_26;
 extern AnimEntry DAT_004560f0[8];
 extern unsigned char DAT_0045A178[];
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_0040c2c0_GameFunkUnk(GXObject *gob)
 {
     int i;
     for (i = 0; i < 8; i++) {

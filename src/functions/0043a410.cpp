@@ -36,7 +36,7 @@ void __cdecl FUN_004397c0_HuntDiveInner(void);
 int __cdecl FUN_004397f0_HuntDiveInner(void);
 void __cdecl SND_PlaySoundNoPosition_0041a360(int, int);
 
-void __cdecl GEX_Target(void)
+void __cdecl ob315DoIt_0043a410(void)
 {
     int p[4];
     if (DAT_00458c7c == 2) {

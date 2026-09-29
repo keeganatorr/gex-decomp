@@ -21,7 +21,7 @@ extern char *STRING_SUREYOUWANTTOENDTHECURRENTGAME_00487fe8;
 char *__cdecl STRING_Load_00404e00(int);
 }
 
-extern "C" void __cdecl GEX_Target(void)
+extern "C" void __cdecl STRING_Init_00404e40(void)
 {
     STRING_CurrentBufferPtr_00487fd8 = (char *)&STRING_DEMO_00488008 + 8;
     STRING_BufferSizeRemaining_00487fdc = 0x2000;

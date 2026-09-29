@@ -9,7 +9,7 @@ extern "C" { extern int* DAT_004A2B18; }
 extern "C" { extern int* DAT_004A2B14; }
 extern "C" { extern int DAT_004A2B20; }
 
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl RM_LinkHiPriCels_00440560()
 {
     if (DAT_0046BC58 != 0xFFFFFF)
     {

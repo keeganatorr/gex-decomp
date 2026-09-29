@@ -7,7 +7,7 @@ typedef struct GXObject {
 extern "C" {
 extern int SCRIPT_WorkRegister_0049fb90;
 extern GXObject *DAT_0049fb94;
-unsigned char * __cdecl GEX_Target(unsigned char *script, GXObject *gob)
+unsigned char * __cdecl SCRIPT_SubFields_00418990(unsigned char *script, GXObject *gob)
 {
     int *fields;
     int a = *script++;

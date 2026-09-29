@@ -7,7 +7,7 @@ int __cdecl FUN_0040F100(int, unsigned int, unsigned int);
 void __cdecl FUN_0042cc70_Object_unk(int, void**);
 extern void** FUN_004A27FC;
 
-int __cdecl GEX_Target(void** param_1, int param_2)
+int __cdecl FUN_0042d7c0_ObjCallUnk(void** param_1, int param_2)
 {
     unsigned int id;
     unsigned int uVar3;

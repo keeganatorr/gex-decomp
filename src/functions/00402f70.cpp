@@ -3,6 +3,6 @@
 extern "C" {
 extern "C" { extern int FUN_00455C10; }
 extern "C" { extern int FUN_0048A034; }
-extern "C" void __cdecl GEX_Target()
+extern "C" void __cdecl MUS_Stop_00402f70()
 { if (FUN_00455C10 != 0) FUN_0048A034 = -1; }
 }

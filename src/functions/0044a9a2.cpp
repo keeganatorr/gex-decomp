@@ -8,7 +8,7 @@ struct GEX_Capture
 
 unsigned int DAT_00461404;
 
-extern "C" void _GEX_Target(int value)
+extern "C" void FUN_0044a9a2(int value)
 {
     GEX_Capture *base = (GEX_Capture *)((unsigned int)&DAT_00461404 - 8u);
     base->field_08 = (unsigned int)value;

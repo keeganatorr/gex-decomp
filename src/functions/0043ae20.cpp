@@ -4,7 +4,7 @@ extern "C" {
 extern "C" { extern int DAT_004647B0; }
 extern "C" { extern int DAT_0046478C; }
 
-extern "C" void __cdecl GEX_Target(void* param_1, int param_2)
+extern "C" void __cdecl FUN_0043ae20_GameFuncUnk(void* param_1, int param_2)
 {
     if (param_2 == 0) {
         if (DAT_004647B0 == 0) {

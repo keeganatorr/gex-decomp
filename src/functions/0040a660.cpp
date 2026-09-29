@@ -45,7 +45,7 @@ void __cdecl GFX_Fade_0043f490(int, int, int, int, int, int, int);
 void __cdecl PAL_WaitForFade_0043f580(void);
 void __cdecl FUN_0043f080_ResetGraphics_Clean1(unsigned int);
 
-void __cdecl GEX_Target(void *map)
+void __cdecl M1_ExitLevel_0040a660(void *map)
 {
     int i;
     M1_CurrentLevel_004a2990 = map;

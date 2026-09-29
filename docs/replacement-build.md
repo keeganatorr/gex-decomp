@@ -14,8 +14,8 @@ can be considered after the game builds and runs from source.
 ## First source-only link milestone
 
 `./scripts/build-source-link-smoke` compiles three reconstructed functions:
-`00420d30`, `00418e20` and `0041fbc0`. It gives each isolated `GEX_Target`
-a unique name at compile time, links their real cross-function call and three
+`00420d30`, `00418e20` and `0041fbc0`. Their source definitions carry their
+Ghidra-based names, and the build links their real cross-function call and three
 global variables using the recovered VC4 compiler/linker and an older SDK
 `kernel32.lib`, then runs the result under Wine. Its only inputs are source,
 `project.json`'s toolchain contract and local toolchain libraries. Output is
@@ -28,16 +28,18 @@ linkability or gameplay parity.
 
 `./scripts/assess-replacement-link` is the current end-to-end source-only
 build assessment. It compiles all **1,193** current function files with their
-per-function C/C++ flags, changes COFF *symbol references* to the exports at
-their justified addresses, assembles `src/replacement/image_data.s` and
+Ghidra-based exported names and per-function C/C++ flags. It changes COFF
+*symbol references* to the exports at their justified addresses, assembles
+`src/replacement/image_data.s` and
 `image_resources.s`, and runs both the recovered VC4 linker and a modern LLD
 link with Win32 imports. The executable and all objects stay under `.work/`.
 The command exits 2 while unresolved externals remain.
 
 At this checkpoint all 1,193 function sources compile. The normalization
-resolved 2,503 function-name references and 3,544 data-name references to
-shared address identities. There are **zero duplicate global definitions**.
-Both linkers report **69 unresolved externals**, down from 1,748 before
+resolved 1,140 remaining function-name references and 3,544 data-name
+references to shared address identities. There are **zero duplicate global
+definitions**.
+Both linkers report **67 unresolved externals**, down from 1,748 before
 source/data normalization. The formerly largest call gaps, `00444590`
 (`GOB_DisplayObject`) and `00441150` (scale/rotate), now have compiling behavior
 candidates. The latter emits 6,684 bytes versus 7,306 original bytes; neither
@@ -58,8 +60,7 @@ called by the ordinary build. After assembly, every non-relocation byte in
 the two raw sections was compared with the pinned PE (zero mismatches), and
 the object has all 2,685 DIR32 relocations. The replacement build now
 converts four source-defined globals to external references in scratch copies,
-so the generated image data has sole storage ownership. The matching source
-files and their verifier proofs remain unchanged.
+so the generated image data has sole storage ownership.
 
 Forty-one function sources contain original image-address literals. The
 replacement build rewrites their 61 distinct in-image addresses into symbolic
@@ -96,19 +97,20 @@ for build readiness.
 
 `./scripts/name-ghidra-functions` reads the live Ghidra function list and
 matches each source filename's eight-digit address to a function name. It
-writes renamed copies to `.work/replacement-named/functions/` and a name map
-to `.work/replacement-named/names.tsv`; `src/functions/` is unchanged so exact
-verifier proofs stay current. An offline Ghidra inventory can be supplied with
+renames the definitions in `src/functions/` and writes the name map to
+`src/replacement/function_names.tsv`. It retains a snapshot under
+`.work/replacement-named/`. An offline Ghidra inventory can be supplied with
 `--inventory JSON`. The current map names 1,185 sources from Ghidra and gives
 eight source addresses without Ghidra entries an address-based fallback. It
 sanitizes three names that are not C identifiers and disambiguates the two
 Ghidra functions both named `__atodbl`.
 
-The name map is for source readability and later shared translation units.
-It is not a complete link fix: current callers use several different names
-and calling conventions for the same address, and some referenced functions
+The build exports the mapped names. `_exit` at `00449780` gets an address
+suffix because VC4's `libc.lib` defines the same decorated `__exit` symbol.
+Current callers use several different names and calling conventions for the
+same address, and some referenced functions
 have no source. The COFF address rebinder above already reconciles available
-source function identities; the 69 remaining externals require implementations,
+source function identities; the 67 remaining externals require implementations,
 imports or separately justified bindings.
 
 Seven new function sources came from this work: `0041a380` is a fresh 122-byte
@@ -120,10 +122,10 @@ are the bubble callback and three rendering helpers described above.
 
 ## Work to reach a playable image
 
-1. **Link map and shared interfaces.** The temporary unique-export/COFF
-   normalization now links address-bearing calls. Audit calling conventions,
-   source-defined data ownership and indirect calls, then replace the
-   per-function `GEX_Target` model with real shared translation units.
+1. **Link map and shared interfaces.** Ghidra-named exports and COFF
+   normalization now link address-bearing calls. Audit calling conventions,
+   source-defined data ownership and indirect calls, then form real shared
+   translation units.
 2. **Code coverage.** Turn provisional and parked source into compilable,
    reviewed implementations. Recover the startup, window, graphics, sound,
    input and save paths. Complete or link the CRT and import thunks through
@@ -146,7 +148,10 @@ are the bubble callback and three rendering helpers described above.
 
 The hand-decompilation checkpoint was 1,101 exact functions / 180,028 bytes
 (`docs/claude-hand-decomp.md`); `0041a380` added one normal verifier proof.
-The live service now reports **1,102 exact functions / 180,150 bytes**.
+Before renaming, the live service reported **1,102 exact functions / 180,150
+bytes**. The retained records are historical evidence; their source hashes
+changed, so current byte-match status requires fresh verification under a
+compatible verifier.
 The edited Ghidra analysis blocks three
 important bodies (`WndProc`, `WinMain`, `GFX_OpenGraphics`). Original PE bytes
 can be inspected read-only, but the analysis is not to be repaired in place.

@@ -22,7 +22,7 @@ extern int decl_pad_7;
 extern TileSlotStruct gpDrawCacheEntries_00465358;
 extern char s_Reserving_slot_d_d_004601e0[];
 void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
-void __cdecl GEX_Target(DrawCache *cache, int initialise)
+void __cdecl FUN_0043eb50_LoadTilePoss(DrawCache *cache, int initialise)
 {
     TileSlotStruct *slot;
     TileSlotStruct *next;

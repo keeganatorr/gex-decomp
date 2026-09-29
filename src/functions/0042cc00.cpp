@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_0042CBB0(int *list, int *node);
 
-extern "C" void __cdecl GEX_Target(int *param_1, int *param_2)
+extern "C" void __cdecl LST_AddTail_0042cc00(int *param_1, int *param_2)
 {
     FUN_0042CBB0(param_1 + 1, param_2);
 }

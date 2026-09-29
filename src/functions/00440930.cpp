@@ -25,7 +25,7 @@ void __cdecl GXINP_ReadPads_0041fc40(void);
 void __cdecl FUN_00444800_Tiles(StaticTile *tile, int x, int y, int width, int height, int image, int colour);
 void __cdecl FUN_0043f2d0_CheckF3ForUnpauseGameDrawWindow(int flag);
 void __cdecl CEL_DrawCels_0043db70(int flag);
-void __cdecl GEX_Target(void)
+void __cdecl FUN_00440930_ContainsInput_POSSMAINGAMELOOP(void)
 {
     int height;
     int bottom;

@@ -18,7 +18,7 @@ void *__cdecl memcpy(void *dst, const void *src, unsigned int count);
 extern unsigned int DAT_0049a060;
 extern unsigned char lpBuffer_0048a050[];
 extern char s_DS_lock_failed_00451668[];
-void __cdecl GEX_Target(int half)
+void __cdecl FUN_004025b0_DS_Lock(int half)
 {
     void *ptr1;
     unsigned long bytes2;

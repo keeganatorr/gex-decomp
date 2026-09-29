@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_00417B70(void*);
 extern "C" { extern void* FUN_004A27FC; }
 
-extern "C" void __cdecl GEX_Target(int param_1, int* param_2)
+extern "C" void __cdecl ob90Clid_0043d170(int param_1, int* param_2)
 {
     unsigned int uVar1;
     unsigned int uVar2;

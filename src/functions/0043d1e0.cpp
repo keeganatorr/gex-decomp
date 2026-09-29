@@ -5,7 +5,7 @@ typedef struct Node {
 } Node;
 extern "C" {
 extern void __cdecl FUN_00434A20(void *);
-void __cdecl GEX_Target(int **object)
+void __cdecl ob120Init_0043d1e0(int **object)
 {
     Node *node = *(Node **)((char *)object[3]);
     node = node->next->next;

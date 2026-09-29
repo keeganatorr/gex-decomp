@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" int __cdecl FUN_00428C80(int);
 
-extern "C" void __cdecl GEX_Target(int param_1)
+extern "C" void __cdecl ob93Init_00431dc0(int param_1)
 {
     *(int*)(param_1 + 0x50) = 0x1a;
     int iVar1 = FUN_00428C80(5);

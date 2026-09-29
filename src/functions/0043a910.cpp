@@ -3,7 +3,7 @@ extern "C" void __cdecl FUN_00419520(void**);
 extern "C" int CAMERA_XPos_004A2A38;
 extern "C" int CAMERA_YPos_004A2A1C;
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl ob371DoIt_0043a910(void** param_1)
 {
     void* gOb;
     void* gOb_00;

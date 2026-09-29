@@ -20,7 +20,7 @@ extern DiveDelay DAT_00464660[];
 extern int DAT_004646f0;
 extern int DAT_004646f8;
 unsigned int __cdecl FUN_004391d0_HuntDiveInner(int a, int b, int c);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_00439640_HuntDiveInner(GXObject *gob)
 {
     int i;
     GXObject *seg;

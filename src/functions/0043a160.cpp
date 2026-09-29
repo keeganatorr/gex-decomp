@@ -2,7 +2,7 @@ extern "C" void __cdecl FUN_00441150(void*);
 extern "C" int DAT_00464610;
 extern "C" int DAT_00464660;
 
-extern "C" void __cdecl GEX_Target(void** param1) {
+extern "C" void __cdecl FUN_0043a160(void** param1) {
     int* piVar4 = &DAT_00464660;
     int* piVar3 = &DAT_00464610;
     do {

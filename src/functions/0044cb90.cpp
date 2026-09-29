@@ -6,7 +6,7 @@ int __cdecl __strgtold12(_LDBL12 *pld, char **pEndPtr, char *str, int a, int b, 
 int __cdecl _ld12tof(_LDBL12 *pld, _CRT_FLOAT *pResult);
 }
 
-extern "C" int __cdecl GEX_Target(_CRT_FLOAT *_Result, char *_Str)
+extern "C" int __cdecl __atodbl_0044cb90(_CRT_FLOAT *_Result, char *_Str)
 {
     char *local_10;
     _LDBL12 local_c;

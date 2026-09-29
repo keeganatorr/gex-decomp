@@ -24,7 +24,7 @@ extern int DAT_0046a654;
 extern int DAT_0046a658;
 extern int DAT_0046a65c;
 extern int DAT_0046a660;
-void __cdecl GEX_Target(void)
+void __cdecl FUN_0043f310_InitializeGraphicsVariables(void)
 {
     int changed;
     if (!DAT_004a2b00)

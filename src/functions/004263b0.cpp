@@ -27,7 +27,7 @@ extern void __cdecl GX_ResetRotAndScale_00423c80(GXObject *);
 extern void __cdecl FUN_00421560_DrawCharacter(void *, GXObject *);
 extern void __cdecl EFECT_AddPuff_0042e480(int, int, unsigned int, int, unsigned int);
 extern void __cdecl PlayerRunStopFall_00426330(GXObject *);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl InitPlayerRunStopFall_004263b0(GXObject *gob)
 {
     GOB_ResetState_00420bc0(gob);
     gob->gob_state = 0x2c;

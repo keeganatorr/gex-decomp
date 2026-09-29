@@ -7,7 +7,7 @@ void __cdecl FUN_0042e850(int *);
 void __cdecl FUN_00441150(int *);
 void __cdecl FUN_00444590(int *);
 
-void __cdecl GEX_Target(int *param_1)
+void __cdecl ob92Draw_0042e2b0(int *param_1)
 {
     int pGVar1;
     int saved_1e, saved_1f, saved_32, saved_33;

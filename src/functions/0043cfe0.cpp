@@ -1,6 +1,6 @@
 extern "C" void __cdecl FUN_00434A20(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl ob90Init_0043cfe0(void** param_1)
 {
     int found = 0;
     void* obj = param_1[3];

@@ -9,7 +9,7 @@ extern "C" int DAT_0046359c;
 extern "C" unsigned char DAT_004A2710[];
 extern "C" int DAT_004A2A98;
 
-extern "C" void __cdecl GEX_Target(int *object)
+extern "C" void __cdecl CameraDoIt_0041a920(int *object)
 {
     int value;
     int *created;

@@ -2,7 +2,7 @@
 extern "C" {
 extern "C" int __cdecl FUN_00419C00(void**, int, int, int*, int*);
 extern "C" { extern void** DAT_004a2888; }
-extern "C" void __cdecl GEX_Target(void** param1) {
+extern "C" void __cdecl FUN_00423130_pStateUnk_Eating(void** param1) {
     if (DAT_004a2888 == 0) return;
     int local_8, local_4;
     int iVar1 = FUN_00419C00(param1, 1, 0, &local_8, &local_4);

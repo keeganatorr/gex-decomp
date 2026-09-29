@@ -22,9 +22,9 @@ CRT = COMPILER.parent.parent / "lib" / "libc.lib"
 SDK_KERNEL32 = COMPILER.parents[5] / "public/sdk/lib/chicago/i386/kernel32.lib"
 WORK = ROOT / ".work/replacement-link-smoke"
 FUNCTIONS = (
-    ("00420d30", "GEX_FN_00420d30"),
-    ("00418e20", "GEX_FN_00418e20"),
-    ("0041fbc0", "GEX_FN_0041fbc0"),
+    "00420d30",
+    "00418e20",
+    "0041fbc0",
 )
 
 
@@ -41,11 +41,9 @@ def run(command: list[str], env: dict[str, str]) -> None:
         raise SystemExit(result.returncode)
 
 
-def compile_file(source: Path, obj: Path, flags: list[str], name: str | None,
+def compile_file(source: Path, obj: Path, flags: list[str],
                  env: dict[str, str]) -> None:
     command = [TC["wine"], str(COMPILER), "/nologo", "/c", *flags]
-    if name:
-        command.append("/DGEX_Target=" + name)
     command += ["/Fo" + win(obj), "/Tp" + win(source)]
     run(command, env)
 
@@ -59,7 +57,7 @@ def main() -> None:
     env = dict(os.environ, WINEPREFIX=TC["winePrefix"], WINEDEBUG="-all",
                INCLUDE="", LIB="", CL="", _CL_="")
     objects = []
-    for address, name in FUNCTIONS:
+    for address in FUNCTIONS:
         source = ROOT / "src/functions" / f"{address}.cpp"
         if not source.is_file():
             raise SystemExit(f"missing reconstructed source: {source}")
@@ -67,19 +65,11 @@ def main() -> None:
         override = PROJECT.get("functionOverrides", {}).get(address, {})
         if override.get("language", "cpp") != "cpp":
             raise SystemExit(f"link smoke only supports C++ source: {address}")
-        compile_file(source, obj, override.get("flags", TC["flags"]), name, env)
+        compile_file(source, obj, override.get("flags", TC["flags"]), env)
         objects.append(obj)
-    # The caller retains its recovered source name. Normalize that COFF
-    # reference to the source-built callee's unique export without a wrapper.
-    caller = WORK / "00418e20.obj"
-    rebound = WORK / "00418e20.rebound.obj"
-    run(["llvm-objcopy",
-         "--redefine-sym=_VSIT_UnforceVoiceSituation_0041fbc0=_GEX_FN_0041fbc0",
-         str(caller), str(rebound)], env)
-    objects[1] = rebound
     harness = WORK / "link_smoke.obj"
     compile_file(ROOT / "src/replacement/link_smoke.cpp", harness,
-                 TC["flags"], None, env)
+                 TC["flags"], env)
     output = WORK / "link-smoke.exe"
     run([TC["wine"], str(LINKER), "/NOLOGO", "/SUBSYSTEM:CONSOLE",
          "/OUT:" + win(output), *(win(obj) for obj in objects), win(harness),

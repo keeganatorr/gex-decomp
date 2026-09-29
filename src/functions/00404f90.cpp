@@ -17,7 +17,7 @@ extern int M1_004a2a80;
 extern const char s_Ended_MusicThread_by_termination_00454f78[];
 extern const char s_Ended_GameThread_by_termination_00454f54[];
 
-void __cdecl GEX_Target(void)
+void __cdecl FUN_00404f90_KillThreads(void)
 {
     DWORD start;
     DWORD exitCode;

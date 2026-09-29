@@ -4,7 +4,7 @@ extern "C" int DAT_004613a4;
 extern "C" unsigned short *PTR_DAT_00461198;
 extern "C" char DAT_004613a8;
 
-extern "C" void GEX_Target(char *param_1)
+extern "C" void FUN_0044a140_fpMathInnerInner(char *param_1)
 {
   char cVar1;
   int iVar2;

@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_004355D0(int obj, int param);
 
-extern "C" void __cdecl GEX_Target(int param_1, int param_2)
+extern "C" void __cdecl ob89Clid_0043cfc0(int param_1, int param_2)
 {
     FUN_004355D0(param_1, param_2);
 }

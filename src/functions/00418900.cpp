@@ -2,7 +2,7 @@ extern "C" int __cdecl GOB_GetHotSpot_00419c00(int* obj, int a, int b, int* px, 
 extern "C" int __cdecl GetGlueDist_0040f1d0(int level, int* obj);
 extern "C" int M1_CurrentLevel_004a2990;
 
-extern "C" int __cdecl GEX_Target(int param_1, int* param_2)
+extern "C" int __cdecl SCRIPT_SnapToContour_00418900(int param_1, int* param_2)
 {
     int local_8;
     int local_4;

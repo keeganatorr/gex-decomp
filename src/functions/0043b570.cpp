@@ -11,7 +11,7 @@ extern "C" { extern void** DAT_00464E14; }
 extern "C" { extern void** DAT_004A27FC; }
 extern "C" { extern void** DAT_00464E10; }
 
-extern "C" void __cdecl GEX_Target(void** param1)
+extern "C" void __cdecl FUN_0043b570_CallsGameFunctions2(void** param1)
 {
     void** ppGVar1 = FUN_004195D0(0x102, (int)DAT_00464E14[0x1e], (int)DAT_00464E14[0x1f], (int)DAT_00464E14[3]);
     if (ppGVar1 != 0)

@@ -18,7 +18,7 @@ extern ImageCache *gImageCache_00460e08;
 extern char s_RM_ExtraResolve_on_x_tile_d_00460f24[];
 extern char s_Tile_already_loaded_at_position_00460eec[];
 void __cdecl TracePrintf_Debug_00405390(const char *format, ...);
-void __cdecl GEX_Target(TilePTRStruct *tile)
+void __cdecl RM_ExtraResolve_00440750(TilePTRStruct *tile)
 {
     ImageCache *cache;
     int bank;

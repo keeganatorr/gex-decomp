@@ -4,7 +4,7 @@ extern "C" int DAT_004a2ad4;
 extern "C" int DAT_0045b08c;
 extern "C" int DAT_0045b090;
 
-extern "C" void __cdecl GEX_Target(int param1, int param2, int param3) {
+extern "C" void __cdecl FUN_0042e5e0(int param1, int param2, int param3) {
     void** ppGVar1 = (void**)FUN_004195D0(0x5c, param2, param3, DAT_004a2ad4);
     if (ppGVar1) {
         ppGVar1[0x14] = (void*)0x19;

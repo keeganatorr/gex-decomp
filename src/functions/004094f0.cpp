@@ -9,7 +9,7 @@ void *__cdecl memcpy(void *dst, const void *src, unsigned int count);
 extern unsigned char *gIDL_0047f000;
 int __cdecl CDIO_FileSeek_004092d0(int handle, int offset, int origin);
 int __cdecl CDIO_FileRead_00409250(int handle, void *buffer, unsigned int bytes);
-int __cdecl GEX_Target(GexLevFileStruct *file, void *buffer, unsigned int bytes)
+int __cdecl FILE_ReadMaybeFromIDL_004094f0(GexLevFileStruct *file, void *buffer, unsigned int bytes)
 {
     if (file->handle == 2) {
         memcpy(buffer, gIDL_0047f000 + file->offset, bytes);

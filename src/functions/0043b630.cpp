@@ -43,7 +43,7 @@ void __cdecl FUN_0043b550_GameFuncUnk(GXObject *gob);
 void __cdecl FUN_0043b570_CallsGameFunctions2(GXObject *gob);
 void __cdecl GOB_PutObjectBehindObject_00419bc0(GXObject *front, GXObject *behind);
 void __cdecl GOB_PutObjectInfrontOfObject_00419be0(GXObject *behind, GXObject *front);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob258DoIt_0043b630(GXObject *gob)
 {
     int i;
     if (PTR_00464e10)

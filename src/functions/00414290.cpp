@@ -15,7 +15,7 @@ typedef struct GXObject {
 extern "C" {
 void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
 void __cdecl PlayerPlatAirToSideCrawl_00414240(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl InitPlayerPlatAirToSideCrawl_00414290(GXObject *gex)
 {
     GOB_ResetState_00420bc0(gex);
     gex->gob_currentFrameIndex = 0;

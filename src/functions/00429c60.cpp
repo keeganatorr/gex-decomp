@@ -2,7 +2,7 @@
 struct Object { Object* next; Object* previous; int type; };
 struct List { Object* head; Object* tailSentinel; Object* tailPrevious; };
 extern "C" List objectLists_004a28a0[10];
-extern "C" Object* __cdecl GEX_Target(int type)
+extern "C" Object* __cdecl GOB_FindFirstWithType_00429c60(int type)
 {
     List* list = objectLists_004a28a0;
     do

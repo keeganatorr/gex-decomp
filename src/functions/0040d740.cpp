@@ -23,7 +23,7 @@ extern int DAT_00456228;
 void __cdecl GOB_SetObjectDisplayPriority_00419b80(GXObject *gob, int priority);
 char *__cdecl HelpBoxGetLine_0040d890(char *text, int *flags);
 int __cdecl TXT_PixelLength_0043fae0(char *text);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl HelpBoxComputeExtents_0040d740(GXObject *gob)
 {
     char *text;
     char *line;

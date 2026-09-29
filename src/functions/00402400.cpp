@@ -9,7 +9,7 @@ extern int DAT_004a2f74_TilesPixelBlue;
 extern unsigned char DAT_004a2b50_TRUETILESMAYBE[];
 extern int DAT_004a2fa0_TilesToDrawPointer;
 
-extern "C" int *__cdecl GEX_Target(unsigned char PixelRed, unsigned char PixelGreen, unsigned char PixelBlue, int ppvBitsPoss, int TileCount)
+extern "C" int *__cdecl FUN_00402400_InnerGraphicsTilesMostInner(unsigned char PixelRed, unsigned char PixelGreen, unsigned char PixelBlue, int ppvBitsPoss, int TileCount)
 {
     if (PixelRed == 0x80 && PixelGreen == 0x80 && PixelBlue == 0x80) {
         return (int *)(FUN_004A33AC + ppvBitsPoss * 0x20);

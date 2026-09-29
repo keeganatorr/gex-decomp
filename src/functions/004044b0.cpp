@@ -76,7 +76,7 @@ __declspec(dllimport) int __stdcall MoveWindow(HWND window, int x, int y, int wi
 __declspec(dllimport) HWND __stdcall GetForegroundWindow(void);
 }
 
-extern "C" void __cdecl GEX_Target(char *param_1, long *param_2)
+extern "C" void __cdecl FUN_004044b0_MoveWindow(char *param_1, long *param_2)
 {
     MCI_DGV_SET_PARMS setParams;
     MCI_DGV_STATUS_PARMS statusParams;

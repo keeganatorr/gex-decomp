@@ -16,7 +16,7 @@ extern int decl_pad_3;
 extern int decl_pad_4;
 extern int decl_pad_5;
 extern int __cdecl GetGlueDist_0040f1d0(void *, GXObject *);
-int __cdecl GEX_Target(void *level, GXObject *gob, int x, int y)
+int __cdecl FUN_00423d80(void *level, GXObject *gob, int x, int y)
 {
     int result;
     int xpos = gob->gob_xpos;

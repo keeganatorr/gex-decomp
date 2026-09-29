@@ -35,7 +35,7 @@ int __cdecl UTL_ReallyRandom_00428c80(int range);
 GXObject *__cdecl GOB_AddObject_004195d0(int type, int x, int y, void *loadData);
 void __cdecl GOB_PutObjectInfrontOfObject_00419be0(GXObject *behind, GXObject *front);
 void __cdecl GOB_Remove_00419a80(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl RemoteClid_0041aea0(GXObject *gob)
 {
     GXObject *spark;
     int i;

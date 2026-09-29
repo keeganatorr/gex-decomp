@@ -24,7 +24,7 @@ extern int DAT_00458548[][5];
 void __cdecl GOB_ResetState_00420bc0(GXObject *gob);
 void __cdecl FUN_004112e0_PlatCorner(GXObject *gex, unsigned int corner);
 void __cdecl PlayerSideOutside90Trans_00412290(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl InitPlayerSideOutside90Trans_004123c0(GXObject *gex)
 {
     int dir;
     GOB_ResetState_00420bc0(gex);

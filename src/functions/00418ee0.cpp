@@ -9,7 +9,7 @@ extern "C" {
 extern "C" unsigned int __cdecl FUN_00417F40(unsigned int**);
 extern "C" { extern int FUN_0049FB90; }
 extern "C" { extern int FUN_0045B808; }
-extern "C" uint * __cdecl GEX_Target(uint *param_1)
+extern "C" uint * __cdecl SCRIPT_GetGlobalArrayValue_00418ee0(uint *param_1)
 
 {
   uint uVar1;

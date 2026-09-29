@@ -17,7 +17,7 @@ void __cdecl EFECT_AddPuff_0042e480(int, int, unsigned int, int, unsigned int);
 void __cdecl InitPlayerRun_00424aa0(int *);
 void __cdecl InitPlayerRunTurn_00427340(int *);
 
-void __cdecl GEX_Target(int *p)
+void __cdecl PlayerRunSkidding_00426df0(int *p)
 {
     if (DAT_004A0280 == 0 && DAT_004A0281 == 0) {
         if (((p[0x1b] & 0x80000000u) != 0 && p[0x20] < 0) ||

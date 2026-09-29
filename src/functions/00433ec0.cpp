@@ -12,7 +12,7 @@ extern int DAT_0045b5e8;
 extern int FUN_00464210;
 extern unsigned int FUN_00464214[16];
 void __cdecl GOB_DisplayObjectScaleAndRotate_00441150(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_00433ec0(GXObject *gob)
 {
     unsigned short colors[31] = {
         0x801f, 0x801d, 0x801b, 0x8019, 0x8017, 0x8015, 0x8013, 0x8011,

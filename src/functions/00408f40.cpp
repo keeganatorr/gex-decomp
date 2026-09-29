@@ -50,7 +50,7 @@ extern char s_Option_Voice_004558cc[];
 extern char s_Option_Music_004558bc[];
 extern char s_Option_FullScreen_004558a8[];
 
-void __cdecl GEX_Target(void)
+void __cdecl SettingsSetFromRegistry_00408f40(void)
 {
     void *key;
     int sizeX;

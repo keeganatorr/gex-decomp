@@ -12,7 +12,7 @@ extern Blob32 DAT_0049fba0[];
 extern void* __cdecl FUN_00433590(void**, void*, void*, int);
 }
 
-extern "C" int __cdecl GEX_Target(void** param_1, int param_2)
+extern "C" int __cdecl FUN_0042e8b0_Call_Event_call(void** param_1, int param_2)
 {
     void* pSVar1;
 

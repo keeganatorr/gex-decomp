@@ -6,7 +6,7 @@ extern "C" unsigned long DAT_00463b68;
 extern "C" unsigned long * __cdecl FUN_00429c10_Object_unk(unsigned long);
 extern "C" unsigned long __cdecl FUN_00429c90_RemoteUnk(void);
 
-extern "C" __declspec(naked) void __cdecl GEX_Target(void)
+extern "C" __declspec(naked) void __cdecl FUN_0042a2e5_MapFunkUnk(void)
 {
     register unsigned long *GexObject;
     unsigned long *ppGVar2;

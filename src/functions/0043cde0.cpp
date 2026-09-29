@@ -6,7 +6,7 @@ extern "C" {
     extern void __cdecl FUN_00444590(void*);
 }
 
-extern "C" void __cdecl GEX_Target(void* p)
+extern "C" void __cdecl ob1Draw_0043cde0(void* p)
 {
     int esi = (int)p;
     int eax = *(int*)(esi + 0xe0);

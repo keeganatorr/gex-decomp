@@ -31,7 +31,7 @@ extern int DAT_00464ab8[64];
 extern int DAT_004648b8[64];
 extern int DAT_004647b8[64];
 extern void __cdecl GOB_DisplayObject_00444590(GXObject *);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_0043b210_GameFuncUnk(GXObject *gob)
 {
     int i, x, y;
     for (i = 0; i < 64; i++) {

@@ -4,7 +4,7 @@ extern "C" {
     extern void TXT_DrawPrint_0043f7f0(int, int);
 }
 
-extern "C" void GEX_Target(int xpos, int ypos, int a3, int a4)
+extern "C" void TXT_DrawPrintP_0043fa70(int xpos, int ypos, int a3, int a4)
 {
     gFontX_004a2af0 = xpos >> 16;
     gFontY_004a2aec = ypos >> 16;

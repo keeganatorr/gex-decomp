@@ -1,6 +1,6 @@
 extern "C" {
 extern void __cdecl FUN_00426CA0(void *);
-void __cdecl GEX_Target(int *object)
+void __cdecl PlayerAirToFaceCrawl_00414330(int *object)
 {
     object[0x26] += 1;
     if (object[0x26] >= 1) {

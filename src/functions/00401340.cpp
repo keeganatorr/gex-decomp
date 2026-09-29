@@ -6,7 +6,7 @@ extern int gFullscreen_0045103c;
 extern int gScreenResolution_00451038;
 extern int lpData_00487a04;
 extern int lpData_00487a08;
-void __cdecl GEX_Target(WindowRect *rect)
+void __cdecl FUN_00401340_CalculateWindowRect(WindowRect *rect)
 {
     int caption;
     memset(rect, 0, sizeof(*rect));

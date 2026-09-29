@@ -6,7 +6,7 @@ extern "C" const char WindowTitle_GEX[];
 extern "C" void* DAT_004875A0;
 extern "C" __declspec(dllimport) int __stdcall MessageBoxA(void* hWnd, const char* lpText, const char* lpCaption, unsigned int uType);
 
-extern "C" unsigned int GEX_Target(void)
+extern "C" unsigned int FUN_00405310_Fullscreen_Unk(void)
 {
     GameUnpause_004051d0();
     if (DAT_0045103C == 2) {

@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" { extern char DAT_004A2F50; }
 
-extern "C" void __cdecl GEX_Target(char param_1)
+extern "C" void __cdecl GFX_SetGraphicsInited_00445340(char param_1)
 {
     DAT_004A2F50 = param_1;
 }

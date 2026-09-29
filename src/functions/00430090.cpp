@@ -94,7 +94,7 @@ void __cdecl FUN_0042f720(GXObject *);
 void __cdecl FUN_0042f800(GXObject *, int, int);
 void __cdecl FUN_0042f860(GXObject *);
 void __cdecl GOB_SetObjectDisplayPriority_00419b80(GXObject *, int);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob229DoIt_00430090(GXObject *gob)
 {
     int op;
     int n;

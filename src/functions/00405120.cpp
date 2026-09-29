@@ -2,7 +2,7 @@ extern "C" {
 __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
 __declspec(dllimport) void __stdcall Sleep(unsigned long milliseconds);
 extern int DAT_004517e8_CurrentFrameCount;
-int __cdecl GEX_Target(void)
+int __cdecl UpdateTimer_00405120(void)
 {
     int now;
     int late;

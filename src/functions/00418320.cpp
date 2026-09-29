@@ -3,7 +3,7 @@
 extern "C" {
 extern void* DAT_0049FB94;
 
-extern "C" int __cdecl GEX_Target(int param_1, void** param_2)
+extern "C" int __cdecl SCRIPT_LinkObject_00418320(int param_1, void** param_2)
 {
     void* pGVar1;
     void* pGVar2;

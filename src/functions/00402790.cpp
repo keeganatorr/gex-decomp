@@ -13,7 +13,7 @@ extern const char s_DS_ReadFile_failed_00451698[];
 __declspec(dllimport) int __stdcall ReadFile(HANDLE, void *, DWORD, DWORD *, void *);
 __declspec(dllimport) void __stdcall OutputDebugStringA(const char *);
 
-void __cdecl GEX_Target(void)
+void __cdecl FUN_00402790_DS_Readfile(void)
 {
     DWORD bytesToRead;
     int remaining;

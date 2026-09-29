@@ -29,7 +29,7 @@ void __cdecl FUN_0040D5F0(int, int, char *, int);
 void __cdecl FUN_0040b950_VoiceInner(void);
 }
 
-extern "C" void __cdecl GEX_Target(unsigned long *p)
+extern "C" void __cdecl MapPlayerInit_0042b530(unsigned long *p)
 {
     unsigned long *bar;
     int i;

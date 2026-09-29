@@ -16,7 +16,7 @@ extern void **DAT_004a2b18_Draw1;
 extern void **DAT_004a2b14_Draw4;
 extern short DAT_004a2b20;
 void __cdecl FUN_00445350_CalculateTileOffset_Clean1(DR_MODE *p, int dfe, int dtd, int tpage, void *tw);
-void __cdecl GEX_Target(int unused, int x, int y, int w, int h, unsigned int colour, unsigned int flags)
+void __cdecl FUN_00444800_Tiles(int unused, int x, int y, int w, int h, unsigned int colour, unsigned int flags)
 {
     TILE *tile;
     DR_MODE *mode;

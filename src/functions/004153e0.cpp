@@ -8,7 +8,7 @@ extern int DAT_004588D8[];
 extern void __cdecl FUN_004252B0(int*);
 }
 
-extern "C" void __cdecl GEX_Target(int* param_1)
+extern "C" void __cdecl FUN_004153e0_Falling_unk(int* param_1)
 {
     int v2;
     int elem;

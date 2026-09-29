@@ -77,7 +77,7 @@ void __cdecl SetSoundEffectVolume_00401e20(int, int);
 void __cdecl SetVoiceVolume_00401e70(int, int);
 void __cdecl SetMusicVolume_00401ed0(int, int);
 
-int __cdecl GEX_Target(int startPage)
+int __cdecl FUN_00406fe0_InitWindowVars(int startPage)
 {
     PROPSHEETHEADER psh;
     PROPSHEETPAGE psp[4];

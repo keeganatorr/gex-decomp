@@ -6,7 +6,7 @@ extern "C" unsigned char DAT_004A2AF8;
 extern "C" unsigned char DAT_004A2AF9;
 extern "C" unsigned char DAT_004A2AFA;
 
-extern "C" unsigned int __cdecl GEX_Target(unsigned int color)
+extern "C" unsigned int __cdecl FUN_0043e2c0(unsigned int color)
 {
     if (color & 0x8000) {
         if ((color & 0xc0) == 0xc0)

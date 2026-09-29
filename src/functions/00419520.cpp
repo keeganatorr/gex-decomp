@@ -17,10 +17,10 @@ extern void* FUN_004A2864;
 extern void* FUN_004A2888;
 void __cdecl FUN_0040F2E0(void*, int);
 void __cdecl FUN_0041E7C0(void*);
-void __cdecl GEX_Target(void*);
+void __cdecl GOB_RemoveObject_00419520(void*);
 }
 
-extern "C" void __cdecl GEX_Target(void* gOb)
+extern "C" void __cdecl GOB_RemoveObject_00419520(void* gOb)
 {
     do {
         if ((*(int*)((char*)gOb + 0x6c) & 0x800000) != 0) {
@@ -35,7 +35,7 @@ extern "C" void __cdecl GEX_Target(void* gOb)
         if (gOb == PTR_004a2838) PTR_004a2838 = 0;
         *(int*)((char*)gOb + 0x6c) |= 0x100000;
         if (*(void**)((char*)gOb + 0x160) != 0) {
-            GEX_Target(*(void**)((char*)gOb + 0x160));
+            GOB_RemoveObject_00419520(*(void**)((char*)gOb + 0x160));
         }
         gOb = *(void**)((char*)gOb + 0x164);
     } while (gOb != 0);

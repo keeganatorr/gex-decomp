@@ -4,7 +4,7 @@
 // See docs/knowledge/symbol-numbering.md.
 extern "C" int decl_pad_0;
 extern "C" {
-int __cdecl GEX_Target(int a, int b)
+int __cdecl FUN_00442de0_GraphicsFlashingInner(int a, int b)
 {
     int ub;
     int ahi;

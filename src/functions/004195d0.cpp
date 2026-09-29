@@ -15,7 +15,7 @@ extern unsigned int obs_0045ca38[][6];
 extern int DAT_004A28A0;
 extern int DAT_004A27A4;
 
-void** __cdecl GEX_Target(int gObType, long xpos, long ypos, int gOb) {
+void** __cdecl GOB_AddObject_004195d0(int gObType, long xpos, long ypos, int gOb) {
     void** GexObject = FUN_0042CC20((void**)&DAT_004A27B0);
     if (GexObject != 0) {
         unsigned int* data = obs_0045ca38[gObType];

@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" { extern unsigned int DAT_0049FB90; }
 extern "C" void __cdecl FUN_0041A630(unsigned int);
-extern "C" unsigned int __cdecl GEX_Target(unsigned int param_1)
+extern "C" unsigned int __cdecl SCRIPT_CollectAnItem_00419060(unsigned int param_1)
 {
     FUN_0041A630(DAT_0049FB90);
     return param_1;

@@ -11,7 +11,7 @@ extern "C" { extern int DAT_0045A8C8[]; }
 extern "C" { extern int DAT_0045A9C8[]; }
 extern "C" { extern int DAT_0045AAC8[]; }
 
-extern "C" void __cdecl GEX_Target(unsigned int* param_1, unsigned int* param_2, unsigned int param_3)
+extern "C" void __cdecl FUN_00442e50_GraphicsFlashingInner2(unsigned int* param_1, unsigned int* param_2, unsigned int param_3)
 {
     unsigned int uVar1, uVar2, uVar5, uVar6, uVar7, uVar8, uVar9;
     unsigned int uVar11, uVar12, uVar19, uVar20;

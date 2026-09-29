@@ -16,7 +16,7 @@ extern "C" {
 // See docs/knowledge/symbol-numbering.md.
 extern int decl_pad_0;
 void __cdecl FUN_00434b10_EVENT_Collision_Unk(GXObject *gob, int *event);
-void __cdecl GEX_Target(GXObject *gob, int *event)
+void __cdecl CLID_GenericPlat_004355d0(GXObject *gob, int *event)
 {
     GXObject *parent;
     int x;

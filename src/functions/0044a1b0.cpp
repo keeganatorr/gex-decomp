@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" { extern char DAT_004613a8; }
 
-extern "C" void __cdecl GEX_Target(char* param_1)
+extern "C" void __cdecl FUN_0044a1b0_fpMathInnerInner(char* param_1)
 {
     char cVar1;
     char* pcVar2;

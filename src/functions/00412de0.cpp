@@ -13,7 +13,7 @@ extern unsigned char DAT_004A0293;
 extern unsigned char DAT_004A0294;
 extern unsigned char DAT_004A0295;
 
-void __cdecl GEX_Target(void** param1) {
+void __cdecl PlayerFaceUnspin_00412de0(void** param1) {
     FUN_00423800_pStateUnk(param1);
     if (DAT_00458C78 != 0 || DAT_004A0294 != 0)
         goto crawl;

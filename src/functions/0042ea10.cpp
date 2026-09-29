@@ -1,6 +1,6 @@
 extern "C" {
 extern int CAMERA_YPos_004a2a1c;
-void __cdecl GEX_Target(int y1, int y2, int y3, unsigned int order)
+void __cdecl FUN_0042ea10(int y1, int y2, int y3, unsigned int order)
 {
     switch (order) {
     case 1:

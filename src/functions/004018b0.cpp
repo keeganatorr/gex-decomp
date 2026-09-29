@@ -10,7 +10,7 @@ extern "C" int decl_pad_0;
 extern "C" int decl_pad_1;
 extern "C" __declspec(dllimport) int __stdcall ReadFile(void *, void *, unsigned long, unsigned long *, void *);
 
-extern "C" int GEX_Target(void *obj, void *hFile, int param3)
+extern "C" int FUN_004018b0_LoadVFX(void *obj, void *hFile, int param3)
 {
     int result;
     int b;

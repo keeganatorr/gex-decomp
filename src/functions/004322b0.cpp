@@ -4,10 +4,10 @@ void** __cdecl FUN_0041A380(void**);
 void __cdecl FUN_0041E7C0(void**);
 void __cdecl FUN_004322a0();
 
-void __cdecl GEX_Target(void** param1, int param2)
+void __cdecl FUN_004322b0(void** param1, int param2)
 {
-    if (param1[0x59]) GEX_Target((void**)param1[0x59], param2);
-    if (param1[0x58]) GEX_Target((void**)param1[0x58], param2);
+    if (param1[0x59]) FUN_004322b0((void**)param1[0x59], param2);
+    if (param1[0x58]) FUN_004322b0((void**)param1[0x58], param2);
     FUN_00431730(param1);
     param1[0x17] = 0;
     param1[0x19] = 0;

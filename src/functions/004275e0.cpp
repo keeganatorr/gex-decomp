@@ -16,7 +16,7 @@ extern unsigned char DAT_004A0294;
 extern unsigned char DAT_004A0295;
 extern unsigned char DAT_004A0293;
 
-void __cdecl GEX_Target(void** param1) {
+void __cdecl PlayerTailSlash_004275e0(void** param1) {
     if (DAT_004A0294 != 0 && DAT_004A0295 == 0) {
         FUN_00424B80(param1);
         return;

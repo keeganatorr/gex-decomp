@@ -4,7 +4,7 @@ extern "C" {
 extern "C" { extern int DAT_0045B570; }
 extern "C" void __cdecl FUN_0042E660(void*, int);
 
-extern "C" int __cdecl GEX_Target(int param_1, void** param_2)
+extern "C" int __cdecl SCRIPT_WhackWhack_00418c00(int param_1, void** param_2)
 {
     FUN_0042E660(param_2, DAT_0045B570);
     return param_1;

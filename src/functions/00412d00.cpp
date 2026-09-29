@@ -11,7 +11,7 @@ extern void __cdecl FUN_00420BC0(int *p);
 extern int __cdecl FUN_00423A50(int *p);
 extern void __cdecl FUN_00412B50(int *p);
 
-void __cdecl GEX_Target(int *param_1)
+void __cdecl InitPlayerFaceSpinAround_00412d00(int *param_1)
 {
     int pGVar1;
     int pGVar2;

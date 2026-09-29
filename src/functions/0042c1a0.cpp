@@ -8,7 +8,7 @@ typedef struct GXObject {
     Work7 gob_work7;   /* 0xb4 */
 } GXObject;
 extern "C" {
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_0042c1a0(GXObject *gob)
 {
     int diff;
     int distance;

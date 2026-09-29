@@ -1,5 +1,5 @@
 typedef unsigned int uint;
-void __cdecl GEX_Target(uint *destination, uint *source)
+void __cdecl __CopyMan(uint *destination, uint *source)
 {
     int count = 3;
     do {

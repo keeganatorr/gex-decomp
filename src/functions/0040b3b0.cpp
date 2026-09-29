@@ -21,7 +21,7 @@ extern int DAT_00462738_BlockNumber;
 extern int DAT_0046272c_LevFileUnk4;
 extern int DAT_00462720_LevFileUnk5;
 extern ReadRequest READ_REQUEST_2_ARRAY_00462740[9];
-void __cdecl GEX_Target(ReadCompletion *completion)
+void __cdecl BLOC_Loaded_0040b3b0(ReadCompletion *completion)
 {
     ReadRequest *request;
     BlockList *list;

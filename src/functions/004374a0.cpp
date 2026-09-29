@@ -3,7 +3,7 @@
 typedef unsigned char byte;
 typedef unsigned int uint;
 extern "C" {
-void __cdecl GEX_Target(uint *param_1,uint *param_2)
+void __cdecl FUN_004374a0(uint *param_1,uint *param_2)
 
 {
   uint uVar1;

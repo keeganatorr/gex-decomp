@@ -1,1 +1,1 @@
-extern "C" { extern void __cdecl FUN_00419520(void *); void __cdecl GEX_Target(int * object) { unsigned child = object[99]; if (child != 0 && (((unsigned)object[27] & 0x80000u) == 0)) { *(unsigned *)(child + 4) &= 0xffff7fffu; } FUN_00419520(object); } }
+extern "C" { extern void __cdecl FUN_00419520(void *); void __cdecl GOB_RemoveMapObject_00419840(int * object) { unsigned child = object[99]; if (child != 0 && (((unsigned)object[27] & 0x80000u) == 0)) { *(unsigned *)(child + 4) &= 0xffff7fffu; } FUN_00419520(object); } }

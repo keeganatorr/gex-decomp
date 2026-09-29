@@ -55,7 +55,7 @@ extern int DAT_00455be8;
 extern int DAT_00455bec;
 extern int DAT_00455bfc;
 extern int DAT_00455c00;
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl FUN_00415170_LevelLoading(GXObject *gob)
 {
     unsigned int *p;
     int kind;

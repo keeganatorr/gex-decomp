@@ -24,7 +24,7 @@ __declspec(dllimport) unsigned int __stdcall RealizePalette(HANDLE dc);
 __declspec(dllimport) HANDLE __stdcall CreateDIBitmap(HANDLE dc, BITMAPINFOHEADER *header, unsigned long init,
     const void *bits, BITMAPINFOHEADER *info, unsigned int usage);
 HANDLE __cdecl FUN_004055b0_GFXUnk(BITMAPINFOHEADER *info, int *colors);
-HANDLE __cdecl GEX_Target(HANDLE module, const char *name, HANDLE *palette)
+HANDLE __cdecl FUN_00405660_GFXUnk(HANDLE module, const char *name, HANDLE *palette)
 {
     HANDLE bitmap;
     HANDLE resource;

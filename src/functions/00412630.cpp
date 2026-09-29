@@ -33,7 +33,7 @@ int __cdecl FUN_00421f20_pStateUnk_Side(GXObject *gex);
 void __cdecl FUN_00421cd0_xpos_ypos_related(GXObject *gex);
 void __cdecl InitPlayerSideCrawl_00411160(GXObject *gex);
 void __cdecl InitPlayerSideJump_004138b0(GXObject *gex);
-void __cdecl GEX_Target(GXObject *gex)
+void __cdecl PlayerSideUTurn_00412630(GXObject *gex)
 {
     unsigned int flags;
     unsigned int dir;

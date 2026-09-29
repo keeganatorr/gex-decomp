@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_00441150(void*);
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl ob315Draw_0043a780(void* param_1)
 {
     int val = *(int*)((char*)param_1 + 0x9c);
     if (val == 1 || val == 3 || val == 4 || val == 5 || val == 6) {

@@ -1,6 +1,6 @@
 extern "C" { extern unsigned char BYTE_ARRAY_004a25d0[]; }
 extern "C" {
-int __cdecl GEX_Target(int SelectedTV, int param_2)
+int __cdecl FUN_00429cb0_RemoteTVSelect_Unk1(int SelectedTV, int param_2)
 {
   do {
     SelectedTV = SelectedTV + 1;

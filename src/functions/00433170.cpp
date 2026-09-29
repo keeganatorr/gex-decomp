@@ -16,7 +16,7 @@ extern "C" void __cdecl FUN_00432D40();
 extern "C" void __cdecl FUN_00432F30();
 extern "C" void __cdecl FUN_00432FA0();
 
-extern "C" void __cdecl GEX_Target(int *param_1, int *param_2)
+extern "C" void __cdecl ob95Clid_00433170(int *param_1, int *param_2)
 {
     int iVar3;
     unsigned int uVar4;

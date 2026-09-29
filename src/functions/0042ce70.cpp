@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void* __cdecl FUN_00440430(void*, void**, unsigned int, unsigned int);
 
-extern "C" void* __cdecl GEX_Target(int param_1, void** param_2, unsigned int param_3, unsigned int param_4)
+extern "C" void* __cdecl TILES_GetBlockAddress_0042ce70(int param_1, void** param_2, unsigned int param_3, unsigned int param_4)
 {
     if ((int)param_3 < 0) return (void*)0x0045afc8;
     if (*(int*)(param_1 + 4) <= (int)param_3) return (void*)0x0045afd8;

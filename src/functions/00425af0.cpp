@@ -5,7 +5,7 @@ extern void __cdecl FUN_00420960(void**);
 extern void __cdecl FUN_00425980(void**);
 extern int DAT_004a0218_pState;
 
-void __cdecl GEX_Target(void** p)
+void __cdecl InitPlayerJumpTailWhack_00425af0(void** p)
 {
     FUN_00420BC0(p);
     p[0x15] = 0;

@@ -3,5 +3,5 @@
 extern "C" {
 extern "C" int __cdecl FUN_0040FCE0(void**);
 extern "C" void __cdecl FUN_0040D740(void**);
-extern "C" void __cdecl GEX_Target(void** p) { if (!FUN_0040FCE0(p) && !((unsigned int)p[0x20] & 1)) FUN_0040D740(p); }
+extern "C" void __cdecl HelpBoxDoIt_0040d8e0(void** p) { if (!FUN_0040FCE0(p) && !((unsigned int)p[0x20] & 1)) FUN_0040D740(p); }
 }

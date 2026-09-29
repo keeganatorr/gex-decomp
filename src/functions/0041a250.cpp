@@ -3,7 +3,7 @@ extern int CAMERA_XPos_004a2a38;
 extern int CAMERA_YPos_004a2a1c;
 void __cdecl SND_PlaySound_00401b50(int, int, int, int, int, int);
 
-void __cdecl GEX_Target(void **gOb, int param2, int param3, int param4) {
+void __cdecl SND_PlayObSound_0041a250(void **gOb, int param2, int param3, int param4) {
     int iVar1;
     int iVar2;
     int iVar3;

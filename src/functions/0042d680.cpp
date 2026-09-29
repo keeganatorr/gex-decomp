@@ -10,7 +10,7 @@ typedef struct GXObject {
 } GXObject;
 extern "C" {
 extern void __cdecl FUN_0042cc70_Object_unk(int, GXObject *);
-int __cdecl GEX_Target(GXObject *gob)
+int __cdecl FUN_0042d680_ObjCallUnk(GXObject *gob)
 {
     gob->gob_ypos += 0x200000 - (gob->gob_checkYpos & 0x1fffff);
     gob->gob_bottomEdge = (gob->gob_checkYpos & 0xffe00000) + 0x200000;

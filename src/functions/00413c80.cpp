@@ -9,7 +9,7 @@ extern int FUN_004A2990;
 extern int DAT_004a27f8;
 extern int DAT_004a0218;
 
-void __cdecl GEX_Target(void** param1) {
+void __cdecl InitPlayerTailBounce_00413c80(void** param1) {
     FUN_00420BC0(param1);
     param1[0x1c] = (void*)3;
     param1[0x15] = (void*)3;

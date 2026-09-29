@@ -11,7 +11,7 @@ typedef struct IDirectSoundBufferVtbl {
 struct IDirectSoundBuffer { IDirectSoundBufferVtbl *lpVtbl; };
 extern "C" {
 void *__cdecl memcpy(void *dst, const void *src, unsigned int count);
-int __cdecl GEX_Target(IDirectSoundBuffer *buffer, unsigned long offset, unsigned char *data, unsigned long bytes)
+int __cdecl SND_FillDirectSoundBuffer_004017d0(IDirectSoundBuffer *buffer, unsigned long offset, unsigned char *data, unsigned long bytes)
 {
     void *ptr2;
     unsigned long bytes1;

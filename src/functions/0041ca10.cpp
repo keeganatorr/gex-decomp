@@ -6,7 +6,7 @@ extern ObjectList CollideObject_00463698[12];
 extern void __cdecl LST_Init_0042cc50(ObjectList *);
 extern void __cdecl LST_AddTail_0042cc00(ObjectList *, void *);
 extern void * __cdecl MEM_AllocMem_004096c0(int);
-void __cdecl GEX_Target(void)
+void __cdecl CLD_InitCollides_0041ca10(void)
 {
     char *entry;
     int n;

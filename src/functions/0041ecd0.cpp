@@ -78,7 +78,7 @@ int __cdecl GX_Resolve_004098d0(void);
 void __cdecl IDL_SetIdle_0041fdb0(int idle);
 int __cdecl IDL_Resolve_0041fd00(void);
 
-int __cdecl GEX_Target(LevelRequest *request)
+int __cdecl M1_StreamLevel_0041ecd0(LevelRequest *request)
 {
     int result;
     int data;

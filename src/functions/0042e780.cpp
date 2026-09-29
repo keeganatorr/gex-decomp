@@ -3,7 +3,7 @@ extern "C" int DAT_0045B104;
 extern "C" int DAT_0045B108;
 extern "C" int __cdecl abs(int);
 
-extern "C" void __cdecl GEX_Target(int *param_1)
+extern "C" void __cdecl FUN_0042e780(int *param_1)
 {
     int value;
     int scale;

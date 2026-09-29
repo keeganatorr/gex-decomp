@@ -5,7 +5,7 @@ extern "C" {
     extern int STRING_BufferSizeRemaining_00487fdc;
     unsigned int __cdecl strlen(const char *);
 
-    char * __cdecl GEX_Target(unsigned int param_1)
+    char * __cdecl STRING_Load_00404e00(unsigned int param_1)
     {
         char *p = STRING_CurrentBufferPtr_00487fd8;
         int len;

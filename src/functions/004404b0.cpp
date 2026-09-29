@@ -7,7 +7,7 @@ extern "C" int decl_pad_1;
 // Adapted from pc_decomp_backup/src/functions/FUN_004404B0.cpp
 // Historical source SHA256: 0d42736f65aef6d09ea772b17c84bb8830d8a3807c412c73c78e5d95df26d3fa
 extern "C" {
-extern "C" int __cdecl GEX_Target(int param_1, unsigned int param_2, unsigned int param_3)
+extern "C" int __cdecl FUN_004404b0(int param_1, unsigned int param_2, unsigned int param_3)
 {
     int iVar1;
 

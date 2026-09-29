@@ -3,5 +3,5 @@
 extern "C" {
 extern "C" { extern int DAT_00455C0C; }
 extern "C" int __cdecl FUN_0041FA80(int);
-extern "C" int __cdecl GEX_Target(int p1) { if (DAT_00455C0C) return FUN_0041FA80(p1); return 0; }
+extern "C" int __cdecl FUN_004206b0(int p1) { if (DAT_00455C0C) return FUN_0041FA80(p1); return 0; }
 }

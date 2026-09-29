@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_00436ED0();
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl RezInObject_004372f0(void** param_1)
 {
     param_1[0x18] = (void*)&FUN_00436ED0;
     param_1[0x2e] = 0;

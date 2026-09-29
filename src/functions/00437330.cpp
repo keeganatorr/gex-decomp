@@ -8,13 +8,13 @@ extern void __cdecl FUN_0041E7C0(void**);
 extern void __cdecl FUN_0041FA80(int);
 extern void __cdecl FUN_00437310(void**);
 
-void __cdecl GEX_Target(void** param_1)
+void __cdecl RezOutAll_00437330(void** param_1)
 {
     if (param_1[0x59] != (void*)0x0) {
-        GEX_Target((void**)param_1[0x59]);
+        RezOutAll_00437330((void**)param_1[0x59]);
     }
     if (param_1[0x58] != (void*)0x0) {
-        GEX_Target((void**)param_1[0x58]);
+        RezOutAll_00437330((void**)param_1[0x58]);
     }
     if (((unsigned int)param_1[0x38] & 0x10) == 0) {
         if (DAT_004A27FC != (void*)0x0) {

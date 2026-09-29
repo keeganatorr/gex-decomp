@@ -14,7 +14,7 @@ extern int DAT_004a298c_FileLoaded;
 extern char *gLevelDir_00455b7c;
 extern char *gIDLDir_00455b78;
 int __cdecl CDIO_OpenDirectory_00409350(void *idl, char *name, int index);
-void __cdecl GEX_Target(void)
+void __cdecl M1_OpenLevelDirs_0040a8c0(void)
 {
     int index;
     if (!DAT_004a2a28_FileLoaded2) {

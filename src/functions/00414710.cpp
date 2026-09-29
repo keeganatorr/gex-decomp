@@ -20,7 +20,7 @@ void __cdecl FUN_004250B0(int *);
 void __cdecl FUN_004146D0(int *);
 }
 
-extern "C" void __cdecl GEX_Target(int *player)
+extern "C" void __cdecl PlayerTongueUp_00414710(int *player)
 {
     unsigned int edges[10];
 

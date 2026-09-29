@@ -8,7 +8,7 @@ extern "C" void __cdecl FUN_004317E0(void**);
 extern "C" void __cdecl FUN_00437330(void**);
 extern "C" void __cdecl FUN_00419520(void**);
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl FUN_00432f40(void** param_1)
 {
     if (((unsigned int)param_1[0x1b] & 0x100000) == 0) {
         void** obj = (void**)param_1[0x28];

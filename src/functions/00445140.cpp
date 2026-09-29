@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_00444DC0(void*);
 
-extern "C" void __cdecl GEX_Target(void* first)
+extern "C" void __cdecl FUN_00445140_InnerGraphics(void* first)
 {
     unsigned int command = (unsigned int)first;
     while ((command & 0x00FFFFFF) != 0x00FFFFFF) {

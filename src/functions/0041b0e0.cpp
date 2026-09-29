@@ -13,7 +13,7 @@ extern "C" CurrentLevel* FUN_004A2990;
 extern "C" unsigned short* __cdecl FUN_004404b0(LevelData*, unsigned int, unsigned int);
 extern "C" int __cdecl FUN_00419FE0(CurrentLevel*, unsigned int, unsigned int);
 
-extern "C" void __cdecl GEX_Target(unsigned int param_1, unsigned int param_2) {
+extern "C" void __cdecl SetTileToAlternate_0041b0e0(unsigned int param_1, unsigned int param_2) {
     if ((int)param_1 < 0) return;
     if ((int)param_2 < 0) return;
     LevelData* lv = FUN_004A2990->levelData;

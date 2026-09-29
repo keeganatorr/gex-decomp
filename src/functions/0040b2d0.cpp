@@ -4,7 +4,7 @@ extern volatile int M1_004a2a84;
 extern volatile int M1_004a2a80;
 extern void __cdecl INPUT_GetActiveKeys_00404ba0(int);
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
-void __cdecl GEX_Target(void)
+void __cdecl FUN_0040b2d0_InputProcessing(void)
 {
     if (gFreezeGame_004a294c == 2) {
         M1_004a2a84 = 0;

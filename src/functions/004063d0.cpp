@@ -14,7 +14,7 @@ extern unsigned long DAT_0048776c_VideoThread;
 extern unsigned long DAT_004879f0_AudioThread;
 }
 
-extern "C" void __cdecl GEX_Target(int dialogType, const char *formatString, ...)
+extern "C" void __cdecl WinShowError_004063d0(int dialogType, const char *formatString, ...)
 {
     char *arguments;
     void *windowHandle;

@@ -35,7 +35,7 @@ int __cdecl UTL_ReallyRandom_00428c80(int);
 void __cdecl IDL_SetIdle_0041fdb0(int);
 int __cdecl IDL_Resolve_0041fd00(void);
 
-void __cdecl GEX_Target(int *p)
+void __cdecl PlayerStand_00423dc0(int *p)
 {
     int r1;
     int r2;

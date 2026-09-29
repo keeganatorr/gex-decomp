@@ -18,7 +18,7 @@ struct LoadRequest {
     int reserved;
 };
 
-extern "C" void __cdecl GEX_Target(void* levelFileHandle, int levNumber,
+extern "C" void __cdecl BLOC_LoadBlocks_0040b8c0(void* levelFileHandle, int levNumber,
                                         int* nextTilePtr, int* currentTilePtr)
 {
     *currentTilePtr = 0;

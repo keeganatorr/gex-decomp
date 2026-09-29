@@ -33,7 +33,7 @@ void __cdecl FUN_00406fe0_InitWindowVars(int);
 int __cdecl FUN_00403030_Registry(int);
 void __cdecl FUN_00402fb0(void);
 
-int __cdecl GEX_Target(void *hwnd, unsigned int msg, unsigned int wParam)
+int __cdecl FUN_004032a0_WM_COMMAND(void *hwnd, unsigned int msg, unsigned int wParam)
 {
     switch (wParam & 0xffff) {
     case 0x9c41:

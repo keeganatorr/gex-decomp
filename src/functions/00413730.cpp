@@ -33,7 +33,7 @@ void __cdecl FUN_004213c0(int level, GXObject *gob);
 int __cdecl FUN_004212d0_pStateUnk_yVel(GXObject *gob);
 int __cdecl FUN_004215d0_pStateUnk_Jump(GXObject *gob, int speed);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl PlayerSideJump_00413730(GXObject *gob)
 {
     gob->save80 = gob->newA8;
     gob->save8c = gob->newAC;

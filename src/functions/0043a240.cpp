@@ -42,7 +42,7 @@ extern GXObject *DAT_00464704;
 extern GXObject *gPlayerObject_004a27fc;
 }
 
-extern "C" void __cdecl GEX_Target(GXObject *param_1)
+extern "C" void __cdecl ob315Init_0043a240(GXObject *param_1)
 {
     GXObject **slot;
     int index;

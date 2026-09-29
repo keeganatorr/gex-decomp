@@ -17,7 +17,7 @@ extern M1TileSet* M1_TileSets_00463740[];
 extern M1Tile gTiles_004a02f0[];
 extern int M1_DidLastLoadSucceed_00463840;
 
-void GEX_Target(void)
+void M1_ProcessTileAnims_0041f7a0(void)
 {
     M1TileSet** gTilesPTR = M1_TileSets_00463740;
     do {

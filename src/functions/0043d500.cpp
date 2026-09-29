@@ -10,7 +10,7 @@ extern "C" {
     extern GXObject *gPlayerObject_004a27fc;
     void PlayerDamage_00417b70(GXObject **param_1);
 
-    void GEX_Target(GXObject **param_1, int *param_2) {
+    void ob121Clid_0043d500(GXObject **param_1, int *param_2) {
         if (*param_2 != 0) {
             unsigned int uVar2 = param_1[0x5c]->gob_node.nd_next & 0xffff;
             unsigned int uVar1 = param_1[0x5d]->gob_node.nd_next & 0xffff;

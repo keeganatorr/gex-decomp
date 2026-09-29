@@ -32,7 +32,7 @@ void __cdecl ob231DoIt_00430e20(GXObject *gob);
 GXObject *__cdecl GOB_AddObject_004195d0(int type, int x, int y, void *loadData);
 void __cdecl GOB_PutObjectInfrontOfObject_00419be0(GXObject *behind, GXObject *front);
 void __cdecl RezInObject_004372f0(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob234DoIt_00431470(GXObject *gob)
 {
     GXObject *copy;
     if (gob->gob_work0 == 0x400) {

@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void __cdecl FUN_00405390(const char* fmt, ...);
 
-extern "C" unsigned int __cdecl GEX_Target()
+extern "C" unsigned int __cdecl ReadBitsFromAnalog_0040f380()
 {
     FUN_00405390((const char*)0x00457CC8);
     return 0;

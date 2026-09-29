@@ -94,7 +94,7 @@ extern int decl_pad_10;
 extern int decl_pad_11;
 GXFrame *__cdecl GOB_GetCurrentFrameWithDefault_0041a380(GXObject *gob);
 void __cdecl CLD_ApplyAngleToPoints_0041cc70(CLDPoints *points, int x, int y, int a, int b, unsigned int c, int xScale, int yScale);
-int __cdecl GEX_Target(GXObject *gob, int a, int b, unsigned int c, CLDPoints *points)
+int __cdecl CLD_ComputeAnglePointsWithFrame_0041d0e0(GXObject *gob, int a, int b, unsigned int c, CLDPoints *points)
 {
     GXObject *parent;
     int originalX;

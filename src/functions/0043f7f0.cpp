@@ -64,7 +64,7 @@ extern unsigned char DAT_004a2afa_InitUnk6;
 int __cdecl abs(int);
 unsigned short __cdecl FUN_0043ecf0_SelectTile_Clean1(int graphics);
 void __cdecl FUN_00445350_CalculateTileOffset_Clean1(DR_MODE *p, int dfe, int dtd, int tpage, void *tw);
-void __cdecl GEX_Target(char *s)
+void __cdecl TXT_DrawPrint_0043f7f0(char *s)
 {
     unsigned short clut;
     DR_MODE *dm;

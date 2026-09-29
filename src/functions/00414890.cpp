@@ -6,7 +6,7 @@ extern "C" void __cdecl FUN_00414710(void**);
 extern "C" { extern unsigned char DAT_004A0293; }
 extern "C" { extern void** DAT_004A2838; }
 
-extern "C" void __cdecl GEX_Target(void** param_1)
+extern "C" void __cdecl InitPlayerTongueUp_00414890(void** param_1)
 {
     FUN_00420BC0(param_1);
     param_1[0x1c] = (void*)0x27;  

@@ -5,7 +5,7 @@ extern "C" void __cdecl FUN_00420BC0(void*);
 extern "C" int __cdecl FUN_004218A0(void*);
 extern "C" void __cdecl FUN_00412F40(void*);
 
-extern "C" void __cdecl GEX_Target(void* param_1)
+extern "C" void __cdecl InitPlayerSideTongueLash90_00413050(void* param_1)
 {
     int tmp;
 

@@ -12,7 +12,7 @@ typedef struct GXObject {
 extern "C" {
 extern void __cdecl FUN_0042e850(GXObject *);
 extern void __cdecl GOB_DisplayObjectScaleAndRotate_00441150(GXObject *);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob230Draw_00430d70(GXObject *gob)
 {
     int xpos = gob->gob_xpos;
     int ypos = gob->gob_ypos;

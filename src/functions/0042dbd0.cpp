@@ -21,7 +21,7 @@ extern int decl_pad_2;
 extern TileAttribute DAT_0045B9A0[];
 void __cdecl FUN_0042cc70_Object_unk(int reason, GXObject *object);
 int __cdecl FUN_0042d680_ObjCallUnk(GXObject *gob, unsigned short *block);
-int __cdecl GEX_Target(GXObject *gob, unsigned short *block)
+int __cdecl FUN_0042dbd0_ObjCallUnk(GXObject *gob, unsigned short *block)
 {
     int xoffset;
     int ypos;

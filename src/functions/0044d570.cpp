@@ -2,7 +2,7 @@ typedef unsigned char byte;
 typedef unsigned short ushort;
 typedef unsigned int uint;
 extern "C" {
-ushort __cdecl GEX_Target(uint param_1)
+ushort __cdecl __hw_cw(uint param_1)
 
 {
   ushort uVar1;

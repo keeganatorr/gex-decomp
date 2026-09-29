@@ -6,7 +6,7 @@ extern "C" {
     void FUN_00406C30(void);
 }
 
-extern "C" void GEX_Target(void)
+extern "C" void FUN_004051a0_WindowDrawing2(void)
 {
     if (GetUpdateRect(DAT_004875A0, 0, 0)) {
         UpdateWindow(DAT_004875A0);

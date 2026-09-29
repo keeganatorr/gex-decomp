@@ -28,7 +28,7 @@ __declspec(dllimport) unsigned long __stdcall mciSendCommandA(unsigned int, unsi
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
 __declspec(dllimport) int __stdcall MoveWindow(void *, int, int, int, int, int);
 
-void __cdecl GEX_Target(void)
+void __cdecl FUN_004048e0_Window(void)
 {
     GenericParams generic;
     PutParams put;

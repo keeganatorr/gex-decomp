@@ -64,7 +64,7 @@ int __cdecl GOB_LandedOnContours_0041a0a0(GXObject *gob, int offset);
 void __cdecl RezInObject_004372f0(GXObject *gob);
 void __cdecl ClearStartDoor_0041a600(void);
 void __cdecl GOB_Remove_00419a80(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl RemoteDoIt_0041ac70(GXObject *gob)
 {
     gob->gob_xold = gob->gob_xpos;
     gob->gob_yold = gob->gob_ypos;

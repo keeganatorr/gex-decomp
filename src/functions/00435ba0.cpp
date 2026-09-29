@@ -6,7 +6,7 @@ extern int FUN_004A2AC8;
 int __cdecl FUN_0040FCE0(void**);
 void __cdecl FUN_00419A80(void**);
 
-void __cdecl GEX_Target(void** param_1)
+void __cdecl CollectibleDoIt_00435ba0(void** param_1)
 {
     void* pGVar1;
     int iVar2;

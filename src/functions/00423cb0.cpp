@@ -12,7 +12,7 @@ extern "C" { extern void* DAT_004A2990; }
 extern "C" { extern void* DAT_004A2AD4; }
 extern "C" { extern int DAT_004A0260; }
 
-extern "C" void __cdecl GEX_Target(void** objectType)
+extern "C" void __cdecl PlayerOldMan_00423cb0(void** objectType)
 {
     int iVar1;
 

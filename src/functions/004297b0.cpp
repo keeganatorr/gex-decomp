@@ -2,7 +2,7 @@ extern "C" {
     extern char DAT_0045ACAC[];
     extern void __cdecl FUN_00405390(int, int);
 
-    int __cdecl GEX_Target(unsigned char *passwordList, int bitOffset, int bitCount)
+    int __cdecl PasswordDecodeGetBits_004297b0(unsigned char *passwordList, int bitOffset, int bitCount)
     {
         int iVar2;
         int iVar3;

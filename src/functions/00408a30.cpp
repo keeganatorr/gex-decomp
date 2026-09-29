@@ -22,7 +22,7 @@ __declspec(dllimport) int __stdcall DeleteObject(void *object);
 __declspec(dllimport) int __stdcall MoveToEx(void *dc, int x, int y, void *point);
 __declspec(dllimport) int __stdcall LineTo(void *dc, int x, int y);
 extern long DAT_004626d0;
-long __stdcall GEX_Target(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
+long __stdcall FUN_00408a30(void *hwnd, unsigned int msg, unsigned int wParam, long lParam)
 {
     PAINTSTRUCT ps;
     RECT rc;

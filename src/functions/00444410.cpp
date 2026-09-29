@@ -3,7 +3,7 @@ typedef struct RezColours { unsigned short colour[14]; } RezColours;
 extern int DAT_0047edb0_Tiles3;
 extern int gTimer_004a2ac8;
 extern volatile unsigned short DAT_004610a0[16];
-void __cdecl GEX_Target(unsigned short *plut)
+void __cdecl RezzifyPLUT_00444410(unsigned short *plut)
 {
     unsigned short *header;
     unsigned short first;

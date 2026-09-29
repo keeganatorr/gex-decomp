@@ -13,7 +13,7 @@ typedef struct GexTileStruct {
     BlockAnim *anims;                /* 0x1c */
 } GexTileStruct;
 extern "C" {
-void __cdecl GEX_Target(GexTileStruct *level)
+void __cdecl M1_ProcessBlockAnims_0041f710(GexTileStruct *level)
 {
     BlockAnim *anim;
     WallCollisionStruct *frame;

@@ -23,7 +23,7 @@ extern void *GEX_pGlob_004a2ad4;
 extern GXObject *gPlayerObject_004a27fc;
 GXObject *__cdecl GOB_AddObject_004195d0(int type, int x, int y, void *loadData);
 void __cdecl GOB_SetObjectDisplayPriority_00419b80(GXObject *gob, unsigned int priority);
-void __cdecl GEX_Target(int x, int y, unsigned int flags, int angle, unsigned int priority)
+void __cdecl EFECT_AddPuff_0042e480(int x, int y, unsigned int flags, int angle, unsigned int priority)
 {
     GXObject *puff;
     puff = GOB_AddObject_004195d0(0x5c, x, y, GEX_pGlob_004a2ad4);

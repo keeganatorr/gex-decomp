@@ -2,7 +2,7 @@ extern "C" { void __cdecl FUN_00441150(void*); }
 struct GXObject;
 extern "C" {
 void __cdecl
-GEX_Target
+GOB_DisplayObjectAtPos_0041a030
           (GXObject **param_1,GXObject *param_2,GXObject *param_3,GXObject *param_4,
           GXObject *param_5)
 

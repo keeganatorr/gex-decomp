@@ -25,7 +25,7 @@ extern int decl_pad_9;
 extern GXObject *ListType_ARRAY_004a28a0[];
 extern GXObject *DAT_004a2918_LevelObjectsListEnd;
 
-GXObject * __cdecl GEX_Target(int SelectedTV)
+GXObject * __cdecl RemoteFindWithLevel_00429b40(int SelectedTV)
 {
     GXObject *gOb_CurrentObject;
     GXObject ***gOb_List;

@@ -6,7 +6,7 @@ extern "C" { extern int DAT_004A2F6C; }
 extern "C" { extern int DAT_004A2F78; }
 extern "C" { extern unsigned short* DAT_004A33AC; }
 
-extern "C" int __cdecl GEX_Target(int param_1, int param_2, unsigned int param_3, unsigned int param_4,
+extern "C" int __cdecl FUN_00449500_InnerGraphicsTiles1_Tiles1(int param_1, int param_2, unsigned int param_3, unsigned int param_4,
     int param_5, int param_6, unsigned int param_7, int param_8)
 {
     int iVar1 = param_2 >> 16;

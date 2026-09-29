@@ -12,7 +12,7 @@ extern "C" { extern unsigned int DAT_00462C94; }
 extern "C" { extern voidfunc DAT_00462C90; }
 extern "C" { extern int DAT_00462C8C; }
 
-extern "C" void __cdecl GEX_Target(int param_1)
+extern "C" void __cdecl CheckIdle_0040f440(int param_1)
 {
     int iVar1;
 

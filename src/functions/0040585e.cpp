@@ -5,7 +5,7 @@ extern int DAT_00487FC4;
 extern int DAT_00487FC8;
 extern int DAT_00487FCC;
 
-extern "C" int __cdecl GEX_Target(int hWnd, int msg, int wParam, int lParam)
+extern "C" int __cdecl FUN_0040585e_Drawing(int hWnd, int msg, int wParam, int lParam)
 {
     int LVar1;
     int hdc;

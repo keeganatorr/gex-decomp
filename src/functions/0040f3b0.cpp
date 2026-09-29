@@ -4,7 +4,7 @@ extern "C" {
 extern "C" void __cdecl FUN_00405390(const char *fmt, ...);
 extern "C" { extern const char DAT_00457D68[]; }
 
-extern "C" unsigned int __cdecl GEX_Target()
+extern "C" unsigned int __cdecl ReadBitsFromUnknown_0040f3b0()
 {
     FUN_00405390(DAT_00457D68);
     return 0;

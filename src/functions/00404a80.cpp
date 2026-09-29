@@ -4,7 +4,7 @@ extern "C" {
     __declspec(dllimport) unsigned int __stdcall mciSendCommandA(unsigned int, unsigned int, unsigned int, unsigned int);
 }
 
-extern "C" void GEX_Target()
+extern "C" void FUN_00404a80_StopMCIMedia()
 {
     if (DAT_00454FC8 > 8) return;
     int result;

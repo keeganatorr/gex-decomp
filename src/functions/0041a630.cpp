@@ -1,6 +1,6 @@
 extern "C" {
 extern unsigned int DAT_004A2660[6];
-void __cdecl GEX_Target(unsigned int value)
+void __cdecl CollectAnItem_0041a630(unsigned int value)
 {
     int index = 0;
     unsigned int *slot = DAT_004A2660;

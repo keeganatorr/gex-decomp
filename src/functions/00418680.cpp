@@ -2,7 +2,7 @@ extern "C" {
 extern int DAT_0049FB90;
 extern void** DAT_004A27FC;
 
-int __cdecl GEX_Target(int param_1, void** param_2)
+int __cdecl SCRIPT_TrackGXDiag_00418680(int param_1, void** param_2)
 {
     int dx = (int)DAT_004A27FC[0x1e] - (int)param_2[0x1e];
     int dy = (int)DAT_004A27FC[0x1f] - (int)param_2[0x1f];

@@ -3,7 +3,7 @@ extern "C" void __cdecl FUN_0044A280(double*, char*, int, int);
 extern "C" void __cdecl FUN_0044A3C0(double*, char*, int);
 extern "C" void __cdecl FUN_0044A4C0(double*, char*, int, int);
 
-extern "C" void __cdecl GEX_Target(double* param_1, char* param_2, int param_3, int param_4, int param_5)
+extern "C" void __cdecl FUN_0044a5d0_fpMathInnerInner(double* param_1, char* param_2, int param_3, int param_4, int param_5)
 {
     if (param_3 != 0x65 && param_3 != 0x45) {
         if (param_3 == 0x66) {

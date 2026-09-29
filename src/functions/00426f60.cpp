@@ -1,7 +1,7 @@
 extern "C" {
 extern void __cdecl FUN_00420BC0(void *);
 extern void __cdecl FUN_00426DF0(void *);
-void __cdecl GEX_Target(int *object)
+void __cdecl InitPlayerRunSkidding_00426f60(int *object)
 {
     FUN_00420BC0(object);
     object[0x1c] = 0x19;

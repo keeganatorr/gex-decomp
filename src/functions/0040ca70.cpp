@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" void** __cdecl FUN_0040C110(int, int);
 extern "C" { extern int DAT_00456034; }
-extern "C" void __cdecl GEX_Target(void** param1, int* param2) {
+extern "C" void __cdecl FUN_0040ca70(void** param1, int* param2) {
     void** ppGVar1 = FUN_0040C110(0x7b, (int)param1[0x2a]);
     ppGVar1[0x15] = (void*)-1;
     if ((int)ppGVar1[0x2a] > 0) {

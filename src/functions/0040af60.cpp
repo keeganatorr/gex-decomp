@@ -7,7 +7,7 @@ void __cdecl FUN_0040ab60_MainGame_Clean1(void);
 void __cdecl FUN_0040abd0_TransitionMenu_and_Setup_Load_Next_Level(void);
 void __cdecl M1_GameLoop_0040ad40(void);
 void __cdecl FUN_004099b0_CloseMusic(int stop);
-void __cdecl GEX_Target(void)
+void __cdecl GEX_RunGameLoop_0040af60(void)
 {
     int quit;
     int level;

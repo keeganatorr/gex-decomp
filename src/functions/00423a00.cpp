@@ -6,7 +6,7 @@ typedef struct GXObject {
 extern "C" {
 extern unsigned char DAT_004a2820[];
 extern void __cdecl FUN_00423780_pStateUnk(GXObject *);
-int __cdecl GEX_Target(GXObject *gob)
+int __cdecl FUN_00423a00_pStateUnk(GXObject *gob)
 {
     int count, i;
     FUN_00423780_pStateUnk(gob);

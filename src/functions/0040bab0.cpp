@@ -17,7 +17,7 @@ extern int gMainState_004a2970;
 extern int gGameState_00455c3c;
 void __cdecl GOB_DisplayObjectAtPos_0041a030(GXObject *gob, int group, int frame, int x, int y);
 void __cdecl FUN_0040b9f0_Unk(void);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob109Draw_0040bab0(GXObject *gob)
 {
     int frame;
     frame = gob->gob_work0 == 3 ? gob->gob_work3 >> 16 : 0;

@@ -66,7 +66,7 @@ int __cdecl FUN_00423960_pStateUnk(GXObject *);
 int __cdecl FUN_004239b0_pStateUnk(GXObject *);
 int __cdecl FUN_00423a00_pStateUnk(GXObject *);
 
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl PlayerFaceStick_00426690(GXObject *gob)
 {
     int animSpeed;
     int dy;

@@ -10,7 +10,7 @@ extern "C" {
     void __cdecl FUN_00421cd0_xpos_ypos_related(void**);
     void __cdecl FUN_00411160(void**);
 
-    void __cdecl GEX_Target(void** param_1)
+    void __cdecl PlayerSideSwallow_00415080(void** param_1)
     {
         if ((DAT_004a0295 != 0 || DAT_004a0294 != 0) && DAT_004a0293 == 0) {
             FUN_00422360_COLLISION_HEALTHLOSTINHERE(param_1);

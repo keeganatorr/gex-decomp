@@ -53,7 +53,7 @@ void __cdecl SetTileToAlternate_0041b0e0(int, int);
 int *__cdecl GOB_AddObject_004195d0(int, int, int, void *);
 void __cdecl GOB_SetObjectDisplayPriority_00419b80(int *, int);
 
-int __cdecl GEX_Target(int x, int y)
+int __cdecl PlayerTryBreakStuff_0041b140(int x, int y)
 {
     int rows;
     int cols;

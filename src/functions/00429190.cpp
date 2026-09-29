@@ -11,7 +11,7 @@ extern "C" int decl_pad_4;
 extern "C" int decl_pad_5;
 int __cdecl abs(int);
 
-int __cdecl GEX_Target(int param_1, int param_2, int param_3, int param_4)
+int __cdecl FUN_00429190(int param_1, int param_2, int param_3, int param_4)
 {
     int dx;
     unsigned int flags = 0;

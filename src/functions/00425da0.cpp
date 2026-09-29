@@ -8,7 +8,7 @@ void __cdecl FUN_00425CF0(void**);
 extern int FUN_004A2990;
 extern int DAT_004a27f8;
 
-void __cdecl GEX_Target(void** param1) {
+void __cdecl InitPlayerStopFalling_00425da0(void** param1) {
     FUN_00420BC0(param1);
     param1[0x15] = 0;
     param1[0x23] = 0;

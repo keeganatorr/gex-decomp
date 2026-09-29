@@ -52,7 +52,7 @@ void __cdecl FUN_00420D40(void);
 void __cdecl SND_PlaySound_0041a340(GXObject *, int);
 void __cdecl GOB_PutObjectInfrontOfObject_00419be0(GXObject *, GXObject *);
 
-void __cdecl GEX_Target(GXObject *p)
+void __cdecl PlayerDraw_00417500(GXObject *p)
 {
     int hy;
     int hx;

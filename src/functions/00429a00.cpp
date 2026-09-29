@@ -18,7 +18,7 @@ extern int decl_pad_2;
 extern int decl_pad_3;
 extern unsigned char BYTE_ARRAY_004a2540[];
 extern int DAT_0045acc0;
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob220Init_00429a00(GXObject *gob)
 {
     int tv = gob->gob_work1;
     if (tv == -1)

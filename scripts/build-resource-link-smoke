@@ -24,7 +24,7 @@ def main() -> None:
     command = ["lld-link", "/nologo", "/subsystem:console", "/safeseh:no",
                "/nodefaultlib", "/out:" + str(output),
                *(str(WORK / name) for name in (
-                   "00420d30.obj", "00418e20.rebound.obj", "0041fbc0.obj",
+                   "00420d30.obj", "00418e20.obj", "0041fbc0.obj",
                    "link_smoke.obj")),
                str(ROOT / ".work/replacement-data/image_resources.obj"),
                str(crt / "libc.lib"), str(crt / "oldnames.lib"), str(kernel32)]

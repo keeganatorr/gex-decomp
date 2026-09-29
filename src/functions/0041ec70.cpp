@@ -7,7 +7,7 @@ extern "C" void __cdecl FUN_0040B8C0(void*, int, int, int*);
 
 extern "C" { extern const char DAT_00459730[]; }
 
-extern "C" int __cdecl GEX_Target(
+extern "C" int __cdecl M1_OpenLevelFile_0041ec70(
     void* levelTileStruct, int sectionType, int levelDataPtr, int* outputDataPtr)
 {
     union {

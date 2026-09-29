@@ -30,7 +30,7 @@ extern "C" {
 extern int decl_pad_0;
 extern int level_004a2964;
 void __cdecl GOB_DisplayObject_00444590(GXObject *gob);
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob278Draw_0040e570(GXObject *gob)
 {
     unsigned short *src;
     unsigned short *dst;

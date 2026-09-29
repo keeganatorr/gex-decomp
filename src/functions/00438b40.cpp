@@ -5,7 +5,7 @@ extern char DAT_0045f088[];
 extern char s_event_ledgeright_0045f0e4[];
 }
 
-extern "C" int GEX_Target(int param_1)
+extern "C" int event_ledgeright_00438b40(int param_1)
 {
     if ((*(unsigned int *)(param_1 + 0x6c) & 0x1f000000) == 0x6000000) {
         if (DAT_00455c54_DebugVar > 1) {

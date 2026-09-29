@@ -2,7 +2,7 @@ extern "C" {
 extern "C" void __cdecl FUN_00423780_pStateUnk(void**);
 extern "C" char DAT_004a2848[];
 
-extern "C" int __cdecl GEX_Target(void** param1) {
+extern "C" int __cdecl FUN_00423910_pStateUnk(void** param1) {
     int* p = (int*)param1;
     FUN_00423780_pStateUnk(param1);
     int limit = ((p[0x31] + 0x200000) & 0x400000) == 0 ? 4 : 3;

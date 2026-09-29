@@ -39,7 +39,7 @@ extern int decl_pad_11;
 extern int decl_pad_12;
 extern GXObject *gPlayerPlatform_004a2864;
 int __cdecl CLD_ComputeAngleEdges_0041cb80(GXObject *platform, AngleEdge *edge);
-int __cdecl GEX_Target(int unused, AngleEdge *edge, int *left, int *right)
+int __cdecl FUN_00411230(int unused, AngleEdge *edge, int *left, int *right)
 {
     Contour *contour;
     int index;

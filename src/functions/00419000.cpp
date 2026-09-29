@@ -2,7 +2,7 @@
 // Historical source SHA256: 403749992ee0d834120e326b961ec5e2d94dcb70ee3cd05b532682ec4fee81ce
 extern "C" {
 extern "C" void __cdecl FUN_0040BC70(void*, void*, unsigned int, int*, int*, int, char*, void**);
-extern "C" unsigned char* __cdecl GEX_Target(unsigned char* param1, void** param2) {
+extern "C" unsigned char* __cdecl SCRIPT_PrintWithFont_00419000(unsigned char* param1, void** param2) {
     unsigned char* p = param1;
     unsigned int val = p[0];
     unsigned int idx = p[1];

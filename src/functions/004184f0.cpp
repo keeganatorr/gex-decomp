@@ -3,7 +3,7 @@
 extern "C" {
 extern "C" { extern void* DAT_00458C90[]; }
 
-extern "C" unsigned char* __cdecl GEX_Target(unsigned char* param_1, void* param_2)
+extern "C" unsigned char* __cdecl SCRIPT_SetDoitRoutine_004184f0(unsigned char* param_1, void* param_2)
 {
     unsigned int idx;
     unsigned char* result;

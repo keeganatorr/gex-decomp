@@ -16,7 +16,7 @@ typedef struct GXObject {
 } GXObject;
 extern "C" {
 extern int M1_IsInMap_004a2a7c;
-void __cdecl GEX_Target(GXObject *gob)
+void __cdecl ob109Init_0040ba50(GXObject *gob)
 {
     M1_IsInMap_004a2a7c = 1;
     gob->gob_work1 = 0x40;
