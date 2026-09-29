@@ -27,7 +27,7 @@ Windows PE link work with this toolchain. It does not establish whole-game
 linkability or gameplay parity.
 
 `./scripts/assess-replacement-link` is the current end-to-end source-only
-build assessment. It compiles all **1,206** current function files with their
+build assessment. It compiles all **1,219** current function files with their
 Ghidra-based exported names and per-function C/C++ flags. It changes COFF
 *symbol references* to the exports at their justified addresses, assembles
 `src/replacement/image_data.s` and
@@ -37,11 +37,11 @@ reconstructed `WinMain_00405bf0` and VC4's `WinMainCRTStartup`. The executable
 and all objects stay under `.work/`.
 The command exits 2 while unresolved externals remain.
 
-At this checkpoint all 1,206 function sources compile. The normalization
-resolved 1,154 remaining function-name references and 3,547 data-name
+At this checkpoint all 1,219 function sources compile. The normalization
+resolved 1,161 remaining function-name references and 3,547 data-name
 references to shared address identities. There are **zero duplicate global
-definitions**. The real game-entry LLD link reports **49 unresolved externals**;
-the diagnostic LLD link reports 49 and VC4 LINK reports 50 (the latter does not
+definitions**. The real game-entry LLD link reports **36 unresolved externals**;
+the diagnostic LLD link reports 36 and VC4 LINK reports 37 (the latter does not
 supply LLD's `___ImageBase` symbol), down from 1,748 before
 source/data normalization. The formerly largest call gaps, `00444590`
 (`GOB_DisplayObject`) and `00441150` (scale/rotate), now have compiling behavior
@@ -53,6 +53,12 @@ bubble callback, `0043dc70` graphics command writer and `0043e2c0` palette
 helper are also behavior candidates, not verifier proofs. The exact list and
 object-to-address map are in
 `.work/replacement-short/game-lld-report.json` and `object-addresses.json`.
+The current pass added analog input lookup, background initialization, graphics
+fill, CRT startup helpers, integer formatting and substring search. The CRT
+float formatting entries forward to matching exports in the recovered VC4
+archive; their behavior is delegated to that archive, not reconstructed or
+byte proven. The original graphics fill bytes were inspected directly because
+the Ghidra body for `00444d10` differs from the pinned executable.
 
 `image_data.s` is a **textual, generated data source**, not a recovered set of
 historical declarations. It contains 1,536 raw `.rdata` bytes, 71,680 raw
@@ -64,11 +70,11 @@ the two raw sections was compared with the pinned PE (zero mismatches), and
 the object has all 2,685 DIR32 relocations. The replacement build now
 converts four source-defined globals to external references in scratch copies,
 so the generated image data has sole storage ownership. The assembler adds
-39 symbol-only aliases for source-referenced addresses within the checked-in
+51 symbol-only aliases for source-referenced addresses within the checked-in
 data; it changes no initialized bytes.
 
-Fifty-one function sources contain original image-address literals. The
-replacement build rewrites their 198 distinct in-image addresses into symbolic
+Fifty-nine function sources contain original image-address literals. The
+replacement build rewrites their 216 distinct in-image addresses into symbolic
 relocations in scratch copies, so relinking does not leave pointers back to the
 old image base. These replacements still need semantic review, particularly
 function pointers and interior code addresses.

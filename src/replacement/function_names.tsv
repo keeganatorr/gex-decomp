@@ -234,6 +234,7 @@ address	ghidra_name	emitted_name	status
 0040f500	GetRecordedBits_0040f500	GetRecordedBits_0040f500	ghidra
 0040f520	PlayRecording_0040f520	PlayRecording_0040f520	ghidra
 0040f5e0	FilterInputForJustOn_0040f5e0	FilterInputForJustOn_0040f5e0	ghidra
+0040f610	ReadAnalogValue_0040f610	ReadAnalogValue_0040f610	ghidra
 0040f680	ReadAxisFromAnalog_0040f680	ReadAxisFromAnalog_0040f680	ghidra
 0040f690	ReadAxisFromMouse_0040f690	ReadAxisFromMouse_0040f690	ghidra
 0040f6a0	ReadAxisFromKeyboard_0040f6a0	ReadAxisFromKeyboard_0040f6a0	ghidra
@@ -866,6 +867,7 @@ address	ghidra_name	emitted_name	status
 00430ea0	ob231Draw_00430ea0	ob231Draw_00430ea0	ghidra
 00430f20	ob232DoIt_00430f20	ob232DoIt_00430f20	ghidra
 00431220	ob232Draw_00431220	ob232Draw_00431220	ghidra
+00431280	FUN_00431280	FUN_00431280	ghidra
 00431300	FUN_00431300	FUN_00431300	ghidra
 004313d0	ob234Init_004313d0	ob234Init_004313d0	ghidra
 00431470	ob234DoIt_00431470	ob234DoIt_00431470	ghidra
@@ -1103,6 +1105,7 @@ address	ghidra_name	emitted_name	status
 0043ef30	GFX_Init_0043ef30	GFX_Init_0043ef30	ghidra
 0043f000	GFX_OpenGraphics_0043f000	GFX_OpenGraphics_0043f000	ghidra
 0043f050	GFX_CloseGraphics_0043f050	GFX_CloseGraphics_0043f050	ghidra
+0043f070	(no Ghidra entry)	FUN_0043f070	fallback
 0043f080	FUN_0043f080_ResetGraphics_Clean1	FUN_0043f080_ResetGraphics_Clean1	ghidra
 0043f290	FUN_0043f290_DrawWindowAlways	FUN_0043f290_DrawWindowAlways	ghidra
 0043f2d0	FUN_0043f2d0_CheckF3ForUnpauseGameDrawWindow	FUN_0043f2d0_CheckF3ForUnpauseGameDrawWindow	ghidra
@@ -1140,7 +1143,9 @@ address	ghidra_name	emitted_name	status
 00444590	GOB_DisplayObject_00444590	GOB_DisplayObject_00444590	ghidra
 00444800	FUN_00444800_Tiles	FUN_00444800_Tiles	ghidra
 00444930	vsprintf_00444930	vsprintf_00444930	ghidra
+00444bf0	FUN_00444bf0_sprintfInner	FUN_00444bf0_sprintfInner	ghidra
 00444c90	FUN_00444c90_InitTiles_TrueMaybe	FUN_00444c90_InitTiles_TrueMaybe	ghidra
+00444d10	FUN_00444d10_GFX_OpenGraphics	FUN_00444d10_GFX_OpenGraphics	ghidra
 00445140	FUN_00445140_InnerGraphics	FUN_00445140_InnerGraphics	ghidra
 00445170	FUN_00445170_Xor_Stub	FUN_00445170_Xor_Stub	ghidra
 00445180	FUN_00445180_CacheInitInner_takes_x_and_y	FUN_00445180_CacheInitInner_takes_x_and_y	ghidra
@@ -1167,14 +1172,20 @@ address	ghidra_name	emitted_name	status
 004497a0	__exit	__exit	ghidra
 004497c0	_doexit	_doexit	ghidra
 00449870	__initterm	__initterm	ghidra
+00449990	FUN_00449990_Registry2	FUN_00449990_Registry2	ghidra
+00449a70	__fpmath	__fpmath	ghidra
 00449a90	FUN_00449A90	FUN_00449A90	ghidra
 00449aa0	FUN_00449aa0_fpMathInner	FUN_00449aa0_fpMathInner	ghidra
+00449d70	__amsg_exit	__amsg_exit	ghidra
 00449e10	_rand	_rand	ghidra
 0044a0a0	__setdefaultprecision	__setdefaultprecision	ghidra
 0044a140	FUN_0044a140_fpMathInnerInner	FUN_0044a140_fpMathInnerInner	ghidra
 0044a1b0	FUN_0044a1b0_fpMathInnerInner	FUN_0044a1b0_fpMathInnerInner	ghidra
 0044a210	FUN_0044a210_fpMathInnerInner	FUN_0044a210_fpMathInnerInner	ghidra
 0044a230	FUN_0044a230_fpMathInnerInner	FUN_0044a230_fpMathInnerInner	ghidra
+0044a280	__cftoe	__cftoe	ghidra
+0044a3c0	__cftof	__cftof	ghidra
+0044a4c0	__cftog	__cftog	ghidra
 0044a5d0	FUN_0044a5d0_fpMathInnerInner	FUN_0044a5d0_fpMathInnerInner	ghidra
 0044a9a2	FUN_0044a9a2	FUN_0044a9a2	ghidra
 0044ab50	__ismbblead	__ismbblead	ghidra
@@ -1183,6 +1194,7 @@ address	ghidra_name	emitted_name	status
 0044c490	_get_int_arg	_get_int_arg	ghidra
 0044c4a0	_get_int64_arg	_get_int64_arg	ghidra
 0044c4c0	_get_short_arg	_get_short_arg	ghidra
+0044c5c0	FUN_0044C5C0	FUN_0044C5C0	ghidra
 0044c690	FUN_0044C690	FUN_0044C690	ghidra
 0044c6b0	__ZeroTail	__ZeroTail	ghidra
 0044c840	__CopyMan	__CopyMan	ghidra
@@ -1193,6 +1205,7 @@ address	ghidra_name	emitted_name	status
 0044cb30	__ld12tof	__ld12tof	ghidra
 0044cb50	__atodbl	__atodbl_0044cb50	ghidra,duplicate
 0044cb90	__atodbl	__atodbl_0044cb90	ghidra,duplicate
+0044d4a0	__controlfp	__controlfp	ghidra
 0044d4c0	__abstract_cw	__abstract_cw	ghidra
 0044d570	__hw_cw	__hw_cw	ghidra
 0044d600	FUN_0044d600_printfInner	FUN_0044d600_printfInner	ghidra

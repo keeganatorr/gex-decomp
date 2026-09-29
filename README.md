@@ -64,7 +64,7 @@ The current whole-source build assessment also needs no original executable:
 ```
 
 It compiles all current sources and attempts a full link with source-built
-Windows resources. The current expected result is exit 2 with 49 unresolved
+Windows resources. The current expected result is exit 2 with 36 unresolved
 externals in the real Windows startup link and no duplicate definitions.
 The replacement executable does not link yet. Its scope and
 the remaining work are in [replacement-build.md](docs/replacement-build.md).
