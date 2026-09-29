@@ -871,6 +871,7 @@ address	ghidra_name	emitted_name	status
 00431730	FUN_00431730	FUN_00431730	ghidra
 004317b0	FUN_004317b0_prev_gOb	FUN_004317b0_prev_gOb	ghidra
 004317e0	GOB_ResetPos_004317e0	GOB_ResetPos_004317e0	ghidra
+00431820	(no Ghidra entry)	FUN_00431820	fallback
 00431830	FUN_00431830	FUN_00431830	ghidra
 00431900	FUN_00431900_Movement_unk	FUN_00431900_Movement_unk	ghidra
 00431990	FUN_00431990	FUN_00431990	ghidra
@@ -960,6 +961,7 @@ address	ghidra_name	emitted_name	status
 00437b70	FUN_00437b70_KFBossState	FUN_00437b70_KFBossState	ghidra
 00437e50	FUN_00437e50	FUN_00437e50	ghidra
 00437e90	ASYNC_LoadFileToMem_00437e90	ASYNC_LoadFileToMem_00437e90	ghidra
+00437f00	(no Ghidra entry)	FUN_00437f00	fallback
 00437f10	ASYNC_DoneLoading_00437f10	ASYNC_DoneLoading_00437f10	ghidra
 00437f40	FUN_00437f40	FUN_00437f40	ghidra
 00438470	FUN_00438470_MoveGuillotine	FUN_00438470_MoveGuillotine	ghidra

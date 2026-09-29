@@ -15,11 +15,11 @@ whose gameplay matches the original as closely as practical.
 - Recovered compiler runs: **Microsoft C/C++ 10.00.5270**, with the old project's
   `/O2 /G5 /Oy /GR-` flags. It is **not MSVC 2010**.
 - The [previous documented checkpoint](docs/claude-hand-decomp.md) reported
-  1,101 exact functions / 180,028 bytes. The live service now reports
-  **1,102 exact functions / 180,150 bytes** after one further 122-byte proof.
-  The source tree currently has
-  1,193 isolated function files. Exact bodies are independently verified;
-  they do not yet form a linked game. The completed
+  1,101 exact functions / 180,028 bytes; one further 122-byte proof brought
+  the pre-rename record to **1,102 functions / 180,150 bytes**. The source tree
+  currently has 1,195 isolated function files. Renaming changed their hashes,
+  so those exact records are historical until a compatible verifier rechecks
+  the renamed sources. They do not yet form a linked game. The completed
   [smallest-first pass](docs/smallest-pass.md), [backup recovery](docs/backup-import.md)
   and [ten-function results](docs/ten-functions.md) remain documented.
 - A persistent backend serves real data to Nexus over a private named Unix socket.
@@ -64,7 +64,7 @@ The current whole-source build assessment also needs no original executable:
 ```
 
 It compiles all current sources and attempts a full link with source-built
-Windows resources. The current expected result is exit 2 with 67 unresolved
+Windows resources. The current expected result is exit 2 with 57 unresolved
 externals and no duplicate definitions.
 This uses a diagnostic main and is not a playable replacement. Its scope and
 the remaining work are in [replacement-build.md](docs/replacement-build.md).

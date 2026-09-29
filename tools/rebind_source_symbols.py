@@ -21,6 +21,22 @@ ROOT = Path(__file__).resolve().parent.parent
 INPUT = ROOT / ".work/replacement-objects"
 OUTPUT = ROOT / ".work/replacement-rebound"
 ADDRESS = re.compile(r"(?<![0-9a-fA-F])([0-9a-fA-F]{8})(?![0-9a-fA-F])")
+# The pinned PE has six-byte import thunks at these addresses. Their IAT slots
+# and stdcall spellings are documented in docs/iat-binding-review.md. The
+# replacement link uses the import library's forwarding symbol directly.
+IMPORT_THUNKS = {
+    "00409870": "_DirectSoundCreate@12",
+    "00409876": "_DirectDrawCreate@12",
+}
+IMAGE_BASE_NAMES = {"_DAT_00400000", "_IMAGE_DOS_HEADER_00400000"}
+# These source declarations include an extra leading underscore. Resolve them
+# to the matching CRT exports; the breakpoint uses the Win32 DebugBreak API.
+LIBRARY_ALIASES = {
+    "__printf": "_printf",
+    "___fcloseall": "__fcloseall",
+    "___setmbcp": "__setmbcp",
+    "___debugbreak": "_DebugBreak@0",
+}
 
 
 def symbols(objects: list[Path]) -> tuple[dict[str, list[tuple[str, str]]], set[str]]:
@@ -87,6 +103,17 @@ def main() -> None:
                     destination = next(iter(embedded))
             if destination in exports:
                 target = exports[destination]
+                changed_function_symbols += name != target
+            elif destination in IMPORT_THUNKS:
+                target = IMPORT_THUNKS[destination]
+                changed_function_symbols += name != target
+            elif name in IMAGE_BASE_NAMES:
+                # LLD defines this symbol at the replacement PE's actual load
+                # base, including when the loader relocates the image.
+                target = "___ImageBase"
+                changed_data_symbols += name != target
+            elif name in LIBRARY_ALIASES:
+                target = LIBRARY_ALIASES[name]
                 changed_function_symbols += name != target
             elif destination in import_exports:
                 target = import_exports[destination]

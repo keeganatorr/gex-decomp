@@ -27,7 +27,7 @@ Windows PE link work with this toolchain. It does not establish whole-game
 linkability or gameplay parity.
 
 `./scripts/assess-replacement-link` is the current end-to-end source-only
-build assessment. It compiles all **1,193** current function files with their
+build assessment. It compiles all **1,195** current function files with their
 Ghidra-based exported names and per-function C/C++ flags. It changes COFF
 *symbol references* to the exports at their justified addresses, assembles
 `src/replacement/image_data.s` and
@@ -35,11 +35,11 @@ Ghidra-based exported names and per-function C/C++ flags. It changes COFF
 link with Win32 imports. The executable and all objects stay under `.work/`.
 The command exits 2 while unresolved externals remain.
 
-At this checkpoint all 1,193 function sources compile. The normalization
-resolved 1,140 remaining function-name references and 3,544 data-name
+At this checkpoint all 1,195 function sources compile. The normalization
+resolved 1,149 remaining function-name references and 3,547 data-name
 references to shared address identities. There are **zero duplicate global
-definitions**.
-Both linkers report **67 unresolved externals**, down from 1,748 before
+definitions**. LLD reports **57 unresolved externals** and VC4 LINK reports 58
+(the latter does not supply LLD's `___ImageBase` symbol), down from 1,748 before
 source/data normalization. The formerly largest call gaps, `00444590`
 (`GOB_DisplayObject`) and `00441150` (scale/rotate), now have compiling behavior
 candidates. The latter emits 6,684 bytes versus 7,306 original bytes; neither
@@ -101,7 +101,7 @@ renames the definitions in `src/functions/` and writes the name map to
 `src/replacement/function_names.tsv`. It retains a snapshot under
 `.work/replacement-named/`. An offline Ghidra inventory can be supplied with
 `--inventory JSON`. The current map names 1,185 sources from Ghidra and gives
-eight source addresses without Ghidra entries an address-based fallback. It
+ten source addresses without Ghidra entries an address-based fallback. It
 sanitizes three names that are not C identifiers and disambiguates the two
 Ghidra functions both named `__atodbl`.
 
@@ -110,8 +110,16 @@ suffix because VC4's `libc.lib` defines the same decorated `__exit` symbol.
 Current callers use several different names and calling conventions for the
 same address, and some referenced functions
 have no source. The COFF address rebinder above already reconciles available
-source function identities; the 67 remaining externals require implementations,
+source function identities; the 57 remaining LLD externals require implementations,
 imports or separately justified bindings.
+
+The current pass wired the pinned DirectDraw and DirectSound import thunks to
+their stdcall import-library entries, mapped original image-base references to
+LLD's actual PE image base, and resolved four known CRT/debug aliases. Source
+implementations now cover the 13-byte `00431820` callback that sets
+`DAT_00463fe0` and the 15-byte `00437f00` async-read completion callback.
+Both were recovered from their complete original instruction spans; neither
+is claimed as an exact verifier proof or as gameplay validation.
 
 Seven new function sources came from this work: `0041a380` is a fresh 122-byte
 exact verifier proof derived from the already exact `0041a500` layout and

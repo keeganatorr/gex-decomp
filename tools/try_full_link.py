@@ -45,6 +45,14 @@ def main() -> None:
     libraries = [crt / "libc.lib", sdk / "kernel32.lib", sdk / "user32.lib",
                  sdk / "gdi32.lib", sdk / "advapi32.lib", crt / "winmm.lib",
                  crt / "shell32.lib", crt / "comdlg32.lib", crt / "oldnames.lib"]
+    # The original PE forwards these two thunks through its IAT. The VC4-era
+    # SDK set above lacks these archives; use the same import libraries as the
+    # resource-bearing LLD link for the source-only replacement assessment.
+    import_lib_query = subprocess.run(
+        ["i686-w64-mingw32-gcc", "-print-file-name=libddraw.a"],
+        capture_output=True, text=True, check=True)
+    import_lib_dir = Path(import_lib_query.stdout.strip()).resolve().parent
+    libraries += [import_lib_dir / "libddraw.a", import_lib_dir / "libdsound.a"]
     missing = [path for path in [linker, harness, image_data, image_resources,
                                   comctl_def, *objects, *libraries]
                if not path.is_file()]
