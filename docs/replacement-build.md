@@ -262,14 +262,23 @@ while it continued reading the recording. The original did not enter this
 damage pause at that point. Temporary call-site and level-loop traces are
 retained under `.work/replacement-runtime/frame941-*-game.log`.
 
-A read-only scan at frame 940 found one type 7 object in the player vicinity
-in each run. The replacement object was at X=`184940544`, animation group 9,
-frame 7, visible; the original candidate was at X=`186390272`, animation
-group 1, frame 2, hidden. Both had Y=`39714816`. Their script bytes also
-differ, so the scan alone cannot establish that they are the same instance.
-The next comparison must match object identities and trace script progression
-or introduction before changing the hit handler. The scans are retained as
-`.work/replacement-runtime/type7-{oracle,replacement}.log`.
+A read-only scan at frame 940 found a type 7 object in each run. The
+replacement object was at X=`184940544`, animation group 9, frame 7; the
+original was at X=`186390272`, animation group 1, frame 2. Both had
+Y=`39714816`. Earlier frame samples establish these as the same loaded
+object: position, animation and script cursor matched through frame 905.
+At frame 909 the original type 7 object contacted a type 93 object at
+X=`185880576`, Y=`37715984`. Its work field became 192 and its script stayed
+at the same cursor while another field counted upward. The replacement had
+no type 93 contact in that vicinity, so type 7 continued its movement and
+script. A wider scan of the replacement at frame 909 found no plausible type
+93 object in the level-coordinate window (X 100–200 million, Y 10–60
+million). The next target is the type 93 introduction or its precursor, not
+the faithful default hit-handler condition. The scans are retained as
+`.work/replacement-runtime/type7-{oracle,replacement}.log`,
+`type7-progress-{oracle,replacement}.log`,
+`type7-900-{oracle,replacement}.log`, `type7-partner-oracle.log`, and
+`type93-global-replacement.log`.
 The isolated captures are `.work/replacement-runtime/pad-{oracle,replacement}.log`
 and `record-{oracle,replacement}.log`. The input field in the earlier player
 traces is a separate word, so its equality did not establish pad-byte parity.
