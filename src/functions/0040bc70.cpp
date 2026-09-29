@@ -219,7 +219,8 @@ FUN_0040BFC1:
     }
     *(int *)(param_8 + 0x1f8) = uVar7;
     *(int *)(param_8 + 0x78) = uVar5;
-    *(int *)(param_8 + 0x1fc) = local_20;
+    // Original 0040c0de restores the saved +0x1fc field after drawing.
+    *(int *)(param_8 + 0x1fc) = uVar7;
     *(int *)(param_8 + 0x7c) = uVar6;
     *(int *)(param_8 + 200) = iVar3;
     *(int *)(param_8 + 0xcc) = uVar4;

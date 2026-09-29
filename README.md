@@ -17,9 +17,10 @@ whose gameplay matches the original as closely as practical.
 - The [previous documented checkpoint](docs/claude-hand-decomp.md) reported
   1,101 exact functions / 180,028 bytes; one further 122-byte proof brought
   the pre-rename record to **1,102 functions / 180,150 bytes**. The source tree
-  currently has 1,246 isolated function files. Renaming changed their hashes,
+  currently has 1,250 isolated function files. Renaming changed their hashes,
   so those exact records are historical until a compatible verifier rechecks
-  the renamed sources. They do not yet form a linked game. The completed
+  the renamed sources. The sources now link into a replacement PE, but gameplay
+  parity has not been established. The completed
   [smallest-first pass](docs/smallest-pass.md), [backup recovery](docs/backup-import.md)
   and [ten-function results](docs/ten-functions.md) remain documented.
 - A persistent backend serves real data to Nexus over a private named Unix socket.
@@ -63,11 +64,11 @@ The current whole-source build assessment also needs no original executable:
 ./scripts/assess-replacement-link
 ```
 
-It compiles all current sources and attempts a full link with source-built
-Windows resources. The current expected result is exit 2 with 6 unresolved
-externals in the real Windows startup link and no duplicate definitions.
-The replacement executable does not link yet. Its scope and
-the remaining work are in [replacement-build.md](docs/replacement-build.md).
+It compiles all 1,250 current sources and links a replacement PE with
+source-built Windows resources. The current result is exit 0, zero unresolved
+externals and zero duplicate definitions. The executable is
+`.work/replacement-short/gex-source.exe`. Its scope and runtime findings are in
+[replacement-build.md](docs/replacement-build.md).
 
 ```sh
 # Start the already-installed user service; waits for its actual identity handshake.

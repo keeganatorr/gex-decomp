@@ -27,7 +27,7 @@ Windows PE link work with this toolchain. It does not establish whole-game
 linkability or gameplay parity.
 
 `./scripts/assess-replacement-link` is the current end-to-end source-only
-build assessment. It compiles all **1,246** current function files with their
+build assessment. It compiles all **1,250** current function files with their
 Ghidra-based exported names and per-function C/C++ flags. It changes COFF
 *symbol references* to the exports at their justified addresses, assembles
 `src/replacement/image_data.s` and
@@ -35,24 +35,19 @@ Ghidra-based exported names and per-function C/C++ flags. It changes COFF
 link with Win32 imports. It attempts a Windows subsystem link through the
 reconstructed `WinMain_00405bf0` and VC4's `WinMainCRTStartup`. The executable
 and all objects stay under `.work/`.
-The command exits 2 while unresolved externals remain.
+The command currently exits 0 and writes
+`.work/replacement-short/gex-source.exe` without reading the original EXE.
 
-At this checkpoint all 1,246 function sources compile. The normalization
-resolved 1,238 remaining function-name references and 3,947 data-name
-references to shared address identities. There are **zero duplicate global
-definitions**. The real game-entry LLD link reports **6 unresolved externals**;
-the diagnostic LLD link reports 6 and VC4 LINK reports 7 (the latter does not
-supply LLD's `___ImageBase` symbol), down from 1,748 before
-source/data normalization. The formerly largest call gaps, `00444590`
-(`GOB_DisplayObject`) and `00441150` (scale/rotate), now have compiling behavior
-candidates. The latter emits 6,684 bytes versus 7,306 original bytes; neither
-is byte exact or gameplay validated. The current gaps include collision,
-text, graphics and level functions, CRT/debug helpers, and pointers to
-unreconstructed code. The new `00420e60`
-bubble callback, `0043dc70` graphics command writer and `0043e2c0` palette
-helper are also behavior candidates, not verifier proofs. The exact list and
-object-to-address map are in
-`.work/replacement-short/game-lld-report.json` and `object-addresses.json`.
+All 1,250 function sources compile. The game-entry LLD link has **zero
+unresolved externals and zero duplicate definitions**. VC4 LINK still reports
+`___ImageBase`, a linker-supplied symbol provided by the final LLD link. The
+four last missing function addresses were `00416320` (player processing),
+`0041d310` (angled collision), `0042eaf0` (graphics drawing) and `00434b10`
+(collision event). Their source bodies are provisional translations, not byte
+proofs. Several earlier sources also retain decompiler artifacts, so a
+successful link does not establish gameplay parity. The exact link result and
+object-to-address map are in `.work/replacement-short/game-lld-report.json`
+and `object-addresses.json`.
 The current pass added analog input lookup, background initialization, graphics
 fill, CRT startup helpers, integer formatting and substring search. The CRT
 float formatting entries forward to matching exports in the recovered VC4
@@ -76,10 +71,34 @@ not need the original executable at build time. The former `00449d23` and
 `00449d3e` references were interior SEH labels in the original CRT startup
 body, not standalone C functions.
 
-The six linker symbols correspond to four missing function entry addresses:
-`00416320`, `0041d310`, `0042eaf0` and `00434b10`. Several addresses appear
-under multiple symbol names. A
-successful link will still need startup and gameplay behavior checks.
+The PE starts under Wine with the original launcher token
+`XAchWieGutDasKeinerWeis`. The alternate token
+`JAchWieGutDasKeinerWeis` also passes the launcher gate and skips both AVI
+clips in the pinned original. Original instructions at `00405edc` write 1 to
+`00487fc0` for the `J` prefix; `GameThread` passes that word to `GameMain` as
+its skip-intro argument. The replacement had incorrectly written `0045633c`.
+After correcting the address, both executables reach the title screen within
+eight seconds with the `J` token. A fresh isolated Wine prefix initially failed to
+open `AVI/GEX000.AVI` because it lacked the 32-bit Intel Indeo 3 `IV32`
+codec. The pinned original EXE showed the same error in that prefix. After
+copying the existing local codec into the isolated prefix and registering
+`vidc.iv31`/`vidc.iv32` in its 32-bit Drivers32 registry view, the replacement
+played the opening AVI. This is a runtime environment requirement; the codec
+and original EXE are not build inputs or repository artifacts. At the title
+screen, a reversed
+branch at `004060a1` in the edited Ghidra WinMain caused the replacement to
+open its 1024-by-512 debug VRAM window. The pinned PE's `test`/`je` instruction
+shows the call must be skipped when `00487bc0` is zero; the source now follows
+that branch. The replacement now reaches a centered title screen, but it lacks
+the original's background and Start/Password/Exit text. Pressing Start with
+the `J` token leaves a black frame six seconds later, while the pinned original
+reaches the fully rendered level-select screen in the same prefix and assets.
+Earlier AVI-path captures showed a static filled frame at 105 and 120 seconds
+instead of level select. The source for
+`0040bc70` also restored an uninitialized local into the object's previous-Y
+field; original instructions restore the saved field value, and that source is
+corrected. The `J`-token runtime capture includes that text fix and still has
+missing text. Level selection and gameplay are not yet working in the replacement.
 
 `image_data.s` is a **textual, generated data source**, not a recovered set of
 historical declarations. It contains 1,536 `.rdata` bytes, 71,680 raw
@@ -137,7 +156,7 @@ matches each source filename's eight-digit address to a function name. It
 renames the definitions in `src/functions/` and writes the name map to
 `src/replacement/function_names.tsv`. It retains a snapshot under
 `.work/replacement-named/`. An offline Ghidra inventory can be supplied with
-`--inventory JSON`. The current map names 1,232 sources from Ghidra and gives
+`--inventory JSON`. The current map names 1,236 sources from Ghidra and gives
 14 source addresses without Ghidra entries an address-based fallback. It
 sanitizes three names that are not C identifiers and disambiguates the two
 Ghidra functions both named `__atodbl`.
@@ -145,10 +164,8 @@ Ghidra functions both named `__atodbl`.
 The build exports the mapped names. `_exit` at `00449780` gets an address
 suffix because VC4's `libc.lib` defines the same decorated `__exit` symbol.
 Current callers use several different names and calling conventions for the
-same address, and some referenced functions
-have no source. The COFF address rebinder above already reconciles available
-source function identities; the six remaining game-link externals require implementations,
-imports or separately justified bindings.
+same address. The COFF address rebinder reconciles their shared address
+identities for the source-only game link.
 
 The current pass wired the pinned DirectDraw and DirectSound import thunks to
 their stdcall import-library entries, mapped original image-base references to
@@ -166,7 +183,8 @@ WndProc's F4 branch missing from edited Ghidra memory. These are behavioral
 candidates, not exact matches. The game entry adapter is a separate source
 file; LLD links with a scratch copy of VC4 `libc.lib` that retains its Windows
 startup member and removes four conflicting alternative startup members.
-The current link still fails before producing `gex-source.exe`.
+The current link produces `gex-source.exe`. Its startup path reaches the
+opening AVI and title sequence; gameplay behavior is still under review.
 Source bodies for VC4 `_x_ismbbtype`, `_flsall` and `_doexit` now resolve the
 multibyte, stream-flush and exit references. They are source reconstruction
 candidates and have not been promoted to verifier proofs.
@@ -193,9 +211,8 @@ are the bubble callback and three rendering helpers described above.
    then review the scratch-build storage/address rewrites. A clean build cannot
    extract these from the original EXE. The
    game's separately supplied asset files may remain runtime inputs.
-4. **Game link.** Resolve the remaining symbols and produce a replacement PE with
-   zero unresolved symbols. A link alone is insufficient: static initializers,
-   resource IDs, imports and section contracts must be checked at runtime.
+4. **Game link.** The PE now links with zero unresolved symbols. Static
+   initializers, resource IDs, imports and section contracts need runtime review.
 5. **Behavior comparison.** Run repeatable original-versus-replacement cases
    for startup, menus, input, level loading, movement, collision, audio,
    saves and exit. Record expected state/output and fix divergences. Byte

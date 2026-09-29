@@ -1,6 +1,7 @@
 // Startup candidate from WinMain_00405bf0 in /EditedGex, cross-checked against
 // the pinned PE's stdcall return. The Ghidra body contains one edited byte at
-// 004060a1; this is behavioral source, not a byte-match claim.
+// 004060a1: the pinned PE skips VRAM_Show when 00487bc0 is zero. This is
+// behavioral source, not a byte-match claim.
 typedef unsigned long DWORD;
 typedef unsigned int UINT;
 typedef void *HANDLE;
@@ -170,7 +171,8 @@ extern "C" int __stdcall WinMain_00405bf0(HINSTANCE instance, HINSTANCE,
         WND_CleanUp_004064d0();
         return 0;
     }
-    if (commandLine[0] == 'J') startupWord(0x0045633c) = 1;
+    // 00405edc writes the skip-intro word read by GameThread at 00405108.
+    if (commandLine[0] == 'J') startupWord(0x00487fc0) = 1;
 
     HANDLE desktop = 0;
     if (RegOpenKeyA((HANDLE)0x80000001UL, startupText(0x00455058), &desktop) == 0) {
@@ -205,7 +207,7 @@ extern "C" int __stdcall WinMain_00405bf0(HINSTANCE instance, HINSTANCE,
     windowClass.name = startupText(0x00487ce0);
     windowClass.proc = WndProc_00403960;
     if (!RegisterClassA(&windowClass)) WND_CleanUp_004064d0();
-    if (startupWord(0x00487bc0) == 0) VRAM_Show_00405700();
+    if (startupWord(0x00487bc0) != 0) VRAM_Show_00405700();
 
     HWND window = CreateWindowExA(0, startupText(0x00487ce0), startupText(0x00487c60),
         0xcf0000, startupWord(0x00487f80), startupWord(0x00487f84),
