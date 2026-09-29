@@ -159,6 +159,20 @@ enemy interaction differ. Traces are retained at
 `.work/replacement-runtime/attract-{pad,state,tail}-trace.log`; all temporary
 tracing source was removed.
 
+A further gate trace shows the replacement's health falling from 3 to 2 at
+player frame 83, immediately before the skipped jump press. Its tail collision
+objects are registered, and the collision manager does compare them with
+nearby objects. The retained traces are `attract-gate-trace.log` and
+`attract-cld-trace.log` under the same runtime directory. The provisional
+`0041d310` rotated collision source had lost almost every object field offset
+and angle mask; it has been reconstructed from read-only Ghidra output into a
+source-level collision path. A source-only link and 55-second and 110-second
+attract runs complete with that repair, including the second demo, but the
+first enemy and score still differ. This collision source is a behavioral
+translation, not a verifier byte proof. The
+next target is the exact object/collision interaction at that first encounter,
+not another change to recorded input playback.
+
 The attract run identified source faults: a doubly scaled camera history
 index; cache pointers addressed two or four bytes too early and incorrect
 LRU links; quad lookup offsets scaled fourfold by C pointer arithmetic;
