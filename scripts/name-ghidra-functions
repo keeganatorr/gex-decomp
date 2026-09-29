@@ -1,0 +1,137 @@
+#!/usr/bin/env bash
+# Give replacement-build source copies the function names in Ghidra.
+# The byte-matching src/functions tree and its verifier proofs stay unchanged.
+set -euo pipefail
+
+ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+OUTPUT="$ROOT/.work/replacement-named"
+INVENTORY=
+
+usage() {
+    cat <<'EOF'
+Usage: scripts/name-ghidra-functions [--output DIR] [--inventory JSON]
+
+Copy src/functions/*.cpp to .work/replacement-named/functions/ and replace
+GEX_Target with the function name at that file's address in Ghidra.
+The default inventory comes from the live Ghidra /list_functions endpoint.
+--inventory accepts a saved /list_functions response or Ghidra import JSON.
+EOF
+}
+
+while (( $# )); do
+    case "$1" in
+        --output|--inventory)
+            (( $# >= 2 )) || { usage >&2; exit 2; }
+            if [[ $1 == --output ]]; then OUTPUT=$2; else INVENTORY=$2; fi
+            shift 2
+            ;;
+        -h|--help) usage; exit 0 ;;
+        *) usage >&2; exit 2 ;;
+    esac
+done
+
+command -v jq >/dev/null || { echo 'jq is required' >&2; exit 1; }
+command -v perl >/dev/null || { echo 'perl is required' >&2; exit 1; }
+mkdir -p "$ROOT/.work"
+OUTPUT=$(realpath -m -- "$OUTPUT")
+case "$OUTPUT" in
+    "$ROOT/src/functions"|"$ROOT/src/functions/"*)
+        echo 'refusing to overwrite byte-matching function sources' >&2
+        exit 1
+        ;;
+esac
+if [[ -e $OUTPUT && ! -f $OUTPUT/.generated-by-name-ghidra-functions ]]; then
+    echo "refusing to replace an unmarked output directory: $OUTPUT" >&2
+    exit 1
+fi
+
+STAGE=$(mktemp -d "$ROOT/.work/name-ghidra.XXXXXX")
+trap 'rm -rf -- "$STAGE"' EXIT
+mkdir "$STAGE/functions"
+if [[ -n $INVENTORY ]]; then
+    cp -- "$INVENTORY" "$STAGE/inventory.json"
+else
+    URL=$(jq -er '.ghidra.url' "$ROOT/project.json")
+    curl --fail --silent --show-error --max-time 30 \
+        "${URL%/}/list_functions?program=GEX.exe" -o "$STAGE/inventory.json"
+fi
+jq -e '.functions | type == "array" and length > 1000' \
+    "$STAGE/inventory.json" >/dev/null || {
+    echo 'Ghidra function inventory is missing or unexpectedly small' >&2
+    exit 1
+}
+
+declare -A GHIDRA_NAME CANDIDATE NAME_COUNT FINAL_NAME
+while IFS=$'\t' read -r address name; do
+    [[ $address =~ ^[0-9a-f]{8}$ && -n $name ]] || continue
+    GHIDRA_NAME[$address]=$name
+done < <(jq -r '.functions[] | [((.address // .entry) | ascii_downcase), .name] | @tsv' \
+          "$STAGE/inventory.json")
+
+shopt -s nullglob
+SOURCES=("$ROOT"/src/functions/[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].cpp)
+(( ${#SOURCES[@]} > 1000 )) || { echo 'source set is unexpectedly small' >&2; exit 1; }
+
+for source in "${SOURCES[@]}"; do
+    address=${source##*/}
+    address=${address%.cpp}
+    original=${GHIDRA_NAME[$address]:-FUN_$address}
+    candidate=$(printf '%s' "$original" | LC_ALL=C sed -E 's/[^A-Za-z0-9_]/_/g')
+    [[ $candidate =~ ^[A-Za-z_] ]] || candidate="_$candidate"
+    CANDIDATE[$address]=$candidate
+    NAME_COUNT[$candidate]=$(( ${NAME_COUNT[$candidate]:-0} + 1 ))
+done
+
+declare -A USED_NAME
+printf 'address\tghidra_name\temitted_name\tstatus\n' > "$STAGE/names.tsv"
+mapped=0
+missing=0
+sanitized=0
+collisions=0
+for source in "${SOURCES[@]}"; do
+    address=${source##*/}
+    address=${address%.cpp}
+    original=${GHIDRA_NAME[$address]:-}
+    candidate=${CANDIDATE[$address]}
+    status=ghidra
+    if [[ -z $original ]]; then
+        original='(no Ghidra entry)'
+        status=fallback
+        (( missing += 1 ))
+    else
+        (( mapped += 1 ))
+        if [[ $candidate != "$original" ]]; then
+            status=sanitized
+            (( sanitized += 1 ))
+        fi
+    fi
+    if (( NAME_COUNT[$candidate] > 1 )); then
+        candidate="${candidate}_${address}"
+        status="${status},duplicate"
+        (( collisions += 1 ))
+    fi
+    if [[ -n ${USED_NAME[$candidate]:-} ]]; then
+        echo "duplicate emitted name $candidate for $address and ${USED_NAME[$candidate]}" >&2
+        exit 1
+    fi
+    USED_NAME[$candidate]=$address
+    FINAL_NAME[$address]=$candidate
+    if ! grep -Eq '(^|[^[:alnum:]_])_?GEX_Target([^[:alnum:]_]|$)' "$source"; then
+        echo "$source has no GEX_Target definition" >&2
+        exit 1
+    fi
+    GEX_NEW_NAME=$candidate perl -pe \
+        'BEGIN { $name = $ENV{GEX_NEW_NAME} } s/(?<![A-Za-z0-9_])_?GEX_Target(?![A-Za-z0-9_])/$name/g' \
+        "$source" > "$STAGE/functions/$address.cpp"
+    printf '%s\t%s\t%s\t%s\n' "$address" "$original" "$candidate" "$status" \
+        >> "$STAGE/names.tsv"
+done
+
+touch "$STAGE/.generated-by-name-ghidra-functions"
+mkdir -p "$(dirname -- "$OUTPUT")"
+if [[ -e $OUTPUT ]]; then rm -rf -- "$OUTPUT"; fi
+mv -- "$STAGE" "$OUTPUT"
+trap - EXIT
+printf '%s sources named: %s Ghidra, %s fallback, %s sanitized, %s duplicate names\n' \
+    "${#SOURCES[@]}" "$mapped" "$missing" "$sanitized" "$collisions"
+printf 'source copies: %s/functions\nname map: %s/names.tsv\n' "$OUTPUT" "$OUTPUT"

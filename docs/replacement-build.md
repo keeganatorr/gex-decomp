@@ -94,6 +94,23 @@ compile without the original executable.
 counts are leads, not linker results; use the COFF census and full link above
 for build readiness.
 
+`./scripts/name-ghidra-functions` reads the live Ghidra function list and
+matches each source filename's eight-digit address to a function name. It
+writes renamed copies to `.work/replacement-named/functions/` and a name map
+to `.work/replacement-named/names.tsv`; `src/functions/` is unchanged so exact
+verifier proofs stay current. An offline Ghidra inventory can be supplied with
+`--inventory JSON`. The current map names 1,185 sources from Ghidra and gives
+eight source addresses without Ghidra entries an address-based fallback. It
+sanitizes three names that are not C identifiers and disambiguates the two
+Ghidra functions both named `__atodbl`.
+
+The name map is for source readability and later shared translation units.
+It is not a complete link fix: current callers use several different names
+and calling conventions for the same address, and some referenced functions
+have no source. The COFF address rebinder above already reconciles available
+source function identities; the 69 remaining externals require implementations,
+imports or separately justified bindings.
+
 Seven new function sources came from this work: `0041a380` is a fresh 122-byte
 exact verifier proof derived from the already exact `0041a500` layout and
 fallback shape; `00409740` is a behavior-focused tracked-memory free routine.

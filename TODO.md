@@ -6,6 +6,9 @@
   (`scripts/build-source-link-smoke`; `docs/replacement-build.md`)
 - [x] Inventory current source/link references without reading the EXE or DB
   (`tools/link_inventory.py`)
+- [x] Generate replacement source copies with live Ghidra function names by
+  filename address, preserving byte-match sources and proofs
+  (`scripts/name-ghidra-functions`)
 - [x] Compile all 1,193 current source functions with unique exports, normalize
   2,503 function and 3,544 data COFF references, and measure the full link
   (`scripts/assess-replacement-link`): 69 unresolved, zero duplicates
