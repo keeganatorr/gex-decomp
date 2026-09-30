@@ -5,7 +5,6 @@ ROOT=$(cd -- "$(dirname -- "$0")/.." && pwd)
 ASSETS_DIR=${GEX_ASSETS_DIR:-"$HOME/.wine/drive_c/GOG Games/Gex"}
 RUN_DIR="$ROOT/.work/replacement-run/game"
 GAME_ARGS=()
-ATTRACT_DEMO=
 
 usage() {
     cat <<'EOF'
@@ -36,7 +35,7 @@ while (($#)); do
             shift 2
             ;;
         --play-intro)
-            GAME_ARGS=(X)
+            GAME_ARGS+=(--play-intro)
             shift
             ;;
         --attract)
@@ -44,7 +43,7 @@ while (($#)); do
                 echo 'Expected --attract 0, 1, or 2' >&2
                 exit 2
             fi
-            ATTRACT_DEMO=$2
+            GAME_ARGS+=(--attract "$2")
             shift 2
             ;;
         -h|--help)
@@ -116,12 +115,6 @@ fi
 STAGED_EXE=$(mktemp "$RUN_DIR/.GEX.exe.XXXXXXXX")
 trap 'rm -f -- "$STAGED_EXE"' EXIT
 cp -- "$SOURCE_EXE" "$STAGED_EXE"
-if [[ -n $ATTRACT_DEMO ]]; then
-    MOD_EXE="$RUN_DIR/.GEX-attract-$ATTRACT_DEMO.exe"
-    python3 "$ROOT/tools/patch_attract.py" --input "$SOURCE_EXE" \
-        --output "$MOD_EXE" --demo "$ATTRACT_DEMO"
-    cp -- "$MOD_EXE" "$STAGED_EXE"
-fi
 chmod 755 "$STAGED_EXE"
 mv -fT -- "$STAGED_EXE" "$RUN_DIR/GEX.exe"
 trap - EXIT

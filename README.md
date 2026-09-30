@@ -72,12 +72,13 @@ To build and play the replacement from an isolated copy of the game assets:
 ./scripts/build-and-run-game --assets-dir "/path/to/Gex"
 ```
 
-The launcher copies the asset folders into `.work/replacement-run/game`, stages
-the source-built `GEX.exe` there, and starts Wine with the launcher and AVI
-skip token. It never copies or executes the installed `GEX.exe`. Use
-`--play-intro` to play the AVI clips, if the Wine prefix has their codec; set
-`WINEPREFIX` to select a different runtime prefix. A graphical desktop is
-required.
+The script copies the asset folders into `.work/replacement-run/game`, stages
+the source-built `GEX.exe` there, and starts Wine. It never copies or executes
+the installed `GEX.exe`. The replacement skips the AVI clips by default;
+`--play-intro` plays them if the Wine prefix has their codec. Use
+`--attract 0`, `1`, or `2` to launch a chosen recording. A graphical desktop
+is required. See [run-game.md](docs/run-game.md) for the exact command to run
+the staged EXE directly and all attract choices.
 
 The build compiles all 1,250 current sources and links a replacement PE with
 source-built Windows resources. The current result is exit 0, zero unresolved

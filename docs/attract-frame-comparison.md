@@ -10,7 +10,7 @@ Use `--no-build` to reuse the current source executable and symbol map while
 iterating on the comparison tool. A game build still reads only source and
 toolchain inputs; the original executable is a separate read-only oracle.
 
-The same standalone mod can be applied to a copy of either executable:
+The standalone binary mod can be applied to a copy of either executable:
 
 ```bash
 python3 tools/patch_attract.py --demo 1 \
@@ -18,8 +18,11 @@ python3 tools/patch_attract.py --demo 1 \
 python3 tools/patch_attract.py --demo 1 \
   --input .work/replacement-short/gex-source.exe \
   --output .work/attract-mod/GEX-source-demo1.exe
-./scripts/build-and-run-game --attract 1
 ```
+
+The source-built EXE also accepts `--attract 0|1|2` directly, without
+changing its saved bytes. See [run-game.md](run-game.md) for commands, or
+build and run a chosen recording with `./scripts/build-and-run-game --attract 1`.
 
 The patcher checks the pinned hash when reading the installed original,
 validates one title-idle instruction sequence and its initial recording

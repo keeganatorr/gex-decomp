@@ -14,6 +14,7 @@ typedef struct GXObject {
 extern "C" {
 extern int M1_IsInMap_004a2a7c;
 extern int DAT_00462c84;
+extern int DAT_00455c34_LEV_Variable;
 extern int DAT_0045acc4_ProcessedTitleScreenCheat;
 extern char DAT_00456334;
 extern char DAT_0045633c;
@@ -34,7 +35,17 @@ void __cdecl MainMenuControllerInit_0040dda0(GXObject *gex)
     GXObject *password;
     GXObject *exit;
     M1_IsInMap_004a2a7c = 1;
-    DAT_00462c84 = 0;
+    if (DAT_00455c34_LEV_Variable >= 4 &&
+        DAT_00455c34_LEV_Variable <= 6) {
+        // The next title update increments both fields before selecting a
+        // recording. Values 4..6 carry the CLI choice through startup; turn
+        // them back into the ordinary cursor before the recording is loaded.
+        DAT_00455c34_LEV_Variable =
+            (DAT_00455c34_LEV_Variable - 4 + 2) % 3;
+        DAT_00462c84 = 0x384;
+    } else {
+        DAT_00462c84 = 0;
+    }
     DAT_0045acc4_ProcessedTitleScreenCheat = 0;
     DAT_00456334 = 0;
     DAT_0045633c = 0;

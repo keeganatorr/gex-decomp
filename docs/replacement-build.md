@@ -49,7 +49,9 @@ Wine prefix unless `WINEPREFIX` is set. A graphical desktop is required.
 The entry adapter changes to the staged executable's directory before the
 game opens its relative asset paths, so `wine .work/replacement-run/game/GEX.exe`
 and absolute-path launches work from another directory. The installed original
-still requires its launcher token.
+still requires its launcher token. The replacement accepts `--attract 0|1|2`
+on its own command line to select and launch a demo on the first title update;
+see [run-game.md](run-game.md) for exact commands.
 
 The source-built window procedure keeps game simulation running on
 `WM_ACTIVATEAPP` focus loss. The original calls `GameUnpause_004051d0` there;
