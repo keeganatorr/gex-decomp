@@ -412,6 +412,22 @@ build logs remain under `.work/replacement-runtime/map-clut-{fix,oracle}-*`.
 These two frames establish this focused rendering path, not complete gameplay
 parity.
 
+The cemetery world-map movement path had another source-width error in
+`0042b7f0`. The four directional just-pressed flags at `004a028f` through
+`004a0292`, and four related input flags, were declared as 32-bit integers.
+The pinned instructions at `0042bbf2` through `0042bc87` read each flag with
+`mov al, byte ptr [...]`. A Right or Up press therefore also made the
+replacement's earlier Left check appear true, selecting the wrong map link.
+The level access flag at `004577b1` likewise needs byte indexing; the pinned
+instruction at `0042baf7` reads one byte at `004577b1 + level * 8`.
+The source declarations now use byte types. With the same X, X, Right, Up
+sequence in isolated Wine runs, the original and source-built game both moved
+Gex from the lower path to the right TV. The 30×30 pixel region around Gex
+matched exactly in the Right and Up captures. The captures and source-only
+build log remain under `.work/replacement-runtime/move-{oracle2,fixed}-*` and
+`map-movement-build.log`. This validates that map route and input sequence;
+other map links and level transitions still need comparison.
+
 `image_data.s` is a **textual, generated data source**, not a recovered set of
 historical declarations. It contains 1,536 `.rdata` bytes, 71,680 raw
 `.data` bytes, the 269,536-byte zero-initialized tail, and 2,683 symbolic
