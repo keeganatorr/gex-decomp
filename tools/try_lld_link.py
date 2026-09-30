@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parent.parent
 WORK = ROOT / ".work/replacement-short"
 PROJECT = json.loads((ROOT / "project.json").read_text())
 LIBRARY_NAMES = ("kernel32", "user32", "gdi32", "advapi32", "winmm",
-                 "shell32", "comdlg32", "comctl32", "ddraw", "dsound")
+                 "shell32", "comdlg32", "comctl32", "ole32", "ddraw", "dsound")
 UNDEFINED = re.compile(r"^lld-link: error: undefined symbol: (.+)$", re.M)
 DUPLICATE = re.compile(r"^lld-link: error: duplicate symbol: (.+)$", re.M)
 
