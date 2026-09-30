@@ -13,6 +13,9 @@ __declspec(dllimport) int __stdcall StretchBlt(HANDLE, int, int, int, int,
                                                HANDLE, int, int, int, int, DWORD);
 __declspec(dllimport) int __stdcall GetSystemMetrics(int);
 void __cdecl FUN_00406c00_IfFreeGameNotEquals1_Unk_WHAT_DOES_THIS_DO_CONTAINS_PPVBITS(void);
+int __cdecl GEX_WidescreenWidth(void);
+extern int level_004a2964;
+__declspec(dllimport) int __stdcall PatBlt(HANDLE, int, int, int, int, DWORD);
 }
 
 static unsigned &flushWord(unsigned long address) { return *(unsigned *)address; }
@@ -24,12 +27,13 @@ extern "C" void __cdecl GFX_Flush_00406c30(void)
     ++flushWord(0x00487a90);
     unsigned char *pixels = (unsigned char *)flushPointer(0x00487f70);
     unsigned char *frame = pixels + 0x4000;
+    unsigned viewportWidth = (unsigned)GEX_WidescreenWidth();
     if (flushWord(0x004a294c) == 2) {
         unsigned char *pauseFrame = pixels + 0x7c000;
         for (unsigned row = 0; row != 224; ++row) {
             unsigned *destination = (unsigned *)(frame + row * 0x800);
             const unsigned *source = (const unsigned *)(pauseFrame + row * 0x800);
-            for (unsigned column = 0; column != 160; ++column)
+            for (unsigned column = 0; column != viewportWidth / 2; ++column)
                 destination[column] = source[column];
         }
     }
@@ -48,7 +52,7 @@ extern "C" void __cdecl GFX_Flush_00406c30(void)
         for (unsigned row8 = 0; row8 != 224; ++row8) {
             unsigned *source8 = (unsigned *)(frame + row8 * 0x800);
             unsigned char *destination8 = frame + row8 * 0x800;
-            for (unsigned column8 = 0; column8 != 160; ++column8) {
+            for (unsigned column8 = 0; column8 != viewportWidth / 2; ++column8) {
                 unsigned pair = source8[column8];
                 destination8[column8 * 2] = lookup[pair & 0x7fff];
                 destination8[column8 * 2 + 1] = lookup[(pair >> 16) & 0x7fff];
@@ -58,7 +62,7 @@ extern "C" void __cdecl GFX_Flush_00406c30(void)
     if (mode == 0x555 || mode == 0x565) {
         for (unsigned row16 = 0; row16 != 224; ++row16) {
             unsigned *line = (unsigned *)(frame + row16 * 0x800);
-            for (unsigned column16 = 0; column16 != 160; ++column16) {
+            for (unsigned column16 = 0; column16 != viewportWidth / 2; ++column16) {
                 unsigned pair16 = line[column16];
                 if (mode == 0x555)
                     line[column16] = (pair16 & 0x03e003e0) |
@@ -106,8 +110,32 @@ extern "C" void __cdecl GFX_Flush_00406c30(void)
         sourceY = 8;
         sourceHeight = 224;
     }
-    StretchBlt(destinationDC, 0, 0, targetWidth, targetHeight, sourceDC,
-               0, sourceY, 320, sourceHeight, 0xcc0020);
+    int targetX = 0;
+    int targetY = 0;
+    int canvasWidth = targetWidth;
+    int canvasHeight = targetHeight;
+    if (fullscreen || level_004a2964 == 63) {
+        // Fit physical fullscreen modes and preserve the title artwork's
+        // aspect ratio while Options previews a different window width.
+        if (targetWidth * sourceHeight > targetHeight * (int)viewportWidth)
+            targetWidth = targetHeight * (int)viewportWidth / sourceHeight;
+        else
+            targetHeight = targetWidth * sourceHeight / (int)viewportWidth;
+    }
+    targetX = (canvasWidth - targetWidth) / 2;
+    targetY = (canvasHeight - targetHeight) / 2;
+    if (targetX) {
+        PatBlt(destinationDC, 0, 0, targetX, canvasHeight, 0x00000042);
+        PatBlt(destinationDC, targetX + targetWidth, 0,
+               canvasWidth - targetX - targetWidth, canvasHeight, 0x00000042);
+    }
+    if (targetY) {
+        PatBlt(destinationDC, 0, 0, canvasWidth, targetY, 0x00000042);
+        PatBlt(destinationDC, 0, targetY + targetHeight,
+               canvasWidth, canvasHeight - targetY - targetHeight, 0x00000042);
+    }
+    StretchBlt(destinationDC, targetX, targetY, targetWidth, targetHeight, sourceDC,
+               0, sourceY, (int)viewportWidth, sourceHeight, 0xcc0020);
     GdiFlush();
     FUN_00406c00_IfFreeGameNotEquals1_Unk_WHAT_DOES_THIS_DO_CONTAINS_PPVBITS();
 }

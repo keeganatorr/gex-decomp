@@ -10,6 +10,7 @@ struct DrawCacheEntry {
 };
 
 extern "C" {
+    int __cdecl GEX_WidescreenCacheX(void);
     void TracePrintf_Debug_00405390(const char*);
     int FUN_00445180_CacheInitInner_takes_x_and_y(int, int);
     void DRAW_CacheClear_0043e430(int);
@@ -33,7 +34,9 @@ extern "C" void DRAW_CacheInit_0043e350(void)
             p->field8 = 0;
             p->field13 = (char)y;
             y += 0x20;
-            p->field4 = p;
+            // Keep all 660 slot identities and coordinates. Exclude cells
+            // covered by the wider framebuffer from the free list.
+            p->field4 = x < GEX_WidescreenCacheX() ? 0 : p;
             ++p;
         } while (y < 0x1e0);
         x += 0x10;

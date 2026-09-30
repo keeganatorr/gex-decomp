@@ -1,4 +1,5 @@
 extern "C" {
+int __cdecl GEX_WidescreenWidth(void);
 int CAMERA_XPos_004a2a38;
 int CAMERA_YPos_004a2a1c;
 int DAT_004A2964;
@@ -17,5 +18,5 @@ extern "C" void FUN_0040FE00(int *param_1)
         param_1[0x1e] = temp + 0x10000;
     }
     FUN_00419B80(param_1, 9);
-    FUN_0040FE80((int)param_1, 0x1400000, 1);
+    FUN_0040FE80((int)param_1, GEX_WidescreenWidth() << 16, 1);
 }

@@ -20,6 +20,7 @@ typedef struct IMAGE {
     RECT rect;
 } IMAGE;
 extern "C" {
+int __cdecl GEX_WidescreenWidth(void);
 // Unused declarations below are compiler-state padding, not recovered source:
 // VC4 orders commutative operands/registers by internal symbol numbering,
 // which the original headers set. They emit no code or relocations.
@@ -87,7 +88,7 @@ void __cdecl FUN_0043f080_ResetGraphics_Clean1(unsigned int mode)
         dm[1] = dm[0];
         *DAT_004a2b14_Draw4 = &dm[1];
         DAT_004a2b14_Draw4 = (void **)&dm[1];
-        for (x = 0; x < 0x140; x += 0x40) {
+        for (x = 0; x < GEX_WidescreenWidth(); x += 0x40) {
             for (y = 0; y < 0xf0; y += 0x20) {
                 if (PTR_004a2ae4 + 0x28 > DAT_004a2adc_Tiles2) {
                     PTR_004a2ae4 = DAT_004a2ae0_TilesBack1 + 0x28;

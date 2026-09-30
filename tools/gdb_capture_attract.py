@@ -1,4 +1,4 @@
-"""Loaded by GDB inside Wine; capture the native 320x224 Gex render buffer."""
+"""Loaded by GDB inside Wine; capture the configured-width, 224-line Gex render buffer."""
 
 import gdb
 import hashlib
@@ -12,6 +12,8 @@ config = json.loads(Path(os.environ["GEX_CAPTURE_CONFIG"]).read_text())
 out = Path(config["out"])
 out.mkdir(parents=True, exist_ok=True)
 addresses = config["addresses"]
+width = config.get("width", 320)
+row_bytes = width * 2
 records = []
 last_timer = None
 previous_sample_timer = None
@@ -42,9 +44,9 @@ def save():
                 "demo": config["demo"],
                 "executableSHA256": config.get("executableSHA256"),
                 "addressMapSHA256": config.get("addressMapSHA256"),
-                "level": config["level"], "width": 320, "height": 224,
+                "level": config["level"], "width": width, "height": 224,
                 "pixelFormat": "little-endian native 5:5:5 words, red in low bits",
-                "frameBytes": 320 * 224 * 2,
+                "frameBytes": width * 224 * 2,
                 "postFlushPoint": "entry to 00406c00 before DIB clear, after GFX_Flush display conversion",
                 "capturePreFlush": config["capturePreFlush"],
                 "capturePoint": ("entry to 00406c00 after display conversion, before DIB clear"
@@ -123,8 +125,8 @@ class Capture(gdb.Breakpoint):
                 }
             if config["capturePreFlush"]:
                 # Each visible line has 320 16-bit pixels in a 0x800-byte stride.
-                backing = read(pointer + 0x4000, 223 * 0x800 + 640)
-                pixels = b"".join(backing[row * 0x800:row * 0x800 + 640]
+                backing = read(pointer + 0x4000, 223 * 0x800 + row_bytes)
+                pixels = b"".join(backing[row * 0x800:row * 0x800 + row_bytes]
                                   for row in range(224))
                 digest = hashlib.sha256(pixels).hexdigest()
                 if timer == previous_sample_timer and digest != last_hash:
@@ -137,8 +139,8 @@ class Capture(gdb.Breakpoint):
                 record["file"] = name
                 record["sha256"] = digest
             else:
-                backing = read(pointer + 0x4000, 223 * 0x800 + 640)
-                pixels = b"".join(backing[row * 0x800:row * 0x800 + 640]
+                backing = read(pointer + 0x4000, 223 * 0x800 + row_bytes)
+                pixels = b"".join(backing[row * 0x800:row * 0x800 + row_bytes]
                                   for row in range(224))
                 name = f"post-flush-{number:06d}.raw"
                 (out / name).write_bytes(pixels)

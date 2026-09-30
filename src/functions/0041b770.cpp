@@ -29,6 +29,7 @@ int __cdecl sprintf(char*, const char*, ...);
 void __cdecl FUN_0041a360(int, int);
 void __cdecl FUN_00441150_Flashing(int);
 void __cdecl FUN_00444590_DrawBehindAndInfrontObjects(int);
+int __cdecl GEX_WidescreenWidth(void);
 }
 
 
@@ -41,6 +42,7 @@ extern "C" void __cdecl HUDDraw_0041b770(int param_1)
   int iVar4;
   int iVar5;
   char acStack_14 [20];
+  int widescreenCameraX = DAT_004a2a38_Camera + ((GEX_WidescreenWidth() - 320) / 2 << 16);
 
   if (DAT_00455c54_EventVar == 0) {
     *(unsigned int *)(param_1 + 0xe0) = *(unsigned int *)(param_1 + 0xe0) | 0x1000000;
@@ -53,7 +55,7 @@ extern "C" void __cdecl HUDDraw_0041b770(int param_1)
     sprintf(acStack_14,FUN_00459484,DAT_004a23c4);
     iVar5 = 0;
     do {
-      iVar2 = DAT_004a2a38_Camera + iVar4;
+      iVar2 = widescreenCameraX + iVar4;
       iVar4 = iVar4 + 0x90000;
       *(int *)(param_1 + 0x78) = iVar2 + 0x1c0000;
       *(int *)(param_1 + 0x54) = acStack_14[iVar5] + -0x30;
@@ -65,7 +67,7 @@ extern "C" void __cdecl HUDDraw_0041b770(int param_1)
     }
     *(int *)(param_1 + 0x50) = 4;
     *(int *)(param_1 + 0x54) = DAT_004635bc;
-    *(int *)(param_1 + 0x78) = DAT_004a2a38_Camera + 0xb00000;
+    *(int *)(param_1 + 0x78) = widescreenCameraX + 0xb00000;
     *(int *)(param_1 + 0x7c) = DAT_004a2a1c + 0x1f0000;
     *(int *)(param_1 + 200) = 0xa000;
     *(int *)(param_1 + 0xcc) = 0xa000;
@@ -83,7 +85,7 @@ extern "C" void __cdecl HUDDraw_0041b770(int param_1)
     sprintf(acStack_14,FUN_0045947C,DAT_004a2808);
     iVar5 = 0;
     do {
-      iVar2 = DAT_004a2a38_Camera + iVar4;
+      iVar2 = widescreenCameraX + iVar4;
       iVar4 = iVar4 + 0x90000;
       *(int *)(param_1 + 0x78) = iVar2 + 0xbe0000;
       *(int *)(param_1 + 0x54) = acStack_14[iVar5] + -0x30;
@@ -92,7 +94,7 @@ extern "C" void __cdecl HUDDraw_0041b770(int param_1)
     } while (iVar4 < 0x120000);
     *(int *)(param_1 + 0x50) = 1;
     *(int *)(param_1 + 0x54) = 0;
-    *(int *)(param_1 + 0x78) = DAT_004a2a38_Camera + 0x900000;
+    *(int *)(param_1 + 0x78) = widescreenCameraX + 0x900000;
     *(int *)(param_1 + 0x7c) = DAT_004a2a1c + 0x1e0000;
     FUN_00444590_DrawBehindAndInfrontObjects(param_1);
     *(int *)(param_1 + 0x50) = 3;
@@ -104,7 +106,7 @@ extern "C" void __cdecl HUDDraw_0041b770(int param_1)
     sprintf(acStack_14,FUN_0045947C,DAT_00456b00);
     iVar5 = 0;
     do {
-      iVar2 = DAT_004a2a38_Camera + iVar4;
+      iVar2 = widescreenCameraX + iVar4;
       iVar4 = iVar4 + 0x90000;
       *(int *)(param_1 + 0x78) = iVar2;
       *(int *)(param_1 + 0x54) = acStack_14[iVar5] + -0x30;
@@ -122,7 +124,7 @@ extern "C" void __cdecl HUDDraw_0041b770(int param_1)
     *(int *)(param_1 + 0x50) = 2;
     *(int *)(param_1 + 0x54) = 1;
     *(int *)(param_1 + 0x7c) = DAT_004a2a1c + 0x200000;
-    *(int *)(param_1 + 0x78) = DAT_004a2a38_Camera + 0x1280000;
+    *(int *)(param_1 + 0x78) = widescreenCameraX + 0x1280000;
     if (8 < DAT_00456afc_MaxHealth) {
       DAT_00456afc_MaxHealth = 8;
     }
@@ -192,7 +194,7 @@ extern "C" void __cdecl HUDDraw_0041b770(int param_1)
       sprintf(acStack_14,FUN_0045947C,DAT_004593bc);
       iVar5 = 0;
       do {
-        iVar2 = DAT_004a2a38_Camera + iVar4;
+        iVar2 = widescreenCameraX + iVar4;
         iVar4 = iVar4 + 0x90000;
         *(int *)(param_1 + 0x78) = iVar2 + 0x1180000;
         *(int *)(param_1 + 0x54) = acStack_14[iVar5] + -0x30;
@@ -201,7 +203,7 @@ extern "C" void __cdecl HUDDraw_0041b770(int param_1)
       } while (iVar4 < 0x120000);
       *(int *)(param_1 + 0x50) = 1;
       *(int *)(param_1 + 0x54) = 0;
-      *(int *)(param_1 + 0x78) = DAT_004a2a38_Camera + 0x140000;
+      *(int *)(param_1 + 0x78) = widescreenCameraX + 0x140000;
       *(int *)(param_1 + 0x7c) = DAT_004a2a1c + 0xd20000;
       FUN_00444590_DrawBehindAndInfrontObjects(param_1);
       *(int *)(param_1 + 0x50) = 3;
@@ -216,7 +218,7 @@ extern "C" void __cdecl HUDDraw_0041b770(int param_1)
       sprintf(acStack_14,FUN_00459474,DAT_004593c0);
       iVar5 = 0;
       do {
-        iVar2 = DAT_004a2a38_Camera + iVar4;
+        iVar2 = widescreenCameraX + iVar4;
         iVar4 = iVar4 + 0x90000;
         *(int *)(param_1 + 0x78) = iVar2 + 0x1e0000;
         *(int *)(param_1 + 0x54) = acStack_14[iVar5] + -0x30;

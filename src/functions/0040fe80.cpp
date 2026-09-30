@@ -27,6 +27,7 @@ extern int DAT_004A29FC;
 extern int DAT_004a297c_CamY1;
 extern int DAT_004a2a30_CameraXResult;
 extern int DAT_004a2a34_CameraYResult;
+int __cdecl GEX_WidescreenWidth(void);
 
 void __cdecl CameraBarrierAdjustCamera_0040fe80(GXObject *g, int unused, int snap)
 {
@@ -36,6 +37,7 @@ void __cdecl CameraBarrierAdjustCamera_0040fe80(GXObject *g, int unused, int sna
     int dy;
     int dxo;
     int dyo;
+    int viewport = GEX_WidescreenWidth() << 16;
     x = g->xpos;
     y = g->ypos;
     dx = x - CAMERA_XPos_004a2a38;
@@ -49,14 +51,14 @@ void __cdecl CameraBarrierAdjustCamera_0040fe80(GXObject *g, int unused, int sna
         if (dy >= 0x140000 && dy <= 0xdc0000) {
             if (dx < 0)
                 break;
-            if (snap ? dx < 0x1400000 : (dxo <= 0 && DAT_004a2a30_CameraXResult < 0)) {
+            if (snap ? dx < viewport : (dxo <= 0 && DAT_004a2a30_CameraXResult < 0)) {
                 dx = dxo;
                 CAMERA_XPos_004a2a38 = x;
             }
         } else {
             if (dx < 0)
                 break;
-            if (snap ? dx < 0x1400000 : (dx < 0x140000 && DAT_004a2a30_CameraXResult < 0)) {
+            if (snap ? dx < viewport : (dx < 0x140000 && DAT_004a2a30_CameraXResult < 0)) {
                 dx = dxo;
                 CAMERA_XPos_004a2a38 = x;
             }
@@ -66,25 +68,25 @@ void __cdecl CameraBarrierAdjustCamera_0040fe80(GXObject *g, int unused, int sna
         if (dy < 0 || dy >= 0xf00000)
             break;
         if (dy >= 0x140000 && dy <= 0xdc0000) {
-            if (dx > 0x1400000)
+            if (dx > viewport)
                 break;
-            if (snap ? dx >= 0 : (dxo >= 0x1400000 && DAT_004a2a30_CameraXResult > 0)) {
-                CAMERA_XPos_004a2a38 = x - 0x1400000;
+            if (snap ? dx >= 0 : (dxo >= viewport && DAT_004a2a30_CameraXResult > 0)) {
+                CAMERA_XPos_004a2a38 = x - viewport;
                 dx = dxo;
             }
         } else {
-            if (dx > 0x1400000)
+            if (dx > viewport)
                 break;
-            if (snap ? dx >= 0 : (dx > 0x12c0000 && DAT_004a2a30_CameraXResult > 0)) {
-                CAMERA_XPos_004a2a38 = x - 0x1400000;
+            if (snap ? dx >= 0 : (dx > viewport - 0x140000 && DAT_004a2a30_CameraXResult > 0)) {
+                CAMERA_XPos_004a2a38 = x - viewport;
                 dx = dxo;
             }
         }
         break;
     case 2:
-        if (dx < 0 || dx >= 0x1400000)
+        if (dx < 0 || dx >= viewport)
             break;
-        if (dx >= 0x140000 && dx <= 0x12c0000) {
+        if (dx >= 0x140000 && dx <= viewport - 0x140000) {
             if (dy < 0)
                 break;
             if (snap ? dy < 0xf00000 : (dyo <= 0 && DAT_004a2a34_CameraYResult < 0)) {
@@ -101,9 +103,9 @@ void __cdecl CameraBarrierAdjustCamera_0040fe80(GXObject *g, int unused, int sna
         }
         break;
     case 3:
-        if (dx < 0 || dx >= 0x1400000)
+        if (dx < 0 || dx >= viewport)
             break;
-        if (dx >= 0x140000 && dx <= 0x12c0000) {
+        if (dx >= 0x140000 && dx <= viewport - 0x140000) {
             if (dy > 0xf00000)
                 break;
             if (snap ? dy >= 0 : (dyo >= 0xf00000 && DAT_004a2a34_CameraYResult > 0)) {

@@ -55,3 +55,15 @@ The three direct CLI launches were checked under an isolated Wine desktop on
 recordings, respectively. Local screenshots are retained under
 `.work/replacement-run/cli-final-{0,1,2}.png`; this launch check is separate
 from the frame comparison report.
+
+## Widescreen and level select
+
+Press backtick (`) during play to return to level select. On the title screen,
+choose **Options** below Password. Use Left/Right to choose 4:3, 16:10, 16:9,
+or 21:9; the window resizes immediately while keeping its height. Select Back
+(or press Escape) to apply the gameplay viewport. The setting is saved in
+`gex-source.ini` beside the staged executable. The title uses its original
+centered composition, and gameplay fills the selected wider view.
+
+`GEX_WIDESCREEN=16:9 wine "$GEX_REPO/.work/replacement-run/game/GEX.exe"`
+overrides the saved ratio for startup. A saved choice otherwise persists between launches.

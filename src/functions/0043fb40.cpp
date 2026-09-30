@@ -28,6 +28,7 @@ struct TileMap {
 };
 
 void __cdecl FUN_0043fce0_DrawTilesInner(int, void *, int, int);
+int __cdecl GEX_WidescreenWidth(void);
 
 void __cdecl RM_DrawTiles_0043fb40(struct TileMap *map, void *gfx, int camX, int camY)
 {
@@ -60,8 +61,9 @@ void __cdecl RM_DrawTiles_0043fb40(struct TileMap *map, void *gfx, int camX, int
     cols = skip != 1;
     rows = cols + 1;
     cols = map->width - ((camX - cx) >> 24);
-    if (cols > 3)
-        cols = 3;
+    int visibleColumns = ((GEX_WidescreenWidth() + 255) >> 8) + 1;
+    if (cols > visibleColumns)
+        cols = visibleColumns;
     camX = -(camX & 0xff0000);
     camY = -(camY & 0xff0000);
     if (cx + camX > 0)

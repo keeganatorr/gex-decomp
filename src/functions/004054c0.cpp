@@ -17,6 +17,7 @@ typedef struct WINDOWPLACEMENT {
     RECT rcNormalPosition;
 } WINDOWPLACEMENT;
 extern "C" {
+int __cdecl GEX_WidescreenConfiguredWidth(void);
 extern int gFullscreen_0045103c;
 extern void *gMainWindow_004875a0;
 extern int DAT_00487768_ScreenWidth;
@@ -35,6 +36,8 @@ void __cdecl FUN_004054c0_SetWindowSize(int width, int height)
 
     if (gFullscreen_0045103c)
         FUN_004013e0_ExitFullscreen_Clean1(0);
+    if (width > 0 && width % 320 == 0)
+        width = GEX_WidescreenConfiguredWidth() * (width / 320);
     r.left = 0;
     r.top = 0;
     r.right = width;

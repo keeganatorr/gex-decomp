@@ -62,6 +62,8 @@ def main() -> None:
     entry = "game_entry.obj" if args.game else "main.obj"
     inputs = [WORK / name for name in objects] + [
         WORK / name for name in (entry, "data.obj", "rsrc.obj")]
+    if args.game:
+        inputs.extend([WORK / "widescreen_runtime.obj", WORK / "menu_options.obj"])
     missing = [path for path in inputs + libraries if not path.is_file()]
     if missing:
         raise SystemExit(f"missing LLD link input: {missing[0]} ({len(missing)} total)")

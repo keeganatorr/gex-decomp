@@ -49,15 +49,20 @@ void __cdecl FUN_00438470_MoveGuillotine(GXObject *gob, int dy)
     int contour;
     int hx;
     int hy;
+    int hotspotApplied;
 
     gob->gob_ypos += dy;
     gob->gob_flags2 &= ~0x800000;
+    hotspotApplied = 0;
     if ((gob->gob_flags2 & 0x80) && GOB_GetHotSpot_00419c00(gob, 0, 0, &hx, &hy)) {
         gob->gob_xpos += hx;
         gob->gob_ypos += hy;
+        hotspotApplied = 1;
     }
     if ((gob->gob_flags & 0x20000) && !(gob->gob_flags2 & 0x400)) {
         frame = GOB_GetCurrentFrameWithDefault_0041a380(gob);
+        if (!frame)
+            goto cleanup;
         flip = gob->gob_flags & 0x40000000;
         if (flip)
             top = -frame->bottom;
@@ -83,6 +88,8 @@ void __cdecl FUN_00438470_MoveGuillotine(GXObject *gob, int dy)
             }
         } else if (dy < 0) {
             frame = GOB_GetCurrentFrameWithDefault_0041a380(gob);
+            if (!frame)
+                goto cleanup;
             if (gob->gob_flags & 0x40000000)
                 top = -frame->bottom;
             else
@@ -116,6 +123,8 @@ void __cdecl FUN_00438470_MoveGuillotine(GXObject *gob, int dy)
             }
         } else if (dy > 0) {
             frame = GOB_GetCurrentFrameWithDefault_0041a380(gob);
+            if (!frame)
+                goto cleanup;
             flip = gob->gob_flags & 0x40000000;
             if (flip)
                 top = -frame->bottom;
@@ -133,7 +142,8 @@ void __cdecl FUN_00438470_MoveGuillotine(GXObject *gob, int dy)
                 gob->gob_flags = gob->gob_flags & 0xe3ffffff | 0x3000000;
         }
     }
-    if (gob->gob_flags2 & 0x80) {
+cleanup:
+    if (hotspotApplied) {
         gob->gob_xpos -= hx;
         gob->gob_ypos -= hy;
     }

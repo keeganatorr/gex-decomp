@@ -9,8 +9,12 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parent.parent
 TC = json.loads((ROOT / "project.json").read_text())["toolchain"]
-SOURCE = ROOT / "src/replacement/game_entry.cpp"
-OUTPUT = ROOT / ".work/replacement-short/game_entry.obj"
+SOURCES = {
+    "game_entry": ROOT / "src/replacement/game_entry.cpp",
+    "menu_options": ROOT / "src/replacement/menu_options.cpp",
+    "widescreen_runtime": ROOT / "src/replacement/widescreen_runtime.cpp",
+}
+OUTPUT_DIR = ROOT / ".work/replacement-short"
 
 
 def win(path: Path) -> str:
@@ -18,13 +22,15 @@ def win(path: Path) -> str:
 
 
 def main() -> None:
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, WINEPREFIX=TC["winePrefix"], WINEDEBUG="-all",
                INCLUDE="", LIB="", CL="", _CL_="")
-    subprocess.run([TC["wine"], TC["compiler"], "/nologo", "/c",
-                    *TC["flags"], "/Fo" + win(OUTPUT), "/Tp" + win(SOURCE)],
-                   cwd=OUTPUT.parent, env=env, check=True, timeout=90)
-    print(f"game entry adapter: {OUTPUT}")
+    for name, source in SOURCES.items():
+        output = OUTPUT_DIR / f"{name}.obj"
+        subprocess.run([TC["wine"], TC["compiler"], "/nologo", "/c",
+                        *TC["flags"], "/Fo" + win(output), "/Tp" + win(source)],
+                       cwd=OUTPUT_DIR, env=env, check=True, timeout=90)
+        print(f"game entry adapter: {output}")
 
 
 if __name__ == "__main__":

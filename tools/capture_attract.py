@@ -73,7 +73,11 @@ def main() -> None:
     parser.add_argument("--map", type=Path,
                         default=ROOT / ".work/replacement-short/gex-source.map")
     parser.add_argument("--timeout", type=int, default=180)
+    parser.add_argument("--width", type=int, default=320,
+                        help="visible framebuffer width (320..672; use with GEX_WIDESCREEN)")
     args = parser.parse_args()
+    if args.width < 320 or args.width > 672 or args.width % 4:
+        parser.error("width must be a multiple of four between 320 and 672")
     if (args.frames is not None and args.frames < 1) or min(args.timeout, args.sample_ticks, args.max_presentations) < 1:
         parser.error("frames, timeout, sample ticks, and presentation limit must be positive")
     exe = args.exe.resolve(strict=True)
@@ -95,7 +99,7 @@ def main() -> None:
     addresses = (ORIGINAL_ADDRESSES if args.kind == "oracle" else
                  source_addresses(args.map))
     out.mkdir(parents=True, exist_ok=True)
-    config = {"demo": args.demo, "level": (0, 9, 36)[args.demo],
+    config = {"demo": args.demo, "level": (0, 9, 36)[args.demo], "width": args.width,
               "frames": args.frames, "fullDemo": args.until_demo_end,
               "capturePreFlush": not args.until_demo_end,
               "sampleIntervalTicks": args.sample_ticks,

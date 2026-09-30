@@ -93,6 +93,7 @@ DWORD __stdcall SoundThread_00402c00(void *);
 void __stdcall FUN_00404ab0_timeSetEvent(UINT, UINT, DWORD, DWORD, DWORD);
 long __stdcall WndProc_00403960(HWND, UINT, UINT, long);
 long __stdcall DebugVramWndProc_00404230(HWND, UINT, UINT, long);
+void __cdecl GEX_WidescreenInit(void);
 }
 
 static unsigned &startupWord(unsigned long address) { return *(unsigned *)address; }
@@ -157,6 +158,8 @@ extern "C" int __stdcall WinMain_00405bf0(HINSTANCE instance, HINSTANCE,
         if (placement.show == 2) ShowWindow(existing, 9);
         return 0;
     }
+
+    GEX_WidescreenInit();
 
     // The replacement starts directly, without LOADER.EXE's password. Keep
     // the original J intro switch and skip the intro for a bare launch.

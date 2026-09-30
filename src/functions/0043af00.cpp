@@ -6,6 +6,7 @@ typedef struct GXObject {
     int gob_work1;              /* 0x9c */
 } GXObject;
 extern "C" {
+int __cdecl GEX_WidescreenWidth(void);
 // Unused declarations below are compiler-state padding, not recovered source:
 // VC4 orders commutative operands/registers by internal symbol numbering,
 // which the original headers set. They emit no code or relocations.
@@ -34,9 +35,10 @@ void __cdecl FUN_0043af00_GRAPHICSDRAWING(GXObject *gob)
 {
     int level;
     int fade;
-    if (gob->gob_work1 && (gob->gob_xpos < CAMERA_XPos_004a2a38 || gob->gob_xpos > CAMERA_XPos_004a2a38 + 0x1400000 || gob->gob_ypos < CAMERA_YPos_004a2a1c || gob->gob_ypos > CAMERA_YPos_004a2a1c + 0xf00000))
+    int viewportWidth = GEX_WidescreenWidth() << 16;
+    if (gob->gob_work1 && (gob->gob_xpos < CAMERA_XPos_004a2a38 || gob->gob_xpos > CAMERA_XPos_004a2a38 + viewportWidth || gob->gob_ypos < CAMERA_YPos_004a2a1c || gob->gob_ypos > CAMERA_YPos_004a2a1c + 0xf00000))
         DAT_00464788--;
-    else if (!gob->gob_work1 && gob->gob_xpos >= CAMERA_XPos_004a2a38 && gob->gob_xpos <= CAMERA_XPos_004a2a38 + 0x1400000 && gob->gob_ypos >= CAMERA_YPos_004a2a1c && gob->gob_ypos <= CAMERA_YPos_004a2a1c + 0xf00000)
+    else if (!gob->gob_work1 && gob->gob_xpos >= CAMERA_XPos_004a2a38 && gob->gob_xpos <= CAMERA_XPos_004a2a38 + viewportWidth && gob->gob_ypos >= CAMERA_YPos_004a2a1c && gob->gob_ypos <= CAMERA_YPos_004a2a1c + 0xf00000)
         DAT_00464788++;
     if (DAT_00464794 == gob && !DAT_004a2b00 && !DAT_00455be4) {
         level = 0xff - (DAT_00464788 << 7 > 0 ? DAT_00464788 << 7 : 0);
@@ -49,7 +51,7 @@ void __cdecl FUN_0043af00_GRAPHICSDRAWING(GXObject *gob)
             DAT_0045ffd8 = 0;
         }
     }
-    if (gob->gob_xpos >= CAMERA_XPos_004a2a38 && gob->gob_xpos <= CAMERA_XPos_004a2a38 + 0x1400000 && gob->gob_ypos >= CAMERA_YPos_004a2a1c && gob->gob_ypos <= CAMERA_YPos_004a2a1c + 0xf00000)
+    if (gob->gob_xpos >= CAMERA_XPos_004a2a38 && gob->gob_xpos <= CAMERA_XPos_004a2a38 + viewportWidth && gob->gob_ypos >= CAMERA_YPos_004a2a1c && gob->gob_ypos <= CAMERA_YPos_004a2a1c + 0xf00000)
         gob->gob_work1 = 1;
     else
         gob->gob_work1 = 0;

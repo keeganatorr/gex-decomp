@@ -59,6 +59,50 @@ despite its name, that routine freezes the game loop. Manual pause keys and
 the existing sound activation handling remain in place. This is an intentional
 behavior change for the replacement executable.
 
+The replacement window procedure handles the backtick (`) key by setting
+the game mode to level select through normal level teardown. The title menu
+adds **Options**, drawn through the same sprite-font renderer as
+Start/Password/Exit. Up/Down selects Widescreen or Back; Left/Right (or confirm
+on Widescreen) cycles 4:3, 16:10, 16:9 and 21:9. Each change posts a resize to
+the UI thread immediately, preserving the actual client height and calculating
+the outer dimensions from the current window styles and menu. Maximized windows
+are restored before resizing. Fullscreen retains its physical display mode.
+Back or Escape applies the gameplay viewport and saves
+the choice to `[Display] Width` in `gex-source.ini` beside the executable.
+A width change reloads the title through normal graphics teardown so cached
+sprites are rebuilt with the new framebuffer reservation.
+
+`GEX_WIDESCREEN=16:9` overrides the saved setting at startup (also `16:10`,
+`21:9`, `4:3`, `W:H`, or a pixel width from 320 to 672, aligned down to four).
+The default is 320. Widths use the game's 240-line nominal display; the ordinary
+window displays its 224-line picture. The title retains its 320-pixel composition
+centered in the wider window. Window sizing preserves the integer scale;
+fullscreen fits the picture within the original physical display mode.
+
+Camera limits, tile coverage, sprite bounds, framebuffer clearing, pause copies,
+HUD and help-box positioning use the viewport width in source. Runtime globals
+use relocated linker symbols. There are no patches into compiled function
+bodies. Cache initialization preserves all 660 sprite-slot identities while
+excluding columns occupied by the wider framebuffer; clip data and camera
+presets are updated before graphics initialization.
+
+The image-data object keeps the original writable data span in one section,
+including the zero-filled tail. `READ_REQUEST_2_ARRAY_00462740` crosses the
+original raw-data boundary at `00462800`; splitting that span into separate
+`.data` and `.bss` input sections allowed newly linked menu strings to land
+inside the request array. Asset loading overwrote `Widescreen` as `Wide` and
+corrupted the ratio labels. Keeping the span contiguous preserves those array
+addresses without changing the matching-source bindings or proof metadata.
+
+The 2026-10-01 local run rebuilt all 1,250 function sources and linked with
+zero unresolved symbols or duplicate definitions. Under isolated Wine, the
+four-row title menu and ratio submenu rendered with the original font; choosing
+21:9 saved width 560 and reloaded the title in the wider window. Native captures
+covered 180 presentations of the graveyard recording at each of 424 and 560
+pixels. Local screenshots, frame manifests and the staged-executable receipt
+are under `.work/widescreen-fix/`. This is a bounded runtime check, not a claim
+of whole-game or fullscreen parity.
+
 All 1,250 function sources compile. The game-entry LLD link has **zero
 unresolved externals and zero duplicate definitions**. VC4 LINK still reports
 `___ImageBase`, a linker-supplied symbol provided by the final LLD link. The

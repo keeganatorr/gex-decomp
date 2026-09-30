@@ -27,6 +27,7 @@ typedef struct BgObject {
     int frame;
 } BgObject;
 extern "C" {
+int __cdecl GEX_WidescreenWidth(void);
 // Unused declarations below are compiler-state padding, not recovered source:
 // VC4 orders commutative operands/registers by internal symbol numbering,
 // which the original headers set. They emit no code or relocations.
@@ -104,10 +105,10 @@ void __cdecl FUN_00440cb0_DrawBackgroundInnerInner(BgObject *obj, int x, int y)
             px += ox + x;
         flags = oflags ^ pflags;
         if (flags & 0x80000000) {
-            if (px < 0 || px - w >= 0x1400000)
+            if (px < 0 || px - w >= (GEX_WidescreenWidth() << 16))
                 continue;
         } else {
-            if (w + px < 0 || px >= 0x1400000)
+            if (w + px < 0 || px >= (GEX_WidescreenWidth() << 16))
                 continue;
         }
         if (pflags & 0x40000000)

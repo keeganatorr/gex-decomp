@@ -23,6 +23,7 @@ typedef struct TitleEntry {
     int level;
 } TitleEntry;
 extern "C" {
+int __cdecl GEX_MainMenuDraw(void *);
 extern int LEVELID_004a2a74;
 extern LevelEntry DAT_004577B0[];
 extern int DAT_00456034;
@@ -39,6 +40,7 @@ void __cdecl MainMenuButtonDraw_0040c340(GXObject *gob)
     int frame;
     int wave;
 
+    if (GEX_MainMenuDraw(gob)) return;
     gob->fe0 |= 0x1000000;
     if (OBI_CheckRemoveObject_0040fce0(gob))
         return;

@@ -24,6 +24,8 @@ __declspec(dllimport) DWORD __stdcall CheckMenuItem(HANDLE, UINT, UINT);
 __declspec(dllimport) HANDLE __stdcall SelectPalette(HANDLE, HANDLE, int);
 __declspec(dllimport) UINT __stdcall RealizePalette(HANDLE);
 
+int __cdecl GEX_MainMenuEscape(void);
+void __cdecl GEX_WidescreenResizeWindow(int);
 void __cdecl FUN_00404a20_MoveWindow(void);
 void __cdecl FUN_00404f90_KillThreads(void);
 void __cdecl SettingsSetFromRegistry_00408f40(void);
@@ -72,6 +74,10 @@ extern "C" long __stdcall WndProc_00403960(HWND window, UINT message,
     HWND mainWindow = windowPointer(0x004875a0);
     char input = (char)wParam;
     switch (message) {
+    case 0x8001: { // Apply viewport window size on the UI thread.
+        GEX_WidescreenResizeWindow((int)wParam);
+        return 0;
+    }
     case 0x0005: // WM_SIZE
         windowWord(0x00487a04) = (unsigned)lParam & 0xffff;
         windowWord(0x00487a08) = (unsigned)lParam >> 16;
@@ -124,6 +130,15 @@ extern "C" long __stdcall WndProc_00403960(HWND window, UINT message,
         }
         break;
     case 0x0100: // WM_KEYDOWN
+        // Replacement-only shortcut: leave the current mode through the
+        // game's normal state transition and let its level teardown run.
+        // This source is a behavioral candidate; the added branch is not an
+        // exact-byte reconstruction of the original WndProc.
+        if (wParam == 0xc0) { // VK_OEM_3, the ` key on a US keyboard
+            if (windowWord(0x00455c3c) != 0)
+                windowWord(0x00455c3c) = 0;
+            return 0;
+        }
         if (wParam == 0x70) { // F1
             GameUnpause_004051d0();
             WinHelpA(mainWindow, windowText(0x00487de0), 3, 100);
@@ -166,6 +181,7 @@ extern "C" long __stdcall WndProc_00403960(HWND window, UINT message,
         }
         if (wParam == 0x74) { FUN_004054c0_SetWindowSize(320, 224); return 0; }
         if (wParam == 0x75) { FUN_004054c0_SetWindowSize(640, 448); return 0; }
+        if (wParam == 0x1b && GEX_MainMenuEscape()) return 0;
         if (wParam == 0x1b) { // Escape
             if (!windowWord(0x0045633c) || windowWord(0x004a2a98) != 0x3f) {
                 if (windowPointer(0x00451794) && windowWord(0x00487f88)) {

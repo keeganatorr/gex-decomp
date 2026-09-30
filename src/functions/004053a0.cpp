@@ -1,3 +1,4 @@
+extern int __cdecl GEX_WidescreenWidth(void);
 
 // Unused declarations below are compiler-state padding, not recovered source:
 // VC4 orders commutative operands/registers by internal symbol numbering,
@@ -21,24 +22,25 @@ void __cdecl FUN_004053a0_SaveScreenshotAndPauseGame(void)
     short *dst;
     int x;
     int y;
+    int width = GEX_WidescreenWidth();
     from = PTR_00487f70;
     to = PTR_00487f70 + 0x78000;
     for (y = 240; y; y--) {
-        memcpy(to, from, 640);
+        memcpy(to, from, width * 2);
         from += 0x800;
         to += 0x800;
     }
     pixel = (unsigned short *)(PTR_00487f70 + 0x78000);
     for (y = 240; y; y--) {
-        for (x = 320; x; x--) {
+        for (x = width; x; x--) {
             *pixel = (*pixel & 0x7bde) >> 1;
             pixel++;
         }
-        pixel += 0x2c0;
+        pixel += 1024 - width;
     }
     key = DAT_004517f0[0];
     src = DAT_004517f0;
-    dst = (short *)(PTR_00487f70 + 0xad0b6);
+    dst = (short *)(PTR_00487f70 + 0xad0b6 + width - 320);
     for (y = 27; y; y--) {
         for (x = 138; x; x--) {
             if (key != *src)

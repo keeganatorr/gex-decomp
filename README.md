@@ -68,6 +68,17 @@ or Windows and point it at the game folder containing the asset directories:
 wine "/path/to/Gex/GEX-source.exe"
 ```
 
+The replacement adds a backtick (\`) shortcut to return to level select and
+an **Options** entry below Password on the title screen. Options uses the
+original menu font. Left/Right changes the display ratio (4:3, 16:10, 16:9,
+or 21:9) and immediately resizes the window, preserving its height. Back or
+Escape applies the gameplay viewport and saves it in `gex-source.ini` beside
+the executable. The title artwork stays centered; gameplay uses the wider view.
+
+`GEX_WIDESCREEN=16:9` can override the saved setting at launch. It also accepts
+`W:H` or a pixel width from 320 to 672 (rounded down to a multiple of four).
+A fresh configuration defaults to 4:3.
+
 The build needs the recovered compiler/linker and supporting build tools; the
 game assets are needed at runtime, not at compile time. See
 [`docs/replacement-build.md`](docs/replacement-build.md) and

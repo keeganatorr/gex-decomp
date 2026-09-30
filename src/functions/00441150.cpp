@@ -27,6 +27,7 @@ extern int FUN_0045A2C0;
 extern int FUN_0045AA9C;
 
 extern "C" int __cdecl FUN_0041A500(int*);
+extern "C" int __cdecl GEX_WidescreenWidth(void);
 extern "C" void __cdecl FUN_004432C0(int*);
 extern "C" int __cdecl FUN_00442DE0_GraphicsFlashingInner(int, int);
 extern "C" void __cdecl FUN_00442E50_GraphicsFlashingInner2(int*, int*, int);
@@ -771,7 +772,7 @@ FUN_00441C57:
         if (sVar35 <= sVar9) {
           sVar9 = sVar35;
         }
-        if ((((sVar9 < 0x140) && (-1 < sVar25)) && (sVar7 < 0xf0)) && (-1 < sVar8)) {
+        if ((((sVar9 < GEX_WidescreenWidth()) && (-1 < sVar25)) && (sVar7 < 0xf0)) && (-1 < sVar8)) {
           bVar2 = *(int*)(imageStruct + 4);
           iVar26 = *imageStruct >> 0x10;
           iVar24 = *local_58 >> 0x10;

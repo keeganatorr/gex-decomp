@@ -1,6 +1,7 @@
 extern "C" short DAT_004a0270_Background_Unk2;
 extern "C" short DAT_004a0272_LEVEL_MAP;
 extern "C" void __cdecl FUN_00440cb0_DrawBackgroundInnerInner(void *, int, int);
+extern "C" int __cdecl GEX_WidescreenWidth(void);
 
 extern "C" void __cdecl PAR_DrawParallax_0041fef0(int *parallax,
                                                    int cameraX, int cameraY)
@@ -80,6 +81,6 @@ extern "C" void __cdecl PAR_DrawParallax_0041fef0(int *parallax,
             tileIndex = tileIndex == layer[11] ? 0 : tileIndex + 1;
             if (animateIndex == tileIndex)
                 animateIndex = -1;
-        } while (drawX < 0x1400000);
+        } while (drawX < (GEX_WidescreenWidth() << 16));
     }
 }

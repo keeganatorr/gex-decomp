@@ -6,6 +6,7 @@ struct CacheEntry {
 };
 
 extern "C" {
+int __cdecl GEX_WidescreenCacheX(void);
 extern char s_DRAW_CacheClear___004600e0[];
 void __cdecl TracePrintf_Debug_00405390(const char *, ...);
 extern CacheEntry gpDrawCacheEntries_00465358;
@@ -78,7 +79,7 @@ extern "C" void __cdecl DRAW_CacheClear_0043e430(int clearMode)
     DrawCacheEntry_0046a518.next = DrawCacheEntry_ARRAY_00464e58;
 
     DAT_004A2B18 = &DAT_00467178;
-    DAT_00460040 = 320;
+    DAT_00460040 = (short)GEX_WidescreenCacheX();
     DAT_00460042 = 0;
     DAT_00467170 = 0;
     *DAT_004A2B18 &= 0x00ffffffUL;

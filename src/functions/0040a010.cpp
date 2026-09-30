@@ -82,6 +82,7 @@ extern int DAT_004a2a3c;
 extern int LEVELID_004a2a98;
 extern int DAT_004626f0_PrevGameTypeSwitchCase;
 extern int gGameState_00455c3c;
+int __cdecl GEX_WidescreenWidth(void);
 void __cdecl GFX_Fade_0043f490(int, int, int, int, int, int, int);
 void __cdecl GXINP_ReadPads_0041fc40(void);
 void __cdecl VFX_Update_0041faf0(void);
@@ -119,6 +120,7 @@ int __cdecl M1_PlayLevel_0040a010(M1Level *level)
     int i;
     GobFunc doit;
     int running;
+    int viewportFixed = GEX_WidescreenWidth() << 16;
 
     M1_CurrentLevel_004a2990 = level;
     if (DAT_004626f4_InitialiseLevel) {
@@ -184,8 +186,9 @@ int __cdecl M1_PlayLevel_0040a010(M1Level *level)
         DAT_004a2974_CameraX_TrueCam2 = 0;
     if (DAT_004a2988_CameraY_TrueCam2 < 0)
         DAT_004a2988_CameraY_TrueCam2 = 0;
-    if (M1_CurrentLevel_004a2990->map->width - 0x1400000 <= DAT_004a2974_CameraX_TrueCam2)
-        DAT_004a2974_CameraX_TrueCam2 = M1_CurrentLevel_004a2990->map->width - 0x1410000;
+    if (M1_CurrentLevel_004a2990->map->width - viewportFixed <= DAT_004a2974_CameraX_TrueCam2)
+        DAT_004a2974_CameraX_TrueCam2 = M1_CurrentLevel_004a2990->map->width - viewportFixed - 0x10000;
+    if (DAT_004a2974_CameraX_TrueCam2 < 0) DAT_004a2974_CameraX_TrueCam2 = 0;
     if (M1_CurrentLevel_004a2990->map->height - 0xf00000 <= DAT_004a2988_CameraY_TrueCam2)
         DAT_004a2988_CameraY_TrueCam2 = M1_CurrentLevel_004a2990->map->height - 0xf10000;
     DAT_004a2a96_CameraX_After = ((DAT_004a2974_CameraX_TrueCam2 >> 16) - DAT_004a2a96_CameraX_After) / 2;
@@ -227,8 +230,8 @@ int __cdecl M1_PlayLevel_0040a010(M1Level *level)
         ProcessPaused_0041bfc0(gPlayerObject_004a27fc);
     DAT_004626ec = FUN_00402fa0_GetFrameTimingValue();
     if (gDemoShowing_004a2a0c && (gTimer_004a2ac8 & 0x10)) {
-        TXT_DrawPrintFP_0043faa0(0xa00000 - TXT_PixelLength_0043fae0(STRING_DEMO_00488008) / 2, 0x500000, STRING_DEMO_00488008);
-        TXT_DrawPrintFP_0043faa0(0xa00000 - TXT_PixelLength_0043fae0(STRING_PRESSJUMPTOSTART_0048a02c) / 2, 0x640000, STRING_PRESSJUMPTOSTART_0048a02c);
+        TXT_DrawPrintFP_0043faa0((viewportFixed / 2) - TXT_PixelLength_0043fae0(STRING_DEMO_00488008) / 2, 0x500000, STRING_DEMO_00488008);
+        TXT_DrawPrintFP_0043faa0((viewportFixed / 2) - TXT_PixelLength_0043fae0(STRING_PRESSJUMPTOSTART_0048a02c) / 2, 0x640000, STRING_PRESSJUMPTOSTART_0048a02c);
     }
     FUN_0043f310_InitializeGraphicsVariables();
     running = UpdateTimer_00405120();

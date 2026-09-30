@@ -58,6 +58,7 @@ extern int DAT_004a2a34;
 extern int DAT_004a2a38_Camera;
 extern int* DAT_004a27fc_PlayerClassInstance;
 unsigned int __cdecl FUN_004206d0(void);
+int __cdecl GEX_WidescreenWidth(void);
 }
 
 
@@ -80,6 +81,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
   int bVar12;
   int iStack_18;
   int iStack_14;
+  int viewportFixed = GEX_WidescreenWidth() << 16;
+  int halfViewportFixed = viewportFixed / 2;
 
   uVar11 = DAT_00455b98;
   if ((DAT_004a27fc_PlayerClassInstance != (int *)0) && (DAT_004a2a04 != 0)) {
@@ -126,8 +129,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
           DAT_00457e8c = DAT_00457e8c + 1 & 7;
           if (iStack_14 == 0) {
             if (0xd0000 < DAT_00462d48) {
-              DAT_00455bb4 = 0x980000;
-              DAT_00455bb8 = 0xa00000;
+              DAT_00455bb4 = halfViewportFixed - 0x80000;
+              DAT_00455bb8 = halfViewportFixed;
             }
           }
           else if (0xd0000 < DAT_00462d48) {
@@ -145,8 +148,8 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
         DAT_00457e8c = DAT_00457e8c + 1 & 7;
         if (iVar2 == 0) {
           if (DAT_00462d48 < -0xd0000) {
-            DAT_00455bb4 = 0xa00000;
-            DAT_00455bb8 = 0xa80000;
+            DAT_00455bb4 = halfViewportFixed;
+            DAT_00455bb8 = halfViewportFixed + 0x80000;
           }
         }
         else if (DAT_00462d48 < -0xd0000) {
@@ -189,13 +192,13 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
     }
     DAT_00462d44 = iVar8;
     if (DAT_00462d30 == 4) {
-      if ((bVar12) || (0x9fffff < iVar8)) {
-        if ((bVar1) && (0xa00000 < iVar8)) {
+      if ((bVar12) || (halfViewportFixed - 1 < iVar8)) {
+        if ((bVar1) && (halfViewportFixed < iVar8)) {
           DAT_00455bb4 = DAT_00455bcc;
           uVar7 = iVar6 + 0x40000;
           DAT_00455bb8 = DAT_00455bd0;
           DAT_00455bcc = DAT_00455ba4;
-          DAT_00462d44 = 0xa00000;
+          DAT_00462d44 = halfViewportFixed;
           DAT_00455bd0 = DAT_00455ba8;
         }
         else {
@@ -207,7 +210,7 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
         uVar7 = iVar6 + 0x40000;
         DAT_00455bb8 = DAT_00455bc8;
         DAT_00455bc4 = DAT_00455b9c;
-        DAT_00462d44 = 0xa00000;
+        DAT_00462d44 = halfViewportFixed;
         DAT_00455bc8 = DAT_00455ba0;
       }
     }
@@ -334,7 +337,7 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
     iVar2 = DAT_00462d44;
     iVar10 = DAT_00462d4c;
     if (DAT_00462d30 == 5) {
-      iVar2 = 0xa00000;
+      iVar2 = halfViewportFixed;
       iVar10 = 0x780000;
       uVar11 = 0x140000;
       uVar7 = 0x140000;
@@ -370,9 +373,10 @@ extern "C" void __cdecl FUN_0041028b_CameraStuff(void)
       DAT_004a2a1c = 0;
     }
     iVar2 = *(int *)(*(int *)(DAT_004a2990_BlockAnims + 4) + 4);
-    if (iVar2 + -0x1400000 <= DAT_004a2a38_Camera) {
-      DAT_004a2a38_Camera = iVar2 + -0x1410000;
+    if (iVar2 - viewportFixed <= DAT_004a2a38_Camera) {
+      DAT_004a2a38_Camera = iVar2 - viewportFixed - 0x10000;
     }
+    if (DAT_004a2a38_Camera < 0) DAT_004a2a38_Camera = 0;
     iVar2 = *(int *)(*(int *)(DAT_004a2990_BlockAnims + 4) + 8);
     if (iVar2 + -0xf00000 <= DAT_004a2a1c) {
       DAT_004a2a1c = iVar2 + -0xf10000;

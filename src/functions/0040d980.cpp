@@ -25,6 +25,7 @@ extern "C" int __cdecl FUN_0043FAE0(char*);
 extern "C" void __cdecl FUN_0043FAA0(int, int, char*);
 extern "C" void __cdecl FUN_00444590(int**);
 extern "C" char* __cdecl FUN_0040D890(char*, int**);
+extern "C" int __cdecl GEX_WidescreenWidth(void);
 
 extern "C" void __cdecl HelpBoxDraw_0040d980(int** param_1)
 {
@@ -140,7 +141,7 @@ extern "C" void __cdecl HelpBoxDraw_0040d980(int** param_1)
     }
     }
 
-    iVar3 = (0x1400000 - (int)param_1[0x29]) >> 1;
+    iVar3 = ((GEX_WidescreenWidth() << 16) - (int)param_1[0x29]) >> 1;
     iVar7 = (0xf00000 - (int)param_1[0x2a]) >> 1;
     FUN_00428CC0(iVar3, iVar7, (int)param_1[0x29], (int)param_1[0x2a], DAT_00456220, DAT_00456224);
 

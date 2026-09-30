@@ -12,6 +12,7 @@ typedef struct GXObject {
     int gob_workB4;             /* 0xb4 */
 } GXObject;
 extern "C" {
+void __cdecl GEX_MainMenuReset(void);
 extern int M1_IsInMap_004a2a7c;
 extern int DAT_00462c84;
 extern int DAT_00455c34_LEV_Variable;
@@ -76,5 +77,6 @@ void __cdecl MainMenuControllerInit_0040dda0(GXObject *gex)
     password->gob_down = 2;
     exit->gob_up = 3;
     exit->gob_down = 1;
+    GEX_MainMenuReset();
 }
 }

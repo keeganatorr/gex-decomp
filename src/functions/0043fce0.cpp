@@ -21,6 +21,7 @@ extern int* DAT_004a2ae4;
 
 extern "C" unsigned int __cdecl FUN_0043ECF0(void*);
 extern "C" void __cdecl FUN_00445350(int, int, int, int);
+extern "C" int __cdecl GEX_WidescreenWidth(void);
 
 
 extern "C" void __cdecl FUN_0043fce0_DrawTilesInner(int param_1, int param_2,
@@ -61,7 +62,9 @@ extern "C" void __cdecl FUN_0043fce0_DrawTilesInner(int param_1, int param_2,
   int local_8;
   int local_4;
   short sVar5;
+  int viewportWidth;
 
+  viewportWidth = GEX_WidescreenWidth() << 16;
   local_c = DAT_004a2ae8;
   uVar11 = (int)DAT_004a2a96 >> 0x1f;
   iVar6 = ((int)DAT_004a2a96 ^ uVar11) - uVar11;
@@ -72,7 +75,7 @@ extern "C" void __cdecl FUN_0043fce0_DrawTilesInner(int param_1, int param_2,
   local_10 = ((unsigned int)DAT_004a2af8 * 0x100 + (unsigned int)DAT_004a2af9) * 0x100 + (unsigned int)DAT_004a2afa;
   local_44[0] = 0xffff;
   local_44[1] = 0xffff;
-  if ((param_3 < iVar7 + 0x1400000) && (param_4 < iVar9 + 0xf00000)) {
+  if ((param_3 < iVar7 + viewportWidth) && (param_4 < iVar9 + 0xf00000)) {
     local_38 = (unsigned short *)(param_1 + 8);
     local_24 = 8;
     local_20 = 8;
@@ -82,8 +85,9 @@ extern "C" void __cdecl FUN_0043fce0_DrawTilesInner(int param_1, int param_2,
       local_24 = iVar12 + 8;
       param_3 = param_3 + iVar12 * -0x200000;
     }
-    if (iVar7 + 0x400000 <= param_3) {
-      local_24 = local_24 - (param_3 + iVar6 * -0x20000 + -0x400000 >> 0x15);
+    if (iVar7 + ((GEX_WidescreenWidth() - 256) << 16) <= param_3) {
+      local_24 = local_24 - (param_3 + iVar6 * -0x20000 -
+                             ((GEX_WidescreenWidth() - 256) << 16) >> 0x15);
     }
     if (-param_4 != iVar9 && param_4 <= iVar8 * -0x20000) {
       iVar6 = param_4 + iVar9 + 0x1f0000 >> 0x15;

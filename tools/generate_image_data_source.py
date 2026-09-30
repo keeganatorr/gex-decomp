@@ -165,7 +165,13 @@ def main() -> None:
                      {a for a in data_labels if a < bss_start},
                      {a: target for a, target in destinations.items()
                       if data["start"] <= a < bss_start}, "GEX_DATA")
-    lines += [".section .bss", ".balign 16"]
+    # Arrays cross the PE raw/zero-filled boundary; preserve their addresses
+    # in one section so other objects cannot be inserted between the halves.
+    lines += [
+        '# Keep the original data span contiguous: the block-request array crosses',
+        '# the original file-backed/zero-filled boundary at 00462800.',
+        '.section .data,"dw"', '.balign 16',
+    ]
     cursor = bss_start
     for address in sorted(a for a in data_labels if a >= bss_start):
         if address > cursor:

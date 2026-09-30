@@ -27,26 +27,28 @@ extern int decl_pad_20;
 extern int decl_pad_21;
 extern int decl_pad_22;
 extern int CAMERA_XPos_004a2a38;
+int __cdecl GEX_WidescreenWidth(void);
 void __cdecl FUN_0042e930_GRAPHICSDRAWING_SetCamera(int x1, int x2, int x3, unsigned int order)
 {
+    int viewport = GEX_WidescreenWidth() << 16;
     switch (order) {
     case 1:
-        CAMERA_XPos_004a2a38 = x1 - ((x1 - x3) + 0x1400000 >> 1);
+        CAMERA_XPos_004a2a38 = x1 - ((x1 - x3) + viewport >> 1);
         return;
     case 2:
-        CAMERA_XPos_004a2a38 = x1 - ((x1 - x2) + 0x1400000 >> 1);
+        CAMERA_XPos_004a2a38 = x1 - ((x1 - x2) + viewport >> 1);
         return;
     case 3:
-        CAMERA_XPos_004a2a38 = x2 - ((x2 - x3) + 0x1400000 >> 1);
+        CAMERA_XPos_004a2a38 = x2 - ((x2 - x3) + viewport >> 1);
         return;
     case 4:
-        CAMERA_XPos_004a2a38 = x2 - ((x2 - x1) + 0x1400000 >> 1);
+        CAMERA_XPos_004a2a38 = x2 - ((x2 - x1) + viewport >> 1);
         return;
     case 5:
-        CAMERA_XPos_004a2a38 = x3 - ((x3 - x2) + 0x1400000 >> 1);
+        CAMERA_XPos_004a2a38 = x3 - ((x3 - x2) + viewport >> 1);
         return;
     case 6:
-        CAMERA_XPos_004a2a38 = x3 - ((x3 - x1) + 0x1400000 >> 1);
+        CAMERA_XPos_004a2a38 = x3 - ((x3 - x1) + viewport >> 1);
     }
 }
 }

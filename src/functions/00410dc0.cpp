@@ -45,11 +45,13 @@ extern int DAT_00455bdc;
 extern int DAT_00455be0;
 extern int DAT_004a2930;
 extern int DAT_00457ed8;
+int __cdecl GEX_WidescreenWidth(void);
 void __cdecl FUN_00410d10_CollisionInner(int value);
 
 void __cdecl FUN_00410dc0_CollisionInner(GXObject *gob)
 {
     unsigned int index;
+    int cameraWindowShift = (GEX_WidescreenWidth() - 320) / 2 << 16;
 
     DAT_00455b94 = DAT_00456b08[gob->gob_type]
         + (DAT_004a0264_PowerUp_SuperSpeed && (DAT_00457210[gob->gob_type] & 1) ? DAT_00456c70[gob->gob_type] : 0);
@@ -68,10 +70,10 @@ void __cdecl FUN_00410dc0_CollisionInner(GXObject *gob)
             DAT_00457e80 = 1;
         DAT_00462d84 = 0;
         DAT_00462d78 = -1;
-        DAT_00455b9c = 0xe00000;
-        DAT_00455ba0 = 0xe80000;
-        DAT_00455ba4 = 0x580000;
-        DAT_00455ba8 = 0x600000;
+        DAT_00455b9c = 0xe00000 + cameraWindowShift;
+        DAT_00455ba0 = 0xe80000 + cameraWindowShift;
+        DAT_00455ba4 = 0x580000 + cameraWindowShift;
+        DAT_00455ba8 = 0x600000 + cameraWindowShift;
         if (DAT_00457e80 == 1) {
             DAT_00455bac = 0xb40000;
             DAT_00455bb0 = 0xb40000;
@@ -86,10 +88,10 @@ void __cdecl FUN_00410dc0_CollisionInner(GXObject *gob)
     case 1:
         DAT_00462d84 = 0;
         DAT_00462d78 = -1;
-        DAT_00455b9c = 0xe00000;
-        DAT_00455ba0 = 0xe80000;
-        DAT_00455ba4 = 0x580000;
-        DAT_00455ba8 = 0x600000;
+        DAT_00455b9c = 0xe00000 + cameraWindowShift;
+        DAT_00455ba0 = 0xe80000 + cameraWindowShift;
+        DAT_00455ba4 = 0x580000 + cameraWindowShift;
+        DAT_00455ba8 = 0x600000 + cameraWindowShift;
         DAT_00455bac = 0x780000;
         DAT_00455bb0 = 0xb40000;
         DAT_00455bbc = 0x780000;
@@ -130,10 +132,10 @@ void __cdecl FUN_00410dc0_CollisionInner(GXObject *gob)
         DAT_00457e80 = 0;
         DAT_00462d84 = 0;
         DAT_00462d78 = -1;
-        DAT_00455b9c = 0xe00000;
-        DAT_00455ba0 = 0xe80000;
-        DAT_00455ba4 = 0x580000;
-        DAT_00455ba8 = 0x600000;
+        DAT_00455b9c = 0xe00000 + cameraWindowShift;
+        DAT_00455ba0 = 0xe80000 + cameraWindowShift;
+        DAT_00455ba4 = 0x580000 + cameraWindowShift;
+        DAT_00455ba8 = 0x600000 + cameraWindowShift;
         DAT_00455bac = 0x780000;
         DAT_00455bb0 = 0xb40000;
         DAT_00455bbc = 0x780000;

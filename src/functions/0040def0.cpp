@@ -20,6 +20,9 @@ struct GXObject {
     int fb4;
 };
 extern "C" {
+int __cdecl GEX_MainMenuOptions(void *);
+int __cdecl GEX_MainMenuNavigate(int, int);
+void __cdecl GEX_MainMenuOpenOptions(void);
 extern char DAT_0045633c;
 extern char DAT_00456338;
 extern int gTimer_004a2ac8;
@@ -94,6 +97,7 @@ void __cdecl MainMenuControllerDraw_0040def0(GXObject *gob)
         FUN_0040e2f0_y_velocity(gob);
         break;
     }
+    if (GEX_MainMenuOptions(gob)) return;
     if (DAT_00455c1c_PlanetXLevelSelect && gInputControllers_004a0280[0x16])
         gGameState_00455c3c = 0;
     if (gInputControllers_004a0280[0x11])
@@ -101,8 +105,7 @@ void __cdecl MainMenuControllerDraw_0040def0(GXObject *gob)
     else
         dir = gInputControllers_004a0280[0x12] ? 0x20 : 0;
     if (gob->fb0 && dir) {
-        gob->fb0 = FUN_0040c1a0(gob->fb0, dir | 4);
-        FUN_0040c1a0(gob->fb0, 10);
+        gob->fb0 = GEX_MainMenuNavigate(gob->fb0, dir);
         SND_PlaySoundNoPosition_0041a360(0x45, 0xff);
     }
     switch (gCurrentCheatCode_00455b38) {
@@ -130,6 +133,9 @@ void __cdecl MainMenuControllerDraw_0040def0(GXObject *gob)
     }
     if (gInputControllers_004a0280[0x14] || VK_00487fd4 == 0xd) {
         switch (gob->fb0) {
+        case 5:
+            GEX_MainMenuOpenOptions();
+            return;
         case 1:
             PasswordEnterLevel_00429940();
             gSFXEnabled_00455c08 = DAT_004a291c_LoadLevelUnk1;

@@ -58,6 +58,7 @@ struct M1TileTable {
     M1Tile mtt_tile;
 };
 extern "C" {
+int __cdecl GEX_WidescreenWidth(void);
 extern int DAT_004a2974_CameraX_TrueCam2;
 extern int DAT_004a2988_CameraY_TrueCam2;
 extern int DAT_004a2a96_CameraX_After;
@@ -268,7 +269,7 @@ LAB_004433dc:
           }
         }
         iVar22 = local_4c;
-        if ((((local_50 < 0x140) && (-1 < local_44)) && (local_4c < 0xf0)) && (-1 < local_40)) {
+        if ((((local_50 < GEX_WidescreenWidth()) && (-1 < local_44)) && (local_4c < 0xf0)) && (-1 < local_40)) {
           bVar3 = imageStruct->field16_0x10;
           iVar9 = *(int *)imageStruct;
           iVar10 = *(int *)local_20;

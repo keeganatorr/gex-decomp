@@ -109,12 +109,15 @@ extern "C" void __cdecl FUN_00402F90();
 extern "C" void __cdecl FUN_0040F740(int, int, int);
 extern "C" void __cdecl FUN_00409970();
 extern "C" void __cdecl FUN_00405350(int, int);
+extern "C" int __cdecl GEX_WidescreenWidth(void);
 
 extern "C" void __cdecl M1_EnterLevel_00409a30(int param_1)
 {
     int iVar2;
     int object_unk;
     int object_ptr_unk_val;
+    int viewportFixed = GEX_WidescreenWidth() << 16;
+    int halfViewportFixed = viewportFixed / 2;
     
     DAT_004A2990 = param_1;
     DAT_00455B88 = 0;
@@ -185,7 +188,7 @@ extern "C" void __cdecl M1_EnterLevel_00409a30(int param_1)
                 object_ptr_unk++;
                 puVar1 = FUN_0040FDA0(
                     (int*)(puVar1 + 4), *(int*)puVar1, (int)&FUN_00419870,
-                    0x1400000, 0xf00000, 0, 0, DAT_00455B70, DAT_00455B74);
+                    viewportFixed, 0xf00000, 0, 0, DAT_00455B70, DAT_00455B74);
                 *(int*)(DAT_004A2A78 + object_unk) = puVar1;
                 object_unk += 4;
             } while (*object_ptr_unk != 0);
@@ -242,16 +245,17 @@ extern "C" void __cdecl M1_EnterLevel_00409a30(int param_1)
             DAT_00456AF8 = -1;
             DAT_004A292C = *(int*)(DAT_004A27FC + 0x78);
             DAT_004A2A1C = *(int*)(DAT_004A27FC + 0x7c) - 0xa80000;
-            DAT_004A2A38 = DAT_004A292C - 0xa00000;
+            DAT_004A2A38 = DAT_004A292C - halfViewportFixed;
             DAT_004A2928 = *(int*)(DAT_004A27FC + 0x7c);
             
             if (DAT_004A2A38 < 0) DAT_004A2A38 = 0;
             if (DAT_004A2A1C < 0) DAT_004A2A1C = 0;
             
             object_unk = *(int*)(*(int*)(DAT_004A2990 + 4) + 4);
-            if (object_unk + -0x1400000 <= DAT_004A2A38) {
-                DAT_004A2A38 = object_unk + -0x1410000;
+            if (object_unk - viewportFixed <= DAT_004A2A38) {
+                DAT_004A2A38 = object_unk - viewportFixed - 0x10000;
             }
+            if (DAT_004A2A38 < 0) DAT_004A2A38 = 0;
             object_unk = *(int*)(*(int*)(DAT_004A2990 + 4) + 8);
             if (object_unk + -0xf00000 <= DAT_004A2A1C) {
                 DAT_004A2A1C = object_unk + -0xf10000;

@@ -9322,7 +9322,9 @@ _GEX_DATA_00462738:
 .globl _GEX_DATA_00462740
 _GEX_DATA_00462740:
 .zero 192
-.section .bss
+# Keep the original data span contiguous: the block-request array crosses
+# the original file-backed/zero-filled boundary at 00462800.
+.section .data,"dw"
 .balign 16
 .globl _GEX_DATA_00462800
 _GEX_DATA_00462800:

@@ -4,6 +4,7 @@
 extern "C" int CAMERA_X_004A2974;
 extern "C" int CAMERA_Y_004A2988;
 extern "C" int FRAME_COUNT_004A2AC8;
+extern "C" int GEX_WidescreenWidth(void);
 extern "C" short CAMERA_DELTA_X_004A2A96;
 extern "C" short CAMERA_DELTA_Y_004A2A94;
 
@@ -84,7 +85,7 @@ extern "C" void __cdecl GOB_DisplayObject_00444590(void** objectPointer)
             }
             clippedX = x - width;
         }
-        if (clippedX >= 0x1400000) {
+        if (clippedX >= (GEX_WidescreenWidth() << 16)) {
             continue;
         }
 
