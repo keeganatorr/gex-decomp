@@ -937,7 +937,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__cinit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\crt0dat.obj",
           "memberOffset": 720672,
@@ -949,7 +949,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__cinit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\crt0dat.obj",
           "memberOffset": 747036,
@@ -1096,7 +1096,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_strncpy",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\strncpy.obj",
           "memberOffset": 867770,
@@ -1108,7 +1108,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_strncpy",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\strncpy.obj",
           "memberOffset": 914922,
@@ -1127,7 +1127,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_atof",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveMember": "build\\intel\\st_obj\\atof.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -1157,7 +1157,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_atof",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\atof.obj",
           "memberOffset": 128834,
@@ -1169,7 +1169,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_atof",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\atof.obj",
           "memberOffset": 130920,
@@ -1188,7 +1188,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__fpmath",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveMember": "..\\build\\intel\\mt_obj\\fpinit.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -1232,7 +1232,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__fpmath",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\fpinit.obj",
           "memberOffset": 936384,
@@ -1244,7 +1244,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__fpmath",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\fpinit.obj",
           "memberOffset": 985882,
@@ -1309,7 +1309,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__tolower",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\tolower.obj",
           "memberOffset": 138740,
@@ -1321,7 +1321,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_tolower",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\tolower.obj",
           "memberOffset": 138740,
@@ -1333,7 +1333,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__tolower",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\tolower.obj",
           "memberOffset": 141542,
@@ -1345,7 +1345,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_tolower",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\tolower.obj",
           "memberOffset": 141542,
@@ -1402,7 +1402,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__amsg_exit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\crt0.obj",
           "memberOffset": 718338,
@@ -1414,7 +1414,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__amsg_exit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\dllcrt0.obj",
           "memberOffset": 731286,
@@ -1426,7 +1426,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__amsg_exit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\wcrt0.obj",
           "memberOffset": 738550,
@@ -1438,7 +1438,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__amsg_exit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\wincrt0.obj",
           "memberOffset": 744440,
@@ -1450,7 +1450,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__amsg_exit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\wwincrt0.obj",
           "memberOffset": 752998,
@@ -1462,7 +1462,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__amsg_exit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\crt0.obj",
           "memberOffset": 744644,
@@ -1474,7 +1474,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__amsg_exit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\dllcrt0.obj",
           "memberOffset": 758122,
@@ -1486,7 +1486,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__amsg_exit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\wcrt0.obj",
           "memberOffset": 775268,
@@ -1498,7 +1498,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__amsg_exit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\wincrt0.obj",
           "memberOffset": 781216,
@@ -1510,7 +1510,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__amsg_exit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\wwincrt0.obj",
           "memberOffset": 789826,
@@ -1566,7 +1566,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_sprintf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\sprintf.obj",
           "memberOffset": 822024,
@@ -1578,7 +1578,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_sprintf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\sprintf.obj",
           "memberOffset": 865978,
@@ -1637,7 +1637,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_rand",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\rand.obj",
           "memberOffset": 677870,
@@ -1649,7 +1649,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_rand",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\rand.obj",
           "memberOffset": 702752,
@@ -1692,7 +1692,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_printf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\printf.obj",
           "memberOffset": 815594,
@@ -1704,7 +1704,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_printf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\printf.obj",
           "memberOffset": 858380,
@@ -1761,7 +1761,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__fltin",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\cfin.obj",
           "memberOffset": 928600,
@@ -1804,7 +1804,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__isctype",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\isctype.obj",
           "memberOffset": 131962,
@@ -1816,7 +1816,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__isctype",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\isctype.obj",
           "memberOffset": 134094,
@@ -1859,7 +1859,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__setdefaultprecision",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\fp8.obj",
           "memberOffset": 755740,
@@ -1872,7 +1872,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__setdefaultprecision",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\fp8.obj",
           "memberOffset": 792626,
@@ -1929,7 +1929,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ms_p5_test_fdiv",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\testfdiv.obj",
           "memberOffset": 997722,
@@ -1941,7 +1941,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ms_p5_test_fdiv",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\testfdiv.obj",
           "memberOffset": 1047018,
@@ -2000,7 +2000,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ms_p5_mp_test_fdiv",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\testfdiv.obj",
           "memberOffset": 997722,
@@ -2012,7 +2012,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ms_p5_mp_test_fdiv",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\testfdiv.obj",
           "memberOffset": 1047018,
@@ -2031,7 +2031,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__cftoe",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveMember": "..\\build\\intel\\st_obj\\cvt.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -2061,7 +2061,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__cftoe",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\cvt.obj",
           "memberOffset": 931484,
@@ -2073,7 +2073,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__cftoe",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\cvt.obj",
           "memberOffset": 981498,
@@ -2092,7 +2092,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__cftof",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveMember": "..\\build\\intel\\st_obj\\cvt.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -2122,7 +2122,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__cftof",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\cvt.obj",
           "memberOffset": 931484,
@@ -2134,7 +2134,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__cftof",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\cvt.obj",
           "memberOffset": 981498,
@@ -2154,7 +2154,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__cftog",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\cvt.obj",
           "memberOffset": 931484,
@@ -2166,7 +2166,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__cftog",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\cvt.obj",
           "memberOffset": 981498,
@@ -2186,7 +2186,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___crtLCMapStringA",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\aw_map.obj",
           "memberOffset": 614898,
@@ -2198,7 +2198,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___crtLCMapStringA",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\aw_map.obj",
           "memberOffset": 638900,
@@ -2218,7 +2218,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__global_unwind2",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\exsup.obj",
           "memberOffset": 595672,
@@ -2230,7 +2230,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__global_unwind2",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\exsup.obj",
           "memberOffset": 619674,
@@ -2286,7 +2286,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__local_unwind2",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveMember": "build\\intel\\mt_obj\\exsup.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -2330,7 +2330,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__local_unwind2",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\exsup.obj",
           "memberOffset": 595672,
@@ -2342,7 +2342,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__local_unwind2",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\exsup.obj",
           "memberOffset": 619674,
@@ -2407,7 +2407,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ismbblead",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\ismbbyte.obj",
           "memberOffset": 552266,
@@ -2419,7 +2419,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ismbblead",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\ismbbyte.obj",
           "memberOffset": 573332,
@@ -2476,7 +2476,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__setenvp",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\stdenvp.obj",
           "memberOffset": 736598,
@@ -2488,7 +2488,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__setenvp",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\stdenvp.obj",
           "memberOffset": 766406,
@@ -2508,7 +2508,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___setargv",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\_setargv.obj",
           "memberOffset": 714628,
@@ -2520,7 +2520,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__setargv",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\stdargv.obj",
           "memberOffset": 734972,
@@ -2532,7 +2532,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___setargv",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\_setargv.obj",
           "memberOffset": 740934,
@@ -2544,7 +2544,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__setargv",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\stdargv.obj",
           "memberOffset": 764780,
@@ -2601,7 +2601,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___crtGetEnvironmentStringsA",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\aw_env.obj",
           "memberOffset": 610528,
@@ -2613,7 +2613,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___crtGetEnvironmentStringsA",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\aw_env.obj",
           "memberOffset": 634530,
@@ -2633,7 +2633,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__setmbcp",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\mbctype.obj",
           "memberOffset": 564852,
@@ -2645,7 +2645,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__setmbcp",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\mbctype.obj",
           "memberOffset": 586150,
@@ -2665,7 +2665,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___initmbctable",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\mbctype.obj",
           "memberOffset": 564852,
@@ -2678,7 +2678,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___initmbctable",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\mbctype.obj",
           "memberOffset": 586150,
@@ -2736,7 +2736,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ioinit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\ioinit.obj",
           "memberOffset": 524504,
@@ -2748,7 +2748,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ioinit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\ioinit.obj",
           "memberOffset": 540042,
@@ -2768,7 +2768,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__heap_init",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\heapinit.obj",
           "memberOffset": 355364,
@@ -2780,7 +2780,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__heap_init",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\heapinit.obj",
           "memberOffset": 360992,
@@ -2799,7 +2799,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__seh_longjmp_unwind@4",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveMember": "build\\intel\\mt_obj\\exsup3.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -2850,7 +2850,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__FF_MSGBANNER",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\crt0msg.obj",
           "memberOffset": 725102,
@@ -2862,7 +2862,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__FF_MSGBANNER",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\crt0msg.obj",
           "memberOffset": 751938,
@@ -2919,7 +2919,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__NMSG_WRITE",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\crt0msg.obj",
           "memberOffset": 725102,
@@ -2931,7 +2931,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__NMSG_WRITE",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\crt0msg.obj",
           "memberOffset": 751938,
@@ -2951,7 +2951,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__flsbuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\_flsbuf.obj",
           "memberOffset": 768402,
@@ -2963,7 +2963,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__flsbuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\_flsbuf.obj",
           "memberOffset": 806532,
@@ -2983,7 +2983,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__output",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\output.obj",
           "memberOffset": 805360,
@@ -2995,7 +2995,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__output",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\output.obj",
           "memberOffset": 847842,
@@ -3014,7 +3014,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__stbuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveMember": "build\\intel\\st_obj\\_sftbuf.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -3044,7 +3044,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__stbuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\_sftbuf.obj",
           "memberOffset": 772366,
@@ -3056,7 +3056,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__stbuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\_sftbuf.obj",
           "memberOffset": 810510,
@@ -3075,7 +3075,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ftbuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\_sftbuf.obj",
           "memberOffset": 772366,
@@ -3087,7 +3087,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ftbuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveMember": "build\\intel\\st_obj\\_sftbuf.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -3117,7 +3117,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ftbuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\_sftbuf.obj",
           "memberOffset": 810510,
@@ -3136,7 +3136,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ZeroTail",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\intrncvt.obj",
           "memberOffset": 938166,
@@ -3148,7 +3148,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ZeroTail",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\intrncvt.obj",
           "memberOffset": 987664,
@@ -3206,7 +3206,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__IncMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\intrncvt.obj",
           "memberOffset": 938166,
@@ -3218,7 +3218,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__IncMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\intrncvt.obj",
           "memberOffset": 987664,
@@ -3276,7 +3276,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__RoundMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\intrncvt.obj",
           "memberOffset": 938166,
@@ -3288,7 +3288,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__RoundMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\intrncvt.obj",
           "memberOffset": 987664,
@@ -3300,7 +3300,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__RoundMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveMember": "..\\build\\intel\\mt_obj\\intrncvt.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -3350,7 +3350,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__CopyMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\intrncvt.obj",
           "memberOffset": 938166,
@@ -3362,7 +3362,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__CopyMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\intrncvt.obj",
           "memberOffset": 987664,
@@ -3421,7 +3421,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__FillZeroMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\intrncvt.obj",
           "memberOffset": 938166,
@@ -3434,7 +3434,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__FillZeroMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\intrncvt.obj",
           "memberOffset": 987664,
@@ -3491,7 +3491,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__IsZeroMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\intrncvt.obj",
           "memberOffset": 938166,
@@ -3503,7 +3503,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__IsZeroMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\intrncvt.obj",
           "memberOffset": 987664,
@@ -3562,7 +3562,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ShrMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\intrncvt.obj",
           "memberOffset": 938166,
@@ -3574,7 +3574,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ShrMan",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\intrncvt.obj",
           "memberOffset": 987664,
@@ -3593,7 +3593,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ld12cvt",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\intrncvt.obj",
           "memberOffset": 938166,
@@ -3605,7 +3605,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ld12cvt",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\intrncvt.obj",
           "memberOffset": 987664,
@@ -3617,7 +3617,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ld12cvt",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveMember": "..\\build\\intel\\mt_obj\\intrncvt.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -3668,7 +3668,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ld12tod",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\intrncvt.obj",
           "memberOffset": 938166,
@@ -3680,7 +3680,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ld12tod",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\intrncvt.obj",
           "memberOffset": 987664,
@@ -3723,7 +3723,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ld12tof",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\intrncvt.obj",
           "memberOffset": 938166,
@@ -3735,7 +3735,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__ld12tof",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\intrncvt.obj",
           "memberOffset": 987664,
@@ -3966,7 +3966,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___strgtold12",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\strgtold.obj",
           "memberOffset": 944794,
@@ -3978,7 +3978,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___strgtold12",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\strgtold.obj",
           "memberOffset": 994292,
@@ -3998,7 +3998,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___crtGetStringTypeA",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\aw_str.obj",
           "memberOffset": 618226,
@@ -4010,7 +4010,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___crtGetStringTypeA",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\aw_str.obj",
           "memberOffset": 642228,
@@ -4030,7 +4030,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__control87",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\ieee87.obj",
           "memberOffset": 992334,
@@ -4042,7 +4042,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__control87",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\ieee87.obj",
           "memberOffset": 1041628,
@@ -4061,7 +4061,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__controlfp",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\ieee87.obj",
           "memberOffset": 992334,
@@ -4073,7 +4073,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__controlfp",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\ieee87.obj",
           "memberOffset": 1041628,
@@ -4176,7 +4176,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__fptostr",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\_fptostr.obj",
           "memberOffset": 124578,
@@ -4188,7 +4188,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__fptostr",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\_fptostr.obj",
           "memberOffset": 126582,
@@ -4233,7 +4233,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__fltout",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\cfout.obj",
           "memberOffset": 929454,
@@ -4276,7 +4276,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___dtold",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\cfout.obj",
           "memberOffset": 929454,
@@ -4288,7 +4288,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___dtold",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\cfout.obj",
           "memberOffset": 979654,
@@ -4308,7 +4308,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_memcpy",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\memcpy.obj",
           "memberOffset": 859246,
@@ -4320,7 +4320,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_memcpy",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\memcpy.obj",
           "memberOffset": 906214,
@@ -4405,7 +4405,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_free",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\free.obj",
           "memberOffset": 352614,
@@ -4417,7 +4417,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_free",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\free.obj",
           "memberOffset": 358236,
@@ -4437,7 +4437,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_malloc",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\malloc.obj",
           "memberOffset": 358858,
@@ -4449,7 +4449,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_malloc",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\malloc.obj",
           "memberOffset": 364498,
@@ -4506,7 +4506,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__nh_malloc",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\malloc.obj",
           "memberOffset": 358858,
@@ -4518,7 +4518,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__nh_malloc",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\malloc.obj",
           "memberOffset": 364498,
@@ -4538,7 +4538,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__heap_alloc",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\malloc.obj",
           "memberOffset": 358858,
@@ -4550,7 +4550,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__heap_alloc",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\malloc.obj",
           "memberOffset": 364498,
@@ -4570,7 +4570,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___crtMessageBoxA",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\crtmbox.obj",
           "memberOffset": 621816,
@@ -4582,7 +4582,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___crtMessageBoxA",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\crtmbox.obj",
           "memberOffset": 645820,
@@ -4625,7 +4625,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__write",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\write.obj",
           "memberOffset": 539116,
@@ -4637,7 +4637,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__write",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\write.obj",
           "memberOffset": 557946,
@@ -4657,7 +4657,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__lseek",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\lseek.obj",
           "memberOffset": 527680,
@@ -4669,7 +4669,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__lseek",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\lseek.obj",
           "memberOffset": 543516,
@@ -4688,7 +4688,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__getbuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveMember": "build\\intel\\mt_obj\\_getbuf.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -4732,7 +4732,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__getbuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\_getbuf.obj",
           "memberOffset": 770624,
@@ -4744,7 +4744,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__getbuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\_getbuf.obj",
           "memberOffset": 808768,
@@ -4764,7 +4764,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__isatty",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\isatty.obj",
           "memberOffset": 526140,
@@ -4776,7 +4776,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__isatty",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\isatty.obj",
           "memberOffset": 541824,
@@ -4796,7 +4796,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_wctomb",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\wctomb.obj",
           "memberOffset": 146010,
@@ -4808,7 +4808,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_wctomb",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\wctomb.obj",
           "memberOffset": 150594,
@@ -4850,7 +4850,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__aulldiv",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\ulldiv.obj",
           "memberOffset": 366126,
@@ -4862,7 +4862,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__aulldiv",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\ulldiv.obj",
           "memberOffset": 371906,
@@ -4920,7 +4920,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__aullrem",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\ullrem.obj",
           "memberOffset": 366530,
@@ -4932,7 +4932,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__aullrem",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\ullrem.obj",
           "memberOffset": 372310,
@@ -4990,7 +4990,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_fflush",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveMember": "build\\intel\\st_obj\\fflush.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -5020,7 +5020,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_fflush",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\fflush.obj",
           "memberOffset": 788290,
@@ -5032,7 +5032,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_fflush",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\fflush.obj",
           "memberOffset": 827096,
@@ -5051,7 +5051,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__flush",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\fflush.obj",
           "memberOffset": 788290,
@@ -5063,7 +5063,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__flush",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\fflush.obj",
           "memberOffset": 827096,
@@ -5108,7 +5108,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_calloc",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\calloc.obj",
           "memberOffset": 351592,
@@ -5120,7 +5120,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_calloc",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\calloc.obj",
           "memberOffset": 357214,
@@ -5140,7 +5140,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__fcloseall",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\closeall.obj",
           "memberOffset": 773828,
@@ -5152,7 +5152,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__fcloseall",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\closeall.obj",
           "memberOffset": 812046,
@@ -5172,7 +5172,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___addl",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\mantold.obj",
           "memberOffset": 943068,
@@ -5184,7 +5184,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___addl",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\mantold.obj",
           "memberOffset": 992566,
@@ -5203,7 +5203,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___add_12",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\mantold.obj",
           "memberOffset": 943068,
@@ -5215,7 +5215,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___add_12",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\mantold.obj",
           "memberOffset": 992566,
@@ -5273,7 +5273,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___shl_12",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\mantold.obj",
           "memberOffset": 943068,
@@ -5285,7 +5285,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___shl_12",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\mantold.obj",
           "memberOffset": 992566,
@@ -5343,7 +5343,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___shr_12",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\mantold.obj",
           "memberOffset": 943068,
@@ -5355,7 +5355,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___shr_12",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\mantold.obj",
           "memberOffset": 992566,
@@ -5414,7 +5414,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___mtold12",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\mantold.obj",
           "memberOffset": 943068,
@@ -5426,7 +5426,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___mtold12",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\mantold.obj",
           "memberOffset": 992566,
@@ -5446,7 +5446,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___ld12mul",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\tenpow.obj",
           "memberOffset": 948550,
@@ -5458,7 +5458,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___ld12mul",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\tenpow.obj",
           "memberOffset": 998048,
@@ -5478,7 +5478,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___multtenpow12",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\tenpow.obj",
           "memberOffset": 948550,
@@ -5490,7 +5490,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "___multtenpow12",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\tenpow.obj",
           "memberOffset": 998048,
@@ -5510,7 +5510,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_$I10_OUTPUT",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "..\\build\\intel\\st_obj\\x10fout.obj",
           "memberOffset": 950082,
@@ -5522,7 +5522,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_$I10_OUTPUT",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "..\\build\\intel\\mt_obj\\x10fout.obj",
           "memberOffset": 999580,
@@ -5542,7 +5542,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__callnewh",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\handler.obj",
           "memberOffset": 360960,
@@ -5554,7 +5554,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__callnewh",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\handler.obj",
           "memberOffset": 366600,
@@ -5597,7 +5597,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__dosmaperr",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\dosmap.obj",
           "memberOffset": 162046,
@@ -5609,7 +5609,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__dosmaperr",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\dosmap.obj",
           "memberOffset": 166972,
@@ -5629,7 +5629,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__free_osfhnd",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\osfinfo.obj",
           "memberOffset": 532648,
@@ -5641,7 +5641,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__free_osfhnd",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\osfinfo.obj",
           "memberOffset": 549472,
@@ -5661,7 +5661,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__get_osfhandle",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\osfinfo.obj",
           "memberOffset": 532648,
@@ -5673,7 +5673,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__get_osfhandle",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\osfinfo.obj",
           "memberOffset": 549472,
@@ -5693,7 +5693,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__commit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\commit.obj",
           "memberOffset": 513686,
@@ -5705,7 +5705,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__commit",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\commit.obj",
           "memberOffset": 528112,
@@ -5724,7 +5724,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_fclose",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\fclose.obj",
           "memberOffset": 786708,
@@ -5736,7 +5736,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_fclose",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveMember": "build\\intel\\st_obj\\fclose.obj",
           "method": "custom-toolchain-fid",
           "confidence": "corroborated-custom-fid",
@@ -5766,7 +5766,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "_fclose",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\fclose.obj",
           "memberOffset": 825118,
@@ -5786,7 +5786,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__close",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\close.obj",
           "memberOffset": 512782,
@@ -5798,7 +5798,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__close",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\close.obj",
           "memberOffset": 526844,
@@ -5840,7 +5840,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__freebuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib",
           "archiveHash": "e5f0d0e6dd2e01dbb0005e9dd4764507b852ede9a824798f0970bc570966a7e3",
           "archiveMember": "build\\intel\\st_obj\\_freebuf.obj",
           "memberOffset": 770212,
@@ -5852,7 +5852,7 @@
         {
           "library": "msvc-crt-10.00.5270-candidate",
           "symbol": "__freebuf",
-          "archive": "/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
+          "archive": "$HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib",
           "archiveHash": "d7bdb49c0a3bc77dee026b9aa9a994c5a78963c8aefc6512dbb298b4d41c4907",
           "archiveMember": "build\\intel\\mt_obj\\_freebuf.obj",
           "memberOffset": 808356,
@@ -5906,6 +5906,6 @@
   ],
   "noDetectionCount": 1223,
   "unsupportedArchiveMemberCount": 92,
-  "privateFullReport": "/home/keegan/Repos/gex-decomp/.work/library-scans/library-scan-2689bf0d40f14f839ff01588a34754ed/report.json",
+  "privateFullReport": "(private local artifact; not published)",
   "note": "Ownership, not source proof; high-confidence FID is NOT exact relocated byte equality. Unknown/candidates remain eligible."
 }

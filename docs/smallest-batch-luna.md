@@ -56,9 +56,8 @@ Project-relative `.work/smallest-batch-bd58b165f8a55359/` contains the approved
 policy and selection, preflight/before/after snapshots, durable Start command and
 receipt, `monitor.jsonl`, `run.log`, function details, batch task state, and
 **`summary.json`**. Immutable backend:
-`/home/keegan/.local/state/pc-decomp/staged/smallest-bd58b165f8a55359/`.
+`$HOME/.local/state/pc-decomp/staged/smallest-bd58b165f8a55359/`.
 
 Request/response: `.work/loop/work-092fe5a4fd5d4ca5ba3c6556aa4e2d9a/`.
-Session: `f26cd8e5-ee3c-4298-9c7a-d7791511755d`.
-Reported transcript:
-`/home/keegan/.pi/agent/sessions/--home-keegan-.local-state-nexus-harness-proposal-workspace--/2026-09-16T14-43-20-555Z_01a0aaac-196b-75f8-8f6a-bd8cf0dc21b4.jsonl`.
+The private session identifier and transcript path are omitted; the retained local
+evidence is not part of the public documentation.

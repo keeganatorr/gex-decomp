@@ -25,8 +25,8 @@ The durable run directory is
 
 The pass reached `LimitReached` after 300.532 seconds and nine model attempts.
 It made **zero ExactMatch gains**, **zero byte gains**, published no source, and
-left all 898 source files unchanged. Reported usage was 196,735 tokens and
-`$1.0248554`; the final usage flag is `unknownUsage: true` because the last
+left all 898 source files unchanged. Provider usage was incomplete; per-run token and cost figures are omitted. The
+final usage flag is `unknownUsage: true` because the last
 bounded work expired before authoritative usage arrived. No command was retried.
 
 The model diagnostics consistently identified the same evidence problem: each

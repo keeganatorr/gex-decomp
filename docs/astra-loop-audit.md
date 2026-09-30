@@ -13,13 +13,11 @@
 | Proofs / bytes gained | **38 / 9,634** |
 | Before | **702 exact / 51,474 bytes** |
 | After | **740 exact / 61,108 bytes** |
-| Reported tokens | **13,890,903** |
-| Reported cost | **$61.247258** (~$1.61 per gained proof) |
-| Usage completeness | **unknownUsage: true**, 176 known / 8 unknown job receipts |
+| Reported usage | Incomplete; per-run token and cost figures omitted |
+| Usage completeness | 176 known / 8 unknown job receipts |
 | Work remaining active | **0 lanes; 0 queued/running verifier tasks** |
 
-Tokens and cost are provider metadata, **not** a subscription bill or complete
-usage accounting. The budget was 3,600 seconds, one pass, no token cap, eight
+Usage metadata is incomplete. The budget was 3,600 seconds, one pass, no token cap, eight
 function iterations, stagnation threshold two, evidenceWorkflow/batchRepair and
 persistWorkingCandidate/continueWhileImproving enabled. No persistentRepair policy
 was silently added. All 184 jobs requested astra/high; 181 receipts confirm high,

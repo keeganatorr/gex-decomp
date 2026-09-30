@@ -9,8 +9,8 @@
   "bytesGained": 9634,
   "attempts": 184,
   "elapsedMs": 1489563,
-  "tokens": 13890903,
-  "reportedCost": 61.24725800000003,
+  "tokens": null,
+  "reportedCost": null,
   "unknownUsage": true,
   "diagnostics": {
     "VERIFY_BYTE_MISMATCH": 123,

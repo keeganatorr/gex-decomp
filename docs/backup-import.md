@@ -1,6 +1,6 @@
-# Recovering pc_decomp_backup
+# Recovering a source archive
 
-Source archive: `/home/keegan/Repos/pc_decomp_backup/`. The archive, installed GOG
+Source archive: private local archive (name and path omitted). The archive, installed GOG
 executable and existing Ghidra analysis were kept unchanged. This is a source
 recovery/verification pass, not a revival of the old injection/mod runtime.
 

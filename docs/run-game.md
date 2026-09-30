@@ -10,17 +10,19 @@ asset folders:
 The script starts the game after building it. On later runs, launch the staged
 executable directly from any working directory:
 
+Set `GEX_REPO` to the path where this repository is checked out.
+
 ```bash
-wine "/home/keegan/Repos/gex-decomp/.work/replacement-run/game/GEX.exe"
+wine "$GEX_REPO/.work/replacement-run/game/GEX.exe"
 ```
 
 To start a chosen attract recording on the first title update, append
 `--attract` and its number:
 
 ```bash
-wine "/home/keegan/Repos/gex-decomp/.work/replacement-run/game/GEX.exe" --attract 0
-wine "/home/keegan/Repos/gex-decomp/.work/replacement-run/game/GEX.exe" --attract 1
-wine "/home/keegan/Repos/gex-decomp/.work/replacement-run/game/GEX.exe" --attract 2
+wine "$GEX_REPO/.work/replacement-run/game/GEX.exe" --attract 0
+wine "$GEX_REPO/.work/replacement-run/game/GEX.exe" --attract 1
+wine "$GEX_REPO/.work/replacement-run/game/GEX.exe" --attract 2
 ```
 
 | Number | First level | Recording part |

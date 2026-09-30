@@ -7,8 +7,8 @@ whole-project proof audit was run.
 
 A fresh one-function bounded trial then retried `SND_Destroy_00401f90` using the
 approved Luna/Terra/Sol/Astra lane, one pass and a 300-second ceiling. It
-completed after one Luna attempt: **ExactMatch, 27 bytes**, 32,348 tokens,
-reported cost `$0.0092286`, and authoritative usage.
+completed after one Luna attempt: **ExactMatch, 27 bytes**. Per-run usage
+figures are omitted from this public summary.
 
 Adding a global binding intentionally invalidated prior proof statuses under the
 current strict binding-hash policy. They remained in immutable attempt history

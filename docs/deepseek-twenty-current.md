@@ -8,8 +8,8 @@ twenty highest live-current, source-present eligible functions (88.7–99.2%), f
 `.work/deepseek-twenty-20260925-b/scope.json`.
 
 **Result: Stopped by the wall guard, no exact gain.** 51 jobs, 1,778 s active,
-2,053,972 provider-reported tokens and $0.66 provider metadata, with `unknownUsage=true`
-(expired turns carry no usage). Thirteen functions were reached; seven (`004260c0`,
+Provider usage was incomplete (expired turns carry no usage); per-run token and
+cost figures are omitted. Thirteen functions were reached; seven (`004260c0`,
 `0041f860`, `004237c0`, `004121b0`, `00429c10`, `00429b40`, `0040cca0`) received no turn.
 Diagnostics: 17 byte mismatches, 7 immediate-only, 2 operand-order, 5 investigations,
 3 model-reported missing evidence, 2 format-invalid, 2 provider/session and **13 expired

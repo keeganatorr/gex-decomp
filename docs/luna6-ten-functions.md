@@ -10,7 +10,7 @@ One explicitly approved campaign, `loop-f2cf827017ec5bb6a8f10f57`, finished **Bl
 - Elapsed: **1,061.207 seconds (17m 41s)**.
 - Results: **4 new exact functions / 545 bytes**; **748 / 62,808 → 752 / 63,353**.
 - 71 jobs: **64 compiler attempts** (4 exact, 58 byte mismatches, 2 actual compiler rejections) and **7 investigation replies**. An investigation does not consume a reconstruction iteration, so a function can have nine jobs within the eight-iteration limit.
-- Provider-reported usage: **6,013,234 tokens**, **$0.29109044**, `unknownUsage=false`. This is provider metadata, not a subscription bill.
+- Provider usage was recorded by the service; per-run token and cost figures are omitted from this public summary.
 - Final state: zero active lanes, zero queued/running verification tasks.
 
 Pi's cached catalog initially lacked GPT-6 Luna. At the operator's request, `pi update --models` refreshed the actual catalog; GPT-6 Luna and max were present afterward. A fresh, unprompted Nexus session exposed that catalog to the host bridge without restarting the active coding session. No GPT-5.6 substitution or hand-written model alias was used.

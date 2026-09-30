@@ -5,7 +5,7 @@ Activated backend commit **d286452a76c4d23f79d946bf0be2a8640f8846ce** as immutab
 release **astra-loop-d286452-cec8d7ff8e72** on 2026-09-22.
 
 Backend:
-`/home/keegan/.local/state/pc-decomp/staged/astra-loop-d286452-cec8d7ff8e72/backend`
+`$HOME/.local/state/pc-decomp/staged/astra-loop-d286452-cec8d7ff8e72/backend`
 
 The release includes `Iced.dll`; its instruction decoding is advisory only.
 Strict verification, pinned compiler/flags, bindings and Ghidra are unchanged.
@@ -65,7 +65,7 @@ hashes.
 
 A separately built, selftested immutable pre-fix backend from commit `66d2972`
 is retained at:
-`/home/keegan/.local/state/pc-decomp/staged/astra-pre-audit-66d2972-99aacf362956/backend`.
+`$HOME/.local/state/pc-decomp/staged/astra-pre-audit-66d2972-99aacf362956/backend`.
 This was built from the pre-fix source because the previous owner used a mutable
 build path; that path is not a reliable rollback binary.
 

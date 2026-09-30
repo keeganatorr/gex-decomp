@@ -92,11 +92,10 @@ not need the original executable at build time. The former `00449d23` and
 `00449d3e` references were interior SEH labels in the original CRT startup
 body, not standalone C functions.
 
-Earlier runtime checks used the original launcher token
-`XAchWieGutDasKeinerWeis`. The alternate token
-`JAchWieGutDasKeinerWeis` also passes the launcher gate and skips both AVI
-clips in the pinned original. The source-built EXE now accepts either token,
-any other command line, or no arguments. Original instructions at `00405edc` write 1 to
+Earlier runtime checks confirmed that the pinned original accepts two
+launcher tokens and that either skips both AVI clips. The source-built EXE now
+accepts arbitrary command lines or no arguments. The token values are omitted.
+Original instructions at `00405edc` write 1 to
 `00487fc0` for the `J` prefix; `GameThread` passes that word to `GameMain` as
 its skip-intro argument. The replacement had incorrectly written `0045633c`.
 After correcting the address, both executables reach the title screen within
@@ -422,7 +421,7 @@ routine exactly, but this is not a published backend proof. The transparent
 identifier to `00402400`; the pinned `00445ceb` instruction reads a word.
 That selected the wrong palette row for the map overlay. The rebuilt
 source-only game and the pinned original were run from the same isolated assets
-with `JAchWieGutDasKeinerWeis`, then X held at the title and pressed again on
+with the alternate launcher token, then X held at the title and pressed again on
 the map. Their full 1024×768 captures matched pixel for pixel at 30 seconds
 (instructions visible) and 36 seconds (instructions dismissed). Captures and
 build logs remain under `.work/replacement-runtime/map-clut-{fix,oracle}-*`.

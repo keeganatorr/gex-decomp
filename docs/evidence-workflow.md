@@ -1,7 +1,7 @@
 # Evidence workflow activation
 
 **Superseded by schema-5 batch deployment `batch-f5934f4a1e98b791`.** The active
-service/CLI path is now `/home/keegan/.local/state/pc-decomp/staged/batch-f5934f4a1e98b791/backend`.
+service/CLI path is now `$HOME/.local/state/pc-decomp/staged/batch-f5934f4a1e98b791/backend`.
 See `../../pc-decomp/docs/batch-validation.md` and
 `.work/batch-activation-f5934f4a1e98b791/activation.json` (project-relative).
 Batch mode starts from pseudocode and uses private hypotheses without waiting for
@@ -15,7 +15,7 @@ Nexus. The loaded host bundle `stable-5bdf69b4154e` matches the staged host modu
 and native runtime. The release extension passed its rendered-frame activation.
 Backend/service and `.work/backend-current` now use:
 
-`/home/keegan/.local/state/pc-decomp/staged/evidence-a901b74f868a6b12/backend/`
+`$HOME/.local/state/pc-decomp/staged/evidence-a901b74f868a6b12/backend/`
 
 Only `schemaVersion` changed in `project.json` (3 → 4). Compiler, flags, bindings,
 original executable and Ghidra were not modified. Before/after captures confirmed

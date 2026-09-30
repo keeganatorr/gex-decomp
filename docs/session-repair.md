@@ -8,7 +8,7 @@ No Nexus restart or model call was needed during activation.
 Only `project.json.schemaVersion` changed, from 5 to 6. Service and
 `.work/backend-current` now use:
 
-`/home/keegan/.local/state/pc-decomp/staged/session-repair-e3b19e240e398dd4/backend`
+`$HOME/.local/state/pc-decomp/staged/session-repair-e3b19e240e398dd4/backend`
 
 The release UI loaded successfully through the native rendered-frame check.
 Backend reports `persistentRepairEnabled:true` and `persistentRepairSupported:true`.

@@ -20,8 +20,8 @@ From the project root, with installed Ghidra and Java 21:
 
 ```sh
 python3 tools/crt_fid.py \
-  --archive /home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib \
-  --archive /home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib \
+  --archive $HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libc.lib \
+  --archive $HOME/Downloads/NTSource/base/mvdm/tools/c1032/lib/libcmt.lib \
   --all-members --max-members 1400 --timeout 2400 \
   --extents .work/fid/extents-validation.json \
   --run-id c1032-full-NEXT

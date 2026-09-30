@@ -24,7 +24,7 @@ Two functions became strict ExactMatch:
 `00401f90` remained unmatched. Models identified the remaining missing binding
 for its global `gSFXTable_0049fb54` at address `0049fb54`; no fabricated address or
 source was accepted. The run reached `LimitReached` after eight model attempts,
-153,164 reported tokens, and `$0.3991094` reported cost (`unknownUsage: true` for
+provider usage was incomplete (`unknownUsage: true` for
 the final expired work). No unsafe source publication occurred.
 
 Current status is **411 ExactMatch functions / 15,484 bytes**, with no running or

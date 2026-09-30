@@ -44,9 +44,8 @@ Thus: ten completed blocker responses, one compiler/verification attempt, one
 deadline-interrupted attempt. The retained compiler attempt is
 `attempt-9d2b909376384b25a682d939e3e48d12`. No candidate was published.
 
-Reported token total: **329,499**, marked **incomplete** because the final request
-was interrupted. Provider-reported cost metadata was 1.5460172; this is not a
-subscription charge or a measured subscription quota debit.
+Provider usage was incomplete because the final request was interrupted. Per-run
+token and cost figures are omitted from this public summary.
 
 ## Selection and limitations
 

@@ -5,10 +5,10 @@ reconstruction batch and current aggregate results, see [ten-functions.md](ten-f
 
 ## Identity and preserved analysis
 
-- Input: `/home/keegan/.wine/drive_c/GOG Games/Gex/GEX.exe`
+- Input: `$HOME/.wine/drive_c/GOG Games/Gex/GEX.exe`
 - SHA256: `e1fd63ecb09fca29d63286e22447752dcb120d7e682f8759d1021776f7698b86`
 - PE32, i386, image base `00400000`, linker version **4.20**.
-- Ghidra project: `Gex`, `/home/keegan/Ghidra/Gex/Gex`.
+- Ghidra project: `Gex`, `$HOME/Ghidra/Gex/Gex`.
 - MCP program selector: `GEX.exe`. Actual DomainFile: **`/EditedGex`**.
 - Original-import SHA256 agrees with the pinned target. Current memory does not.
 - GhidraMCP 7.0.0 rebuilt against `/opt/ghidra` 12.1.2_DEV with Java 21 and installed
@@ -36,15 +36,15 @@ analysis should be separate or explicitly approved, preserving this valuable wor
 
 ## Recovered compiler finding
 
-The historical C# matching implementation was inspected at `df37fe8^`, with related
-configuration at `49460b1`, in `../pc-decomp-agent-csharp`. Its old flags were:
+An archived C# matching implementation and its related configuration were
+inspected. Its old flags were:
 
 ```
 /O2 /G5 /Oy /GR-
 ```
 
 Its 'MSVC 2010' label conflicts with the actual local tool. The compiler at
-`/home/keegan/Downloads/NTSource/base/mvdm/tools/c1032/bin/cl.exe` reports:
+`$HOME/Downloads/NTSource/base/mvdm/tools/c1032/bin/cl.exe` reports:
 
 ```
 Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 10.00.5270 for 80x86
@@ -56,7 +56,7 @@ This is a **VC4.0-era compiler**, not Visual Studio 2010. `cl.exe` SHA256 is
 The complete seven-component fingerprint is in `project.json` and each successful
 attempt. No compiler files were copied into Git or downloaded from elsewhere.
 
-A separate Wine prefix at `/home/keegan/.local/state/pc-decomp/wine-vc4` was
+A separate Wine prefix at `$HOME/.local/state/pc-decomp/wine-vc4` was
 initialized for compiler probes. The user's `.wine` game prefix was not reused.
 Linker 4.20 is evidence about the linker, **not proof of the source compiler**.
 Two simple matching functions are a working baseline, not global identification.
