@@ -105,6 +105,10 @@ the object's previous-Y field; original instructions restore the saved field
 value, and that source is corrected.
 
 The unattended title screen enters attract mode in both executables.
+For reproducible recording selection and byte-exact per-frame visual
+comparison, see `docs/attract-frame-comparison.md` and
+`./scripts/compare-attract`.
+
 Using the isolated assets and Wine prefix, the replacement renders the
 graveyard demo without the earlier memory faults. Before the script and
 contour-platform repairs below, a 40-second capture showed the graveyard

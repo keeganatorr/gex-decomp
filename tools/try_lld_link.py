@@ -66,6 +66,7 @@ def main() -> None:
     if missing:
         raise SystemExit(f"missing LLD link input: {missing[0]} ({len(missing)} total)")
     output = WORK / ("gex-source.exe" if args.game else "full-link-lld.exe")
+    symbol_map = WORK / "gex-source.map" if args.game else None
     output.unlink(missing_ok=True)
     response = WORK / ("link-game-lld.rsp" if args.game else "link-lld.rsp")
     response.write_text("\n".join([
@@ -73,6 +74,7 @@ def main() -> None:
         "/entry:WinMainCRTStartup" if args.game else "/entry:mainCRTStartup",
         "/safeseh:no", "/nodefaultlib",
         "/errorlimit:0", "/out:" + quoted(output),
+        *(["/map:" + quoted(symbol_map)] if symbol_map else []),
         *(quoted(path) for path in inputs + libraries),
     ]) + "\n")
     run = subprocess.run(["lld-link", "@" + str(response)], cwd=WORK,

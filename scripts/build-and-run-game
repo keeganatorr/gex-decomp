@@ -5,10 +5,11 @@ ROOT=$(cd -- "$(dirname -- "$0")/.." && pwd)
 ASSETS_DIR=${GEX_ASSETS_DIR:-"$HOME/.wine/drive_c/GOG Games/Gex"}
 RUN_DIR="$ROOT/.work/replacement-run/game"
 INTRO_TOKEN=JAchWieGutDasKeinerWeis
+ATTRACT_DEMO=
 
 usage() {
     cat <<'EOF'
-Usage: ./scripts/build-and-run-game [--assets-dir DIR] [--play-intro]
+Usage: ./scripts/build-and-run-game [--assets-dir DIR] [--play-intro] [--attract 0|1|2]
 
 Build the source-only Gex executable and run it under Wine. Game assets are
 copied into .work/replacement-run/game; the installed game is not changed.
@@ -16,6 +17,7 @@ copied into .work/replacement-run/game; the installed game is not changed.
   --assets-dir DIR  Directory containing the installed Gex asset folders
                     (default: GEX_ASSETS_DIR or ~/.wine/drive_c/GOG Games/Gex)
   --play-intro      Play the AVI intro instead of skipping it
+  --attract N       Start attract recording N on the first title update
   -h, --help        Show this help
 
 Set WINEPREFIX to choose the runtime Wine prefix. A graphical desktop is
@@ -36,6 +38,14 @@ while (($#)); do
         --play-intro)
             INTRO_TOKEN=XAchWieGutDasKeinerWeis
             shift
+            ;;
+        --attract)
+            if (($# < 2)) || [[ ! $2 =~ ^[012]$ ]]; then
+                echo 'Expected --attract 0, 1, or 2' >&2
+                exit 2
+            fi
+            ATTRACT_DEMO=$2
+            shift 2
             ;;
         -h|--help)
             usage
@@ -106,6 +116,12 @@ fi
 STAGED_EXE=$(mktemp "$RUN_DIR/.GEX.exe.XXXXXXXX")
 trap 'rm -f -- "$STAGED_EXE"' EXIT
 cp -- "$SOURCE_EXE" "$STAGED_EXE"
+if [[ -n $ATTRACT_DEMO ]]; then
+    MOD_EXE="$RUN_DIR/.GEX-attract-$ATTRACT_DEMO.exe"
+    python3 "$ROOT/tools/patch_attract.py" --input "$SOURCE_EXE" \
+        --output "$MOD_EXE" --demo "$ATTRACT_DEMO"
+    cp -- "$MOD_EXE" "$STAGED_EXE"
+fi
 chmod 755 "$STAGED_EXE"
 mv -fT -- "$STAGED_EXE" "$RUN_DIR/GEX.exe"
 trap - EXIT

@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT=$(cd -- "$(dirname -- "$0")/.." && pwd)
+ASSETS_DIR=${GEX_ASSETS_DIR:-"$HOME/.wine/drive_c/GOG Games/Gex"}
+DEMO=0
+FRAMES=120
+SKIP_BUILD=0
+RUN_ROOT="$ROOT/.work/attract-compare"
+SCREEN_BBOX=${GEX_SCREEN_BBOX:-348,264,320,224}
+
+usage() {
+    cat <<'EOF'
+Usage: ./scripts/compare-attract [--demo 0|1|2] [--frames N]
+                                 [--assets-dir DIR] [--no-build]
+
+Build the source game, patch copies of both executables for the same attract
+recording, capture every native rendered frame with a fixed-step timer, and
+report the first differing pixel and frame. The installed GEX.exe is read only.
+Outputs, including a focused diff image and JSON report, stay under
+.work/attract-compare/.
+
+--no-build reuses .work/replacement-short/gex-source.exe and gex-source.map.
+Requires Wine, GDB, xvfb-run, Python pefile and Pillow.
+The displayed-pixel crop defaults to 348,264,320,224 on the script's
+1024x768 Xvfb screen; set GEX_SCREEN_BBOX=X,Y,320,224 if Wine places the
+game window differently.
+EOF
+}
+
+while (($#)); do
+    case "$1" in
+        --demo)
+            if (($# < 2)) || [[ ! $2 =~ ^[012]$ ]]; then
+                echo 'Expected --demo 0, 1, or 2' >&2; exit 2
+            fi
+            DEMO=$2; shift 2 ;;
+        --frames)
+            if (($# < 2)) || [[ ! $2 =~ ^[1-9][0-9]*$ ]]; then
+                echo 'Expected a positive frame count' >&2; exit 2
+            fi
+            FRAMES=$2; shift 2 ;;
+        --assets-dir)
+            if (($# < 2)); then echo 'Missing --assets-dir value' >&2; exit 2; fi
+            ASSETS_DIR=$2; shift 2 ;;
+        --no-build) SKIP_BUILD=1; shift ;;
+        -h|--help) usage; exit 0 ;;
+        *) echo "Unknown option: $1" >&2; usage >&2; exit 2 ;;
+    esac
+done
+
+for binary in wine winedbg gdb xvfb-run; do
+    if ! command -v "$binary" >/dev/null 2>&1; then
+        echo "Missing required command: $binary" >&2; exit 1
+    fi
+done
+if [[ ! -f "$ASSETS_DIR/GEX.exe" ]]; then
+    echo "Missing original executable: $ASSETS_DIR/GEX.exe" >&2; exit 1
+fi
+if [[ ! -f "$ASSETS_DIR/LOADER.WAV" ]]; then
+    echo "Missing game asset: $ASSETS_DIR/LOADER.WAV" >&2; exit 1
+fi
+PINNED=e1fd63ecb09fca29d63286e22447752dcb120d7e682f8759d1021776f7698b86
+read -r ORIGINAL_HASH _ < <(sha256sum -- "$ASSETS_DIR/GEX.exe")
+if [[ $ORIGINAL_HASH != "$PINNED" ]]; then
+    echo 'Original GEX.exe does not match the pinned SHA256' >&2; exit 1
+fi
+
+GAME_DIR="$RUN_ROOT/game"
+RUN_DIR="$RUN_ROOT/runs/$(date -u +%Y%m%dT%H%M%SZ)-demo-$DEMO"
+if [[ -L "$RUN_ROOT" || -L "$GAME_DIR" ]]; then
+    echo 'Refusing symlinked output directory' >&2; exit 1
+fi
+mkdir -p -- "$GAME_DIR" "$RUN_DIR"
+for folder in AVI IDL LEV MUS SFX VFX; do
+    if [[ ! -d "$ASSETS_DIR/$folder" || -L "$GAME_DIR/$folder" ]]; then
+        echo "Missing asset folder or symlinked output: $folder" >&2; exit 1
+    fi
+    mkdir -p -- "$GAME_DIR/$folder"
+    cp -anL -- "$ASSETS_DIR/$folder/." "$GAME_DIR/$folder/"
+done
+for file in LOADER.WAV gex_settings.txt GEX.HLP; do
+    if [[ -f "$ASSETS_DIR/$file" ]]; then cp -anL -- "$ASSETS_DIR/$file" "$GAME_DIR/$file"; fi
+done
+
+if (( ! SKIP_BUILD )); then
+    "$ROOT/scripts/assess-replacement-link" > "$RUN_DIR/source-build.log" 2>&1
+fi
+SOURCE_EXE="$ROOT/.work/replacement-short/gex-source.exe"
+SOURCE_MAP="$ROOT/.work/replacement-short/gex-source.map"
+if [[ ! -s "$SOURCE_EXE" || ! -s "$SOURCE_MAP" ]]; then
+    echo 'Source executable or symbol map missing; build first' >&2; exit 1
+fi
+
+python3 "$ROOT/tools/patch_attract.py" --input "$ASSETS_DIR/GEX.exe" \
+    --output "$GAME_DIR/GEX-oracle-attract.exe" --demo "$DEMO"
+python3 "$ROOT/tools/patch_attract.py" --input "$SOURCE_EXE" \
+    --output "$GAME_DIR/GEX-source-attract.exe" --demo "$DEMO"
+
+ORACLE_CAPTURE="$RUN_DIR/oracle"
+SOURCE_CAPTURE="$RUN_DIR/source"
+REPORT="$RUN_DIR/report"
+mkdir -p -- "$ORACLE_CAPTURE" "$SOURCE_CAPTURE" "$REPORT"
+
+xvfb-run -a -s '-screen 0 1024x768x24' \
+    python3 "$ROOT/tools/capture_attract.py" --kind oracle --demo "$DEMO" \
+    --frames "$FRAMES" --timeout 900 --screen-bbox "$SCREEN_BBOX" \
+    --exe "$GAME_DIR/GEX-oracle-attract.exe" \
+    --out "$ORACLE_CAPTURE"
+xvfb-run -a -s '-screen 0 1024x768x24' \
+    python3 "$ROOT/tools/capture_attract.py" --kind source --demo "$DEMO" \
+    --frames "$FRAMES" --timeout 900 --screen-bbox "$SCREEN_BBOX" \
+    --map "$SOURCE_MAP" \
+    --exe "$GAME_DIR/GEX-source-attract.exe" --out "$SOURCE_CAPTURE"
+python3 "$ROOT/tools/compare_attract_frames.py" \
+    --oracle "$ORACLE_CAPTURE" --source "$SOURCE_CAPTURE" --out "$REPORT" --strict
