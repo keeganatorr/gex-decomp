@@ -46,6 +46,13 @@ it does not copy or execute the installed `GEX.exe`. By default it passes
 `--assets-dir DIR` (or `GEX_ASSETS_DIR`) if the assets are elsewhere, and
 `--play-intro` to use the intro token. Runtime Wine uses the normal Wine
 prefix unless `WINEPREFIX` is set. The launcher requires a graphical desktop.
+The source-built executable also supplies the skip-intro token when launched
+directly without arguments, so `wine .work/replacement-run/game/GEX.exe` works
+after staging. The entry adapter also changes to the staged executable's
+directory before the game opens its relative asset paths, so an absolute-path
+launch works from another directory. An explicit command-line argument still
+passes unchanged to the reconstructed WinMain; the installed original requires
+the token.
 
 All 1,250 function sources compile. The game-entry LLD link has **zero
 unresolved externals and zero duplicate definitions**. VC4 LINK still reports
