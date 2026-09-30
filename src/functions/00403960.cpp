@@ -112,7 +112,8 @@ extern "C" long __stdcall WndProc_00403960(HWND window, UINT message,
         DestroyWindow(window);
         break;
     case 0x001c: // WM_ACTIVATEAPP
-        if (!wParam) GameUnpause_004051d0();
+        // The original freezes play here when activation is lost. Keep the
+        // game running in the source-built executable while focus is away.
         if (wParam != windowWord(0x00454fbc)) FUN_00402140_Sound(wParam);
         windowWord(0x00454fbc) = wParam;
         break;

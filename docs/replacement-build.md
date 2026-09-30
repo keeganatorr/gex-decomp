@@ -51,6 +51,12 @@ game opens its relative asset paths, so `wine .work/replacement-run/game/GEX.exe
 and absolute-path launches work from another directory. The installed original
 still requires its launcher token.
 
+The source-built window procedure keeps game simulation running on
+`WM_ACTIVATEAPP` focus loss. The original calls `GameUnpause_004051d0` there;
+despite its name, that routine freezes the game loop. Manual pause keys and
+the existing sound activation handling remain in place. This is an intentional
+behavior change for the replacement executable.
+
 All 1,250 function sources compile. The game-entry LLD link has **zero
 unresolved externals and zero duplicate definitions**. VC4 LINK still reports
 `___ImageBase`, a linker-supplied symbol provided by the final LLD link. The
