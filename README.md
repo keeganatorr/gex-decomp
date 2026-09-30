@@ -1,169 +1,94 @@
-# Gex / GOG — matching decompilation baseline
+# Gex: matching decompilation
 
-A fresh project at `/home/keegan/Repos/gex-decomp`, separate from all previous
-Gex injection, SDL, pemod and recompilation work. The current source set is a
-**per-function C/C++ reconstruction and verification baseline**. The active
-goal is a [source-built replacement executable](docs/replacement-build.md)
-whose gameplay matches the original as closely as practical.
+An ongoing source reconstruction of the 32-bit Windows version of **Gex**. This
+repository contains C/C++ function candidates, reconstruction notes, and tools
+for checking whether each candidate compiles to the original function's bytes.
+It is a research project and an incomplete work in progress.
 
-## Working now
+> **Bug disclaimer:** This project may be quite buggy. Reconstructed code is
+> incomplete, and the source-built executable can behave incorrectly, crash, or
+> fail to run. Use it for experimentation, not as a dependable replacement for
+> the original game.
 
-- Original EXE pinned by SHA256, without changing the GOG installation.
-- Existing Ghidra analysis imported: **1,335 non-external functions** and **1,116
-  existing type inventory entries** (including SDK/CRT types, not 1,116 newly
-  recovered structures). Ghidra reports 1,515 functions including 180 externals.
-- Recovered compiler runs: **Microsoft C/C++ 10.00.5270**, with the old project's
-  `/O2 /G5 /Oy /GR-` flags. It is **not MSVC 2010**.
-- The [previous documented checkpoint](docs/claude-hand-decomp.md) reported
-  1,101 exact functions / 180,028 bytes; one further 122-byte proof brought
-  the pre-rename record to **1,102 functions / 180,150 bytes**. The source tree
-  currently has 1,250 isolated function files. Renaming changed their hashes,
-  so those exact records are historical until a compatible verifier rechecks
-  the renamed sources. The sources now link into a replacement PE, but gameplay
-  parity has not been established. The completed
-  [smallest-first pass](docs/smallest-pass.md), [backup recovery](docs/backup-import.md)
-  and [ten-function results](docs/ten-functions.md) remain documented.
-- A persistent backend serves real data to Nexus over a private named Unix socket.
-- Explicit verification requests are journalled, queued and processed one at a time.
-  The backend launches no model calls or autonomous workers.
+## Reconstruction progress
 
-## Nexus
+Documented checkpoint at commit [`647eb5f`](https://github.com/keeganatorr/gex-decomp/commit/647eb5fb2adaefe922d4bc2dfbed655a6a559876):
 
-In **Decomp**, select **Data source → real**, service identity `pc-decomp`.
-Leave project ID blank (service default), or enter `gex-gog-e1fd63ec`.
-It connects automatically; **Connect / reconnect** retries if needed.
+| Measure | Matched | Inventory | Percentage |
+|---|---:|---:|---:|
+| Functions with an exact byte match | 1,074 | 1,335 | **80.4%** |
+| Bytes in exactly matched functions | 166,735 | 525,887 | **31.7%** |
 
-**Atlas now renders a native hierarchical treemap**: module/function byte areas,
-state colours, exact totals, hover details and click-to-Function-Lab. Wheel zooms,
-right-drag pans, and the module selector drills down. It retains the enclosing-span
-coverage warning rather than pretending those sizes are unique code coverage.
+“Exact” means the reconstructed function compiled and its resolved machine code
+matched the corresponding bytes in the pinned original executable. The byte
+total is the sum of Ghidra function spans; spans can overlap or include gaps, so
+it is not a count of unique executable bytes. These figures do not mean that
+80.4% of the game is playable or that 31.7% of the original executable has been
+patched. They describe functions whose reconstructed source compiled to matching
+machine code; no patch is applied to the original executable. Most functions
+remain unfinished, and an exact machine-code match does not by itself prove that
+the recovered C/C++ types or intent are historically correct.
 
-Use Functions, Function Lab, Atlas, Queue, Types, Knowledge, Ghidra, Toolchains
-and History against the real backend. Empty campaigns/reviews/agents are honestly
-empty, not synthetic filler. The implemented bulk action is **Verification**;
-other agent-driven actions are explicitly unavailable in this baseline.
+The exact-match totals come from the
+[checkpoint report](https://github.com/keeganatorr/gex-decomp/blob/647eb5fb2adaefe922d4bc2dfbed655a6a559876/docs/claude-hand-decomp.md);
+the inventory denominator is recorded in the
+[pinned inventory](https://github.com/keeganatorr/gex-decomp/blob/647eb5fb2adaefe922d4bc2dfbed655a6a559876/docs/iterative-editedgex-index.json).
+The private verification database is not included in this repository; see the
+report for scope and audit limits.
 
-For a coding agent working on Gex, open a Nexus session **in this directory** so
-it reads this project's AGENTS.md and writes here, not into the Nexus repository.
-Nexus's own agents and actual session viewers remain the place for discussion.
+## What is included
 
-## Build / verify
+- Current per-function C/C++ reconstruction candidates in `src/functions/`.
+- Research notes and byte-matching lessons in [`docs/`](docs/).
+- Scripts for inspecting candidates, building the source-linked replacement,
+  and submitting explicit verification requests.
+- A pinned target identity. The original executable's SHA-256 is
+  `e1fd63ecb09fca29d63286e22447752dcb120d7e682f8759d1021776f7698b86`.
 
-The first source-only link milestone builds and runs three reconstructed
-functions as a Windows executable without reading `GEX.exe`:
+The repository does **not** include the original game executable, game assets,
+compiler binaries, private verification database, or retained binary artifacts.
+You must obtain the game files and required build tools separately. Nothing here
+is a complete or standalone distribution of Gex.
 
-```sh
-./scripts/build-source-link-smoke
-./scripts/build-resource-link-smoke
-./tools/link_inventory.py
-```
+## Build and run
 
-The current whole-source build assessment also needs no original executable:
+The source build does **not** read or require the original `GEX.exe`. From the
+repository root, build the replacement, then copy it into your Gex install
+folder under a different name so the original stays intact:
 
-```sh
+```bash
 ./scripts/assess-replacement-link
+cp .work/replacement-short/gex-source.exe "/path/to/Gex/GEX-source.exe"
 ```
 
-To build and play the replacement from an isolated copy of the game assets:
+The build writes `.work/replacement-short/gex-source.exe`. To run it, use Wine
+or Windows and point it at the game folder containing the asset directories:
 
-```sh
-./scripts/build-and-run-game
-# If your game is installed elsewhere:
-./scripts/build-and-run-game --assets-dir "/path/to/Gex"
+```bash
+wine "/path/to/Gex/GEX-source.exe"
 ```
 
-The script copies the asset folders into `.work/replacement-run/game`, stages
-the source-built `GEX.exe` there, and starts Wine. It never copies or executes
-the installed `GEX.exe`. The replacement skips the AVI clips by default;
-`--play-intro` plays them if the Wine prefix has their codec. Use
-`--attract 0`, `1`, or `2` to launch a chosen recording. A graphical desktop
-is required. See [run-game.md](docs/run-game.md) for the exact command to run
-the staged EXE directly and all attract choices.
+The build needs the recovered compiler/linker and supporting build tools; the
+game assets are needed at runtime, not at compile time. See
+[`docs/replacement-build.md`](docs/replacement-build.md) and
+[`docs/run-game.md`](docs/run-game.md) for prerequisites and known limitations.
+A graphics-capable environment is required to run the game.
 
-The build compiles all 1,250 current sources and links a replacement PE with
-source-built Windows resources. The current result is exit 0, zero unresolved
-externals and zero duplicate definitions. The executable is
-`.work/replacement-short/gex-source.exe`. Its scope and runtime findings are in
-[replacement-build.md](docs/replacement-build.md).
+The reconstructed build is not equivalent to the original game. It may have
+missing or incorrect behavior even where individual functions match exactly.
 
-```sh
-# Start the already-installed user service; waits for its actual identity handshake.
-systemctl --user start pc-decomp-gex.service
+## Verification
 
-# Verify the original two-function baseline through the real queue.
-./scripts/build-baseline
+Exact matches require the project's pinned compiler setup and original target
+for comparison. Function candidates are verified individually; the repository
+does not claim a fully reconstructed executable or full gameplay parity. See
+[`docs/baseline.md`](docs/baseline.md) for target and toolchain evidence, and
+[`docs/knowledge/README.md`](docs/knowledge/README.md) for the byte-difference
+workflow.
 
-# One intentional verification operation; choose a stable ID for it.
-./scripts/verify 00420d30 bubbles-source-v2-verification
+## Disclaimer
 
-# Repeating that same command queries its outcome. It does not run the compiler again.
-./scripts/verify 00420d30 bubbles-source-v2-verification
-
-# Read current inventory / progress through the backend CLI.
-./scripts/backend status
-
-# Read-only audit of every current exact artifact, including independent COFF relocation.
-./scripts/audit-current
-```
-
-`build-baseline` keys operations by source, configuration and import epoch. An
-unchanged successful baseline is queried rather than compiled repeatedly. If an
-operation failed for a transient reason, inspect its result before choosing a new
-explicit verification ID.
-
-Nexus build scripts are in `.nexus/`: **Build** validates the original two translation
-units (not every file in src/functions), **Run** starts the backend, **Build and run** starts it then verifies the
-baseline. They do **not** launch or relink GEX.exe.
-
-Exit codes: 0 = current exact source proof, 2 = no current exact proof, 1 = failure
-or rejection, 3 = uncertain online outcome. Inspect the JSON and retained artifacts.
-
-## Service and files
-
-```sh
-systemctl --user status pc-decomp-gex.service
-journalctl --user -u pc-decomp-gex.service
-systemctl --user stop pc-decomp-gex.service
-```
-
-Installed and running, but **not enabled automatically at login**. Run the start
-command or the Nexus Run button after logging in. Closing Nexus does not destroy
-backend-owned verification history. The socket is owner-only at
-`/run/user/1000/pc-decomp/gex.sock`; only the Decomp extension is granted this
-service identity in Nexus's `extension-services.json`.
-
-| File | Owner / purpose |
-|---|---|
-| `project.json` | Target identity, compiler fingerprints, bindings, policy and knowledge |
-| `src/functions/*.cpp` | Current source candidates |
-| `scripts/`, `.nexus/` | Reproducible operator commands |
-| `.work/original.exe` | Read-only original copy — ignored, never publish |
-| `.work/decomp.db` | Backend SQLite — never edit from the UI/agent |
-| `.work/attempts/` | Immutable source/object/log/byte-comparison evidence |
-| `.work/requests/` | Online command checkpoints and receipts |
-| `imports/` | Timestamped Ghidra inventory snapshots — ignored |
-| `.work/backend/3545257/` | Immutable tested backend; scoped compiler contracts and compact proofs |
-
-The backend's source is `/home/keegan/Repos/pc-decomp`. To import again, stop the
-service, run `./scripts/backend import`, then restart. Existing attempts survive;
-current proof is retired until reverified against the new analysis epoch. To fetch
-uncached detail offline, stop the service and use `./scripts/backend detail
---function ADDRESS`. Nexus fetches details online without requiring a stop.
-
-**Configuration changes require a service restart.** Source edits do not; they
-retire current proof automatically. Header dependency capture is not implemented,
-so candidate translation units must currently be self-contained. Project schema 2
-adds per-function `functionOverrides` for allowlisted flags, C/C++ language and COFF
-symbol. C sources retain the `.cpp` filename but compile with `/Tc`; effective
-contracts are recorded in proofs. See the [checkpoint](docs/iterative-editedgex.md).
-
-## Preserve the existing Ghidra work
-
-The active program is `/EditedGex`, originally imported from the same binary,
-but five bytes in its current `.text` are edited. Three functions are blocked:
-`WndProc`, `WinMain`, and `GFX_OpenGraphics`. We did not overwrite those edits.
-Only an explicit plan for original-byte analysis should change that situation.
-
-See [baseline evidence and compiler findings](docs/baseline.md) and [TODO](TODO.md).
-Nothing here proves the original compiler globally or that the whole game has
-been reconstructed. Neither repository publishes the game or proprietary tools.
+Gex is the property of its respective rights holders. This project is an
+unofficial reverse-engineering and source-reconstruction effort. It is not
+affiliated with or endorsed by those rights holders. Do not use this repository
+to distribute copyrighted game files or proprietary tools.
