@@ -41,18 +41,15 @@ The command currently exits 0 and writes
 `./scripts/build-and-run-game` builds that executable and launches it from
 `.work/replacement-run/game`. It copies only the installed asset folders,
 `LOADER.WAV`, and optional settings/help files into that private directory;
-it does not copy or execute the installed `GEX.exe`. By default it passes
-`JAchWieGutDasKeinerWeis` to skip the launcher and AVI intro. Supply
-`--assets-dir DIR` (or `GEX_ASSETS_DIR`) if the assets are elsewhere, and
-`--play-intro` to use the intro token. Runtime Wine uses the normal Wine
-prefix unless `WINEPREFIX` is set. The launcher requires a graphical desktop.
-The source-built executable also supplies the skip-intro token when launched
-directly without arguments, so `wine .work/replacement-run/game/GEX.exe` works
-after staging. The entry adapter also changes to the staged executable's
-directory before the game opens its relative asset paths, so an absolute-path
-launch works from another directory. An explicit command-line argument still
-passes unchanged to the reconstructed WinMain; the installed original requires
-the token.
+it does not copy or execute the installed `GEX.exe`. The source-built WinMain
+does not check for LOADER.EXE's password. A bare launch skips the AVI intro;
+`--play-intro` passes `X` to play it. Supply `--assets-dir DIR` (or
+`GEX_ASSETS_DIR`) if the assets are elsewhere. Runtime Wine uses the normal
+Wine prefix unless `WINEPREFIX` is set. A graphical desktop is required.
+The entry adapter changes to the staged executable's directory before the
+game opens its relative asset paths, so `wine .work/replacement-run/game/GEX.exe`
+and absolute-path launches work from another directory. The installed original
+still requires its launcher token.
 
 All 1,250 function sources compile. The game-entry LLD link has **zero
 unresolved externals and zero duplicate definitions**. VC4 LINK still reports
@@ -87,10 +84,11 @@ not need the original executable at build time. The former `00449d23` and
 `00449d3e` references were interior SEH labels in the original CRT startup
 body, not standalone C functions.
 
-The PE starts under Wine with the original launcher token
+Earlier runtime checks used the original launcher token
 `XAchWieGutDasKeinerWeis`. The alternate token
 `JAchWieGutDasKeinerWeis` also passes the launcher gate and skips both AVI
-clips in the pinned original. Original instructions at `00405edc` write 1 to
+clips in the pinned original. The source-built EXE now accepts either token,
+any other command line, or no arguments. Original instructions at `00405edc` write 1 to
 `00487fc0` for the `J` prefix; `GameThread` passes that word to `GameMain` as
 its skip-intro argument. The replacement had incorrectly written `0045633c`.
 After correcting the address, both executables reach the title screen within
@@ -517,7 +515,7 @@ is claimed as an exact verifier proof or as gameplay validation.
 The Windows startup path now has compiling sources for `WinMain`, `WndProc`,
 registry settings, GDI setup, graphics flush, CDIO open/seek and HSV conversion.
 The source
-keeps the original launcher token check and uses the pinned PE bytes to recover
+removes the original launcher token check and uses the pinned PE bytes to recover
 WndProc's F4 branch missing from edited Ghidra memory. These are behavioral
 candidates, not exact matches. The game entry adapter is a separate source
 file; LLD links with a scratch copy of VC4 `libc.lib` that retains its Windows

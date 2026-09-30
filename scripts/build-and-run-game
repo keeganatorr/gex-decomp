@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT=$(cd -- "$(dirname -- "$0")/.." && pwd)
 ASSETS_DIR=${GEX_ASSETS_DIR:-"$HOME/.wine/drive_c/GOG Games/Gex"}
 RUN_DIR="$ROOT/.work/replacement-run/game"
-INTRO_TOKEN=JAchWieGutDasKeinerWeis
+GAME_ARGS=()
 ATTRACT_DEMO=
 
 usage() {
@@ -36,7 +36,7 @@ while (($#)); do
             shift 2
             ;;
         --play-intro)
-            INTRO_TOKEN=XAchWieGutDasKeinerWeis
+            GAME_ARGS=(X)
             shift
             ;;
         --attract)
@@ -128,4 +128,4 @@ trap - EXIT
 
 echo "Running $RUN_DIR/GEX.exe"
 cd -- "$RUN_DIR"
-exec wine ./GEX.exe "$INTRO_TOKEN"
+exec wine ./GEX.exe "${GAME_ARGS[@]}"

@@ -158,21 +158,11 @@ extern "C" int __stdcall WinMain_00405bf0(HINSTANCE instance, HINSTANCE,
         return 0;
     }
 
-    // The original launcher supplied this 23-character token. Keep the gate
-    // until the replacement has a deliberate, documented launch contract.
-    const char password[] = "XAchWieGutDasKeinerWeis";
-    unsigned commandLength = 0;
-    while (commandLine[commandLength]) ++commandLength;
-    int permitted = commandLength == 23;
-    for (unsigned i = 1; permitted && i != 24; ++i)
-        if (commandLine[i] != password[i]) permitted = 0;
-    if (!permitted) {
-        WinShowError_004063d0(2, startupText(0x00487ef0));
-        WND_CleanUp_004064d0();
-        return 0;
-    }
-    // 00405edc writes the skip-intro word read by GameThread at 00405108.
-    if (commandLine[0] == 'J') startupWord(0x00487fc0) = 1;
+    // The replacement starts directly, without LOADER.EXE's password. Keep
+    // the original J intro switch and skip the intro for a bare launch.
+    // GameThread reads this word at 00405108.
+    if (commandLine == 0 || commandLine[0] == 0 || commandLine[0] == 'J')
+        startupWord(0x00487fc0) = 1;
 
     HANDLE desktop = 0;
     if (RegOpenKeyA((HANDLE)0x80000001UL, startupText(0x00455058), &desktop) == 0) {

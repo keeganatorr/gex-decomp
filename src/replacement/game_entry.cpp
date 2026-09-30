@@ -23,11 +23,5 @@ extern "C" int __stdcall WinMain(void *instance, void *previous,
         }
     }
 
-    // The installed game receives this token from LOADER.EXE. Supply it only
-    // for a bare launch of the source-built executable; explicit arguments
-    // still reach the reconstructed WinMain unchanged.
-    static char directLaunchToken[] = "JAchWieGutDasKeinerWeis";
-    if (commandLine == 0 || commandLine[0] == '\0')
-        commandLine = directLaunchToken;
     return WinMain_00405bf0(instance, previous, commandLine, show);
 }
