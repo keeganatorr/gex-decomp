@@ -75,6 +75,8 @@ def main() -> None:
     parser.add_argument("--timeout", type=int, default=180)
     parser.add_argument("--width", type=int, default=320,
                         help="visible framebuffer width (320..672; use with GEX_WIDESCREEN)")
+    parser.add_argument("--trace-objects", action="store_true",
+                        help="record map-object spawn/removal positions and tracker dimensions")
     args = parser.parse_args()
     if args.width < 320 or args.width > 672 or args.width % 4:
         parser.error("width must be a multiple of four between 320 and 672")
@@ -98,8 +100,21 @@ def main() -> None:
             parser.error("source executable no longer matches this build's map")
     addresses = (ORIGINAL_ADDRESSES if args.kind == "oracle" else
                  source_addresses(args.map))
+    if args.trace_objects:
+        names = {"spawnObject": "_GOB_AddMapObject_00419870",
+                 "removeObject": "_GOB_RemoveMapObject_00419840"}
+        if args.kind == "oracle":
+            addresses.update(spawnObject=0x419870, removeObject=0x419840)
+        else:
+            lines = args.map.read_text(errors="replace").splitlines()
+            for key, name in names.items():
+                matches = [line for line in lines if re.search(r"\s" + re.escape(name) + r"\s", line)]
+                if len(matches) != 1:
+                    raise ValueError(f"expected one {name} in {args.map}")
+                addresses[key] = int(matches[0].split()[2], 16)
     out.mkdir(parents=True, exist_ok=True)
     config = {"demo": args.demo, "level": (0, 9, 36)[args.demo], "width": args.width,
+              "traceObjects": args.trace_objects,
               "frames": args.frames, "fullDemo": args.until_demo_end,
               "capturePreFlush": not args.until_demo_end,
               "sampleIntervalTicks": args.sample_ticks,

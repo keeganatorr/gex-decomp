@@ -1,3 +1,5 @@
+// Raster clipping follows the source replacement viewport, including sprite spans.
+extern "C" int __cdecl GEX_WidescreenWidth(void);
 // Adapted from pc_decomp_backup/src/functions/FUN_00447680.cpp
 // Historical source SHA256: 4428362a6fbb5d0048d84c27a0ad4521e3f38638f7a3950c863a8af74b2ade43
 extern "C" {
@@ -14,7 +16,7 @@ extern "C" void __cdecl FUN_00447680_InnerGraphicsTiles2_Tiles2(int param_1, int
     iVar2 = param_2 >> 0x10;
     if (iVar2 > 0) {
         iVar5 = param_1 >> 0x10;
-        if (iVar5 < 0x140) {
+        if (iVar5 < GEX_WidescreenWidth()) {
             iVar6 = (param_2 - param_1) >> 0x10;
             if (iVar6 != 0) {
                 iVar3 = (param_5 - param_3) / iVar6;
@@ -28,8 +30,8 @@ extern "C" void __cdecl FUN_00447680_InnerGraphicsTiles2_Tiles2(int param_1, int
                     iVar5 = ((int)(param_7 & 0xffff001f) >> 5) + iVar5 * 2;
                 }
                 DAT_004a2f54_ppvBitsUnk = (unsigned short *)(iVar5 + (int)FUN_004A33AC);
-                if (iVar2 > 0x13f) {
-                    iVar6 = iVar6 + (0x13f - iVar2);
+                if (iVar2 > (GEX_WidescreenWidth() - 1)) {
+                    iVar6 = iVar6 + ((GEX_WidescreenWidth() - 1) - iVar2);
                 }
                 if (param_8 == 0) {
                     iVar6 = iVar6 + 1;

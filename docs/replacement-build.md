@@ -103,6 +103,42 @@ pixels. Local screenshots, frame manifests and the staged-executable receipt
 are under `.work/widescreen-fix/`. This is a bounded runtime check, not a claim
 of whole-game or fullscreen parity.
 
+The follow-up sprite pop-in investigation found that twelve software raster
+entry/span routines still clipped to x=320/319. This affected paletted,
+transparent, direct-colour and transformed sprites even though object
+introduction and high-level culling already used the wider viewport. These
+routines now use the configured gameplay width (320 on the title). The last
+camera-follow clamp and the rain-particle right-edge emitter use the same width.
+
+Before/after 560-pixel captures of the three attract levels retained identical
+camera, player and RNG state in all 217 sampled frame pairs. Every changed pixel
+was at x>=320; the original 320 columns were byte-identical. The previously
+missing enemies, scenery and water are visible in the extra columns. Object
+lifecycle traces for the moon and castle runs showed no introductions/removals
+inside the visible rectangle after initialization; their tracker widths were
+already 560. Local evidence is in `.work/widescreen-popin/`, including
+`raster-comparison.json` and `sprite-comparison.png`.
+
+`python3 tests/widescreen_raster.py` compiles eight actual rectangle/span
+rasterizers with 32-bit MinGW and runs them under Wine. It checks 320, 384, 424,
+560 and 672-pixel views at eight positions, including the old x=320 seam and
+both screen edges, and checks the complete framebuffer for stray writes.
+This is a behavior regression check, not a byte-match proof.
+Running the same check against the pre-fix `00445ca0` source fails at width
+384, sprite x=316, framebuffer pixel (320,20): the expected sprite pixel was
+left untouched. The fixed version passes all 320 rectangle/span cases.
+
+The rebuilt executable also completed nine attract captures: each of the three
+selected levels at 320 (4:3), 424 (16:9) and 560 (21:9) pixels, through its level
+transition or demo end. Sample counts for demos 0/1/2 were 182/118/85 at 320,
+179/106/38 at 424 and 74/99/44 at 560. Separate focused checks passed for camera
+right limits, maps narrower than the viewport, and top/right rain spawning at
+all five supported test widths. The playable copy was updated at
+`.work/replacement-run/game/GEX.exe`; hashes, capture completion reasons and
+validation references are retained in `.work/widescreen-popin/completion.json`.
+These checks cover the reported clipping defect and selected attract levels,
+not whole-game gameplay parity.
+
 All 1,250 function sources compile. The game-entry LLD link has **zero
 unresolved externals and zero duplicate definitions**. VC4 LINK still reports
 `___ImageBase`, a linker-supplied symbol provided by the final LLD link. The

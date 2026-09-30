@@ -124,7 +124,7 @@ class Capture(gdb.Breakpoint):
                     "frameIndex": struct.unpack("<I", read(player + 0x54, 4))[0],
                 }
             if config["capturePreFlush"]:
-                # Each visible line has 320 16-bit pixels in a 0x800-byte stride.
+                # Visible 16-bit pixels occupy a 0x800-byte backing stride.
                 backing = read(pointer + 0x4000, 223 * 0x800 + row_bytes)
                 pixels = b"".join(backing[row * 0x800:row * 0x800 + row_bytes]
                                   for row in range(224))
@@ -158,6 +158,47 @@ class Capture(gdb.Breakpoint):
             print(f"GEX_CAPTURE_ERROR {error!r}", flush=True)
             return True
 
+
+class ObjectEvent(gdb.Breakpoint):
+    def __init__(self, kind, address):
+        super().__init__("*" + hex(address))
+        self.kind = kind
+
+    def stop(self):
+        if word("demoShowing") != 1 or word("level") != config["level"]:
+            return False
+        try:
+            stack = int(gdb.parse_and_eval("$esp"))
+            pointer = struct.unpack("<I", read(stack + 4, 4))[0]
+            record = {"event": self.kind, "timer": word("timer"),
+                      "cameraX": signed(word("cameraX")),
+                      "cameraY": signed(word("cameraY"))}
+            if self.kind == "spawn":
+                obj = struct.unpack("<4I", read(pointer, 16))
+                tracker = struct.unpack("<I", read(stack + 8, 4))[0]
+                fields = struct.unpack("<15i", read(tracker, 60))
+                record.update(mapObject=pointer, type=obj[1] & 0x3fff,
+                              x=signed(obj[0] & 0xffff0000),
+                              y=signed((obj[0] << 16) & 0xffffffff),
+                              trackerWidth=fields[11], introRadius=fields[13],
+                              removeRadius=fields[14])
+            else:
+                obj = struct.unpack("<129I", read(pointer, 0x204))
+                record.update(mapObject=obj[99], type=obj[2],
+                              x=signed(obj[30]), y=signed(obj[31]),
+                              removeRadius=signed(obj[52]))
+            with (out / "object-events.jsonl").open("a") as stream:
+                stream.write(json.dumps(record) + "\n")
+        except Exception as error:
+            (out / "capture-error.txt").write_text(repr(error) + "\n")
+            return True
+        return False
+
+
+if config.get("traceObjects"):
+    (out / "object-events.jsonl").write_text("")
+    ObjectEvent("spawn", addresses["spawnObject"])
+    ObjectEvent("remove", addresses["removeObject"])
 
 clock_original = read(addresses["updateTimer"], 6)
 if clock_original[0] != 0x56:

@@ -1,3 +1,5 @@
+// Raster clipping follows the source replacement viewport, including sprite spans.
+extern "C" int __cdecl GEX_WidescreenWidth(void);
 // Adapted from pc_decomp_backup/src/functions/FUN_00447850.cpp
 // Historical source SHA256: 3c3fdd9f1c96e4c2352c8a9ecdd96f0b635e4ce190e497c6efb41613d3758c91
 // Behavior candidate; original bytes are not claimed to match.
@@ -461,7 +463,7 @@ FUN_004482BD:
   if (*(short *)(param_1 + 0x20) < *(short *)(param_1 + 8)) {
     DAT_004a2f58 = DAT_004a2f58 + 1;
     iVar7 = (int)*(short *)(param_1 + 0x10);
-    if (0x13f < iVar7) {
+    if ((GEX_WidescreenWidth() - 1) < iVar7) {
       DAT_004a2f60 = iVar7;
       return;
     }
@@ -471,17 +473,17 @@ FUN_004482BD:
         return;
       }
       DAT_004a2f60 = 0;
-      iVar8 = 0x140;
+      iVar8 = GEX_WidescreenWidth();
       DAT_004a2f8c = DAT_004a2f8c + iVar7;
-      if (0x140 < DAT_004a2f8c) {
+      if (GEX_WidescreenWidth() < DAT_004a2f8c) {
 FUN_004479B0:
         DAT_004a2f8c = iVar8;
       }
     }
     else {
       DAT_004a2f60 = iVar7;
-      if (0x140 < iVar7 + DAT_004a2f8c) {
-        iVar5 = iVar7 + -0x140 + DAT_004a2f8c;
+      if (GEX_WidescreenWidth() < iVar7 + DAT_004a2f8c) {
+        iVar5 = iVar7 + -GEX_WidescreenWidth() + DAT_004a2f8c;
         iVar8 = DAT_004a2f8c - iVar5;
         goto FUN_004479B0;
       }
@@ -491,7 +493,7 @@ FUN_004479B0:
   }
   else {
     DAT_004a2f60 = (int)*(short *)(param_1 + 8);
-    if (0x13f < DAT_004a2f60) {
+    if ((GEX_WidescreenWidth() - 1) < DAT_004a2f60) {
       return;
     }
     if (DAT_004a2f60 < 0) {
@@ -502,15 +504,15 @@ FUN_004479B0:
       DAT_004a2f8c = DAT_004a2f8c + DAT_004a2f60;
       DAT_004a2f60 = 0;
       iVar7 = 0;
-      if (0x140 < DAT_004a2f8c) {
-        DAT_004a2f8c = 0x140;
+      if (GEX_WidescreenWidth() < DAT_004a2f8c) {
+        DAT_004a2f8c = GEX_WidescreenWidth();
         iVar7 = DAT_004a2f60;
       }
     }
     else {
       iVar7 = DAT_004a2f60;
-      if (0x140 < DAT_004a2f60 + DAT_004a2f8c) {
-        DAT_004a2f8c = 0x140 - DAT_004a2f60;
+      if (GEX_WidescreenWidth() < DAT_004a2f60 + DAT_004a2f8c) {
+        DAT_004a2f8c = GEX_WidescreenWidth() - DAT_004a2f60;
       }
     }
     DAT_004a2f60 = iVar7;

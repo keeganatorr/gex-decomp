@@ -1,3 +1,5 @@
+// Raster clipping follows the source replacement viewport, including sprite spans.
+extern "C" int __cdecl GEX_WidescreenWidth(void);
 // Adapted from pc_decomp_backup/src/functions/FUN_00448710.cpp
 // Historical source SHA256: 182da47b39bf99a1f2e5cbe4c82e634cb478ab32d05ab28351d00c6075a48bce
 // Behavior candidate; original bytes are not claimed to match.
@@ -471,7 +473,7 @@ FUN_00449232:
   if (*(short *)(param_1 + 0x20) < *(short *)(param_1 + 8)) {
     DAT_004a2f58 = local_34 + 1;
     iVar10 = (int)*(short *)(param_1 + 0x10);
-    if (0x13f < iVar10) {
+    if ((GEX_WidescreenWidth() - 1) < iVar10) {
       DAT_004a2f60 = iVar10;
       return;
     }
@@ -482,16 +484,16 @@ FUN_00449232:
       }
       DAT_004a2f60 = 0;
       DAT_004a2f8c = DAT_004a2f8c + iVar10;
-      iVar10 = 0x140;
-      if (0x140 < DAT_004a2f8c) {
+      iVar10 = GEX_WidescreenWidth();
+      if (GEX_WidescreenWidth() < DAT_004a2f8c) {
 FUN_00448875:
         DAT_004a2f8c = iVar10;
       }
     }
     else {
       DAT_004a2f60 = iVar10;
-      if (0x140 < iVar10 + DAT_004a2f8c) {
-        iVar7 = iVar10 + -0x140 + DAT_004a2f8c;
+      if (GEX_WidescreenWidth() < iVar10 + DAT_004a2f8c) {
+        iVar7 = iVar10 + -GEX_WidescreenWidth() + DAT_004a2f8c;
         iVar10 = DAT_004a2f8c - iVar7;
         goto FUN_00448875;
       }
@@ -501,7 +503,7 @@ FUN_00448875:
   }
   else {
     iVar10 = (int)*(short *)(param_1 + 8);
-    if (0x13f < iVar10) {
+    if ((GEX_WidescreenWidth() - 1) < iVar10) {
       DAT_004a2f58 = local_34;
       DAT_004a2f60 = iVar10;
       return;
@@ -514,17 +516,17 @@ FUN_00448875:
       }
       iVar7 = -iVar10;
       DAT_004a2f60 = 0;
-      iVar5 = 0x140;
+      iVar5 = GEX_WidescreenWidth();
       DAT_004a2f8c = DAT_004a2f8c + iVar10;
-      if (0x140 < DAT_004a2f8c) {
+      if (GEX_WidescreenWidth() < DAT_004a2f8c) {
 FUN_00448923:
         DAT_004a2f8c = iVar5;
       }
     }
     else {
       DAT_004a2f60 = iVar10;
-      if (0x140 < iVar10 + DAT_004a2f8c) {
-        iVar5 = 0x140 - iVar10;
+      if (GEX_WidescreenWidth() < iVar10 + DAT_004a2f8c) {
+        iVar5 = GEX_WidescreenWidth() - iVar10;
         goto FUN_00448923;
       }
     }

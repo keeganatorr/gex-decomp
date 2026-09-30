@@ -1,3 +1,5 @@
+// Raster clipping follows the source replacement viewport, including sprite spans.
+extern "C" int __cdecl GEX_WidescreenWidth(void);
 // Adapted from pc_decomp_backup/src/functions/FUN_00449500.cpp
 // Historical source SHA256: 45e6496909b1a2ad801542c40bbc20b4b5c7fa2fe29d6fd21133acbccd27c278
 extern "C" {
@@ -10,7 +12,7 @@ extern "C" int __cdecl FUN_00449500_InnerGraphicsTiles1_Tiles1(int param_1, int 
     int param_5, int param_6, unsigned int param_7, int param_8)
 {
     int iVar1 = param_2 >> 16;
-    if ((iVar1 <= 0) || (int)(param_1 >> 16) >= 0x140) return 0;
+    if ((iVar1 <= 0) || (int)(param_1 >> 16) >= GEX_WidescreenWidth()) return 0;
     int iVar6 = (param_2 - param_1) >> 16;
     if (iVar6 == 0) return 0;
     int iVar5 = param_1 >> 16;
@@ -25,8 +27,8 @@ extern "C" int __cdecl FUN_00449500_InnerGraphicsTiles1_Tiles1(int param_1, int 
         iVar5 = (int)((param_7 & 0xffff001f) >> 5) + iVar5 * 2;
     }
     DAT_004A2F54 = (unsigned short*)(iVar5 + (int)DAT_004A33AC);
-    if (iVar1 > 0x13f) {
-        iVar6 = iVar6 + (0x13f - iVar1);
+    if (iVar1 > (GEX_WidescreenWidth() - 1)) {
+        iVar6 = iVar6 + ((GEX_WidescreenWidth() - 1) - iVar1);
     }
     if (param_8 == 0) {
         iVar6++;

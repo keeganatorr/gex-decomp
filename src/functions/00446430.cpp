@@ -1,3 +1,5 @@
+// Raster clipping follows the source replacement viewport, including sprite spans.
+extern "C" int __cdecl GEX_WidescreenWidth(void);
 // Adapted from pc_decomp_backup/src/functions/FUN_00446430.cpp
 // Historical source SHA256: 235af694ff80ded8aecaa9eb6c06d8e59a344822bdb144b1840a603355c89bf4
 extern "C" {
@@ -33,7 +35,7 @@ extern "C" void __cdecl FUN_00446430_DrawTilesInner6(void* param_1)
     DAT_004A2F8C = (unsigned int)((short*)((unsigned char*)param_1 + 0x10))[0];
     DAT_004A2F88 = (int)((short*)((unsigned char*)param_1 + 0x12))[0];
 
-    if (((int)DAT_004A2F8C > 0) && (DAT_004A2F88 > 0) && (DAT_004A2F60 < 0x140)) {
+    if (((int)DAT_004A2F8C > 0) && (DAT_004A2F88 > 0) && (DAT_004A2F60 < GEX_WidescreenWidth())) {
         if (DAT_004A2F60 < 0) {
             uVar3 = DAT_004A2F60 + DAT_004A2F8C;
             if ((int)uVar3 < 1) {
@@ -42,12 +44,12 @@ extern "C" void __cdecl FUN_00446430_DrawTilesInner6(void* param_1)
             DAT_004A2F60 = DAT_004A2F60 + (int)(DAT_004A2F8C - uVar3);
             DAT_004A2F58 = DAT_004A2F58 + (DAT_004A2F8C - uVar3);
             DAT_004A2F8C = uVar3;
-            if (0x140 < (int)uVar3) {
-                DAT_004A2F8C = 0x140;
+            if (GEX_WidescreenWidth() < (int)uVar3) {
+                DAT_004A2F8C = GEX_WidescreenWidth();
             }
         }
-        else if (0x13f < DAT_004A2F60 + (int)DAT_004A2F8C) {
-            DAT_004A2F8C = DAT_004A2F8C - ((DAT_004A2F60 + (int)DAT_004A2F8C) - 0x140);
+        else if ((GEX_WidescreenWidth() - 1) < DAT_004A2F60 + (int)DAT_004A2F8C) {
+            DAT_004A2F8C = DAT_004A2F8C - ((DAT_004A2F60 + (int)DAT_004A2F8C) - GEX_WidescreenWidth());
         }
 
         if (DAT_004A2F64 < 0xe8) {

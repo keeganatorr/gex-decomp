@@ -1,3 +1,5 @@
+// Raster clipping follows the source replacement viewport, including sprite spans.
+extern "C" int __cdecl GEX_WidescreenWidth(void);
 // Adapted from pc_decomp_backup/src/functions/FUN_004466A0.cpp
 // Historical source SHA256: 52ca8c9fd7cddef105684d10c0f96c34952d8bc8c99843e63946e075ba4fbafa
 extern "C" {
@@ -9,13 +11,13 @@ extern "C" void __cdecl FUN_004466a0_DrawBoxBehindText(int xPos, int yPos, unsig
     unsigned int uVar1, uVar2;
     unsigned int *puVar3, *puVar4;
 
-    if (xPos < 0x140 && (int)(Blue + xPos) > 0 && yPos < 0xe8 && Green + yPos > 8) {
+    if (xPos < GEX_WidescreenWidth() && (int)(Blue + xPos) > 0 && yPos < 0xe8 && Green + yPos > 8) {
         if (xPos < 0) {
             Blue = Blue + xPos;
             xPos = 0;
         }
-        if ((int)(Blue + xPos) > 0x140) {
-            Blue = 0x140 - xPos;
+        if ((int)(Blue + xPos) > GEX_WidescreenWidth()) {
+            Blue = GEX_WidescreenWidth() - xPos;
         }
         if (yPos < 8) {
             Green = Green + yPos - 8;
