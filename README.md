@@ -64,7 +64,22 @@ The current whole-source build assessment also needs no original executable:
 ./scripts/assess-replacement-link
 ```
 
-It compiles all 1,250 current sources and links a replacement PE with
+To build and play the replacement from an isolated copy of the game assets:
+
+```sh
+./scripts/build-and-run-game
+# If your game is installed elsewhere:
+./scripts/build-and-run-game --assets-dir "/path/to/Gex"
+```
+
+The launcher copies the asset folders into `.work/replacement-run/game`, stages
+the source-built `GEX.exe` there, and starts Wine with the launcher and AVI
+skip token. It never copies or executes the installed `GEX.exe`. Use
+`--play-intro` to play the AVI clips, if the Wine prefix has their codec; set
+`WINEPREFIX` to select a different runtime prefix. A graphical desktop is
+required.
+
+The build compiles all 1,250 current sources and links a replacement PE with
 source-built Windows resources. The current result is exit 0, zero unresolved
 externals and zero duplicate definitions. The executable is
 `.work/replacement-short/gex-source.exe`. Its scope and runtime findings are in

@@ -38,6 +38,15 @@ and all objects stay under `.work/`.
 The command currently exits 0 and writes
 `.work/replacement-short/gex-source.exe` without reading the original EXE.
 
+`./scripts/build-and-run-game` builds that executable and launches it from
+`.work/replacement-run/game`. It copies only the installed asset folders,
+`LOADER.WAV`, and optional settings/help files into that private directory;
+it does not copy or execute the installed `GEX.exe`. By default it passes
+`JAchWieGutDasKeinerWeis` to skip the launcher and AVI intro. Supply
+`--assets-dir DIR` (or `GEX_ASSETS_DIR`) if the assets are elsewhere, and
+`--play-intro` to use the intro token. Runtime Wine uses the normal Wine
+prefix unless `WINEPREFIX` is set. The launcher requires a graphical desktop.
+
 All 1,250 function sources compile. The game-entry LLD link has **zero
 unresolved externals and zero duplicate definitions**. VC4 LINK still reports
 `___ImageBase`, a linker-supplied symbol provided by the final LLD link. The

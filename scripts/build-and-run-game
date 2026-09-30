@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT=$(cd -- "$(dirname -- "$0")/.." && pwd)
+ASSETS_DIR=${GEX_ASSETS_DIR:-"$HOME/.wine/drive_c/GOG Games/Gex"}
+RUN_DIR="$ROOT/.work/replacement-run/game"
+INTRO_TOKEN=JAchWieGutDasKeinerWeis
+
+usage() {
+    cat <<'EOF'
+Usage: ./scripts/build-and-run-game [--assets-dir DIR] [--play-intro]
+
+Build the source-only Gex executable and run it under Wine. Game assets are
+copied into .work/replacement-run/game; the installed game is not changed.
+
+  --assets-dir DIR  Directory containing the installed Gex asset folders
+                    (default: GEX_ASSETS_DIR or ~/.wine/drive_c/GOG Games/Gex)
+  --play-intro      Play the AVI intro instead of skipping it
+  -h, --help        Show this help
+
+Set WINEPREFIX to choose the runtime Wine prefix. A graphical desktop is
+required. The built executable remains in .work/replacement-short/.
+EOF
+}
+
+while (($#)); do
+    case "$1" in
+        --assets-dir)
+            if (($# < 2)); then
+                echo 'Missing directory after --assets-dir' >&2
+                exit 2
+            fi
+            ASSETS_DIR=$2
+            shift 2
+            ;;
+        --play-intro)
+            INTRO_TOKEN=XAchWieGutDasKeinerWeis
+            shift
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1" >&2
+            usage >&2
+            exit 2
+            ;;
+    esac
+done
+
+if [[ ! -d "$ASSETS_DIR" ]]; then
+    echo "Game asset directory not found: $ASSETS_DIR" >&2
+    exit 1
+fi
+for folder in AVI IDL LEV MUS SFX VFX; do
+    if [[ ! -d "$ASSETS_DIR/$folder" ]]; then
+        echo "Missing game assets: $ASSETS_DIR/$folder" >&2
+        exit 1
+    fi
+done
+if [[ ! -f "$ASSETS_DIR/LOADER.WAV" ]]; then
+    echo "Missing game asset: $ASSETS_DIR/LOADER.WAV" >&2
+    exit 1
+fi
+if ! command -v wine >/dev/null 2>&1; then
+    echo 'Wine is required to run the Windows game.' >&2
+    exit 1
+fi
+if [[ -z ${DISPLAY:-} && -z ${WAYLAND_DISPLAY:-} ]]; then
+    echo 'A graphical desktop is required. Set DISPLAY or WAYLAND_DISPLAY.' >&2
+    exit 1
+fi
+
+echo 'Building Gex from reconstructed source...'
+"$ROOT/scripts/assess-replacement-link"
+SOURCE_EXE="$ROOT/.work/replacement-short/gex-source.exe"
+if [[ ! -s "$SOURCE_EXE" ]]; then
+    echo "Build did not produce $SOURCE_EXE" >&2
+    exit 1
+fi
+
+if [[ -L "$ROOT/.work/replacement-run" || -L "$RUN_DIR" ]]; then
+    echo 'Refusing a symlinked runtime directory.' >&2
+    exit 1
+fi
+mkdir -p -- "$RUN_DIR"
+for folder in AVI IDL LEV MUS SFX VFX; do
+    if [[ -L "$RUN_DIR/$folder" ]]; then
+        echo "Refusing a symlinked runtime asset folder: $RUN_DIR/$folder" >&2
+        exit 1
+    fi
+    mkdir -p -- "$RUN_DIR/$folder"
+    cp -anL -- "$ASSETS_DIR/$folder/." "$RUN_DIR/$folder/"
+done
+cp -anL -- "$ASSETS_DIR/LOADER.WAV" "$RUN_DIR/LOADER.WAV"
+if [[ -f "$ASSETS_DIR/gex_settings.txt" ]]; then
+    cp -anL -- "$ASSETS_DIR/gex_settings.txt" "$RUN_DIR/gex_settings.txt"
+fi
+if [[ -f "$ASSETS_DIR/GEX.HLP" ]]; then
+    cp -anL -- "$ASSETS_DIR/GEX.HLP" "$RUN_DIR/GEX.HLP"
+fi
+
+# Replace the staged executable through a new file, so a pre-existing symlink
+# cannot redirect the write into the installed game directory.
+STAGED_EXE=$(mktemp "$RUN_DIR/.GEX.exe.XXXXXXXX")
+trap 'rm -f -- "$STAGED_EXE"' EXIT
+cp -- "$SOURCE_EXE" "$STAGED_EXE"
+chmod 755 "$STAGED_EXE"
+mv -fT -- "$STAGED_EXE" "$RUN_DIR/GEX.exe"
+trap - EXIT
+
+echo "Running $RUN_DIR/GEX.exe"
+cd -- "$RUN_DIR"
+exec wine ./GEX.exe "$INTRO_TOKEN"
