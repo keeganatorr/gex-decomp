@@ -775,7 +775,8 @@ FUN_00441C57:
           bVar2 = *(int*)(imageStruct + 4);
           iVar26 = *imageStruct >> 0x10;
           iVar24 = *local_58 >> 0x10;
-          local_d4 = (unsigned int)param_1[0x17];
+          // The pinned 00442341 reads the object's colour at byte offset 0xbc.
+          local_d4 = (unsigned int)param_1[0x2f];
           if (local_d4 == 0) {
             local_d4 = (unsigned int)local_80[4];
           }
@@ -814,8 +815,11 @@ FUN_00441C57:
             }
             *(short*)((char*)pMVar36 + 14) = local_f6;
             sVar25 = psVar34[2];
-            puVar18 = (unsigned short*)local_f0_0;
-            if ((sVar25 != 0) && (iVar30 = (int)sVar25, puVar18 = (unsigned short*)local_e0_0, iVar26 != iVar30)) {
+            // Each endpoint is a packed pair of signed 16-bit coordinates.
+            // The pinned 00442454/00442466 load the whole pair, just as the
+            // interpolation paths below do. Keeping only X collapses Y to 0.
+            puVar18 = (unsigned short*)(((unsigned int)local_f0_1 << 16) | ((unsigned int)local_f0_0 & 0xffff));
+            if ((sVar25 != 0) && (iVar30 = (int)sVar25, puVar18 = (unsigned short*)(((unsigned int)local_e0_1 << 16) | ((unsigned int)local_e0_0 & 0xffff)), iVar26 != iVar30)) {
               local_54_0 = local_f0_0;
               if ((short)local_e0_0 != (short)local_f0_0) {
                 local_54_0 = local_f0_0 + ((((int)(short)local_e0_0 - (int)(short)local_f0_0) * iVar30) / iVar26);
@@ -827,8 +831,8 @@ FUN_00441C57:
               local_54_1 = sVar7;
               puVar18 = (unsigned short*)((local_54_1 << 16) | (local_54_0 & 0xffff));
             }
-            puVar19 = (unsigned short*)local_ec_0;
-            if ((sVar25 != 0) && (iVar30 = (int)sVar25, puVar19 = (unsigned short*)local_dc_0, iVar26 != iVar30)) {
+            puVar19 = (unsigned short*)(((unsigned int)local_ec_1 << 16) | ((unsigned int)local_ec_0 & 0xffff));
+            if ((sVar25 != 0) && (iVar30 = (int)sVar25, puVar19 = (unsigned short*)(((unsigned int)local_dc_1 << 16) | ((unsigned int)local_dc_0 & 0xffff)), iVar26 != iVar30)) {
               local_50_0 = local_ec_0;
               if ((short)local_dc_0 != (short)local_ec_0) {
                 local_50_0 = local_ec_0 + ((((int)(short)local_dc_0 - (int)(short)local_ec_0) * iVar30) / iVar26);
@@ -858,8 +862,8 @@ FUN_00441C57:
             }
             pMVar36[2] = (int)puVar20;
             iVar30 = (int)(unsigned char)*(unsigned char*)(psVar34 + 1) + (int)psVar34[2];
-            puVar19 = (unsigned short*)local_f0_0;
-            if ((iVar30 != 0) && (puVar19 = (unsigned short*)local_e0_0, iVar26 != iVar30)) {
+            puVar19 = (unsigned short*)(((unsigned int)local_f0_1 << 16) | ((unsigned int)local_f0_0 & 0xffff));
+            if ((iVar30 != 0) && (puVar19 = (unsigned short*)(((unsigned int)local_e0_1 << 16) | ((unsigned int)local_e0_0 & 0xffff)), iVar26 != iVar30)) {
               local_48_0 = local_f0_0;
               if ((short)local_e0_0 != (short)local_f0_0) {
                 local_48_0 = local_f0_0 + ((((int)(short)local_e0_0 - (int)(short)local_f0_0) * iVar30) / iVar26);
@@ -871,8 +875,8 @@ FUN_00441C57:
               local_48_1 = sVar25;
               puVar19 = (unsigned short*)((local_48_1 << 16) | (local_48_0 & 0xffff));
             }
-            puVar20 = (unsigned short*)local_ec_0;
-            if ((iVar30 != 0) && (puVar20 = (unsigned short*)local_dc_0, iVar26 != iVar30)) {
+            puVar20 = (unsigned short*)(((unsigned int)local_ec_1 << 16) | ((unsigned int)local_ec_0 & 0xffff));
+            if ((iVar30 != 0) && (puVar20 = (unsigned short*)(((unsigned int)local_dc_1 << 16) | ((unsigned int)local_dc_0 & 0xffff)), iVar26 != iVar30)) {
               local_44_0 = local_ec_0;
               if ((short)local_dc_0 != (short)local_ec_0) {
                 local_44_0 = local_ec_0 + ((((int)(short)local_dc_0 - (int)(short)local_ec_0) * iVar30) / iVar26);
@@ -902,8 +906,8 @@ FUN_00441C57:
             }
             pMVar36[4] = (int)puVar21;
             sVar25 = psVar34[2];
-            puVar20 = (unsigned short*)local_f0_0;
-            if ((sVar25 != 0) && (iVar30 = (int)sVar25, puVar20 = (unsigned short*)local_e0_0, iVar26 != iVar30)) {
+            puVar20 = (unsigned short*)(((unsigned int)local_f0_1 << 16) | ((unsigned int)local_f0_0 & 0xffff));
+            if ((sVar25 != 0) && (iVar30 = (int)sVar25, puVar20 = (unsigned short*)(((unsigned int)local_e0_1 << 16) | ((unsigned int)local_e0_0 & 0xffff)), iVar26 != iVar30)) {
               local_3c_0 = local_f0_0;
               if ((short)local_e0_0 != (short)local_f0_0) {
                 local_3c_0 = local_f0_0 + ((((int)(short)local_e0_0 - (int)(short)local_f0_0) * iVar30) / iVar26);
@@ -915,8 +919,8 @@ FUN_00441C57:
               local_3c_1 = sVar7;
               puVar20 = (unsigned short*)((local_3c_1 << 16) | (local_3c_0 & 0xffff));
             }
-            puVar21 = (unsigned short*)local_ec_0;
-            if ((sVar25 != 0) && (iVar30 = (int)sVar25, puVar21 = (unsigned short*)local_dc_0, iVar26 != iVar30)) {
+            puVar21 = (unsigned short*)(((unsigned int)local_ec_1 << 16) | ((unsigned int)local_ec_0 & 0xffff));
+            if ((sVar25 != 0) && (iVar30 = (int)sVar25, puVar21 = (unsigned short*)(((unsigned int)local_dc_1 << 16) | ((unsigned int)local_dc_0 & 0xffff)), iVar26 != iVar30)) {
               local_38_0 = local_ec_0;
               if ((short)local_dc_0 != (short)local_ec_0) {
                 local_38_0 = local_ec_0 + ((((int)(short)local_dc_0 - (int)(short)local_ec_0) * iVar30) / iVar26);
@@ -947,8 +951,8 @@ FUN_00441C57:
             }
             pMVar36[6] = (int)puVar22;
             iVar30 = (int)(unsigned char)*(unsigned char*)(psVar34 + 1) + (int)psVar34[2];
-            puVar21 = (unsigned short*)local_f0_0;
-            if ((iVar30 != 0) && (puVar21 = (unsigned short*)local_e0_0, iVar26 != iVar30)) {
+            puVar21 = (unsigned short*)(((unsigned int)local_f0_1 << 16) | ((unsigned int)local_f0_0 & 0xffff));
+            if ((iVar30 != 0) && (puVar21 = (unsigned short*)(((unsigned int)local_e0_1 << 16) | ((unsigned int)local_e0_0 & 0xffff)), iVar26 != iVar30)) {
               local_30_0 = local_f0_0;
               if ((short)local_e0_0 != (short)local_f0_0) {
                 local_30_0 = local_f0_0 + ((((int)(short)local_e0_0 - (int)(short)local_f0_0) * iVar30) / iVar26);
@@ -960,8 +964,8 @@ FUN_00441C57:
               local_30_1 = sVar25;
               puVar21 = (unsigned short*)((local_30_1 << 16) | (local_30_0 & 0xffff));
             }
-            puVar22 = (unsigned short*)local_ec_0;
-            if ((iVar30 != 0) && (puVar22 = (unsigned short*)local_dc_0, iVar26 != iVar30)) {
+            puVar22 = (unsigned short*)(((unsigned int)local_ec_1 << 16) | ((unsigned int)local_ec_0 & 0xffff));
+            if ((iVar30 != 0) && (puVar22 = (unsigned short*)(((unsigned int)local_dc_1 << 16) | ((unsigned int)local_dc_0 & 0xffff)), iVar26 != iVar30)) {
               local_2c_0 = local_ec_0;
               if ((short)local_dc_0 != (short)local_ec_0) {
                 local_2c_0 = local_ec_0 + ((((int)(short)local_dc_0 - (int)(short)local_ec_0) * iVar30) / iVar26);

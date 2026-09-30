@@ -1,5 +1,8 @@
 // Adapted from pc_decomp_backup/src/functions/FUN_00442E50.cpp
 // Historical source SHA256: c6396098f46628ffc911e46e811efaf1be28b54c2a0661eb23baa63fa543fd46
+// Lookup bases and signs follow pinned instructions 00442eec, 004430ee,
+// 0044310c, 0044311a and 00443135. The cosine paths include a quarter-turn
+// offset already; using the sine-path bases there reads different table entries.
 extern "C" {
 extern "C" { extern int DAT_0045A2C8[]; }
 extern "C" { extern int DAT_0045A3C8[]; }
@@ -32,7 +35,7 @@ extern "C" void __cdecl FUN_00442e50_GraphicsFlashingInner2(unsigned int* param_
                     iVar3 = DAT_0045A7C8[-iVar3];
                 }
             } else if (iVar3 + -0x80 < 0x41) {
-                iVar3 = -DAT_0045A3C8[iVar3 + 1];
+                iVar3 = -DAT_0045A3C8[iVar3];
             } else {
                 iVar3 = -DAT_0045A9C8[-iVar3];
             }
@@ -40,7 +43,7 @@ FUN_00442FE6:
             uVar2 = -iVar3;
         } else if ((int)uVar2 < -0x800000) {
             if ((int)(-0x80 - iVar9s) < 0x41) {
-                iVar3 = -DAT_0045A3C8[-iVar9s + 1];
+                iVar3 = -DAT_0045A3C8[-iVar9s];
             } else {
                 iVar3 = -DAT_0045A9C8[iVar9s];
             }
@@ -56,7 +59,7 @@ FUN_00442FE6:
     } else if ((int)uVar2 < 0x1000001) {
         if (0x800000 < (int)uVar2) {
             if ((int)(iVar9s - 0x80) < 0x41) {
-                iVar3 = DAT_0045A3C8[iVar9s + 1];
+                iVar3 = DAT_0045A3C8[iVar9s];
             } else {
                 iVar3 = DAT_0045A9C8[-iVar9s];
             }
@@ -72,7 +75,7 @@ FUN_00442FE6:
         iVar3 = (((int)iVar9s ^ (int)uVar2) - (int)uVar2 & 0xff ^ (int)uVar2) - (int)uVar2;
         if (0x80 < iVar3) {
             if (iVar3 + -0x80 < 0x41) {
-                iVar3 = DAT_0045A3C8[iVar3 + 1];
+                iVar3 = DAT_0045A3C8[iVar3];
             } else {
                 iVar3 = DAT_0045A9C8[-iVar3];
             }
@@ -93,24 +96,24 @@ FUN_00442FE6:
             iVar3 = (((int)(-iVar9s - 0x40) ^ (int)uVar11) - (int)uVar11 & 0xff ^ (int)uVar11) - (int)uVar11;
             if (iVar3 < 0x81) {
                 if (0x40 < iVar3) {
-                    uVar9 = -DAT_0045A7C8[-iVar3];
+                    uVar9 = DAT_0045A7C8[-iVar3];
                 } else {
                     uVar9 = DAT_0045A5C8[iVar3];
                 }
             } else if (iVar3 + -0x80 < 0x41) {
-                uVar9 = -DAT_0045A3C8[iVar3 + 1];
+                uVar9 = -DAT_0045A3C8[iVar3];
             } else {
                 uVar9 = -DAT_0045A9C8[-iVar3];
             }
         } else if ((int)uVar11 < -0x80) {
             if ((int)(-0xc0 - iVar9s) < 0x41) {
-                uVar9 = -DAT_0045A3C8[-iVar9s + 1];
+                uVar9 = -DAT_0045A2C8[-iVar9s];
             } else {
-                uVar9 = -DAT_0045A9C8[iVar9s];
+                uVar9 = -DAT_0045AAC8[iVar9s];
             }
         } else {
             if (-0x41 < (int)uVar11) {
-                uVar9 = DAT_0045A6C8[-iVar9s];
+                uVar9 = DAT_0045A4C8[-iVar9s];
             } else {
                 uVar9 = DAT_0045A8C8[iVar9s];
             }
@@ -125,9 +128,9 @@ FUN_00442FE6:
             }
         } else {
             if (0x40 < (int)(iVar9s - 0x40)) {
-                uVar9 = DAT_0045A8C8[-iVar9s];
+                uVar9 = -DAT_0045A8C8[-iVar9s];
             } else {
-                uVar9 = DAT_0045A4C8[iVar9s];
+                uVar9 = -DAT_0045A4C8[iVar9s];
             }
         }
     } else {
@@ -142,7 +145,7 @@ FUN_00442FE6:
             }
         } else {
             if (iVar3 + -0x80 < 0x41) {
-                uVar9 = -(unsigned int)DAT_0045A3C8[iVar3 + 1];
+                uVar9 = -(unsigned int)DAT_0045A3C8[iVar3];
             } else {
                 uVar9 = -(unsigned int)DAT_0045A9C8[-iVar3];
             }

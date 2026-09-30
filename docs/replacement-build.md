@@ -445,6 +445,78 @@ build log remain under `.work/replacement-runtime/move-{oracle2,fixed}-*` and
 `map-movement-build.log`. This validates that map route and input sequence;
 other map links and level transitions still need comparison.
 
+The graveyard map's brief horizontal corruption during downward movement was
+reproduced with dense captures after entering the map, then pressing Left, Up,
+Right and Down. A temporary trace found horizontal scale `20497340` (about
+313 times normal), producing sprite bounds from roughly -3,500 to +7,100 pixels.
+`0042c860` had declared `GXObject_00463b70_gob_xScale` as a scalar even though
+its binding denotes the object base. It read the object's first pointer as
+the scale. The pinned loads at `0042c8a5` and the other direction branches
+read `00463c38`, the member at byte offset `0xc8`. The source now indexes that
+member, consistent with `0042ca40`, without changing the binding.
+`tests/map_player_direction.py` compares the linked routine's complete object
+updates and direction-step global with the pinned original for 867 cases.
+It requires `pefile` and `unicorn`, and a fresh replacement build; it publishes
+no backend proof. Temporary tracing was removed from the final source.
+The clean rebuilt executable replayed the same movement sequence: eight of
+30 old downward-transition captures contained a wide band, versus zero of
+30 fixed captures. The final build linked with zero unresolved symbols and
+was staged at `.work/replacement-run/game/GEX.exe`. This validates the
+reproduced map transition, not all gameplay.
+
+The same investigation completed repairs to `00442e50`'s rotation-table
+indices, signs and quarter-turn lookup bases. This was a separate defect:
+repairing rotation alone did not remove the map band.
+`tests/sprite_rotation.py` compares 8,196 compiled rotation cases with the
+pinned original. Build logs, diagnostic traces and before/after captures are
+retained locally under `.work/map-render-debug/`.
+
+The downward-facing wall sprite exposed another error in `00441150`'s rotated
+tile writer. Its endpoint paths cast the X component alone into a packed point,
+discarding Y; the interpolation paths packed both components. The original
+instructions at `00442454` and `00442466` load complete 32-bit X/Y pairs.
+All sixteen endpoint selections now preserve both signed 16-bit coordinates.
+Previously a synthetic upside-down sprite produced Y=0 at every corner and
+was clipped away; the corrected 80-byte paired draw commands agree with the
+pinned original across all 44 cases in `tests/rotated_sprite_commands.py`.
+Those cases cover eleven angles, full tiles and partially interpolated tiles,
+using identical frame-lookup and colour-conversion stubs in both executables.
+
+A separate Wine/GDB check forced the live graveyard player's draw angle to
+`0x800000` in the old and fixed processes. Retained command traces confirm
+that actual player tiles likewise lost endpoint Y values before and preserve
+them afterward. Initial full-frame captures were identical and do not establish
+a visual before/after result. This is a controlled rendering check, not a replay
+of the user's exact wall position. The debugger-only changes are absent from
+the saved executable. The clean source-only build linked with zero unresolved
+symbols; captures, scripts and build logs remain local under
+`.work/wall-sprite-debug/`. The corrected executable is staged at
+`.work/replacement-run/game/GEX.exe`; the 867 map-direction and 8,196 rotation
+cases also remain passing.
+
+Grave4's exit-TV crash was reproduced in an isolated Wine/GDB run by loading
+level ID 3 and requesting the normal completion transition through
+`00456af8 = 4`. After the exit animation, `PAL_WaitForFade_0043f580` divided
+by zero while processing a blue help-box rectangle on an already black frame.
+The underlying error was in `HelpBoxDraw_0040d980`: hidden state 0 and closing
+delay state 5 incorrectly fell through to rectangle drawing. The pinned
+original's jump table at `0040dd7c` sends state 0 to its return, and the branch
+at `0040dcb6` returns throughout state 5. Restoring those returns removes the
+spurious rectangle without changing the fade routine.
+
+`tests/help_box_draw.py` compares object updates and rectangle/removal calls
+with the pinned original in 192 cases, four ticks per case. It covers hidden,
+opening, visible and closing states with several countdowns and dimensions;
+graphics calls are boundary stubs, so this is behavioral evidence, not a
+byte-match proof. The fixed live run passed the formerly failing black fade,
+ran 30 frames of the results level (68), then returned to graveyard map 49.
+The harness set the level-done flag on results frame 30 and stopped after
+three map frames. It exercises the real transition code with debugger-set
+entry conditions, not a manual traversal into the TV. No debugger overrides
+are included in the staged executable. Build, before/after traces and the
+local receipt are retained under `.work/exit-crash-debug/`; the 867 map,
+8,196 rotation and 44 rotated-command regression cases also pass.
+
 `image_data.s` is a **textual, generated data source**, not a recovered set of
 historical declarations. It contains 1,536 `.rdata` bytes, 71,680 raw
 `.data` bytes, the 269,536-byte zero-initialized tail, and 2,683 symbolic

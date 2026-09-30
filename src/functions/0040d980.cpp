@@ -71,6 +71,10 @@ extern "C" void __cdecl HelpBoxDraw_0040d980(int** param_1)
     pGVar2 = param_1[0x28];
 
     switch ((unsigned int)pGVar2 & 0xf) {
+    case 0:
+        // The original jump table sends the inactive box directly to
+        // the return at 0040dd6e; it must not queue a coloured rectangle.
+        return;
     case 1:
         if (((unsigned int)param_1[0x20] & 4) != 0) {
             DAT_00455C4C = DAT_00455C4C + 1;
@@ -131,7 +135,8 @@ extern "C" void __cdecl HelpBoxDraw_0040d980(int** param_1)
             param_1[0x28] = (int*)((unsigned int)pGVar2 & 0xfffffff0);
             return;
         }
-        break;
+        // The closing delay is also hidden, including ticks before zero.
+        return;
     }
     }
 
