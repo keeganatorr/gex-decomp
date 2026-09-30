@@ -5,26 +5,28 @@ ROOT=$(cd -- "$(dirname -- "$0")/.." && pwd)
 ASSETS_DIR=${GEX_ASSETS_DIR:-"$HOME/.wine/drive_c/GOG Games/Gex"}
 DEMO=0
 FRAMES=120
+FULL=0
+FRAMES_SET=0
 SKIP_BUILD=0
 RUN_ROOT="$ROOT/.work/attract-compare"
-SCREEN_BBOX=${GEX_SCREEN_BBOX:-348,264,320,224}
 
 usage() {
     cat <<'EOF'
-Usage: ./scripts/compare-attract [--demo 0|1|2] [--frames N]
+Usage: ./scripts/compare-attract [--demo 0|1|2] [--frames N | --full]
                                  [--assets-dir DIR] [--no-build]
 
 Build the source game, patch copies of both executables for the same attract
-recording, capture every native rendered frame with a fixed-step timer, and
-report the first differing pixel and frame. The installed GEX.exe is read only.
+recording, capture native rendered frames with a fixed-step timer, and report
+the first differing pixel and frame. --full runs until the selected demo ends
+and samples its first presented frame every 30 game ticks (about one second).
+The installed GEX.exe is read only.
 Outputs, including a focused diff image and JSON report, stay under
 .work/attract-compare/.
 
 --no-build reuses .work/replacement-short/gex-source.exe and gex-source.map.
 Requires Wine, GDB, xvfb-run, Python pefile and Pillow.
-The displayed-pixel crop defaults to 348,264,320,224 on the script's
-1024x768 Xvfb screen; set GEX_SCREEN_BBOX=X,Y,320,224 if Wine places the
-game window differently.
+The full-demo check reads the game's DIB just before its post-presentation
+clear routine; desktop screenshots are not used.
 EOF
 }
 
@@ -39,7 +41,8 @@ while (($#)); do
             if (($# < 2)) || [[ ! $2 =~ ^[1-9][0-9]*$ ]]; then
                 echo 'Expected a positive frame count' >&2; exit 2
             fi
-            FRAMES=$2; shift 2 ;;
+            FRAMES=$2; FRAMES_SET=1; shift 2 ;;
+        --full) FULL=1; shift ;;
         --assets-dir)
             if (($# < 2)); then echo 'Missing --assets-dir value' >&2; exit 2; fi
             ASSETS_DIR=$2; shift 2 ;;
@@ -48,6 +51,9 @@ while (($#)); do
         *) echo "Unknown option: $1" >&2; usage >&2; exit 2 ;;
     esac
 done
+if (( FULL && FRAMES_SET )); then
+    echo '--frames and --full cannot be combined' >&2; exit 2
+fi
 
 for binary in wine winedbg gdb xvfb-run; do
     if ! command -v "$binary" >/dev/null 2>&1; then
@@ -101,15 +107,20 @@ ORACLE_CAPTURE="$RUN_DIR/oracle"
 SOURCE_CAPTURE="$RUN_DIR/source"
 REPORT="$RUN_DIR/report"
 mkdir -p -- "$ORACLE_CAPTURE" "$SOURCE_CAPTURE" "$REPORT"
+if (( FULL )); then
+    CAPTURE_ARGS=(--until-demo-end --sample-ticks 30 --timeout 1800)
+else
+    CAPTURE_ARGS=(--frames "$FRAMES" --timeout 900)
+fi
 
 xvfb-run -a -s '-screen 0 1024x768x24' \
     python3 "$ROOT/tools/capture_attract.py" --kind oracle --demo "$DEMO" \
-    --frames "$FRAMES" --timeout 900 --screen-bbox "$SCREEN_BBOX" \
+    "${CAPTURE_ARGS[@]}" \
     --exe "$GAME_DIR/GEX-oracle-attract.exe" \
     --out "$ORACLE_CAPTURE"
 xvfb-run -a -s '-screen 0 1024x768x24' \
     python3 "$ROOT/tools/capture_attract.py" --kind source --demo "$DEMO" \
-    --frames "$FRAMES" --timeout 900 --screen-bbox "$SCREEN_BBOX" \
+    "${CAPTURE_ARGS[@]}" \
     --map "$SOURCE_MAP" \
     --exe "$GAME_DIR/GEX-source-attract.exe" --out "$SOURCE_CAPTURE"
 python3 "$ROOT/tools/compare_attract_frames.py" \

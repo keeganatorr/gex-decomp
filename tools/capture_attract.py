@@ -27,6 +27,10 @@ SOURCE_NAMES = {
     "cameraY": "_GEX_DATA_004a2a1c",
     "player": "_GEX_DATA_004a27fc",
     "input": "_GEX_DATA_004a0280",
+    "rng": "_GEX_DATA_00461180",
+    "gameState": "_GEX_DATA_00455c3c",
+    "displayMode": "_GEX_DATA_00454fc8",
+    "clearAfterFlush": "_FUN_00406c00_IfFreeGameNotEquals1_Unk_WHAT_DOES_THIS_DO_CONTAINS_PPVBITS",
     "updateTimer": "_UpdateTimer_00405120",
 }
 ORIGINAL_ADDRESSES = {
@@ -35,6 +39,9 @@ ORIGINAL_ADDRESSES = {
     "timer": 0x004a2ac8, "cameraX": 0x004a2a38,
     "cameraY": 0x004a2a1c, "player": 0x004a27fc,
     "input": 0x004a0280,
+    "rng": 0x00461180, "gameState": 0x00455c3c,
+    "displayMode": 0x00454fc8,
+    "clearAfterFlush": 0x00406c00,
     "updateTimer": 0x00405120,
 }
 
@@ -56,16 +63,19 @@ def main() -> None:
     parser.add_argument("--exe", type=Path, required=True)
     parser.add_argument("--kind", choices=("oracle", "source"), required=True)
     parser.add_argument("--demo", type=int, choices=range(3), required=True)
-    parser.add_argument("--frames", type=int, default=100)
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument("--frames", type=int, default=100)
+    selection.add_argument("--until-demo-end", action="store_true",
+                           help="capture the whole selected demo, sampling once per 30 game ticks")
+    parser.add_argument("--sample-ticks", type=int, default=30)
+    parser.add_argument("--max-presentations", type=int, default=30000)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--map", type=Path,
                         default=ROOT / ".work/replacement-short/gex-source.map")
     parser.add_argument("--timeout", type=int, default=180)
-    parser.add_argument("--screen-bbox", metavar="X,Y,W,H",
-                        help="also capture literal displayed RGB pixels after each flush")
     args = parser.parse_args()
-    if args.frames < 1 or args.timeout < 1:
-        parser.error("frames and timeout must be positive")
+    if (args.frames is not None and args.frames < 1) or min(args.timeout, args.sample_ticks, args.max_presentations) < 1:
+        parser.error("frames, timeout, sample ticks, and presentation limit must be positive")
     exe = args.exe.resolve(strict=True)
     out = args.out.absolute()
     if not out.is_relative_to(ROOT / ".work"):
@@ -86,18 +96,14 @@ def main() -> None:
                  source_addresses(args.map))
     out.mkdir(parents=True, exist_ok=True)
     config = {"demo": args.demo, "level": (0, 9, 36)[args.demo],
-              "frames": args.frames, "out": str(out), "addresses": addresses,
+              "frames": args.frames, "fullDemo": args.until_demo_end,
+              "capturePreFlush": not args.until_demo_end,
+              "sampleIntervalTicks": args.sample_ticks,
+              "maxPresentations": args.max_presentations,
+              "out": str(out), "addresses": addresses,
               "executableSHA256": receipt["outputSHA256"]}
     if args.kind == "source":
         config["addressMapSHA256"] = hashlib.sha256(args.map.read_bytes()).hexdigest()
-    if args.screen_bbox:
-        try:
-            box = [int(value) for value in args.screen_bbox.split(",")]
-        except ValueError:
-            parser.error("--screen-bbox needs four integers X,Y,W,H")
-        if len(box) != 4 or box[2:] != [320, 224] or min(box) < 0:
-            parser.error("screen box must have nonnegative X,Y and size 320x224")
-        config["screenBox"] = box
     config_path = out / "capture-config.json"
     config_path.write_text(json.dumps(config, indent=2) + "\n")
     command = "\n".join([
@@ -132,10 +138,13 @@ def main() -> None:
     manifest = out / "manifest.json"
     if not manifest.exists():
         raise SystemExit(f"no frames captured; inspect {out / 'debugger.log'}")
-    count = len(json.loads(manifest.read_text())["frames"])
-    if count != args.frames or (out / "capture-error.txt").exists():
-        raise SystemExit(f"captured {count}/{args.frames} frames; inspect {out}")
-    print(f"Captured {count} {args.kind} demo {args.demo} frames: {out}")
+    data = json.loads(manifest.read_text())
+    count = len(data["frames"])
+    if ((args.until_demo_end and not data.get("complete")) or
+            (not args.until_demo_end and count != args.frames) or
+            (out / "capture-error.txt").exists()):
+        raise SystemExit(f"capture incomplete ({count} samples, {data.get('totalPresentations')} presentations, {data.get('endReason')}); inspect {out}")
+    print(f"Captured {count} {args.kind} demo {args.demo} frames across {data['totalPresentations']} presentations: {out}")
 
 
 if __name__ == "__main__":
