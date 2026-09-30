@@ -27,7 +27,9 @@ extern "C" void __cdecl FUN_00445ca0_DrawTilesInner4(unsigned char* param_1)
     DAT_004A2F8C = (unsigned int)*(short*)(param_1 + 0x10);
     DAT_004A2F88 = (int)*(short*)(param_1 + 0x12);
 
-    DAT_004A2F6C = (int)FUN_00402400(param_1[4], param_1[5], param_1[6], (unsigned int)param_1[0xe], 0x10);
+    // The pinned 00445ceb instruction loads the full 16-bit CLUT identifier.
+    DAT_004A2F6C = (int)FUN_00402400(param_1[4], param_1[5], param_1[6],
+                                      *(unsigned short *)(param_1 + 0xe), 0x10);
 
     if ((int)DAT_004A2F8C > 0 && DAT_004A2F88 > 0 && DAT_004A2F60 < 0x140) {
         if (DAT_004A2F60 < 0) {

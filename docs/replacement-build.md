@@ -395,6 +395,23 @@ instructions. Further timed comparisons are needed to isolate the remaining
 demo movement, collision and rendering differences. Pressing Start and
 normal level selection need another comparison after these fixes.
 
+The title-screen X path now reaches the world map without the dark polygon
+that previously covered its wheel. Two source errors caused the visible
+differences. `0040d890` discarded the separator pointer that the help-box
+drawer uses to advance through three instruction lines; its replacement source
+now returns that pointer. A local 75-byte relocated probe matched the pinned
+routine exactly, but this is not a published backend proof. The transparent
+4-bit sprite renderer at `00445ca0` passed only one byte of a two-byte palette
+identifier to `00402400`; the pinned `00445ceb` instruction reads a word.
+That selected the wrong palette row for the map overlay. The rebuilt
+source-only game and the pinned original were run from the same isolated assets
+with `JAchWieGutDasKeinerWeis`, then X held at the title and pressed again on
+the map. Their full 1024×768 captures matched pixel for pixel at 30 seconds
+(instructions visible) and 36 seconds (instructions dismissed). Captures and
+build logs remain under `.work/replacement-runtime/map-clut-{fix,oracle}-*`.
+These two frames establish this focused rendering path, not complete gameplay
+parity.
+
 `image_data.s` is a **textual, generated data source**, not a recovered set of
 historical declarations. It contains 1,536 `.rdata` bytes, 71,680 raw
 `.data` bytes, the 269,536-byte zero-initialized tail, and 2,683 symbolic

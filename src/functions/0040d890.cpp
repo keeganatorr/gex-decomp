@@ -1,26 +1,16 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0040d890.cpp
-// Historical source SHA256: bb59022a477a64a12eae9578bb1dc388b991ee610bcf93104cfe930eab3da98a
-typedef unsigned int undefined4;
-extern "C" {
-void __cdecl HelpBoxGetLine_0040d890(char *param_1,undefined4 *param_2)
-
+// The pinned 0040d890 routine returns the separator (or final NUL) in EAX.
+// HelpBoxDraw uses that pointer to advance through a multiline message.
+extern "C" char *__cdecl HelpBoxGetLine_0040d890(char *line, unsigned int *flags)
 {
-  char cVar1;
-  undefined4 uVar2;
-  
-  cVar1 = *param_1;
-  for (; (cVar1 != '\0' && (*param_1 != '\\')); param_1 = param_1 + 1) {
-    cVar1 = param_1[1];
-  }
-  if ((param_1[1] == 'C') || (uVar2 = 2, param_1[1] == 'c')) {
-    uVar2 = 4;
-  }
-  if (*param_1 == '\0') {
-    *param_2 = 1;
-    return;
-  }
-  *param_1 = '\0';
-  *param_2 = uVar2;
-  return;
-}
+    char *end = line;
+    while (*end && *end != '\\')
+        ++end;
+
+    unsigned int result = (end[1] == 'C' || end[1] == 'c') ? 4 : 2;
+    if (*end)
+        *end = 0;
+    else
+        result = 1;
+    *flags = result;
+    return end;
 }
