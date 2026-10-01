@@ -665,6 +665,31 @@ checks also pass. These sampled runs do not establish full gameplay parity.
 Local Wine input traces, screenshots, build logs and staging receipt are retained
 under `.work/manual-zoom-debug/`.
 
+Rez Knight Fever (`rez1`, level 21) could fault reading `1f300078` during tube
+entry. `PlayerGoThruTube_00415820` treated X/Y coordinate values as object
+pointers and read a field through each value. The pinned routine instead adds
+the selected direction's movement directly to X/Y. The repair also restores
+indexed loads from the four five-word movement/scale rows, removes an erroneous
+28-unit subtraction, and restores junction probes to 32 pixels (`00200000` in
+16.16 units) rather than `00001000`.
+
+`tests/tube_travel.py` compares all object fields, camera-lock globals and
+boundary-call arguments with the pinned original in 5,648 cases. It covers all
+256 block attributes, four directions, entry initialization, periodic animation,
+button priority, forbidden reversals, inclusive turn bounds, scale/angle values,
+exit velocities and unmapped coordinate values. Attribute lookup, animation,
+audio and reset helpers are stubbed identically; these are behavioral checks,
+not a byte-match proof.
+
+The old build reproduces the `1f300078` read fault after debugger-assisted entry
+into a real tube cell at (7984, 2672). The rebuilt executable passes 600 Wine
+presentations at 4:3 (569 tube updates) and 16:9 (572 updates, with numpad zoom
+and reset). Save-state, level-CLI and manual-zoom regression checks also pass.
+The harness uses the real
+shrink/entry states and the level's actual tube attributes; it does not claim a
+manual traversal or completion of the level. Local before/after traces, test
+logs and the staging receipt remain under `.work/knight-fever-debug/`.
+
 `image_data.s` is a **textual, generated data source**, not a recovered set of
 historical declarations. It contains 1,536 `.rdata` bytes, 71,680 raw
 `.data` bytes, the 269,536-byte zero-initialized tail, and 2,683 symbolic
