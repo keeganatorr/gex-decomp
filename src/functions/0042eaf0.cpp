@@ -1,432 +1,179 @@
-// Adapted from pc_decomp_backup/src/functions/FUN_0042eaf0.cpp
-// Historical source SHA256: 25f9416dae8a2df97c671c27f1c536ec51d4a566130ad15765a8099aaa2e780e
-// Provisional behavior candidate; original bytes and gameplay are not claimed to match.
+// Rez camera reconstruction from pinned 0042eaf0..0042f5bd instructions.
+// Behavioral candidate; this does not claim a byte match or historical types.
 extern "C" {
-extern int DAT_004a2a38_Camera;
-int __cdecl FUN_0042E720(int, unsigned int);
-int __cdecl FUN_0042E750(int, unsigned int);
-void __cdecl FUN_0042E780(int);
-void __cdecl FUN_0042E930(int, int, int, int);
-void __cdecl FUN_0042EA10(int, int, int, int);
+extern int DAT_0045B100;
+extern int DAT_0045B104;
+extern int DAT_0045B108;
+extern int DAT_0045B10C;
+extern int DAT_0045B110;
+extern int DAT_0045B114;
+extern int DAT_0045B118;
+extern int DAT_0045B11C;
+extern int DAT_00463E0C;
+extern int DAT_00463E14[17];
+extern int DAT_00463E54[17];
+extern int DAT_00463F10;
+extern int DAT_00463F14;
+extern int DAT_00463F98;
+extern int DAT_00463FA0[16];
+extern int CAMERA_XPos_004a2a38;
+extern int CAMERA_YPos_004a2a1c;
+int __cdecl GEX_WidescreenWidth(void);
+void __cdecl FUN_0042e780(int *);
+int __cdecl FUN_0042e720_GraphicsUnk(int, unsigned int);
+int __cdecl FUN_0042e750_GraphicsUnk(int, unsigned int);
+void __cdecl FUN_0042e930_GRAPHICSDRAWING_SetCamera(int, int, int, unsigned int);
+void __cdecl FUN_0042ea10(int, int, int, unsigned int);
 }
-extern int _DAT_0045B100;
-extern int _DAT_0045B104;
-extern int _DAT_0045B108;
-extern int _DAT_0045B10C;
-extern int _DAT_0045B110;
-extern int _DAT_0045B114;
-extern int _DAT_0045B118;
-extern int _DAT_0045B11C;
-extern int _DAT_00463E0C;
-extern int _DAT_00463E18;
-extern int _DAT_00463E54;
-extern int _DAT_00463E58;
-extern int _DAT_00463E94;
-extern int _DAT_00463F10;
-extern int _DAT_00463F14;
-extern int _DAT_00463F98;
-extern int _DAT_00463FA0;
-extern int _DAT_00463FDC;
-extern int _DAT_00463FE0;
-extern int _DAT_004A2A1C;
 
-extern "C" void __cdecl FUN_0042eaf0_GRAPHICSDRAWING(int param_1,int param_2,int param_3)
+// Projection temporarily changes six fields; restore all after sampling.
+static void sample(int *object, int *x, int *y)
 {
-  int uVar1;
-  int uVar2;
-  int uVar3;
-  int uVar4;
-  int uVar5;
-  int uVar6;
-  int iVar7;
-  int iVar8;
-  int *piVar9;
-  unsigned int uVar10;
-  int iVar11;
-  int iVar12;
-  int *puVar13;
-  int iVar14;
-  int iVar15;
-  int iVar16;
-  int local_28;
-  int local_24;
-  int local_20;
-  int local_8;
-  _DAT_0045B100 = 0;
-  uVar1 = *(int *)(param_1 + 0);
-  local_20 = *(int *)(param_1 + 0);
-  uVar2 = *(int *)(param_1 + 200);
-  uVar3 = *(int *)(param_1 + 0);
-  uVar4 = *(int *)(param_1 + 0);
-  uVar5 = *(int *)(param_1 + 0);
-  FUN_0042E780(param_1);
-  iVar8 = *(int *)(param_1 + 0);
-  iVar11 = *(int *)(param_1 + 0);
-  *(int *)(param_1 + 0) = uVar4;
-  *(int *)(param_1 + 0) = uVar5;
-  *(int *)(param_1 + 0) = uVar1;
-  *(int *)(param_1 + 0) = local_20;
-  *(int *)(param_1 + 200) = uVar2;
-  *(int *)(param_1 + 0) = uVar3;
-  iVar16 = iVar8;
-  local_28 = iVar11;
-  if (param_2 != 0) {
-    uVar1 = *(int *)(param_2 + 0);
-    uVar2 = *(int *)(param_2 + 0);
-    uVar3 = *(int *)(param_2 + 200);
-    uVar4 = *(int *)(param_2 + 0);
-    local_20 = *(int *)(param_2 + 0);
-    uVar5 = *(int *)(param_2 + 0);
-    FUN_0042E780(param_2);
-    iVar16 = *(int *)(param_2 + 0);
-    local_28 = *(int *)(param_2 + 0);
-    *(int *)(param_2 + 0) = local_20;
-    *(int *)(param_2 + 0) = uVar5;
-    *(int *)(param_2 + 0) = uVar1;
-    *(int *)(param_2 + 0) = uVar2;
-    *(int *)(param_2 + 200) = uVar3;
-    *(int *)(param_2 + 0) = uVar4;
-  }
-  iVar12 = local_28;
-  if (param_3 == 0) {
-    iVar14 = iVar8 + iVar16 >> 1;
-    iVar15 = iVar11 + local_28 >> 1;
-  }
-  else {
-    uVar1 = *(int *)(param_3 + 0);
-    uVar2 = *(int *)(param_3 + 0);
-    uVar3 = *(int *)(param_3 + 200);
-    uVar4 = *(int *)(param_3 + 0);
-    local_20 = *(int *)(param_3 + 0);
-    uVar5 = *(int *)(param_3 + 0);
-    FUN_0042E780(param_3);
-    iVar14 = *(int *)(param_3 + 0);
-    iVar15 = *(int *)(param_3 + 0);
-    *(int *)(param_3 + 0) = local_20;
-    *(int *)(param_3 + 0) = uVar5;
-    *(int *)(param_3 + 0) = uVar1;
-    *(int *)(param_3 + 0) = uVar2;
-    *(int *)(param_3 + 200) = uVar3;
-    *(int *)(param_3 + 0) = uVar4;
-  }
-  if ((iVar8 < iVar16) && (iVar16 < iVar14)) {
-    local_8 = 1;
-    iVar7 = iVar14 - iVar8;
-  }
-  else if ((iVar14 < iVar8) || (iVar16 < iVar14)) {
-    if ((iVar8 < iVar16) || (iVar14 < iVar8)) {
-      if (iVar14 < iVar16) {
-        if ((iVar8 < iVar14) || (iVar16 < iVar8)) goto label_0042ed13;
-        local_8 = 5;
-        iVar7 = iVar16 - iVar14;
-      }
-      else if (iVar8 < iVar14) {
-label_0042ed13:
-        iVar7 = local_20;
-        if ((iVar14 <= iVar16) && (iVar16 <= iVar8)) {
-          local_8 = 6;
-          iVar7 = iVar8 - iVar14;
-        }
-      }
-      else {
-        local_8 = 4;
-        iVar7 = iVar8 - iVar16;
-      }
+    int xpos = object[0x1e], ypos = object[0x1f];
+    int xscale = object[0x32], yscale = object[0x33];
+    int oldx = object[0x7e], oldy = object[0x7f];
+    FUN_0042e780(object);
+    *x = object[0x1e]; *y = object[0x1f];
+    object[0x1e] = xpos; object[0x1f] = ypos;
+    object[0x32] = xscale; object[0x33] = yscale;
+    object[0x7e] = oldx; object[0x7f] = oldy;
+}
+
+static int order(int a, int b, int c, int inclusive, int *span)
+{
+    // X's first branch is strict; Y includes equality. Branch order breaks ties.
+    if ((inclusive ? a <= b : a < b) && (inclusive ? b <= c : b < c)) {
+        *span = c - a; return 1;
     }
-    else {
-      local_8 = 3;
-      iVar7 = iVar14 - iVar16;
-    }
-  }
-  else {
-    local_8 = 2;
-    iVar7 = iVar16 - iVar8;
-  }
-  if ((local_28 < iVar11) || (iVar15 < local_28)) {
-    if ((iVar15 < iVar11) || (local_28 < iVar15)) {
-      if ((iVar11 < local_28) || (iVar15 < iVar11)) {
-        if (iVar15 < local_28) {
-          if ((iVar11 < iVar15) || (local_28 < iVar11)) goto label_0042edd3;
-          local_28 = 5;
-          local_20 = iVar12 - iVar15;
-        }
-        else if (iVar11 < iVar15) {
-label_0042edd3:
-          if ((iVar15 <= local_28) && (local_28 <= iVar11)) {
-            local_28 = 6;
-            local_20 = iVar11 - iVar15;
-          }
-        }
-        else {
-          local_28 = 4;
-          local_20 = iVar11 - iVar12;
-        }
-      }
-      else {
-        local_28 = 3;
-        local_20 = iVar15 - iVar12;
-      }
-    }
-    else {
-      local_28 = 2;
-      local_20 = iVar12 - iVar11;
-    }
-  }
-  else {
-    local_28 = 1;
-    local_20 = iVar15 - iVar11;
-  }
-  _DAT_0045B100 = local_20 / 0;
-  if (_DAT_0045B100 < iVar7 / 0) {
-    local_24 = 1;
-    _DAT_0045B100 = iVar7 / 0;
-  }
-  else {
-    local_24 = 2;
-  }
-  if (_DAT_0045B100 < 0) {
-    local_24 = 0;
-  }
-  if (_DAT_0045B11C < _DAT_0045B100) {
-    _DAT_0045B100 = _DAT_0045B11C;
-  }
-  else if (_DAT_0045B100 < _DAT_0045B118) {
-    _DAT_0045B100 = _DAT_0045B118;
-  }
-  iVar8 = 0;
-  puVar13 = &_DAT_00463FA0;
-  do {
-    iVar8 = iVar8 + -1;
-    *puVar13 = puVar13[1];
-    _DAT_00463FDC = _DAT_0045B100;
-    puVar13 = puVar13 + 1;
-  } while (iVar8 != 0);
-  _DAT_0045B100 = 0;
-  piVar9 = &_DAT_00463FA0;
-  do {
-    _DAT_0045B100 = _DAT_0045B100 + *piVar9;
-    piVar9 = piVar9 + 1;
-  } while (piVar9 < &_DAT_00463FE0);
-  _DAT_0045B100 = _DAT_0045B100 >> 4;
-  uVar1 = *(int *)(param_1 + 0);
-  uVar2 = *(int *)(param_1 + 0);
-  uVar3 = *(int *)(param_1 + 0);
-  uVar4 = *(int *)(param_1 + 200);
-  uVar5 = *(int *)(param_1 + 0);
-  uVar6 = *(int *)(param_1 + 0);
-  FUN_0042E780(param_1);
-  iVar8 = *(int *)(param_1 + 0);
-  iVar11 = *(int *)(param_1 + 0);
-  *(int *)(param_1 + 0) = uVar5;
-  *(int *)(param_1 + 0) = uVar6;
-  *(int *)(param_1 + 0) = uVar2;
-  *(int *)(param_1 + 0) = uVar3;
-  *(int *)(param_1 + 200) = uVar4;
-  *(int *)(param_1 + 0) = uVar1;
-  iVar12 = iVar11;
-  iVar16 = iVar8;
-  if (param_2 != 0) {
-    uVar1 = *(int *)(param_2 + 0);
-    uVar2 = *(int *)(param_2 + 0);
-    uVar3 = *(int *)(param_2 + 200);
-    uVar4 = *(int *)(param_2 + 0);
-    uVar5 = *(int *)(param_2 + 0);
-    uVar6 = *(int *)(param_2 + 0);
-    FUN_0042E780(param_2);
-    iVar16 = *(int *)(param_2 + 0);
-    iVar12 = *(int *)(param_2 + 0);
-    *(int *)(param_2 + 0) = uVar5;
-    *(int *)(param_2 + 0) = uVar6;
-    *(int *)(param_2 + 0) = uVar1;
-    *(int *)(param_2 + 0) = uVar2;
-    *(int *)(param_2 + 200) = uVar3;
-    *(int *)(param_2 + 0) = uVar4;
-  }
-  if (param_3 == 0) {
-    iVar14 = iVar8 + iVar16 >> 1;
-    iVar15 = iVar11 + iVar12 >> 1;
-  }
-  else {
-    uVar1 = *(int *)(param_3 + 0);
-    uVar2 = *(int *)(param_3 + 0);
-    uVar3 = *(int *)(param_3 + 200);
-    uVar4 = *(int *)(param_3 + 0);
-    uVar5 = *(int *)(param_3 + 0);
-    uVar6 = *(int *)(param_3 + 0);
-    FUN_0042E780(param_3);
-    iVar14 = *(int *)(param_3 + 0);
-    iVar15 = *(int *)(param_3 + 0);
-    *(int *)(param_3 + 0) = uVar5;
-    *(int *)(param_3 + 0) = uVar6;
-    *(int *)(param_3 + 0) = uVar1;
-    *(int *)(param_3 + 0) = uVar2;
-    *(int *)(param_3 + 200) = uVar3;
-    *(int *)(param_3 + 0) = uVar4;
-  }
-  if ((_DAT_0045B118 < _DAT_0045B100) || (_DAT_0045B118 == _DAT_0045B11C)) {
-    if (local_24 != 1) {
-      if (local_24 == 2) {
-        switch(local_28) {
-        case 1:
-        case 2:
-          _DAT_004A2A1C = iVar11 + -0;
-          break;
-        case 3:
-          if (iVar15 - iVar12 < 0) {
-            _DAT_004A2A1C = iVar12 + -0;
-          }
-          else if (iVar11 - iVar12 < 0) {
-            _DAT_004A2A1C = iVar12 + -0;
-          }
-          else {
-            _DAT_004A2A1C = iVar11 + -0;
-          }
-          break;
-        case 4:
-        case 6:
-          _DAT_004A2A1C = iVar11 + -0;
-          break;
-        case 5:
-          if ((iVar12 - iVar15 < 0) || (iVar11 - iVar15 < 0)) {
-            _DAT_004A2A1C = iVar15 + -0;
-          }
-          else {
-            _DAT_004A2A1C = iVar11 + -0;
-          }
-        }
-        FUN_0042E930(iVar8,iVar16,iVar14,local_8);
-        goto label_0042f234;
-      }
-      goto label_0042f20f;
-    }
-    switch(local_8) {
-    case 1:
-    case 2:
-      DAT_004a2a38_Camera = iVar8 + -0;
-      break;
+    if (a <= c && c <= b) { *span = b - a; return 2; }
+    if (b <= a && a <= c) { *span = c - b; return 3; }
+    if (b <= c && c <= a) { *span = a - b; return 4; }
+    if (c <= a && a <= b) { *span = b - c; return 5; }
+    *span = a - c; return 6;
+}
+
+static int edge(int a, int b, int c, int ordering, int space)
+{
+    switch (ordering) {
+    case 1: case 2: return a - 0x400000;
     case 3:
-      if (iVar14 - iVar16 < 0) {
-        DAT_004a2a38_Camera = iVar16 + -0;
-      }
-      else if (iVar8 - iVar16 < 0) {
-        DAT_004a2a38_Camera = iVar16 + -0;
-      }
-      else {
-        DAT_004a2a38_Camera = iVar8 + -0;
-      }
-      break;
-    case 4:
-    case 6:
-      DAT_004a2a38_Camera = iVar8 + -0;
-      break;
+        if (c - b > space && a - b > space) return a - space - 0x400000;
+        return b - 0x400000;
+    case 4: case 6: return a - space - 0x400000;
     case 5:
-      if ((iVar16 - iVar14 < 0) || (iVar8 - iVar14 < 0)) {
-        DAT_004a2a38_Camera = iVar14 + -0;
-      }
-      else {
-        DAT_004a2a38_Camera = iVar8 + -0;
-      }
+        if (b - c > space && a - c > space) return a - space - 0x400000;
+        return c - 0x400000;
     }
-  }
-  else {
-label_0042f20f:
-    FUN_0042E930(iVar8,iVar16,iVar14,local_8);
-  }
-  FUN_0042EA10(iVar11,iVar12,iVar15,local_28);
-label_0042f234:
-  if (_DAT_0045B100 < 0) {
-    uVar10 = 0;
-  }
-  else {
-    uVar10 = (unsigned int)(0 / (__int64)(_DAT_0045B100 >> 4));
-  }
-  iVar16 = (int)uVar10 >> 8;
-  iVar11 = (0 - _DAT_0045B104 >> 8) * iVar16 + _DAT_0045B104;
-  iVar8 = (0 - _DAT_0045B108 >> 8) * iVar16 + _DAT_0045B108;
-  if ((DAT_004a2a38_Camera < iVar11) || (_DAT_0045B114 == 0)) {
-    DAT_004a2a38_Camera = iVar11;
-  }
-  iVar11 = (0 - _DAT_0045B104 >> 8) * iVar16 + _DAT_0045B104 + -0;
-  if ((iVar11 < DAT_004a2a38_Camera) || (_DAT_0045B114 == 0)) {
-    DAT_004a2a38_Camera = iVar11;
-  }
-  if ((iVar8 <= _DAT_004A2A1C) &&
-     (iVar11 = (0 - _DAT_0045B108 >> 8) * iVar16 + _DAT_0045B108 + -0,
-     iVar8 = _DAT_004A2A1C, iVar11 < _DAT_004A2A1C)) {
-    iVar8 = iVar11;
-  }
-  _DAT_004A2A1C = iVar8;
-  _DAT_0045B104 = FUN_0042E720(DAT_004a2a38_Camera + 0,uVar10);
-  _DAT_0045B108 = FUN_0042E750(_DAT_004A2A1C + 0,uVar10);
-  iVar8 = 4;
-  do {
-    *(int *)(&_DAT_00463E54 + iVar8) = *(int *)((int)&_DAT_00463E58 + iVar8);
-    *(int *)(iVar8 + 0) = *(int *)((int)&_DAT_00463E18 + iVar8);
-    iVar8 = iVar8 + 4;
-  } while (iVar8 < 0);
-  _DAT_00463E94 = _DAT_0045B104;
-  _DAT_00463E54 = _DAT_0045B108;
-  iVar8 = 0;
-  _DAT_0045B104 = 0;
-  _DAT_0045B108 = 0;
-  do {
-    _DAT_0045B104 = _DAT_0045B104 + *(int *)((int)&_DAT_00463E58 + iVar8);
-    _DAT_0045B108 = _DAT_0045B108 + *(int *)((int)&_DAT_00463E18 + iVar8);
-    iVar8 = iVar8 + 4;
-  } while (iVar8 < 0);
-  _DAT_0045B104 = _DAT_0045B104 >> 4;
-  _DAT_0045B108 = _DAT_0045B108 >> 4;
-  iVar12 = _DAT_0045B104 + -0;
-  iVar8 = _DAT_0045B108 + -0;
-  iVar14 = (0 - _DAT_0045B104 >> 8) * iVar16 + _DAT_0045B104;
-  iVar11 = (0 - _DAT_0045B104 >> 8) * iVar16 + _DAT_0045B104;
-  if ((iVar14 < iVar12) || (_DAT_0045B104 + 0 <= iVar14)) {
-    if ((iVar11 < iVar12) || (_DAT_0045B104 + 0 <= iVar11)) {
-      iVar14 = iVar12 - iVar14;
-      iVar11 = (iVar11 - iVar12) + iVar14 + -0 >> 0;
-      if (iVar11 != 0) {
-        iVar14 = iVar14 / iVar11;
-      }
-      iVar14 = (iVar14 >> 8) * 0 + 0;
-      iVar11 = iVar12;
+    return 0;
+}
+
+static int project(int position, int centre, int scale)
+{
+    return ((position - centre) >> 8) * scale + centre;
+}
+
+extern "C" void __cdecl FUN_0042eaf0_GRAPHICSDRAWING(int *first, int *second, int *third)
+{
+    int x1, y1, x2, y2, x3, y3, xspan, yspan, xorder, yorder;
+    int axis, reciprocal, scale, i, left, right, top, bottom, delta, divisor;
+    int width = GEX_WidescreenWidth();
+    int viewport = width << 16;
+    int xspace = (width - 128) << 16;
+    DAT_0045B100 = 0x10000;
+    sample(first, &x1, &y1);
+    x2 = x1; y2 = y1;
+    if (second) sample(second, &x2, &y2);
+    x3 = (x1 + x2) >> 1; y3 = (y1 + y2) >> 1;
+    if (third) sample(third, &x3, &y3);
+    xorder = order(x1, x2, x3, 0, &xspan);
+    yorder = order(y1, y2, y3, 1, &yspan);
+    DAT_0045B100 = yspan / 112;
+    axis = 2;
+    if (xspan / (width - 128) > DAT_0045B100) {
+        axis = 1; DAT_0045B100 = xspan / (width - 128);
     }
+    if (DAT_0045B100 < 0x10000) axis = 0;
+    if (DAT_0045B100 > DAT_0045B11C) DAT_0045B100 = DAT_0045B11C;
+    else if (DAT_0045B100 < DAT_0045B118) DAT_0045B100 = DAT_0045B118;
+    for (i = 0; i < 15; ++i) DAT_00463FA0[i] = DAT_00463FA0[i + 1];
+    DAT_00463FA0[15] = DAT_0045B100;
+    DAT_0045B100 = 0;
+    for (i = 0; i < 16; ++i) DAT_0045B100 += DAT_00463FA0[i];
+    DAT_0045B100 >>= 4;
+
+    sample(first, &x1, &y1);
+    x2 = x1; y2 = y1;
+    if (second) sample(second, &x2, &y2);
+    x3 = (x1 + x2) >> 1; y3 = (y1 + y2) >> 1;
+    if (third) sample(third, &x3, &y3);
+    if ((DAT_0045B118 < DAT_0045B100 || DAT_0045B118 == DAT_0045B11C) && axis == 1) {
+        CAMERA_XPos_004a2a38 = edge(x1, x2, x3, xorder, xspace);
+        FUN_0042ea10(y1, y2, y3, yorder);
+    } else if ((DAT_0045B118 < DAT_0045B100 || DAT_0045B118 == DAT_0045B11C) && axis == 2) {
+        CAMERA_YPos_004a2a1c = edge(y1, y2, y3, yorder, 0x700000);
+        FUN_0042e930_GRAPHICSDRAWING_SetCamera(x1, x2, x3, xorder);
+    } else {
+        FUN_0042e930_GRAPHICSDRAWING_SetCamera(x1, x2, x3, xorder);
+        FUN_0042ea10(y1, y2, y3, yorder);
+    }
+
+    reciprocal = DAT_0045B100 > 16 ? 0x10000000 / (DAT_0045B100 >> 4) : 0x10000000;
+    scale = reciprocal >> 8;
+    left = project(0x1200000, DAT_0045B104, scale);
+    right = project(0x5400000, DAT_0045B104, scale) - viewport;
+    top = project(0xa00000, DAT_0045B108, scale);
+    bottom = project(0x2800000, DAT_0045B108, scale) - 0xf00000;
+    if (CAMERA_XPos_004a2a38 < left || DAT_0045B114 == 0x69) CAMERA_XPos_004a2a38 = left;
+    if (CAMERA_XPos_004a2a38 > right || DAT_0045B114 == 0x6a) CAMERA_XPos_004a2a38 = right;
+    if (CAMERA_YPos_004a2a1c < top) CAMERA_YPos_004a2a1c = top;
+    else if (CAMERA_YPos_004a2a1c > bottom) CAMERA_YPos_004a2a1c = bottom;
+    DAT_0045B104 = FUN_0042e720_GraphicsUnk(CAMERA_XPos_004a2a38 + (viewport >> 1), reciprocal);
+    DAT_0045B108 = FUN_0042e750_GraphicsUnk(CAMERA_YPos_004a2a1c + 0x780000, reciprocal);
+    // Histories overlap at 00463e54; preserve original shift/store order.
+    for (i = 1; i < 16; ++i) {
+        DAT_00463E54[i] = DAT_00463E54[i + 1];
+        DAT_00463E14[i] = DAT_00463E14[i + 1];
+    }
+    DAT_00463E54[16] = DAT_0045B104;
+    DAT_00463E54[0] = DAT_0045B108;
+    DAT_0045B104 = 0; DAT_0045B108 = 0;
+    for (i = 1; i <= 16; ++i) {
+        DAT_0045B104 += DAT_00463E54[i];
+        DAT_0045B108 += DAT_00463E14[i];
+    }
+    DAT_0045B104 >>= 4; DAT_0045B108 >>= 4;
+    CAMERA_XPos_004a2a38 = DAT_0045B104 - (viewport >> 1);
+    CAMERA_YPos_004a2a1c = DAT_0045B108 - 0x780000;
+    left = project(0x1600000, DAT_0045B104, scale);
+    right = project(0x5000000, DAT_0045B104, scale);
+    if (left >= CAMERA_XPos_004a2a38 && left < CAMERA_XPos_004a2a38 + viewport)
+        DAT_0045B10C = 0x1600000 - left;
+    else if (right >= CAMERA_XPos_004a2a38 && right < CAMERA_XPos_004a2a38 + viewport)
+        DAT_0045B10C = 0x3200000 - right;
     else {
-      iVar14 = 0;
+        delta = CAMERA_XPos_004a2a38 - left;
+        divisor = (right - CAMERA_XPos_004a2a38 + delta - viewport) >> 16;
+        if (divisor) delta /= divisor;
+        DAT_0045B10C = ((delta >> 8) << 15) + 0x1600000 - CAMERA_XPos_004a2a38;
     }
-    _DAT_0045B10C = iVar14 - iVar11;
-  }
-  else {
-    _DAT_0045B10C = 0 - iVar14;
-  }
-  iVar14 = (0 - _DAT_0045B108 >> 8) * iVar16;
-  iVar11 = iVar14 + _DAT_0045B108;
-  if ((iVar11 < iVar8) || (_DAT_0045B108 + 0 <= iVar11)) {
-    iVar16 = iVar8 - ((0 - _DAT_0045B108 >> 8) * iVar16 + _DAT_0045B108);
-    iVar11 = (iVar16 - iVar8) + iVar11 + -0 >> 0;
-    if (iVar11 != 0) {
-      iVar16 = iVar16 / iVar11;
+    top = project(0xa00000, DAT_0045B108, scale);
+    bottom = project(0x2400000, DAT_0045B108, scale);
+    if (bottom >= CAMERA_YPos_004a2a1c && bottom < CAMERA_YPos_004a2a1c + 0xf00000)
+        DAT_0045B110 = 0x2400000 - bottom;
+    else {
+        delta = CAMERA_YPos_004a2a1c - top;
+        divisor = (delta - CAMERA_YPos_004a2a1c + bottom - 0xf00000) >> 16;
+        if (divisor) delta /= divisor;
+        DAT_0045B110 = (delta >> 8) * 0x5000 + 0x1000000 - CAMERA_YPos_004a2a1c;
     }
-    iVar14 = (iVar16 >> 8) * 0 + 0;
-    iVar11 = iVar8;
-  }
-  else {
-    iVar14 = 0 - iVar14;
-    iVar11 = _DAT_0045B108;
-  }
-  _DAT_0045B110 = iVar14 - iVar11;
-  DAT_004a2a38_Camera = iVar12 + _DAT_0045B10C;
-  _DAT_004A2A1C = iVar8 + (iVar14 - iVar11);
-  iVar8 = 0;
-  if ((DAT_004a2a38_Camera < 0) || (iVar8 = 0, 0 < DAT_004a2a38_Camera)) {
-    DAT_004a2a38_Camera = iVar8;
-  }
-  iVar8 = 0;
-  if ((_DAT_004A2A1C < 0) || (iVar8 = 0, 0 < _DAT_004A2A1C)) {
-    _DAT_004A2A1C = iVar8;
-  }
-  _DAT_00463F10 = DAT_004a2a38_Camera;
-  _DAT_00463F98 = DAT_004a2a38_Camera + 0;
-  _DAT_00463F14 = _DAT_004A2A1C;
-  _DAT_00463E0C = _DAT_004A2A1C + 0;
-  return;
+    CAMERA_XPos_004a2a38 += DAT_0045B10C;
+    CAMERA_YPos_004a2a1c += DAT_0045B110;
+    if (CAMERA_XPos_004a2a38 < 0x1000000) CAMERA_XPos_004a2a38 = 0x1000000;
+    else if (CAMERA_XPos_004a2a38 > 0x2400000) CAMERA_XPos_004a2a38 = 0x2400000;
+    if (CAMERA_YPos_004a2a1c < 0x1000000) CAMERA_YPos_004a2a1c = 0x1000000;
+    else if (CAMERA_YPos_004a2a1c > 0x1800000) CAMERA_YPos_004a2a1c = 0x1800000;
+    DAT_00463F10 = CAMERA_XPos_004a2a38;
+    DAT_00463F98 = CAMERA_XPos_004a2a38 + viewport;
+    DAT_00463F14 = CAMERA_YPos_004a2a1c;
+    DAT_00463E0C = CAMERA_YPos_004a2a1c + 0xf00000;
 }

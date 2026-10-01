@@ -606,6 +606,30 @@ are included in the staged executable. Build, before/after traces and the
 local receipt are retained under `.work/exit-crash-debug/`; the 867 map,
 8,196 rotation and 44 rotated-command regression cases also pass.
 
+Rez's Lair (`rez7`, level 27) crashed at replacement address `0042f158` in
+`FUN_0042eaf0_GRAPHICSDRAWING`. Its provisional source had lost the camera
+fit divisors (192 horizontal pixels and 112 vertical pixels), replacing both
+with literal zero. It also read object headers instead of positions, restored
+multiple fields into offset zero, and lost the smoothing-loop bounds and
+arena constants. The camera path now samples and restores the six projected
+object fields, preserves the original target-order tie handling, shifts and
+averages the 16-entry zoom/position histories, and applies the original arena
+clamps and correction offsets. Horizontal fit and screen bounds use the
+configured viewport width; at 320 pixels the original calculations are retained.
+
+`tests/rez_camera.py` compares the linked camera, its real projection/centering
+helpers, complete history storage and object preservation with the pinned
+original. All 2,064 cases pass for three ticks each, covering target orderings,
+ties, absent targets, forced edge modes, varying depth and smoothing histories.
+Twelve wider-view cases also check screen bounds for twenty ticks each. This
+is behavioral evidence, not a published byte-match proof. Local before/after
+Wine/GDB traces and build/test receipts are under `.work/rez-boss-debug/`.
+The old executable reproduces the exact `0042f158` divide-by-zero on entering
+the boss level; the rebuilt executable passes 600 presentations each at 4:3,
+16:9 and 21:9, with 576 camera calls in each run. The corrected executable is
+staged at `.work/replacement-run/game/GEX.exe`. This checks the reported crash
+path, not completion of the boss fight.
+
 `image_data.s` is a **textual, generated data source**, not a recovered set of
 historical declarations. It contains 1,536 `.rdata` bytes, 71,680 raw
 `.data` bytes, the 269,536-byte zero-initialized tail, and 2,683 symbolic
