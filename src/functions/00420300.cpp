@@ -78,6 +78,7 @@ void __cdecl FUN_0040b2d0_InputProcessing(void);
 void __cdecl GFX_Fade_0043f490(int, int, int, int, int, int, int);
 void __cdecl PAL_WaitForFade_0043f580(void);
 void *__cdecl memset(void *, int, unsigned int);
+void __cdecl GEX_SpriteViewerMenu(void);
 
 void __cdecl DoLevelSelectScreen_00420300(void)
 {
@@ -124,6 +125,7 @@ void __cdecl DoLevelSelectScreen_00420300(void)
             i = count - 1 + i;
         FUN_0043f080_ResetGraphics_Clean1(0);
         GOB_DisplayObject_00444590(&obj);
+        GEX_SpriteViewerMenu();
         if (count - 2 < gLevelSelectSelectedIndex_00463aa0)
             gLevelSelectSelectedIndex_00463aa0 = gLevelSelectSelectedIndex_00463aa0 - count + 1;
         j = i + 4;

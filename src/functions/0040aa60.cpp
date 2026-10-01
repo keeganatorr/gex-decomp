@@ -1,4 +1,5 @@
 extern "C" {
+    void __cdecl GEX_SpriteViewerReset(void);
     extern int DAT_004a2954_DrawTiles;
     extern int FUN_00455C40;
     extern int FUN_004A2924;
@@ -18,6 +19,7 @@ extern "C" {
 
 extern "C" void __cdecl M1_FreeLevel_0040aa60()
 {
+    GEX_SpriteViewerReset();
     if (DAT_004a2954_DrawTiles != 0 && FUN_00455C40 >= 0) {
         FUN_00405390(FUN_00455E9C);
         FUN_004202D0();

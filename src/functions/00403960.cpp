@@ -25,6 +25,7 @@ __declspec(dllimport) HANDLE __stdcall SelectPalette(HANDLE, HANDLE, int);
 __declspec(dllimport) UINT __stdcall RealizePalette(HANDLE);
 
 int __cdecl GEX_MainMenuEscape(void);
+int __cdecl GEX_SpriteViewerKey(unsigned int, long);
 void __cdecl GEX_WidescreenResizeWindow(int);
 void __cdecl FUN_00404a20_MoveWindow(void);
 void __cdecl FUN_00404f90_KillThreads(void);
@@ -130,6 +131,7 @@ extern "C" long __stdcall WndProc_00403960(HWND window, UINT message,
         }
         break;
     case 0x0100: // WM_KEYDOWN
+        if (GEX_SpriteViewerKey(wParam, lParam)) return 0;
         // Replacement-only shortcut: leave the current mode through the
         // game's normal state transition and let its level teardown run.
         // This source is a behavioral candidate; the added branch is not an

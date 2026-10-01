@@ -57,7 +57,7 @@ repository root, build the replacement, then copy it into your Gex install
 folder under a different name so the original stays intact:
 
 ```bash
-./scripts/assess-replacement-link
+./build.sh
 cp .work/replacement-short/gex-source.exe "/path/to/Gex/GEX-source.exe"
 ```
 
@@ -78,6 +78,10 @@ the executable. The title artwork stays centered; gameplay uses the wider view.
 `GEX_WIDESCREEN=16:9` can override the saved setting at launch. It also accepts
 `W:H` or a pixel width from 320 to 672 (rounded down to a multiple of four).
 A fresh configuration defaults to 4:3.
+
+Press **F8** during a level to open the in-game sprite viewer. You can also
+enable it with F8 on level select, then start each level to inspect its loaded
+objects and animation frames. See [viewer controls](docs/run-game.md#sprite-viewer).
 
 The build needs the recovered compiler/linker and supporting build tools; the
 game assets are needed at runtime, not at compile time. See

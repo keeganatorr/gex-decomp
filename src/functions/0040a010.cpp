@@ -83,6 +83,7 @@ extern int LEVELID_004a2a98;
 extern int DAT_004626f0_PrevGameTypeSwitchCase;
 extern int gGameState_00455c3c;
 int __cdecl GEX_WidescreenWidth(void);
+int __cdecl GEX_SpriteViewerTick(void *);
 void __cdecl GFX_Fade_0043f490(int, int, int, int, int, int, int);
 void __cdecl GXINP_ReadPads_0041fc40(void);
 void __cdecl VFX_Update_0041faf0(void);
@@ -123,6 +124,11 @@ int __cdecl M1_PlayLevel_0040a010(M1Level *level)
     int viewportFixed = GEX_WidescreenWidth() << 16;
 
     M1_CurrentLevel_004a2990 = level;
+    // Replacement-only inspection mode: leave simulation and demo input still.
+    if (GEX_SpriteViewerTick(level)) {
+        return DAT_004626f0_PrevGameTypeSwitchCase == gGameState_00455c3c &&
+               (DAT_004a2a3c || level_004a2964 == LEVELID_004a2a98);
+    }
     if (DAT_004626f4_InitialiseLevel) {
         DAT_004626f4_InitialiseLevel = 0;
         if (DAT_004a2948 != 1)

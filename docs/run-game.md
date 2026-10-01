@@ -67,3 +67,52 @@ centered composition, and gameplay fills the selected wider view.
 
 `GEX_WIDESCREEN=16:9 wine "$GEX_REPO/.work/replacement-run/game/GEX.exe"`
 overrides the saved ratio for startup. A saved choice otherwise persists between launches.
+
+## Sprite viewer
+
+Build with `./scripts/build-and-run-game`, then press **F8** in a level. The
+viewer holds gameplay still and draws frames through the source-built game's
+normal sprite renderer. Alternatively, press backtick (`) to open level select,
+toggle **F8 SPRITE VIEWER: ON**, and start a level with the configured Jump button
+(Z by default). The viewer stays enabled when returning to level select, so you
+can inspect levels in succession.
+
+| Key | Action |
+| --- | --- |
+| Left / Right | Previous / next frame, continuing across animations and objects |
+| Up / Down | Previous / next animation in the current object |
+| Page Up / Page Down | Previous / next loaded object |
+| Space | Automatically advance through frames, animations, and objects |
+| Home | Return to the first object and frame |
+| B | Toggle black / white background |
+| N | Toggle fit-to-view / native size (large native frames can clip) |
+| F8 / Escape | Close the viewer and resume the level |
+| Backtick (`) | Return to level select with the viewer still enabled |
+
+The counters include every frame slot in the resolved level object tables,
+plus separately loaded Gex and idle animation objects. Identical object pointers
+are listed once; animation and frame indices are zero-based, followed by their
+counts. Empty slots remain inspectable instead of falling back to frame zero.
+The viewer labels empty images, invalid metadata, and frames that submit no draw
+commands. `ERR` counts catalogue/table problems; a nonzero count means the
+inventory is incomplete. It rebuilds the catalogue after level teardown and
+does not edit objects or run their scripts.
+
+This is a visual inspection aid for loaded object animation assets. Tiles and
+parallax backgrounds are outside this inventory. Drawing a frame here does not
+prove that an object spawns, uses the same scripted palette/transform, or passes
+camera culling during gameplay. `ERR 0` is not a claim that every frame contains
+visible pixels; use stepping, playback, and both backgrounds to inspect them.
+
+The replacement implementation is in `src/replacement/sprite_viewer.cpp`, with
+small hooks in input, level playback, teardown, and level select. These are
+replacement features, not matching-decompilation proofs. After building,
+`python3 tests/sprite_viewer.py` exercises the compiled viewer with synthetic
+assets under x86 emulation (requires `pefile` and `unicorn`), covering navigation,
+empty and invalid frames, scaling selection, playback, and teardown.
+
+Live Wine checks on 2026-10-01 covered levels 0, 9, and 36, frame/object
+navigation, playback, both backgrounds, native size, and resuming gameplay.
+Level-select activation and rebuilding the catalogue on a transition to level
+63 were also checked. Local captures are under `.work/sprite-viewer/`.
+These sampled checks do not establish visibility of every frame in every level.

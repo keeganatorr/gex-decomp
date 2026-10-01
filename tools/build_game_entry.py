@@ -13,6 +13,7 @@ SOURCES = {
     "game_entry": ROOT / "src/replacement/game_entry.cpp",
     "menu_options": ROOT / "src/replacement/menu_options.cpp",
     "widescreen_runtime": ROOT / "src/replacement/widescreen_runtime.cpp",
+    "sprite_viewer": ROOT / "src/replacement/sprite_viewer.cpp",
 }
 OUTPUT_DIR = ROOT / ".work/replacement-short"
 
