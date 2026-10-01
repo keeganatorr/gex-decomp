@@ -1,5 +1,6 @@
 extern "C" {
 void __cdecl GEX_WidescreenApplyPending(void);
+void __cdecl GEX_StartupLevelApply(void);
 extern void* DAT_00455998;
 extern void* DAT_004A2968;
 extern "C" void __cdecl FUN_0043DAF0();
@@ -42,6 +43,7 @@ extern "C" void __cdecl GEX_Run_0040b000()
     FUN_0041CA10();
     FUN_0040B6F0();
     FUN_00417EE0();
+    GEX_StartupLevelApply();
     FUN_0040AF60();
     FUN_00409940();
     FUN_0040B830();

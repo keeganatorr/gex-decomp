@@ -28,6 +28,27 @@ extern "C" void __stdcall CoTaskMemFree(void *);
 // before the normal three-entry recording cursor is used.
 extern "C" int GEX_DATA_00455c34;
 
+struct LevelName {
+    const char *name;
+    int level; // The level-select tables store one-based IDs.
+};
+extern "C" LevelName *GEX_DATA_0045a580[2];
+extern "C" int GEX_DATA_0045a578[2];
+extern "C" int GEX_DATA_004a2964, GEX_DATA_00455c3c;
+extern "C" int GEX_DATA_004a281c, GEX_DATA_00456afc;
+static int startupLevel = -1;
+
+// Called after GEX_Run has initialized resources and the player, before its
+// first level load. Consume the request once so later title visits work normally.
+extern "C" void __cdecl GEX_StartupLevelApply(void)
+{
+    if (startupLevel < 0) return;
+    GEX_DATA_004a2964 = startupLevel;
+    GEX_DATA_00455c3c = 1;
+    GEX_DATA_004a281c = GEX_DATA_00456afc = 3;
+    startupLevel = -1;
+}
+
 static int isDirectory(const char *path)
 {
     unsigned long attributes = GetFileAttributesA(path);
@@ -99,14 +120,79 @@ static int consumeOption(char *&cursor, const char *option)
     return 1;
 }
 
-static void showUsage()
+static void writeError(const char *text, unsigned long length)
 {
-    static const char usage[] =
-        "Usage: GEX.exe [--attract 0|1|2] [--play-intro]\r\n";
     unsigned long written;
     void *error = GetStdHandle((unsigned long)-12);
     if (error && error != (void *)-1)
-        WriteFile(error, usage, sizeof(usage) - 1, &written, 0);
+        WriteFile(error, text, length, &written, 0);
+}
+
+static int lower(int c)
+{
+    return c >= 'A' && c <= 'Z' ? c + 'a' - 'A' : c;
+}
+
+static int findLevel(const char *name)
+{
+    for (int table = 0; table < 2; ++table) {
+        for (int i = 0; i < GEX_DATA_0045a578[table] - 1; ++i) {
+            LevelName &entry = GEX_DATA_0045a580[table][i];
+            const char *a = name, *b = entry.name;
+            // Ignore the menu's descriptive suffix, e.g. "grave7 (boss)".
+            while (*a && *b && !isSpace(*b) && lower(*a) == lower(*b)) {
+                ++a;
+                ++b;
+            }
+            if (!*a && (!*b || isSpace(*b))) return entry.level - 1;
+        }
+    }
+    return -1;
+}
+
+static void listLevels()
+{
+    static const char heading[] = "Available levels (use --level NAME):\r\n";
+    writeError(heading, sizeof(heading) - 1);
+    for (int table = 0; table < 2; ++table) {
+        for (int i = 0; i < GEX_DATA_0045a578[table] - 1; ++i) {
+            const char *name = GEX_DATA_0045a580[table][i].name;
+            unsigned long length = 0;
+            while (name[length]) ++length;
+            writeError(name, length);
+            writeError("\r\n", 2);
+        }
+    }
+}
+
+static int readLevel(char *&cursor)
+{
+    skipSpaces(cursor);
+    int quoted = *cursor == '"';
+    if (quoted) ++cursor;
+    char name[96];
+    unsigned int length = 0;
+    while (*cursor && (quoted ? *cursor != '"' : !isSpace(*cursor))) {
+        if (length == sizeof(name) - 1) return -1;
+        name[length++] = *cursor++;
+    }
+    if (quoted) {
+        if (*cursor != '"') return -1;
+        ++cursor;
+        if (*cursor && !isSpace(*cursor)) return -1;
+    }
+    name[length] = 0;
+    return length ? findLevel(name) : -1;
+}
+
+static void showUsage()
+{
+    static const char usage[] =
+        "Usage: GEX.exe [--level NAME | --attract 0|1|2] [--play-intro]\r\n"
+        "       GEX.exe --list-levels\r\n"
+        "Example: GEX.exe --level grave4\r\n"
+        "Save states: 0-9 select slot, F5 save, F9 load.\r\n";
+    writeError(usage, sizeof(usage) - 1);
 }
 
 extern "C" int __stdcall WinMain(void *instance, void *previous,
@@ -128,25 +214,33 @@ extern "C" int __stdcall WinMain(void *instance, void *previous,
         }
     }
 
-    // The original game assets are resolved relative to the install folder.
-    // If this executable was copied elsewhere, ask for that folder before the
-    // reconstructed startup can show the generic file-read error dialog.
-    if (!hasGameFiles() && !selectGameFolder()) return 0;
-
     char *cursor = commandLine;
     if (cursor) skipSpaces(cursor);
     if (cursor && cursor[0] == '-' && cursor[1] == '-') {
         int demo = -1;
+        int level = -1;
         int playIntro = 0;
         while (*cursor) {
             if (consumeOption(cursor, "--attract")) {
                 skipSpaces(cursor);
-                if (demo >= 0 || *cursor < '0' || *cursor > '2' ||
+                if (demo >= 0 || level >= 0 || *cursor < '0' || *cursor > '2' ||
                     (cursor[1] && !isSpace(cursor[1]))) {
                     showUsage();
                     return 2;
                 }
                 demo = *cursor++ - '0';
+            } else if (consumeOption(cursor, "--level")) {
+                if (level >= 0 || demo >= 0 || (level = readLevel(cursor)) < 0) {
+                    static const char error[] =
+                        "Invalid --level selection. Use --list-levels for names; "
+                        "choose one of --level or --attract.\r\n";
+                    writeError(error, sizeof(error) - 1);
+                    showUsage();
+                    return 2;
+                }
+            } else if (consumeOption(cursor, "--list-levels")) {
+                listLevels();
+                return 0;
             } else if (consumeOption(cursor, "--play-intro")) {
                 playIntro = 1;
             } else if (consumeOption(cursor, "--help")) {
@@ -158,11 +252,16 @@ extern "C" int __stdcall WinMain(void *instance, void *previous,
             }
             skipSpaces(cursor);
         }
+        startupLevel = level;
         if (demo >= 0) GEX_DATA_00455c34 = demo + 4;
         static char skipIntroLine[] = "";
         static char playIntroLine[] = "X";
         commandLine = playIntro ? playIntroLine : skipIntroLine;
     }
+
+    // Parse CLI options before asset selection, so help, listing and invalid
+    // arguments work even when this executable is outside the game folder.
+    if (!hasGameFiles() && !selectGameFolder()) return 0;
 
     return WinMain_00405bf0(instance, previous, commandLine, show);
 }

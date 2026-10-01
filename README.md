@@ -68,6 +68,15 @@ or Windows and point it at the game folder containing the asset directories:
 wine "/path/to/Gex/GEX-source.exe"
 ```
 
+Launch directly into a level with `--level`, using the level-select name:
+
+```bash
+wine "/path/to/Gex/GEX-source.exe" --level grave4
+```
+
+Use `--list-levels` to print all available names. These arguments also work with
+`./scripts/build-and-run-game --level grave4`.
+
 The replacement adds a backtick (\`) shortcut to return to level select and
 an **Options** entry below Password on the title screen. Options uses the
 original menu font. Left/Right changes the display ratio (4:3, 16:10, 16:9,
@@ -107,3 +116,5 @@ Gex is the property of its respective rights holders. This project is an
 unofficial reverse-engineering and source-reconstruction effort. It is not
 affiliated with or endorsed by those rights holders. Do not use this repository
 to distribute copyrighted game files or proprietary tools.
+
+The replacement supports persistent save states: **0–9** select a slot, **F5** saves, and **F9** loads. See [save-state controls and compatibility](docs/save-states.md).

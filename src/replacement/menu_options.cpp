@@ -54,6 +54,11 @@ extern "C" void __cdecl GEX_MainMenuReset(void)
     p = button(3); if (p) field(p, 0x7c) = 182 << 16;
     p = button(2); if (p) field(p, 0x7c) = 222 << 16;
 }
+extern "C" void __cdecl GEX_MainMenuClose(void)
+{
+    opened=escapeRequested=selection=currentItem=0;
+    chosen=GEX_WidescreenConfiguredWidth();
+}
 extern "C" int __cdecl GEX_MainMenuNavigate(int current, int direction)
 {
     static const int order[] = {1, 3, 5, 2};

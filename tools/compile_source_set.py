@@ -15,6 +15,7 @@ import subprocess
 import sys
 from address_literals import relocate
 from function_names import NAMES
+from save_state_hooks import hooks
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -50,7 +51,7 @@ def compile_one(source: Path, env: dict[str, str], cached: dict,
     flags = override.get("flags", TC["flags"])
     export = NAMES[address]
     obj = WORK / f"{address}.obj"
-    transformed, literals = relocate(use_image_storage(source.read_text(), address), language)
+    transformed, literals = relocate(hooks(use_image_storage(source.read_text(), address), address, language), language)
     scratch_source = WORK / "source" / f"{address}.cpp"
     source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
     contract = {"language": language, "flags": flags, "export": export,

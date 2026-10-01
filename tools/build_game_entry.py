@@ -14,6 +14,8 @@ SOURCES = {
     "menu_options": ROOT / "src/replacement/menu_options.cpp",
     "widescreen_runtime": ROOT / "src/replacement/widescreen_runtime.cpp",
     "sprite_viewer": ROOT / "src/replacement/sprite_viewer.cpp",
+    "save_states": ROOT / "src/replacement/save_states.cpp",
+    "state_audio": ROOT / "src/replacement/state_audio.cpp",
 }
 OUTPUT_DIR = ROOT / ".work/replacement-short"
 
@@ -23,6 +25,8 @@ def win(path: Path) -> str:
 
 
 def main() -> None:
+    from build_save_state_schema import build
+    build()
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, WINEPREFIX=TC["winePrefix"], WINEDEBUG="-all",
                INCLUDE="", LIB="", CL="", _CL_="")

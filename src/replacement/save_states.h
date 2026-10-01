@@ -1,0 +1,104 @@
+// Replacement-only snapshot ABI. All persisted IDs are independent of link RVAs.
+#ifndef GEX_SAVE_STATES_H
+#define GEX_SAVE_STATES_H
+typedef unsigned int SSWord;
+struct SSRegion { SSWord id; unsigned char *address; SSWord size; };
+struct SSFunction { SSWord id; void *address; };
+struct SSObjectField { SSWord callback, offset; };
+extern "C" {
+extern SSRegion SSImages[];
+extern SSFunction SSFunctions[];
+extern SSWord SSFunctionCount;
+extern SSWord SSInitialPointers[], SSInitialPointerCount;
+extern SSObjectField SSObjectFields[];
+extern SSWord SSObjectFieldCount;
+void * __cdecl memcpy(void *, const void *, unsigned int);
+void * __cdecl memset(void *, int, unsigned int);
+void * __cdecl malloc(unsigned int);
+void __cdecl free(void *);
+int __cdecl sprintf(char *, const char *, ...);
+__declspec(dllimport) void * __stdcall GlobalAlloc(unsigned int, unsigned long);
+__declspec(dllimport) void * __stdcall GlobalFree(void *);
+__declspec(dllimport) unsigned long __stdcall GetTickCount(void);
+__declspec(dllimport) unsigned long __stdcall GetModuleFileNameA(void *, char *, unsigned long);
+__declspec(dllimport) void __stdcall Sleep(unsigned long);
+__declspec(dllimport) long __stdcall InterlockedIncrement(long *);
+__declspec(dllimport) long __stdcall InterlockedDecrement(long *);
+__declspec(dllimport) long __stdcall InterlockedExchange(long *,long);
+__declspec(dllimport) int __stdcall PostMessageA(void *,unsigned int,unsigned int,long);
+__declspec(dllimport) void __stdcall OutputDebugStringA(const char *);
+__declspec(dllimport) void * __stdcall CreateFileA(const char *, unsigned long, unsigned long,
+    void *, unsigned long, unsigned long, void *);
+__declspec(dllimport) int __stdcall CloseHandle(void *);
+__declspec(dllimport) int __stdcall ReadFile(void *, void *, unsigned long, unsigned long *, void *);
+__declspec(dllimport) int __stdcall WriteFile(void *, const void *, unsigned long, unsigned long *, void *);
+__declspec(dllimport) unsigned long __stdcall SetFilePointer(void *, long, long *, unsigned long);
+__declspec(dllimport) unsigned long __stdcall GetFileSize(void *, unsigned long *);
+__declspec(dllimport) int __stdcall FlushFileBuffers(void *);
+__declspec(dllimport) int __stdcall MoveFileExA(const char *, const char *, unsigned long);
+__declspec(dllimport) int __stdcall DeleteFileA(const char *);
+__declspec(dllimport) int __stdcall CreateDirectoryA(const char *, void *);
+__declspec(dllimport) int __stdcall SetWindowTextA(void *, const char *);
+__declspec(dllimport) unsigned long __stdcall GetEnvironmentVariableA(const char *, char *, unsigned long);
+int __cdecl GEX_StateKey(unsigned int, long);
+int __cdecl GEX_StateBusy(void);
+int __cdecl GEX_StateMutationBegin(void);
+void __cdecl GEX_StateMutationEnd(void);
+void __cdecl GEX_StateActivation(unsigned int);
+unsigned int __cdecl GEX_StateLatestActivation(void);
+void __cdecl GEX_StateDeferActivation(void);
+int __cdecl GEX_StateRand(void);
+void __cdecl GEX_StateSequence(unsigned int);
+void __cdecl GEX_StateReturnLevel(unsigned int);
+int __cdecl GEX_StateSequenceResume(int *);
+int __cdecl GEX_StatePoll(int);
+void __cdecl GEX_StateDraw(void);
+void __cdecl GEX_StateUITick(void);
+void __cdecl GEX_StateDispatch(void);
+int __cdecl GEX_StatePending(void);
+void __cdecl GEX_StateAllocated(void *, unsigned int);
+void __cdecl GEX_StateFreed(void *);
+void __cdecl GEX_StatePointer(void *);
+void __cdecl GEX_StateCopyKind(void *, const void *);
+void __cdecl GEX_StateSwapKind(void *, void *);
+void __cdecl GEX_StateHandle(void *);
+void __cdecl GEX_StateClear(void *, unsigned int);
+void __cdecl GEX_StateCacheSlot(void *);
+void __cdecl GEX_StateFileOpened(void *, const char *);
+void __cdecl GEX_StateFileClosed(void *);
+void __cdecl GEX_StateResourceRead(void *, void *, unsigned int);
+void __cdecl GEX_StateResourceCopy(void *, const void *, unsigned int);
+void __cdecl GEX_StateAudioWorker(void);
+void __cdecl GEX_StateAudioAsset(unsigned int,const char *,unsigned int,unsigned int);
+void __cdecl GEX_StateSFXAsset(unsigned int,unsigned int);
+int __cdecl SSFileIdentity(const char *, SSWord *, SSWord *);
+void *__cdecl SSAddress(SSWord);
+void __cdecl GEX_StateRegisterCallback(unsigned int, void *);
+extern int GEX_StateFont[5];
+}
+struct SSBuffer {
+    unsigned char *data;
+    SSWord size, capacity, position;
+    int good;
+    SSBuffer();
+    ~SSBuffer();
+    int append(const void *, SSWord);
+    int read(void *, SSWord);
+    int word(SSWord);
+    SSWord take();
+};
+struct SSAudio;
+SSAudio *SSAudioCapture();
+void SSAudioResume(SSAudio *);
+int SSAudioWrite(SSAudio *, SSBuffer &);
+SSAudio *SSAudioRead(SSBuffer &, SSWord version);
+const char *SSAudioError();
+int SSAudioReadIdentities(SSAudio *,const void *,SSWord);
+void SSAudioDispose(SSAudio *);
+int SSAudioCommit(SSAudio *);
+int SSAudioHold();
+int SSAudioStopHardware();
+void SSAudioContinueHardware();
+void SSAudioRelease();
+inline SSWord &ssw(SSWord id) { return *(SSWord *)SSAddress(id); }
+#endif

@@ -14,6 +14,7 @@ void __cdecl TXT_DrawPrintP_0043fa70(int, int, char *, int);
 int __cdecl _vsnprintf(char *, unsigned int, const char *, char *);
 int __cdecl UpdateTimer_00405120(void);
 void __cdecl CEL_DrawCels_0043db70(int);
+void __cdecl GEX_StateDraw(void);
 void __cdecl FUN_0043f2d0_CheckF3ForUnpauseGameDrawWindow(int);
 void __cdecl FUN_0040b2d0_InputProcessing(void);
 void __cdecl FUN_0043db50_UpdateGraphicsState(void);
@@ -35,6 +36,7 @@ static volatile unsigned readKey, writeKey;
 static unsigned keys[32];
 static unsigned long lastStep;
 static void *catalogLevel;
+extern "C" int __cdecl GEX_SpriteViewerActive(void) { return enabled || viewing; }
 static int good(const void *p, unsigned bytes)
 {
     return p && !((unsigned)p & 1) && !IsBadReadPtr(p, bytes);
@@ -64,6 +66,12 @@ extern "C" void __cdecl GEX_SpriteViewerReset(void)
     catalogLevel = 0;
     objectCount = 0;
     playing = 0;
+}
+extern "C" void __cdecl GEX_SpriteViewerClose(void)
+{
+    enabled=0;
+    readKey=writeKey;
+    GEX_SpriteViewerReset();
 }
 static int animations(LoadObject *o)
 {
@@ -290,6 +298,7 @@ extern "C" int __cdecl GEX_SpriteViewerTick(void *level)
     // F3's paused framebuffer must not cover the viewer or stall its input.
     int frozen = GEX_DATA_004a294c;
     GEX_DATA_004a294c = 0;
+    GEX_StateDraw();
     int running = UpdateTimer_00405120();
     CEL_DrawCels_0043db70(running);
     FUN_0043f2d0_CheckF3ForUnpauseGameDrawWindow(running);

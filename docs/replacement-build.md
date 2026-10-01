@@ -53,6 +53,16 @@ still requires its launcher token. The replacement accepts `--attract 0|1|2`
 on its own command line to select and launch a demo on the first title update;
 see [run-game.md](run-game.md) for exact commands.
 
+`--level NAME` starts directly in any of the 44 levels in the two level-select
+tables, using their names without descriptive suffixes (for example `grave4`
+or `mainmap1`). `--list-levels` prints both tables. The entry adapter validates
+the selection before asset discovery and saves a one-shot request;
+`GEX_StartupLevelApply` consumes it in `GEX_Run_0040b000` after resource and
+player initialization, before the normal first level load. This is a replacement
+feature, not a byte-match claim. After building, `python3 tests/level_cli.py`
+checks the compiled parser, every table name and ID, one-shot behavior, and
+invalid arguments under x86 emulation (requires `pefile` and `unicorn`).
+
 The source-built window procedure keeps game simulation running on
 `WM_ACTIVATEAPP` focus loss. The original calls `GameUnpause_004051d0` there;
 despite its name, that routine freezes the game loop. Manual pause keys and
@@ -734,3 +744,15 @@ The assessment retains a diagnostic-main link and links the real Windows
 startup path. The title and attract demo now run, but matching gameplay is
 unfinished. No model campaign, backend deployment or Ghidra modification
 was part of this build milestone.
+
+## Save-state build integration
+
+`build_game_entry.py` generates the stable callback/pointer schema from source and
+replacement COFF, then compiles `save_states.cpp` and `state_audio.cpp`. The game
+link includes these objects. `compile_source_set.py` applies audited replacement
+hooks before address-literal relocation and includes their output in cache
+identities. Probe/verifier sources and proof contracts are unchanged.
+
+See [save-states.md](save-states.md) for the frozen world ABI, persistent file
+format, compatibility fixture and linked-code/Wine validation. Generated schema,
+objects, test executables and state files are not committed.

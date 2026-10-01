@@ -8,7 +8,7 @@ GAME_ARGS=()
 
 usage() {
     cat <<'EOF'
-Usage: ./scripts/build-and-run-game [--assets-dir DIR] [--play-intro] [--attract 0|1|2]
+Usage: ./scripts/build-and-run-game [--assets-dir DIR] [--play-intro] [--level NAME | --attract 0|1|2]
 
 Build the source-only Gex executable and run it under Wine. Game assets are
 copied into .work/replacement-run/game; the installed game is not changed.
@@ -17,6 +17,8 @@ copied into .work/replacement-run/game; the installed game is not changed.
                     (default: GEX_ASSETS_DIR or ~/.wine/drive_c/GOG Games/Gex)
   --play-intro      Play the AVI intro instead of skipping it
   --attract N       Start attract recording N on the first title update
+  --level NAME      Start directly in a level (e.g. grave4)
+  --list-levels     Print available level names after building
   -h, --help        Show this help
 
 Set WINEPREFIX to choose the runtime Wine prefix. A graphical desktop is
@@ -45,6 +47,18 @@ while (($#)); do
             fi
             GAME_ARGS+=(--attract "$2")
             shift 2
+            ;;
+        --level)
+            if (($# < 2)) || [[ -z $2 || $2 == --* ]]; then
+                echo 'Expected a level name after --level (e.g. grave4)' >&2
+                exit 2
+            fi
+            GAME_ARGS+=(--level "$2")
+            shift 2
+            ;;
+        --list-levels)
+            GAME_ARGS+=(--list-levels)
+            shift
             ;;
         -h|--help)
             usage

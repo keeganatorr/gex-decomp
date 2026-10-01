@@ -16,6 +16,30 @@ Set `GEX_REPO` to the path where this repository is checked out.
 wine "$GEX_REPO/.work/replacement-run/game/GEX.exe"
 ```
 
+To launch directly into any level available in level select, use its name:
+
+```bash
+wine "$GEX_REPO/.work/replacement-run/game/GEX.exe" --level grave4
+./scripts/build-and-run-game --level grave4
+wine "$GEX_REPO/.work/replacement-run/game/GEX.exe" --list-levels
+```
+
+Names are case-insensitive. Use the first word of the level-select label:
+`grave7` for `grave7 (boss)`, or `mainmap1` for `mainmap1 (grave)`. The list
+includes both ordinary and Planet X levels. The chosen level starts with normal
+player input and three hit points. The choice is consumed once; subsequent
+title-screen visits work normally. Backtick (`) still returns to level select.
+`--play-intro` also works with `--level`. Choose either `--level` or `--attract`;
+combining them, repeating `--level`, or using an unknown name exits with code 2.
+`--help` and `--list-levels` work without the game assets installed.
+
+Launch checks on 2026-10-01 loaded `grave4`, `mainmap1`, and `scifi1` under
+an isolated Wine desktop, including movement and backtick level-select return
+from `grave4`. Captures remain local under `.work/level-cli-runtime/`.
+`tests/level_cli.py` exercises all 44 name-to-ID mappings and argument validation
+against the compiled executable; these checks do not establish gameplay parity
+for every level.
+
 To start a chosen attract recording on the first title update, append
 `--attract` and its number:
 
@@ -67,6 +91,16 @@ centered composition, and gameplay fills the selected wider view.
 
 `GEX_WIDESCREEN=16:9 wine "$GEX_REPO/.work/replacement-run/game/GEX.exe"`
 overrides the saved ratio for startup. A saved choice otherwise persists between launches.
+
+## Save states
+
+Press **0–9** to select a persistent slot, **F5** to save, and **F9** to load.
+Slot 0 is selected initially. States include the world and audio playback and
+survive restarting or changing levels. Files are stored in
+`%LOCALAPPDATA%\GexSource\states`. Saving requires gameplay or world-map play;
+loading also works from the title and level select, and closes the sprite viewer.
+F5 replaces the old window-size shortcut. See [save-states.md](save-states.md)
+for compatibility, failure handling, implementation and validation.
 
 ## Sprite viewer
 
