@@ -630,6 +630,41 @@ the boss level; the rebuilt executable passes 600 presentations each at 4:3,
 staged at `.work/replacement-run/game/GEX.exe`. This checks the reported crash
 path, not completion of the boss fight.
 
+`src/replacement/manual_zoom.cpp` adds numpad +/−/0 controls for all gameplay
+levels, with a 0.5×–2× range, 0.125× steps and per-frame easing. It shifts only
+draw-time camera globals and expands command-generation bounds; the six camera
+globals and command-pool roots are restored before the rest of the level tick.
+Ordinary levels pivot around Gex's screen position so zooming in does not crop
+him out of a wide view. Rez retains its automatic multi-target camera centre.
+Zoom-out object introduction/removal uses the expanded view.
+
+The renderer replays world commands into physical-size tiles using the existing
+software rasterizers, then samples their pixels into the visible frame. It runs
+object callbacks once and leaves linked commands intact. HUD/help callbacks use
+the original camera/extents and their commands render afterward at normal size;
+later overlays also retain their size. A separate 1 MiB world-command buffer
+prevents the original 70 KiB ring from overwriting linked commands at wide zoom-out
+settings. Texture-cache/framebuffer reservations remain at the physical width.
+
+`tools/zoom_hooks.py` applies fail-closed hooks exclusively during replacement
+compilation; verifier/probe sources and proof metadata are untouched. The title,
+world maps and sprite viewer use their normal render path. At 1× the extra scene
+renderer is bypassed. The setting lasts for the process and is independent of
+save-state slots.
+
+`tests/manual_zoom.py` checks controls, all 63 gameplay-range IDs, 32 player/Rez
+camera pivots, restoration of cameras/pool roots/commands, fixed HUD pixels and
+the complete framebuffer in 20 width/scale combinations (320/424/560/672 pixels,
+0.5×/0.75×/1×/1.5×/2×). Eight textured rectangle/quad cases cross horizontal and
+vertical raster tile seams. These are behavioral checks, not byte-match proofs.
+Wine traces reached 300 presentations each in the graveyard at 320/672 pixels
+and Rez's Lair at 424/560 pixels using actual numpad input. The widest graveyard
+and Rez runs covered both limits and reset; HUD pixels stayed at normal size.
+Rez-camera, rotated-command, save-state, level-CLI and sprite-viewer regression
+checks also pass. These sampled runs do not establish full gameplay parity.
+Local Wine input traces, screenshots, build logs and staging receipt are retained
+under `.work/manual-zoom-debug/`.
+
 `image_data.s` is a **textual, generated data source**, not a recovered set of
 historical declarations. It contains 1,536 `.rdata` bytes, 71,680 raw
 `.data` bytes, the 269,536-byte zero-initialized tail, and 2,683 symbolic

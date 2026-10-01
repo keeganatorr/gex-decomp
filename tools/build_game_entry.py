@@ -13,6 +13,7 @@ SOURCES = {
     "game_entry": ROOT / "src/replacement/game_entry.cpp",
     "menu_options": ROOT / "src/replacement/menu_options.cpp",
     "widescreen_runtime": ROOT / "src/replacement/widescreen_runtime.cpp",
+    "manual_zoom": ROOT / "src/replacement/manual_zoom.cpp",
     "sprite_viewer": ROOT / "src/replacement/sprite_viewer.cpp",
     "save_states": ROOT / "src/replacement/save_states.cpp",
     "state_audio": ROOT / "src/replacement/state_audio.cpp",

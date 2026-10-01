@@ -92,6 +92,19 @@ centered composition, and gameplay fills the selected wider view.
 `GEX_WIDESCREEN=16:9 wine "$GEX_REPO/.work/replacement-run/game/GEX.exe"`
 overrides the saved ratio for startup. A saved choice otherwise persists between launches.
 
+## Manual zoom
+
+During any gameplay level, press **numpad +** to zoom in, **numpad -** to zoom
+out, and **numpad 0** to reset. Each press changes the target by 0.125×, with
+a smooth transition and limits of **0.5×–2×**. The setting carries between levels
+for the current run; the title, world maps and sprite viewer keep their normal
+view. Use Num Lock for numpad 0.
+
+Ordinary levels zoom around Gex's screen position. Rez's Lair keeps its automatic
+camera and adds manual zoom around that camera's centre. The HUD, help text and
+overlays retain their normal size. Zooming out reveals more terrain and extends
+object activation to cover it; it also increases the software renderer's work.
+
 ## Save states
 
 Press **0–9** to select a persistent slot, **F5** to save, and **F9** to load.

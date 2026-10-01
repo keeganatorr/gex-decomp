@@ -88,6 +88,10 @@ the executable. The title artwork stays centered; gameplay uses the wider view.
 `W:H` or a pixel width from 320 to 672 (rounded down to a multiple of four).
 A fresh configuration defaults to 4:3.
 
+During gameplay, **numpad + / -** smoothly zoom the scene from **0.5× to 2×**;
+**numpad 0** resets it. The HUD keeps its normal size, and Rez's automatic camera
+continues to work. See [zoom controls](docs/run-game.md#manual-zoom).
+
 Press **F8** during a level to open the in-game sprite viewer. You can also
 enable it with F8 on level select, then start each level to inspect its loaded
 objects and animation frames. See [viewer controls](docs/run-game.md#sprite-viewer).
